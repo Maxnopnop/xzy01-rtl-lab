@@ -22,7 +22,8 @@ import rtl_lab as lab
 
 ROOT = Path(__file__).resolve().parent
 STOP = threading.Event()
-CODE_FILES = ['batch.py','rtl_lab.py','backends.py','codex_adapter.py','api_worker.py']
+CODE_FILES = ['batch.py','rtl_lab.py','backends.py','codex_adapter.py','api_worker.py','synthesis.py']
+SUITES = {'custom': 'tasks', 'dev10': 'benchmarks/dev10/tasks'}
 
 
 def read(path):
@@ -59,28 +60,38 @@ def lock(folder):
             else: fcntl.flock(f.fileno(),fcntl.LOCK_UN)
 
 
-def manifest():
-    specs=read(ROOT/'tasks/manifest.json')
+def manifest(suite='custom'):
+    task_dir=ROOT/SUITES[suite]
+    specs=read(task_dir/'manifest.json')
     ids=[s['id'] for s in specs]
     if len(ids)!=len(set(ids)): raise ValueError('Duplicate task IDs')
     for s in specs:
         if not s['id'].replace('_','').isalnum(): raise ValueError('Invalid task ID')
         assets={s['id']+'_tb.sv':s['tb_sha256'],**s.get('assets',{})}
         for name, expected in assets.items():
-            if Path(name).name!=name or lab.digest((ROOT/'tasks'/name).read_bytes())!=expected:
+            if Path(name).name!=name or lab.digest((task_dir/name).read_bytes())!=expected:
                 raise ValueError('Task asset hash mismatch: '+name)
+    if suite=='dev10':
+        base=ROOT/'benchmarks/dev10'
+        for name,expected in read(base/'source-lock.json')['sources'].items():
+            path=(base/name).resolve()
+            if not path.is_relative_to(base.resolve()) or lab.digest(path.read_bytes())!=expected:
+                raise ValueError('Upstream source hash mismatch: '+name)
+        split=read(base/'split-lock.json')
+        if split['development']!=ids or set(ids)&set(split['final']):raise ValueError('Invalid development split')
     return specs
 
 
-def identity():
-    return {name:lab.digest((ROOT/name).read_bytes()) for name in CODE_FILES+['tasks/manifest.json']}
+def identity(suite='custom'):
+    extra=['benchmarks/dev10/'+n for n in ('source-lock.json','split-lock.json')] if suite=='dev10' else []
+    return {name:lab.digest((ROOT/name).read_bytes()) for name in CODE_FILES+[SUITES[suite]+'/manifest.json']+extra}
 
 
 def init(args):
     run=Path(args.run_dir).resolve()
     if (run/'plan.json').exists(): raise ValueError('Run exists; use run or a new --run-dir')
     if run.exists() and any(run.iterdir()): raise ValueError('Choose a new or empty run directory')
-    specs=manifest()
+    specs=manifest(args.suite)
     selected=args.tasks.split(',') if args.tasks!='all' else [s['id'] for s in specs]
     if len(selected)!=len(set(selected)) or set(selected)-{s['id'] for s in specs}: raise ValueError('Unknown or duplicate task ID')
     specs=[s for s in specs if s['id'] in selected]
@@ -90,6 +101,8 @@ def init(args):
     config={k:getattr(args,k) for k in ('mode','model','base_url','api_key_env','allow_anonymous','codex_executable',
         'codex_reasoning','temperature','seed','max_output_tokens','token_field','api_timeout','compile_timeout','sim_timeout','iverilog','vvp')}
     config.update(rtl_dir=str(Path(args.rtl_dir).resolve()),label={'offline':'OFFLINE_FIXTURE','codex':'LIVE_CODEX_CHATGPT','live':'LIVE_API'}[args.mode],backend='icarus')
+    config.update(suite=args.suite, task_dir=SUITES[args.suite], synthesis=args.synthesis,
+                  yosys=args.yosys, synth_timeout=args.synth_timeout)
     if args.mode=='live': lab.validate_endpoint(args.base_url,args.allow_anonymous,os.environ.get(args.api_key_env,''))
     fixtures={}
     if args.mode=='offline':
@@ -97,8 +110,8 @@ def init(args):
     run.mkdir(parents=True,exist_ok=True)
     jobs=[{'id':f'{s["id"]}__s{i:03d}','task':s['id'],'sample':i} for i in range(1,args.samples+1) for s in specs]
     atomic(run/'plan.json',dict(schema=2,created_utc=lab.utc(),config=config,tasks=specs,jobs=jobs,
-        source_hashes=identity(),fixture_hashes=fixtures,max_calls=args.max_calls if args.max_calls is not None else n,
-        note='Local custom task suite; not VerilogEval. Offline repeats are not model samples.'))
+        source_hashes=identity(args.suite),fixture_hashes=fixtures,max_calls=args.max_calls if args.max_calls is not None else n,
+        note='Adapted development subset, not official benchmark scoring.' if args.suite=='dev10' else 'Local custom suite; offline repeats are not model samples.'))
     report(run)
     print(f'Plan: {n} samples, mode={args.mode}; {run}')
 
@@ -135,8 +148,11 @@ def report(run):
         pass_fraction_of_planned=successes/len(plan['jobs']),real_generations=generated,
         model_call_reservations=calls,recorded_token_usage=dict(tokens),by_task=by_task,results=rows,
         note='Denominator includes planned samples; unfinished and infrastructure failures remain visible. No public benchmark or formal-equivalence claim.')
+    summary.update(suite=plan['config'].get('suite','custom'),
+        synthesis_counts=dict(Counter(r.get('synthesis_status','NOT_REQUESTED') for r in rows)),
+        joint_passes=sum(r.get('joint_pass',r['status']=='PASS') for r in rows))
     atomic(run/'summary.json',summary)
-    fields=['job_id','task','sample','mode','requested_model','status','stage','message','elapsed_seconds','attempt','directory','rtl_sha256','testbench_sha256']
+    fields=['job_id','task','sample','mode','requested_model','status','synthesis_status','joint_pass','stage','message','elapsed_seconds','attempt','directory','rtl_sha256','testbench_sha256']
     output=io.StringIO(newline=''); writer=csv.DictWriter(output,fields,extrasaction='ignore');writer.writeheader();writer.writerows(rows)
     # BOM improves opening directly in Windows Excel.
     (run/'summary.csv').write_text(output.getvalue(),encoding='utf-8-sig')
@@ -146,7 +162,8 @@ def report(run):
 <style>body{{font:16px system-ui;max-width:1000px;margin:36px auto;padding:0 20px;color:#142b3a;background:#f8fafb}}table{{border-collapse:collapse;width:100%;background:white}}td,th{{padding:9px;border-bottom:1px solid #ddd;text-align:left}}.stats{{padding:18px;background:#e2eef4;border-radius:12px}}code{{word-break:break-all}}</style>
 <h1>RTL 本机批量实验</h1><p>{html.escape(plan['config']['mode'])} / {html.escape(plan['config']['model'] or '人工离线样例')} / Icarus</p>
 <p class="stats">计划 {len(plan['jobs'])} · 完成 {len(rows)} · 通过 {successes} · 待完成 {summary['pending']} · 已记录真实生成 {generated}</p>
-<p>本地自建任务集。离线样例只验证工具链，不代表模型成绩。仿真通过仅覆盖固定测试范围。</p>
+<p>任务集：{html.escape(summary['suite'])}。离线样例只验证工具链。仿真通过仅覆盖固定测试范围。</p>
+<p>综合：{html.escape(str(summary['synthesis_counts']))}；联合通过 {summary['joint_passes']}。通用逻辑统计不代表芯片 PPA。</p>
 <table><thead><tr><th>任务</th><th>类型</th><th>计划</th><th>完成</th><th>通过</th></tr></thead><tbody>{tr}</tbody></table>
 <h2>失败与异常</h2><ul>{failures or '<li>当前没有已记录的失败</li>'}</ul>
 <p><a href="summary.csv">CSV</a> · <a href="summary.json">完整 JSON</a></p></html>'''
@@ -188,7 +205,7 @@ def execute_job(run,job,attempt,config):
     with (attempt/'worker.log').open('wb') as output:
         proc=subprocess.Popen([sys.executable,str(ROOT/'batch.py'),'_worker','--run-dir',str(run),
             '--job-id',job['id'],'--attempt-dir',str(attempt)],cwd=ROOT,env=env,stdin=subprocess.DEVNULL,stdout=output,stderr=output,**kwargs)
-        limit=config['api_timeout']+config['compile_timeout']+config['sim_timeout']+60
+        limit=config['api_timeout']+config['compile_timeout']+config['sim_timeout']+config.get('synth_timeout',0)+60
         while proc.poll() is None:
             if STOP.is_set() or time.monotonic()-started>limit:
                 reason='INTERRUPTED' if STOP.is_set() else 'TIMEOUT'
@@ -205,8 +222,8 @@ def execute_job(run,job,attempt,config):
 
 def run_jobs(args):
     run=Path(args.run_dir).resolve();plan=read(run/'plan.json')
-    if identity()!=plan['source_hashes']:raise ValueError('Code or task manifest changed; start a new run to preserve comparability')
-    manifest()
+    if identity(plan['config'].get('suite','custom'))!=plan['source_hashes']:raise ValueError('Code or task manifest changed; start a new run to preserve comparability')
+    manifest(plan['config'].get('suite','custom'))
     config=plan['config']
     for task,expected in plan['fixture_hashes'].items():
         if lab.digest((Path(config['rtl_dir'])/(task+'.sv')).read_bytes())!=expected:raise ValueError('Offline fixture changed')
@@ -265,16 +282,19 @@ def run_jobs(args):
             summary=report(run)
         print(json.dumps({k:summary[k] for k in ('planned','completed','counts','pending','real_generations','model_call_reservations')},ensure_ascii=False))
         print('Report: '+str(run/'report.html'))
-        return 0 if summary['completed']==summary['planned'] and summary['counts']=={'PASS':summary['planned']} else 1
+        return 0 if summary['completed']==summary['planned'] and summary['joint_passes']==summary['planned'] else 1
 
 
 def main(argv=None):
     p=argparse.ArgumentParser(description=__doc__)
     sub=p.add_subparsers(dest='command',required=True)
-    sub.add_parser('list')
+    listing=sub.add_parser('list');listing.add_argument('--suite',choices=SUITES,default='custom')
     new=sub.add_parser('init')
     new.add_argument('--run-dir',required=True)
     new.add_argument('--mode',choices=['offline','codex','live'],default='offline')
+    new.add_argument('--suite',choices=SUITES,default='custom')
+    new.add_argument('--synthesis',choices=['none','yosys'],default='none')
+    new.add_argument('--yosys');new.add_argument('--synth-timeout',type=lab.positive,default=60)
     new.add_argument('--model',default=os.environ.get('LLM_MODEL',''))
     new.add_argument('--tasks',default='all');new.add_argument('--samples',type=int,default=1)
     new.add_argument('--rtl-dir',default=str(ROOT/'examples/correct'))
@@ -294,7 +314,7 @@ def main(argv=None):
     args=p.parse_args(argv)
     try:
         if args.command=='list':
-            for s in manifest():print(f"{s['id']:18s} {s.get('category',''):14s} checks={s['checks']}")
+            for s in manifest(args.suite):print(f"{s['id']:18s} {s.get('category',''):14s} checks={s['checks']}")
         elif args.command=='init':
             if args.samples<1 or args.max_output_tokens<1 or (args.max_calls is not None and args.max_calls<0):raise ValueError('Invalid count')
             if args.temperature is not None and not 0<=args.temperature<=2:raise ValueError('temperature must be in [0,2]')

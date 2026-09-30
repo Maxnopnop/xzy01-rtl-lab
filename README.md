@@ -1,6 +1,8 @@
 # XZY01 RTL Lab
 
-用于 FYP 的本机实验流程：**规格 → LLM 生成 RTL → 固定独立测试 → Icarus 编译/仿真 → CSV、JSON、HTML 结果**。
+用于 FYP 的本机实验流程：**规格 → LLM 生成 RTL → 固定独立测试 → Icarus 编译/仿真 → Yosys 综合 → CSV、JSON、HTML 结果**。
+
+新增：已固定来源的 **[10 题开发集](benchmarks/dev10/README.md)**（VerilogEval 5 + RTLLM 5），以及 **[两模型 × 10 题 × 3 次 pilot](PILOT.md)**。原有 20 个自建任务继续用于工具链回归，与公开来源开发题分开记录。
 
 提供 20 个自建电路任务、每题多样本、1–16 个有界并行工作进程、断点续跑、调用上限、逐阶段日志，以及学校 VCS/Xcelium 手动复核接口。默认并发 2，建议本机离线仿真用 4。这是研究起步用的本地任务集，不是 VerilogEval，也不是芯片完整签核流程。
 
@@ -99,7 +101,16 @@ CLI：`python batch.py --help`、`python batch.py init --help`、`python batch.p
 
 `tasks/manifest.json` 固定规格、模块名、检查数、TB 与向量哈希。`build_tasks.py` 可确定性重建新增题目；原有三题由独立手写 TB 保留。`examples/wrong` 为每题提供一个明确错误实现，用于确认测试能发现错误。
 
-仿真 PASS 表示通过这些固定用例，不是所有时序上的数学证明；当前没有形式等价、综合、PPA 或实际芯片签核。重复用同一固定测试集不会增加测试覆盖率。
+仿真 PASS 表示通过这些固定用例，不是所有时序上的数学证明。现支持独立 Yosys 通用综合与结构检查；尚无形式等价、PPA 或实际芯片签核。重复使用固定测试集不会增加测试覆盖率。
+
+在已安装 Icarus/Yosys 的 WSL 内验证开发集：
+
+```powershell
+wsl -d Ubuntu -- python3 batch.py init --run-dir runs/dev10-audit --suite dev10 --rtl-dir benchmarks/dev10/reference --synthesis yosys
+wsl -d Ubuntu -- python3 batch.py run --run-dir runs/dev10-audit --workers 4
+```
+
+`status` 保留功能仿真结果；`synthesis_status` 单独记录 `SYNTH_PASS/FAIL/TIMEOUT/ERROR`，`joint_pass` 表示两项同时通过。未请求综合时联合字段只反映已请求的仿真阶段，不能声称完成了综合。综合启用时退出码 0 要求所有样本联合通过。`synthesis.py --run-dir <已有实验>` 可在 WSL 对保存的 RTL 单独复核，既不重新调用模型，也不修改原仿真记录。
 
 ## 5. 判题和证据
 
@@ -152,7 +163,7 @@ python school_bridge.py import --package exports\vcs-check --returned returned\v
 ## 7. 测试、GitHub 和后续开发
 
 ```powershell
-python -m unittest -v test_lab test_batch
+python -m unittest -v test_lab test_batch test_dev
 ```
 
 测试包括正确/错误 RTL、缺失/伪造凭据、语法错误、无限循环超时、进程树清理、并行续跑、重复启动锁、输入变化拒绝、人工商业工具回传协议，以及模拟 HTTP 异常。HTTP 和商业回传夹具均明确标注为 synthetic/mock，不计入模型或商业 EDA 成绩。
@@ -168,4 +179,4 @@ GitHub Actions 在 Linux 上只执行离线测试，不调用模型、不需要 
 - [Codex 非交互调用](https://learn.chatgpt.com/docs/non-interactive-mode)
 - [Icarus 编译参数](https://steveicarus.github.io/iverilog/usage/command_line_flags.html)
 - [vvp 运行参数](https://steveicarus.github.io/iverilog/usage/vvp_flags.html)
-- [VerilogEval](https://github.com/NVlabs/verilog-eval)：未来扩展公开 benchmark 时固定版本与原始评测条件，单独标记结果。
+- [VerilogEval](https://github.com/NVlabs/verilog-eval) 与 [RTLLM](https://github.com/hkust-zhiyao/RTLLM)：本仓库固定 5+5 适配开发题，上游 MIT 许可与原始文件随库保存；后续最终测试集单独审计。

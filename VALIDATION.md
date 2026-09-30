@@ -34,6 +34,23 @@ CLI 记录的累计 usage 为 input_tokens=341608，cached_input_tokens=199168�
 
 ## 解释范围
 
-这是自建小模块任务集的初始基线，不是公开 benchmark 成绩，也不证明复杂芯片设计正确。尚未完成真实 VCS/Xcelium、综合、形式验证或 PPA 验证。HTTP 通道与商业回传的测试使用明确标注的 mock/synthetic 数据，不计入上表的真实 LLM 次数。
+上面的历史结果是自建小模块任务集的初始基线，不是公开 benchmark 成绩，也不证明复杂芯片设计正确。现已补充下述 Yosys 通用综合；尚未完成真实 VCS/Xcelium、形式验证或 PPA 验证。HTTP 通道与商业回传的测试使用明确标注的 mock/synthetic 数据，不计入真实 LLM 次数。
 
 完整本机证据位于 `validation/`（Git 忽略）；仓库保存去除账户和机器路径后的摘要及生成 RTL。源码、清单、向量和 RTL 在 Git 中按精确字节保留，便于与 SHA-256 对照。
+
+## 2026-09-30：综合和正式开发集
+
+| 新增验收 | 结果 |
+|---|---|
+| Yosys 0.52，本机 WSL Ubuntu | 已安装并实际执行，generic synth -noabc |
+| 20 个自建参考实现 | 20/20 仿真与综合联合通过 |
+| 之前保存的 40 份真实生成 RTL | 40/40 综合通过，新增模型调用 0 |
+| dev10：VerilogEval 5 + RTLLM 5 | 10/10 参考实现仿真与综合联合通过 |
+| dev10：每题 1 个故意错误实现 | 10/10 FUNCTION_FAIL；均能综合，验证了综合不能替代功能测试 |
+| 上游来源审计 | 30 份规格/参考/TB 对照固定 Git commit；除 Windows checkout 换行外内容相同 |
+| Windows 回归 | 原 17 项 + 新增 5 项通过；2 项原生 Yosys 测试在 WSL 执行 |
+| WSL 回归 | 原 17 项通过，新增 7 项通过（修复跨平台排序后重跑新增整组） |
+
+验收摘要和逐 RTL 综合信息见 [evidence/development_audit.json](evidence/development_audit.json)。综合失败、超时、冲突驱动、无法推断单一时钟结构的测试已实际运行。参考与 mutant 只用于判题器验收，不属于模型采样结果。
+
+一轮 dev10 有 140,430 次固定输出检查。来源、适配和 final 排除规则见 [开发集说明](benchmarks/dev10/README.md)。最终 40 题尚未选择/审计。两模型 60 次 pilot 的执行方式和统计口径见 [PILOT.md](PILOT.md)。

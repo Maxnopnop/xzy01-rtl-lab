@@ -160,6 +160,9 @@ def inspect_tools(args, folder):
             raise LabError("ENV_ERROR", "environment", f"Cannot execute {name} -V")
         found[name] = {"path": exe, "sha256": digest(Path(exe).read_bytes()),
                        "version": (result["stdout"] + result["stderr"]).splitlines()[0]}
+    if getattr(args, 'synthesis', 'none') == 'yosys':
+        from synthesis import inspect
+        found['yosys'] = inspect(args, folder)
     return found
 
 
@@ -180,7 +183,9 @@ def extract_rtl(raw, module):
         raise LabError("RTL_REJECTED", "policy", "Expected only the specified DUT module")
     if not re.match(r"\s*module\b", tokens) or not re.search(r"\bendmodule\s*$", tokens):
         raise LabError("RTL_REJECTED", "policy", "Unexpected text outside DUT module")
-    if any(x in tokens for x in ('`', '"', '\\', '(*', '*)')):
+    # @(*) is a legal wildcard sensitivity list, not a synthesis attribute.
+    policy_tokens = re.sub(r'@\s*\(\s*\*\s*\)', '@*', tokens)
+    if any(x in policy_tokens for x in ('`', '"', '\\', '(*', '*)')):
         raise LabError("RTL_REJECTED", "policy", "Directives, strings, escaped names and attributes are unsupported")
     if re.search(r"\b(?:bind|force|release|defparam|program|interface|package|extern|primitive|config)\b", tokens):
         raise LabError("RTL_REJECTED", "policy", "Unsupported construct or hierarchy modification")
@@ -307,7 +312,8 @@ def evaluate(args, suite, spec, index, tools, secret):
         rtl = extract_rtl(raw, spec["module"])
         write_text(folder / "dut.sv", rtl, secret)
         row["rtl_sha256"] = digest((folder / "dut.sv").read_bytes())
-        tb_bytes = (ROOT / "tasks" / (spec["id"] + "_tb.sv")).read_bytes()
+        task_dir = ROOT / getattr(args, 'task_dir', 'tasks')
+        tb_bytes = (task_dir / (spec["id"] + "_tb.sv")).read_bytes()
         if digest(tb_bytes) != spec["tb_sha256"]:
             raise LabError("ENV_ERROR", "testbench", "Fixed testbench differs from manifest hash")
         (folder / "testbench.sv").write_bytes(tb_bytes)
@@ -315,18 +321,28 @@ def evaluate(args, suite, spec, index, tools, secret):
         for name, expected in spec.get("assets", {}).items():
             if Path(name).name != name:
                 raise LabError("ENV_ERROR", "testbench", "Invalid asset path")
-            data = (ROOT / "tasks" / name).read_bytes()
+            data = (task_dir / name).read_bytes()
             if digest(data) != expected:
                 raise LabError("ENV_ERROR", "testbench", "Test vector hash changed")
             (folder / name).write_bytes(data)
         from backends import BACKENDS
         row.update(BACKENDS[getattr(args, "backend", "icarus")]().evaluate(folder, spec, tools, args, secret))
+        row['simulation_status'] = row['status']
+        if getattr(args, 'synthesis', 'none') == 'yosys':
+            from synthesis import evaluate as synthesize
+            row['synthesis'] = synthesize(folder, spec, tools['yosys'], args.synth_timeout)
+            row['synthesis_status'] = row['synthesis']['status']
+        else:
+            row['synthesis_status'] = 'NOT_REQUESTED'
     except LabError as exc:
         row.update(status=exc.status, stage=exc.stage, message=exc.message)
     except (OSError, UnicodeError) as exc:
         row.update(status="ENV_ERROR", stage="io", message=type(exc).__name__)
     except KeyboardInterrupt:
         row.update(status="INTERRUPTED", stage="interrupted", message="User interrupted; child process cleaned up")
+    row.setdefault('simulation_status', row['status'])
+    row.setdefault('synthesis_status', 'NOT_RUN' if getattr(args, 'synthesis', 'none') == 'yosys' else 'NOT_REQUESTED')
+    row['joint_pass'] = row['status'] == 'PASS' and row['synthesis_status'] in ('SYNTH_PASS', 'NOT_REQUESTED')
     row["elapsed_seconds"] = round(time.monotonic() - start, 4)
     row["finished_utc"] = utc()
     write_json(folder / "result.json", row, secret)

@@ -10,6 +10,10 @@ rtl_lab.evaluate（样本证据、生成、提取、固定输入检查）
     ├─ api_worker.py：兼容 Chat Completions 的 HTTP 请求
     └─ backends.SimulationBackend
           └─ IcarusBackend：编译、仿真、统一结果
+    └─ synthesis.py：可选 Yosys 通用综合，独立阶段结果
+
+pilot.py：冻结两个/四个模型实验、轮次顺序、汇总及成对 task-cluster bootstrap
+synthesis.py --run-dir：对已有 RTL 做单独综合，哈希绑定原始结果，不生成新 RTL
 
 school_bridge.py
     已有样本 → 单案例 VCS/Xcelium 包 → VDI 手动运行 → 统一凭据导入
@@ -50,4 +54,6 @@ school_bridge.py
 - `summary.json` schema 2：计划/完成/待完成、分类、真实生成次数、调用预留、token usage。
 - `package.json` schema 1：商业工具回传需对照的原始来源哈希与 nonce。
 
-未来加入综合、形式验证、PPA 时建立单独 stage/result，不把仿真 PASS 当成综合或签核 PASS。多文件/多模块设计需要版本化的文件清单和更强隔离，不宜直接取消现有单模块限制。
+综合已有独立 stage/result，不把仿真 PASS 当成综合或签核 PASS。后续形式验证、PPA 继续遵循同样边界。多文件/多模块设计需要版本化的文件清单和更强隔离，不宜直接取消现有单模块限制。
+
+`batch.SUITES` 将原有 `custom` 与 `dev10` 分开，核心 runner 同时固定所选 manifest、源代码、来源锁和划分锁；任务目录属于配置，不硬编码在 evaluator 中。`build_dev.py` 从随库上游快照确定性生成开发集，不调用模型。整个 Yosys 工作进程在 WSL/Linux 内运行，复用 POSIX 进程组超时清理；Windows 模型生成与 WSL 综合以文件哈希交接。
