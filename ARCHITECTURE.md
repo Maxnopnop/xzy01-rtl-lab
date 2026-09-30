@@ -69,3 +69,7 @@ school_bridge.py
 模型输出依次经过固定 Icarus 规格测试、IR/RTL 一致性与私有规格诊断，再由 `synthesis.py` 对原 RTL 单独综合。结果兼容 `school_bridge.py`，每个学校案例仍由用户在 VDI 登录主机手动执行。`curate` 输出移除会话 ID 的白名单证据及 SHA-256 锁；原始日志仍位于 Git 忽略的 `runs` 目录。
 
 两个候选保留题只离线验证判题器，本轮不发送模型。扩展更多位宽、Mealy 行为或多个时钟时，需要升级 IR/判题协议并创建新版本，不能直接将现有单比特 Moore 结果外推。
+
+## 公开契约的离线验证与升级
+
+`mutation_study.py analyze/run` 只在开发题上枚举固定类别的单处故障，并用图语义和真实 Icarus 核验。生成的 `contracts-v2.json` 明确标注为开发内拟合产物；不覆盖原 bank，不修改历史反馈或成绩。`check` 只消费给定公开 profile，测试保证该执行入口不调用私有 oracle；`verify` 重建枚举、核对源码/输入/结果锁和 DUT 绑定。五种已知 IR/RTL 关系的夹具校准与真实模型研究分别记录。

@@ -1,0 +1,501 @@
+{
+  "rt_sequence": {
+    "contract": {
+      "clock_edge": "posedge",
+      "output_kind": "moore",
+      "reset": {
+        "kind": "async",
+        "active": 0,
+        "output": 0
+      },
+      "trace_convention": "Each trace starts after reset. List output after each rising edge; reset is then inactive.",
+      "examples": [
+        {
+          "bits": "1001",
+          "outputs": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "bits": "1011",
+          "outputs": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "bits": "1001001",
+          "outputs": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "bits": "100001",
+          "outputs": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "bits": "10011001",
+          "outputs": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "bits": "11001",
+          "outputs": [
+            0,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "bits": "001",
+          "outputs": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "bits": "101001",
+          "outputs": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "bits": "01",
+          "outputs": [
+            0,
+            0
+          ]
+        },
+        {
+          "bits": "0001",
+          "outputs": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "bits": "1000001",
+          "outputs": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "additions": [
+      {
+        "bits": "100001",
+        "outputs": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "newly_detected": [
+          "rt_sequence__edge_00_S3",
+          "rt_sequence__edge_00_S4",
+          "rt_sequence__edge_06_S2",
+          "rt_sequence__edge_06_S3",
+          "rt_sequence__edge_06_S4"
+        ]
+      },
+      {
+        "bits": "10011001",
+        "outputs": [
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "newly_detected": [
+          "rt_sequence__edge_09_S0",
+          "rt_sequence__edge_09_S2",
+          "rt_sequence__edge_09_S3",
+          "rt_sequence__edge_09_S4"
+        ]
+      },
+      {
+        "bits": "11001",
+        "outputs": [
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "newly_detected": [
+          "rt_sequence__edge_03_S0",
+          "rt_sequence__edge_03_S2",
+          "rt_sequence__edge_03_S3"
+        ]
+      },
+      {
+        "bits": "001",
+        "outputs": [
+          0,
+          0,
+          0
+        ],
+        "newly_detected": [
+          "rt_sequence__edge_00_S2",
+          "rt_sequence__reset_state_S1"
+        ]
+      },
+      {
+        "bits": "101001",
+        "outputs": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "newly_detected": [
+          "rt_sequence__edge_05_S0",
+          "rt_sequence__edge_05_S2"
+        ]
+      },
+      {
+        "bits": "01",
+        "outputs": [
+          0,
+          0
+        ],
+        "newly_detected": [
+          "rt_sequence__reset_state_S2"
+        ]
+      },
+      {
+        "bits": "0001",
+        "outputs": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "newly_detected": [
+          "rt_sequence__edge_00_S1"
+        ]
+      },
+      {
+        "bits": "1000001",
+        "outputs": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "newly_detected": [
+          "rt_sequence__edge_06_S1"
+        ]
+      }
+    ],
+    "provenance": "Development-tuned using exact counterexamples from this declared mutation set; not held-out evidence."
+  },
+  "sticky_alarm": {
+    "contract": {
+      "clock_edge": "posedge",
+      "output_kind": "moore",
+      "reset": {
+        "kind": "async",
+        "active": 0,
+        "output": 0
+      },
+      "trace_convention": "Each trace starts after reset; output is sampled after every rising edge.",
+      "examples": [
+        {
+          "bits": "1011000",
+          "outputs": [
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "bits": "01010",
+          "outputs": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "bits": "111",
+          "outputs": [
+            0,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    "additions": [
+      {
+        "bits": "111",
+        "outputs": [
+          0,
+          1,
+          1
+        ],
+        "newly_detected": [
+          "sticky_alarm__edge_05_S0",
+          "sticky_alarm__edge_05_S1"
+        ]
+      }
+    ],
+    "provenance": "Development-tuned using exact counterexamples from this declared mutation set; not held-out evidence."
+  },
+  "event_parity": {
+    "contract": {
+      "clock_edge": "posedge",
+      "output_kind": "moore",
+      "reset": {
+        "kind": "async",
+        "active": 0,
+        "output": 0
+      },
+      "trace_convention": "Each trace starts after reset; output is sampled after every rising edge.",
+      "examples": [
+        {
+          "bits": "101101",
+          "outputs": [
+            1,
+            1,
+            0,
+            1,
+            1,
+            0
+          ]
+        },
+        {
+          "bits": "000",
+          "outputs": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "additions": [],
+    "provenance": "Development-tuned using exact counterexamples from this declared mutation set; not held-out evidence."
+  },
+  "request_delay": {
+    "contract": {
+      "clock_edge": "posedge",
+      "output_kind": "moore",
+      "reset": {
+        "kind": "async",
+        "active": 0,
+        "output": 0
+      },
+      "trace_convention": "Each trace starts after reset; output is sampled after every rising edge.",
+      "examples": [
+        {
+          "bits": "11111001100",
+          "outputs": [
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ]
+        },
+        {
+          "bits": "100000",
+          "outputs": [
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "bits": "10010",
+          "outputs": [
+            0,
+            1,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "additions": [
+      {
+        "bits": "10010",
+        "outputs": [
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        "newly_detected": [
+          "request_delay__edge_04_S0"
+        ]
+      }
+    ],
+    "provenance": "Development-tuned using exact counterexamples from this declared mutation set; not held-out evidence."
+  },
+  "debounce3": {
+    "contract": {
+      "clock_edge": "posedge",
+      "output_kind": "moore",
+      "reset": {
+        "kind": "async",
+        "active": 0,
+        "output": 0
+      },
+      "trace_convention": "Each trace starts after reset; output is sampled after every rising edge.",
+      "examples": [
+        {
+          "bits": "01110100111",
+          "outputs": [
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "bits": "110110",
+          "outputs": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "bits": "1011",
+          "outputs": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "bits": "11110",
+          "outputs": [
+            0,
+            0,
+            1,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    "additions": [
+      {
+        "bits": "1011",
+        "outputs": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "newly_detected": [
+          "debounce3__edge_02_S1",
+          "debounce3__edge_02_S2",
+          "debounce3__edge_02_S3",
+          "debounce3__edge_02_S4"
+        ]
+      },
+      {
+        "bits": "11110",
+        "outputs": [
+          0,
+          0,
+          1,
+          1,
+          1
+        ],
+        "newly_detected": [
+          "debounce3__edge_07_S0",
+          "debounce3__edge_07_S1",
+          "debounce3__edge_07_S2",
+          "debounce3__edge_07_S4"
+        ]
+      }
+    ],
+    "provenance": "Development-tuned using exact counterexamples from this declared mutation set; not held-out evidence."
+  }
+}

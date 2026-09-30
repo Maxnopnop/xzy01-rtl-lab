@@ -76,3 +76,11 @@ CLI 记录的累计 usage 为 input_tokens=341608，cached_input_tokens=199168�
 详情：[结果报告](PAIRED_FINDINGS.md)、[机器可读审计](evidence/paired-analysis.json)、[睡眠恢复偏差](PAIRED_EXECUTION_NOTE.md)。学校配对案例包已在本机导出，尚未在 VCS/Xcelium 上实际运行。
 
 本轮结果提交 `88726c896eebb36a6c9dab32d0c1912c1e1df22c` 的 [GitHub CI 36774716313](https://github.com/Maxnopnop/xzy01-rtl-lab/actions/runs/36774716313) 已通过：43 项离线测试和全部配对证据审计成功。后续文档收尾不改变生成代码或原始实验数据。
+
+## 2026-10-01：公开契约覆盖与诊断校准
+
+零新增模型调用。五个开发题族穷举 163 种单处变体，全部非等价；原公开检查检出 133/163，新版开发 profile 增加 12 个例子后检出 163/163。固定隐藏测试实际检出全部 163 种错误，各故障 RTL 与自身 IR 的一致性测试全部通过，5 个正确参考通过。25 格人工故障定位校准全部通过。
+
+Windows 的 5 项新增回归通过。WSL 的完整 **48/48** 回归通过（172.920 秒），包含实际 Icarus、Yosys、公共/私有信息隔离及校验篡改拒绝。旧配对证据审计仍通过；新证据 412 个文件及全部绑定校验通过。一次 CLI 反例复核确认：sticky_alarm 的同一错误表旧检查通过，新 profile 检出 `111` 且返回退出码 1；正确表返回 0。
+
+详见 [MUTATION_FINDINGS.md](MUTATION_FINDINGS.md)。这是开发内故障覆盖和离线夹具诊断验证，不能作为未见题准确率或新增模型效果。现有两个候选保留题未参与本轮用例选择和校准。

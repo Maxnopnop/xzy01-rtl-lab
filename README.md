@@ -1,5 +1,7 @@
 # XZY01 RTL Lab
 
+最新验证：[公开检查盲点与错误定位](MUTATION_FINDINGS.md)。零新增模型调用，系统枚举 163 种单处故障，发现原公开检查漏检 30 种；独立新版公开 profile 增加 12 个例子后覆盖这批全部故障，25 格实际 Icarus 诊断校准通过。此为开发内工具验证，不改变下述模型实验分数。
+
 最新完成：[固定错误表的 32→64 次配对扩展](PAIRED_FINDINGS.md)。96 个预算槽位取得 94 份真实 RTL（另 2 次系统睡眠超时），94/94 综合通过，89/94 功能通过；自然错误与人工注错分开报告。新增四个开发题族、两个未进行模型实验的候选保留题，保留全部结果及 [可执行证据审计](paired_audit.py)。
 
 用于 FYP 的本机实验流程：**规格 → LLM 生成 RTL → 固定独立测试 → Icarus 编译/仿真 → Yosys 综合 → CSV、JSON、HTML 结果**。
@@ -169,7 +171,7 @@ python school_bridge.py import --package exports\vcs-check --returned returned\v
 ## 7. 测试、GitHub 和后续开发
 
 ```powershell
-python -m unittest -v test_lab test_batch test_dev test_fsm test_paired test_paired_audit
+python -m unittest -v test_lab test_batch test_dev test_fsm test_paired test_paired_audit test_mutation
 ```
 
 测试包括正确/错误 RTL、缺失/伪造凭据、语法错误、无限循环超时、进程树清理、并行续跑、重复启动锁、输入变化拒绝、人工商业工具回传协议，以及模拟 HTTP 异常。HTTP 和商业回传夹具均明确标注为 synthetic/mock，不计入模型或商业 EDA 成绩。

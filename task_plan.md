@@ -1,3 +1,32 @@
+# Active continuation: systematic FSM mutation coverage
+
+## Objective and finish line
+Find and resolve locally verifiable gaps in public semantic feedback and stage-error localization. Zero new model calls. Preserve all historical scores, source locks and paired-v1 data.
+
+## Current phase
+1. Define deterministic single-edit mutation operators on the five development families — complete
+2. Measure public-check vs exact-IR vs real Icarus detection; identify shortest counterexamples — complete
+3. Publish separate strengthened development contracts and verify localization quadrants — complete
+4. Targeted/full regressions, evidence audit and Chinese report — complete; GitHub/CI and archive delivery gate in progress
+
+## Constraints / stop conditions
+- Enumerate all alternative edge destinations, state-output flips, reset kind/polarity flips and alternative reset states. Deterministic enumeration, no fault selection based on model scores.
+- Use development tasks only; do not inspect or tune to held-out candidate behavior.
+- A derived public contract is a new development-tuned version, not an untouched test set. Do not rescore past experiments as if they had used it.
+- Report equivalent mutations separately. If fixed tests miss a real semantic fault, save the counterexample and extend only a new diagnostic test version.
+- Exercise correct IR/wrong RTL and wrong IR/correct RTL using labeled offline fixtures; never count them as LLM outputs.
+- Complete this finite verification study, not an unbounded search. No new commercial EDA run, account purchase or model call.
+- Prior normal shutdown failed because Windows was locked. No pending shutdown process remains; do not force-close user applications.
+
+## Loop checklist
+- [x] Define finish line and bounded scope.
+- [x] Run deterministic fault enumeration and measure checker coverage.
+- [x] Implement and verify improvements on a separate version.
+- [ ] Deliver evidence, limits, synchronization and local backup.
+
+---
+# Historical plan (completed preceding campaign)
+
 # Task Plan: Paired feedback study and bounded scale-up
 
 ## Goal
