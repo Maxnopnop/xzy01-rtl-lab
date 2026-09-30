@@ -2,6 +2,8 @@
 
 ## 现有模块
 
+`fsm_study.py` 是独立两阶段实验调度器：`codex_adapter.generate_text` 复用现有禁工具生成通道；`fsm_ir.py` 负责有限状态表数据解释，`fsm_checks.py` 明确区分公开反馈与私有判题。它输出兼容独立 Yosys replay 和学校单案例导出的任务结果。协议见 `FSM_STUDY.md`，不改变原 60 次 pilot 的统计口径。
+
 ```text
 batch.py（计划、进程池、锁、续跑、调用上限、报告）
     ↓ 每个样本在独立 Python 子进程中运行

@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "name": "fsm-budget-localization-feasibility-v1",
+  "models": ["gpt-5.6-sol", "gpt-5.6-terra"],
+  "tasks": ["ve_fsm", "rt_sequence"],
+  "arms": ["prose", "table", "checked_table"],
+  "repeats": 2,
+  "max_calls": 48,
+  "reasoning_effort": "low",
+  "api_timeout": 180,
+  "compile_timeout": 15,
+  "sim_timeout": 10,
+  "note": "Two calls per sample; CLI internal retries and tokens are not hard-capped. Feasibility on reused development tasks, not a final efficacy study."
+}

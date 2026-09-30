@@ -25,6 +25,12 @@ def find_codex(override=None):
 
 
 def generate(args, folder, spec):
+    prompt = lab.SYSTEM_PROMPT + '\n\n' + spec['spec'] + '\n\nReply directly with the RTL. Do not invoke tools, read files, run tests, or delegate.\n'
+    return generate_text(args, folder, prompt)
+
+
+def generate_text(args, folder, prompt):
+    """One guarded model turn; the caller owns the stage's response schema."""
     exe = find_codex(args.codex_executable)
     env = lab.clean_env()
     for name in ('APPDATA', 'LOCALAPPDATA', 'CODEX_HOME'):
@@ -39,7 +45,6 @@ def generate(args, folder, spec):
             raise lab.LabError('ENV_ERROR', 'codex_auth', 'Codex version/login check failed')
         if label == 'codex_auth' and 'Logged in using ChatGPT' not in result['stdout'] + result['stderr']:
             raise lab.LabError('ENV_ERROR', 'codex_auth', 'This mode requires existing ChatGPT login, not API-key auth')
-    prompt = lab.SYSTEM_PROMPT + '\n\n' + spec['spec'] + '\n\nReply directly with the RTL. Do not invoke tools, read files, run tests, or delegate.\n'
     lab.write_text(folder / 'codex_prompt.txt', prompt)
     working = folder / 'generation_workspace'
     working.mkdir()
