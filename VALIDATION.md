@@ -62,3 +62,5 @@ CLI 记录的累计 usage 为 input_tokens=341608，cached_input_tokens=199168�
 详细失败分析、置信区间和 FYP 对照见 [PILOT_FINDINGS.md](PILOT_FINDINGS.md)。这 60 次与之前自建任务的 40 次是两套不同任务的独立实验，不合并成一个 benchmark 分数。
 
 新增离线回归共 **24 项**，GitHub 干净 Linux 环境全部通过：[CI 记录](https://github.com/Maxnopnop/xzy01-rtl-lab/actions/runs/36728142866)，验证代码 commit `51de2cf`。该 CI 不调用模型。
+
+实验结束后的 CSV 换行修复已在 Windows 重跑全部 24 项：22 项通过，2 项需原生 Yosys、由 Linux/WSL 执行。CSV 验证为表头加 60 行、无空白行；重新输出前后的 pilot JSON 完全一致，未改变实验成绩或调用次数。

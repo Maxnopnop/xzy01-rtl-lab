@@ -155,7 +155,7 @@ def report(run):
     fields=['job_id','task','sample','mode','requested_model','status','synthesis_status','joint_pass','stage','message','elapsed_seconds','attempt','directory','rtl_sha256','testbench_sha256']
     output=io.StringIO(newline=''); writer=csv.DictWriter(output,fields,extrasaction='ignore');writer.writeheader();writer.writerows(rows)
     # BOM improves opening directly in Windows Excel.
-    (run/'summary.csv').write_text(output.getvalue(),encoding='utf-8-sig')
+    (run/'summary.csv').write_bytes(output.getvalue().encode('utf-8-sig'))
     tr=''.join('<tr>'+''.join('<td>'+html.escape(str(r.get(k,'')))+'</td>' for k in ('task','category','planned','completed','passes'))+'</tr>' for r in by_task)
     failures=''.join('<li>'+html.escape(r['job_id']+': '+r['status']+' — '+r.get('message',''))+'</li>' for r in rows if r['status']!='PASS')
     page=f'''<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>RTL 实验结果</title>

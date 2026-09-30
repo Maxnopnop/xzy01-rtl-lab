@@ -1,5 +1,6 @@
 """Public-source development audit and real synthesis regression tests."""
 import contextlib
+import csv
 import io
 import json
 from pathlib import Path
@@ -70,6 +71,8 @@ class DevelopmentTests(unittest.TestCase):
         self.assertEqual(summary['completed'],0)
         self.assertEqual(summary['statistics'],{})
         self.assertEqual([m['model_call_reservations'] for m in summary['models']],[0,0])
+        with (root/'pilot-summary.csv').open(encoding='utf-8-sig',newline='') as f:
+            self.assertEqual(len(list(csv.reader(f))),61)
         other=root/'model_02/plan.json';plan=batch.read(other)
         plan['config']['temperature']=.7;batch.atomic(other,plan)
         with self.assertRaises(ValueError):pilot.report(root)

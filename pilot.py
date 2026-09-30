@@ -136,7 +136,7 @@ def report(root):
                 note='All planned slots stay in denominator; failures and missing results are not removed. No pass@k or final benchmark claim.')
     batch.atomic(root/'pilot-summary.json',output)
     stream=io.StringIO(newline='');writer=csv.DictWriter(stream,fieldnames=list(rows[0]));writer.writeheader();writer.writerows(rows)
-    (root/'pilot-summary.csv').write_text(stream.getvalue(),encoding='utf-8-sig')
+    (root/'pilot-summary.csv').write_bytes(stream.getvalue().encode('utf-8-sig'))
     body=''.join('<tr>'+''.join('<td>'+html.escape(str(m[k]))+'</td>' for k in ('model','planned','completed','simulation_passes','synthesis_passes','joint_passes'))+'</tr>' for m in models)
     page=f'''<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>Dev10 pilot</title>
 <style>body{{font:16px system-ui;max-width:1000px;margin:40px auto;padding:20px}}th,td{{padding:12px;border-bottom:1px solid #ddd;text-align:left}}table{{border-collapse:collapse}}pre{{white-space:pre-wrap}}</style>

@@ -363,7 +363,7 @@ def summarize(suite, rows, secret=""):
     writer = csv.DictWriter(buffer, fieldnames=fields, extrasaction="ignore")
     writer.writeheader()
     writer.writerows(rows)
-    write_text(suite / "summary.csv", buffer.getvalue(), secret)
+    (suite / "summary.csv").write_bytes(redact(buffer.getvalue(), secret).encode('utf-8'))
 
 
 def positive(value):

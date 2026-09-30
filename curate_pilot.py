@@ -50,7 +50,7 @@ def curate(run, out):
             if result['status']=='COMPILE_FAIL':
                 text=(source/'compile.stderr.log').read_text(encoding='utf-8')
                 text=text.replace(str(run),'<run>')
-                (dest/(job['task']+'.compile.txt')).write_bytes(text.encode('utf-8'))
+                (dest/(job['task']+'.compile.txt')).write_bytes((text.rstrip()+'\n').encode('utf-8'))
     batch.atomic(out/'experiment.json',dict(config=plan['config'],models=models,
         original_pilot_sha256=lab.digest((run/'pilot.json').read_bytes()),
         note='Allowlisted metadata and generated RTL only. Raw account/CLI logs remain local.'))

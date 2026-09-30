@@ -1,5 +1,6 @@
 """Integration tests execute real Icarus. Bridge fixtures are synthetic, not VCS evidence."""
 import contextlib
+import csv
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import io
 import json
@@ -41,6 +42,8 @@ class BatchTests(unittest.TestCase):
         self.assertEqual(self.call('run','--run-dir',run,'--workers',3)['returncode'],0)
         summary=batch.read(run/'summary.json')
         self.assertEqual(summary['counts'],{'PASS':6})
+        with (run/'summary.csv').open(encoding='utf-8-sig',newline='') as f:
+            self.assertEqual(len(list(csv.reader(f))),7, 'CSV must not contain Windows extra blank rows')
         for path,sha in before.items():self.assertEqual(lab.digest(path.read_bytes()),sha)
         self.assertEqual(self.call('run','--run-dir',run)['returncode'],0)
         self.assertEqual(len(list(run.glob('jobs/*/attempt_*'))),6)
