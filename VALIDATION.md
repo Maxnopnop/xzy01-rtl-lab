@@ -11,6 +11,7 @@
 | 完成后再次运行相同真实实验 | 已完成任务全部跳过，调用预留仍为 40 |
 | Windows 回归 | 16 项整组测试通过，新增调用上限测试单独通过，共 17 项 |
 | WSL Ubuntu 回归 | 16 项整组测试通过，新增调用上限测试单独通过，共 17 项 |
+| GitHub Actions 干净 Linux 环境 | 17/17 测试通过；[运行记录](https://github.com/Maxnopnop/xzy01-rtl-lab/actions/runs/36723549380) |
 | VCS/Xcelium 导出 | 已导出真实模型生成的 adder8 与 fifo4x8 两类案例 |
 | 商业工具回传接口 | 本地合成凭据测试通过；尚未实际登录学校执行商业工具 |
 
