@@ -84,3 +84,5 @@ CLI 记录的累计 usage 为 input_tokens=341608，cached_input_tokens=199168�
 Windows 的 5 项新增回归通过。WSL 的完整 **48/48** 回归通过（172.920 秒），包含实际 Icarus、Yosys、公共/私有信息隔离及校验篡改拒绝。旧配对证据审计仍通过；新证据 412 个文件及全部绑定校验通过。一次 CLI 反例复核确认：sticky_alarm 的同一错误表旧检查通过，新 profile 检出 `111` 且返回退出码 1；正确表返回 0。
 
 详见 [MUTATION_FINDINGS.md](MUTATION_FINDINGS.md)。这是开发内故障覆盖和离线夹具诊断验证，不能作为未见题准确率或新增模型效果。现有两个候选保留题未参与本轮用例选择和校准。
+
+本轮提交 `0173f54d4bf8e00b993fa7f2172b65d886333acf` 的 [GitHub CI 36785360906](https://github.com/Maxnopnop/xzy01-rtl-lab/actions/runs/36785360906) 已通过：完整 48 项测试、历史配对审计及新故障证据校验全部成功。

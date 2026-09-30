@@ -3,11 +3,11 @@
 ## Objective and finish line
 Find and resolve locally verifiable gaps in public semantic feedback and stage-error localization. Zero new model calls. Preserve all historical scores, source locks and paired-v1 data.
 
-## Current phase
+## Completed phases
 1. Define deterministic single-edit mutation operators on the five development families — complete
 2. Measure public-check vs exact-IR vs real Icarus detection; identify shortest counterexamples — complete
 3. Publish separate strengthened development contracts and verify localization quadrants — complete
-4. Targeted/full regressions, evidence audit and Chinese report — complete; GitHub/CI and archive delivery gate in progress
+4. Regressions, evidence audit, Chinese report, GitHub CI and research archives — complete
 
 ## Constraints / stop conditions
 - Enumerate all alternative edge destinations, state-output flips, reset kind/polarity flips and alternative reset states. Deterministic enumeration, no fault selection based on model scores.
@@ -22,7 +22,7 @@ Find and resolve locally verifiable gaps in public semantic feedback and stage-e
 - [x] Define finish line and bounded scope.
 - [x] Run deterministic fault enumeration and measure checker coverage.
 - [x] Implement and verify improvements on a separate version.
-- [ ] Deliver evidence, limits, synchronization and local backup.
+- [x] Deliver evidence, limits, synchronization and local backup.
 
 ---
 # Historical plan (completed preceding campaign)
