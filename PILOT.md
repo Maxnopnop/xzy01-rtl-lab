@@ -1,5 +1,7 @@
 # 两模型 pilot：60 次生成
 
+本计划已经实际执行完成，结果见 [PILOT_FINDINGS.md](PILOT_FINDINGS.md)；以下命令用于复现或新建实验。
+
 实验配置保存在 `experiments/pilot60.json`：`gpt-5.6-sol`、`gpt-5.6-terra` 各 10 题 × 3 次，共 60 次生成尝试。模型依据本机已登录 Codex CLI 的模型目录选择；沿用同一供应商通道以先验证研究流程，不声称跨供应商多样性。
 
 冻结 `dev10-v1` 的来源、提示词、测试、向量及代码；每题使用同一提示词独立生成三次，reasoning=low，生成超时 180 秒，并发最多 2，无自动修复、无测试反馈、无工具访问。CLI 没有设置 temperature、采样 seed 或输出 token 上限；按原样记录未指定，不宣称三个样本统计独立或 token 成本完全相同。模型名称是请求 ID，CLI 不提供可核实的后端快照 ID。
@@ -38,5 +40,7 @@ WSL 安装工具：`sudo apt-get install iverilog yosys`。Linux 已有独立 Co
 扩至四模型时复制配置到新文件，设置四个明确 model ID，再以 `--config` 初始化新的实验目录（120 次，不能在旧 60 次实验里加模型）。兼容 API 访问仍由 `batch.py --mode live` 提供；引入另一供应商前应明确其模型、认证、采样字段和预算，并另建同任务比较计划。
 
 学校 VCS/Xcelium 继续使用 `school_bridge.py` 导出单个案例、VDI 手动运行和结果导入，不自动向共享 VDI 提交批任务。
+
+本机已导出 `exports/pilot-vcs` 和 `exports/pilot-xcelium`，选用 model_01 的 `ve_fsm__s001` 检查枚举类型工具差异。它们是待运行的单案例包，尚无学校工具结果；导出目录被 Git 忽略。其他电脑可对自己重放的 run 使用同一导出命令重新建包。
 
 CLI 的显式模型参数与非交互行为见 [OpenAI 官方模型文档](https://learn.chatgpt.com/docs/models)及[非交互文档](https://learn.chatgpt.com/docs/non-interactive-mode)。

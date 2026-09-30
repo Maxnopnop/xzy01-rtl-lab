@@ -1,0 +1,51 @@
+{
+  "task": "ve_fsm",
+  "sample": 3,
+  "requested_model": "gpt-5.6-sol",
+  "status": "COMPILE_FAIL",
+  "stage": "compile",
+  "message": "See compile.stderr.log",
+  "usage": {
+    "input_tokens": 8655,
+    "cached_input_tokens": 6656,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 222,
+    "reasoning_output_tokens": 0
+  },
+  "generation_seconds": 18.484,
+  "rtl_sha256": "b5fe4d4a1cb758aa730b449fa5d43f7bb90ba4dd7d985225434b40b88874683d",
+  "testbench_sha256": "73ac7f8b8c2835b3c2d303a54a06175f4b086d8e366bd40a303299646fa5f292",
+  "expected_checks": 1600,
+  "sampling": {
+    "reasoning_effort": "low",
+    "temperature": null,
+    "seed": null,
+    "max_output_tokens": null,
+    "note": "Codex CLI defaults; see codex_request.json"
+  },
+  "model_identity_basis": "Explicit --model; exec does not expose backend snapshot",
+  "codex_generation_success": true,
+  "tools_used": false,
+  "synthesis": {
+    "job_id": "ve_fsm__s003",
+    "source_result_sha256": "8012b6b46088b7dd34d2223aaa260905604b0cc8088195b599fd03c5a3100ca0",
+    "rtl_sha256": "b5fe4d4a1cb758aa730b449fa5d43f7bb90ba4dd7d985225434b40b88874683d",
+    "simulation_status": "COMPILE_FAIL",
+    "backend": "yosys",
+    "flow": "generic-synth-noabc-v1",
+    "elapsed_seconds": 0.0833,
+    "statistics_kind": "generic cells, not silicon area/timing/power",
+    "status": "SYNTH_PASS",
+    "generic_cells": 20,
+    "cell_types": {
+      "$_AND_": 3,
+      "$_DFF_PP0_": 2,
+      "$_MUX_": 2,
+      "$_NOT_": 6,
+      "$_OR_": 7
+    },
+    "latch_cells": 0,
+    "netlist_sha256": "522e0ae7f661bd6c49ae8cc5c206645b79199e19e5cd7ea7a7384363fccc56dc",
+    "message": "Generic synthesis and structural checks passed"
+  }
+}

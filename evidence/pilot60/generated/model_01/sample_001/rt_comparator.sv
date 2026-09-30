@@ -1,0 +1,22 @@
+module comparator_3bit (
+    input  logic [2:0] A,
+    input  logic [2:0] B,
+    output logic       A_greater,
+    output logic       A_equal,
+    output logic       A_less
+);
+
+    always_comb begin
+        A_greater = 1'b0;
+        A_equal   = 1'b0;
+        A_less    = 1'b0;
+
+        if (A > B)
+            A_greater = 1'b1;
+        else if (A == B)
+            A_equal = 1'b1;
+        else
+            A_less = 1'b1;
+    end
+
+endmodule

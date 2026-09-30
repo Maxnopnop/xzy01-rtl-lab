@@ -1,11 +1,14 @@
 * text=auto eol=lf
 # Preserve exact bytes of fingerprinted sources and plans across clones.
 *.py -text whitespace=cr-at-eol
-*.sv -text
+*.sv -text whitespace=cr-at-eol
 *.hex -text
-*.json -text
-*.txt -text
+*.json -text whitespace=cr-at-eol
+*.txt -text whitespace=cr-at-eol
 *.csh text eol=lf
 *.tcl text eol=lf
 *.ps1 text eol=lf
-benchmarks/dev10/upstream/** -text
+# Preserve upstream formatting (including its whitespace) for provenance hashes.
+benchmarks/dev10/upstream/** -text -whitespace
+benchmarks/dev10/reference/** -whitespace
+benchmarks/dev10/mutants/** -whitespace

@@ -54,3 +54,11 @@ CLI 记录的累计 usage 为 input_tokens=341608，cached_input_tokens=199168�
 验收摘要和逐 RTL 综合信息见 [evidence/development_audit.json](evidence/development_audit.json)。综合失败、超时、冲突驱动、无法推断单一时钟结构的测试已实际运行。参考与 mutant 只用于判题器验收，不属于模型采样结果。
 
 一轮 dev10 有 140,430 次固定输出检查。来源、适配和 final 排除规则见 [开发集说明](benchmarks/dev10/README.md)。最终 40 题尚未选择/审计。两模型 60 次 pilot 的执行方式和统计口径见 [PILOT.md](PILOT.md)。
+
+## 已完成的两模型 pilot
+
+实际新增 60 次真实生成：gpt-5.6-sol 与 gpt-5.6-terra 各 30 次，均 24/30 仿真通过、30/30 综合通过、24/30 联合通过。sol 有 6 次编译失败；terra 有 3 次编译失败及 3 次功能失败。全部槽位有结果，真实生成计数和调用预留均为 60，没有修复或额外调用。
+
+详细失败分析、置信区间和 FYP 对照见 [PILOT_FINDINGS.md](PILOT_FINDINGS.md)。这 60 次与之前自建任务的 40 次是两套不同任务的独立实验，不合并成一个 benchmark 分数。
+
+新增离线回归共 **24 项**，GitHub 干净 Linux 环境全部通过：[CI 记录](https://github.com/Maxnopnop/xzy01-rtl-lab/actions/runs/36728142866)，验证代码 commit `51de2cf`。该 CI 不调用模型。

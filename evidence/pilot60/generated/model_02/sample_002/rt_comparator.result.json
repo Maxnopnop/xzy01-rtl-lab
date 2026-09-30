@@ -1,0 +1,51 @@
+{
+  "task": "rt_comparator",
+  "sample": 2,
+  "requested_model": "gpt-5.6-terra",
+  "status": "PASS",
+  "stage": "simulate",
+  "message": "Independent testbench completed all 64 checks",
+  "usage": {
+    "input_tokens": 8730,
+    "cached_input_tokens": 7936,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 96,
+    "reasoning_output_tokens": 0
+  },
+  "generation_seconds": 12.641,
+  "rtl_sha256": "fd6077a573b6688f28c70a8540731e7990e4695aa69f22219f5701c2ed789180",
+  "testbench_sha256": "a688ad671c672323681232728acc4fbc58f67d35967868816392063da9e699fd",
+  "expected_checks": 64,
+  "sampling": {
+    "reasoning_effort": "low",
+    "temperature": null,
+    "seed": null,
+    "max_output_tokens": null,
+    "note": "Codex CLI defaults; see codex_request.json"
+  },
+  "model_identity_basis": "Explicit --model; exec does not expose backend snapshot",
+  "codex_generation_success": true,
+  "tools_used": false,
+  "receipt_nonce": "eaa7b8eb412a416ea9d355e2a317020f",
+  "synthesis": {
+    "job_id": "rt_comparator__s002",
+    "source_result_sha256": "8d0e92ed4a5324211b8919944891a16d7818ae2160f715ee599a59d8265824da",
+    "rtl_sha256": "fd6077a573b6688f28c70a8540731e7990e4695aa69f22219f5701c2ed789180",
+    "simulation_status": "PASS",
+    "backend": "yosys",
+    "flow": "generic-synth-noabc-v1",
+    "elapsed_seconds": 0.0632,
+    "statistics_kind": "generic cells, not silicon area/timing/power",
+    "status": "SYNTH_PASS",
+    "generic_cells": 19,
+    "cell_types": {
+      "$_AND_": 7,
+      "$_NOT_": 5,
+      "$_OR_": 4,
+      "$_XOR_": 3
+    },
+    "latch_cells": 0,
+    "netlist_sha256": "9fc0319d3604802c5770db4e3c4f2f8de9b4b81a8099bf8ce78f40ec6224c5dc",
+    "message": "Generic synthesis and structural checks passed"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "task": "rt_sequence",
+  "sample": 2,
+  "requested_model": "gpt-5.6-sol",
+  "status": "COMPILE_FAIL",
+  "stage": "compile",
+  "message": "See compile.stderr.log",
+  "usage": {
+    "input_tokens": 8813,
+    "cached_input_tokens": 6656,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 415,
+    "reasoning_output_tokens": 159
+  },
+  "generation_seconds": 30.64,
+  "rtl_sha256": "27dc40fa8017ce1f0f6c536a36a4f786615f136764b14d059aa16f507fd98e67",
+  "testbench_sha256": "6abb900b5f8cae1ea0ab98321c1830bd58f4132c75efb676b9cc4250a5e90e4b",
+  "expected_checks": 1840,
+  "sampling": {
+    "reasoning_effort": "low",
+    "temperature": null,
+    "seed": null,
+    "max_output_tokens": null,
+    "note": "Codex CLI defaults; see codex_request.json"
+  },
+  "model_identity_basis": "Explicit --model; exec does not expose backend snapshot",
+  "codex_generation_success": true,
+  "tools_used": false,
+  "synthesis": {
+    "job_id": "rt_sequence__s002",
+    "source_result_sha256": "31328605d176334c68b03813139a3cd1103b30f270d6456e961de7730a9e03c4",
+    "rtl_sha256": "27dc40fa8017ce1f0f6c536a36a4f786615f136764b14d059aa16f507fd98e67",
+    "simulation_status": "COMPILE_FAIL",
+    "backend": "yosys",
+    "flow": "generic-synth-noabc-v1",
+    "elapsed_seconds": 0.0833,
+    "statistics_kind": "generic cells, not silicon area/timing/power",
+    "status": "SYNTH_PASS",
+    "generic_cells": 36,
+    "cell_types": {
+      "$_AND_": 5,
+      "$_DFF_PN0_": 3,
+      "$_MUX_": 3,
+      "$_NOT_": 9,
+      "$_OR_": 16
+    },
+    "latch_cells": 0,
+    "netlist_sha256": "0a3a9fa2dab3408837601cac878068919d87e3a2a0d8d365f6b51839505fdf4c",
+    "message": "Generic synthesis and structural checks passed"
+  }
+}
