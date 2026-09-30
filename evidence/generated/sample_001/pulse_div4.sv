@@ -1,0 +1,22 @@
+module pulse_div4 (
+    input  wire clk,
+    input  wire rst,
+    input  wire en,
+    output reg  pulse
+);
+
+    reg [1:0] counter;
+
+    always_ff @(posedge clk) begin
+        if (rst) begin
+            counter <= 2'b00;
+            pulse   <= 1'b0;
+        end else if (en) begin
+            pulse   <= (counter == 2'b11);
+            counter <= counter + 2'b01;
+        end else begin
+            pulse <= 1'b0;
+        end
+    end
+
+endmodule

@@ -1,0 +1,11 @@
+name: Offline RTL validation
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  icarus:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install simulator
+        run: sudo apt-get update && sudo apt-get install -y iverilog
+      - name: Validate evaluator and resumable runner
+        run: python3 -m unittest -v test_lab test_batch

@@ -1,0 +1,15 @@
+module popcount8(
+    input  wire [7:0] a,
+    output reg  [3:0] count
+);
+    always_comb begin
+        count = {3'b000, a[0]} +
+                {3'b000, a[1]} +
+                {3'b000, a[2]} +
+                {3'b000, a[3]} +
+                {3'b000, a[4]} +
+                {3'b000, a[5]} +
+                {3'b000, a[6]} +
+                {3'b000, a[7]};
+    end
+endmodule

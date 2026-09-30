@@ -1,0 +1,21 @@
+module encoder4 (
+    input  wire [3:0] req,
+    output reg        valid,
+    output reg  [1:0] index
+);
+    always_comb begin
+        valid = 1'b1;
+        index = 2'd0;
+
+        if (req[3])
+            index = 2'd3;
+        else if (req[2])
+            index = 2'd2;
+        else if (req[1])
+            index = 2'd1;
+        else if (req[0])
+            index = 2'd0;
+        else
+            valid = 1'b0;
+    end
+endmodule

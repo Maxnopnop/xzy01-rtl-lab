@@ -1,0 +1,46 @@
+module fifo4x8(
+    input  wire       clk,
+    input  wire       rst,
+    input  wire       wr_en,
+    input  wire       rd_en,
+    input  wire [7:0] wdata,
+    output wire       full,
+    output wire       empty,
+    output reg  [2:0] count,
+    output wire [7:0] rdata
+);
+
+    reg [7:0] mem [0:3];
+    reg [1:0] wr_ptr;
+    reg [1:0] rd_ptr;
+
+    wire write_accept = wr_en && (count < 3'd4);
+    wire read_accept  = rd_en && (count > 3'd0);
+
+    assign full  = (count == 3'd4);
+    assign empty = (count == 3'd0);
+    assign rdata = empty ? 8'd0 : mem[rd_ptr];
+
+    always @(posedge clk) begin
+        if (rst) begin
+            count  <= 3'd0;
+            wr_ptr <= 2'd0;
+            rd_ptr <= 2'd0;
+        end else begin
+            if (write_accept) begin
+                mem[wr_ptr] <= wdata;
+                wr_ptr      <= wr_ptr + 2'd1;
+            end
+
+            if (read_accept)
+                rd_ptr <= rd_ptr + 2'd1;
+
+            case ({write_accept, read_accept})
+                2'b10: count <= count + 3'd1;
+                2'b01: count <= count - 3'd1;
+                default: count <= count;
+            endcase
+        end
+    end
+
+endmodule
