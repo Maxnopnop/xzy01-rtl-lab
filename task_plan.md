@@ -13,18 +13,18 @@ Complete a reproducible paired-feedback experiment, expand to new FSM task famil
 - Shutdown only after these checks and clean synchronization. Use normal shutdown without force-closing unsaved applications; record the result and completion state before scheduling it. No school SSH, batch EDA, or messages.
 
 ## Current Phase
-Phase 2: Offline verification
+Phase 6: GitHub delivery and shutdown gate
 
 ## Next Step
-Finish full regression, commit frozen protocol/code/bank, then start Stage A without further source edits.
+Commit curated results, verify GitHub CI, archive exact source and raw local evidence, then issue authorized normal shutdown after writing completion receipt.
 
 ## Phases
 1. Bank, fixed split and experimental protocol — complete
-2. Paired single-call runner and offline regression — in_progress
-3. Stage A 32-turn paired study — pending
-4. Stage B 64-turn expansion — pending
-5. Synthesis, analysis, literature and evidence verification — pending
-6. GitHub/CI, final archive and authorized shutdown — pending
+2. Paired single-call runner and offline regression — complete
+3. Stage A 32-turn paired study — complete
+4. Stage B 64-turn expansion — complete (62 outputs, 2 documented infrastructure gaps)
+5. Synthesis, analysis, literature and evidence verification — complete
+6. GitHub/CI, final archive and authorized shutdown — in_progress
 
 ## Loop checklist
 - [x] Define finish line, deliverables and constraints.
@@ -34,3 +34,5 @@ Finish full regression, commit frozen protocol/code/bank, then start Stage A wit
 
 ## Errors
 - Read-only `shutdown.exe /?` returned Windows error 203 instead of help. The shutdown executable and PowerShell Stop-Computer cmdlet exist. Use an independently verified non-force shutdown path at the final gate; no shutdown has been attempted yet.
+
+- Stage B interrupted by confirmed idle sleep; 2 unknown model turns terminal TIMEOUT. Explicit recovery deviation allows only untouched slots; analyze infrastructure missingness separately, preserving planned denominator.

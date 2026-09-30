@@ -64,3 +64,13 @@ CLI 记录的累计 usage 为 input_tokens=341608，cached_input_tokens=199168�
 新增离线回归共 **24 项**，GitHub 干净 Linux 环境全部通过：[CI 记录](https://github.com/Maxnopnop/xzy01-rtl-lab/actions/runs/36728142866)，验证代码 commit `51de2cf`。该 CI 不调用模型。
 
 实验结束后的 CSV 换行修复已在 Windows 重跑全部 24 项：22 项通过，2 项需原生 Yosys、由 Linux/WSL 执行。CSV 验证为表头加 60 行、无空白行；重新输出前后的 pilot JSON 完全一致，未改变实验成绩或调用次数。
+
+## 2026-10-01：固定错误 IR 的配对扩展
+
+冻结生成代码 `9c2a895`：Windows 41 项回归（39 通过、2 个原生 Yosys 项转 WSL），WSL 41/41 通过；该提交 GitHub CI [36750502858](https://github.com/Maxnopnop/xzy01-rtl-lab/actions/runs/36750502858) 通过。
+
+实际预留/启动 32+64=96 次，收到 94 份 RTL；系统自动空闲睡眠导致 2 次未知结果超时，未重试、未退款。恢复只运行尚未启动的槽位，偏差单独记录。功能 89/94，通过综合 94/94。两个没有 RTL 的槽位综合为 NOT_RUN，不伪造成功。
+
+`paired_audit.py` 在 Windows 和 WSL 对 682 个证据文件核验通过，检查源码/计划/题库锁、提示词、回复、RTL、综合源结果绑定、CSV 行数、调用上限及候选保留题未参与模型实验。两项新审计测试在 Windows 通过。GitHub 工作流包含完整 43 项测试及这次全部证据审计，且不调用模型。
+
+详情：[结果报告](PAIRED_FINDINGS.md)、[机器可读审计](evidence/paired-analysis.json)、[睡眠恢复偏差](PAIRED_EXECUTION_NOTE.md)。学校配对案例包已在本机导出，尚未在 VCS/Xcelium 上实际运行。

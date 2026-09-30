@@ -1,0 +1,199 @@
+Implement the given digital circuit in synthesizable SystemVerilog.
+Return only one complete module in a single ```systemverilog code block.
+Use exactly the specified module name and ports. Do not provide a testbench.
+No includes, preprocessor directives, strings, hierarchical references, extra
+modules, simulation system tasks, file IO, or attributes. Only $signed,
+$unsigned and $clog2 system functions are permitted. Do not use delays.
+The independent evaluator will supply all input stimuli and check outputs.
+
+Implement module debounce3(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. Initially q=0. While q=0, require three consecutive sampled ones to change q to 1 on the third edge; any zero restarts this count. While q=1, require two consecutive sampled zeros to change q to 0 on the second edge; any one restarts this count. q otherwise holds.
+
+Use reg/localparam state encodings and case/if assignments for Icarus compatibility. Avoid enum-valued ternary assignments. Preserve the specified reset, overlap and cycle timing.
+
+Public specification examples shared across conditions:
+{
+  "clock_edge": "posedge",
+  "output_kind": "moore",
+  "reset": {
+    "kind": "async",
+    "active": 0,
+    "output": 0
+  },
+  "trace_convention": "Each trace starts after reset; output is sampled after every rising edge.",
+  "examples": [
+    {
+      "bits": "01110100111",
+      "outputs": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "bits": "110110",
+      "outputs": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ]
+}
+
+Candidate intermediate state table (may contain mistakes):
+{
+  "schema": 1,
+  "clock_edge": "posedge",
+  "output_kind": "moore",
+  "reset": {
+    "kind": "async",
+    "active": 0,
+    "state": "S0"
+  },
+  "states": [
+    {
+      "name": "S0",
+      "output": 0
+    },
+    {
+      "name": "S1",
+      "output": 1
+    },
+    {
+      "name": "S2",
+      "output": 0
+    },
+    {
+      "name": "S3",
+      "output": 1
+    },
+    {
+      "name": "S4",
+      "output": 1
+    }
+  ],
+  "transitions": [
+    {
+      "from": "S0",
+      "input": 0,
+      "to": "S0"
+    },
+    {
+      "from": "S0",
+      "input": 1,
+      "to": "S1"
+    },
+    {
+      "from": "S1",
+      "input": 0,
+      "to": "S0"
+    },
+    {
+      "from": "S1",
+      "input": 1,
+      "to": "S2"
+    },
+    {
+      "from": "S2",
+      "input": 0,
+      "to": "S0"
+    },
+    {
+      "from": "S2",
+      "input": 1,
+      "to": "S3"
+    },
+    {
+      "from": "S3",
+      "input": 0,
+      "to": "S4"
+    },
+    {
+      "from": "S3",
+      "input": 1,
+      "to": "S3"
+    },
+    {
+      "from": "S4",
+      "input": 0,
+      "to": "S0"
+    },
+    {
+      "from": "S4",
+      "input": 1,
+      "to": "S3"
+    }
+  ]
+}
+
+
+Implement the specification. You may correct the candidate table while producing RTL. There is no extra repair turn. Return only the specified RTL module.
+
+Executable results on the already-public contract:
+{
+  "status": "PUBLIC_CHECK_FAIL",
+  "errors": [
+    {
+      "bits": "01110100111",
+      "expected": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        1
+      ],
+      "observed": [
+        0,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "bits": "110110",
+      "expected": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "observed": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    }
+  ],
+  "scope": "Only disclosed examples/reset/schema; private tests were not consulted."
+}
+
+Do not invoke tools, read files, run tests, or delegate. Reply directly.

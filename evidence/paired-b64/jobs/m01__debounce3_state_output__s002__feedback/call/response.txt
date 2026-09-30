@@ -1,0 +1,71 @@
+```systemverilog
+module debounce3 (
+    input  clk,
+    input  rst_n,
+    input  din,
+    output q
+);
+
+    localparam [2:0] S_LOW      = 3'd0;
+    localparam [2:0] S_LOW_1    = 3'd1;
+    localparam [2:0] S_LOW_2    = 3'd2;
+    localparam [2:0] S_HIGH     = 3'd3;
+    localparam [2:0] S_HIGH_1   = 3'd4;
+
+    reg [2:0] state;
+    reg [2:0] next_state;
+
+    assign q = (state == S_HIGH) || (state == S_HIGH_1);
+
+    always @(*) begin
+        case (state)
+            S_LOW: begin
+                if (din)
+                    next_state = S_LOW_1;
+                else
+                    next_state = S_LOW;
+            end
+
+            S_LOW_1: begin
+                if (din)
+                    next_state = S_LOW_2;
+                else
+                    next_state = S_LOW;
+            end
+
+            S_LOW_2: begin
+                if (din)
+                    next_state = S_HIGH;
+                else
+                    next_state = S_LOW;
+            end
+
+            S_HIGH: begin
+                if (din)
+                    next_state = S_HIGH;
+                else
+                    next_state = S_HIGH_1;
+            end
+
+            S_HIGH_1: begin
+                if (din)
+                    next_state = S_HIGH;
+                else
+                    next_state = S_LOW;
+            end
+
+            default: begin
+                next_state = S_LOW;
+            end
+        endcase
+    end
+
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n)
+            state <= S_LOW;
+        else
+            state <= next_state;
+    end
+
+endmodule
+```

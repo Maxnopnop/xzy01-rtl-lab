@@ -59,3 +59,13 @@ school_bridge.py
 综合已有独立 stage/result，不把仿真 PASS 当成综合或签核 PASS。后续形式验证、PPA 继续遵循同样边界。多文件/多模块设计需要版本化的文件清单和更强隔离，不宜直接取消现有单模块限制。
 
 `batch.SUITES` 将原有 `custom` 与 `dev10` 分开，核心 runner 同时固定所选 manifest、源代码、来源锁和划分锁；任务目录属于配置，不硬编码在 evaluator 中。`build_dev.py` 从随库上游快照确定性生成开发集，不调用模型。整个 Yosys 工作进程在 WSL/Linux 内运行，复用 POSIX 进程组超时清理；Windows 模型生成与 WSL 综合以文件哈希交接。
+
+## 固定 IR 的配对研究扩展
+
+`paired_bank.py` 维护独立版本 `benchmarks/paired-v1`：规格、公开例子、私有输入、过程 oracle、状态图、错误表及开发/候选保留划分。`bank-lock.json` 固定全部数据字节，不能据运行结果修改既有 bank。
+
+`paired_study.py` 每个配对复用同一张错误 IR、同一规格与模型；feedback 条件只增加公开契约的执行结果。一个分支一次新调用，每次调用启动前预留额度；结果不明的调用不重发、不退预算。A 阶段 32 次的可靠性检查通过后，B 阶段才允许 64 次；效果正负不参与扩容判断。
+
+模型输出依次经过固定 Icarus 规格测试、IR/RTL 一致性与私有规格诊断，再由 `synthesis.py` 对原 RTL 单独综合。结果兼容 `school_bridge.py`，每个学校案例仍由用户在 VDI 登录主机手动执行。`curate` 输出移除会话 ID 的白名单证据及 SHA-256 锁；原始日志仍位于 Git 忽略的 `runs` 目录。
+
+两个候选保留题只离线验证判题器，本轮不发送模型。扩展更多位宽、Mealy 行为或多个时钟时，需要升级 IR/判题协议并创建新版本，不能直接将现有单比特 Moore 结果外推。
