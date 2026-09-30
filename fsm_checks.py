@@ -83,9 +83,9 @@ def inputs_from_dev(task_dir, spec):
     return [((int(v, 16) >> 4) & 1, (int(v, 16) >> 3) & 1) for v in data.decode().split()]
 
 
-def write_agreement_test(folder, spec, ir, inputs):
+def write_agreement_test(folder, spec, ir, inputs, ports=None):
     """Independent TB using the model's IR as oracle, on frozen private stimuli."""
-    rows = fsm_ir.timed_vectors(ir, inputs); c = CONTRACTS[spec['id']]
+    rows = fsm_ir.timed_vectors(ir, inputs); c = ports or CONTRACTS[spec['id']]
     reset, bit, out = (c[k] for k in ('reset_port', 'input_port', 'output_port'))
     vectors = []; checks = 0
     for r, b, pre, post in rows:
