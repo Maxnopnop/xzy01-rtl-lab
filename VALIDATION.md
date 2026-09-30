@@ -74,3 +74,5 @@ CLI 记录的累计 usage 为 input_tokens=341608，cached_input_tokens=199168�
 `paired_audit.py` 在 Windows 和 WSL 对 682 个证据文件核验通过，检查源码/计划/题库锁、提示词、回复、RTL、综合源结果绑定、CSV 行数、调用上限及候选保留题未参与模型实验。两项新审计测试在 Windows 通过。GitHub 工作流包含完整 43 项测试及这次全部证据审计，且不调用模型。
 
 详情：[结果报告](PAIRED_FINDINGS.md)、[机器可读审计](evidence/paired-analysis.json)、[睡眠恢复偏差](PAIRED_EXECUTION_NOTE.md)。学校配对案例包已在本机导出，尚未在 VCS/Xcelium 上实际运行。
+
+本轮结果提交 `88726c896eebb36a6c9dab32d0c1912c1e1df22c` 的 [GitHub CI 36774716313](https://github.com/Maxnopnop/xzy01-rtl-lab/actions/runs/36774716313) 已通过：43 项离线测试和全部配对证据审计成功。后续文档收尾不改变生成代码或原始实验数据。

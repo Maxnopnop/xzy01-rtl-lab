@@ -13,10 +13,10 @@ Complete a reproducible paired-feedback experiment, expand to new FSM task famil
 - Shutdown only after these checks and clean synchronization. Use normal shutdown without force-closing unsaved applications; record the result and completion state before scheduling it. No school SSH, batch EDA, or messages.
 
 ## Current Phase
-Phase 6: GitHub delivery and shutdown gate
+Research complete; final shutdown delivery gate
 
 ## Next Step
-Commit curated results, verify GitHub CI, archive exact source and raw local evidence, then issue authorized normal shutdown after writing completion receipt.
+Finalize this documentation commit, verify its CI and exact archive, write validation/paired-completion/completion.json, then start the user-authorized normal-shutdown helper. The helper refuses shutdown if completion or archive/commit checks fail.
 
 ## Phases
 1. Bank, fixed split and experimental protocol — complete
@@ -24,13 +24,13 @@ Commit curated results, verify GitHub CI, archive exact source and raw local evi
 3. Stage A 32-turn paired study — complete
 4. Stage B 64-turn expansion — complete (62 outputs, 2 documented infrastructure gaps)
 5. Synthesis, analysis, literature and evidence verification — complete
-6. GitHub/CI, final archive and authorized shutdown — in_progress
+6. Research GitHub/CI and archives — complete; normal shutdown handled by the verified local completion gate
 
 ## Loop checklist
 - [x] Define finish line, deliverables and constraints.
 - [x] Set finite budget and stopping gates.
-- [ ] Execute, verify and record each phase.
-- [ ] Deliver evidence and state research limits.
+- [x] Execute, verify and record each research phase.
+- [x] Deliver evidence and state research limits.
 
 ## Errors
 - Read-only `shutdown.exe /?` returned Windows error 203 instead of help. The shutdown executable and PowerShell Stop-Computer cmdlet exist. Use an independently verified non-force shutdown path at the final gate; no shutdown has been attempted yet.
