@@ -1,0 +1,1578 @@
+{
+  "schema": 1,
+  "study": "fsm48-v1",
+  "mode": "codex",
+  "planned": 24,
+  "completed": 24,
+  "pending": 0,
+  "max_calls": 48,
+  "model_call_reservations": 48,
+  "model_turns_started": 48,
+  "real_generations": 48,
+  "usage": {
+    "input_tokens": 451516,
+    "cached_input_tokens": 285696,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 14992,
+    "reasoning_output_tokens": 1058
+  },
+  "groups": [
+    {
+      "model": "gpt-5.6-sol",
+      "arm": "prose",
+      "planned": 4,
+      "completed": 4,
+      "passes": 4,
+      "counts": {
+        "PASS": 4
+      },
+      "usage": {
+        "input_tokens": 75692,
+        "cached_input_tokens": 46592,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 3351,
+        "reasoning_output_tokens": 0
+      },
+      "localizations": {
+        "NO_TABLE_DIAGNOSIS": 4
+      },
+      "ir_counts": {
+        "NO_TABLE": 4
+      },
+      "public_check_counts": {
+        "NOT_APPLICABLE": 4
+      }
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "arm": "table",
+      "planned": 4,
+      "completed": 4,
+      "passes": 4,
+      "counts": {
+        "PASS": 4
+      },
+      "usage": {
+        "input_tokens": 75112,
+        "cached_input_tokens": 46592,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2459,
+        "reasoning_output_tokens": 371
+      },
+      "localizations": {
+        "ALL_PASS": 4
+      },
+      "ir_counts": {
+        "IR_EQUIVALENT": 4
+      },
+      "public_check_counts": {
+        "PUBLIC_CHECK_PASS": 4
+      }
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "arm": "checked_table",
+      "planned": 4,
+      "completed": 4,
+      "passes": 4,
+      "counts": {
+        "PASS": 4
+      },
+      "usage": {
+        "input_tokens": 75368,
+        "cached_input_tokens": 26624,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2540,
+        "reasoning_output_tokens": 324
+      },
+      "localizations": {
+        "ALL_PASS": 4
+      },
+      "ir_counts": {
+        "IR_EQUIVALENT": 4
+      },
+      "public_check_counts": {
+        "PUBLIC_CHECK_PASS": 4
+      }
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "arm": "prose",
+      "planned": 4,
+      "completed": 4,
+      "passes": 3,
+      "counts": {
+        "PASS": 3,
+        "FUNCTION_FAIL": 1
+      },
+      "usage": {
+        "input_tokens": 74864,
+        "cached_input_tokens": 51200,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2244,
+        "reasoning_output_tokens": 0
+      },
+      "localizations": {
+        "NO_TABLE_DIAGNOSIS": 4
+      },
+      "ir_counts": {
+        "NO_TABLE": 4
+      },
+      "public_check_counts": {
+        "NOT_APPLICABLE": 4
+      }
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "arm": "table",
+      "planned": 4,
+      "completed": 4,
+      "passes": 3,
+      "counts": {
+        "PASS": 3,
+        "FUNCTION_FAIL": 1
+      },
+      "usage": {
+        "input_tokens": 75112,
+        "cached_input_tokens": 57344,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2209,
+        "reasoning_output_tokens": 174
+      },
+      "localizations": {
+        "ALL_PASS": 3,
+        "SPEC_TO_IR_ERROR": 1
+      },
+      "ir_counts": {
+        "IR_EQUIVALENT": 3,
+        "IR_SPEC_MISMATCH": 1
+      },
+      "public_check_counts": {
+        "PUBLIC_CHECK_PASS": 3,
+        "PUBLIC_CHECK_FAIL": 1
+      }
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "arm": "checked_table",
+      "planned": 4,
+      "completed": 4,
+      "passes": 4,
+      "counts": {
+        "PASS": 4
+      },
+      "usage": {
+        "input_tokens": 75368,
+        "cached_input_tokens": 57344,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2189,
+        "reasoning_output_tokens": 189
+      },
+      "localizations": {
+        "ALL_PASS": 4
+      },
+      "ir_counts": {
+        "IR_EQUIVALENT": 4
+      },
+      "public_check_counts": {
+        "PUBLIC_CHECK_PASS": 4
+      }
+    }
+  ],
+  "results": [
+    {
+      "job_id": "m01__ve_fsm__prose__s001",
+      "task": "ve_fsm",
+      "sample": 1,
+      "arm": "prose",
+      "mode": "codex",
+      "requested_model": "gpt-5.6-sol",
+      "directory": "jobs/m01__ve_fsm__prose__s001",
+      "ir_diagnosis": {
+        "status": "NO_TABLE"
+      },
+      "ir_rtl": {
+        "status": "NOT_APPLICABLE"
+      },
+      "rtl_sha256": "45dda526fcf015d9644855d798696eb0ea3a95ca74df27514078ccc6b8215506",
+      "backend": "icarus",
+      "compile_seconds": 0.109,
+      "status": "PASS",
+      "message": "Independent testbench completed all 1600 checks",
+      "stage": "simulate",
+      "receipt_nonce": "bfaa4fc89dc64320be4437f6561caa0c",
+      "simulate_seconds": 0.047,
+      "spec_diagnostic": {
+        "checks": 1600,
+        "stimulus_count": 800,
+        "tb_sha256": "c212360db67c3f06cc8f86ccfe9ed18fcfb392590c481bb9ae1132010f1c0f10",
+        "vectors_sha256": "e1636408a65aba953b87a0b991fedf7d7fa2e11f19ac1a8120f599d8597d2499",
+        "backend": "icarus",
+        "compile_seconds": 0.11,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1600 checks",
+        "stage": "simulate",
+        "receipt_nonce": "03b5b3524d48418b90168ef7c17ca51c",
+        "simulate_seconds": 0.062,
+        "mismatches": []
+      },
+      "diagnostic_consistent": true,
+      "localization": "NO_TABLE_DIAGNOSIS",
+      "elapsed_seconds": 66.703
+    },
+    {
+      "job_id": "m01__ve_fsm__table__s001",
+      "task": "ve_fsm",
+      "sample": 1,
+      "arm": "table",
+      "mode": "codex",
+      "requested_model": "gpt-5.6-sol",
+      "directory": "jobs/m01__ve_fsm__table__s001",
+      "ir_diagnosis": {
+        "status": "IR_EQUIVALENT",
+        "reset_contract_errors": [],
+        "shortest_counterexample": null,
+        "visited_pairs": 4,
+        "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+      },
+      "ir_rtl": {
+        "checks": 1600,
+        "stimulus_count": 800,
+        "tb_sha256": "c212360db67c3f06cc8f86ccfe9ed18fcfb392590c481bb9ae1132010f1c0f10",
+        "vectors_sha256": "e1636408a65aba953b87a0b991fedf7d7fa2e11f19ac1a8120f599d8597d2499",
+        "backend": "icarus",
+        "compile_seconds": 0.109,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1600 checks",
+        "stage": "simulate",
+        "receipt_nonce": "ab44d438e7d343edae5dda4eb6a68469",
+        "simulate_seconds": 0.047,
+        "mismatches": []
+      },
+      "public_check": {
+        "status": "PUBLIC_CHECK_PASS",
+        "errors": [],
+        "note": "Only the public examples and schema were checked; passing is not full equivalence."
+      },
+      "rtl_sha256": "f4e0d84e52f8bd44335018ca06541a0ed0cd780ce5418200bf178db6fb705135",
+      "backend": "icarus",
+      "compile_seconds": 0.125,
+      "status": "PASS",
+      "message": "Independent testbench completed all 1600 checks",
+      "stage": "simulate",
+      "receipt_nonce": "a92a2c75f65f4a68960b5755d7f04c4a",
+      "simulate_seconds": 0.047,
+      "spec_diagnostic": {
+        "checks": 1600,
+        "stimulus_count": 800,
+        "tb_sha256": "c212360db67c3f06cc8f86ccfe9ed18fcfb392590c481bb9ae1132010f1c0f10",
+        "vectors_sha256": "e1636408a65aba953b87a0b991fedf7d7fa2e11f19ac1a8120f599d8597d2499",
+        "backend": "icarus",
+        "compile_seconds": 0.094,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1600 checks",
+        "stage": "simulate",
+        "receipt_nonce": "c9d29997c4e74a9aa5d9a6c683006a8d",
+        "simulate_seconds": 0.062,
+        "mismatches": []
+      },
+      "diagnostic_consistent": true,
+      "localization": "ALL_PASS",
+      "elapsed_seconds": 41.296
+    },
+    {
+      "job_id": "m01__ve_fsm__checked_table__s001",
+      "task": "ve_fsm",
+      "sample": 1,
+      "arm": "checked_table",
+      "mode": "codex",
+      "requested_model": "gpt-5.6-sol",
+      "directory": "jobs/m01__ve_fsm__checked_table__s001",
+      "ir_diagnosis": {
+        "status": "IR_EQUIVALENT",
+        "reset_contract_errors": [],
+        "shortest_counterexample": null,
+        "visited_pairs": 4,
+        "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+      },
+      "ir_rtl": {
+        "checks": 1600,
+        "stimulus_count": 800,
+        "tb_sha256": "c212360db67c3f06cc8f86ccfe9ed18fcfb392590c481bb9ae1132010f1c0f10",
+        "vectors_sha256": "e1636408a65aba953b87a0b991fedf7d7fa2e11f19ac1a8120f599d8597d2499",
+        "backend": "icarus",
+        "compile_seconds": 0.109,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1600 checks",
+        "stage": "simulate",
+        "receipt_nonce": "524e59e30c134a6291467a4ff098e941",
+        "simulate_seconds": 0.047,
+        "mismatches": []
+      },
+      "public_check": {
+        "status": "PUBLIC_CHECK_PASS",
+        "errors": [],
+        "note": "Only the public examples and schema were checked; passing is not full equivalence."
+      },
+      "rtl_sha256": "3b9b9447e7241d26521c3508fd5e6a1cccefd3830299573aa8f176d89bf69ab4",
+      "backend": "icarus",
+      "compile_seconds": 0.11,
+      "status": "PASS",
+      "message": "Independent testbench completed all 1600 checks",
+      "stage": "simulate",
+      "receipt_nonce": "d1fb6349492d40fe94d657b1fdfccaef",
+      "simulate_seconds": 0.047,
+      "spec_diagnostic": {
+        "checks": 1600,
+        "stimulus_count": 800,
+        "tb_sha256": "c212360db67c3f06cc8f86ccfe9ed18fcfb392590c481bb9ae1132010f1c0f10",
+        "vectors_sha256": "e1636408a65aba953b87a0b991fedf7d7fa2e11f19ac1a8120f599d8597d2499",
+        "backend": "icarus",
+        "compile_seconds": 0.094,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1600 checks",
+        "stage": "simulate",
+        "receipt_nonce": "1bb4397b971c4ed2a101390e3804e626",
+        "simulate_seconds": 0.063,
+        "mismatches": []
+      },
+      "diagnostic_consistent": true,
+      "localization": "ALL_PASS",
+      "elapsed_seconds": 44.594
+    },
+    {
+      "job_id": "m02__ve_fsm__table__s001",
+      "task": "ve_fsm",
+      "sample": 1,
+      "arm": "table",
+      "mode": "codex",
+      "requested_model": "gpt-5.6-terra",
+      "directory": "jobs/m02__ve_fsm__table__s001",
+      "ir_diagnosis": {
+        "status": "IR_EQUIVALENT",
+        "reset_contract_errors": [],
+        "shortest_counterexample": null,
+        "visited_pairs": 4,
+        "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+      },
+      "ir_rtl": {
+        "checks": 1600,
+        "stimulus_count": 800,
+        "tb_sha256": "c212360db67c3f06cc8f86ccfe9ed18fcfb392590c481bb9ae1132010f1c0f10",
+        "vectors_sha256": "e1636408a65aba953b87a0b991fedf7d7fa2e11f19ac1a8120f599d8597d2499",
+        "backend": "icarus",
+        "compile_seconds": 0.093,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1600 checks",
+        "stage": "simulate",
+        "receipt_nonce": "559c943d6fb84c0482f3bf02bffd3498",
+        "simulate_seconds": 0.047,
+        "mismatches": []
+      },
+      "public_check": {
+        "status": "PUBLIC_CHECK_PASS",
+        "errors": [],
+        "note": "Only the public examples and schema were checked; passing is not full equivalence."
+      },
+      "rtl_sha256": "012e1c8a85186fcc878f8375c0d5f06daf3d70ff1257b6dbad6de75e3740304c",
+      "backend": "icarus",
+      "compile_seconds": 0.125,
+      "status": "PASS",
+      "message": "Independent testbench completed all 1600 checks",
+      "stage": "simulate",
+      "receipt_nonce": "4c52f1b6d86349d9a96593ae34aa6235",
+      "simulate_seconds": 0.063,
+      "spec_diagnostic": {
+        "checks": 1600,
+        "stimulus_count": 800,
+        "tb_sha256": "c212360db67c3f06cc8f86ccfe9ed18fcfb392590c481bb9ae1132010f1c0f10",
+        "vectors_sha256": "e1636408a65aba953b87a0b991fedf7d7fa2e11f19ac1a8120f599d8597d2499",
+        "backend": "icarus",
+        "compile_seconds": 0.11,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1600 checks",
+        "stage": "simulate",
+        "receipt_nonce": "9f16c33bbbf04e1e865f41667f252d8c",
+        "simulate_seconds": 0.062,
+        "mismatches": []
+      },
+      "diagnostic_consistent": true,
+      "localization": "ALL_PASS",
+      "elapsed_seconds": 41.89
+    },
+    {
+      "job_id": "m02__ve_fsm__checked_table__s001",
+      "task": "ve_fsm",
+      "sample": 1,
+      "arm": "checked_table",
+      "mode": "codex",
+      "requested_model": "gpt-5.6-terra",
+      "directory": "jobs/m02__ve_fsm__checked_table__s001",
+      "ir_diagnosis": {
+        "status": "IR_EQUIVALENT",
+        "reset_contract_errors": [],
+        "shortest_counterexample": null,
+        "visited_pairs": 4,
+        "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+      },
+      "ir_rtl": {
+        "checks": 1600,
+        "stimulus_count": 800,
+        "tb_sha256": "c212360db67c3f06cc8f86ccfe9ed18fcfb392590c481bb9ae1132010f1c0f10",
+        "vectors_sha256": "e1636408a65aba953b87a0b991fedf7d7fa2e11f19ac1a8120f599d8597d2499",
+        "backend": "icarus",
+        "compile_seconds": 0.094,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1600 checks",
+        "stage": "simulate",
+        "receipt_nonce": "4dfba8e9ed5044f4b5fc5b34af4d8f13",
+        "simulate_seconds": 0.047,
+        "mismatches": []
+      },
+      "public_check": {
+        "status": "PUBLIC_CHECK_PASS",
+        "errors": [],
+        "note": "Only the public examples and schema were checked; passing is not full equivalence."
+      },
+      "rtl_sha256": "87c20150de6662c4fa0f31147109814cd03d583efad6e67d106e0bbf500a8312",
+      "backend": "icarus",
+      "compile_seconds": 0.109,
+      "status": "PASS",
+      "message": "Independent testbench completed all 1600 checks",
+      "stage": "simulate",
+      "receipt_nonce": "402d33b8d50d44d28d9d97a33b53eddb",
+      "simulate_seconds": 0.047,
+      "spec_diagnostic": {
+        "checks": 1600,
+        "stimulus_count": 800,
+        "tb_sha256": "c212360db67c3f06cc8f86ccfe9ed18fcfb392590c481bb9ae1132010f1c0f10",
+        "vectors_sha256": "e1636408a65aba953b87a0b991fedf7d7fa2e11f19ac1a8120f599d8597d2499",
+        "backend": "icarus",
+        "compile_seconds": 0.109,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1600 checks",
+        "stage": "simulate",
+        "receipt_nonce": "12a3ae5588c546da90923a44965d0192",
+        "simulate_seconds": 0.046,
+        "mismatches": []
+      },
+      "diagnostic_consistent": true,
+      "localization": "ALL_PASS",
+      "elapsed_seconds": 28.891
+    },
+    {
+      "job_id": "m02__ve_fsm__prose__s001",
+      "task": "ve_fsm",
+      "sample": 1,
+      "arm": "prose",
+      "mode": "codex",
+      "requested_model": "gpt-5.6-terra",
+      "directory": "jobs/m02__ve_fsm__prose__s001",
+      "ir_diagnosis": {
+        "status": "NO_TABLE"
+      },
+      "ir_rtl": {
+        "status": "NOT_APPLICABLE"
+      },
+      "rtl_sha256": "de8190af73d98aaade20d56ae5be9a29c0e3c5b7d1780e2b1f9f5d16a268aca4",
+      "backend": "icarus",
+      "compile_seconds": 0.11,
+      "status": "PASS",
+      "message": "Independent testbench completed all 1600 checks",
+      "stage": "simulate",
+      "receipt_nonce": "0605cece9f3440c99a5a20980ff359e4",
+      "simulate_seconds": 0.047,
+      "spec_diagnostic": {
+        "checks": 1600,
+        "stimulus_count": 800,
+        "tb_sha256": "c212360db67c3f06cc8f86ccfe9ed18fcfb392590c481bb9ae1132010f1c0f10",
+        "vectors_sha256": "e1636408a65aba953b87a0b991fedf7d7fa2e11f19ac1a8120f599d8597d2499",
+        "backend": "icarus",
+        "compile_seconds": 0.094,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1600 checks",
+        "stage": "simulate",
+        "receipt_nonce": "5de8069e026e408e925ce274958b6b74",
+        "simulate_seconds": 0.062,
+        "mismatches": []
+      },
+      "diagnostic_consistent": true,
+      "localization": "NO_TABLE_DIAGNOSIS",
+      "elapsed_seconds": 33.812
+    },
+    {
+      "job_id": "m01__rt_sequence__table__s001",
+      "task": "rt_sequence",
+      "sample": 1,
+      "arm": "table",
+      "mode": "codex",
+      "requested_model": "gpt-5.6-sol",
+      "directory": "jobs/m01__rt_sequence__table__s001",
+      "ir_diagnosis": {
+        "status": "IR_EQUIVALENT",
+        "reset_contract_errors": [],
+        "shortest_counterexample": null,
+        "visited_pairs": 5,
+        "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+      },
+      "ir_rtl": {
+        "checks": 1840,
+        "stimulus_count": 920,
+        "tb_sha256": "580cafa73384203b27323016bac3290fdd3a1937aa48c3836adbeb6b7f6009c3",
+        "vectors_sha256": "6d6be24bc3bcd13c908a31f787058ca934d49d3fb247d38de24224a06b55595c",
+        "backend": "icarus",
+        "compile_seconds": 0.11,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1840 checks",
+        "stage": "simulate",
+        "receipt_nonce": "da28182ed8504bf8a4eb3519c152c361",
+        "simulate_seconds": 0.062,
+        "mismatches": []
+      },
+      "public_check": {
+        "status": "PUBLIC_CHECK_PASS",
+        "errors": [],
+        "note": "Only the public examples and schema were checked; passing is not full equivalence."
+      },
+      "rtl_sha256": "711113ec7b837d73cf7dd160127f0a9e338b935e4bb7de36fee24dbbe86229de",
+      "backend": "icarus",
+      "compile_seconds": 0.11,
+      "status": "PASS",
+      "message": "Independent testbench completed all 1840 checks",
+      "stage": "simulate",
+      "receipt_nonce": "37a1fa1948eb413099db493edfb481ed",
+      "simulate_seconds": 0.062,
+      "spec_diagnostic": {
+        "checks": 1840,
+        "stimulus_count": 920,
+        "tb_sha256": "580cafa73384203b27323016bac3290fdd3a1937aa48c3836adbeb6b7f6009c3",
+        "vectors_sha256": "6d6be24bc3bcd13c908a31f787058ca934d49d3fb247d38de24224a06b55595c",
+        "backend": "icarus",
+        "compile_seconds": 0.078,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1840 checks",
+        "stage": "simulate",
+        "receipt_nonce": "5ed32507d32643dd97dacf30e5666086",
+        "simulate_seconds": 0.047,
+        "mismatches": []
+      },
+      "diagnostic_consistent": true,
+      "localization": "ALL_PASS",
+      "elapsed_seconds": 73.015
+    },
+    {
+      "job_id": "m01__rt_sequence__checked_table__s001",
+      "task": "rt_sequence",
+      "sample": 1,
+      "arm": "checked_table",
+      "mode": "codex",
+      "requested_model": "gpt-5.6-sol",
+      "directory": "jobs/m01__rt_sequence__checked_table__s001",
+      "ir_diagnosis": {
+        "status": "IR_EQUIVALENT",
+        "reset_contract_errors": [],
+        "shortest_counterexample": null,
+        "visited_pairs": 5,
+        "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+      },
+      "ir_rtl": {
+        "checks": 1840,
+        "stimulus_count": 920,
+        "tb_sha256": "580cafa73384203b27323016bac3290fdd3a1937aa48c3836adbeb6b7f6009c3",
+        "vectors_sha256": "6d6be24bc3bcd13c908a31f787058ca934d49d3fb247d38de24224a06b55595c",
+        "backend": "icarus",
+        "compile_seconds": 0.094,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1840 checks",
+        "stage": "simulate",
+        "receipt_nonce": "05824057a60a4a9c94f440a2887764f2",
+        "simulate_seconds": 0.062,
+        "mismatches": []
+      },
+      "public_check": {
+        "status": "PUBLIC_CHECK_PASS",
+        "errors": [],
+        "note": "Only the public examples and schema were checked; passing is not full equivalence."
+      },
+      "rtl_sha256": "f39dbdfc81d97eaec833920342489ce6e0e16a3c540c7b4719938ad00107926a",
+      "backend": "icarus",
+      "compile_seconds": 0.109,
+      "status": "PASS",
+      "message": "Independent testbench completed all 1840 checks",
+      "stage": "simulate",
+      "receipt_nonce": "a7b08c1171ee4e19bb92d7b66d7eb2f9",
+      "simulate_seconds": 0.063,
+      "spec_diagnostic": {
+        "checks": 1840,
+        "stimulus_count": 920,
+        "tb_sha256": "580cafa73384203b27323016bac3290fdd3a1937aa48c3836adbeb6b7f6009c3",
+        "vectors_sha256": "6d6be24bc3bcd13c908a31f787058ca934d49d3fb247d38de24224a06b55595c",
+        "backend": "icarus",
+        "compile_seconds": 0.078,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1840 checks",
+        "stage": "simulate",
+        "receipt_nonce": "04eedc0d3049456ab9f55c552814f0cc",
+        "simulate_seconds": 0.047,
+        "mismatches": []
+      },
+      "diagnostic_consistent": true,
+      "localization": "ALL_PASS",
+      "elapsed_seconds": 68.797
+    },
+    {
+      "job_id": "m01__rt_sequence__prose__s001",
+      "task": "rt_sequence",
+      "sample": 1,
+      "arm": "prose",
+      "mode": "codex",
+      "requested_model": "gpt-5.6-sol",
+      "directory": "jobs/m01__rt_sequence__prose__s001",
+      "ir_diagnosis": {
+        "status": "NO_TABLE"
+      },
+      "ir_rtl": {
+        "status": "NOT_APPLICABLE"
+      },
+      "rtl_sha256": "93017c9c217dc670162b8d476c63a4fc253aaed34b5164f7ddf027a49051a480",
+      "backend": "icarus",
+      "compile_seconds": 0.109,
+      "status": "PASS",
+      "message": "Independent testbench completed all 1840 checks",
+      "stage": "simulate",
+      "receipt_nonce": "0342551999ca40fe8b86fba1b2b5c34c",
+      "simulate_seconds": 0.047,
+      "spec_diagnostic": {
+        "checks": 1840,
+        "stimulus_count": 920,
+        "tb_sha256": "580cafa73384203b27323016bac3290fdd3a1937aa48c3836adbeb6b7f6009c3",
+        "vectors_sha256": "6d6be24bc3bcd13c908a31f787058ca934d49d3fb247d38de24224a06b55595c",
+        "backend": "icarus",
+        "compile_seconds": 0.094,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1840 checks",
+        "stage": "simulate",
+        "receipt_nonce": "1c7a080c1d324ffa87703520441a13fa",
+        "simulate_seconds": 0.047,
+        "mismatches": []
+      },
+      "diagnostic_consistent": true,
+      "localization": "NO_TABLE_DIAGNOSIS",
+      "elapsed_seconds": 64.422
+    },
+    {
+      "job_id": "m02__rt_sequence__checked_table__s001",
+      "task": "rt_sequence",
+      "sample": 1,
+      "arm": "checked_table",
+      "mode": "codex",
+      "requested_model": "gpt-5.6-terra",
+      "directory": "jobs/m02__rt_sequence__checked_table__s001",
+      "ir_diagnosis": {
+        "status": "IR_EQUIVALENT",
+        "reset_contract_errors": [],
+        "shortest_counterexample": null,
+        "visited_pairs": 5,
+        "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+      },
+      "ir_rtl": {
+        "checks": 1840,
+        "stimulus_count": 920,
+        "tb_sha256": "580cafa73384203b27323016bac3290fdd3a1937aa48c3836adbeb6b7f6009c3",
+        "vectors_sha256": "6d6be24bc3bcd13c908a31f787058ca934d49d3fb247d38de24224a06b55595c",
+        "backend": "icarus",
+        "compile_seconds": 0.094,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1840 checks",
+        "stage": "simulate",
+        "receipt_nonce": "4e09b437d628487ca947a779c320fca1",
+        "simulate_seconds": 0.062,
+        "mismatches": []
+      },
+      "public_check": {
+        "status": "PUBLIC_CHECK_PASS",
+        "errors": [],
+        "note": "Only the public examples and schema were checked; passing is not full equivalence."
+      },
+      "rtl_sha256": "25ebc97721ae9e470b7d31b275665d90a4fdb6418af79f776ffc4ecead81528b",
+      "backend": "icarus",
+      "compile_seconds": 0.11,
+      "status": "PASS",
+      "message": "Independent testbench completed all 1840 checks",
+      "stage": "simulate",
+      "receipt_nonce": "4c36390e368b458c956216245c8196d0",
+      "simulate_seconds": 0.047,
+      "spec_diagnostic": {
+        "checks": 1840,
+        "stimulus_count": 920,
+        "tb_sha256": "580cafa73384203b27323016bac3290fdd3a1937aa48c3836adbeb6b7f6009c3",
+        "vectors_sha256": "6d6be24bc3bcd13c908a31f787058ca934d49d3fb247d38de24224a06b55595c",
+        "backend": "icarus",
+        "compile_seconds": 0.109,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1840 checks",
+        "stage": "simulate",
+        "receipt_nonce": "acf1b512af754193909022f4a40f80af",
+        "simulate_seconds": 0.063,
+        "mismatches": []
+      },
+      "diagnostic_consistent": true,
+      "localization": "ALL_PASS",
+      "elapsed_seconds": 31.203
+    },
+    {
+      "job_id": "m02__rt_sequence__prose__s001",
+      "task": "rt_sequence",
+      "sample": 1,
+      "arm": "prose",
+      "mode": "codex",
+      "requested_model": "gpt-5.6-terra",
+      "directory": "jobs/m02__rt_sequence__prose__s001",
+      "ir_diagnosis": {
+        "status": "NO_TABLE"
+      },
+      "ir_rtl": {
+        "status": "NOT_APPLICABLE"
+      },
+      "rtl_sha256": "c8f486e29beeeeac2d640716ca809b491f4ebd07c4a59bc285eebfcfeea670b3",
+      "backend": "icarus",
+      "compile_seconds": 0.109,
+      "status": "FUNCTION_FAIL",
+      "message": "Independent testbench found 81 mismatches",
+      "stage": "simulate",
+      "receipt_nonce": "1cac73e6a3704273997dfb1f6e338cb1",
+      "simulate_seconds": 0.063,
+      "spec_diagnostic": {
+        "checks": 1840,
+        "stimulus_count": 920,
+        "tb_sha256": "580cafa73384203b27323016bac3290fdd3a1937aa48c3836adbeb6b7f6009c3",
+        "vectors_sha256": "6d6be24bc3bcd13c908a31f787058ca934d49d3fb247d38de24224a06b55595c",
+        "backend": "icarus",
+        "compile_seconds": 0.125,
+        "status": "FUNCTION_FAIL",
+        "message": "Independent testbench found 81 mismatches",
+        "stage": "simulate",
+        "receipt_nonce": "136f187afc0c44f7aec78e50307f7bf5",
+        "simulate_seconds": 0.047,
+        "mismatches": [
+          {
+            "cycle": 17,
+            "phase": "post",
+            "reset": 1,
+            "input": 1,
+            "expected": 1,
+            "observed": "0"
+          },
+          {
+            "cycle": 18,
+            "phase": "pre",
+            "reset": 1,
+            "input": 0,
+            "expected": 1,
+            "observed": "0"
+          },
+          {
+            "cycle": 32,
+            "phase": "post",
+            "reset": 1,
+            "input": 1,
+            "expected": 1,
+            "observed": "0"
+          },
+          {
+            "cycle": 43,
+            "phase": "post",
+            "reset": 1,
+            "input": 1,
+            "expected": 1,
+            "observed": "0"
+          },
+          {
+            "cycle": 44,
+            "phase": "pre",
+            "reset": 1,
+            "input": 0,
+            "expected": 1,
+            "observed": "0"
+          }
+        ]
+      },
+      "diagnostic_consistent": true,
+      "localization": "NO_TABLE_DIAGNOSIS",
+      "elapsed_seconds": 27.172
+    },
+    {
+      "job_id": "m02__rt_sequence__table__s001",
+      "task": "rt_sequence",
+      "sample": 1,
+      "arm": "table",
+      "mode": "codex",
+      "requested_model": "gpt-5.6-terra",
+      "directory": "jobs/m02__rt_sequence__table__s001",
+      "ir_diagnosis": {
+        "status": "IR_SPEC_MISMATCH",
+        "reset_contract_errors": [],
+        "shortest_counterexample": {
+          "bits": "100101",
+          "expected": 0,
+          "observed": 1
+        },
+        "visited_pairs": 9,
+        "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+      },
+      "ir_rtl": {
+        "checks": 1840,
+        "stimulus_count": 920,
+        "tb_sha256": "580cafa73384203b27323016bac3290fdd3a1937aa48c3836adbeb6b7f6009c3",
+        "vectors_sha256": "cff8926082dec58b131ebc0f69046f5c1efdd5806ace7817e236aae5e4a3e17c",
+        "backend": "icarus",
+        "compile_seconds": 0.11,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1840 checks",
+        "stage": "simulate",
+        "receipt_nonce": "44e6870ec7db44bf8c8c749f1e868edd",
+        "simulate_seconds": 0.047,
+        "mismatches": []
+      },
+      "public_check": {
+        "status": "PUBLIC_CHECK_FAIL",
+        "errors": [
+          {
+            "bits": "1001001",
+            "expected": [
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              1
+            ],
+            "observed": [
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "note": "Only the public examples and schema were checked; passing is not full equivalence."
+      },
+      "rtl_sha256": "332e714e569b2e1596c188a97366a9af3df468ea70139192ae78b7d23a26c4aa",
+      "backend": "icarus",
+      "compile_seconds": 0.11,
+      "status": "FUNCTION_FAIL",
+      "message": "Independent testbench found 88 mismatches",
+      "stage": "simulate",
+      "receipt_nonce": "8195312713394ab391e3d212f1bc66ee",
+      "simulate_seconds": 0.047,
+      "spec_diagnostic": {
+        "checks": 1840,
+        "stimulus_count": 920,
+        "tb_sha256": "580cafa73384203b27323016bac3290fdd3a1937aa48c3836adbeb6b7f6009c3",
+        "vectors_sha256": "6d6be24bc3bcd13c908a31f787058ca934d49d3fb247d38de24224a06b55595c",
+        "backend": "icarus",
+        "compile_seconds": 0.109,
+        "status": "FUNCTION_FAIL",
+        "message": "Independent testbench found 88 mismatches",
+        "stage": "simulate",
+        "receipt_nonce": "c0a98d78f0e148288919942f409f4190",
+        "simulate_seconds": 0.063,
+        "mismatches": [
+          {
+            "cycle": 17,
+            "phase": "post",
+            "reset": 1,
+            "input": 1,
+            "expected": 1,
+            "observed": "0"
+          },
+          {
+            "cycle": 18,
+            "phase": "pre",
+            "reset": 1,
+            "input": 0,
+            "expected": 1,
+            "observed": "0"
+          },
+          {
+            "cycle": 32,
+            "phase": "post",
+            "reset": 1,
+            "input": 1,
+            "expected": 1,
+            "observed": "0"
+          },
+          {
+            "cycle": 43,
+            "phase": "post",
+            "reset": 1,
+            "input": 1,
+            "expected": 1,
+            "observed": "0"
+          },
+          {
+            "cycle": 44,
+            "phase": "pre",
+            "reset": 1,
+            "input": 0,
+            "expected": 1,
+            "observed": "0"
+          }
+        ]
+      },
+      "diagnostic_consistent": true,
+      "localization": "SPEC_TO_IR_ERROR",
+      "elapsed_seconds": 27.875
+    },
+    {
+      "job_id": "m02__ve_fsm__checked_table__s002",
+      "task": "ve_fsm",
+      "sample": 2,
+      "arm": "checked_table",
+      "mode": "codex",
+      "requested_model": "gpt-5.6-terra",
+      "directory": "jobs/m02__ve_fsm__checked_table__s002",
+      "ir_diagnosis": {
+        "status": "IR_EQUIVALENT",
+        "reset_contract_errors": [],
+        "shortest_counterexample": null,
+        "visited_pairs": 4,
+        "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+      },
+      "ir_rtl": {
+        "checks": 1600,
+        "stimulus_count": 800,
+        "tb_sha256": "c212360db67c3f06cc8f86ccfe9ed18fcfb392590c481bb9ae1132010f1c0f10",
+        "vectors_sha256": "e1636408a65aba953b87a0b991fedf7d7fa2e11f19ac1a8120f599d8597d2499",
+        "backend": "icarus",
+        "compile_seconds": 0.11,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1600 checks",
+        "stage": "simulate",
+        "receipt_nonce": "cfcbd200b25a4188a9b063e0c0362f54",
+        "simulate_seconds": 0.047,
+        "mismatches": []
+      },
+      "public_check": {
+        "status": "PUBLIC_CHECK_PASS",
+        "errors": [],
+        "note": "Only the public examples and schema were checked; passing is not full equivalence."
+      },
+      "rtl_sha256": "3d3f17af7e71b0a1edde073995f7a93ebdc3ae1f11074dff12fa38031fc58453",
+      "backend": "icarus",
+      "compile_seconds": 0.094,
+      "status": "PASS",
+      "message": "Independent testbench completed all 1600 checks",
+      "stage": "simulate",
+      "receipt_nonce": "5268e62f9c2c42a387164cd4e1ea0657",
+      "simulate_seconds": 0.062,
+      "spec_diagnostic": {
+        "checks": 1600,
+        "stimulus_count": 800,
+        "tb_sha256": "c212360db67c3f06cc8f86ccfe9ed18fcfb392590c481bb9ae1132010f1c0f10",
+        "vectors_sha256": "e1636408a65aba953b87a0b991fedf7d7fa2e11f19ac1a8120f599d8597d2499",
+        "backend": "icarus",
+        "compile_seconds": 0.078,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1600 checks",
+        "stage": "simulate",
+        "receipt_nonce": "25bdf30f97604386b12f265dcb4bde6b",
+        "simulate_seconds": 0.063,
+        "mismatches": []
+      },
+      "diagnostic_consistent": true,
+      "localization": "ALL_PASS",
+      "elapsed_seconds": 27.516
+    },
+    {
+      "job_id": "m02__ve_fsm__prose__s002",
+      "task": "ve_fsm",
+      "sample": 2,
+      "arm": "prose",
+      "mode": "codex",
+      "requested_model": "gpt-5.6-terra",
+      "directory": "jobs/m02__ve_fsm__prose__s002",
+      "ir_diagnosis": {
+        "status": "NO_TABLE"
+      },
+      "ir_rtl": {
+        "status": "NOT_APPLICABLE"
+      },
+      "rtl_sha256": "7904cc25798f013e1680a7065566c925908fa1e36db161fa2fe8649d69e44f80",
+      "backend": "icarus",
+      "compile_seconds": 0.11,
+      "status": "PASS",
+      "message": "Independent testbench completed all 1600 checks",
+      "stage": "simulate",
+      "receipt_nonce": "cb588f0e08d44af79d06497fe517a3ae",
+      "simulate_seconds": 0.062,
+      "spec_diagnostic": {
+        "checks": 1600,
+        "stimulus_count": 800,
+        "tb_sha256": "c212360db67c3f06cc8f86ccfe9ed18fcfb392590c481bb9ae1132010f1c0f10",
+        "vectors_sha256": "e1636408a65aba953b87a0b991fedf7d7fa2e11f19ac1a8120f599d8597d2499",
+        "backend": "icarus",
+        "compile_seconds": 0.078,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1600 checks",
+        "stage": "simulate",
+        "receipt_nonce": "02e96577480a43fcb54266fb4582f210",
+        "simulate_seconds": 0.031,
+        "mismatches": []
+      },
+      "diagnostic_consistent": true,
+      "localization": "NO_TABLE_DIAGNOSIS",
+      "elapsed_seconds": 32.703
+    },
+    {
+      "job_id": "m02__ve_fsm__table__s002",
+      "task": "ve_fsm",
+      "sample": 2,
+      "arm": "table",
+      "mode": "codex",
+      "requested_model": "gpt-5.6-terra",
+      "directory": "jobs/m02__ve_fsm__table__s002",
+      "ir_diagnosis": {
+        "status": "IR_EQUIVALENT",
+        "reset_contract_errors": [],
+        "shortest_counterexample": null,
+        "visited_pairs": 4,
+        "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+      },
+      "ir_rtl": {
+        "checks": 1600,
+        "stimulus_count": 800,
+        "tb_sha256": "c212360db67c3f06cc8f86ccfe9ed18fcfb392590c481bb9ae1132010f1c0f10",
+        "vectors_sha256": "e1636408a65aba953b87a0b991fedf7d7fa2e11f19ac1a8120f599d8597d2499",
+        "backend": "icarus",
+        "compile_seconds": 0.094,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1600 checks",
+        "stage": "simulate",
+        "receipt_nonce": "46ccc92e1f6949d987a0cd2ffca16848",
+        "simulate_seconds": 0.031,
+        "mismatches": []
+      },
+      "public_check": {
+        "status": "PUBLIC_CHECK_PASS",
+        "errors": [],
+        "note": "Only the public examples and schema were checked; passing is not full equivalence."
+      },
+      "rtl_sha256": "91cdab2edd4c7afc8662de05f4d5b68e81f03d32099a4f5cd253515f5f3fa98a",
+      "backend": "icarus",
+      "compile_seconds": 0.109,
+      "status": "PASS",
+      "message": "Independent testbench completed all 1600 checks",
+      "stage": "simulate",
+      "receipt_nonce": "b01857eabed945f09771e4bee7cb025a",
+      "simulate_seconds": 0.047,
+      "spec_diagnostic": {
+        "checks": 1600,
+        "stimulus_count": 800,
+        "tb_sha256": "c212360db67c3f06cc8f86ccfe9ed18fcfb392590c481bb9ae1132010f1c0f10",
+        "vectors_sha256": "e1636408a65aba953b87a0b991fedf7d7fa2e11f19ac1a8120f599d8597d2499",
+        "backend": "icarus",
+        "compile_seconds": 0.094,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1600 checks",
+        "stage": "simulate",
+        "receipt_nonce": "5cb717f5aa544785819a67cb91bc06b5",
+        "simulate_seconds": 0.063,
+        "mismatches": []
+      },
+      "diagnostic_consistent": true,
+      "localization": "ALL_PASS",
+      "elapsed_seconds": 24.766
+    },
+    {
+      "job_id": "m01__ve_fsm__table__s002",
+      "task": "ve_fsm",
+      "sample": 2,
+      "arm": "table",
+      "mode": "codex",
+      "requested_model": "gpt-5.6-sol",
+      "directory": "jobs/m01__ve_fsm__table__s002",
+      "ir_diagnosis": {
+        "status": "IR_EQUIVALENT",
+        "reset_contract_errors": [],
+        "shortest_counterexample": null,
+        "visited_pairs": 4,
+        "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+      },
+      "ir_rtl": {
+        "checks": 1600,
+        "stimulus_count": 800,
+        "tb_sha256": "c212360db67c3f06cc8f86ccfe9ed18fcfb392590c481bb9ae1132010f1c0f10",
+        "vectors_sha256": "e1636408a65aba953b87a0b991fedf7d7fa2e11f19ac1a8120f599d8597d2499",
+        "backend": "icarus",
+        "compile_seconds": 0.079,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1600 checks",
+        "stage": "simulate",
+        "receipt_nonce": "3bba588c5eea4b5b96718635e1c3aa02",
+        "simulate_seconds": 0.047,
+        "mismatches": []
+      },
+      "public_check": {
+        "status": "PUBLIC_CHECK_PASS",
+        "errors": [],
+        "note": "Only the public examples and schema were checked; passing is not full equivalence."
+      },
+      "rtl_sha256": "fc24a34447247990ff04a73b6cd2e6241783baf13de877c8886a42cd6412ed4f",
+      "backend": "icarus",
+      "compile_seconds": 0.093,
+      "status": "PASS",
+      "message": "Independent testbench completed all 1600 checks",
+      "stage": "simulate",
+      "receipt_nonce": "88a1ac8f8d98453c8d51ec677250bc11",
+      "simulate_seconds": 0.063,
+      "spec_diagnostic": {
+        "checks": 1600,
+        "stimulus_count": 800,
+        "tb_sha256": "c212360db67c3f06cc8f86ccfe9ed18fcfb392590c481bb9ae1132010f1c0f10",
+        "vectors_sha256": "e1636408a65aba953b87a0b991fedf7d7fa2e11f19ac1a8120f599d8597d2499",
+        "backend": "icarus",
+        "compile_seconds": 0.078,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1600 checks",
+        "stage": "simulate",
+        "receipt_nonce": "c1b444829a314761acbaef5788f2610b",
+        "simulate_seconds": 0.047,
+        "mismatches": []
+      },
+      "diagnostic_consistent": true,
+      "localization": "ALL_PASS",
+      "elapsed_seconds": 40.234
+    },
+    {
+      "job_id": "m01__ve_fsm__checked_table__s002",
+      "task": "ve_fsm",
+      "sample": 2,
+      "arm": "checked_table",
+      "mode": "codex",
+      "requested_model": "gpt-5.6-sol",
+      "directory": "jobs/m01__ve_fsm__checked_table__s002",
+      "ir_diagnosis": {
+        "status": "IR_EQUIVALENT",
+        "reset_contract_errors": [],
+        "shortest_counterexample": null,
+        "visited_pairs": 4,
+        "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+      },
+      "ir_rtl": {
+        "checks": 1600,
+        "stimulus_count": 800,
+        "tb_sha256": "c212360db67c3f06cc8f86ccfe9ed18fcfb392590c481bb9ae1132010f1c0f10",
+        "vectors_sha256": "e1636408a65aba953b87a0b991fedf7d7fa2e11f19ac1a8120f599d8597d2499",
+        "backend": "icarus",
+        "compile_seconds": 0.109,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1600 checks",
+        "stage": "simulate",
+        "receipt_nonce": "cde08ea1f41644cbb3360df08be6e56c",
+        "simulate_seconds": 0.063,
+        "mismatches": []
+      },
+      "public_check": {
+        "status": "PUBLIC_CHECK_PASS",
+        "errors": [],
+        "note": "Only the public examples and schema were checked; passing is not full equivalence."
+      },
+      "rtl_sha256": "f4e0d84e52f8bd44335018ca06541a0ed0cd780ce5418200bf178db6fb705135",
+      "backend": "icarus",
+      "compile_seconds": 0.11,
+      "status": "PASS",
+      "message": "Independent testbench completed all 1600 checks",
+      "stage": "simulate",
+      "receipt_nonce": "8ab28a3d21684231b2a0b24654c88b44",
+      "simulate_seconds": 0.047,
+      "spec_diagnostic": {
+        "checks": 1600,
+        "stimulus_count": 800,
+        "tb_sha256": "c212360db67c3f06cc8f86ccfe9ed18fcfb392590c481bb9ae1132010f1c0f10",
+        "vectors_sha256": "e1636408a65aba953b87a0b991fedf7d7fa2e11f19ac1a8120f599d8597d2499",
+        "backend": "icarus",
+        "compile_seconds": 0.094,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1600 checks",
+        "stage": "simulate",
+        "receipt_nonce": "8a684752ce9d41ca8a7665712079aa7d",
+        "simulate_seconds": 0.047,
+        "mismatches": []
+      },
+      "diagnostic_consistent": true,
+      "localization": "ALL_PASS",
+      "elapsed_seconds": 48.969
+    },
+    {
+      "job_id": "m01__ve_fsm__prose__s002",
+      "task": "ve_fsm",
+      "sample": 2,
+      "arm": "prose",
+      "mode": "codex",
+      "requested_model": "gpt-5.6-sol",
+      "directory": "jobs/m01__ve_fsm__prose__s002",
+      "ir_diagnosis": {
+        "status": "NO_TABLE"
+      },
+      "ir_rtl": {
+        "status": "NOT_APPLICABLE"
+      },
+      "rtl_sha256": "45dda526fcf015d9644855d798696eb0ea3a95ca74df27514078ccc6b8215506",
+      "backend": "icarus",
+      "compile_seconds": 0.11,
+      "status": "PASS",
+      "message": "Independent testbench completed all 1600 checks",
+      "stage": "simulate",
+      "receipt_nonce": "871d0e78a7d74ab0b9d6bcd3902c51ea",
+      "simulate_seconds": 0.062,
+      "spec_diagnostic": {
+        "checks": 1600,
+        "stimulus_count": 800,
+        "tb_sha256": "c212360db67c3f06cc8f86ccfe9ed18fcfb392590c481bb9ae1132010f1c0f10",
+        "vectors_sha256": "e1636408a65aba953b87a0b991fedf7d7fa2e11f19ac1a8120f599d8597d2499",
+        "backend": "icarus",
+        "compile_seconds": 0.11,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1600 checks",
+        "stage": "simulate",
+        "receipt_nonce": "356c7315d04040238b6a9b7c035295d3",
+        "simulate_seconds": 0.047,
+        "mismatches": []
+      },
+      "diagnostic_consistent": true,
+      "localization": "NO_TABLE_DIAGNOSIS",
+      "elapsed_seconds": 59.047
+    },
+    {
+      "job_id": "m02__rt_sequence__prose__s002",
+      "task": "rt_sequence",
+      "sample": 2,
+      "arm": "prose",
+      "mode": "codex",
+      "requested_model": "gpt-5.6-terra",
+      "directory": "jobs/m02__rt_sequence__prose__s002",
+      "ir_diagnosis": {
+        "status": "NO_TABLE"
+      },
+      "ir_rtl": {
+        "status": "NOT_APPLICABLE"
+      },
+      "rtl_sha256": "d05b19dbe65516c885422a587e70b5a0ca6b26db1b5670c9ab5426eb6330a273",
+      "backend": "icarus",
+      "compile_seconds": 0.11,
+      "status": "PASS",
+      "message": "Independent testbench completed all 1840 checks",
+      "stage": "simulate",
+      "receipt_nonce": "7a96a8f5dd4e431d8e693f4e95478636",
+      "simulate_seconds": 0.031,
+      "spec_diagnostic": {
+        "checks": 1840,
+        "stimulus_count": 920,
+        "tb_sha256": "580cafa73384203b27323016bac3290fdd3a1937aa48c3836adbeb6b7f6009c3",
+        "vectors_sha256": "6d6be24bc3bcd13c908a31f787058ca934d49d3fb247d38de24224a06b55595c",
+        "backend": "icarus",
+        "compile_seconds": 0.109,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1840 checks",
+        "stage": "simulate",
+        "receipt_nonce": "51d2fdf682dd4eb580e50a9e79674302",
+        "simulate_seconds": 0.063,
+        "mismatches": []
+      },
+      "diagnostic_consistent": true,
+      "localization": "NO_TABLE_DIAGNOSIS",
+      "elapsed_seconds": 36.984
+    },
+    {
+      "job_id": "m02__rt_sequence__table__s002",
+      "task": "rt_sequence",
+      "sample": 2,
+      "arm": "table",
+      "mode": "codex",
+      "requested_model": "gpt-5.6-terra",
+      "directory": "jobs/m02__rt_sequence__table__s002",
+      "ir_diagnosis": {
+        "status": "IR_EQUIVALENT",
+        "reset_contract_errors": [],
+        "shortest_counterexample": null,
+        "visited_pairs": 5,
+        "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+      },
+      "ir_rtl": {
+        "checks": 1840,
+        "stimulus_count": 920,
+        "tb_sha256": "580cafa73384203b27323016bac3290fdd3a1937aa48c3836adbeb6b7f6009c3",
+        "vectors_sha256": "6d6be24bc3bcd13c908a31f787058ca934d49d3fb247d38de24224a06b55595c",
+        "backend": "icarus",
+        "compile_seconds": 0.11,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1840 checks",
+        "stage": "simulate",
+        "receipt_nonce": "151d6e589b8f4ff08fb95c14ab427f2f",
+        "simulate_seconds": 0.047,
+        "mismatches": []
+      },
+      "public_check": {
+        "status": "PUBLIC_CHECK_PASS",
+        "errors": [],
+        "note": "Only the public examples and schema were checked; passing is not full equivalence."
+      },
+      "rtl_sha256": "c442b8b36498e4f53d3e97579b37a1902ec7b8ec86a2e677a453fc8d987e1178",
+      "backend": "icarus",
+      "compile_seconds": 0.109,
+      "status": "PASS",
+      "message": "Independent testbench completed all 1840 checks",
+      "stage": "simulate",
+      "receipt_nonce": "bcb7ab9aa5e344199f0b9af938fd8dc7",
+      "simulate_seconds": 0.063,
+      "spec_diagnostic": {
+        "checks": 1840,
+        "stimulus_count": 920,
+        "tb_sha256": "580cafa73384203b27323016bac3290fdd3a1937aa48c3836adbeb6b7f6009c3",
+        "vectors_sha256": "6d6be24bc3bcd13c908a31f787058ca934d49d3fb247d38de24224a06b55595c",
+        "backend": "icarus",
+        "compile_seconds": 0.109,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1840 checks",
+        "stage": "simulate",
+        "receipt_nonce": "51b954a1c7524c5090606b6d8d1cf0a9",
+        "simulate_seconds": 0.047,
+        "mismatches": []
+      },
+      "diagnostic_consistent": true,
+      "localization": "ALL_PASS",
+      "elapsed_seconds": 35.375
+    },
+    {
+      "job_id": "m02__rt_sequence__checked_table__s002",
+      "task": "rt_sequence",
+      "sample": 2,
+      "arm": "checked_table",
+      "mode": "codex",
+      "requested_model": "gpt-5.6-terra",
+      "directory": "jobs/m02__rt_sequence__checked_table__s002",
+      "ir_diagnosis": {
+        "status": "IR_EQUIVALENT",
+        "reset_contract_errors": [],
+        "shortest_counterexample": null,
+        "visited_pairs": 5,
+        "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+      },
+      "ir_rtl": {
+        "checks": 1840,
+        "stimulus_count": 920,
+        "tb_sha256": "580cafa73384203b27323016bac3290fdd3a1937aa48c3836adbeb6b7f6009c3",
+        "vectors_sha256": "6d6be24bc3bcd13c908a31f787058ca934d49d3fb247d38de24224a06b55595c",
+        "backend": "icarus",
+        "compile_seconds": 0.109,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1840 checks",
+        "stage": "simulate",
+        "receipt_nonce": "d0385654c61b40f697d3c6c3f1aa5ff9",
+        "simulate_seconds": 0.046,
+        "mismatches": []
+      },
+      "public_check": {
+        "status": "PUBLIC_CHECK_PASS",
+        "errors": [],
+        "note": "Only the public examples and schema were checked; passing is not full equivalence."
+      },
+      "rtl_sha256": "cf45dc6b57a60cb1ed86b0b20c139d1f86cdf3405e49c8d2daaa4b0f4ac56383",
+      "backend": "icarus",
+      "compile_seconds": 0.125,
+      "status": "PASS",
+      "message": "Independent testbench completed all 1840 checks",
+      "stage": "simulate",
+      "receipt_nonce": "4038f859920c43c183e17118dd4d16d4",
+      "simulate_seconds": 0.047,
+      "spec_diagnostic": {
+        "checks": 1840,
+        "stimulus_count": 920,
+        "tb_sha256": "580cafa73384203b27323016bac3290fdd3a1937aa48c3836adbeb6b7f6009c3",
+        "vectors_sha256": "6d6be24bc3bcd13c908a31f787058ca934d49d3fb247d38de24224a06b55595c",
+        "backend": "icarus",
+        "compile_seconds": 0.094,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1840 checks",
+        "stage": "simulate",
+        "receipt_nonce": "4b49eb1a29da4f7b93031513d92823d6",
+        "simulate_seconds": 0.047,
+        "mismatches": []
+      },
+      "diagnostic_consistent": true,
+      "localization": "ALL_PASS",
+      "elapsed_seconds": 41.515
+    },
+    {
+      "job_id": "m01__rt_sequence__checked_table__s002",
+      "task": "rt_sequence",
+      "sample": 2,
+      "arm": "checked_table",
+      "mode": "codex",
+      "requested_model": "gpt-5.6-sol",
+      "directory": "jobs/m01__rt_sequence__checked_table__s002",
+      "ir_diagnosis": {
+        "status": "IR_EQUIVALENT",
+        "reset_contract_errors": [],
+        "shortest_counterexample": null,
+        "visited_pairs": 5,
+        "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+      },
+      "ir_rtl": {
+        "checks": 1840,
+        "stimulus_count": 920,
+        "tb_sha256": "580cafa73384203b27323016bac3290fdd3a1937aa48c3836adbeb6b7f6009c3",
+        "vectors_sha256": "6d6be24bc3bcd13c908a31f787058ca934d49d3fb247d38de24224a06b55595c",
+        "backend": "icarus",
+        "compile_seconds": 0.109,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1840 checks",
+        "stage": "simulate",
+        "receipt_nonce": "5aecef32e49140179eefafec64e43683",
+        "simulate_seconds": 0.047,
+        "mismatches": []
+      },
+      "public_check": {
+        "status": "PUBLIC_CHECK_PASS",
+        "errors": [],
+        "note": "Only the public examples and schema were checked; passing is not full equivalence."
+      },
+      "rtl_sha256": "c38c9d9ca7e75dfe2866b259d5b9034ec279335ad6b29011905356316017d22e",
+      "backend": "icarus",
+      "compile_seconds": 0.109,
+      "status": "PASS",
+      "message": "Independent testbench completed all 1840 checks",
+      "stage": "simulate",
+      "receipt_nonce": "68021635699b46398c73182fd8be8eb8",
+      "simulate_seconds": 0.063,
+      "spec_diagnostic": {
+        "checks": 1840,
+        "stimulus_count": 920,
+        "tb_sha256": "580cafa73384203b27323016bac3290fdd3a1937aa48c3836adbeb6b7f6009c3",
+        "vectors_sha256": "6d6be24bc3bcd13c908a31f787058ca934d49d3fb247d38de24224a06b55595c",
+        "backend": "icarus",
+        "compile_seconds": 0.11,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1840 checks",
+        "stage": "simulate",
+        "receipt_nonce": "b0140a94e87d4115b129c7f7c968d8ad",
+        "simulate_seconds": 0.047,
+        "mismatches": []
+      },
+      "diagnostic_consistent": true,
+      "localization": "ALL_PASS",
+      "elapsed_seconds": 64.375
+    },
+    {
+      "job_id": "m01__rt_sequence__prose__s002",
+      "task": "rt_sequence",
+      "sample": 2,
+      "arm": "prose",
+      "mode": "codex",
+      "requested_model": "gpt-5.6-sol",
+      "directory": "jobs/m01__rt_sequence__prose__s002",
+      "ir_diagnosis": {
+        "status": "NO_TABLE"
+      },
+      "ir_rtl": {
+        "status": "NOT_APPLICABLE"
+      },
+      "rtl_sha256": "e47a8c2a14d76b275deff1ef8b35ef40a1a36611b47721ea57e298529b5132a9",
+      "backend": "icarus",
+      "compile_seconds": 0.11,
+      "status": "PASS",
+      "message": "Independent testbench completed all 1840 checks",
+      "stage": "simulate",
+      "receipt_nonce": "c4c377e6b09f489da37837c50b60be76",
+      "simulate_seconds": 0.062,
+      "spec_diagnostic": {
+        "checks": 1840,
+        "stimulus_count": 920,
+        "tb_sha256": "580cafa73384203b27323016bac3290fdd3a1937aa48c3836adbeb6b7f6009c3",
+        "vectors_sha256": "6d6be24bc3bcd13c908a31f787058ca934d49d3fb247d38de24224a06b55595c",
+        "backend": "icarus",
+        "compile_seconds": 0.094,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1840 checks",
+        "stage": "simulate",
+        "receipt_nonce": "8764d301eb6b463ab37a3706bd53899e",
+        "simulate_seconds": 0.046,
+        "mismatches": []
+      },
+      "diagnostic_consistent": true,
+      "localization": "NO_TABLE_DIAGNOSIS",
+      "elapsed_seconds": 73.687
+    },
+    {
+      "job_id": "m01__rt_sequence__table__s002",
+      "task": "rt_sequence",
+      "sample": 2,
+      "arm": "table",
+      "mode": "codex",
+      "requested_model": "gpt-5.6-sol",
+      "directory": "jobs/m01__rt_sequence__table__s002",
+      "ir_diagnosis": {
+        "status": "IR_EQUIVALENT",
+        "reset_contract_errors": [],
+        "shortest_counterexample": null,
+        "visited_pairs": 5,
+        "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+      },
+      "ir_rtl": {
+        "checks": 1840,
+        "stimulus_count": 920,
+        "tb_sha256": "580cafa73384203b27323016bac3290fdd3a1937aa48c3836adbeb6b7f6009c3",
+        "vectors_sha256": "6d6be24bc3bcd13c908a31f787058ca934d49d3fb247d38de24224a06b55595c",
+        "backend": "icarus",
+        "compile_seconds": 0.109,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1840 checks",
+        "stage": "simulate",
+        "receipt_nonce": "3d86f60ec6234db38c167967fab789d2",
+        "simulate_seconds": 0.063,
+        "mismatches": []
+      },
+      "public_check": {
+        "status": "PUBLIC_CHECK_PASS",
+        "errors": [],
+        "note": "Only the public examples and schema were checked; passing is not full equivalence."
+      },
+      "rtl_sha256": "eec1c58a2ebd68376d53785606119c5b171c48e4bff72910a84b6478019070a8",
+      "backend": "icarus",
+      "compile_seconds": 0.125,
+      "status": "PASS",
+      "message": "Independent testbench completed all 1840 checks",
+      "stage": "simulate",
+      "receipt_nonce": "7d0f726d29b5443ba1613ed943bdcc3d",
+      "simulate_seconds": 0.047,
+      "spec_diagnostic": {
+        "checks": 1840,
+        "stimulus_count": 920,
+        "tb_sha256": "580cafa73384203b27323016bac3290fdd3a1937aa48c3836adbeb6b7f6009c3",
+        "vectors_sha256": "6d6be24bc3bcd13c908a31f787058ca934d49d3fb247d38de24224a06b55595c",
+        "backend": "icarus",
+        "compile_seconds": 0.11,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1840 checks",
+        "stage": "simulate",
+        "receipt_nonce": "941f1baef24b462fa9d1c42ecdb22487",
+        "simulate_seconds": 0.062,
+        "mismatches": []
+      },
+      "diagnostic_consistent": true,
+      "localization": "ALL_PASS",
+      "elapsed_seconds": 60.062
+    }
+  ],
+  "limitations": [
+    "Two reused development tasks, two repetitions: feasibility only, no population efficacy claim.",
+    "Equal model turns, not equal tokens/compute/cost; CLI defaults and internal retries are not controlled.",
+    "IR equivalence is finite-graph exact; RTL agreement is fixed-vector simulation.",
+    "ve_fsm already contains a state table; it is a translation control, not NL understanding evidence."
+  ]
+}

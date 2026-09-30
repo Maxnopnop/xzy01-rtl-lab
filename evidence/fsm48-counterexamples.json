@@ -1,0 +1,158 @@
+{
+  "schema": 1,
+  "kind": "POST_HOC_REPLAY_OF_UNMODIFIED_REAL_RTL",
+  "new_model_calls": 0,
+  "tools": {
+    "iverilog": {
+      "path": "D:\\iverilog\\bin\\iverilog.exe",
+      "sha256": "803b8844af2cc8ed70b5f08b07ffa749901280e81339617ca3e72cbbb852bd2b",
+      "version": "Icarus Verilog version 12.0 (devel) (s20150603-1539-g2693dd32b)"
+    },
+    "vvp": {
+      "path": "D:\\iverilog\\bin\\vvp.exe",
+      "sha256": "e2f442f4d5aa76e55c85c3ff77e4446fbfdb9946b7cfe8a2dff87f275da17b62",
+      "version": "Icarus Verilog runtime version 12.0 (devel) (s20150603-1539-g2693dd32b)"
+    }
+  },
+  "results": [
+    {
+      "job_id": "m02__rt_sequence__table__s001",
+      "bits": "100101",
+      "reset_preamble": "rst_n=0 for one rising edge, then rst_n=1",
+      "expected_post_outputs": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "rtl_sha256": "332e714e569b2e1596c188a97366a9af3df468ea70139192ae78b7d23a26c4aa",
+      "source_result_sha256": "e7330ea0b2fc16ea9584e37cd5e802fe7c55dd4ef857910e1cd9f10b164b5b61",
+      "bindings": {
+        "checks": 14,
+        "stimulus_count": 7,
+        "tb_sha256": "dbb3a3575e40718b5d1bc982f1b92c0ac24fab5ac3ca46ed0d9624473d812223",
+        "vectors_sha256": "45dbed851086188a1b19e630310e2c586687f0bb2ec374442cb40f542ad5f79e"
+      },
+      "result": {
+        "backend": "icarus",
+        "compile_seconds": 0.094,
+        "status": "FUNCTION_FAIL",
+        "message": "Independent testbench found 1 mismatches",
+        "stage": "simulate",
+        "receipt_nonce": "14db6cae1fa94e45936f260f92a19c9f",
+        "simulate_seconds": 0.031
+      },
+      "mismatches": [
+        {
+          "cycle": 6,
+          "phase": "post",
+          "reset": 1,
+          "input": 1,
+          "expected": 0,
+          "observed": "1"
+        }
+      ],
+      "ir_post_outputs": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "job_id": "m02__rt_sequence__table__s001",
+      "bits": "1001001",
+      "reset_preamble": "rst_n=0 for one rising edge, then rst_n=1",
+      "expected_post_outputs": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1
+      ],
+      "rtl_sha256": "332e714e569b2e1596c188a97366a9af3df468ea70139192ae78b7d23a26c4aa",
+      "source_result_sha256": "e7330ea0b2fc16ea9584e37cd5e802fe7c55dd4ef857910e1cd9f10b164b5b61",
+      "bindings": {
+        "checks": 16,
+        "stimulus_count": 8,
+        "tb_sha256": "1845e3d50baa2775528b1bb511e8b90ada15b60395066221606420fb47d30e25",
+        "vectors_sha256": "86bf29fdb22bb88d1886285c9869c4fabf6fa9031a557fb191f25c0efd8a184e"
+      },
+      "result": {
+        "backend": "icarus",
+        "compile_seconds": 0.078,
+        "status": "FUNCTION_FAIL",
+        "message": "Independent testbench found 1 mismatches",
+        "stage": "simulate",
+        "receipt_nonce": "d7707ec27cf948fe9db9c8fa95f12e3b",
+        "simulate_seconds": 0.031
+      },
+      "mismatches": [
+        {
+          "cycle": 7,
+          "phase": "post",
+          "reset": 1,
+          "input": 1,
+          "expected": 1,
+          "observed": "0"
+        }
+      ],
+      "ir_post_outputs": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "job_id": "m02__rt_sequence__prose__s001",
+      "bits": "1001001",
+      "reset_preamble": "rst_n=0 for one rising edge, then rst_n=1",
+      "expected_post_outputs": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1
+      ],
+      "rtl_sha256": "c8f486e29beeeeac2d640716ca809b491f4ebd07c4a59bc285eebfcfeea670b3",
+      "source_result_sha256": "eb88c2eb92501281ee9c05c280693d8411ec5dab97b2a7876c22894881a5815e",
+      "bindings": {
+        "checks": 16,
+        "stimulus_count": 8,
+        "tb_sha256": "1845e3d50baa2775528b1bb511e8b90ada15b60395066221606420fb47d30e25",
+        "vectors_sha256": "86bf29fdb22bb88d1886285c9869c4fabf6fa9031a557fb191f25c0efd8a184e"
+      },
+      "result": {
+        "backend": "icarus",
+        "compile_seconds": 0.093,
+        "status": "FUNCTION_FAIL",
+        "message": "Independent testbench found 1 mismatches",
+        "stage": "simulate",
+        "receipt_nonce": "bdf6ac85fa61477391cda537a1e101b2",
+        "simulate_seconds": 0.032
+      },
+      "mismatches": [
+        {
+          "cycle": 7,
+          "phase": "post",
+          "reset": 1,
+          "input": 1,
+          "expected": 1,
+          "observed": "0"
+        }
+      ]
+    }
+  ]
+}

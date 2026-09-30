@@ -1,0 +1,86 @@
+Implement the given digital circuit in synthesizable SystemVerilog.
+Return only one complete module in a single ```systemverilog code block.
+Use exactly the specified module name and ports. Do not provide a testbench.
+No includes, preprocessor directives, strings, hierarchical references, extra
+modules, simulation system tasks, file IO, or attributes. Only $signed,
+$unsigned and $clog2 system functions are permitted. Do not use delays.
+The independent evaluator will supply all input stimuli and check outputs.
+
+I would like you to implement a module named TopModule with the following
+interface. All input and output ports are one bit unless otherwise
+specified.
+
+ - input  clk
+ - input  areset
+ - input  in
+ - output out
+
+The module should implement a Moore state machine with the following
+state transition table with one input, one output, and four states.
+Implement this state machine. Include a positive edge triggered
+asynchronous reset that resets the FSM to state A. Assume all sequential
+logic is triggered on the positive edge of the clock.
+
+  state | next state in=0, next state in=1 | output
+  A     | A, B                             | 0
+  B     | C, B                             | 0
+  C     | A, D                             | 0
+  D     | C, B                             | 1
+
+Common implementation convention:
+Use reg/localparam state encodings and case/if assignments for Icarus compatibility. Avoid enum-valued ternary assignments. Preserve the specified reset, overlap and cycle timing.
+
+Public specification examples (same in every condition):
+{
+  "clock_edge": "posedge",
+  "output_kind": "moore",
+  "reset": {
+    "kind": "async",
+    "active": 1,
+    "output": 0
+  },
+  "trace_convention": "Each trace starts after reset. List output after each rising edge; reset is then inactive.",
+  "examples": [
+    {
+      "bits": "1101",
+      "outputs": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "bits": "10101",
+      "outputs": [
+        0,
+        0,
+        1,
+        0,
+        1
+      ]
+    }
+  ]
+}
+
+Previous-stage design artifact:
+Implement `TopModule` as a four-state Moore finite-state machine using registers for the current and next state, with `localparam` constants encoding states A, B, C, and D.
+
+Use a positive-edge-triggered state register with an active-high asynchronous reset. Its sensitivity list should respond to both the rising edge of `clk` and the rising edge of `areset`. When `areset` is asserted, immediately set the current state to A, independent of the clock. Otherwise, on each rising clock edge, load the computed next state.
+
+Implement combinational next-state logic with a `case` statement on the current state:
+
+- In A, remain in A when `in` is 0; transition to B when `in` is 1.
+- In B, transition to C when `in` is 0; remain in B when `in` is 1.
+- In C, transition to A when `in` is 0; transition to D when `in` is 1.
+- In D, transition to C when `in` is 0; transition to B when `in` is 1.
+
+Assign a safe default next state, preferably A, to handle an invalid or unknown state encoding and to avoid unintended combinational storage.
+
+Because this is a Moore machine, derive `out` solely from the current registered state. Assert `out` only while the current state is D; drive it low in A, B, C, and invalid states. Resetting to A therefore makes the output 0 immediately after the asynchronous reset updates the state.
+
+Input sampling and transitions occur on rising clock edges. After an edge, the newly registered state determines the visible output for that cycle. Thus, an input bit that causes a transition into D makes `out` become 1 after that same rising edge. An input bit that causes a transition away from D makes `out` return to 0 after that edge. The transition rules naturally preserve overlapping input-pattern recognition, as demonstrated by the supplied traces.
+
+Use the artifact to implement the specification. Resolve any contradictions in favor of the specification. Return only RTL.
+
+Do not invoke tools, read files, run tests, or delegate. Reply directly.

@@ -1,0 +1,12 @@
+Use four registered states, A through D, with localparam/reg encodings. Keep a separate combinational next-state block and a Moore output decode based only on the current registered state.
+
+An active-high asynchronous reset applies on the positive edge of `areset` and immediately places the state register in A. Since A’s Moore output is 0, reset produces `out = 0`.
+
+On each rising clock edge when reset is inactive, update the current state to the combinationally selected next state:
+
+- In A: remain in A for `in=0`; go to B for `in=1`.
+- In B: go to C for `in=0`; remain in B for `in=1`.
+- In C: go to A for `in=0`; go to D for `in=1`.
+- In D: go to C for `in=0`; go to B for `in=1`.
+
+Decode `out` from the current state: assert it only in D; output 0 in A, B, and C. Thus, a transition into D causes `out` to become 1 after that same rising edge, and it remains high only while the registered state stays D.

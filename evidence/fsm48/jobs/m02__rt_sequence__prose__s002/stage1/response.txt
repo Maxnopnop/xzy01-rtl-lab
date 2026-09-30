@@ -1,0 +1,13 @@
+Use a five-state Moore FSM: IDLE, S1, S2, S3, and S4. IDLE represents no useful partial match. S1, S2, and S3 represent successful matching of `1`, `10`, and `100`; S4 represents a complete `1001` match.
+
+Use an asynchronous active-low reset in the state register. When `rst_n` is low, immediately set the state to IDLE and ensure `sequence_detected` is low.
+
+On each rising clock edge when reset is inactive, advance according to `data_in`:
+
+- IDLE: `1` moves to S1; `0` remains in IDLE.
+- S1: `0` moves to S2; `1` remains in S1 because it may start a new match.
+- S2: `0` moves to S3; `1` returns to S1.
+- S3: `1` moves to S4, completing `1001`; `0` returns to IDLE.
+- S4: assert `sequence_detected`. For overlap support, a new `1` moves to S1, while `0` moves to S2 because the ending `1` from the prior match can serve as the first bit of a new `1001` candidate.
+
+Drive `sequence_detected` combinationally from the current state: high only in S4 and low in every other state. Thus, the output becomes high immediately after the rising edge that consumes the final `1` of the sequence, remains high for that cycle, and returns low after the following state transition unless another completed match is reached.
