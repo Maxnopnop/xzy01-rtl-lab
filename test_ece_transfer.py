@@ -10,9 +10,15 @@ import warnings
 from unittest.mock import patch
 import ece_desktop as desktop
 import ece_transfer as transfer
+import school_bridge
 
 
 class TransportTests(unittest.TestCase):
+    def test_vcs_reads_harness_timescale_before_dut(self):
+        script=school_bridge.script('vcs','abc123')
+        self.assertIn('-top tb testbench.sv dut.sv',script)
+        self.assertNotIn('-top tb dut.sv testbench.sv',script)
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory(); self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name); self.package = self.root / 'package'; self.package.mkdir()

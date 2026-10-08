@@ -22,7 +22,8 @@ source "$VCS_SETUP"
 if ($status != 0) exit 2
 rehash
 vcs -ID >& tool_version.log
-vcs -full64 -sverilog -top tb dut.sv testbench.sv -o simv -l compile.log
+# Read the harness timescale before modules without an explicit directive.
+vcs -full64 -sverilog -top tb testbench.sv dut.sv -o simv -l compile.log
 set compile_rc = $status
 echo $compile_rc > compile.exit
 if ($compile_rc != 0) exit $compile_rc
