@@ -1,6 +1,6 @@
 # XZY01 RTL Lab
 
-学校桌面接入：[Horizon 单案例传输与回传指南](ECE_DESKTOP_GUIDE.md)。入口 `vdi.ece.ust.hk`；使用 `ece.ps1` 打包/传入/接收，在 ECE 终端使用包内独立 `ece_desktop.py` 运行一个案例并收集日志。商业工具尚需学校真实会话验证。
+学校桌面接入：[Horizon 单案例传输与回传指南](ECE_DESKTOP_GUIDE.md)。入口 `vdi.ece.ust.hk`；使用 `ece.ps1` 打包/传入/接收，在 ECE 终端使用包内独立 `ece_desktop.py` 运行一个案例并收集日志。2026-10-08 已完成一例真实 VCS X-2025.06-SP1 验收：1840 次检查、0 错误，与 Icarus 一致；[证据](evidence/ece-vcs-smoke-20261008/result.json)。Xcelium 尚未实际验证。
 
 最新验证：[公开检查盲点与错误定位](MUTATION_FINDINGS.md)。零新增模型调用，系统枚举 163 种单处故障，发现原公开检查漏检 30 种；独立新版公开 profile 增加 12 个例子后覆盖这批全部故障，25 格实际 Icarus 诊断校准通过。此为开发内工具验证，不改变下述模型实验分数。
 
