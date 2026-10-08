@@ -8,7 +8,7 @@ jobs:
       - name: Install simulator
         run: sudo apt-get update && sudo apt-get install -y iverilog yosys
       - name: Validate evaluator and resumable runner
-        run: python3 -m unittest -v test_lab test_batch test_dev test_fsm test_paired test_paired_audit test_mutation
+        run: python3 -m unittest -v test_lab test_batch test_dev test_fsm test_paired test_paired_audit test_mutation test_ece_transfer
       - name: Audit retained paired experiment without model calls
         run: python3 paired_audit.py --evidence evidence/paired-a32 evidence/paired-b64 --output validation/paired-ci.json
       - name: Verify offline mutation evidence and public contracts

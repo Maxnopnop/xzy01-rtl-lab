@@ -20,3 +20,10 @@
 - Concrete public blind spots: sticky_alarm edge_05->S0, input 111 loses latched alarm (expected1/observed0); request_delay edge_04->S0, input10010 responds too early; debounce3 edge_02->S1, input1011 improperly accumulates nonconsecutive ones; rt_sequence edge_00->S1, input0001 false positive. These are checker coverage limits, not claims about natural LLM error rates.
 - Real simulator confirmation: no fixed hidden-test misses among the 163 faults. Public coverage rises from 133/163 to 163/163 with a separate 12-example augmentation; this is development-fitted coverage, not LLM efficacy. New public check CLI has a tested absence of private-oracle dependencies; 25 actual Icarus calibration cells cover all five diagnostic classes.
 - Verified end state: original public-check blind spots reproduced by CLI; 12 separate development examples cover all 163 enumerated faults; original hidden tests catch all 163; 25 localization fixtures pass. WSL 48/48 and GitHub CI 36785360906 pass. Next research question is generalization to composite faults and separating added-example information from executable-feedback benefit.
+# ECE desktop handoff, 2026-10-08
+
+- User confirmed Omnissa Horizon Client and server vdi.ece.ust.hk; school VPN is now enabled. Screenshot showed connecting, not a completed Linux desktop session.
+- New capped paired replay reserved 4/16 slots (two models, control/feedback real_overlap); all failed with HTTP 403 at Codex model service. Two requests followed the VPN change. No effective generation, no efficacy estimate; 12 tasks remain pending. No failed call retries.
+- Separate transport modules preserve frozen experiment source hashes. VCS/Xcelium packages use retained paired-a32 m01 real_overlap control, not fresh generated data.
+- ECE only supports manual host simulation in this context; no SSH, supported EDA batch or scheduler. Folder sharing and actual commercial tool availability remain unverified.
+

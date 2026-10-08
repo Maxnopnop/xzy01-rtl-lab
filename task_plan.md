@@ -1,3 +1,22 @@
+# Active task: 2026-10-08 small replay and ECE desktop handoff
+
+## Finish line
+Execute a 16-call capped paired A/repeats=1 replication without changing frozen runtime; then deliver tested one-case ECE desktop packages, local transfer/receive wrappers, standalone school-side runner/collector, Chinese guide, GitHub sync and archives. Actual school login/tool execution requires the user's ECE session; no SSH, batch EDA or SLURM.
+
+## Phases
+1. Freeze and run small experiment — service-blocked: 4/16 slots, all HTTP 403, 12 pending; no effective outputs
+2. Build safe single-case transfer/return workflow — complete locally; school execution not yet verified
+3. Real local simulation plus synthetic transport/return tests — complete: 1840-check Icarus PASS; initial 53-test suite passed with 2 skips; final six transport tests passed
+4. Package retained samples, report evidence/limits, sync/CI — in_progress
+
+## Constraints
+16 new turns maximum, concurrency 2, no retries of unknown calls or credit purchase. Runtime files and bank remain unchanged. New transport lives separately. Ask only for desktop entry/shared-folder configuration; never passwords. Existing shutdown must not interrupt active work. Report commercial tools as unverified until school-returned evidence exists.
+
+User confirmed Linux ECE LAB7 and preconfigured Horizon share C:/Users/A/Documents/FYP. Ready packages staged in its ECE-Transfer subdirectory. User is actively connecting/validating remote desktop; do not shut down during this interactive handoff. Next required evidence is school-side doctor output and an actual manual single-case returned ZIP.
+
+---
+# Historical completed tasks
+
 # Active continuation: systematic FSM mutation coverage
 
 ## Objective and finish line

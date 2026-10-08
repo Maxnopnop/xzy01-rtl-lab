@@ -1,0 +1,178 @@
+{
+  "schema": 1,
+  "kind": "PAIRED_FIXED_IR_REPAIR_V1",
+  "stage": "A",
+  "mode": "codex",
+  "planned": 16,
+  "completed": 4,
+  "pending": 12,
+  "max_calls": 16,
+  "model_call_reservations": 4,
+  "model_turns_started": 4,
+  "real_generations": 0,
+  "infra_failures": 4,
+  "checker_inconsistencies": 0,
+  "groups": [
+    {
+      "model": "gpt-5.6-sol",
+      "arm": "control",
+      "planned": 4,
+      "completed": 1,
+      "passes": 0,
+      "counts": {
+        "API_ERROR": 1
+      },
+      "localizations": {
+        "INCONCLUSIVE": 1
+      },
+      "usage": {}
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "arm": "feedback",
+      "planned": 4,
+      "completed": 1,
+      "passes": 0,
+      "counts": {
+        "API_ERROR": 1
+      },
+      "localizations": {
+        "INCONCLUSIVE": 1
+      },
+      "usage": {}
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "arm": "control",
+      "planned": 4,
+      "completed": 1,
+      "passes": 0,
+      "counts": {
+        "API_ERROR": 1
+      },
+      "localizations": {
+        "INCONCLUSIVE": 1
+      },
+      "usage": {}
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "arm": "feedback",
+      "planned": 4,
+      "completed": 1,
+      "passes": 0,
+      "counts": {
+        "API_ERROR": 1
+      },
+      "localizations": {
+        "INCONCLUSIVE": 1
+      },
+      "usage": {}
+    }
+  ],
+  "pair_counts": {
+    "both_fail": 2
+  },
+  "pairs": [
+    {
+      "pair_id": "m01__real_overlap__s001",
+      "case": "real_overlap",
+      "model": "gpt-5.6-sol",
+      "control_pass": false,
+      "feedback_pass": false,
+      "outcome": "both_fail"
+    },
+    {
+      "pair_id": "m02__real_overlap__s001",
+      "case": "real_overlap",
+      "model": "gpt-5.6-terra",
+      "control_pass": false,
+      "feedback_pass": false,
+      "outcome": "both_fail"
+    }
+  ],
+  "results": [
+    {
+      "job_id": "m01__real_overlap__s001__control",
+      "task": "rt_sequence",
+      "case": "real_overlap",
+      "pair_id": "m01__real_overlap__s001",
+      "arm": "control",
+      "sample": 1,
+      "requested_model": "gpt-5.6-sol",
+      "mode": "codex",
+      "case_kind": "REAL_RETAINED_IR",
+      "error_type": "overlap_fallback",
+      "ir_sha256": "5ce2fcb30c7f978419ad41299ba7440957ca700efd21075f7407ce426efcdc09",
+      "directory": "jobs/m01__real_overlap__s001__control",
+      "status": "API_ERROR",
+      "stage": "codex",
+      "message": "Codex failed; inspect codex stderr/events",
+      "localization": "INCONCLUSIVE",
+      "elapsed_seconds": 13.828
+    },
+    {
+      "job_id": "m01__real_overlap__s001__feedback",
+      "task": "rt_sequence",
+      "case": "real_overlap",
+      "pair_id": "m01__real_overlap__s001",
+      "arm": "feedback",
+      "sample": 1,
+      "requested_model": "gpt-5.6-sol",
+      "mode": "codex",
+      "case_kind": "REAL_RETAINED_IR",
+      "error_type": "overlap_fallback",
+      "ir_sha256": "5ce2fcb30c7f978419ad41299ba7440957ca700efd21075f7407ce426efcdc09",
+      "directory": "jobs/m01__real_overlap__s001__feedback",
+      "status": "API_ERROR",
+      "stage": "codex",
+      "message": "Codex failed; inspect codex stderr/events",
+      "localization": "INCONCLUSIVE",
+      "elapsed_seconds": 13.875
+    },
+    {
+      "job_id": "m02__real_overlap__s001__feedback",
+      "task": "rt_sequence",
+      "case": "real_overlap",
+      "pair_id": "m02__real_overlap__s001",
+      "arm": "feedback",
+      "sample": 1,
+      "requested_model": "gpt-5.6-terra",
+      "mode": "codex",
+      "case_kind": "REAL_RETAINED_IR",
+      "error_type": "overlap_fallback",
+      "ir_sha256": "5ce2fcb30c7f978419ad41299ba7440957ca700efd21075f7407ce426efcdc09",
+      "directory": "jobs/m02__real_overlap__s001__feedback",
+      "status": "API_ERROR",
+      "stage": "codex",
+      "message": "Codex failed; inspect codex stderr/events",
+      "localization": "INCONCLUSIVE",
+      "elapsed_seconds": 14.5
+    },
+    {
+      "job_id": "m02__real_overlap__s001__control",
+      "task": "rt_sequence",
+      "case": "real_overlap",
+      "pair_id": "m02__real_overlap__s001",
+      "arm": "control",
+      "sample": 1,
+      "requested_model": "gpt-5.6-terra",
+      "mode": "codex",
+      "case_kind": "REAL_RETAINED_IR",
+      "error_type": "overlap_fallback",
+      "ir_sha256": "5ce2fcb30c7f978419ad41299ba7440957ca700efd21075f7407ce426efcdc09",
+      "directory": "jobs/m02__real_overlap__s001__control",
+      "status": "API_ERROR",
+      "stage": "codex",
+      "message": "Codex failed; inspect codex stderr/events",
+      "localization": "INCONCLUSIVE",
+      "elapsed_seconds": 14.406
+    }
+  ],
+  "limitations": [
+    "Conditional repair of fixed erroneous tables, not end-to-end generation accuracy.",
+    "Injected faults and one retained natural error must be reported separately.",
+    "Two repeats and a small number of families do not establish population efficacy.",
+    "Equal new-turn count; token use and cached input differ. No paired random seed is exposed."
+  ]
+}
