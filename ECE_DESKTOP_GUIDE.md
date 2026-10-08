@@ -16,6 +16,14 @@
 
 当前最短操作：在学校文件管理器打开共享的 FYP → ECE-Transfer，把 VCS ZIP 复制到学校家目录并解压，进入 `ece-vcs-ready-20261008` 打开终端执行 `python3 ece_desktop.py doctor`。然后根据检查结果运行下文单案例命令。回传 ZIP 放入同一共享目录，本机 receive 的 `--zip` 使用 `C:\Users\A\Documents\FYP\ECE-Transfer\回传文件名.zip`，`--package` 使用 `exports/ece-vcs-ready-20261008`。
 
+也已提供共享目录中的 `start_ece.sh` 和 ZIP 哈希文件：在学校终端执行 `bash /实际共享路径/FYP/ECE-Transfer/start_ece.sh`，自动核对 ZIP、复制到家目录的新会话目录、解压并执行 doctor，不启动仿真。若学校使用默认 `~/tsclient` 挂载，可执行：
+
+```bash
+find "$HOME/tsclient" -maxdepth 6 -type f -name start_ece.sh -exec bash {} \; -quit
+```
+
+如果报告 `tsclient` 不存在，或完全无输出，不要反复运行；先确认学校端实际共享挂载路径。此路径尚未由截图验证。启动器打印实际家目录路径和下一条单案例命令，避免手动猜测解压位置。
+
 ## 本机：打包与传入
 
 在仓库目录打开 PowerShell。任务 ID 必须来自对应运行的 `summary.json`；可打包多个案例，但学校每次只运行其中一个。
