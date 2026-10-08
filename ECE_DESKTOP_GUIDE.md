@@ -1,6 +1,8 @@
 # 本机 → ECE Horizon → 单案例仿真 → 本机验收
 
-## Xcelium 单案例验证入口（尚待学校回传）
+**2026-10-08 Xcelium 真实验收也已通过。** 用户在同一学校主机运行并回传；xrun 23.03-s004 正常编译、展开和仿真，退出 0，1840 次检查、0 错误。源文件哈希与 VCS 案例相同，三工具的此案例结果一致。证据见 [Xcelium 验收记录](evidence/ece-xcelium-smoke-20261008/result.json)。无需重复运行本例；以下入口用于复现，扩展案例仍按学校规则手动逐例执行。
+
+## Xcelium 单案例验证入口（已真实验证）
 
 共享目录现提供 `start_xcelium.sh` 和 `ece-xcelium-verify-20261008.zip`。与已通过 VCS 的案例使用完全相同的 RTL、测试台和向量，保留独立 backend 和 nonce，不覆盖 VCS 结果。在学校终端粘贴：
 
@@ -8,7 +10,7 @@
 bash -c 'find "$HOME/tsclient" -maxdepth 6 -type f -name start_xcelium.sh -exec bash {} \; -quit'
 ```
 
-先检查输出中 Xcelium `.cshrc` 路径存在，再执行打印的 `cd` 和单案例 `run`。运行后按具体 attempt 名 collect 到一个新的 Xcelium ZIP，带回本机；使用原始 `exports/ece-xcelium-verify-20261008` 导入。若 setup/许可证报错，则归为环境问题，不计入 RTL 失败。Xcelium 编译/仿真由一次 xrun 完成，回传应包含 `xrun.log`、`simulate.exit`、版本和 verdict。
+先检查输出中 Xcelium `.cshrc` 路径存在，再执行打印的 `cd` 和单案例 `run`。运行后按具体 attempt 名 collect 到一个新的 Xcelium ZIP，带回本机；使用原始 `exports/ece-xcelium-verify-20261008` 导入。若 setup/许可证报错，则归为环境问题，不计入 RTL 失败。Xcelium 编译/仿真由一次 xrun 完成，回传应包含 `xrun.log`、`simulate.exit`、版本和 verdict。该接口已由本次学校实际回传验证。
 
 **2026-10-08 已完成首次真实学校 VCS 验收。** 用户在 `ecelvd702` 的 Horizon 会话中手动运行修复包并回传 ZIP；VCS X-2025.06-SP1 编译退出 0、仿真退出 0，1840 个检查全部通过。源码哈希、nonce、回执检查数和退出码核对通过，与本机 Icarus 的该案例结果一致。记录见 [验收证据](evidence/ece-vcs-smoke-20261008/result.json)。这证明一例完整传输/商业仿真流程可用，不代表所有案例已验证；Xcelium 尚未实际执行。
 

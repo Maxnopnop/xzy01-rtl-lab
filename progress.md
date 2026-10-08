@@ -31,6 +31,8 @@
 - 2026-10-08: User requests a fresh small experiment followed by a convenient ECE desktop handoff. Chosen immutable paired A/repeats1, 16 new turns maximum, plus standalone single-case packaging/collector; asked desktop entry/shared-folder configuration asynchronously. Account readout 19% used; no reset or purchase.
 # 2026-10-08 ECE workflow continuation
 
+Xcelium request complete: returned-xcelium-20261008.zip imported and verified PASS, xrun 23.03-s004 exit 0, independent receipt 1840 checks/zero errors. Source hashes equal verified VCS case. Saved curated evidence/ece-xcelium-smoke-20261008 with receipt, execution record, tool version and hashes; original ZIP/logs remain local. Same retained sample now passes Icarus, VCS and Xcelium; no broader efficacy claim or new model calls.
+
 User requested actual Xcelium verification after VCS PASS. Preparing fresh same-source package with absolute tcsh launch, harness-first compile order, backend-specific setup and receipt, plus start_xcelium.sh shared-folder entry. Actual result remains pending user-operated school execution and returned evidence.
 
 School handoff completed on a retained FSM sample: user ran VCS via Horizon on ecelvd702 and returned ZIP. Initial relative-path launcher issue and then ITSFM compilation ordering issue were fixed without changing DUT/testbench/vector bytes. Final compile=0, simulate=0, valid nonce receipt=1840 checks/zero errors; source hashes match originals and local Icarus PASS. Curated result and receipt saved under evidence/ece-vcs-smoke-20261008; raw three attempts remain local. Xcelium unverified, new pilot still service-blocked (4/16 reservations, zero output). Keep computer running for active user school-session work; no shutdown scheduled.
