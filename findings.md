@@ -1,5 +1,9 @@
 # Findings — paired feedback study, 2026-10-01
 
+2026-10-08 integrated workflow: local registry binds each source ZIP hash/backend/case/nonce to one returned attempt; school station menu executes ONE selected case per invocation, auto-collects and ships ZIP then provenance sidecar. Unwritable share preserves outbox for transport-only retries. Local ingestion deduplicates exact ZIP hashes and does not count historical smoke as new commercial validation. Prepared 10 packages/356 tool-case choices from all 178 historical RTL outputs.
+
+Large offline verification: 178 retained outputs re-simulated, 159 PASS/10 FUNCTION_FAIL/9 COMPILE_FAIL, all 178 match originals. Re-ran 163 mutation fixtures, 5 correct references, 25 localization cells. WSL full suite 61 passed; Windows added workflow/transport tests 13 passed. Windows full suite failed two preexisting loopback HTTP mock methods (3 assertions/1 error); urllib reports no proxy bypass for localhost/127.0.0.1. No frozen runtime or system proxy changes. Native ExitWindowsEx privilege probe returned win32_error 0 without requesting shutdown.
+
 - Previous frozen 48-turn study is complete at commit 186357a. Scores 7/8, 7/8, 8/8; all checked IRs were initially correct, so it did not test feedback-driven repair.
 - One real erroneous IR exists at evidence/fsm48/jobs/m02__rt_sequence__table__s001/stage1/response.txt. It sends S4 on input 0 to S3 instead of S2. Preserve its exact bytes and provenance.
 - Existing FSM interpreter handles data-only single-bit Moore FSMs, explicit reset, finite graph equivalence and timed pre/post-edge simulation.

@@ -1,5 +1,7 @@
 # Progress — 2026-10-01
 
+2026-10-08 integrated delivery: implemented ece_workflow.py history/prepare/ingest/status and registry; portable ece_station.py/ece_menu.sh; ece_desktop session/ship auto-return; ece_replay.py offline historical re-simulation; native gated shutdown helper. 178 historical replays match original statuses, fresh 163-mutant calibration passes, WSL 61 tests pass, Windows 13 new tests pass. Existing Windows HTTP fixtures are blocked by local proxy settings; retained limitation and original code untouched. Shared folder now has 10 packages with 356 menu choices. Saved exact replay code snapshots, mutation/replay results and release manifest under evidence/ece-workflow-20261008. No model calls, no new actual school runs. User explicitly requested normal native shutdown after complete save; still awaiting final sync/archives gate.
+
 - Read planning-with-files and codex-ralph-loop-skill, repository AGENTS/README/ARCHITECTURE, and existing runner. Resolver found no existing selected plan; using project-root planning files.
 - Defined 32 + 64 = 96 new-turn hard limit and independent held-out split. Completion gates include successful tests, evidence, synchronization and CI before normal shutdown.
 - Initial unknown: broadening existing hard-coded two-task diagnosis without changing historical runs. Decision: implement a separate bank and paired runner using common interpreter/transport/simulator functions.

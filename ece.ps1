@@ -4,5 +4,11 @@ $runtimePython = Join-Path $env:USERPROFILE '.cache/codex-runtimes/codex-primary
 if (!(Test-Path -LiteralPath $runtimePython)) {
     $runtimePython = (Get-Command python -ErrorAction Stop).Source
 }
-& $runtimePython (Join-Path $PSScriptRoot 'ece_transfer.py') @args
+$entryScript = 'ece_transfer.py'
+if ($args.Count -gt 0 -and $args[0] -in @('history','prepare','ingest','status','--state-dir')) {
+    $entryScript = 'ece_workflow.py'
+}
+Push-Location $PSScriptRoot
+try { & $runtimePython (Join-Path $PSScriptRoot $entryScript) @args }
+finally { Pop-Location }
 exit $LASTEXITCODE

@@ -1,4 +1,11 @@
-# Active task: 2026-10-08 small replay and ECE desktop handoff
+# Active task: 2026-10-08 integrated historical experiment / ECE workflow
+
+Finish line: local history/prepare/ingest/status entry, portable Linux package-and-one-case menu, automatic return with provenance and deduplication, independent per-attempt reports, historical three-tool results in consolidated reports, tests, current shared-folder release and GitHub sync. No new LLM calls; no change to frozen experimental runtime or scores; no VDI batch execution. Existing verified VCS/Xcelium sample calibrates transport, not broad equivalence.
+
+Phases: (1) inspect historical schemas and design registry — complete; (2) implement local and school tools — complete; (3) verify transport/failed and successful returns plus regression — complete: 178/178 historical matches, 163 mutants and 25 localization cells, 61/61 WSL tests, 13/13 new Windows tests; Windows legacy mock HTTP proxy limitation recorded; (4) prepare shared release and guide, sync GitHub — in progress, 10 packages/356 choices staged. Native shutdown capability check passed; arm only after sync/CI and archives.
+
+---
+# Previous task: 2026-10-08 small replay and ECE desktop handoff
 
 ## Finish line
 Execute a 16-call capped paired A/repeats=1 replication without changing frozen runtime; then deliver tested one-case ECE desktop packages, local transfer/receive wrappers, standalone school-side runner/collector, Chinese guide, GitHub sync and archives. Actual school login/tool execution requires the user's ECE session; no SSH, batch EDA or SLURM.
