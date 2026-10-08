@@ -37,7 +37,7 @@ source "$XCELIUM_SETUP"
 if ($status != 0) exit 2
 rehash
 xrun -version >& tool_version.log
-xrun -64bit -sv -top tb dut.sv testbench.sv +nonce={nonce} -input run.tcl -l xrun.log
+xrun -64bit -sv -top tb testbench.sv dut.sv +nonce={nonce} -input run.tcl -l xrun.log
 set sim_rc = $status
 echo $sim_rc > simulate.exit
 exit $sim_rc

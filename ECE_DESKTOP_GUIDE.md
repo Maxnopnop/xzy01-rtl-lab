@@ -1,5 +1,15 @@
 # 本机 → ECE Horizon → 单案例仿真 → 本机验收
 
+## Xcelium 单案例验证入口（尚待学校回传）
+
+共享目录现提供 `start_xcelium.sh` 和 `ece-xcelium-verify-20261008.zip`。与已通过 VCS 的案例使用完全相同的 RTL、测试台和向量，保留独立 backend 和 nonce，不覆盖 VCS 结果。在学校终端粘贴：
+
+```bash
+bash -c 'find "$HOME/tsclient" -maxdepth 6 -type f -name start_xcelium.sh -exec bash {} \; -quit'
+```
+
+先检查输出中 Xcelium `.cshrc` 路径存在，再执行打印的 `cd` 和单案例 `run`。运行后按具体 attempt 名 collect 到一个新的 Xcelium ZIP，带回本机；使用原始 `exports/ece-xcelium-verify-20261008` 导入。若 setup/许可证报错，则归为环境问题，不计入 RTL 失败。Xcelium 编译/仿真由一次 xrun 完成，回传应包含 `xrun.log`、`simulate.exit`、版本和 verdict。
+
 **2026-10-08 已完成首次真实学校 VCS 验收。** 用户在 `ecelvd702` 的 Horizon 会话中手动运行修复包并回传 ZIP；VCS X-2025.06-SP1 编译退出 0、仿真退出 0，1840 个检查全部通过。源码哈希、nonce、回执检查数和退出码核对通过，与本机 Icarus 的该案例结果一致。记录见 [验收证据](evidence/ece-vcs-smoke-20261008/result.json)。这证明一例完整传输/商业仿真流程可用，不代表所有案例已验证；Xcelium 尚未实际执行。
 
 当前终端默认是 tcsh，涉及 `$(...)` 的示例应显式用 `bash -c '...'` 包裹。启动脚本及 Python 单案例命令已在学校使用。后续仍按手动单案例方式运行，不进行 VDI 批量 EDA。
