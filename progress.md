@@ -32,4 +32,3 @@
 # 2026-10-08 ECE workflow continuation
 
 Implemented ece_transfer.py, portable ece_desktop.py, ece.ps1 and Chinese ECE_DESKTOP_GUIDE.md. Built VCS and Xcelium packages from retained paired evidence and staged both in E:/FYP-Transfer. Five transport test methods passed (synthetic commercial receipts only); full regression underway. Historical paired audit and mutation evidence verification passed. New replay blocked after 4 slots by persistent service HTTP 403 including after user VPN change; 12 pending, zero effective generations. No remote access or real commercial simulation claimed.
-

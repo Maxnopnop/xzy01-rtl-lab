@@ -26,4 +26,3 @@
 - New capped paired replay reserved 4/16 slots (two models, control/feedback real_overlap); all failed with HTTP 403 at Codex model service. Two requests followed the VPN change. No effective generation, no efficacy estimate; 12 tasks remain pending. No failed call retries.
 - Separate transport modules preserve frozen experiment source hashes. VCS/Xcelium packages use retained paired-a32 m01 real_overlap control, not fresh generated data.
 - ECE only supports manual host simulation in this context; no SSH, supported EDA batch or scheduler. Folder sharing and actual commercial tool availability remain unverified.
-
