@@ -2,7 +2,7 @@
 # Run on the ECE desktop. Copies/unpacks one prepared ZIP and checks the environment only.
 set -eu
 transfer_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
-archive=${1:-"$transfer_dir/ece-vcs-ready-20261008.zip"}
+archive=${1:-"$transfer_dir/ece-vcs-fixed-20261008.zip"}
 if ! command -v python3 >/dev/null 2>&1; then
     printf '%s\n' 'Python 3 is unavailable. Copy the ZIP to your home directory and use the manual tcsh fallback in the guide.'
     exit 2

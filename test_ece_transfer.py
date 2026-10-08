@@ -81,8 +81,13 @@ class TransportTests(unittest.TestCase):
             proc.return_value.wait.return_value=0
             with contextlib.redirect_stdout(io.StringIO()): self.assertEqual(desktop.run_case(self.package,self.case),0)
             self.assertEqual(proc.call_count,1)
-            self.assertEqual(proc.call_args[0][0],['tcsh','run_vcs.csh'])
+            command=proc.call_args[0][0]
+            self.assertEqual(command[0],'tcsh')
+            working_directory=proc.call_args[1]['cwd']
             self.assertEqual(len(list((self.package/'results'/self.case).iterdir())),1)
+        self.assertTrue(Path(command[1]).is_absolute())
+        self.assertEqual(Path(command[1]).name,'run_vcs.csh')
+        self.assertEqual(Path(command[1]).parent,Path(working_directory))
         with self.assertRaises(ValueError): desktop.case_meta(self.package,'test_case,other')
 
 

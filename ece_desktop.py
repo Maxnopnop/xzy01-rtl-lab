@@ -47,7 +47,7 @@ def run_case(root, case, timeout=300):
     record = dict(case=case, backend=meta['backend'], started_utc=started, status='STARTED')
     (target / 'execution.json').write_text(json.dumps(record, indent=2), encoding='utf-8')
     with (target / 'launcher.log').open('wb') as log:
-        process = subprocess.Popen(['tcsh', 'run_' + meta['backend'] + '.csh'],
+        process = subprocess.Popen(['tcsh', str(target / ('run_' + meta['backend'] + '.csh'))],
                                    cwd=str(target), stdout=log, stderr=subprocess.STDOUT,
                                    start_new_session=True)
         try:
