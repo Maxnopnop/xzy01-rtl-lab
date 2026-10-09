@@ -1,4 +1,8 @@
-# Active task: 2026-10-08 integrated historical experiment / ECE workflow
+# Active task: 2026-10-09 multi-model API workbench
+
+Deliver CSV model profiles, interactive key entry, no-network preview, frozen batch preparation, bounded sequential model execution, and consolidated reports. Reuse frozen batch/runtime without changing historical scores. No real API calls during implementation. Phases: implementation in progress; offline tests and docs pending; GitHub sync pending. The previously requested Git ECE delivery remains outstanding and is not part of this API workbench completion claim.
+
+# Previous task: 2026-10-08 integrated historical experiment / ECE workflow
 
 Finish line: local history/prepare/ingest/status entry, portable Linux package-and-one-case menu, automatic return with provenance and deduplication, independent per-attempt reports, historical three-tool results in consolidated reports, tests, current shared-folder release and GitHub sync. No new LLM calls; no change to frozen experimental runtime or scores; no VDI batch execution. Existing verified VCS/Xcelium sample calibrates transport, not broad equivalence.
 

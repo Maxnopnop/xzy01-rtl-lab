@@ -1,5 +1,7 @@
 # XZY01 RTL Lab
 
+多模型 API 入口：[CSV 配置与批量调用指南](MODEL_PLATFORM.md)。`models.ps1 template/check/prepare/run/report`；集中填写基础地址、模型 ID 和密钥环境变量名，预览与建任务均不调用 API。
+
 项目总览：[完整流程与阶段总结（2026-10-09）](FYP_FLOW_SUMMARY.md)。
 
 日常统一入口：[历史实验 → 学校单案例菜单 → 自动回传 → 本机报告](ECE_WORKFLOW.md)。本机 `ece.ps1 history/prepare/ingest/status`，学校 `ece_menu.sh`。已准备 178 份历史 RTL 的两工具菜单，共 356 个待验证项；本机 178 份复验结果全部与原实验一致，不产生新模型调用。
