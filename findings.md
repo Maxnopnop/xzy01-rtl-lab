@@ -32,3 +32,10 @@ Large offline verification: 178 retained outputs re-simulated, 159 PASS/10 FUNCT
 - ECE only supports manual host simulation in this context; no SSH, supported EDA batch or scheduler. Folder sharing and actual commercial tool availability remain unverified.
 
 2026-10-09 API workbench: seven new Windows tests passed, including synthetic loopback HTTP -> actual Icarus -> report and resume with exactly one request. No paid model calls. CSV local configuration is Git-ignored. PDF review requested during regression; six pages extracted with pypdf; fitz unavailable, initial console GBK failed, fixed UTF-8 output. ELEC5550 requires DC, PrimeTime, Innovus, Tcl and Nangate45; Horizon/DUO school login. Existing CLI/FSM runtime untouched.
+## 2026-10-09 unified FYP workflow
+
+- Original FYP tools are connected through lab.ps1: configured API generation, fixed Icarus tests, independent Yosys review, frozen VCS/Xcelium packages, return validation and reports. ELEC5550/DC/Innovus remains deferred by the user.
+- Verbatim mode preserves the UTF-8 file bytes, including CRLF, Unicode and leading/trailing whitespace. The actual API messages array contains exactly one user message. Loopback request inspection verifies this; arbitrary prompts without a matching fixed testbench receive GENERATED_UNVERIFIED, not a functional score.
+- Shared-folder and Git routes retain one manually selected commercial case per invocation. Git results use independent result branches and a temporary index, preserving HEAD and staged changes. Failed upload retries only transport; result ingestion verifies hashes and never checks out returned code.
+- Ten unchanged historical packages contain 356 case/tool selections (178 retained RTL outputs, each offered for VCS and Xcelium). Availability in the menu does not mean those commercial simulations passed. The new Git route still needs first real school network/authentication validation.
+- Windows eight new tests and Linux 28 related tests passed with synthetic API/commercial fixtures and real local Icarus/Yosys. No paid model calls or new school EDA runs were made during script development.

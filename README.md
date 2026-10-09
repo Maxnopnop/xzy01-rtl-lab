@@ -1,5 +1,7 @@
 # XZY01 RTL Lab
 
+统一入口：[完整工具清单与一键流程](FYP_ONE_COMMAND.md)。支持完整提示词原文输入、本机 API→Icarus→Yosys→打包、学校共享目录/Git 单案例运行及结果回传。
+
 多模型 API 入口：[CSV 配置与批量调用指南](MODEL_PLATFORM.md)。`models.ps1 template/check/prepare/run/report`；集中填写基础地址、模型 ID 和密钥环境变量名，预览与建任务均不调用 API。
 
 项目总览：[完整流程与阶段总结（2026-10-09）](FYP_FLOW_SUMMARY.md)。

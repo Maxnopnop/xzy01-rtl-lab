@@ -57,26 +57,41 @@ def unpack(shared, entry, work):
     return root, package
 
 
-def main():
+def main(argv=None):
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--shared-dir', default=str(Path(__file__).resolve().parent))
     p.add_argument('--work-dir', default=str(Path.home() / 'xzy01-ece'))
-    args = p.parse_args(); shared = Path(args.shared_dir).resolve()
+    p.add_argument('--return-dir', help='Transport inbox; defaults to shared-dir/inbox')
+    p.add_argument('--package-id', help='Select an exact package instead of the package menu')
+    p.add_argument('--case', help='Select one exact case instead of the case menu')
+    args = p.parse_args(argv); shared = Path(args.shared_dir).resolve()
     try:
         entries = json.loads((shared / 'ece-workflow-catalog.json').read_text(encoding='utf-8'))['packages']
         print('ECE station: manual ONE case per invocation; no SSH or EDA batch.')
-        index = choose([e['label'] + ' | ' + e['backend'] + ' | ' + str(len(e['cases'])) + ' cases' for e in entries], 'package')
+        if args.package_id:
+            matches = [i for i, e in enumerate(entries) if e['package_id'] == args.package_id]
+            if len(matches) != 1: raise ValueError('Unknown package ID')
+            index = matches[0]
+        else:
+            index = choose([e['label'] + ' | ' + e['backend'] + ' | ' + str(len(e['cases'])) + ' cases' for e in entries], 'package')
         if index is None: return 0
+        if args.case and args.case not in {m['job_id'] for m in entries[index]['cases']}:
+            raise ValueError('Unknown case ID; select exactly one case')
         root, package = unpack(shared, entries[index], Path(args.work_dir).resolve())
         print('School working directory: ' + str(root))
         result = subprocess.call([sys.executable, str(root / 'ece_desktop.py'), 'doctor'])
         if result: return result
-        index = choose([m['job_id'] + ' | ' + m['task'] + ' | local=' + m['original_status'] for m in package['cases']], 'case')
+        if args.case:
+            matches = [i for i, m in enumerate(package['cases']) if m['job_id'] == args.case]
+            if len(matches) != 1: raise ValueError('Unknown case ID')
+            index = matches[0]
+        else:
+            index = choose([m['job_id'] + ' | ' + m['task'] + ' | local=' + m['original_status'] for m in package['cases']], 'case')
         if index is None: return 0
         case = package['cases'][index]['job_id']
         print('Selected: ' + package['backend'] + ' / ' + case)
         return subprocess.call([sys.executable, str(root / 'ece_desktop.py'), 'session', '--case', case,
-                                '--return-dir', str(shared / 'inbox')])
+                                '--return-dir', str(Path(args.return_dir).resolve() if args.return_dir else shared / 'inbox')])
     except (ValueError, KeyError, OSError, zipfile.BadZipFile) as exc:
         print('ERROR: ' + str(exc)); return 2
     except (KeyboardInterrupt, EOFError):

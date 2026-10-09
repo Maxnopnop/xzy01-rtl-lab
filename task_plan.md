@@ -1,6 +1,14 @@
-# Active task: 2026-10-09 multi-model API workbench
+# Active task: 2026-10-09 original FYP unified workflow and Git transport
 
-Deliver CSV model profiles, interactive key entry, no-network preview, frozen batch preparation, bounded sequential model execution, and consolidated reports. Reuse frozen batch/runtime without changing historical scores. No real API calls during implementation. Phases: implementation in progress; offline tests and docs pending; GitHub sync pending. The previously requested Git ECE delivery remains outstanding and is not part of this API workbench completion claim.
+User explicitly defers ELEC5550 course package/DC/Innovus and requests original tools plus prior unified workflow. Delivered lab.ps1/lab_flow.py local orchestration, shared-folder and private GitHub package/result transport, portable ONE-case school command, configuration and complete Chinese toolchain guide. Added complete UTF-8 prompt input with verified one-user-message wire preservation. Implementation and verification complete: 76/76 full Linux tests, 8/8 new Windows tests; 10 unchanged packages with 356 selections; 16,299-file private local backup verified. No new paid model calls, EDA batches or shutdown. Preserve unfinished ELEC files without claiming them ready. Final delivery: Git sync and remote CI; its exact commit/status is recorded under validation/fyp-one-command. New school Git login/run still requires real user session validation. User's Yosys explanation/results question is queued after script completion.
+
+# Deferred by user: 2026-10-09 ELEC5550 local/school workflow
+
+User requests local scripts, minimal ECE operations and full toolchain list. Course ZIP exists only at school public path; local PDF inspected. Build shared-folder fetch/doctor, local source audit and single-design DC/Innovus job packages, school menu/collection, local hash-verified imports and submission checklist/report scaffold. Preserve one manually selected design per invocation; no SSH/scheduler or multi-design loops. GitHub stores our scripts/docs only; course archive/libraries stay local/shared. Actual course-specific paths, Task 2 edits, commercial results and layout images remain unverified until original archive is returned. Phases: implement and synthetic tests; stage first-use fetch; docs and Git sync. Earlier API workbench full WSL regression completed: 68/68 tests pass, new native Windows 7/7 pass.
+
+# Previous task: 2026-10-09 multi-model API workbench
+
+Deliver CSV model profiles, interactive key entry, no-network preview, frozen batch preparation, bounded sequential model execution, and consolidated reports. Reuse frozen batch/runtime without changing historical scores. No real API calls during implementation. Phases: implementation and Chinese guide complete; seven Windows tests passed including synthetic HTTP and actual Icarus; full WSL regression running; GitHub synced e92960a. No real provider authentication tested. The previously requested Git ECE delivery remains outstanding and is not part of this API workbench completion claim.
 
 # Previous task: 2026-10-08 integrated historical experiment / ECE workflow
 

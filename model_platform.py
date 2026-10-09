@@ -155,6 +155,8 @@ def report(root):
 
 def run(args):
     root = Path(args.run_dir).resolve()
+    if (root / 'exact-prompts.json').exists():
+        raise ValueError('This run uses verbatim prompts; continue with lab.ps1 local --prompt-dir, not the default prompt runner')
     plan = load(root)
     keys([i['profile'] for i in plan['profiles']], args.prompt_keys)
     with batch.lock(root):
