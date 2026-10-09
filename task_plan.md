@@ -1,4 +1,8 @@
-# Active task: 2026-10-09 original FYP unified workflow and Git transport
+# Active task: 2026-10-09 local button window
+
+Completed native Tk window and double-click launcher over the verified CLI. Model CSV editor, masked in-memory keys, byte-preserving whole-prompt paste/import, explicit budget and mode selection, background execution/logs, reports and shared/Git transport buttons. Existing runtime unchanged. Eleven Windows GUI/transport/pipeline tests passed in 18.534 seconds, including actual Tk callbacks, exact byte preservation and actual CLI doctor. Fixed stdout handle cleanup found during first smoke test. Open-Lab.ps1 launched a responding XZY01 control window; desktop shortcut saved. No paid calls during development. Source sync and remote CI tracked under validation/gui-completion. Existing planning-with-files ledger reused.
+
+# Completed task: 2026-10-09 original FYP unified workflow and Git transport
 
 User explicitly defers ELEC5550 course package/DC/Innovus and requests original tools plus prior unified workflow. Delivered lab.ps1/lab_flow.py local orchestration, shared-folder and private GitHub package/result transport, portable ONE-case school command, configuration and complete Chinese toolchain guide. Added complete UTF-8 prompt input with verified one-user-message wire preservation. Implementation and verification complete: 76/76 full Linux tests, 8/8 new Windows tests; 10 unchanged packages with 356 selections; 16,299-file private local backup verified. No new paid model calls, EDA batches or shutdown. Preserve unfinished ELEC files without claiming them ready. Final delivery: Git sync and remote CI; its exact commit/status is recorded under validation/fyp-one-command. New school Git login/run still requires real user session validation. User's Yosys explanation/results question is queued after script completion.
 

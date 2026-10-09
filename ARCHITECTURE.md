@@ -2,6 +2,8 @@
 
 ## 现有模块
 
+`lab_gui.py` 是独立 Tk 本机窗口，通过子进程调用已验证的 `lab_flow.py` 和 `model_platform.py`，不修改运行器。Windows 完整提示词粘贴直接读取 Unicode 剪贴板；UTF-8 字节缓冲区是唯一发送来源，只读文本框仅作预览。后台任务通过队列更新 UI；密钥只进入子进程环境，配置 CSV 只保存变量名。`Open-Lab.cmd` / `Open-Lab.ps1` 提供双击启动。
+
 `fsm_study.py` 是独立两阶段实验调度器：`codex_adapter.generate_text` 复用现有禁工具生成通道；`fsm_ir.py` 负责有限状态表数据解释，`fsm_checks.py` 明确区分公开反馈与私有判题。它输出兼容独立 Yosys replay 和学校单案例导出的任务结果。协议见 `FSM_STUDY.md`，不改变原 60 次 pilot 的统计口径。
 
 ```text

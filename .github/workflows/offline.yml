@@ -6,10 +6,12 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1, Node 24
       - name: Install simulator
-        run: sudo apt-get update && sudo apt-get install -y iverilog yosys
+        run: sudo apt-get update && sudo apt-get install -y iverilog yosys python3-tk xvfb
       - name: Validate evaluator and resumable runner
         run: python3 -m unittest -v test_lab test_batch test_dev test_fsm test_paired test_paired_audit test_mutation test_ece_transfer test_ece_workflow test_model_platform test_lab_flow
       - name: Audit retained paired experiment without model calls
         run: python3 paired_audit.py --evidence evidence/paired-a32 evidence/paired-b64 --output validation/paired-ci.json
+      - name: Validate window callbacks and exact prompt entry without model calls
+        run: xvfb-run -a python3 -m unittest -v test_lab_gui
       - name: Verify offline mutation evidence and public contracts
         run: python3 mutation_study.py verify --evidence evidence/mutation-v1
