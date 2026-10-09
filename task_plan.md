@@ -1,4 +1,8 @@
-# Active task: 2026-10-09 local button window
+# Active task: 2026-10-09 DC and Genus integration
+
+Read user-supplied ECE_SYNTHESIS_STARTUP.md: DC X-2025.06-SP2 and Genus 21.14 have school startup evidence only. User confirmed no library paths yet. Completed configuration, one-case package/return/report, native GUI fourth page and copy-library-search button with missing-resource gates. Preserved Yosys and historical results. Require explicit standard-cell library paths, corner label and reviewed SDC before actual mapped synthesis. No libraries or licensed software copied into Git, no automatic school batch or SSH. Verified 84 full Linux tests, 19 related Windows tests and final 11 synthesis/GUI checks after exclusive-run guard. Two blocked draft packages staged in ECE-Synthesis; updated window opened. No actual DC/Genus synthesis performed. Git sync/CI receipt goes under validation/synthesis-integration. New commercial synthesis uses shared-folder transport; existing simulation Git protocol remains separate.
+
+# Completed task: 2026-10-09 local button window
 
 Completed native Tk window and double-click launcher over the verified CLI. Model CSV editor, masked in-memory keys, byte-preserving whole-prompt paste/import, explicit budget and mode selection, background execution/logs, reports and shared/Git transport buttons. Existing runtime unchanged. Eleven Windows GUI/transport/pipeline tests passed in 18.534 seconds, including actual Tk callbacks, exact byte preservation and actual CLI doctor. Fixed stdout handle cleanup found during first smoke test. Open-Lab.ps1 launched a responding XZY01 control window; desktop shortcut saved. No paid calls during development. Source sync and remote CI tracked under validation/gui-completion. Existing planning-with-files ledger reused.
 

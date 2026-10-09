@@ -17,6 +17,7 @@ import ece_git
 import ece_workflow as workflow
 import model_platform
 import exact_prompts
+import ece_synthesis
 
 ROOT = Path(__file__).resolve().parent
 
@@ -90,6 +91,7 @@ def stage(run, backends, shared, state):
 
 def report(state, root=None):
     school = workflow.status(state)
+    school_synthesis = ece_synthesis.report(state / 'synthesis')
     rows = []
     runs = runs_under(root) if root else [ROOT / e['run'] for e in workflow.history()]
     for run in runs:
@@ -110,9 +112,14 @@ def report(state, root=None):
                 matches = [r for r in school['rows'] if r['experiment'] == str(run) and r['job_id'] == job['id'] and r['backend'] == backend]
                 done = [r for r in matches if r['attempts']]
                 item[backend] = done[-1]['commercial'] if done else 'NOT_RUN'
+            for backend in ('dc', 'genus'):
+                matching = [r for r in school_synthesis if r['run_dir'] == str(run) and r['job_id'] == job['id'] and
+                            r['tool'] == backend and r['rtl_sha256'] == row.get('rtl_sha256') and
+                            r['source_result_sha256'] == desktop.digest(run / 'jobs' / job['id'] / 'result.json')]
+                item[backend] = matching[-1]['status'] if matching else 'NOT_RUN'
             rows.append(item)
     workflow.saved(state / 'lab-summary.json', dict(rows=rows, note='Development results; no PPA/formal-equivalence claim.'))
-    fields = ['run', 'job', 'model', 'icarus', 'yosys', 'vcs', 'xcelium']
+    fields = ['run', 'job', 'model', 'icarus', 'yosys', 'vcs', 'xcelium', 'dc', 'genus']
     with (state / 'lab-summary.csv').open('w', encoding='utf-8-sig', newline='') as stream:
         writer = csv.DictWriter(stream, fieldnames=fields)
         writer.writeheader()
@@ -121,7 +128,7 @@ def report(state, root=None):
     (state / 'lab-report.html').write_text('<!doctype html><meta charset="utf-8"><title>FYP workflow</title>'
         '<style>body{font:15px system-ui;padding:24px}td,th{padding:8px;border:1px solid #ccc}table{border-collapse:collapse}</style>'
         '<h1>FYP 工具链结果</h1><p>NOT_RUN 表示尚未验证。商业工具每次只运行一个人工选择的案例。</p>'
-        '<p><a href="report.html">学校所有包与尝试</a> · <a href="lab-summary.csv">下载 CSV</a></p>'
+        '<p><a href="report.html">学校仿真</a> · <a href="synthesis/report.html">DC / Genus 综合详情</a> · <a href="lab-summary.csv">下载 CSV</a></p>'
         '<table><tr>' + ''.join('<th>' + k + '</th>' for k in fields) + '</tr>' + body + '</table>', encoding='utf-8')
     print('Unified report: ' + str(state / 'lab-report.html'))
     return rows
@@ -202,6 +209,8 @@ def main(argv=None):
     p.add_argument('--state-dir', default=str(workflow.DEFAULT_STATE))
     sub = p.add_subparsers(dest='command', required=True)
     sub.add_parser('doctor')
+    a = sub.add_parser('synth', help='School DC/Genus local configuration, packaging and collection')
+    a.add_argument('synth_args', nargs=argparse.REMAINDER)
     a = sub.add_parser('local')
     a.add_argument('--run-dir', required=True)
     a.add_argument('--profiles', default='config.local.models.csv')
@@ -258,6 +267,8 @@ def main(argv=None):
                 shared_exists=workflow.DEFAULT_SHARED.is_dir(), repo=str(ROOT)), indent=2))
             print('No API/network/EDA request made. Windows Yosys may run via WSL Ubuntu.')
         elif args.command == 'local': return local(args)
+        elif args.command == 'synth':
+            return ece_synthesis.main(['--state-dir', str(state / 'synthesis')] + args.synth_args)
         elif args.command == 'generate': return exact_prompts.generate_only(args)
         elif args.command == 'prompt':
             if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]*', args.task):

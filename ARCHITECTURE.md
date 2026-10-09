@@ -45,6 +45,8 @@ school_bridge.py
 
 ## 学校连接与专业工具的边界
 
+`ece_synthesis.py` 是独立 DC/Genus 本机配置、单案例打包与导入模块；`ece_synth_common.py` 和 `ece_synth_school.py` 支持学校 Python 3.6。每个包冻结 RTL、SDC、工具脚本和来源哈希；学校预检查标准单元库可读性并记录库指纹，单次运行后只收集白名单输出。缺少库/角/审核约束时不启动工具。商业综合状态单列，不覆盖 Yosys；即使退出零且输出完整，也只标 COMPLETED_REVIEW_REQUIRED，保留人工审阅和未来等价检查边界。当前综合传输使用独立 ECE-Synthesis 共享目录，不混用原仿真 Git 分支协议。
+
 目前**仅实现手动 transport**，不是自动商业 backend。`school_bridge.py` 的 VCS/Xcelium 命令模板与统一证据协议，为后续适配保留边界。
 
 若学校以后允许远程自动化，新增例如 `transports/ssh.py`：上传不可变的案例包、提交单次运行、轮询状态、下载证据、取消进程。连接地址、账号和许可证设置保存在本机环境或不提交的配置中。不要将主机地址/凭据硬编码进任务或提示词。

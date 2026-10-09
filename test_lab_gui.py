@@ -49,7 +49,19 @@ class WindowTests(unittest.TestCase):
         try:
             app = gui.LabWindow(window)
             window.update()
-            self.assertEqual(app.tabs.index('end'), 3)
+            self.assertEqual(app.tabs.index('end'), 4)
+            with tempfile.TemporaryDirectory() as config_temp, patch.object(gui.ece_synthesis, 'CONFIG', Path(config_temp) / 'config.json'):
+                app.save_synthesis()
+                self.assertIn('standard-cell library paths', app.status.get())
+                app.synth_tool.set('genus')
+                app.switch_synthesis()
+                self.assertEqual(app.synth_active, 'genus')
+                app.synth_options = {'synthetic': dict(run_dir=config_temp, job_id='case')}
+                app.synth_selection.set('synthetic')
+                with patch.object(app, 'start') as synth_start:
+                    app.pack_synthesis()
+                self.assertEqual(synth_start.call_args.kwargs['script'], 'ece_synthesis.py')
+                self.assertIn('genus', synth_start.call_args.args[0])
             data = ' \r\n粘贴原文\r\n end  '.encode('utf-8')
             with patch.object(gui, 'clipboard_text', return_value=data.decode('utf-8')):
                 app.paste_prompt()

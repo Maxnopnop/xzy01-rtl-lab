@@ -1,6 +1,6 @@
 # FYP 原工具链：本机一键处理，学校单案例运行
 
-范围：模型 API → RTL → Icarus → Yosys → VCS/Xcelium → 报告。ELEC5550 课程包、DC、PrimeTime、Innovus 暂不使用。本机已提供自动脚本；学校商业仿真仍需登录后人工选择一个案例。没有 SSH、SLURM、远程后台代理或全案例商业仿真循环。
+范围：模型 API → RTL → Icarus → Yosys → VCS/Xcelium → 报告。学校 DC/Genus 综合已新增独立入口，见 [学校综合接入指南](ECE_SYNTHESIS_GUIDE.md)，尚缺标准单元库与审核后的约束，未执行实际综合。ELEC5550 课程包、PrimeTime、Innovus 暂不使用。本机已提供自动脚本；学校商业工具仍需登录后人工选择一个案例。没有 SSH、SLURM、远程后台代理或全案例商业工具循环。
 
 ## 完整工具清单
 
@@ -29,6 +29,8 @@
 | Python 3.6+、Bash、tcsh | 学校菜单、环境加载与回传 | 学校 Linux；.cshrc 在 tcsh 中加载 |
 | Synopsys VCS | 商业 RTL 仿真 | 学校安装与许可证；学校主机实际可用性由运行结果确认 |
 | Cadence Xcelium | 第二种商业 RTL 仿真 | 同上 |
+| Synopsys Design Compiler / Cadence Genus | 学校工艺库映射综合 | 已有启动证据；窗口第4页配置、打包和回传；实际综合待验证 |
+| 标准单元 `.db` / `.lib`、SDC | 工艺库和设计约束 | 用户尚未提供；缺少时阻止 DC/Genus 运行 |
 | 普通浏览器 | 打开本机 HTML 报告 | 无云端部署要求 |
 | GitHub Actions | 开源工具离线回归 | 可选；不会运行学校商业工具 |
 

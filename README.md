@@ -2,6 +2,8 @@
 
 按钮窗口：双击 **Open-Lab.cmd**。可配置模型、隐藏输入 API 密钥、粘贴完整原文提示词、设置预算、启动实验及收取学校结果。打开窗口不调用 API。
 
+新增第4页：[DC / Genus 学校综合](ECE_SYNTHESIS_GUIDE.md)。保留独立库/约束配置、单案例打包、回传与报告；学校启动已验证，缺库和审核后的 SDC 时阻止实际综合。
+
 统一入口：[完整工具清单与一键流程](FYP_ONE_COMMAND.md)。支持完整提示词原文输入、本机 API→Icarus→Yosys→打包、学校共享目录/Git 单案例运行及结果回传。
 
 多模型 API 入口：[CSV 配置与批量调用指南](MODEL_PLATFORM.md)。`models.ps1 template/check/prepare/run/report`；集中填写基础地址、模型 ID 和密钥环境变量名，预览与建任务均不调用 API。
