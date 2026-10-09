@@ -12,13 +12,13 @@ bash -c 'find "$HOME/tsclient" -maxdepth 6 -type f -name start_xcelium.sh -exec 
 
 先检查输出中 Xcelium `.cshrc` 路径存在，再执行打印的 `cd` 和单案例 `run`。运行后按具体 attempt 名 collect 到一个新的 Xcelium ZIP，带回本机；使用原始 `exports/ece-xcelium-verify-20261008` 导入。若 setup/许可证报错，则归为环境问题，不计入 RTL 失败。Xcelium 编译/仿真由一次 xrun 完成，回传应包含 `xrun.log`、`simulate.exit`、版本和 verdict。该接口已由本次学校实际回传验证。
 
-**2026-10-08 已完成首次真实学校 VCS 验收。** 用户在 `ecelvd702` 的 Horizon 会话中手动运行修复包并回传 ZIP；VCS X-2025.06-SP1 编译退出 0、仿真退出 0，1840 个检查全部通过。源码哈希、nonce、回执检查数和退出码核对通过，与本机 Icarus 的该案例结果一致。记录见 [验收证据](evidence/ece-vcs-smoke-20261008/result.json)。这证明一例完整传输/商业仿真流程可用，不代表所有案例已验证；Xcelium 尚未实际执行。
+**2026-10-08 已完成首次真实学校 VCS 验收。** 用户在 `ecelvd702` 的 Horizon 会话中手动运行修复包并回传 ZIP；VCS X-2025.06-SP1 编译退出 0、仿真退出 0，1840 个检查全部通过。源码哈希、nonce、回执检查数和退出码核对通过，与本机 Icarus 的该案例结果一致。记录见 [验收证据](evidence/ece-vcs-smoke-20261008/result.json)。这证明一例完整传输/商业仿真流程可用，不代表所有案例已验证；同一案例的 Xcelium 验收也已完成，见上文记录。
 
 当前终端默认是 tcsh，涉及 `$(...)` 的示例应显式用 `bash -c '...'` 包裹。启动脚本及 Python 单案例命令已在学校使用。后续仍按手动单案例方式运行，不进行 VDI 批量 EDA。
 
-第二次真实回传已进入 VCS X-2025.06-SP1，编译报 ITSFM：先读取的 DUT 没有 timescale，后读取的测试台有 timescale。VCS 导出命令现改为先读取测试台再读取 DUT，使测试台的时间声明先出现；RTL/测试向量不变。当前启动器默认 `ece-vcs-timescale-20261008.zip`，此修复仍需学校实际仿真确认。该编译配置问题不能作为模型时序语义错误计分。
+第二次真实回传已进入 VCS X-2025.06-SP1，编译报 ITSFM：先读取的 DUT 没有 timescale，后读取的测试台有 timescale。VCS 导出命令现改为先读取测试台再读取 DUT，使测试台的时间声明先出现；RTL/测试向量不变。当前单包启动器默认 `ece-vcs-timescale-20261008.zip`，此修复随后已由学校实际仿真确认通过。该编译配置问题不能作为模型时序语义错误计分。
 
-2026-10-08 首次学校回传暴露启动路径错误：tcsh 收到无目录前缀的脚本名，脚本内部 `$0:h` 无法定位目录。已修复为向 tcsh 传递绝对脚本路径；当前启动器默认解压 `ece-vcs-fixed-20261008.zip`。首次尝试为启动环境错误，未运行 VCS，不作为 RTL 失败。原始包与回传保留。
+2026-10-08 首次学校回传暴露启动路径错误：tcsh 收到无目录前缀的脚本名，脚本内部 `$0:h` 无法定位目录。已修复为向 tcsh 传递绝对脚本路径；当时使用 `ece-vcs-fixed-20261008.zip`，后续又更新为 timescale 修复包。首次尝试为启动环境错误，未运行 VCS，不作为 RTL 失败。原始包与回传保留。
 
 入口：`vdi.ece.ust.hk`。使用你已安装的 Omnissa Horizon Client 登录学校 Linux 桌面；密码只在学校登录窗口输入。本工具不保存密码、不建立 SSH，也不提交 SLURM 作业。
 
