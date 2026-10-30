@@ -85,3 +85,7 @@ OpenRouter密钥在新电脑由用户重新输入，不能从Git恢复。学校V
 确切上传提交、核验和已删除数量以 PROJECT_SYNC_RECEIPT.json 为准；本说明本身不是成功回执。
 本地Git对远端保留但本机清理的文件使用skip-worktree，避免普通git add -u把归档从远端删除。
 需要恢复这些文件时：取消对应skip-worktree后 git restore --source=同步提交 -- 对应路径。
+
+## 临时核验副本保留说明
+
+原工作目录清单中的13509文件已删除，GitHub归档保留。但自动执行策略拒绝对本次两个临时clone目录递归删除，仅返回`blocked by policy`，未说明更具体原因；未绕过限制。因此项目外层`.planning/historical-github-archive-20261030/stage`与`restore`仍有本次核验副本。它们是临时副本，不是新的实验或主仓库中的重复目录。本机Git对象缓存也可能保有历史，不能宣称本机所有副本已擦除。
