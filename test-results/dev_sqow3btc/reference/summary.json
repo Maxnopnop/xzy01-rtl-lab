@@ -1,0 +1,629 @@
+{
+  "schema": 2,
+  "mode": "offline",
+  "requested_model": "",
+  "backend": "icarus",
+  "planned": 10,
+  "completed": 10,
+  "pending": 0,
+  "counts": {
+    "PASS": 10
+  },
+  "pass_fraction_of_planned": 1.0,
+  "real_generations": 0,
+  "model_call_reservations": 0,
+  "recorded_token_usage": {},
+  "by_task": [
+    {
+      "task": "ve_addsub",
+      "category": "arithmetic",
+      "planned": 1,
+      "completed": 1,
+      "passes": 1,
+      "counts": {
+        "PASS": 1
+      }
+    },
+    {
+      "task": "ve_popcount",
+      "category": "arithmetic",
+      "planned": 1,
+      "completed": 1,
+      "passes": 1,
+      "counts": {
+        "PASS": 1
+      }
+    },
+    {
+      "task": "ve_count10",
+      "category": "sequential",
+      "planned": 1,
+      "completed": 1,
+      "passes": 1,
+      "counts": {
+        "PASS": 1
+      }
+    },
+    {
+      "task": "ve_rotate",
+      "category": "sequential",
+      "planned": 1,
+      "completed": 1,
+      "passes": 1,
+      "counts": {
+        "PASS": 1
+      }
+    },
+    {
+      "task": "ve_fsm",
+      "category": "fsm",
+      "planned": 1,
+      "completed": 1,
+      "passes": 1,
+      "counts": {
+        "PASS": 1
+      }
+    },
+    {
+      "task": "rt_comparator",
+      "category": "combinational",
+      "planned": 1,
+      "completed": 1,
+      "passes": 1,
+      "counts": {
+        "PASS": 1
+      }
+    },
+    {
+      "task": "rt_counter12",
+      "category": "sequential",
+      "planned": 1,
+      "completed": 1,
+      "passes": 1,
+      "counts": {
+        "PASS": 1
+      }
+    },
+    {
+      "task": "rt_sequence",
+      "category": "fsm",
+      "planned": 1,
+      "completed": 1,
+      "passes": 1,
+      "counts": {
+        "PASS": 1
+      }
+    },
+    {
+      "task": "rt_shift",
+      "category": "sequential",
+      "planned": 1,
+      "completed": 1,
+      "passes": 1,
+      "counts": {
+        "PASS": 1
+      }
+    },
+    {
+      "task": "rt_pipeline",
+      "category": "pipeline",
+      "planned": 1,
+      "completed": 1,
+      "passes": 1,
+      "counts": {
+        "PASS": 1
+      }
+    }
+  ],
+  "results": [
+    {
+      "schema": 1,
+      "task": "ve_addsub",
+      "sample": 1,
+      "mode": "offline",
+      "source_label": "OFFLINE_FIXTURE",
+      "requested_model": null,
+      "live_api_success": false,
+      "started_utc": "2026-10-11T00:58:53.055041+00:00",
+      "directory": "jobs/ve_addsub__s001/attempt_001/001_ve_addsub",
+      "expected_checks": 131072,
+      "sampling": {
+        "stream": false,
+        "max_tokens": 4096
+      },
+      "offline_source": "/mnt/e/Codex/2026-09-25/xzy01-using-llm-for-digital-chip-2/outputs/rtl-batch/benchmarks/dev10/reference/ve_addsub.sv",
+      "rtl_sha256": "63e1905a9d24ee4c310dd63b872d159bd171187aee7c9267a50f22555f80c8d3",
+      "testbench_sha256": "5e0e9b37dad3ebc91fc40742d7315ce2cb9ba8bd5ec2c364a39eff9256538aeb",
+      "backend": "icarus",
+      "compile_seconds": 0.0427,
+      "status": "PASS",
+      "message": "Independent testbench completed all 131072 checks",
+      "stage": "simulate",
+      "receipt_nonce": "790aa6a66ce34356b80f127caa914163",
+      "simulate_seconds": 0.3028,
+      "simulation_status": "PASS",
+      "synthesis": {
+        "backend": "yosys",
+        "flow": "generic-synth-noabc-v1",
+        "elapsed_seconds": 0.1036,
+        "statistics_kind": "generic cells, not silicon area/timing/power",
+        "status": "SYNTH_PASS",
+        "generic_cells": 87,
+        "cell_types": {
+          "$_AND_": 25,
+          "$_MUX_": 7,
+          "$_NOT_": 17,
+          "$_OR_": 16,
+          "$_XOR_": 22
+        },
+        "latch_cells": 0,
+        "netlist_sha256": "a191bf3387d3e6b453b178447d4e38dfb44580d0f308929ecfe4b19270d40d20",
+        "message": "Generic synthesis and structural checks passed"
+      },
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "elapsed_seconds": 0.805,
+      "finished_utc": "2026-10-11T00:58:53.860088+00:00",
+      "job_id": "ve_addsub__s001",
+      "attempt": "attempt_001"
+    },
+    {
+      "schema": 1,
+      "task": "ve_popcount",
+      "sample": 1,
+      "mode": "offline",
+      "source_label": "OFFLINE_FIXTURE",
+      "requested_model": null,
+      "live_api_success": false,
+      "started_utc": "2026-10-11T00:58:53.101265+00:00",
+      "directory": "jobs/ve_popcount__s001/attempt_001/001_ve_popcount",
+      "expected_checks": 1112,
+      "sampling": {
+        "stream": false,
+        "max_tokens": 4096
+      },
+      "offline_source": "/mnt/e/Codex/2026-09-25/xzy01-using-llm-for-digital-chip-2/outputs/rtl-batch/benchmarks/dev10/reference/ve_popcount.sv",
+      "rtl_sha256": "9cc75018964d53c983b6bf72e4b34b51119f54e540105a4fbd5618f88c16a4db",
+      "testbench_sha256": "180ab80c4cf9d575067886cf64899f9c76531b5412e7e05a157d9564d1559935",
+      "backend": "icarus",
+      "compile_seconds": 0.0425,
+      "status": "PASS",
+      "message": "Independent testbench completed all 1112 checks",
+      "stage": "simulate",
+      "receipt_nonce": "4744537d9dc84fb5b234e8c734a75797",
+      "simulate_seconds": 0.223,
+      "simulation_status": "PASS",
+      "synthesis": {
+        "backend": "yosys",
+        "flow": "generic-synth-noabc-v1",
+        "elapsed_seconds": 0.5668,
+        "statistics_kind": "generic cells, not silicon area/timing/power",
+        "status": "SYNTH_PASS",
+        "generic_cells": 1297,
+        "cell_types": {
+          "$_AND_": 526,
+          "$_OR_": 247,
+          "$_XOR_": 524
+        },
+        "latch_cells": 0,
+        "netlist_sha256": "8198791546d1ff30f612cad90c50d718ce53a96a37201ed9d565018501b0142c",
+        "message": "Generic synthesis and structural checks passed"
+      },
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "elapsed_seconds": 1.1356,
+      "finished_utc": "2026-10-11T00:58:54.236892+00:00",
+      "job_id": "ve_popcount__s001",
+      "attempt": "attempt_001"
+    },
+    {
+      "schema": 1,
+      "task": "ve_count10",
+      "sample": 1,
+      "mode": "offline",
+      "source_label": "OFFLINE_FIXTURE",
+      "requested_model": null,
+      "live_api_success": false,
+      "started_utc": "2026-10-11T00:58:53.133969+00:00",
+      "directory": "jobs/ve_count10__s001/attempt_001/001_ve_count10",
+      "expected_checks": 639,
+      "sampling": {
+        "stream": false,
+        "max_tokens": 4096
+      },
+      "offline_source": "/mnt/e/Codex/2026-09-25/xzy01-using-llm-for-digital-chip-2/outputs/rtl-batch/benchmarks/dev10/reference/ve_count10.sv",
+      "rtl_sha256": "2c51c017ccaccfebb355056fab37fed390c40d1614a82f59157af77700d66e55",
+      "testbench_sha256": "6a94125b254425506fd629f6e0e96481d8db2b0d71cbfd5c2c64b61e92052e47",
+      "backend": "icarus",
+      "compile_seconds": 0.022,
+      "status": "PASS",
+      "message": "Independent testbench completed all 639 checks",
+      "stage": "simulate",
+      "receipt_nonce": "d3cd8650f9a74c3b8f01da7243329d88",
+      "simulate_seconds": 0.0234,
+      "simulation_status": "PASS",
+      "synthesis": {
+        "backend": "yosys",
+        "flow": "generic-synth-noabc-v1",
+        "elapsed_seconds": 0.0818,
+        "statistics_kind": "generic cells, not silicon area/timing/power",
+        "status": "SYNTH_PASS",
+        "generic_cells": 16,
+        "cell_types": {
+          "$_AND_": 2,
+          "$_NOT_": 3,
+          "$_OR_": 4,
+          "$_SDFF_PP0_": 4,
+          "$_XOR_": 3
+        },
+        "latch_cells": 0,
+        "netlist_sha256": "ce1d34be3b04bd5e31fe9ab20e9b74c170f42c0528750962fca58ee6c83a387c",
+        "message": "Generic synthesis and structural checks passed"
+      },
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "elapsed_seconds": 0.4157,
+      "finished_utc": "2026-10-11T00:58:53.549656+00:00",
+      "job_id": "ve_count10__s001",
+      "attempt": "attempt_001"
+    },
+    {
+      "schema": 1,
+      "task": "ve_rotate",
+      "sample": 1,
+      "mode": "offline",
+      "source_label": "OFFLINE_FIXTURE",
+      "requested_model": null,
+      "live_api_success": false,
+      "started_utc": "2026-10-11T00:58:53.166948+00:00",
+      "directory": "jobs/ve_rotate__s001/attempt_001/001_ve_rotate",
+      "expected_checks": 839,
+      "sampling": {
+        "stream": false,
+        "max_tokens": 4096
+      },
+      "offline_source": "/mnt/e/Codex/2026-09-25/xzy01-using-llm-for-digital-chip-2/outputs/rtl-batch/benchmarks/dev10/reference/ve_rotate.sv",
+      "rtl_sha256": "91daaa983042154903707a2fe7b768cfcf8e382ec5055212e1b701fdc1d66b0b",
+      "testbench_sha256": "b54c555523b45792e7cbb50c0531479783350b6320acddedd0000b49f15cf3fb",
+      "backend": "icarus",
+      "compile_seconds": 0.0426,
+      "status": "PASS",
+      "message": "Independent testbench completed all 839 checks",
+      "stage": "simulate",
+      "receipt_nonce": "bb6d33b1e5834e04acefd9dcc4519157",
+      "simulate_seconds": 0.0239,
+      "simulation_status": "PASS",
+      "synthesis": {
+        "backend": "yosys",
+        "flow": "generic-synth-noabc-v1",
+        "elapsed_seconds": 0.1631,
+        "statistics_kind": "generic cells, not silicon area/timing/power",
+        "status": "SYNTH_PASS",
+        "generic_cells": 308,
+        "cell_types": {
+          "$_DFFE_PP_": 100,
+          "$_MUX_": 200,
+          "$_NOT_": 4,
+          "$_OR_": 4
+        },
+        "latch_cells": 0,
+        "netlist_sha256": "6a16714c30e44951cfe5ad94a5ee72f6d184aa205d7bdfef8eac135e6692d87f",
+        "message": "Generic synthesis and structural checks passed"
+      },
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "elapsed_seconds": 0.5587,
+      "finished_utc": "2026-10-11T00:58:53.725625+00:00",
+      "job_id": "ve_rotate__s001",
+      "attempt": "attempt_001"
+    },
+    {
+      "schema": 1,
+      "task": "ve_fsm",
+      "sample": 1,
+      "mode": "offline",
+      "source_label": "OFFLINE_FIXTURE",
+      "requested_model": null,
+      "live_api_success": false,
+      "started_utc": "2026-10-11T00:58:54.298209+00:00",
+      "directory": "jobs/ve_fsm__s001/attempt_001/001_ve_fsm",
+      "expected_checks": 1600,
+      "sampling": {
+        "stream": false,
+        "max_tokens": 4096
+      },
+      "offline_source": "/mnt/e/Codex/2026-09-25/xzy01-using-llm-for-digital-chip-2/outputs/rtl-batch/benchmarks/dev10/reference/ve_fsm.sv",
+      "rtl_sha256": "6ff14fa807ced9355a7f0e062111d132779841b7e78cbf1d67aae4ecb88d4923",
+      "testbench_sha256": "73ac7f8b8c2835b3c2d303a54a06175f4b086d8e366bd40a303299646fa5f292",
+      "backend": "icarus",
+      "compile_seconds": 0.0213,
+      "status": "PASS",
+      "message": "Independent testbench completed all 1600 checks",
+      "stage": "simulate",
+      "receipt_nonce": "711ac7e4f4c54aa3bcdc788a37cdea74",
+      "simulate_seconds": 0.0212,
+      "simulation_status": "PASS",
+      "synthesis": {
+        "backend": "yosys",
+        "flow": "generic-synth-noabc-v1",
+        "elapsed_seconds": 0.0431,
+        "statistics_kind": "generic cells, not silicon area/timing/power",
+        "status": "SYNTH_PASS",
+        "generic_cells": 20,
+        "cell_types": {
+          "$_AND_": 3,
+          "$_DFF_PP0_": 2,
+          "$_MUX_": 2,
+          "$_NOT_": 6,
+          "$_OR_": 7
+        },
+        "latch_cells": 0,
+        "netlist_sha256": "f8bb7a622c0ae1b6354bbbc63bd8f7ab986bd44d52b45de5ab99b91160c60ad1",
+        "message": "Generic synthesis and structural checks passed"
+      },
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "elapsed_seconds": 0.2922,
+      "finished_utc": "2026-10-11T00:58:54.590407+00:00",
+      "job_id": "ve_fsm__s001",
+      "attempt": "attempt_001"
+    },
+    {
+      "schema": 1,
+      "task": "rt_comparator",
+      "sample": 1,
+      "mode": "offline",
+      "source_label": "OFFLINE_FIXTURE",
+      "requested_model": null,
+      "live_api_success": false,
+      "started_utc": "2026-10-11T00:58:54.600521+00:00",
+      "directory": "jobs/rt_comparator__s001/attempt_001/001_rt_comparator",
+      "expected_checks": 64,
+      "sampling": {
+        "stream": false,
+        "max_tokens": 4096
+      },
+      "offline_source": "/mnt/e/Codex/2026-09-25/xzy01-using-llm-for-digital-chip-2/outputs/rtl-batch/benchmarks/dev10/reference/rt_comparator.sv",
+      "rtl_sha256": "5e7404689a5f3f9b7670c01fbb179c00d8ad95b0cdb5bd8302ad64b3e2851e95",
+      "testbench_sha256": "a688ad671c672323681232728acc4fbc58f67d35967868816392063da9e699fd",
+      "backend": "icarus",
+      "compile_seconds": 0.0417,
+      "status": "PASS",
+      "message": "Independent testbench completed all 64 checks",
+      "stage": "simulate",
+      "receipt_nonce": "61ab7ef6579d4be5a2b1a45719dc89c4",
+      "simulate_seconds": 0.0336,
+      "simulation_status": "PASS",
+      "synthesis": {
+        "backend": "yosys",
+        "flow": "generic-synth-noabc-v1",
+        "elapsed_seconds": 0.0613,
+        "statistics_kind": "generic cells, not silicon area/timing/power",
+        "status": "SYNTH_PASS",
+        "generic_cells": 19,
+        "cell_types": {
+          "$_AND_": 7,
+          "$_NOT_": 5,
+          "$_OR_": 4,
+          "$_XOR_": 3
+        },
+        "latch_cells": 0,
+        "netlist_sha256": "bdd3e1bf060f25586ac4365d2478e647e41d09e31b9d803c0b622f935f113732",
+        "message": "Generic synthesis and structural checks passed"
+      },
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "elapsed_seconds": 0.3919,
+      "finished_utc": "2026-10-11T00:58:54.992458+00:00",
+      "job_id": "rt_comparator__s001",
+      "attempt": "attempt_001"
+    },
+    {
+      "schema": 1,
+      "task": "rt_counter12",
+      "sample": 1,
+      "mode": "offline",
+      "source_label": "OFFLINE_FIXTURE",
+      "requested_model": null,
+      "live_api_success": false,
+      "started_utc": "2026-10-11T00:58:54.601757+00:00",
+      "directory": "jobs/rt_counter12__s001/attempt_001/001_rt_counter12",
+      "expected_checks": 960,
+      "sampling": {
+        "stream": false,
+        "max_tokens": 4096
+      },
+      "offline_source": "/mnt/e/Codex/2026-09-25/xzy01-using-llm-for-digital-chip-2/outputs/rtl-batch/benchmarks/dev10/reference/rt_counter12.sv",
+      "rtl_sha256": "3087dfa46f5af08fe53aef48ccc6432e6537ab69a7d50146738cdd51b6706c55",
+      "testbench_sha256": "1771f170f9f088c5195f095af249e7397dfa8b056270eeef5527521c020ed7dc",
+      "backend": "icarus",
+      "compile_seconds": 0.0419,
+      "status": "PASS",
+      "message": "Independent testbench completed all 960 checks",
+      "stage": "simulate",
+      "receipt_nonce": "0b7c966cc0da484aa0124c32cbe77a8c",
+      "simulate_seconds": 0.0434,
+      "simulation_status": "PASS",
+      "synthesis": {
+        "backend": "yosys",
+        "flow": "generic-synth-noabc-v1",
+        "elapsed_seconds": 0.062,
+        "statistics_kind": "generic cells, not silicon area/timing/power",
+        "status": "SYNTH_PASS",
+        "generic_cells": 19,
+        "cell_types": {
+          "$_AND_": 2,
+          "$_DFFE_PN0P_": 4,
+          "$_MUX_": 4,
+          "$_NOT_": 3,
+          "$_OR_": 3,
+          "$_XOR_": 3
+        },
+        "latch_cells": 0,
+        "netlist_sha256": "515f168cac9bc4220dabac92b133bc2372acdc8c671bad6e1c280ee1aa387a93",
+        "message": "Generic synthesis and structural checks passed"
+      },
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "elapsed_seconds": 0.4126,
+      "finished_utc": "2026-10-11T00:58:55.014346+00:00",
+      "job_id": "rt_counter12__s001",
+      "attempt": "attempt_001"
+    },
+    {
+      "schema": 1,
+      "task": "rt_sequence",
+      "sample": 1,
+      "mode": "offline",
+      "source_label": "OFFLINE_FIXTURE",
+      "requested_model": null,
+      "live_api_success": false,
+      "started_utc": "2026-10-11T00:58:54.892029+00:00",
+      "directory": "jobs/rt_sequence__s001/attempt_001/001_rt_sequence",
+      "expected_checks": 1840,
+      "sampling": {
+        "stream": false,
+        "max_tokens": 4096
+      },
+      "offline_source": "/mnt/e/Codex/2026-09-25/xzy01-using-llm-for-digital-chip-2/outputs/rtl-batch/benchmarks/dev10/reference/rt_sequence.sv",
+      "rtl_sha256": "6acb22c07d9e2bef30be3a8ed023a845da6a565b1b5f13938ea90d3bbb0ae010",
+      "testbench_sha256": "6abb900b5f8cae1ea0ab98321c1830bd58f4132c75efb676b9cc4250a5e90e4b",
+      "backend": "icarus",
+      "compile_seconds": 0.021,
+      "status": "PASS",
+      "message": "Independent testbench completed all 1840 checks",
+      "stage": "simulate",
+      "receipt_nonce": "bec31d09c50c463aadc80b5bd72ffc7d",
+      "simulate_seconds": 0.0412,
+      "simulation_status": "PASS",
+      "synthesis": {
+        "backend": "yosys",
+        "flow": "generic-synth-noabc-v1",
+        "elapsed_seconds": 0.0818,
+        "statistics_kind": "generic cells, not silicon area/timing/power",
+        "status": "SYNTH_PASS",
+        "generic_cells": 22,
+        "cell_types": {
+          "$_AND_": 5,
+          "$_DFF_PN0_": 4,
+          "$_DFF_PN1_": 1,
+          "$_NOT_": 4,
+          "$_OR_": 8
+        },
+        "latch_cells": 0,
+        "netlist_sha256": "a471ccce10219897c1b10773c693b61dead1c22966bd812aa2a67b86828634bf",
+        "message": "Generic synthesis and structural checks passed"
+      },
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "elapsed_seconds": 0.4126,
+      "finished_utc": "2026-10-11T00:58:55.304617+00:00",
+      "job_id": "rt_sequence__s001",
+      "attempt": "attempt_001"
+    },
+    {
+      "schema": 1,
+      "task": "rt_shift",
+      "sample": 1,
+      "mode": "offline",
+      "source_label": "OFFLINE_FIXTURE",
+      "requested_model": null,
+      "live_api_success": false,
+      "started_utc": "2026-10-11T00:58:55.256722+00:00",
+      "directory": "jobs/rt_shift__s001/attempt_001/001_rt_shift",
+      "expected_checks": 1280,
+      "sampling": {
+        "stream": false,
+        "max_tokens": 4096
+      },
+      "offline_source": "/mnt/e/Codex/2026-09-25/xzy01-using-llm-for-digital-chip-2/outputs/rtl-batch/benchmarks/dev10/reference/rt_shift.sv",
+      "rtl_sha256": "547d1fd22da552c8e6c23c1be730602b58f28e77af8288cee352fe682d2a03a2",
+      "testbench_sha256": "317bd44b09d6e386c553285adc6ff088ff99215393b965eafced38f91ad2173b",
+      "backend": "icarus",
+      "compile_seconds": 0.021,
+      "status": "PASS",
+      "message": "Independent testbench completed all 1280 checks",
+      "stage": "simulate",
+      "receipt_nonce": "ac5f90b511b34e5d933c7fd2a0c0c02c",
+      "simulate_seconds": 0.0426,
+      "simulation_status": "PASS",
+      "synthesis": {
+        "backend": "yosys",
+        "flow": "generic-synth-noabc-v1",
+        "elapsed_seconds": 0.065,
+        "statistics_kind": "generic cells, not silicon area/timing/power",
+        "status": "SYNTH_PASS",
+        "generic_cells": 8,
+        "cell_types": {
+          "$_DFF_P_": 8
+        },
+        "latch_cells": 0,
+        "netlist_sha256": "151fc215ce3241ec59e96b8e3907ae6f7266404216a7418eb60338011674ad45",
+        "message": "Generic synthesis and structural checks passed"
+      },
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "elapsed_seconds": 0.3777,
+      "finished_utc": "2026-10-11T00:58:55.634400+00:00",
+      "job_id": "rt_shift__s001",
+      "attempt": "attempt_001"
+    },
+    {
+      "schema": 1,
+      "task": "rt_pipeline",
+      "sample": 1,
+      "mode": "offline",
+      "source_label": "OFFLINE_FIXTURE",
+      "requested_model": null,
+      "live_api_success": false,
+      "started_utc": "2026-10-11T00:58:55.660807+00:00",
+      "directory": "jobs/rt_pipeline__s001/attempt_001/001_rt_pipeline",
+      "expected_checks": 1024,
+      "sampling": {
+        "stream": false,
+        "max_tokens": 4096
+      },
+      "offline_source": "/mnt/e/Codex/2026-09-25/xzy01-using-llm-for-digital-chip-2/outputs/rtl-batch/benchmarks/dev10/reference/rt_pipeline.sv",
+      "rtl_sha256": "166a836e1dd5964767081d60e77c47e1c5eb0990087ce486c23571e99ed63134",
+      "testbench_sha256": "1b02333ec06c55a46836b4f55d8048fc31a74086fde10c33ce46d2ffddbadffb",
+      "backend": "icarus",
+      "compile_seconds": 0.0216,
+      "status": "PASS",
+      "message": "Independent testbench completed all 1024 checks",
+      "stage": "simulate",
+      "receipt_nonce": "ed49ddb95de04f108209b06d80d33ea6",
+      "simulate_seconds": 0.0213,
+      "simulation_status": "PASS",
+      "synthesis": {
+        "backend": "yosys",
+        "flow": "generic-synth-noabc-v1",
+        "elapsed_seconds": 0.1026,
+        "statistics_kind": "generic cells, not silicon area/timing/power",
+        "status": "SYNTH_PASS",
+        "generic_cells": 93,
+        "cell_types": {
+          "$_AND_": 26,
+          "$_DFF_PN0_": 20,
+          "$_MUX_": 16,
+          "$_OR_": 10,
+          "$_XOR_": 21
+        },
+        "latch_cells": 0,
+        "netlist_sha256": "84de06b6f741ec9c7c33cc8d49a639692280f60c423b61e4f481163270e85b9e",
+        "message": "Generic synthesis and structural checks passed"
+      },
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "elapsed_seconds": 0.2924,
+      "finished_utc": "2026-10-11T00:58:55.953221+00:00",
+      "job_id": "rt_pipeline__s001",
+      "attempt": "attempt_001"
+    }
+  ],
+  "note": "Denominator includes planned samples; unfinished and infrastructure failures remain visible. No public benchmark or formal-equivalence claim.",
+  "suite": "dev10",
+  "synthesis_counts": {
+    "SYNTH_PASS": 10
+  },
+  "joint_passes": 10
+}

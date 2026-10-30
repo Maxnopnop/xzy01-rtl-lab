@@ -1,0 +1,262 @@
+{
+  "query": "\nConsider the following adder-subtractor with a zero flag:\n\n  module TopModule (\n      input      cpu_overheated,\n      output reg shut_off_computer,\n      input      arrived,\n      input      gas_tank_empty,\n      output reg keep_driving\n  );\n\n      always @(*) begin\n          if (cpu_overheated)\n             shut_off_computer = 1;\n      end\n\n      always @(*) begin\n          if (~arrived)\n             keep_driving = ~gas_tank_empty;\n      end\n\n  endmodule\n\nUnfortunately, this module has a bug. Implement a new version of this\nmodule that fixes the bug.\n\n",
+  "query_sha256": "8a3ea8c732f21239cd4141606628d08ad4115da6ed4c16cc2b6ac41f68311cf7",
+  "query_terms": [
+    "adder",
+    "always",
+    "arrived",
+    "begin",
+    "bug",
+    "consider",
+    "cpu_overheated",
+    "end",
+    "endmodule",
+    "fixes",
+    "flag",
+    "following",
+    "gas_tank_empty",
+    "has",
+    "if",
+    "implement",
+    "input",
+    "keep_driving",
+    "module",
+    "new",
+    "output",
+    "reg",
+    "shut_off_computer",
+    "subtractor",
+    "topmodule",
+    "unfortunately",
+    "version",
+    "zero"
+  ],
+  "rankings": [
+    {
+      "chunk_id": "LR008",
+      "score": 3.223432385384224,
+      "matched": [
+        {
+          "term": "consider",
+          "tf": 1,
+          "df": 1,
+          "contribution": 2.1659001593925704
+        },
+        {
+          "term": "if",
+          "tf": 1,
+          "df": 5,
+          "contribution": 1.0575322259916538
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR002",
+      "score": 2.909095903096425,
+      "matched": [
+        {
+          "term": "zero",
+          "tf": 1,
+          "df": 1,
+          "contribution": 2.909095903096425
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR003",
+      "score": 2.7039884829371292,
+      "matched": [
+        {
+          "term": "always",
+          "tf": 1,
+          "df": 6,
+          "contribution": 1.2543194345914999
+        },
+        {
+          "term": "if",
+          "tf": 1,
+          "df": 5,
+          "contribution": 1.4496690483456294
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR009",
+      "score": 2.5969913812674132,
+      "matched": [
+        {
+          "term": "always",
+          "tf": 1,
+          "df": 6,
+          "contribution": 1.2046858858851432
+        },
+        {
+          "term": "if",
+          "tf": 1,
+          "df": 5,
+          "contribution": 1.39230549538227
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR015",
+      "score": 2.3239549929934724,
+      "matched": [
+        {
+          "term": "always",
+          "tf": 1,
+          "df": 6,
+          "contribution": 0.8631403599604089
+        },
+        {
+          "term": "if",
+          "tf": 2,
+          "df": 5,
+          "contribution": 1.4608146330330636
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR018",
+      "score": 2.2996556405251556,
+      "matched": [
+        {
+          "term": "input",
+          "tf": 2,
+          "df": 1,
+          "contribution": 2.2996556405251556
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR016",
+      "score": 1.9342038337614573,
+      "matched": [
+        {
+          "term": "if",
+          "tf": 3,
+          "df": 5,
+          "contribution": 1.9342038337614573
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR004",
+      "score": 1.3369433496377818,
+      "matched": [
+        {
+          "term": "always",
+          "tf": 1,
+          "df": 6,
+          "contribution": 1.3369433496377818
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR012",
+      "score": 1.2807021596504224,
+      "matched": [
+        {
+          "term": "always",
+          "tf": 1,
+          "df": 6,
+          "contribution": 1.2807021596504224
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR005",
+      "score": 0.8168241167296748,
+      "matched": [
+        {
+          "term": "always",
+          "tf": 1,
+          "df": 6,
+          "contribution": 0.8168241167296748
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR001",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR006",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR007",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR010",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR011",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR013",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR014",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR017",
+      "score": 0.0,
+      "matched": []
+    }
+  ],
+  "selected_ids": [
+    "LR008",
+    "LR002",
+    "LR003"
+  ],
+  "no_hit": false,
+  "selected_chunks": [
+    {
+      "id": "LR008",
+      "section": "Sequential Logic (Registers)",
+      "start_line": 1897,
+      "end_line": 1901,
+      "text": "Keep work in sequential blocks simple. If a sequential block becomes\nsufficiently complicated, consider splitting the combinational logic into a\nseparate combinational (`always_comb`) block. Ideally, sequential blocks should\ncontain only a register instantiation, with perhaps a load enable or an\nincrement.",
+      "sha256": "21c198d95c6a31cf2ed9e901a11384008476b278830e4a0be73c3c5feb192946",
+      "characters": 307,
+      "use": "General synthesizable language/style guidance, not task requirements or a solution"
+    },
+    {
+      "id": "LR002",
+      "section": "Delay Modeling",
+      "start_line": 1789,
+      "end_line": 1790,
+      "text": "Synthesizable design modules must be designed around a zero-delay simulation\nmethodology. All forms of `#delay`, including `#0`, are not permitted.",
+      "sha256": "f08d2bb9835cd2c97e28e5887e08b5b4a8a22fbf1363bff522ea521583dc5538",
+      "characters": 147,
+      "use": "General synthesizable language/style guidance, not task requirements or a solution"
+    },
+    {
+      "id": "LR003",
+      "section": "Sequential Logic (Latches)",
+      "start_line": 1802,
+      "end_line": 1803,
+      "text": "If you must use a latch, use `always_latch` over `always`, and use non-blocking\nassignments (`<=`). Never use blocking assignments (`=`).",
+      "sha256": "bebab74d9159028626ec42336b8a11d2d3850005988ffd16e22d4d44f7953c7f",
+      "characters": 137,
+      "use": "General synthesizable language/style guidance, not task requirements or a solution"
+    }
+  ],
+  "elapsed_seconds": 0.000407300001825206,
+  "a_lock_sha256": "c0609d940a0e586e2b7b5fc81ca6d58bd1eeee5e1d4cecbe40415317f341ead1",
+  "task_source_sha256": "8a3ea8c732f21239cd4141606628d08ad4115da6ed4c16cc2b6ac41f68311cf7",
+  "context_sha256": "8deb1aae6b82e8b943437a731f5924fb6706d1b9524359d09c83458e65ec5a9e"
+}

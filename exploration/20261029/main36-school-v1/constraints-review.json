@@ -1,0 +1,23 @@
+{
+  "status": "STATIC_ENGINEERING_SMOKE_REVIEW",
+  "reviewer": "exploration",
+  "basis": "Original 055/072 purely combinational; 124 specifies positive-edge clk/load/data/q. 10 units is provisional shared engineering constraint, not task requirement.",
+  "comb_tasks": [
+    "Prob055_conditional",
+    "Prob072_thermostat"
+  ],
+  "clock_task": "Prob124_rule110",
+  "port_patterns": [
+    "clk",
+    "load",
+    "data*",
+    "q*"
+  ],
+  "ppa_signoff": false,
+  "external_delays": "zero for clocked smoke only",
+  "library_profiles_source": "validation/console-school-four-slot025-v1/school-profile.json",
+  "sdc_sha256": {
+    "comb.sdc": "683e6820d6cf18fc036116deaf41e14eafc08ead9d99ac987d5565980e103ea2",
+    "rule110.sdc": "1e5110e1d33a2368835235cb76fc3d1add4ab93f97d9ab1dd6e9a5330352c97f"
+  }
+}

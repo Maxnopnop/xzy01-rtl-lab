@@ -1,0 +1,33 @@
+{
+  "local_only": true,
+  "model_calls": 0,
+  "proxy_state": {
+    "proxy_schemes": [
+      "http",
+      "https"
+    ],
+    "http_proxy_is_loopback": true,
+    "loopback_bypassed": false
+  },
+  "results": [
+    {
+      "automatic_proxy_disabled": false,
+      "server_requests": 0,
+      "exit": 1,
+      "worker_result": {
+        "ok": false,
+        "error": "RemoteDisconnected; request failed; no retry"
+      }
+    },
+    {
+      "automatic_proxy_disabled": true,
+      "server_requests": 1,
+      "exit": 0,
+      "worker_result": {
+        "ok": true,
+        "http_status": 200,
+        "body": "{\"choices\": [{\"message\": {\"content\": \"module TopModule; endmodule\"}, \"finish_reason\": \"stop\"}]}"
+      }
+    }
+  ]
+}

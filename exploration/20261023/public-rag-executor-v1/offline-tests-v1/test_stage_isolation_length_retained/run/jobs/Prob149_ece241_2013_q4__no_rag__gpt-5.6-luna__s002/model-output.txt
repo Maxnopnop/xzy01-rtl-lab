@@ -1,0 +1,1 @@
+module TopModule(input clk,input reset,input [2:0] s,output fr2,fr1,fr0,dfr); assign {fr2,fr1,fr0,dfr}=0; endmodule

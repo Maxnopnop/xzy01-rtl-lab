@@ -1,0 +1,1174 @@
+{
+  "utc": "2026-10-24T05:00:23.951324+00:00",
+  "status": "VERIFIED",
+  "model_calls": 0,
+  "network_requests": 0,
+  "eda_calls": 0,
+  "checks": {
+    "source_lock_entries": 8,
+    "input_lock_entries": 255,
+    "tools_lock_entries": 2,
+    "packet_lock_entries": 254,
+    "request_byte_matches": 96,
+    "reported_model_provider_matches": 96,
+    "single_client_posts": 96,
+    "compile_simulation_log_matches": 96,
+    "identical_three_model_groups": 32
+  },
+  "counts": {
+    "REFERENCE_PASS": 94,
+    "REFERENCE_FAIL": 2
+  },
+  "arms": {
+    "gpt-5.6-luna/no_rag": {
+      "REFERENCE_PASS": 16
+    },
+    "gpt-5.6-terra/no_rag": {
+      "REFERENCE_PASS": 15,
+      "REFERENCE_FAIL": 1
+    },
+    "gpt-5.6-sol/no_rag": {
+      "REFERENCE_PASS": 16
+    },
+    "gpt-5.6-luna/rag": {
+      "REFERENCE_PASS": 16
+    },
+    "gpt-5.6-terra/rag": {
+      "REFERENCE_PASS": 15,
+      "REFERENCE_FAIL": 1
+    },
+    "gpt-5.6-sol/rag": {
+      "REFERENCE_PASS": 16
+    }
+  },
+  "paired": {
+    "both_pass": 46,
+    "helped": 1,
+    "worsened": 1
+  },
+  "paired_by_model": {
+    "gpt-5.6-luna": {
+      "both_pass": 16
+    },
+    "gpt-5.6-terra": {
+      "both_pass": 14,
+      "helped": 1,
+      "worsened": 1
+    },
+    "gpt-5.6-sol": {
+      "both_pass": 16
+    }
+  },
+  "changes": [
+    {
+      "task": "Prob094_gatesv",
+      "model": "gpt-5.6-terra",
+      "sample": 1,
+      "kind": "helped"
+    },
+    {
+      "task": "Prob094_gatesv",
+      "model": "gpt-5.6-terra",
+      "sample": 2,
+      "kind": "worsened"
+    }
+  ],
+  "failures": [
+    {
+      "ordinal": 27,
+      "task": "Prob094_gatesv",
+      "model": "gpt-5.6-terra",
+      "condition": "no_rag",
+      "sample": 1,
+      "status": "REFERENCE_FAIL",
+      "mismatches": 160,
+      "checked_samples": 213,
+      "utc": "2026-10-24T04:44:16.544610+00:00"
+    },
+    {
+      "ordinal": 34,
+      "task": "Prob094_gatesv",
+      "model": "gpt-5.6-terra",
+      "condition": "rag",
+      "sample": 2,
+      "status": "REFERENCE_FAIL",
+      "mismatches": 186,
+      "checked_samples": 213,
+      "utc": "2026-10-24T04:44:58.875325+00:00"
+    }
+  ],
+  "usage": {
+    "input_tokens": 51462,
+    "output_tokens": 21917,
+    "total_tokens": 73379,
+    "reasoning_tokens": 7808,
+    "cached_input_tokens": 3270
+  },
+  "reported_cost_sum": "0.3071525",
+  "cost_currency": "not inferred",
+  "rows": [
+    {
+      "ordinal": 1,
+      "task": "Prob001_zero",
+      "model": "gpt-5.6-luna",
+      "condition": "no_rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 20,
+      "utc": "2026-10-24T04:42:59.655531+00:00"
+    },
+    {
+      "ordinal": 2,
+      "task": "Prob001_zero",
+      "model": "gpt-5.6-luna",
+      "condition": "no_rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 20,
+      "utc": "2026-10-24T04:43:02.281446+00:00"
+    },
+    {
+      "ordinal": 3,
+      "task": "Prob001_zero",
+      "model": "gpt-5.6-terra",
+      "condition": "no_rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 20,
+      "utc": "2026-10-24T04:43:04.215724+00:00"
+    },
+    {
+      "ordinal": 4,
+      "task": "Prob001_zero",
+      "model": "gpt-5.6-terra",
+      "condition": "no_rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 20,
+      "utc": "2026-10-24T04:43:06.211425+00:00"
+    },
+    {
+      "ordinal": 5,
+      "task": "Prob001_zero",
+      "model": "gpt-5.6-sol",
+      "condition": "no_rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 20,
+      "utc": "2026-10-24T04:43:08.881902+00:00"
+    },
+    {
+      "ordinal": 6,
+      "task": "Prob001_zero",
+      "model": "gpt-5.6-sol",
+      "condition": "no_rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 20,
+      "utc": "2026-10-24T04:43:11.084566+00:00"
+    },
+    {
+      "ordinal": 7,
+      "task": "Prob001_zero",
+      "model": "gpt-5.6-luna",
+      "condition": "rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 20,
+      "utc": "2026-10-24T04:43:13.541671+00:00"
+    },
+    {
+      "ordinal": 8,
+      "task": "Prob001_zero",
+      "model": "gpt-5.6-luna",
+      "condition": "rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 20,
+      "utc": "2026-10-24T04:43:15.811949+00:00"
+    },
+    {
+      "ordinal": 9,
+      "task": "Prob001_zero",
+      "model": "gpt-5.6-terra",
+      "condition": "rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 20,
+      "utc": "2026-10-24T04:43:17.915839+00:00"
+    },
+    {
+      "ordinal": 10,
+      "task": "Prob001_zero",
+      "model": "gpt-5.6-terra",
+      "condition": "rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 20,
+      "utc": "2026-10-24T04:43:20.351822+00:00"
+    },
+    {
+      "ordinal": 11,
+      "task": "Prob001_zero",
+      "model": "gpt-5.6-sol",
+      "condition": "rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 20,
+      "utc": "2026-10-24T04:43:22.702201+00:00"
+    },
+    {
+      "ordinal": 12,
+      "task": "Prob001_zero",
+      "model": "gpt-5.6-sol",
+      "condition": "rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 20,
+      "utc": "2026-10-24T04:43:25.102144+00:00"
+    },
+    {
+      "ordinal": 13,
+      "task": "Prob019_m2014_q4f",
+      "model": "gpt-5.6-luna",
+      "condition": "no_rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 100,
+      "utc": "2026-10-24T04:43:28.323629+00:00"
+    },
+    {
+      "ordinal": 14,
+      "task": "Prob019_m2014_q4f",
+      "model": "gpt-5.6-luna",
+      "condition": "no_rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 100,
+      "utc": "2026-10-24T04:43:31.857256+00:00"
+    },
+    {
+      "ordinal": 15,
+      "task": "Prob019_m2014_q4f",
+      "model": "gpt-5.6-terra",
+      "condition": "no_rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 100,
+      "utc": "2026-10-24T04:43:34.072129+00:00"
+    },
+    {
+      "ordinal": 16,
+      "task": "Prob019_m2014_q4f",
+      "model": "gpt-5.6-terra",
+      "condition": "no_rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 100,
+      "utc": "2026-10-24T04:43:36.168841+00:00"
+    },
+    {
+      "ordinal": 17,
+      "task": "Prob019_m2014_q4f",
+      "model": "gpt-5.6-sol",
+      "condition": "no_rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 100,
+      "utc": "2026-10-24T04:43:38.552182+00:00"
+    },
+    {
+      "ordinal": 18,
+      "task": "Prob019_m2014_q4f",
+      "model": "gpt-5.6-sol",
+      "condition": "no_rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 100,
+      "utc": "2026-10-24T04:43:41.202233+00:00"
+    },
+    {
+      "ordinal": 19,
+      "task": "Prob019_m2014_q4f",
+      "model": "gpt-5.6-luna",
+      "condition": "rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 100,
+      "utc": "2026-10-24T04:43:44.184206+00:00"
+    },
+    {
+      "ordinal": 20,
+      "task": "Prob019_m2014_q4f",
+      "model": "gpt-5.6-luna",
+      "condition": "rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 100,
+      "utc": "2026-10-24T04:43:47.626615+00:00"
+    },
+    {
+      "ordinal": 21,
+      "task": "Prob019_m2014_q4f",
+      "model": "gpt-5.6-terra",
+      "condition": "rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 100,
+      "utc": "2026-10-24T04:43:49.972396+00:00"
+    },
+    {
+      "ordinal": 22,
+      "task": "Prob019_m2014_q4f",
+      "model": "gpt-5.6-terra",
+      "condition": "rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 100,
+      "utc": "2026-10-24T04:43:52.014483+00:00"
+    },
+    {
+      "ordinal": 23,
+      "task": "Prob019_m2014_q4f",
+      "model": "gpt-5.6-sol",
+      "condition": "rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 100,
+      "utc": "2026-10-24T04:43:55.025436+00:00"
+    },
+    {
+      "ordinal": 24,
+      "task": "Prob019_m2014_q4f",
+      "model": "gpt-5.6-sol",
+      "condition": "rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 100,
+      "utc": "2026-10-24T04:43:57.529127+00:00"
+    },
+    {
+      "ordinal": 25,
+      "task": "Prob094_gatesv",
+      "model": "gpt-5.6-luna",
+      "condition": "no_rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 213,
+      "utc": "2026-10-24T04:44:07.662597+00:00"
+    },
+    {
+      "ordinal": 26,
+      "task": "Prob094_gatesv",
+      "model": "gpt-5.6-luna",
+      "condition": "no_rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 213,
+      "utc": "2026-10-24T04:44:13.722564+00:00"
+    },
+    {
+      "ordinal": 27,
+      "task": "Prob094_gatesv",
+      "model": "gpt-5.6-terra",
+      "condition": "no_rag",
+      "sample": 1,
+      "status": "REFERENCE_FAIL",
+      "mismatches": 160,
+      "checked_samples": 213,
+      "utc": "2026-10-24T04:44:16.544610+00:00"
+    },
+    {
+      "ordinal": 28,
+      "task": "Prob094_gatesv",
+      "model": "gpt-5.6-terra",
+      "condition": "no_rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 213,
+      "utc": "2026-10-24T04:44:21.254649+00:00"
+    },
+    {
+      "ordinal": 29,
+      "task": "Prob094_gatesv",
+      "model": "gpt-5.6-sol",
+      "condition": "no_rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 213,
+      "utc": "2026-10-24T04:44:25.026519+00:00"
+    },
+    {
+      "ordinal": 30,
+      "task": "Prob094_gatesv",
+      "model": "gpt-5.6-sol",
+      "condition": "no_rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 213,
+      "utc": "2026-10-24T04:44:36.630311+00:00"
+    },
+    {
+      "ordinal": 31,
+      "task": "Prob094_gatesv",
+      "model": "gpt-5.6-luna",
+      "condition": "rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 213,
+      "utc": "2026-10-24T04:44:45.927212+00:00"
+    },
+    {
+      "ordinal": 32,
+      "task": "Prob094_gatesv",
+      "model": "gpt-5.6-luna",
+      "condition": "rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 213,
+      "utc": "2026-10-24T04:44:52.308983+00:00"
+    },
+    {
+      "ordinal": 33,
+      "task": "Prob094_gatesv",
+      "model": "gpt-5.6-terra",
+      "condition": "rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 213,
+      "utc": "2026-10-24T04:44:55.906329+00:00"
+    },
+    {
+      "ordinal": 34,
+      "task": "Prob094_gatesv",
+      "model": "gpt-5.6-terra",
+      "condition": "rag",
+      "sample": 2,
+      "status": "REFERENCE_FAIL",
+      "mismatches": 186,
+      "checked_samples": 213,
+      "utc": "2026-10-24T04:44:58.875325+00:00"
+    },
+    {
+      "ordinal": 35,
+      "task": "Prob094_gatesv",
+      "model": "gpt-5.6-sol",
+      "condition": "rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 213,
+      "utc": "2026-10-24T04:45:02.090999+00:00"
+    },
+    {
+      "ordinal": 36,
+      "task": "Prob094_gatesv",
+      "model": "gpt-5.6-sol",
+      "condition": "rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 213,
+      "utc": "2026-10-24T04:45:05.885247+00:00"
+    },
+    {
+      "ordinal": 37,
+      "task": "Prob143_fsm_onehot",
+      "model": "gpt-5.6-luna",
+      "condition": "no_rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 224,
+      "utc": "2026-10-24T04:45:14.383681+00:00"
+    },
+    {
+      "ordinal": 38,
+      "task": "Prob143_fsm_onehot",
+      "model": "gpt-5.6-luna",
+      "condition": "no_rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 224,
+      "utc": "2026-10-24T04:45:23.180420+00:00"
+    },
+    {
+      "ordinal": 39,
+      "task": "Prob143_fsm_onehot",
+      "model": "gpt-5.6-terra",
+      "condition": "no_rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 224,
+      "utc": "2026-10-24T04:45:28.673491+00:00"
+    },
+    {
+      "ordinal": 40,
+      "task": "Prob143_fsm_onehot",
+      "model": "gpt-5.6-terra",
+      "condition": "no_rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 224,
+      "utc": "2026-10-24T04:45:33.963515+00:00"
+    },
+    {
+      "ordinal": 41,
+      "task": "Prob143_fsm_onehot",
+      "model": "gpt-5.6-sol",
+      "condition": "no_rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 224,
+      "utc": "2026-10-24T04:45:42.103913+00:00"
+    },
+    {
+      "ordinal": 42,
+      "task": "Prob143_fsm_onehot",
+      "model": "gpt-5.6-sol",
+      "condition": "no_rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 224,
+      "utc": "2026-10-24T04:45:49.107383+00:00"
+    },
+    {
+      "ordinal": 43,
+      "task": "Prob143_fsm_onehot",
+      "model": "gpt-5.6-luna",
+      "condition": "rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 224,
+      "utc": "2026-10-24T04:45:58.947019+00:00"
+    },
+    {
+      "ordinal": 44,
+      "task": "Prob143_fsm_onehot",
+      "model": "gpt-5.6-luna",
+      "condition": "rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 224,
+      "utc": "2026-10-24T04:46:08.874304+00:00"
+    },
+    {
+      "ordinal": 45,
+      "task": "Prob143_fsm_onehot",
+      "model": "gpt-5.6-terra",
+      "condition": "rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 224,
+      "utc": "2026-10-24T04:46:14.604377+00:00"
+    },
+    {
+      "ordinal": 46,
+      "task": "Prob143_fsm_onehot",
+      "model": "gpt-5.6-terra",
+      "condition": "rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 224,
+      "utc": "2026-10-24T04:46:19.839309+00:00"
+    },
+    {
+      "ordinal": 47,
+      "task": "Prob143_fsm_onehot",
+      "model": "gpt-5.6-sol",
+      "condition": "rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 224,
+      "utc": "2026-10-24T04:46:27.324051+00:00"
+    },
+    {
+      "ordinal": 48,
+      "task": "Prob143_fsm_onehot",
+      "model": "gpt-5.6-sol",
+      "condition": "rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 224,
+      "utc": "2026-10-24T04:46:35.024227+00:00"
+    },
+    {
+      "ordinal": 49,
+      "task": "Prob114_bugs_case",
+      "model": "gpt-5.6-luna",
+      "condition": "no_rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 1041,
+      "utc": "2026-10-24T04:46:40.352002+00:00"
+    },
+    {
+      "ordinal": 50,
+      "task": "Prob114_bugs_case",
+      "model": "gpt-5.6-luna",
+      "condition": "no_rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 1041,
+      "utc": "2026-10-24T04:46:46.345709+00:00"
+    },
+    {
+      "ordinal": 51,
+      "task": "Prob114_bugs_case",
+      "model": "gpt-5.6-terra",
+      "condition": "no_rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 1041,
+      "utc": "2026-10-24T04:46:49.694527+00:00"
+    },
+    {
+      "ordinal": 52,
+      "task": "Prob114_bugs_case",
+      "model": "gpt-5.6-terra",
+      "condition": "no_rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 1041,
+      "utc": "2026-10-24T04:46:53.174377+00:00"
+    },
+    {
+      "ordinal": 53,
+      "task": "Prob114_bugs_case",
+      "model": "gpt-5.6-sol",
+      "condition": "no_rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 1041,
+      "utc": "2026-10-24T04:46:56.975970+00:00"
+    },
+    {
+      "ordinal": 54,
+      "task": "Prob114_bugs_case",
+      "model": "gpt-5.6-sol",
+      "condition": "no_rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 1041,
+      "utc": "2026-10-24T04:47:00.994563+00:00"
+    },
+    {
+      "ordinal": 55,
+      "task": "Prob114_bugs_case",
+      "model": "gpt-5.6-luna",
+      "condition": "rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 1041,
+      "utc": "2026-10-24T04:47:07.129558+00:00"
+    },
+    {
+      "ordinal": 56,
+      "task": "Prob114_bugs_case",
+      "model": "gpt-5.6-luna",
+      "condition": "rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 1041,
+      "utc": "2026-10-24T04:47:11.604638+00:00"
+    },
+    {
+      "ordinal": 57,
+      "task": "Prob114_bugs_case",
+      "model": "gpt-5.6-terra",
+      "condition": "rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 1041,
+      "utc": "2026-10-24T04:47:15.474992+00:00"
+    },
+    {
+      "ordinal": 58,
+      "task": "Prob114_bugs_case",
+      "model": "gpt-5.6-terra",
+      "condition": "rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 1041,
+      "utc": "2026-10-24T04:47:18.424832+00:00"
+    },
+    {
+      "ordinal": 59,
+      "task": "Prob114_bugs_case",
+      "model": "gpt-5.6-sol",
+      "condition": "rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 1041,
+      "utc": "2026-10-24T04:47:23.114819+00:00"
+    },
+    {
+      "ordinal": 60,
+      "task": "Prob114_bugs_case",
+      "model": "gpt-5.6-sol",
+      "condition": "rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 1041,
+      "utc": "2026-10-24T04:47:28.052205+00:00"
+    },
+    {
+      "ordinal": 61,
+      "task": "Prob087_gates",
+      "model": "gpt-5.6-luna",
+      "condition": "no_rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 210,
+      "utc": "2026-10-24T04:47:32.546774+00:00"
+    },
+    {
+      "ordinal": 62,
+      "task": "Prob087_gates",
+      "model": "gpt-5.6-luna",
+      "condition": "no_rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 210,
+      "utc": "2026-10-24T04:47:36.213195+00:00"
+    },
+    {
+      "ordinal": 63,
+      "task": "Prob087_gates",
+      "model": "gpt-5.6-terra",
+      "condition": "no_rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 210,
+      "utc": "2026-10-24T04:47:39.042852+00:00"
+    },
+    {
+      "ordinal": 64,
+      "task": "Prob087_gates",
+      "model": "gpt-5.6-terra",
+      "condition": "no_rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 210,
+      "utc": "2026-10-24T04:47:41.995086+00:00"
+    },
+    {
+      "ordinal": 65,
+      "task": "Prob087_gates",
+      "model": "gpt-5.6-sol",
+      "condition": "no_rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 210,
+      "utc": "2026-10-24T04:47:45.133125+00:00"
+    },
+    {
+      "ordinal": 66,
+      "task": "Prob087_gates",
+      "model": "gpt-5.6-sol",
+      "condition": "no_rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 210,
+      "utc": "2026-10-24T04:47:49.623188+00:00"
+    },
+    {
+      "ordinal": 67,
+      "task": "Prob087_gates",
+      "model": "gpt-5.6-luna",
+      "condition": "rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 210,
+      "utc": "2026-10-24T04:47:54.175351+00:00"
+    },
+    {
+      "ordinal": 68,
+      "task": "Prob087_gates",
+      "model": "gpt-5.6-luna",
+      "condition": "rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 210,
+      "utc": "2026-10-24T04:47:58.051343+00:00"
+    },
+    {
+      "ordinal": 69,
+      "task": "Prob087_gates",
+      "model": "gpt-5.6-terra",
+      "condition": "rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 210,
+      "utc": "2026-10-24T04:48:01.475431+00:00"
+    },
+    {
+      "ordinal": 70,
+      "task": "Prob087_gates",
+      "model": "gpt-5.6-terra",
+      "condition": "rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 210,
+      "utc": "2026-10-24T04:48:04.551696+00:00"
+    },
+    {
+      "ordinal": 71,
+      "task": "Prob087_gates",
+      "model": "gpt-5.6-sol",
+      "condition": "rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 210,
+      "utc": "2026-10-24T04:48:08.015495+00:00"
+    },
+    {
+      "ordinal": 72,
+      "task": "Prob087_gates",
+      "model": "gpt-5.6-sol",
+      "condition": "rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 210,
+      "utc": "2026-10-24T04:48:11.565485+00:00"
+    },
+    {
+      "ordinal": 73,
+      "task": "Prob050_kmap1",
+      "model": "gpt-5.6-luna",
+      "condition": "no_rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 219,
+      "utc": "2026-10-24T04:48:15.133477+00:00"
+    },
+    {
+      "ordinal": 74,
+      "task": "Prob050_kmap1",
+      "model": "gpt-5.6-luna",
+      "condition": "no_rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 219,
+      "utc": "2026-10-24T04:48:18.719469+00:00"
+    },
+    {
+      "ordinal": 75,
+      "task": "Prob050_kmap1",
+      "model": "gpt-5.6-terra",
+      "condition": "no_rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 219,
+      "utc": "2026-10-24T04:48:21.097680+00:00"
+    },
+    {
+      "ordinal": 76,
+      "task": "Prob050_kmap1",
+      "model": "gpt-5.6-terra",
+      "condition": "no_rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 219,
+      "utc": "2026-10-24T04:48:23.565496+00:00"
+    },
+    {
+      "ordinal": 77,
+      "task": "Prob050_kmap1",
+      "model": "gpt-5.6-sol",
+      "condition": "no_rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 219,
+      "utc": "2026-10-24T04:48:26.305672+00:00"
+    },
+    {
+      "ordinal": 78,
+      "task": "Prob050_kmap1",
+      "model": "gpt-5.6-sol",
+      "condition": "no_rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 219,
+      "utc": "2026-10-24T04:48:29.155641+00:00"
+    },
+    {
+      "ordinal": 79,
+      "task": "Prob050_kmap1",
+      "model": "gpt-5.6-luna",
+      "condition": "rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 219,
+      "utc": "2026-10-24T04:48:32.271586+00:00"
+    },
+    {
+      "ordinal": 80,
+      "task": "Prob050_kmap1",
+      "model": "gpt-5.6-luna",
+      "condition": "rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 219,
+      "utc": "2026-10-24T04:48:35.490452+00:00"
+    },
+    {
+      "ordinal": 81,
+      "task": "Prob050_kmap1",
+      "model": "gpt-5.6-terra",
+      "condition": "rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 219,
+      "utc": "2026-10-24T04:48:38.445710+00:00"
+    },
+    {
+      "ordinal": 82,
+      "task": "Prob050_kmap1",
+      "model": "gpt-5.6-terra",
+      "condition": "rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 219,
+      "utc": "2026-10-24T04:48:42.375017+00:00"
+    },
+    {
+      "ordinal": 83,
+      "task": "Prob050_kmap1",
+      "model": "gpt-5.6-sol",
+      "condition": "rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 219,
+      "utc": "2026-10-24T04:48:45.686098+00:00"
+    },
+    {
+      "ordinal": 84,
+      "task": "Prob050_kmap1",
+      "model": "gpt-5.6-sol",
+      "condition": "rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 219,
+      "utc": "2026-10-24T04:48:48.701071+00:00"
+    },
+    {
+      "ordinal": 85,
+      "task": "Prob106_always_nolatches",
+      "model": "gpt-5.6-luna",
+      "condition": "no_rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 30020,
+      "utc": "2026-10-24T04:48:53.757788+00:00"
+    },
+    {
+      "ordinal": 86,
+      "task": "Prob106_always_nolatches",
+      "model": "gpt-5.6-luna",
+      "condition": "no_rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 30020,
+      "utc": "2026-10-24T04:48:58.426297+00:00"
+    },
+    {
+      "ordinal": 87,
+      "task": "Prob106_always_nolatches",
+      "model": "gpt-5.6-terra",
+      "condition": "no_rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 30020,
+      "utc": "2026-10-24T04:49:01.874159+00:00"
+    },
+    {
+      "ordinal": 88,
+      "task": "Prob106_always_nolatches",
+      "model": "gpt-5.6-terra",
+      "condition": "no_rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 30020,
+      "utc": "2026-10-24T04:49:05.138394+00:00"
+    },
+    {
+      "ordinal": 89,
+      "task": "Prob106_always_nolatches",
+      "model": "gpt-5.6-sol",
+      "condition": "no_rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 30020,
+      "utc": "2026-10-24T04:49:09.606246+00:00"
+    },
+    {
+      "ordinal": 90,
+      "task": "Prob106_always_nolatches",
+      "model": "gpt-5.6-sol",
+      "condition": "no_rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 30020,
+      "utc": "2026-10-24T04:49:13.583076+00:00"
+    },
+    {
+      "ordinal": 91,
+      "task": "Prob106_always_nolatches",
+      "model": "gpt-5.6-luna",
+      "condition": "rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 30020,
+      "utc": "2026-10-24T04:49:18.712795+00:00"
+    },
+    {
+      "ordinal": 92,
+      "task": "Prob106_always_nolatches",
+      "model": "gpt-5.6-luna",
+      "condition": "rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 30020,
+      "utc": "2026-10-24T04:49:23.626474+00:00"
+    },
+    {
+      "ordinal": 93,
+      "task": "Prob106_always_nolatches",
+      "model": "gpt-5.6-terra",
+      "condition": "rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 30020,
+      "utc": "2026-10-24T04:49:26.756720+00:00"
+    },
+    {
+      "ordinal": 94,
+      "task": "Prob106_always_nolatches",
+      "model": "gpt-5.6-terra",
+      "condition": "rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 30020,
+      "utc": "2026-10-24T04:49:30.491304+00:00"
+    },
+    {
+      "ordinal": 95,
+      "task": "Prob106_always_nolatches",
+      "model": "gpt-5.6-sol",
+      "condition": "rag",
+      "sample": 1,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 30020,
+      "utc": "2026-10-24T04:49:34.341788+00:00"
+    },
+    {
+      "ordinal": 96,
+      "task": "Prob106_always_nolatches",
+      "model": "gpt-5.6-sol",
+      "condition": "rag",
+      "sample": 2,
+      "status": "REFERENCE_PASS",
+      "mismatches": 0,
+      "checked_samples": 30020,
+      "utc": "2026-10-24T04:49:38.576619+00:00"
+    }
+  ],
+  "limitations": [
+    "same-source reference; not independent oracle",
+    "Prob143 testbench does not cover multi-hot states",
+    "related task families; 8 tasks are not 8 independent families",
+    "two samples per task/model/condition; no general RAG benefit established",
+    "client logs cannot establish hidden provider-side execution or retries"
+  ]
+}

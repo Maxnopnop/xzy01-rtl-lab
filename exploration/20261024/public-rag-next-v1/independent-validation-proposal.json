@@ -1,0 +1,27 @@
+{
+  "status": "PROPOSED_NOT_EXECUTED_NOT_AUTHORIZED",
+  "scope": "Separate diagnostic only; never modify original prompt/ref/test or feed diagnostics to model",
+  "independence": "Draft derived from original prompt by reviewer who also saw same-repository reference. NOT an independent oracle; blind spec review by an independent reviewer required before execution.",
+  "truth_domain": "Known binary inputs only. No invented X/Z specification. Pure combinational interfaces; no clock/reset assumptions added.",
+  "cases": [
+    {"task":"Prob001_zero","input_cases":1,"truth":"zero=0 always"},
+    {"task":"Prob019_m2014_q4f","input_cases":4,"truth_table_in1_in2_out":[[0,0,0],[0,1,0],[1,0,1],[1,1,0]]},
+    {"task":"Prob094_gatesv","input_cases":16,"truth":"both[i]=in[i]&in[i+1] for i=0..2; any[i]=in[i]|in[i-1] for i=1..3; different[i]=in[i]^in[(i+1)%4] for i=0..3","output_masks":{"out_both":7,"out_any":14,"out_different":15},"mask_origin":"Original prompt explicitly does not require both[3]/any[0]; not inferred from reference X"},
+    {"task":"Prob143_fsm_onehot","input_cases":2048,"truth":"For each asserted current state bit, OR its indicated successor bit into next_state. out1=any active S8/S9; out2=any active S7/S9. Zero current state gives all-zero. Multi-hot union interpretation requires independent review before diagnostic implementation.","successors_by_input_0_1":{"S0":[0,1],"S1":[0,2],"S2":[0,3],"S3":[0,4],"S4":[0,5],"S5":[8,6],"S6":[9,7],"S7":[0,7],"S8":[0,1],"S9":[0,1]},"original_test_gap":"one-hot only; no multi-hot correctness claim"},
+    {"task":"Prob114_bugs_case","input_cases":256,"truth":"matched code => valid1 and mapped value, otherwise valid0/out0","mapping_hex_to_digit":{"45":0,"16":1,"1e":2,"26":3,"25":4,"2e":5,"36":6,"3d":7,"3e":8,"46":9}},
+    {"task":"Prob087_gates","input_cases":4,"output_order":["and","or","xor","nand","nor","xnor","anotb"],"truth_table_ab_outputs":{"00":[0,0,0,1,1,1,0],"01":[0,1,1,1,0,0,0],"10":[0,1,1,1,0,0,1],"11":[1,1,0,0,0,1,0]}},
+    {"task":"Prob050_kmap1","input_cases":8,"truth":"out=0 only for a=b=c=0; all other binary combinations1"},
+    {"task":"Prob106_always_nolatches","input_cases":65536,"truth":"exact e06b left, e072 down, e074 right, e075 up; other output bits0; all unmatched inputs all0"}
+  ],
+  "future_diagnostic_procedure": "Only after review: compile each untouched RefModule with a separate newly approved diagnostic wrapper, drive enumerated binary inputs and sample after an explicitly declared settling interval in that separate diagnostic, compare prompt-derived truth. This does not replace original TB, prove original TB sampling, or turn alias smoke into independence. Freeze wrapper bytes and exact sampling before execution.",
+  "future_max_compile":8,
+  "future_max_simulate":8,
+  "future_max_input_cases":67873,
+  "future_compile_timeout_seconds":15,
+  "future_sim_timeout_seconds":10,
+  "future_total_wall_seconds":300,
+  "future_total_disk_bytes":67108864,
+  "stop":"Infrastructure/timeout/hash/resource failure stops without retry. Preserve mismatch as negative evidence, no source repair. No extra cases or candidates.",
+  "this_round_compile_sim_sat_synthesis":0,
+  "this_round_model_calls":0
+}

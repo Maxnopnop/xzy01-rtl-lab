@@ -1,0 +1,92 @@
+XZY01 — Proposed expanded OpenRouter budget
+Prepared: 2026-10-16 (Asia/Shanghai)
+Status: grant-planning scenario only; NOT an approved execution protocol or purchase.
+
+Proposed project API spending ceiling: HKD 19,500.
+Additional grant request = this ceiling minus confirmed available funding for the same expenditure.
+The proposal's HKD 500 API allowance was a planning estimate, not a confirmed allocation.
+
+PRICE EVIDENCE
+OpenRouter Standard published prices, USD per million tokens:
+openai/gpt-5.6-sol: input 4; output 20; cache-write input 5.
+anthropic/claude-opus-5.5: input 4; output 20; short cache-write input 5.
+google/gemini-3.1-pro-preview: ordinary input 2; output 12.
+Sources:
+https://openrouter.ai/openai/gpt-5.6-sol
+https://openrouter.ai/anthropic/claude-opus-5.5
+https://openrouter.ai/google/gemini-3.1-pro-preview
+https://openrouter.ai/pricing
+Standard credit-purchase fee: 5.5%. No Business, Fast, Priority, long-lived cache or tool charges assumed.
+Historical search snippets show discounts differing from current Standard model pages; use exact endpoint quote before purchase, and reduce budget if lower prices apply.
+Budget FX assumption: USD 1 = HKD 7.8, not a live exchange quotation.
+
+RESEARCH QUESTION AND MODEL ROLES
+Investigate whether explicit timing representations and executable feedback improve generated RTL under matched call opportunities, and which observable stage contains an error.
+Sol retains a model-family link to earlier development, without claiming backend equivalence to the Codex login route.
+Claude and Gemini test whether findings extend across model developers, rather than only within two OpenAI variants.
+Three candidates replace the earlier two-model costing scenario; proposal's two/four-model inconsistency needs supervisor reconciliation. Model availability, exact endpoint, and supported controls must be checked before protocol freeze. Preview retirement requires a revised, recorded selection before evaluation, not silent switching during a batch.
+
+EXPERIMENTAL DESIGN
+Target: 20 development tasks and 80 held-out evaluation tasks, reviewed for provenance, compatible timing contracts, reference correctness, and near duplicates.
+80 held-out tasks are NOT currently established or frozen. This is a feasibility-dependent expansion from the earlier 40-task planning estimate.
+Suggested strata: reset/priority, state transitions, cycle latency, and ready/valid transaction ordering; target 20 tasks per stratum subject to admissibility, without filling gaps with near-duplicates.
+For each model/task/repetition, four strategy paths:
+S-F: structured timing representation -> RTL -> revision with public executable feedback.
+S-R: same representation and RTL parent -> regeneration without execution feedback.
+D-F: direct RTL -> unconditional no-feedback revision -> revision with public executable feedback.
+D-R: same direct RTL and revision parent -> regeneration without execution feedback.
+Each final path has 3 model-call opportunities. Each representation branch shares the first two calls between F/R, then has two distinct third calls: 4 actual calls per representation, 8 actual calls overall.
+The first direct RTL output also supplies the single-call baseline without extra API calls.
+No best-of selection; final scoring uses hidden tests only after generation. Public feedback availability and design facts matched across representation conditions.
+This compares workflows; equal calls do not imply equal tokens, FLOPs, or identical intermediate semantics. Report input/output/reasoning/cache separately without double counting.
+Keep fixed planned call opportunities irrespective of intermediate functional success; infrastructure failure invokes the stopping policy. Negative and truncated results stay visible.
+
+CALL PLAN
+Development: 20 tasks x 2 repetitions x 3 models x 8 actual calls = 960.
+Held-out main evaluation: 80 x 5 x 3 x 8 = 9,600.
+Wording robustness: 40 semantic-preserving variants x 3 x 3 x 8 = 2,880.
+Variants are paired with 40 preselected held-out originals and compare against those originals' first 3 repetitions. They are NOT 40 additional independent tasks. Review/freeze variants before model outcomes, with no tuning on them.
+Core total = 13,440 actual calls; 4,480 per model.
+Technical retry ceiling = 5% = 672 attempts, at most 224/model; at most one retry per eligible documented transient infrastructure failure.
+Total attempt ceiling = 14,112, not 13,440 plus open-ended retries.
+A wrong or malformed answer is not eligible for a technical retry. Reconcile unknown billing before retrying. Stop for persistent service errors or any cost/token cap breach.
+Statistical analysis pairs conditions by task and clusters repetitions/variants at original task (and source family where appropriate). Five repetitions measure variation but do not guarantee power; no claimed minimum detectable effect yet.
+
+TOKEN AND COST ENVELOPE
+Planning envelope per actual call: at most 12,000 input tokens and 6,000 billed output tokens including reasoning, subject to provider enforcement validation during development.
+The output allowance is NOT a measured mean. Earlier Codex R6 averaged about 11,395 input and 934 output tokens, including reasoning, on a narrower workload. A higher allowance is provisional for different reasoning models and more complex temporal tasks; calibrate it before main evaluation.
+No artificial prompt padding or minimum-output requirement. Store actual usage and stop/shrink scope if limits are unsuitable; do not claim savings require extra calls.
+Per model core token allowance: 53.76M input + 26.88M billed output.
+Conservative input accounting: Sol and Claude at USD 5/M short cache-write rate, with no cache-read discount; Gemini at ordinary USD 2/M with no explicit cache storage purchased. Cache-write rate replaces, not adds to, ordinary input rate. Do not enable 1-hour cache, priority, browsing, or other paid tools within this estimate.
+
+Model                         Calls   Input USD    Output USD   Total USD
+GPT-5.6 Sol                   4480       268.80        537.60      806.40
+Claude Opus 5.5               4480       268.80        537.60      806.40
+Gemini 3.1 Pro Preview        4480       107.52        322.56      430.08
+Core inference total                                           2,042.88
+5.5% credit-purchase fee                                          112.3584
+Core converted to HKD                                         16,810.85952
+5% eligible retry reserve (fee included)                          840.542976
+10% exchange/price reserve on subtotal                          1,765.1402496
+Calculated ceiling                                            19,416.5427456
+Rounded proposed ceiling                                      19,500
+Rounding headroom                                                 83.4572544
+
+Sensitivity: with 2,000 instead of 6,000 billed output tokens per call, retaining the same conservative input rates, fees, retry allowance and 10% reserve, estimated budget = HKD 10,559.8741248.
+At ordinary non-cached input rates and 6,000 output tokens, core cost including fee = HKD 15,926.07744, before retries and reserve.
+This is an upper spending envelope, not evidence that HKD 19,500 will be spent or is already necessary. Recalculate from development before committing remaining funds. Reserve eligibility must be confirmed with the scheme; unused funds are not spent merely to exhaust the grant.
+
+PHASE GATES AND DELIVERABLES
+1. Finish reference/contract and runner checks offline. Establish task availability and estimate student review time before promising the full scale.
+2. After separate execution authorisation, use the development allowance to verify endpoints, token enforcement, error classifications and realistic cost. If lower use suffices, lower the budget.
+3. Freeze model/provider versions, task split, variants, prompts, scoring and stop rules; then conduct bounded evaluation blocks without adapting to hidden results.
+4. Reuse verified traces for an interactive demo, error examples, final report and reproducibility package. Do not buy a separate demo hardware system solely for this budget.
+Local compilation/simulation handles candidate evaluation; school EDA remains selected, manually executed cases under existing access restrictions, with separate runtime and staff/student-hour records. No assumption of 14,112 school jobs or new EDA licence purchase.
+No full-model training, chip fabrication, or guaranteed accuracy improvement promised.
+MakerSpace retention acceptance or competition commitment still requires resolution separately; this budget does not resolve grant delivery eligibility.
+
+APPLICATION JUSTIFICATION (ENGLISH)
+We propose an API spending ceiling of HKD 19,500 for a controlled study using GPT-5.6 Sol, Claude Opus 5.5, and Gemini 3.1 Pro Preview through OpenRouter. The planned scope comprises 20 development tasks, 80 held-out tasks with five repeated trials, and 40 paired specification variants. Four conditions will separate the effects of structured timing representations and executable feedback, while shared generation steps limit the core workload to 13,440 API calls. The three model families assess generalisability, repeated trials quantify variability, and paired variants test robustness to wording. The ceiling uses published token rates, allowances of up to 12,000 input and 6,000 billed output tokens per call, a 5.5% platform fee, and bounded retry and price/exchange reserves. Task availability and token needs will be validated before the main study, and spending will be reduced where appropriate. Results will support the demonstration prototype and reproducible research package. Existing available funding will be deducted from the additional grant request.
+
+简短中文说明
+拟安排最高HKD19,500的OpenRouter实验预算，比较三家模型，覆盖20道开发题、80道保留评测题及40个配对规格改写。四组对照用于区分结构化时序表示和执行反馈的作用，重复采样用于评估波动，改写用于检查稳健性。预算按公开token单价、13,440次核心调用及受限重试估算；6,000输出token是含推理的预留上限，并非实测平均值。任务和用量通过开发阶段核验后再开展主实验，实际支出低于预算时相应缩减，额外申请额扣除现有可用资金。

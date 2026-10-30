@@ -1,0 +1,185 @@
+{
+  "query": "Implement module event_parity(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. q starts at 0. On each rising clock edge with din=1, toggle q. With din=0 hold q. Thus q is the parity of the number of sampled ones since reset.",
+  "query_sha256": "78b5e7312a024231e87572bd7dbc543704c3a5c47b8c704fa97cec94b12a1d4f",
+  "query_terms": [
+    "active",
+    "asynchronous",
+    "clk",
+    "clock",
+    "din",
+    "edge",
+    "edges",
+    "event_parity",
+    "hold",
+    "implement",
+    "input",
+    "low",
+    "module",
+    "moore",
+    "number",
+    "ones",
+    "output",
+    "outputs",
+    "parity",
+    "q",
+    "reset",
+    "rising",
+    "rst_n",
+    "sampled",
+    "since",
+    "starts",
+    "thus",
+    "toggle"
+  ],
+  "rankings": [
+    {
+      "chunk_id": "LR017",
+      "score": 3.164597955848727,
+      "matched": [
+        {
+          "term": "since",
+          "tf": 1,
+          "df": 1,
+          "contribution": 3.164597955848727
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR006",
+      "score": 2.642417804238559,
+      "matched": [
+        {
+          "term": "reset",
+          "tf": 1,
+          "df": 1,
+          "contribution": 2.642417804238559
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR018",
+      "score": 2.2996556405251556,
+      "matched": [
+        {
+          "term": "input",
+          "tf": 2,
+          "df": 1,
+          "contribution": 2.2996556405251556
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR001",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR002",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR003",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR004",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR005",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR007",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR008",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR009",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR010",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR011",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR012",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR013",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR014",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR015",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR016",
+      "score": 0.0,
+      "matched": []
+    }
+  ],
+  "selected_ids": [
+    "LR017",
+    "LR006",
+    "LR018"
+  ],
+  "no_hit": false,
+  "selected_chunks": [
+    {
+      "id": "LR017",
+      "section": "Case Statements",
+      "start_line": 2242,
+      "end_line": 2243,
+      "text": "When expressing a wildcard in a case item, use the '?' character since it more\nclearly expresses the intent.",
+      "sha256": "20ca8d3774dc2c297cec8df21172fd69a8020c7aeb2684749aadb6272e135a2f",
+      "characters": 108,
+      "use": "General synthesizable language/style guidance, not task requirements or a solution"
+    },
+    {
+      "id": "LR006",
+      "section": "Sequential Logic (Registers)",
+      "start_line": 1818,
+      "end_line": 1820,
+      "text": "Sequential statements for state assignments should only contain reset values and\na next-state to state assignment, use a separate combinational-only block to\ngenerate that next-state value.",
+      "sha256": "e21796acf251a073061ee4e103ad61404d82cbafca689dc2df125e2c0df8e647",
+      "characters": 189,
+      "use": "General synthesizable language/style guidance, not task requirements or a solution"
+    },
+    {
+      "id": "LR018",
+      "section": "Case Statements",
+      "start_line": 2245,
+      "end_line": 2252,
+      "text": "`casex` should not be used. `casex` implements a symmetric wildcard operator\nsuch that an `X` in the case expression may match one or more case items.\n`casez` only treats high-impedance states (`Z` or `?`) as a wildcard, and\nperforms exact matches for undriven `X` inputs. While this does not completely\nfix the problems with symmetric wildcard matching, it is harder to accidentally\nproduce a `Z` input than an `X` input, so this form is preferred.\n`case inside` does not treat either `X` or `Z` in the case expression as a\nwildcard, so this form is preferred over `casez`.",
+      "sha256": "38b511f542f8fcb62c5ad046b40e95a8c569d5e5b69bdce9dbe2cc6e393640e9",
+      "characters": 574,
+      "use": "General synthesizable language/style guidance, not task requirements or a solution"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "status": "GENERATED",
+  "usage": {
+    "input_tokens": 11696,
+    "cached_input_tokens": 7424,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 1023,
+    "reasoning_output_tokens": 115
+  },
+  "source": "READ_ONLY_SAVED_EVIDENCE",
+  "reserved_calls": 1,
+  "response": "module ordered_retire (\n    input  wire       clk,\n    input  wire       rst_n,\n    input  wire       flush,\n    input  wire       issue,\n    input  wire [1:0] issue_tag,\n    input  wire       finish,\n    input  wire [1:0] finish_tag,\n    output reg  [1:0] count,\n    output reg        retired,\n    output reg  [1:0] retired_tag\n);\n\n    reg       valid0, valid1;\n    reg       finished0, finished1;\n    reg [1:0] tag0, tag1;\n\n    reg       n_valid0, n_valid1;\n    reg       n_finished0, n_finished1;\n    reg [1:0] n_tag0, n_tag1;\n    reg [1:0] n_count;\n    reg       n_retired;\n    reg [1:0] n_retired_tag;\n\n    reg retire_old_head;\n    reg accept_old_issue;\n\n    always @* begin\n        n_valid0      = valid0;\n        n_valid1      = valid1;\n        n_finished0   = finished0;\n        n_finished1   = finished1;\n        n_tag0        = tag0;\n        n_tag1        = tag1;\n        n_count       = count;\n        n_retired     = 1'b0;\n        n_retired_tag = retired_tag;\n\n        retire_old_head = valid0 && finished0;\n\n        accept_old_issue =\n            issue &&\n            (count < 2) &&\n            !(valid0 && (tag0 == issue_tag)) &&\n            !(valid1 && (tag1 == issue_tag));\n\n        if (finish && valid0 && (finish_tag == tag0))\n            n_finished0 = 1'b1;\n\n        if (finish && valid1 && (finish_tag == tag1))\n            n_finished1 = 1'b1;\n\n        if (retire_old_head) begin\n            n_retired     = 1'b1;\n            n_retired_tag = tag0;\n\n            n_valid0      = valid1;\n            n_finished0   = n_finished1;\n            n_tag0        = tag1;\n\n            n_valid1      = 1'b0;\n            n_finished1   = 1'b0;\n            n_tag1        = 2'b00;\n\n            n_count       = count - 2'b01;\n        end\n\n        if (accept_old_issue) begin\n            if (retire_old_head || !valid0) begin\n                n_valid0    = 1'b1;\n                n_finished0 = 1'b0;\n                n_tag0      = issue_tag;\n            end else begin\n                n_valid1    = 1'b1;\n                n_finished1 = 1'b0;\n                n_tag1      = issue_tag;\n            end\n\n            n_count = n_count + 2'b01;\n        end\n    end\n\n    always @(posedge clk or negedge rst_n) begin\n        if (!rst_n) begin\n            valid0      <= 1'b0;\n            valid1      <= 1'b0;\n            finished0   <= 1'b0;\n            finished1   <= 1'b0;\n            tag0        <= 2'b00;\n            tag1        <= 2'b00;\n            count       <= 2'b00;\n            retired     <= 1'b0;\n            retired_tag <= 2'b00;\n        end else if (flush) begin\n            valid0      <= 1'b0;\n            valid1      <= 1'b0;\n            finished0   <= 1'b0;\n            finished1   <= 1'b0;\n            tag0        <= 2'b00;\n            tag1        <= 2'b00;\n            count       <= 2'b00;\n            retired     <= 1'b0;\n            retired_tag <= 2'b00;\n        end else begin\n            valid0      <= n_valid0;\n            valid1      <= n_valid1;\n            finished0   <= n_finished0;\n            finished1   <= n_finished1;\n            tag0        <= n_tag0;\n            tag1        <= n_tag1;\n            count       <= n_count;\n            retired     <= n_retired;\n            retired_tag <= n_retired_tag;\n        end\n    end\n\nendmodule",
+  "response_sha256": "116d1e00662a5d1fdb0f073c0dcde6a8b6b166980a69b4623ecda35cab475428",
+  "thread_id": "01a12a07-0e2f-7f02-8c78-1b32fd43c35d",
+  "exit": {
+    "utc": "2026-10-11T08:14:44.692072+00:00",
+    "pid": 16020,
+    "identity": "134361800675850922",
+    "nonce": "9c64aa05364b4bb5ab89b8f090afa3dd",
+    "request_sha256": "8a6d0c913e0790de6852a58f860d953475c31eb1096900d5d5b1178f46f4a192",
+    "returncode": 0,
+    "reason": null,
+    "elapsed_seconds": 17.09400000000096,
+    "streams_closed": true,
+    "reader_errors": [],
+    "counts": {
+      "stdout": 3724,
+      "stderr": 0
+    },
+    "descendant_cleanup": "UNVERIFIED",
+    "sha256": {
+      "stdout": "57fd43dd5cf088626973079a184d37c81071265d83a006b6e0565b620134a314",
+      "stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "reconstructed_without_summary": true
+}

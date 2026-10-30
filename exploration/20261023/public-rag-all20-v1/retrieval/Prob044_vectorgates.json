@@ -1,0 +1,230 @@
+{
+  "query": "\nI would like you to implement a module named TopModule with the following\ninterface. All input and output ports are one bit unless otherwise\nspecified.\n\n - input  a              (3 bits)\n - input  b              (3 bits)\n - output out_or_bitwise (3 bits)\n - output out_or_logical\n - output out_not        (6 bits)\n\nImplement a module with two 3-bit inputs that computes the bitwise-OR of\nthe two vectors, the logical-OR of the two vectors, and the inverse (NOT)\nof both vectors. Place the inverse of b in the upper half of out_not\n(i.e., bits [5:3]), and the inverse of a in the lower half.\n\n",
+  "query_sha256": "ca7e990ab01903f606c956d8af8fb9faf01adf063847560d23e3d99fc10968a7",
+  "query_terms": [
+    "all",
+    "b",
+    "bit",
+    "bits",
+    "bitwise",
+    "both",
+    "computes",
+    "e",
+    "following",
+    "half",
+    "i",
+    "implement",
+    "input",
+    "inputs",
+    "interface",
+    "inverse",
+    "like",
+    "logical",
+    "lower",
+    "module",
+    "named",
+    "one",
+    "otherwise",
+    "out_not",
+    "out_or_bitwise",
+    "out_or_logical",
+    "output",
+    "place",
+    "ports",
+    "specified",
+    "topmodule",
+    "two",
+    "unless",
+    "upper",
+    "vectors",
+    "would",
+    "you"
+  ],
+  "rankings": [
+    {
+      "chunk_id": "LR018",
+      "score": 5.1954021019231345,
+      "matched": [
+        {
+          "term": "input",
+          "tf": 2,
+          "df": 1,
+          "contribution": 2.2996556405251556
+        },
+        {
+          "term": "inputs",
+          "tf": 1,
+          "df": 1,
+          "contribution": 1.4478732306989897
+        },
+        {
+          "term": "one",
+          "tf": 1,
+          "df": 1,
+          "contribution": 1.4478732306989897
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR015",
+      "score": 3.404362645465794,
+      "matched": [
+        {
+          "term": "all",
+          "tf": 1,
+          "df": 3,
+          "contribution": 1.361275165744766
+        },
+        {
+          "term": "specified",
+          "tf": 1,
+          "df": 1,
+          "contribution": 2.043087479721028
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR003",
+      "score": 2.969023870581372,
+      "matched": [
+        {
+          "term": "you",
+          "tf": 1,
+          "df": 1,
+          "contribution": 2.969023870581372
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR002",
+      "score": 1.9382821572553182,
+      "matched": [
+        {
+          "term": "all",
+          "tf": 1,
+          "df": 3,
+          "contribution": 1.9382821572553182
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR014",
+      "score": 1.3237451152255943,
+      "matched": [
+        {
+          "term": "all",
+          "tf": 1,
+          "df": 3,
+          "contribution": 1.3237451152255943
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR001",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR004",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR005",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR006",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR007",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR008",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR009",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR010",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR011",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR012",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR013",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR016",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR017",
+      "score": 0.0,
+      "matched": []
+    }
+  ],
+  "selected_ids": [
+    "LR018",
+    "LR015",
+    "LR003"
+  ],
+  "no_hit": false,
+  "selected_chunks": [
+    {
+      "id": "LR018",
+      "section": "Case Statements",
+      "start_line": 2245,
+      "end_line": 2252,
+      "text": "`casex` should not be used. `casex` implements a symmetric wildcard operator\nsuch that an `X` in the case expression may match one or more case items.\n`casez` only treats high-impedance states (`Z` or `?`) as a wildcard, and\nperforms exact matches for undriven `X` inputs. While this does not completely\nfix the problems with symmetric wildcard matching, it is harder to accidentally\nproduce a `Z` input than an `X` input, so this form is preferred.\n`case inside` does not treat either `X` or `Z` in the case expression as a\nwildcard, so this form is preferred over `casez`.",
+      "sha256": "38b511f542f8fcb62c5ad046b40e95a8c569d5e5b69bdce9dbe2cc6e393640e9",
+      "characters": 574,
+      "use": "General synthesizable language/style guidance, not task requirements or a solution"
+    },
+    {
+      "id": "LR015",
+      "section": "Case Statements",
+      "start_line": 2189,
+      "end_line": 2192,
+      "text": "  - a `default:` statement is **always** included in order to avoid accidental\n  inference of latches, even if all cases are covered. In simulation, a case\n  expression that evaluates to `X` will not match any case and will behave as a\n  latch, leading to different behavior than synthesis if no default is specified.",
+      "sha256": "671cab8965910cd22aa4aa60fb141c20ee77102e6da34dd8c28e743cf5ec15e0",
+      "characters": 317,
+      "use": "General synthesizable language/style guidance, not task requirements or a solution"
+    },
+    {
+      "id": "LR003",
+      "section": "Sequential Logic (Latches)",
+      "start_line": 1802,
+      "end_line": 1803,
+      "text": "If you must use a latch, use `always_latch` over `always`, and use non-blocking\nassignments (`<=`). Never use blocking assignments (`=`).",
+      "sha256": "bebab74d9159028626ec42336b8a11d2d3850005988ffd16e22d4d44f7953c7f",
+      "characters": 137,
+      "use": "General synthesizable language/style guidance, not task requirements or a solution"
+    }
+  ],
+  "elapsed_seconds": 0.0003063000040128827,
+  "a_lock_sha256": "c0609d940a0e586e2b7b5fc81ca6d58bd1eeee5e1d4cecbe40415317f341ead1",
+  "task_source_sha256": "ca7e990ab01903f606c956d8af8fb9faf01adf063847560d23e3d99fc10968a7",
+  "context_sha256": "e376481317560b33d3e93e115c428889f710cb0519e25fe4a566994ec3569969"
+}

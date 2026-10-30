@@ -1,0 +1,54 @@
+
+I would like you to implement a module named TopModule with the following
+interface. All input and output ports are one bit unless otherwise
+specified.
+
+ - input  clk
+ - input  in
+ - input  reset
+ - output out_byte (8 bits)
+ - output done
+
+In many (older) serial communications protocols, each data byte is sent
+along with a start bit and a stop bit, to help the receiver delimit bytes
+from the stream of bits. One common scheme is to use one start bit (0), 8
+data bits, and 1 stop bit (1). The line is also at logic 1 when nothing
+is being transmitted (idle). Design a finite state machine that will
+identify when bytes have been correctly received when given a stream of
+bits. It needs to identify the start bit, wait for all 8 data bits, then
+verify that the stop bit was correct. The module will also output the
+correctly-received data byte. `out_byte` needs to be valid when `done` is
+1, and is don't-care otherwise. If the stop bit does not appear when
+expected, the FSM must wait until it finds a stop bit before attempting
+to receive the next byte. Include a active-high synchronous reset. Note
+that the serial protocol sends the least significant bit first. It should
+assert done each time it finds a stop bit. Assume all sequential logic is
+triggered on the positive edge of the clock.
+
+
+
+<generic_reference_context>
+These are generic style excerpts, not new task requirements or solutions. The original specification above takes precedence.
+Source: lowRISC contributors; CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/); unmodified selected prose.
+https://github.com/lowRISC/style-guides/blob/9c15ff5dce23eef969e00ab3715153967419eadd/VerilogCodingStyle.md
+[LR006; Sequential Logic (Registers); lines 1818-1820]
+Sequential statements for state assignments should only contain reset values and
+a next-state to state assignment, use a separate combinational-only block to
+generate that next-state value.
+
+[LR015; Case Statements; lines 2189-2192]
+  - a `default:` statement is **always** included in order to avoid accidental
+  inference of latches, even if all cases are covered. In simulation, a case
+  expression that evaluates to `X` will not match any case and will behave as a
+  latch, leading to different behavior than synthesis if no default is specified.
+
+[LR018; Case Statements; lines 2245-2252]
+`casex` should not be used. `casex` implements a symmetric wildcard operator
+such that an `X` in the case expression may match one or more case items.
+`casez` only treats high-impedance states (`Z` or `?`) as a wildcard, and
+performs exact matches for undriven `X` inputs. While this does not completely
+fix the problems with symmetric wildcard matching, it is harder to accidentally
+produce a `Z` input than an `X` input, so this form is preferred.
+`case inside` does not treat either `X` or `Z` in the case expression as a
+wildcard, so this form is preferred over `casez`.
+</generic_reference_context>

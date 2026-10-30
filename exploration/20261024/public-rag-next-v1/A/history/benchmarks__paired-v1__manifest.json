@@ -1,0 +1,586 @@
+{
+  "schema": 1,
+  "tasks": [
+    {
+      "id": "rt_sequence",
+      "module": "sequence_detector",
+      "checks": 1840,
+      "spec": "Please act as a professional Verilog designer.\n\nImplement a module of a sequence detector to detect a specific 4-bit binary sequence 1001.\n\nModule name:\n    sequence_detector\n\nInput ports:\n    clk: Clock signal to synchronize the detector.\n    rst_n: Active-low reset signal to initialize the state machine.\n    data_in: 1-bit binary input signal to feed the bitstream for sequence detection.\n\nOutput ports:\n    sequence_detected: 1-bit output signal that is set high when the specific sequence is detected.\n    \nInternal logic:\n    State Machine: The sequence detector uses a finite state machine (FSM) with the following states:\n    IDLE: Waiting for the start of the sequence.\n    S1: The first bit of the desired sequence is detected.\n    S2: The second bit of the desired sequence is detected.\n    S3: The third bit of the desired sequence is detected.\n    S4: The fourth and final bit of the desired sequence is detected, and the output sequence_detected is set high.\n\nImplementation:\n    -FSM Design: The FSM transitions through states based on the bitstream data_in. On each clock cycle, the detector checks for a match of the specific sequence.\n\n    -Sequence Detection: The module checks the input data_in and transitions between states. Once the complete sequence is detected, sequence_detected is asserted.\n\n    -Reset Behavior: When rst_n is low, the state machine returns to the IDLE state, resetting the detection process.\n\nDevelopment-subset clarification (part of the fixed specification): Use asynchronous active-low reset, overlapping detections, and a Moore output high after the edge consuming the final 1; matching the archived reference.",
+      "category": "fsm",
+      "split": "development",
+      "family": "sequence1001",
+      "benchmark": "RTLLM",
+      "suite_version": "dev10-v1",
+      "synthesis_eligible": true,
+      "origin": {
+        "repository": "https://github.com/hkust-zhiyao/RTLLM",
+        "commit": "51ed553d0ffd32797a1a0a13e051656bf302c81f",
+        "path": "Control/Finite State Machine/sequence_detector",
+        "license": "MIT",
+        "files": {
+          "upstream/RTLLM/sequence_detector/design_description.txt": "eaa043dd75258c345f8e2f21817c2454a38923e476e50523a5e41bff8ef93b13",
+          "upstream/RTLLM/sequence_detector/verified_sequence_detector.v": "573bbf1a2e9afb77960131b731cd6aae85b3508a09465c7589a131b517401f23",
+          "upstream/RTLLM/sequence_detector/testbench.v": "0d5e90177af40049a62b48bf63ae8ff113435115a7544d6727a272123583bcae"
+        }
+      },
+      "adaptations": [
+        "Independent deterministic vector oracle replaces upstream TB; upstream TB archived.",
+        "Reference module renamed; timescale directive removed.",
+        "Use asynchronous active-low reset, overlapping detections, and a Moore output high after the edge consuming the final 1; matching the archived reference."
+      ],
+      "mutation": "Breaks sequence prefix transition",
+      "reference_sha256": "6acb22c07d9e2bef30be3a8ed023a845da6a565b1b5f13938ea90d3bbb0ae010",
+      "mutant_sha256": "a18f13b6c6d5d4c88681df2b627226c00f7343f4a88e2d0cda5b230004ef933d",
+      "tb_sha256": "6abb900b5f8cae1ea0ab98321c1830bd58f4132c75efb676b9cc4250a5e90e4b",
+      "assets": {
+        "rt_sequence.hex": "6f656556d2940534fe990384d84ed61cb498a683531b24ee599374d98aec4c40"
+      },
+      "ports": {
+        "reset_port": "rst_n",
+        "input_port": "data_in",
+        "output_port": "sequence_detected",
+        "active": 0,
+        "examples": [
+          {
+            "bits": "1001",
+            "outputs": [
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "bits": "1011",
+            "outputs": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "bits": "1001001",
+            "outputs": [
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              1
+            ]
+          }
+        ]
+      },
+      "public_contract": {
+        "clock_edge": "posedge",
+        "output_kind": "moore",
+        "reset": {
+          "kind": "async",
+          "active": 0,
+          "output": 0
+        },
+        "trace_convention": "Each trace starts after reset. List output after each rising edge; reset is then inactive.",
+        "examples": [
+          {
+            "bits": "1001",
+            "outputs": [
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "bits": "1011",
+            "outputs": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "bits": "1001001",
+            "outputs": [
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              1
+            ]
+          }
+        ]
+      },
+      "bank_directory": "rt_sequence"
+    },
+    {
+      "id": "sticky_alarm",
+      "module": "sticky_alarm",
+      "category": "fsm",
+      "family": "sticky_alarm",
+      "split": "development",
+      "spec": "Implement module sticky_alarm(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. q starts at 0. Two consecutive sampled ones set q to 1. Once set, q remains 1 until reset, regardless of later input. A zero before activation breaks the consecutive-one count.",
+      "checks": 9216,
+      "tb_sha256": "afd042df366768a2fad95fc4b58384b3eeebdf184e6baf3be028728dd5c0b5c6",
+      "assets": {
+        "agreement.hex": "cba61869ef75bc2738e16b4473340a5becf2b11008d6e2d9c6062552afdca370"
+      },
+      "ports": {
+        "reset_port": "rst_n",
+        "input_port": "din",
+        "output_port": "q",
+        "active": 0
+      },
+      "public_contract": {
+        "clock_edge": "posedge",
+        "output_kind": "moore",
+        "reset": {
+          "kind": "async",
+          "active": 0,
+          "output": 0
+        },
+        "trace_convention": "Each trace starts after reset; output is sampled after every rising edge.",
+        "examples": [
+          {
+            "bits": "1011000",
+            "outputs": [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "bits": "01010",
+            "outputs": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      "bank_directory": "sticky_alarm"
+    },
+    {
+      "id": "event_parity",
+      "module": "event_parity",
+      "category": "fsm",
+      "family": "event_parity",
+      "split": "development",
+      "spec": "Implement module event_parity(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. q starts at 0. On each rising clock edge with din=1, toggle q. With din=0 hold q. Thus q is the parity of the number of sampled ones since reset.",
+      "checks": 9216,
+      "tb_sha256": "ac111343afe9debbc5ed26b6e474fb73303080b082052eeacdfd90f66b27e65c",
+      "assets": {
+        "agreement.hex": "68acba1204d4451cc6dc7b305053d9e90f616c8cd5b020cd448b91926fc8ede3"
+      },
+      "ports": {
+        "reset_port": "rst_n",
+        "input_port": "din",
+        "output_port": "q",
+        "active": 0
+      },
+      "public_contract": {
+        "clock_edge": "posedge",
+        "output_kind": "moore",
+        "reset": {
+          "kind": "async",
+          "active": 0,
+          "output": 0
+        },
+        "trace_convention": "Each trace starts after reset; output is sampled after every rising edge.",
+        "examples": [
+          {
+            "bits": "101101",
+            "outputs": [
+              1,
+              1,
+              0,
+              1,
+              1,
+              0
+            ]
+          },
+          {
+            "bits": "000",
+            "outputs": [
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      "bank_directory": "event_parity"
+    },
+    {
+      "id": "request_delay",
+      "module": "request_delay",
+      "category": "fsm",
+      "family": "request_delay",
+      "split": "development",
+      "spec": "Implement module request_delay(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. Initially idle with q=0. In idle, a sampled din=1 accepts a request. q remains 0 on that accepting edge, then is 1 for exactly the following clock cycle, regardless of din. At the next edge q returns to 0 and enters cooldown. In cooldown, remain there while din=1; an edge with din=0 returns to idle. The edge returning to idle does not accept a request.",
+      "checks": 9216,
+      "tb_sha256": "a4cc1b10234e3d9f87d786e5ae2a33001cba8f70761e274a3bbf269d3fc8c788",
+      "assets": {
+        "agreement.hex": "e6b00b9db43bcbabecf07ba74c906a80dd888a638726bbac52366c5a42e98a9e"
+      },
+      "ports": {
+        "reset_port": "rst_n",
+        "input_port": "din",
+        "output_port": "q",
+        "active": 0
+      },
+      "public_contract": {
+        "clock_edge": "posedge",
+        "output_kind": "moore",
+        "reset": {
+          "kind": "async",
+          "active": 0,
+          "output": 0
+        },
+        "trace_convention": "Each trace starts after reset; output is sampled after every rising edge.",
+        "examples": [
+          {
+            "bits": "11111001100",
+            "outputs": [
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0
+            ]
+          },
+          {
+            "bits": "100000",
+            "outputs": [
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      "bank_directory": "request_delay"
+    },
+    {
+      "id": "debounce3",
+      "module": "debounce3",
+      "category": "fsm",
+      "family": "debounce3",
+      "split": "development",
+      "spec": "Implement module debounce3(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. Initially q=0. While q=0, require three consecutive sampled ones to change q to 1 on the third edge; any zero restarts this count. While q=1, require two consecutive sampled zeros to change q to 0 on the second edge; any one restarts this count. q otherwise holds.",
+      "checks": 9216,
+      "tb_sha256": "cff80605ce4e08a7469025e72d6ace782184cdf9b6d9b18a9a58fefff42eae0e",
+      "assets": {
+        "agreement.hex": "7149675d5fecdde1559c88400e4708bfb742dc2dc0f76125fe042941663de1a0"
+      },
+      "ports": {
+        "reset_port": "rst_n",
+        "input_port": "din",
+        "output_port": "q",
+        "active": 0
+      },
+      "public_contract": {
+        "clock_edge": "posedge",
+        "output_kind": "moore",
+        "reset": {
+          "kind": "async",
+          "active": 0,
+          "output": 0
+        },
+        "trace_convention": "Each trace starts after reset; output is sampled after every rising edge.",
+        "examples": [
+          {
+            "bits": "01110100111",
+            "outputs": [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "bits": "110110",
+            "outputs": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      "bank_directory": "debounce3"
+    },
+    {
+      "id": "credit_bucket",
+      "module": "credit_bucket",
+      "category": "fsm",
+      "family": "credit_bucket",
+      "split": "heldout",
+      "spec": "Implement module credit_bucket(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. Track credits with capacity two. Initially there are zero credits and q=1. At each rising edge, din=1 adds one credit, saturating at two; din=0 removes one credit, saturating at zero. q is 1 exactly when the current credit count is zero.",
+      "checks": 9216,
+      "tb_sha256": "bba142c67c853b7b8e3a0c78e67c88f36461283825e742e23407ca632312edbe",
+      "assets": {
+        "agreement.hex": "40360f89b25b9d2fac4c50591f08a7b27df459f40761f75adca3db10a1aed4c8"
+      },
+      "ports": {
+        "reset_port": "rst_n",
+        "input_port": "din",
+        "output_port": "q",
+        "active": 0
+      },
+      "public_contract": {
+        "clock_edge": "posedge",
+        "output_kind": "moore",
+        "reset": {
+          "kind": "async",
+          "active": 0,
+          "output": 1
+        },
+        "trace_convention": "Each trace starts after reset; output is sampled after every rising edge.",
+        "examples": [
+          {
+            "bits": "11100010",
+            "outputs": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              1,
+              0,
+              1
+            ]
+          },
+          {
+            "bits": "0101",
+            "outputs": [
+              1,
+              0,
+              1,
+              0
+            ]
+          }
+        ]
+      },
+      "bank_directory": "credit_bucket"
+    },
+    {
+      "id": "framed_parity",
+      "module": "framed_parity",
+      "category": "fsm",
+      "family": "framed_parity",
+      "split": "heldout",
+      "spec": "Implement module framed_parity(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. Consume non-overlapping frames of four bits, one bit per rising edge. q is 0 for the first three edges of each frame. On the fourth edge q is 1 exactly when the four bits contain an even number of ones, else 0. The next edge starts the next frame and q returns to 0. Reset discards any incomplete frame.",
+      "checks": 9216,
+      "tb_sha256": "123fc6def9b4fce500e0a235256229b5420b1da23302850b49989045a63acf7e",
+      "assets": {
+        "agreement.hex": "87d6dbd558eeac95ade6fdd5fcf1b2a3249b0814ec42c0a5ca63139d881a1f72"
+      },
+      "ports": {
+        "reset_port": "rst_n",
+        "input_port": "din",
+        "output_port": "q",
+        "active": 0
+      },
+      "public_contract": {
+        "clock_edge": "posedge",
+        "output_kind": "moore",
+        "reset": {
+          "kind": "async",
+          "active": 0,
+          "output": 0
+        },
+        "trace_convention": "Each trace starts after reset; output is sampled after every rising edge.",
+        "examples": [
+          {
+            "bits": "000010011111",
+            "outputs": [
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "bits": "00010010",
+            "outputs": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      "bank_directory": "framed_parity"
+    }
+  ],
+  "cases": [
+    {
+      "id": "real_overlap",
+      "task": "rt_sequence",
+      "stage": "A",
+      "kind": "REAL_RETAINED_IR",
+      "error_type": "overlap_fallback",
+      "ir_file": "real_overlap.json",
+      "origin": "evidence/fsm48/jobs/m02__rt_sequence__table__s001/stage1/response.txt",
+      "origin_sha256": "5ce2fcb30c7f978419ad41299ba7440957ca700efd21075f7407ce426efcdc09",
+      "ir_sha256": "5ce2fcb30c7f978419ad41299ba7440957ca700efd21075f7407ce426efcdc09"
+    },
+    {
+      "id": "rt_sequence_sync_reset",
+      "task": "rt_sequence",
+      "stage": "A",
+      "kind": "INJECTED_FAULT",
+      "error_type": "sync_reset",
+      "ir_file": "rt_sequence_sync_reset.json",
+      "ir_sha256": "2b7a13163359d209cd2e71721af0787f9bfb484e387ecc6f09a952c4d97064b2"
+    },
+    {
+      "id": "rt_sequence_reset_polarity",
+      "task": "rt_sequence",
+      "stage": "A",
+      "kind": "INJECTED_FAULT",
+      "error_type": "reset_polarity",
+      "ir_file": "rt_sequence_reset_polarity.json",
+      "ir_sha256": "16360ab50212202b795fb783aaa605d2a4a90b177283ad6e7b5acb0239b1c6bd"
+    },
+    {
+      "id": "rt_sequence_early_output",
+      "task": "rt_sequence",
+      "stage": "A",
+      "kind": "INJECTED_FAULT",
+      "error_type": "early_output",
+      "ir_file": "rt_sequence_early_output.json",
+      "ir_sha256": "e7df3db996dc6a81d5fcc966d228942df27246ee4d72616541deb7ac364c94a2"
+    },
+    {
+      "id": "sticky_alarm_transition",
+      "task": "sticky_alarm",
+      "stage": "B",
+      "kind": "INJECTED_FAULT",
+      "error_type": "transition",
+      "ir_file": "sticky_alarm_transition.json",
+      "ir_sha256": "ccb08e22305303fd3b1f1de832d874a462e2c4cb2b6d0fa6db3d9142bac67d28"
+    },
+    {
+      "id": "sticky_alarm_state_output",
+      "task": "sticky_alarm",
+      "stage": "B",
+      "kind": "INJECTED_FAULT",
+      "error_type": "state_output",
+      "ir_file": "sticky_alarm_state_output.json",
+      "ir_sha256": "0a86eef3b9966078b0b0d0aa3030c6553c9724b74f4612dff94819807e0c3c68"
+    },
+    {
+      "id": "event_parity_transition",
+      "task": "event_parity",
+      "stage": "B",
+      "kind": "INJECTED_FAULT",
+      "error_type": "transition",
+      "ir_file": "event_parity_transition.json",
+      "ir_sha256": "06cfaf4697c54daeb9d39342d08c08c92506686ccd92f18996a33213a16d0fc9"
+    },
+    {
+      "id": "event_parity_state_output",
+      "task": "event_parity",
+      "stage": "B",
+      "kind": "INJECTED_FAULT",
+      "error_type": "state_output",
+      "ir_file": "event_parity_state_output.json",
+      "ir_sha256": "188fc19ad8df36f0aee09975dc60b28d70c533166ef47bbe75c6bf5898d4022c"
+    },
+    {
+      "id": "request_delay_transition",
+      "task": "request_delay",
+      "stage": "B",
+      "kind": "INJECTED_FAULT",
+      "error_type": "transition",
+      "ir_file": "request_delay_transition.json",
+      "ir_sha256": "cb09e52748fe6fbc2a020d3617ca0dd88321af56ff23b2ae64e355eb1fe2bff0"
+    },
+    {
+      "id": "request_delay_state_output",
+      "task": "request_delay",
+      "stage": "B",
+      "kind": "INJECTED_FAULT",
+      "error_type": "state_output",
+      "ir_file": "request_delay_state_output.json",
+      "ir_sha256": "e6b94a5db5f3b6f114cd02aa312a43a50d5c9ee83d0dffed69dc196bd5440783"
+    },
+    {
+      "id": "debounce3_transition",
+      "task": "debounce3",
+      "stage": "B",
+      "kind": "INJECTED_FAULT",
+      "error_type": "transition",
+      "ir_file": "debounce3_transition.json",
+      "ir_sha256": "b72ed2a9199931501d6628ef6438af72b725448fdd99a2f00dc500d4c2d477ec"
+    },
+    {
+      "id": "debounce3_state_output",
+      "task": "debounce3",
+      "stage": "B",
+      "kind": "INJECTED_FAULT",
+      "error_type": "state_output",
+      "ir_file": "debounce3_state_output.json",
+      "ir_sha256": "d979ede0461dbd2f0aefa2228ebb45f2efec739b735507a2423f7354abc29949"
+    }
+  ],
+  "split": {
+    "development": [
+      "rt_sequence",
+      "sticky_alarm",
+      "event_parity",
+      "request_delay",
+      "debounce3"
+    ],
+    "heldout": [
+      "credit_bucket",
+      "framed_parity"
+    ]
+  },
+  "note": "Authored development stress bank, not an official benchmark. Held-out candidates receive offline oracle validation only."
+}

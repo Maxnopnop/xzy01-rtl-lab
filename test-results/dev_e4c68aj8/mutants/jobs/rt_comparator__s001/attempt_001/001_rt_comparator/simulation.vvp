@@ -1,0 +1,124 @@
+#! /c/Source/iverilog-install/bin/vvp
+:ivl_version "12.0 (devel)" "(s20150603-1539-g2693dd32b)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "D:\iverilog\lib\ivl\system.vpi";
+:vpi_module "D:\iverilog\lib\ivl\vhdl_sys.vpi";
+:vpi_module "D:\iverilog\lib\ivl\vhdl_textio.vpi";
+:vpi_module "D:\iverilog\lib\ivl\v2005_math.vpi";
+:vpi_module "D:\iverilog\lib\ivl\va_math.vpi";
+:vpi_module "D:\iverilog\lib\ivl\v2009.vpi";
+S_00000267571dad40 .scope package, "$unit" "$unit" 2 1;
+ .timescale 0 0;
+S_0000026757226920 .scope module, "tb" "tb" 3 3;
+ .timescale -9 -12;
+v0000026757279030_0 .var "A", 2 0;
+v0000026757278950_0 .net "A_equal", 0 0, L_0000026757278a90;  1 drivers
+v00000267572792b0_0 .net "A_greater", 0 0, L_0000026757279710;  1 drivers
+v0000026757278d10_0 .net "A_less", 0 0, L_0000026757278bd0;  1 drivers
+v00000267572793f0_0 .var "B", 2 0;
+v0000026757279490_0 .var/i "checks", 31 0;
+v00000267572795d0_0 .var/i "errors", 31 0;
+v0000026757278e50_0 .var "expected", 2 0;
+v0000026757278ef0_0 .var/i "fd", 31 0;
+v00000267572790d0_0 .var/i "i", 31 0;
+v0000026757279670_0 .var "nonce", 255 0;
+v0000026757279170 .array "vectors", 63 0, 8 0;
+S_0000026757226ab0 .scope module, "dut" "comparator_3bit" 3 14, 4 1 0, S_0000026757226920;
+ .timescale 0 0;
+    .port_info 0 /INPUT 3 "A";
+    .port_info 1 /INPUT 3 "B";
+    .port_info 2 /OUTPUT 1 "A_greater";
+    .port_info 3 /OUTPUT 1 "A_equal";
+    .port_info 4 /OUTPUT 1 "A_less";
+v00000267571f2c80_0 .net "A", 2 0, v0000026757279030_0;  1 drivers
+v00000267571f33e0_0 .net "A_equal", 0 0, L_0000026757278a90;  alias, 1 drivers
+v00000267571daed0_0 .net "A_greater", 0 0, L_0000026757279710;  alias, 1 drivers
+v0000026757226c40_0 .net "A_less", 0 0, L_0000026757278bd0;  alias, 1 drivers
+v0000026757226ce0_0 .net "B", 2 0, v00000267572793f0_0;  1 drivers
+v00000267571f2490_0 .net *"_ivl_0", 0 0, L_0000026757279350;  1 drivers
+L_0000026757279908 .functor BUFT 1, C4<1>, C4<0>, C4<0>, C4<0>;
+v00000267571f2530_0 .net/2u *"_ivl_10", 0 0, L_0000026757279908;  1 drivers
+L_0000026757279950 .functor BUFT 1, C4<0>, C4<0>, C4<0>, C4<0>;
+v00000267571f25d0_0 .net/2u *"_ivl_12", 0 0, L_0000026757279950;  1 drivers
+v00000267572788b0_0 .net *"_ivl_16", 0 0, L_0000026757278b30;  1 drivers
+L_0000026757279998 .functor BUFT 1, C4<1>, C4<0>, C4<0>, C4<0>;
+v00000267572797b0_0 .net/2u *"_ivl_18", 0 0, L_0000026757279998;  1 drivers
+L_0000026757279878 .functor BUFT 1, C4<1>, C4<0>, C4<0>, C4<0>;
+v0000026757279210_0 .net/2u *"_ivl_2", 0 0, L_0000026757279878;  1 drivers
+L_00000267572799e0 .functor BUFT 1, C4<0>, C4<0>, C4<0>, C4<0>;
+v0000026757278f90_0 .net/2u *"_ivl_20", 0 0, L_00000267572799e0;  1 drivers
+L_00000267572798c0 .functor BUFT 1, C4<0>, C4<0>, C4<0>, C4<0>;
+v0000026757278db0_0 .net/2u *"_ivl_4", 0 0, L_00000267572798c0;  1 drivers
+v0000026757279530_0 .net *"_ivl_8", 0 0, L_00000267572789f0;  1 drivers
+L_0000026757279350 .cmp/gt.s 3, v0000026757279030_0, v00000267572793f0_0;
+L_0000026757279710 .functor MUXZ 1, L_00000267572798c0, L_0000026757279878, L_0000026757279350, C4<>;
+L_00000267572789f0 .cmp/eq 3, v0000026757279030_0, v00000267572793f0_0;
+L_0000026757278a90 .functor MUXZ 1, L_0000026757279950, L_0000026757279908, L_00000267572789f0, C4<>;
+L_0000026757278b30 .cmp/gt 3, v00000267572793f0_0, v0000026757279030_0;
+L_0000026757278bd0 .functor MUXZ 1, L_00000267572799e0, L_0000026757279998, L_0000026757278b30, C4<>;
+    .scope S_0000026757226920;
+T_0 ;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0000026757279490_0, 0, 32;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v00000267572795d0_0, 0, 32;
+    %end;
+    .thread T_0, $init;
+    .scope S_0000026757226920;
+T_1 ;
+    %vpi_func 3 16 "$value$plusargs" 32, "nonce=%s", v0000026757279670_0 {0 0 0};
+    %nor/r;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_1.0, 8;
+    %vpi_call/w 3 16 "$fatal", 32'sb00000000000000000000000000000001, "nonce missing" {0 0 0};
+T_1.0 ;
+    %vpi_call/w 3 17 "$readmemh", "rt_comparator.hex", v0000026757279170 {0 0 0};
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v00000267572790d0_0, 0, 32;
+T_1.2 ;
+    %load/vec4 v00000267572790d0_0;
+    %cmpi/s 64, 0, 32;
+    %jmp/0xz T_1.3, 5;
+    %ix/getv/s 4, v00000267572790d0_0;
+    %load/vec4a v0000026757279170, 4;
+    %split/vec4 3;
+    %store/vec4 v0000026757278e50_0, 0, 3;
+    %split/vec4 3;
+    %store/vec4 v00000267572793f0_0, 0, 3;
+    %store/vec4 v0000026757279030_0, 0, 3;
+    %delay 2000, 0;
+    %load/vec4 v0000026757279490_0;
+    %addi 1, 0, 32;
+    %store/vec4 v0000026757279490_0, 0, 32;
+    %load/vec4 v00000267572792b0_0;
+    %load/vec4 v0000026757278950_0;
+    %concat/vec4; draw_concat_vec4
+    %load/vec4 v0000026757278d10_0;
+    %concat/vec4; draw_concat_vec4
+    %load/vec4 v0000026757278e50_0;
+    %cmp/ne;
+    %jmp/0xz  T_1.4, 6;
+    %load/vec4 v00000267572795d0_0;
+    %addi 1, 0, 32;
+    %store/vec4 v00000267572795d0_0, 0, 32;
+T_1.4 ;
+    %load/vec4 v00000267572790d0_0;
+    %addi 1, 0, 32;
+    %store/vec4 v00000267572790d0_0, 0, 32;
+    %jmp T_1.2;
+T_1.3 ;
+    %vpi_func 3 21 "$fopen" 32, "verdict.txt", "w" {0 0 0};
+    %store/vec4 v0000026757278ef0_0, 0, 32;
+    %vpi_call/w 3 22 "$fdisplay", v0000026757278ef0_0, "RTL_LAB_V1 %0s checks=%0d errors=%0d", v0000026757279670_0, v0000026757279490_0, v00000267572795d0_0 {0 0 0};
+    %vpi_call/w 3 23 "$fclose", v0000026757278ef0_0 {0 0 0};
+    %vpi_call/w 3 23 "$finish" {0 0 0};
+    %end;
+    .thread T_1;
+# The file index is used to find the file name in the following table.
+:file_names 5;
+    "N/A";
+    "<interactive>";
+    "-";
+    "testbench.sv";
+    "dut.sv";

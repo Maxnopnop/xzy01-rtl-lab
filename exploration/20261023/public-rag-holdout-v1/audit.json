@@ -1,0 +1,89 @@
+{
+  "utc": "2026-10-23T02:31:51.777454+00:00",
+  "status": "PASS_STATIC_PREPARATION_ONLY",
+  "checks": {
+    "A_lock": {
+      "count": 30,
+      "sha256": "c0609d940a0e586e2b7b5fc81ca6d58bd1eeee5e1d4cecbe40415317f341ead1",
+      "status": "PASS"
+    },
+    "B_lock": {
+      "count": 67,
+      "sha256": "4505a697f76ef3fdbf16a0bfd80e466af3a4c99be4bf7588e1fecf00d118d973",
+      "status": "PASS"
+    },
+    "C_lock": {
+      "count": 93,
+      "sha256": "b6c8e23341793042fd5f7e17d84a1fa1465a83887c5e82e8d610f9767fbcde02",
+      "status": "PASS"
+    },
+    "phase_order": "PASS local UTC receipts+hash bindings; not external notarization",
+    "selection": "PASS deterministic metadata/first5 declared-eligible; semantic judgments require coordinator review",
+    "sources": {
+      "requests": 60,
+      "raw_bytes": 99327,
+      "saved": 60,
+      "failed": 0,
+      "retry": 0,
+      "git_blob_and_sha256": "PASS"
+    },
+    "retrieval_independent_recalculation": "PASS all5 full18 rankings and exact context",
+    "fixed_nohit_tie_fixtures": "PASS generic synthetic words only, no method change",
+    "proposed_requests": "PASS 60 slots, 10 message pairs, all6 copies identical within task-condition; actual service unverified",
+    "prior_preservation": [
+      {
+        "path": "exploration/20261016/public-benchmark-rag-v1",
+        "files": 155,
+        "packet_sha256": "8a3b613cf353d40f346bc12ffcb9880461218d53a8984083cd3d506f00f039e6",
+        "status": "PASS"
+      },
+      {
+        "path": "exploration/20261016/fixed-input-rag-v2",
+        "files": 118,
+        "packet_sha256": "47603eb9e0c0fa6c76d0fa3ea7d4ca7ab2ffdadb880140a7b3dee03dce030a5e",
+        "status": "PASS"
+      },
+      {
+        "path": "exploration/20261016/fixed-input-rag-v2/baseline-bindings.json",
+        "files": 97,
+        "status": "PASS"
+      },
+      {
+        "path": "exploration/20261023/public-rag-holdout-v1/A/reuse-bindings.json",
+        "files": 22,
+        "status": "PASS"
+      }
+    ],
+    "routing_static": {
+      "columns_allowlisted": [
+        "enabled",
+        "model"
+      ],
+      "rows": [
+        {
+          "enabled": "false",
+          "model": "REPLACE_MODEL_ID"
+        },
+        {
+          "enabled": "false",
+          "model": "REPLACE_MODEL_ID"
+        },
+        {
+          "enabled": "true",
+          "model": "DEMO_NOT_REAL"
+        }
+      ],
+      "status": "UNVERIFIED no probe or API call"
+    },
+    "current_execution": {
+      "model": 0,
+      "embedding": 0,
+      "rerank": 0,
+      "compile": 0,
+      "sim": 0,
+      "sat": 0,
+      "proxy_regression_reruns": 0
+    }
+  },
+  "remaining": "Coordinator semantic qualification review, actual transport/budget/model support, independent correctness, new task checker adaptation remain blocked."
+}

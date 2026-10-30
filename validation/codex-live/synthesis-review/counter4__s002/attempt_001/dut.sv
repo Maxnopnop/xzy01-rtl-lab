@@ -1,0 +1,13 @@
+module counter4(
+    input  wire       clk,
+    input  wire       rst,
+    input  wire       en,
+    output reg  [3:0] q
+);
+    always_ff @(posedge clk) begin
+        if (rst)
+            q <= 4'b0000;
+        else if (en)
+            q <= q + 4'b0001;
+    end
+endmodule

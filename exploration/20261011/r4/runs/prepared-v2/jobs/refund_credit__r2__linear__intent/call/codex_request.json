@@ -1,0 +1,22 @@
+{
+  "transport": "codex_exec_chatgpt_login",
+  "network_adapter": "configured_proxy_stdin_v3",
+  "prompt_transport": "stdin_utf8_file",
+  "prompt_bytes": 3008,
+  "prompt_sha256": "2bdc5d0689923d0c13e2694e59187d16750da6401c04ffc264d59de76fd6ccba",
+  "proxy_env_names": [
+    "HTTPS_PROXY",
+    "HTTP_PROXY"
+  ],
+  "adapter_sha256": "daed24ab563f3469005c8010dc43e422bd55d6e8d6e982ab008bd2e17fd6559f",
+  "requested_model": "gpt-5.6-sol",
+  "reasoning_effort": "low",
+  "prompt": "Module refund_credit\nClock clk and reset rst_n. Input fields MSB first [[\"submit\", 1], [\"refund\", 2], [\"cost\", 2]]; output fields MSB first [[\"credit\", 3], [\"accepted\", 1], [\"rejected\", 1], [\"can_pay\", 1]]\nSpecification: Weighted credit ledger with capacity five. Async active-low rst_n clears 3-bit credit and accepted/rejected pulses. Every rising edge first form funded=min(5, old_credit + unsigned refund), regardless of submit. Clear accepted/rejected. If submit=1, cost=0 is invalid: rejected=1, keep funded. Else if funded>=cost consume cost and accepted=1; otherwise rejected=1 and keep funded. Without submit keep funded and both pulses zero; cost has no sequential effect. Thus same-edge refund can fund a purchase and saturation occurs BEFORE subtracting cost. credit and pulses hold between edges. can_pay is combinational: rst_n && cost!=0 && min(5,credit+refund)>=cost, forecasting the same rule using current credit; it may change as inputs change without a clock edge. Capacity arithmetic must not wrap at three or four bits. All binary input combinations are defined; reset dominates submit/refund.\nPublic settled events [clk,rst_n,packed_input,packed_expected_output]:\n[[0,0,0,0],[1,0,31,0],[0,1,0,0],[0,1,12,0],[1,1,12,24],[1,1,19,25],[1,1,12,24],[0,1,12,24],[0,1,30,25],[1,1,30,29],[1,1,1,29],[1,1,30,29],[0,1,30,29],[0,1,19,29],[1,1,19,4],[1,1,12,4],[1,1,19,4],[0,1,19,4],[0,1,16,4],[1,1,16,2],[1,1,15,3],[1,1,16,2],[0,1,16,2],[0,1,26,3],[1,1,26,5],[1,1,5,5],[1,1,26,5],[0,1,26,5],[0,0,0,0],[1,0,31,0],[0,1,0,0],[0,1,21,1],[1,1,21,5],[1,1,10,5],[1,1,21,5],[0,1,21,5],[0,1,18,4],[1,1,18,2],[1,1,13,3],[1,1,18,2],[0,1,18,2],[0,1,12,2],[1,1,12,24],[1,1,19,25],[1,1,12,24],[0,1,12,24],[0,1,12,24],[1,1,12,40],[1,1,19,41],[1,1,12,40],[0,1,12,40],[0,1,31,41],[1,1,31,21],[1,1,0,20],[1,1,31,21],[0,1,31,21]]\nProduce an implementation intent contract, not RTL.\nOne binary-event clock; edge rising/falling; reset async_low/sync_low/none. Declare 1..16 unsigned registers width 1..8 and reset values. Parallel next expressions use old registers plus inputs/rst_n. Combinational output expressions cover every interface output. Assignments wrap to declared/output width. Expressions are integer constants 0..65535, names, + - & | ^, single == != < <= > >= comparison, and/or/not, and Python-style a if condition else b; no calls, attributes, arrays, loops or output-name references. Max intent UTF8 16KiB, each expression 4096 chars/512 AST nodes. Use all specification facts; do not add assumptions.\nReturn only these complete line sentences, without markdown or headings. First: Clock edge EDGE; reset RESET. For each register: Register NAME has width WIDTH and reset VALUE. For each next: On the clock edge, set NAME to EXPR. For each output: Continuously output NAME as EXPR. EDGE/RESET are the listed domain strings, EXPR is the identical expression language, all declarations/nexts/outputs required. No other sentences.\nDo not invoke tools, read files, run tests, or delegate. Reply directly.",
+  "temperature": null,
+  "seed": null,
+  "max_output_tokens": null,
+  "sampling_note": "CLI defaults; no temperature/seed/token limit sent",
+  "codex_executable_sha256": "d13914ced6c7af174d8d638db938284231227312104b06a25e9608c632a7daec",
+  "cli_auth": "ChatGPT (confirmed by login status)",
+  "server_model_snapshot": "Not exposed by exec JSONL; requested model is recorded without claiming a snapshot"
+}

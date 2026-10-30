@@ -1,0 +1,17 @@
+{
+ "denominator":12,"scheduled_pairs":11,"spec_ambiguous_not_run":1,
+ "cases":[
+  {"id":"01_same_mapping","kind":0,"scene":5,"fault":0,"latency":0,"expected":{"ir_spec":"PASS","rtl_spec":"PASS","intent":"PASS"}},
+  {"id":"02_legal_stuttering","kind":0,"scene":5,"fault":0,"latency":2,"expected":{"ir_spec":"PASS","rtl_spec":"PASS","intent":"PASS"}},
+  {"id":"03_two_slot_buffer","kind":1,"scene":1,"fault":0,"latency":0,"expected":{"ir_spec":"PASS","rtl_spec":"PASS","intent":"PASS"}},
+  {"id":"04_early_valid_wait","kind":3,"scene":3,"fault":0,"latency":0,"expected":{"ir_spec":"PASS","rtl_spec":"PASS","intent":"PASS"}},
+  {"id":"05_same_edge_legal","kind":2,"scene":2,"fault":0,"latency":0,"expected":{"ir_spec":"PASS","rtl_spec":"PASS","intent":"PASS"}},
+  {"id":"06_early_consume_flat_equal","kind":4,"scene":2,"fault":0,"latency":0,"expected":{"ir_spec":"PASS","rtl_spec":"FUNCTION_FAIL","intent":"FUNCTION_FAIL"},"required_rtl_category":"UNEXPECTED_TRANSACTION"},
+  {"id":"07_partial_delivery_reset","kind":0,"scene":0,"fault":0,"latency":0,"expected":{"ir_spec":"PASS","rtl_spec":"PASS","intent":"PASS"}},
+  {"id":"08_stale_across_epoch","kind":0,"scene":0,"fault":1,"latency":0,"expected":{"ir_spec":"PASS","rtl_spec":"FUNCTION_FAIL","intent":"FUNCTION_FAIL"},"required_rtl_category":"UNEXPECTED_TRANSACTION"},
+  {"id":"09_reset_acceptance_gap","kind":1,"scene":0,"fault":0,"latency":0,"expected":{"ir_spec":"PASS","rtl_spec":"PASS","intent":"NOT_EVALUABLE"},"reason":"Different accepted/cancelled offer sets at fixed reset"},
+  {"id":"10_reset_policy_missing","skip":true,"expected":{"ir_spec":"SPEC_AMBIGUOUS","rtl_spec":"SPEC_AMBIGUOUS","intent":"NOT_EVALUABLE"},"reason":"Counterfactual descriptor deliberately omits reset cancellation policy; no IR/native execution"},
+  {"id":"11_source_protocol_break","kind":0,"scene":4,"fault":0,"latency":0,"expected":{"ir_spec":"INPUT_PROTOCOL_FAIL","rtl_spec":"INPUT_PROTOCOL_FAIL","intent":"NOT_EVALUABLE"},"reason":"External driver changes held payload at cycle6; not a DUT error"},
+  {"id":"12_missing_pre_sample","kind":0,"scene":5,"fault":0,"latency":0,"drop_rtl_cycle":6,"expected":{"ir_spec":"PASS","rtl_spec":"TRACE_INVALID","intent":"NOT_EVALUABLE"},"reason":"Raw retained; declared adapter negative view omits pre sample6"}
+ ]
+}

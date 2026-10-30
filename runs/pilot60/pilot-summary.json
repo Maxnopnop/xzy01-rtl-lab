@@ -1,0 +1,714 @@
+{
+  "schema": 1,
+  "kind": "DEVELOPMENT_PILOT_NOT_FINAL_BENCHMARK",
+  "planned": 60,
+  "completed": 60,
+  "generation_complete": true,
+  "synthesis_complete": true,
+  "models": [
+    {
+      "model": "gpt-5.6-sol",
+      "planned": 30,
+      "completed": 30,
+      "model_call_reservations": 30,
+      "real_generations": 30,
+      "simulation_passes": 24,
+      "synthesis_passes": 30,
+      "joint_passes": 24,
+      "counts": {
+        "PASS": 24,
+        "COMPILE_FAIL": 6
+      },
+      "synthesis_counts": {
+        "SYNTH_PASS": 30
+      },
+      "recorded_token_usage": {
+        "input_tokens": 261600,
+        "cached_input_tokens": 173056,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 5905,
+        "reasoning_output_tokens": 1013
+      }
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "planned": 30,
+      "completed": 30,
+      "model_call_reservations": 30,
+      "real_generations": 30,
+      "simulation_passes": 24,
+      "synthesis_passes": 30,
+      "joint_passes": 24,
+      "counts": {
+        "PASS": 24,
+        "COMPILE_FAIL": 3,
+        "FUNCTION_FAIL": 3
+      },
+      "synthesis_counts": {
+        "SYNTH_PASS": 30
+      },
+      "recorded_token_usage": {
+        "input_tokens": 261600,
+        "cached_input_tokens": 179200,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 4946,
+        "reasoning_output_tokens": 0
+      }
+    }
+  ],
+  "statistics": {
+    "simulation": {
+      "estimates": [
+        0.8,
+        0.8
+      ],
+      "method": "paired task-cluster percentile bootstrap, stratified by benchmark",
+      "seed": 20260930,
+      "replicates": 5000,
+      "confidence": 0.95,
+      "model_intervals": [
+        [
+          0.5,
+          1.0
+        ],
+        [
+          0.5,
+          1.0
+        ]
+      ],
+      "model_2_minus_model_1_interval": [
+        0.0,
+        0.0
+      ],
+      "caveat": "Only 10 development tasks. Degenerate intervals at all-pass are not evidence of perfect generalization."
+    },
+    "joint": {
+      "estimates": [
+        0.8,
+        0.8
+      ],
+      "method": "paired task-cluster percentile bootstrap, stratified by benchmark",
+      "seed": 20260930,
+      "replicates": 5000,
+      "confidence": 0.95,
+      "model_intervals": [
+        [
+          0.5,
+          1.0
+        ],
+        [
+          0.5,
+          1.0
+        ]
+      ],
+      "model_2_minus_model_1_interval": [
+        0.0,
+        0.0
+      ],
+      "caveat": "Only 10 development tasks. Degenerate intervals at all-pass are not evidence of perfect generalization."
+    }
+  },
+  "results": [
+    {
+      "model": "gpt-5.6-sol",
+      "task": "ve_addsub",
+      "sample": 1,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 20.75,
+      "rtl_sha256": "5dd315b37e7451daa8b8bcc554e99b5376098637082bfbe8281cb0a14d7e942e"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "task": "ve_popcount",
+      "sample": 1,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 18.797,
+      "rtl_sha256": "f287c889944f20e8b1cb1070a63a6e0b67bdf0b9fa4c95121a04a9921c5952fa"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "task": "ve_count10",
+      "sample": 1,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 15.687,
+      "rtl_sha256": "c65506da655f2953a7839aac02a66741d3288f8bf4599454e176fef7e0b5ca18"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "task": "ve_rotate",
+      "sample": 1,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 17.062,
+      "rtl_sha256": "581c4f3c631a7e16c3617c24a215bb2e5052a5e7a1a67455b0511f9ec03eecd5"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "task": "ve_fsm",
+      "sample": 1,
+      "status": "COMPILE_FAIL",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": false,
+      "generation_seconds": 19.172,
+      "rtl_sha256": "39409a65d26da8049d792d82ca4885d0d0bef4214ca7bcab97f4d6959fbf1742"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "task": "rt_comparator",
+      "sample": 1,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 17.703,
+      "rtl_sha256": "073d1ddb359c28ce5324922e3c101a094e2141f0a269a5bc32e86921c2eca96b"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "task": "rt_counter12",
+      "sample": 1,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 17.641,
+      "rtl_sha256": "c8eb15428ce0a9f5af52f1cd8e8d40667f588595737d7b4524806c90ad02fa9f"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "task": "rt_sequence",
+      "sample": 1,
+      "status": "COMPILE_FAIL",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": false,
+      "generation_seconds": 32.5,
+      "rtl_sha256": "27dc40fa8017ce1f0f6c536a36a4f786615f136764b14d059aa16f507fd98e67"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "task": "rt_shift",
+      "sample": 1,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 22.032,
+      "rtl_sha256": "9c8687b51de4b54f2ec2ead0dccf7417b482541e011b146eec32e1f210514771"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "task": "rt_pipeline",
+      "sample": 1,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 40.0,
+      "rtl_sha256": "ec9a5ce9190ed153da12f49d620b0b993b75b558fc49dc5c2df98a09cb271304"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "task": "ve_addsub",
+      "sample": 2,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 13.468,
+      "rtl_sha256": "5dd315b37e7451daa8b8bcc554e99b5376098637082bfbe8281cb0a14d7e942e"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "task": "ve_popcount",
+      "sample": 2,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 12.906,
+      "rtl_sha256": "96c80b33054dd0a2dae4f656f9ffc13b4a4b6a540b6efb0e1701a05cf71721bc"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "task": "ve_count10",
+      "sample": 2,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 15.5,
+      "rtl_sha256": "c65506da655f2953a7839aac02a66741d3288f8bf4599454e176fef7e0b5ca18"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "task": "ve_rotate",
+      "sample": 2,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 16.328,
+      "rtl_sha256": "581c4f3c631a7e16c3617c24a215bb2e5052a5e7a1a67455b0511f9ec03eecd5"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "task": "ve_fsm",
+      "sample": 2,
+      "status": "COMPILE_FAIL",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": false,
+      "generation_seconds": 28.25,
+      "rtl_sha256": "b5fe4d4a1cb758aa730b449fa5d43f7bb90ba4dd7d985225434b40b88874683d"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "task": "rt_comparator",
+      "sample": 2,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 17.25,
+      "rtl_sha256": "153e86a6411b34199315db643b5abffd106e03c1f629bc51f2e8812b7f6c3854"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "task": "rt_counter12",
+      "sample": 2,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 16.938,
+      "rtl_sha256": "c8eb15428ce0a9f5af52f1cd8e8d40667f588595737d7b4524806c90ad02fa9f"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "task": "rt_sequence",
+      "sample": 2,
+      "status": "COMPILE_FAIL",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": false,
+      "generation_seconds": 30.64,
+      "rtl_sha256": "27dc40fa8017ce1f0f6c536a36a4f786615f136764b14d059aa16f507fd98e67"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "task": "rt_shift",
+      "sample": 2,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 15.329,
+      "rtl_sha256": "9c8687b51de4b54f2ec2ead0dccf7417b482541e011b146eec32e1f210514771"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "task": "rt_pipeline",
+      "sample": 2,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 43.156,
+      "rtl_sha256": "b55305eb8d03d07fcbe9e7386486d4593c0aea156f2e03e4448975acea20a821"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "task": "ve_addsub",
+      "sample": 3,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 17.593,
+      "rtl_sha256": "5dd315b37e7451daa8b8bcc554e99b5376098637082bfbe8281cb0a14d7e942e"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "task": "ve_popcount",
+      "sample": 3,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 13.109,
+      "rtl_sha256": "96c80b33054dd0a2dae4f656f9ffc13b4a4b6a540b6efb0e1701a05cf71721bc"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "task": "ve_count10",
+      "sample": 3,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 15.828,
+      "rtl_sha256": "c65506da655f2953a7839aac02a66741d3288f8bf4599454e176fef7e0b5ca18"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "task": "ve_rotate",
+      "sample": 3,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 18.469,
+      "rtl_sha256": "581c4f3c631a7e16c3617c24a215bb2e5052a5e7a1a67455b0511f9ec03eecd5"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "task": "ve_fsm",
+      "sample": 3,
+      "status": "COMPILE_FAIL",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": false,
+      "generation_seconds": 18.484,
+      "rtl_sha256": "b5fe4d4a1cb758aa730b449fa5d43f7bb90ba4dd7d985225434b40b88874683d"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "task": "rt_comparator",
+      "sample": 3,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 32.375,
+      "rtl_sha256": "153e86a6411b34199315db643b5abffd106e03c1f629bc51f2e8812b7f6c3854"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "task": "rt_counter12",
+      "sample": 3,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 20.156,
+      "rtl_sha256": "c8eb15428ce0a9f5af52f1cd8e8d40667f588595737d7b4524806c90ad02fa9f"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "task": "rt_sequence",
+      "sample": 3,
+      "status": "COMPILE_FAIL",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": false,
+      "generation_seconds": 39.75,
+      "rtl_sha256": "27dc40fa8017ce1f0f6c536a36a4f786615f136764b14d059aa16f507fd98e67"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "task": "rt_shift",
+      "sample": 3,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 15.406,
+      "rtl_sha256": "7fa396445f559fe2ec890e5190b245837c123a8d4892cb8f44db623d9de821c5"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "task": "rt_pipeline",
+      "sample": 3,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 42.656,
+      "rtl_sha256": "b9fa7597608884ce1033fc6e6f27f9baf63aee85dc6e56745741b59bd20b4504"
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "task": "ve_addsub",
+      "sample": 1,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 14.328,
+      "rtl_sha256": "b33832b4dad05943da718b3fe77554d880f4bdcc19f706b55db9a33ce9518be1"
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "task": "ve_popcount",
+      "sample": 1,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 12.719,
+      "rtl_sha256": "96c80b33054dd0a2dae4f656f9ffc13b4a4b6a540b6efb0e1701a05cf71721bc"
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "task": "ve_count10",
+      "sample": 1,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 10.329,
+      "rtl_sha256": "c65506da655f2953a7839aac02a66741d3288f8bf4599454e176fef7e0b5ca18"
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "task": "ve_rotate",
+      "sample": 1,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 11.093,
+      "rtl_sha256": "581c4f3c631a7e16c3617c24a215bb2e5052a5e7a1a67455b0511f9ec03eecd5"
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "task": "ve_fsm",
+      "sample": 1,
+      "status": "COMPILE_FAIL",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": false,
+      "generation_seconds": 19.297,
+      "rtl_sha256": "a805f81755a84477cdca74da4d22ada3634f16d7c90f9b3a6d3a0e70618519f8"
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "task": "rt_comparator",
+      "sample": 1,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 9.516,
+      "rtl_sha256": "fd6077a573b6688f28c70a8540731e7990e4695aa69f22219f5701c2ed789180"
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "task": "rt_counter12",
+      "sample": 1,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 11.437,
+      "rtl_sha256": "c8eb15428ce0a9f5af52f1cd8e8d40667f588595737d7b4524806c90ad02fa9f"
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "task": "rt_sequence",
+      "sample": 1,
+      "status": "FUNCTION_FAIL",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": false,
+      "generation_seconds": 15.906,
+      "rtl_sha256": "d917a023560d985b34eda722e1726415915c6ef7f42b7633e1a086244debb488"
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "task": "rt_shift",
+      "sample": 1,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 9.812,
+      "rtl_sha256": "c5a90b99f80ce5307bee1d0ab5352637b2a1d24ed2b232366eb652b51f254b7c"
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "task": "rt_pipeline",
+      "sample": 1,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 14.375,
+      "rtl_sha256": "b049f1ea3072b2e5f9f53523ddd7329eedf451d4565db83cd175962366860017"
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "task": "ve_addsub",
+      "sample": 2,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 11.922,
+      "rtl_sha256": "b33832b4dad05943da718b3fe77554d880f4bdcc19f706b55db9a33ce9518be1"
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "task": "ve_popcount",
+      "sample": 2,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 11.735,
+      "rtl_sha256": "5666cd082313463a789b2043bd520d3c0417275a51aa8b3381f8594b8ffda9f5"
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "task": "ve_count10",
+      "sample": 2,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 19.906,
+      "rtl_sha256": "c65506da655f2953a7839aac02a66741d3288f8bf4599454e176fef7e0b5ca18"
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "task": "ve_rotate",
+      "sample": 2,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 20.11,
+      "rtl_sha256": "581c4f3c631a7e16c3617c24a215bb2e5052a5e7a1a67455b0511f9ec03eecd5"
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "task": "ve_fsm",
+      "sample": 2,
+      "status": "COMPILE_FAIL",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": false,
+      "generation_seconds": 20.203,
+      "rtl_sha256": "0bd985e26cfc493fb56960986d47d434a9c24e227bfcc7dae49c34cf00bc2b6f"
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "task": "rt_comparator",
+      "sample": 2,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 12.641,
+      "rtl_sha256": "fd6077a573b6688f28c70a8540731e7990e4695aa69f22219f5701c2ed789180"
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "task": "rt_counter12",
+      "sample": 2,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 12.453,
+      "rtl_sha256": "c8eb15428ce0a9f5af52f1cd8e8d40667f588595737d7b4524806c90ad02fa9f"
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "task": "rt_sequence",
+      "sample": 2,
+      "status": "FUNCTION_FAIL",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": false,
+      "generation_seconds": 26.531,
+      "rtl_sha256": "d917a023560d985b34eda722e1726415915c6ef7f42b7633e1a086244debb488"
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "task": "rt_shift",
+      "sample": 2,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 25.531,
+      "rtl_sha256": "c5a90b99f80ce5307bee1d0ab5352637b2a1d24ed2b232366eb652b51f254b7c"
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "task": "rt_pipeline",
+      "sample": 2,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 17.454,
+      "rtl_sha256": "2df70b751321a626736f306ad4635c92ba4ffe9723503f0e1f11d7b3aecd6474"
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "task": "ve_addsub",
+      "sample": 3,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 10.407,
+      "rtl_sha256": "b33832b4dad05943da718b3fe77554d880f4bdcc19f706b55db9a33ce9518be1"
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "task": "ve_popcount",
+      "sample": 3,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 11.016,
+      "rtl_sha256": "5666cd082313463a789b2043bd520d3c0417275a51aa8b3381f8594b8ffda9f5"
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "task": "ve_count10",
+      "sample": 3,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 13.313,
+      "rtl_sha256": "c65506da655f2953a7839aac02a66741d3288f8bf4599454e176fef7e0b5ca18"
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "task": "ve_rotate",
+      "sample": 3,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 15.407,
+      "rtl_sha256": "581c4f3c631a7e16c3617c24a215bb2e5052a5e7a1a67455b0511f9ec03eecd5"
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "task": "ve_fsm",
+      "sample": 3,
+      "status": "COMPILE_FAIL",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": false,
+      "generation_seconds": 11.984,
+      "rtl_sha256": "4a5d597c43e86117dc450607d1b8429aa36d4cfecfde5ee0269016e2fca24985"
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "task": "rt_comparator",
+      "sample": 3,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 8.938,
+      "rtl_sha256": "fd6077a573b6688f28c70a8540731e7990e4695aa69f22219f5701c2ed789180"
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "task": "rt_counter12",
+      "sample": 3,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 10.469,
+      "rtl_sha256": "c8eb15428ce0a9f5af52f1cd8e8d40667f588595737d7b4524806c90ad02fa9f"
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "task": "rt_sequence",
+      "sample": 3,
+      "status": "FUNCTION_FAIL",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": false,
+      "generation_seconds": 20.984,
+      "rtl_sha256": "090a9d94ac4688816c233b1e115451fc91729e5a9da3796dc91d21dc2b001554"
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "task": "rt_shift",
+      "sample": 3,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 11.515,
+      "rtl_sha256": "c5a90b99f80ce5307bee1d0ab5352637b2a1d24ed2b232366eb652b51f254b7c"
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "task": "rt_pipeline",
+      "sample": 3,
+      "status": "PASS",
+      "synthesis_status": "SYNTH_PASS",
+      "joint_pass": true,
+      "generation_seconds": 15.641,
+      "rtl_sha256": "944d3f3fd6e14960f07416be9a901e6710ed4957ecc4b7be22323ed5a28b9d2c"
+    }
+  ],
+  "note": "All planned slots stay in denominator; failures and missing results are not removed. No pass@k or final benchmark claim."
+}

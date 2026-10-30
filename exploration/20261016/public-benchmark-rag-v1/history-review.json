@@ -1,0 +1,462 @@
+{
+  "scope": "Prior22358-file byte hash inventory plus current custom/dev10/paired original spec manifests; exact matches capped20 displayed paths per asset",
+  "rows": [
+    {
+      "id": "Prob017_mux2to1v",
+      "exact_prior_file_matches": {
+        "prompt.txt": [],
+        "ref.sv": [],
+        "test.sv": []
+      },
+      "closest_prior_specs": [
+        {
+          "jaccard": 0.3026315789473684,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_popcount"
+        },
+        {
+          "jaccard": 0.2608695652173913,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_count10"
+        },
+        {
+          "jaccard": 0.184,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_fsm"
+        }
+      ],
+      "manual_decision": "EXCLUDE_NEAR_DUPLICATE",
+      "manual_reason": "custom mux8: same two-input selection function, only data width differs."
+    },
+    {
+      "id": "Prob018_mux256to1",
+      "exact_prior_file_matches": {
+        "prompt.txt": [],
+        "ref.sv": [],
+        "test.sv": []
+      },
+      "closest_prior_specs": [
+        {
+          "jaccard": 0.2808988764044944,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_popcount"
+        },
+        {
+          "jaccard": 0.21296296296296297,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_count10"
+        },
+        {
+          "jaccard": 0.18115942028985507,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_fsm"
+        }
+      ],
+      "manual_decision": "SELECTED_CONDITIONAL",
+      "manual_reason": "Self-contained 256-index packed bit selector. Changes selection arity/address contract from old two-input mux8, not merely data width; same broad mux component family disclosed."
+    },
+    {
+      "id": "Prob021_mux256to1v",
+      "exact_prior_file_matches": {
+        "prompt.txt": [],
+        "ref.sv": [],
+        "test.sv": []
+      },
+      "closest_prior_specs": [
+        {
+          "jaccard": 0.27472527472527475,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_popcount"
+        },
+        {
+          "jaccard": 0.22018348623853212,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_count10"
+        },
+        {
+          "jaccard": 0.1619718309859155,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_fsm"
+        }
+      ],
+      "manual_decision": "NOT_SELECTED_STRATUM_FILLED",
+      "manual_reason": "Self-contained but first eligible Prob018 already fills mux stratum; closely related 256-way grouped-word variant, not independent mechanism."
+    },
+    {
+      "id": "Prob022_mux2to1",
+      "exact_prior_file_matches": {
+        "prompt.txt": [],
+        "ref.sv": [],
+        "test.sv": []
+      },
+      "closest_prior_specs": [
+        {
+          "jaccard": 0.2987012987012987,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_popcount"
+        },
+        {
+          "jaccard": 0.24468085106382978,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_count10"
+        },
+        {
+          "jaccard": 0.20161290322580644,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_fsm"
+        }
+      ],
+      "manual_decision": "EXCLUDE_NEAR_DUPLICATE",
+      "manual_reason": "custom mux8 two-input selection, width-only reduction."
+    },
+    {
+      "id": "Prob009_popcount3",
+      "exact_prior_file_matches": {
+        "prompt.txt": [],
+        "ref.sv": [],
+        "test.sv": []
+      },
+      "closest_prior_specs": [
+        {
+          "jaccard": 0.5076923076923077,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_popcount"
+        },
+        {
+          "jaccard": 0.26373626373626374,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_count10"
+        },
+        {
+          "jaccard": 0.18548387096774194,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_fsm"
+        }
+      ],
+      "manual_decision": "EXCLUDE_NEAR_DUPLICATE",
+      "manual_reason": "Population count width variant of historical popcount8 / ve_popcount255."
+    },
+    {
+      "id": "Prob030_popcount255",
+      "exact_prior_file_matches": {
+        "prompt.txt": [],
+        "ref.sv": [],
+        "test.sv": []
+      },
+      "closest_prior_specs": [
+        {
+          "jaccard": 1.0,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_popcount"
+        },
+        {
+          "jaccard": 0.23,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_count10"
+        },
+        {
+          "jaccard": 0.17424242424242425,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_fsm"
+        }
+      ],
+      "manual_decision": "EXCLUDE_EXACT_PRIOR_TASK",
+      "manual_reason": "Same official task and commit as ve_popcount in dev10; prior adapted task/tests and model experiments."
+    },
+    {
+      "id": "Prob123_bugs_addsubz",
+      "exact_prior_file_matches": {
+        "prompt.txt": [],
+        "ref.sv": [],
+        "test.sv": []
+      },
+      "closest_prior_specs": [
+        {
+          "jaccard": 1.0,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_addsub"
+        },
+        {
+          "jaccard": 0.0,
+          "path": "tasks/manifest.json#updown8"
+        },
+        {
+          "jaccard": 0.0,
+          "path": "tasks/manifest.json#signedcmp8"
+        }
+      ],
+      "manual_decision": "EXCLUDE_EXACT_PRIOR_TASK",
+      "manual_reason": "Same official task and commit as ve_addsub; includes supplied faulty RTL and is not new pure specification task."
+    },
+    {
+      "id": "Prob031_dff",
+      "exact_prior_file_matches": {
+        "prompt.txt": [],
+        "ref.sv": [],
+        "test.sv": []
+      },
+      "closest_prior_specs": [
+        {
+          "jaccard": 0.4,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_count10"
+        },
+        {
+          "jaccard": 0.2911392405063291,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_popcount"
+        },
+        {
+          "jaccard": 0.2905982905982906,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_fsm"
+        }
+      ],
+      "manual_decision": "EXCLUDE_SPEC_INTERFACE_CONFLICT",
+      "manual_reason": "Original prompt declares input q; expected flip-flop output and RefModule declare output q. Cannot fix or silently reinterpret."
+    },
+    {
+      "id": "Prob034_dff8",
+      "exact_prior_file_matches": {
+        "prompt.txt": [],
+        "ref.sv": [],
+        "test.sv": []
+      },
+      "closest_prior_specs": [
+        {
+          "jaccard": 0.2857142857142857,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_count10"
+        },
+        {
+          "jaccard": 0.28205128205128205,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_popcount"
+        },
+        {
+          "jaccard": 0.192,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_fsm"
+        }
+      ],
+      "manual_decision": "EXCLUDE_NEAR_DUPLICATE_AND_INITIALIZATION_GAP",
+      "manual_reason": "Plain DFF is a restricted old dff8 family variant; upstream reference additionally initializes q=0, not stated by prompt. Do not infer initial requirement from reference."
+    },
+    {
+      "id": "Prob041_dff8r",
+      "exact_prior_file_matches": {
+        "prompt.txt": [],
+        "ref.sv": [],
+        "test.sv": []
+      },
+      "closest_prior_specs": [
+        {
+          "jaccard": 0.2647058823529412,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_count10"
+        },
+        {
+          "jaccard": 0.24444444444444444,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_popcount"
+        },
+        {
+          "jaccard": 0.17518248175182483,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_fsm"
+        }
+      ],
+      "manual_decision": "EXCLUDE_NEAR_DUPLICATE",
+      "manual_reason": "Old dff8 contract with enable fixed high; same posedge/sync-high-zero register behavior."
+    },
+    {
+      "id": "Prob046_dff8p",
+      "exact_prior_file_matches": {
+        "prompt.txt": [],
+        "ref.sv": [],
+        "test.sv": []
+      },
+      "closest_prior_specs": [
+        {
+          "jaccard": 0.2268041237113402,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_popcount"
+        },
+        {
+          "jaccard": 0.22522522522522523,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_count10"
+        },
+        {
+          "jaccard": 0.16666666666666666,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_fsm"
+        }
+      ],
+      "manual_decision": "EXCLUDE_NEAR_DUPLICATE",
+      "manual_reason": "Same DFF mechanism with edge polarity/reset constant changes and enable removed; conservative near-duplicate exclusion, not claimed identical RTL behavior."
+    },
+    {
+      "id": "Prob035_count1to10",
+      "exact_prior_file_matches": {
+        "prompt.txt": [],
+        "ref.sv": [],
+        "test.sv": []
+      },
+      "closest_prior_specs": [
+        {
+          "jaccard": 0.7763157894736842,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_count10"
+        },
+        {
+          "jaccard": 0.2556390977443609,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_fsm"
+        },
+        {
+          "jaccard": 0.24210526315789474,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_popcount"
+        }
+      ],
+      "manual_decision": "EXCLUDE_NEAR_DUPLICATE",
+      "manual_reason": "Historical ve_count10 decade counter with value offset and reset-to1; same modulus mechanism."
+    },
+    {
+      "id": "Prob037_review2015_count1k",
+      "exact_prior_file_matches": {
+        "prompt.txt": [],
+        "ref.sv": [],
+        "test.sv": []
+      },
+      "closest_prior_specs": [
+        {
+          "jaccard": 0.6666666666666666,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_count10"
+        },
+        {
+          "jaccard": 0.2463768115942029,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_fsm"
+        },
+        {
+          "jaccard": 0.23,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_popcount"
+        }
+      ],
+      "manual_decision": "EXCLUDE_NEAR_DUPLICATE",
+      "manual_reason": "Historical decade/modulo-counter mechanism with width/modulus changed; no new independent task mechanism."
+    },
+    {
+      "id": "Prob038_count15",
+      "exact_prior_file_matches": {
+        "prompt.txt": [],
+        "ref.sv": [],
+        "test.sv": []
+      },
+      "closest_prior_specs": [
+        {
+          "jaccard": 0.8552631578947368,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_count10"
+        },
+        {
+          "jaccard": 0.2446043165467626,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_fsm"
+        },
+        {
+          "jaccard": 0.22772277227722773,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_popcount"
+        }
+      ],
+      "manual_decision": "EXCLUDE_NEAR_DUPLICATE",
+      "manual_reason": "custom counter4 modulo16 sync reset contract with enable fixed high."
+    },
+    {
+      "id": "Prob040_count10",
+      "exact_prior_file_matches": {
+        "prompt.txt": [],
+        "ref.sv": [],
+        "test.sv": []
+      },
+      "closest_prior_specs": [
+        {
+          "jaccard": 1.0,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_count10"
+        },
+        {
+          "jaccard": 0.2463768115942029,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_fsm"
+        },
+        {
+          "jaccard": 0.23,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_popcount"
+        }
+      ],
+      "manual_decision": "EXCLUDE_EXACT_PRIOR_TASK",
+      "manual_reason": "Same official source as dev10 ve_count10."
+    },
+    {
+      "id": "Prob079_fsm3onehot",
+      "exact_prior_file_matches": {
+        "prompt.txt": [],
+        "ref.sv": [],
+        "test.sv": []
+      },
+      "closest_prior_specs": [
+        {
+          "jaccard": 0.2571428571428571,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_fsm"
+        },
+        {
+          "jaccard": 0.1554054054054054,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_popcount"
+        },
+        {
+          "jaccard": 0.13253012048192772,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_count10"
+        }
+      ],
+      "manual_decision": "EXCLUDE_NEAR_DUPLICATE_AND_DOMAIN_GAP",
+      "manual_reason": "Same four-state graph as prior ve_fsm/Prob119; combinational one-hot variant. Invalid/multi-hot input state behavior unspecified, reference equation behavior must not be silently added to spec."
+    },
+    {
+      "id": "Prob095_review2015_fsmshift",
+      "exact_prior_file_matches": {
+        "prompt.txt": [],
+        "ref.sv": [],
+        "test.sv": []
+      },
+      "closest_prior_specs": [
+        {
+          "jaccard": 0.2755905511811024,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_count10"
+        },
+        {
+          "jaccard": 0.20496894409937888,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_fsm"
+        },
+        {
+          "jaccard": 0.17886178861788618,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_popcount"
+        }
+      ],
+      "manual_decision": "SELECTED_CONDITIONAL",
+      "manual_reason": "Reset-started four-cycle enable then terminal hold is explicit; distinct from periodic pulse_div4 or input-request delay. Same FSM/counter building blocks disclosed; independently specified implementation correctness still unverified."
+    },
+    {
+      "id": "Prob096_review2015_fsmseq",
+      "exact_prior_file_matches": {
+        "prompt.txt": [],
+        "ref.sv": [],
+        "test.sv": []
+      },
+      "closest_prior_specs": [
+        {
+          "jaccard": 0.30973451327433627,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_count10"
+        },
+        {
+          "jaccard": 0.2328767123287671,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_fsm"
+        },
+        {
+          "jaccard": 0.21296296296296297,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_popcount"
+        }
+      ],
+      "manual_decision": "NOT_SELECTED_STRATUM_FILLED",
+      "manual_reason": "First eligible Prob095 fills state-machine stratum. Sequence1101 latch shares detector/sticky building blocks with exposed tasks; not promoted as independent holdout."
+    },
+    {
+      "id": "Prob100_fsm3comb",
+      "exact_prior_file_matches": {
+        "prompt.txt": [],
+        "ref.sv": [],
+        "test.sv": []
+      },
+      "closest_prior_specs": [
+        {
+          "jaccard": 0.25139664804469275,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_fsm"
+        },
+        {
+          "jaccard": 0.1513157894736842,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_popcount"
+        },
+        {
+          "jaccard": 0.12941176470588237,
+          "path": "benchmarks/dev10/tasks/manifest.json#ve_count10"
+        }
+      ],
+      "manual_decision": "EXCLUDE_NEAR_DUPLICATE",
+      "manual_reason": "Exact state-transition graph of prior ve_fsm/Prob119 exposed as combinational current-state interface."
+    }
+  ],
+  "limitations": "No exact match is not proof of no exposure; functional near-duplicate judgments in selection take precedence over lexical scores. Public training contamination UNKNOWN."
+}

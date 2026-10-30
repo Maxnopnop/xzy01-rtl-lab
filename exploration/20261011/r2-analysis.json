@@ -1,0 +1,237 @@
+{
+  "status": "PASS",
+  "checked_utc": "2026-10-11T01:09:26.316600+00:00",
+  "kind": "PREDECLARED_R2_AGGREGATES_AND_ENGINEERING_AUDIT",
+  "plan_sha256": "18d6d4d86e02406e862546163638299e33c6d9bc27235ff154af4ad0589dc005",
+  "planned_slots": 20,
+  "started": 20,
+  "generated": 20,
+  "pending": 0,
+  "statuses": {
+    "PASS": 19,
+    "FUNCTION_FAIL": 1
+  },
+  "dispatch": {
+    "status": "GENERATION_COMPLETE",
+    "gate": true
+  },
+  "verified_evidence_files": 1073,
+  "verified_icarus_receipts": 60,
+  "arms": {
+    "regeneration": {
+      "planned": 10,
+      "started": 10,
+      "generated": 10,
+      "statuses": {
+        "PASS": 10
+      },
+      "usage": {
+        "input_tokens": 106450,
+        "output_tokens": 3609,
+        "cached_input_tokens": 44544,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 533
+      },
+      "elapsed_seconds": 118.23200000000008,
+      "generation_seconds": 113.595,
+      "pass_per_1000_output_tokens": 2.770850651149903,
+      "cost": "UNKNOWN; no billing information"
+    },
+    "feedback": {
+      "planned": 10,
+      "started": 10,
+      "generated": 10,
+      "statuses": {
+        "PASS": 9,
+        "FUNCTION_FAIL": 1
+      },
+      "usage": {
+        "input_tokens": 108332,
+        "output_tokens": 3503,
+        "cached_input_tokens": 59392,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 435
+      },
+      "elapsed_seconds": 132.82600000000002,
+      "generation_seconds": 128.219,
+      "pass_per_1000_output_tokens": 2.569226377390808,
+      "cost": "UNKNOWN; no billing information"
+    }
+  },
+  "effects": {
+    "no_change": 9,
+    "harm": 1
+  },
+  "family_clusters": {
+    "rt_sequence": [
+      {
+        "pair": "rt_sequence__r1",
+        "task": "rt_sequence",
+        "kind": "REAL_RETAINED_IR",
+        "effect": "no_change",
+        "output_token_ratio_le2": true
+      },
+      {
+        "pair": "rt_sequence__r2",
+        "task": "rt_sequence",
+        "kind": "REAL_RETAINED_IR",
+        "effect": "no_change",
+        "output_token_ratio_le2": true
+      }
+    ],
+    "sticky_alarm": [
+      {
+        "pair": "sticky_alarm__r1",
+        "task": "sticky_alarm",
+        "kind": "INJECTED_FAULT",
+        "effect": "no_change",
+        "output_token_ratio_le2": true
+      },
+      {
+        "pair": "sticky_alarm__r2",
+        "task": "sticky_alarm",
+        "kind": "INJECTED_FAULT",
+        "effect": "no_change",
+        "output_token_ratio_le2": true
+      }
+    ],
+    "event_parity": [
+      {
+        "pair": "event_parity__r1",
+        "task": "event_parity",
+        "kind": "INJECTED_FAULT",
+        "effect": "no_change",
+        "output_token_ratio_le2": true
+      },
+      {
+        "pair": "event_parity__r2",
+        "task": "event_parity",
+        "kind": "INJECTED_FAULT",
+        "effect": "no_change",
+        "output_token_ratio_le2": true
+      }
+    ],
+    "request_delay": [
+      {
+        "pair": "request_delay__r1",
+        "task": "request_delay",
+        "kind": "INJECTED_FAULT",
+        "effect": "no_change",
+        "output_token_ratio_le2": true
+      },
+      {
+        "pair": "request_delay__r2",
+        "task": "request_delay",
+        "kind": "INJECTED_FAULT",
+        "effect": "harm",
+        "output_token_ratio_le2": false
+      }
+    ],
+    "debounce3": [
+      {
+        "pair": "debounce3__r1",
+        "task": "debounce3",
+        "kind": "INJECTED_FAULT",
+        "effect": "no_change",
+        "output_token_ratio_le2": true
+      },
+      {
+        "pair": "debounce3__r2",
+        "task": "debounce3",
+        "kind": "INJECTED_FAULT",
+        "effect": "no_change",
+        "output_token_ratio_le2": true
+      }
+    ]
+  },
+  "strata": {
+    "REAL_RETAINED_IR": {
+      "planned_pairs": 2,
+      "effects": {
+        "no_change": 2
+      }
+    },
+    "INJECTED_FAULT": {
+      "planned_pairs": 8,
+      "effects": {
+        "no_change": 7,
+        "harm": 1
+      }
+    }
+  },
+  "descriptive_output_token_ratio_le2": {
+    "pairs": [
+      {
+        "pair": "rt_sequence__r1",
+        "task": "rt_sequence",
+        "kind": "REAL_RETAINED_IR",
+        "effect": "no_change",
+        "output_token_ratio_le2": true
+      },
+      {
+        "pair": "sticky_alarm__r1",
+        "task": "sticky_alarm",
+        "kind": "INJECTED_FAULT",
+        "effect": "no_change",
+        "output_token_ratio_le2": true
+      },
+      {
+        "pair": "event_parity__r1",
+        "task": "event_parity",
+        "kind": "INJECTED_FAULT",
+        "effect": "no_change",
+        "output_token_ratio_le2": true
+      },
+      {
+        "pair": "request_delay__r1",
+        "task": "request_delay",
+        "kind": "INJECTED_FAULT",
+        "effect": "no_change",
+        "output_token_ratio_le2": true
+      },
+      {
+        "pair": "debounce3__r1",
+        "task": "debounce3",
+        "kind": "INJECTED_FAULT",
+        "effect": "no_change",
+        "output_token_ratio_le2": true
+      },
+      {
+        "pair": "rt_sequence__r2",
+        "task": "rt_sequence",
+        "kind": "REAL_RETAINED_IR",
+        "effect": "no_change",
+        "output_token_ratio_le2": true
+      },
+      {
+        "pair": "sticky_alarm__r2",
+        "task": "sticky_alarm",
+        "kind": "INJECTED_FAULT",
+        "effect": "no_change",
+        "output_token_ratio_le2": true
+      },
+      {
+        "pair": "event_parity__r2",
+        "task": "event_parity",
+        "kind": "INJECTED_FAULT",
+        "effect": "no_change",
+        "output_token_ratio_le2": true
+      },
+      {
+        "pair": "debounce3__r2",
+        "task": "debounce3",
+        "kind": "INJECTED_FAULT",
+        "effect": "no_change",
+        "output_token_ratio_le2": true
+      }
+    ],
+    "count": 9,
+    "effects": {
+      "no_change": 9
+    },
+    "note": "Descriptive only; does not match total tokens, reasoning, compute or visible prompt text"
+  },
+  "infrastructure_failures": [],
+  "yosys": "NOT_RUN",
+  "limitations": "Five families, two repeats, fixed initial IR. Not an end-to-end comparison, natural error rate or equal actual compute/cost claim. No post-hoc filtering of primary denominator."
+}

@@ -1,0 +1,23 @@
+
+
+<generic_reference_context>
+These are generic style excerpts, not new task requirements or solutions. The original specification above takes precedence.
+Source: lowRISC contributors; CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/); unmodified selected prose.
+https://github.com/lowRISC/style-guides/blob/9c15ff5dce23eef969e00ab3715153967419eadd/VerilogCodingStyle.md
+[LR015; Case Statements; lines 2189-2192]
+  - a `default:` statement is **always** included in order to avoid accidental
+  inference of latches, even if all cases are covered. In simulation, a case
+  expression that evaluates to `X` will not match any case and will behave as a
+  latch, leading to different behavior than synthesis if no default is specified.
+
+[LR013; Case Statements; lines 2163-2164]
+Never use either the `full_case` or `parallel_case` pragmas. These pragmas can
+easily cause simulation/synthesis mismatches.
+
+[LR014; Case Statements; lines 2181-2185]
+The `unique` prefix is recommended before all case statements, as it creates
+simulation assertions that can catch certain mistakes. In some cases, `priority`
+may be used instead of `unique`, though in such cases, cascaded ternary
+structures should be the preferred way of representing priority encoders as
+they are a more readable representation for priority encoders.
+</generic_reference_context>

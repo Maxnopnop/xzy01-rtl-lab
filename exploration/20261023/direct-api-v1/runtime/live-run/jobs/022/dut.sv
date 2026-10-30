@@ -1,0 +1,56 @@
+module TopModule (
+    input  clk,
+    input  areset,
+    input  x,
+    output z
+);
+
+    typedef enum logic [1:0] {
+        IDLE,
+        ONE,
+        ZERO
+    } state_t;
+
+    state_t state, next_state;
+
+    always_comb begin
+        next_state = state;
+
+        case (state)
+            IDLE: begin
+                if (x)
+                    next_state = ONE;
+                else
+                    next_state = IDLE;
+            end
+
+            ONE: begin
+                if (x)
+                    next_state = ZERO;
+                else
+                    next_state = ONE;
+            end
+
+            ZERO: begin
+                if (x)
+                    next_state = ZERO;
+                else
+                    next_state = ONE;
+            end
+
+            default: begin
+                next_state = IDLE;
+            end
+        endcase
+    end
+
+    always_ff @(posedge clk or posedge areset) begin
+        if (areset)
+            state <= IDLE;
+        else
+            state <= next_state;
+    end
+
+    assign z = (state == ONE);
+
+endmodule

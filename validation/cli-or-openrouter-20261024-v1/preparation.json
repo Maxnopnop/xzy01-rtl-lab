@@ -1,0 +1,13 @@
+{
+  "original_probe_sha256": "72b7a131a18fdc663a145526ebc3347e3233d4c4e072b27e21a1ab9426267179",
+  "new_probe_sha256": "4f4f77e0893c4d47a56d0c090c21bd8625b9d3bb8e6bd18fb25fa5a037d70c29",
+  "catalog_unchanged": true,
+  "changes": {
+    "B=R.parents[2]": "B=R.parents[1]",
+    "MODELS=['gpt-5.6-luna','gpt-5.6-terra','gpt-5.6-sol']": "MODELS=['gpt-5.6-luna']  # one local-only entry check; not a three-model certification",
+    "for mode in ['401','403','429','disconnect','sse_disconnect']:": "for mode in []:  # no extra launches in this bounded recheck",
+    "'candidate_probe_cap':3,'retry_test_extra_cap':5": "'candidate_probe_cap':1,'retry_test_extra_cap':0",
+    "'retry_modes':['400 (reuse initial Luna)','401','403','429','disconnect','sse_disconnect']": "'retry_modes':['400 entry check only; zero-retry production test NOT_EXECUTED']"
+  },
+  "model_generation_calls": 0
+}

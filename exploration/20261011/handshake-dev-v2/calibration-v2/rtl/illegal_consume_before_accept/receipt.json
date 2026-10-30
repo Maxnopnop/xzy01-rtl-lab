@@ -1,0 +1,58 @@
+{
+  "name": "illegal_consume_before_accept",
+  "parameters": {
+    "KIND": 4,
+    "SCENE": 2,
+    "FAULT": 0
+  },
+  "expected": "FUNCTION_FAIL",
+  "expected_category": "UNEXPECTED_TRANSACTION",
+  "commands": [
+    {
+      "argv": [
+        "D:/iverilog/bin/iverilog.exe",
+        "-g2012",
+        "-s",
+        "tb",
+        "-Ptb.KIND=4",
+        "-Ptb.SCENE=2",
+        "-Ptb.FAULT=0",
+        "-o",
+        "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v2\\calibration-v2\\rtl\\illegal_consume_before_accept\\sim.vvp",
+        "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v2\\development.v",
+        "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v2\\tb.v"
+      ],
+      "returncode": 0,
+      "timeout": false,
+      "seconds": 0.0930000000007567,
+      "executable_sha256": "803b8844af2cc8ed70b5f08b07ffa749901280e81339617ca3e72cbbb852bd2b"
+    },
+    {
+      "argv": [
+        "D:/iverilog/bin/vvp.exe",
+        "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v2\\calibration-v2\\rtl\\illegal_consume_before_accept\\sim.vvp"
+      ],
+      "returncode": 0,
+      "timeout": false,
+      "seconds": 0.0319999999992433,
+      "executable_sha256": "e2f442f4d5aa76e55c85c3ff77e4446fbfdb9946b7cfe8a2dff87f275da17b62"
+    }
+  ],
+  "source_plan": [
+    {
+      "beats": [
+        [
+          81,
+          1
+        ]
+      ],
+      "termination": "drain"
+    }
+  ],
+  "observed": "FUNCTION_FAIL",
+  "counts": {
+    "UNEXPECTED_TRANSACTION": 2,
+    "MISSING_TRANSACTION": 2
+  },
+  "matched": true
+}

@@ -1,0 +1,62 @@
+{
+  "schema": 2,
+  "mode": "live",
+  "requested_model": "MOCK_NOT_REAL_LLM",
+  "backend": "icarus",
+  "planned": 3,
+  "completed": 1,
+  "pending": 2,
+  "counts": {
+    "API_ERROR": 1
+  },
+  "pass_fraction_of_planned": 0.0,
+  "real_generations": 0,
+  "model_call_reservations": 1,
+  "recorded_token_usage": {},
+  "by_task": [
+    {
+      "task": "adder8",
+      "category": "combinational",
+      "planned": 3,
+      "completed": 1,
+      "passes": 0,
+      "counts": {
+        "API_ERROR": 1
+      }
+    }
+  ],
+  "results": [
+    {
+      "schema": 1,
+      "task": "adder8",
+      "sample": 1,
+      "mode": "live",
+      "source_label": "LIVE_API",
+      "requested_model": "MOCK_NOT_REAL_LLM",
+      "live_api_success": false,
+      "started_utc": "2026-10-11T00:56:49.084539+00:00",
+      "directory": "jobs/adder8__s001/attempt_001/001_adder8",
+      "expected_checks": 65536,
+      "sampling": {
+        "stream": false,
+        "max_tokens": 4096
+      },
+      "status": "API_ERROR",
+      "stage": "api",
+      "message": "RemoteDisconnected; request failed; no retry",
+      "simulation_status": "API_ERROR",
+      "synthesis_status": "NOT_REQUESTED",
+      "joint_pass": false,
+      "elapsed_seconds": 0.578,
+      "finished_utc": "2026-10-11T00:56:49.652380+00:00",
+      "job_id": "adder8__s001",
+      "attempt": "attempt_001"
+    }
+  ],
+  "note": "Denominator includes planned samples; unfinished and infrastructure failures remain visible. No public benchmark or formal-equivalence claim.",
+  "suite": "custom",
+  "synthesis_counts": {
+    "NOT_REQUESTED": 1
+  },
+  "joint_passes": 0
+}

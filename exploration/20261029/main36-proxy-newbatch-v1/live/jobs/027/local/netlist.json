@@ -1,0 +1,201 @@
+{
+  "creator": "Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)",
+  "modules": {
+    "TopModule": {
+      "attributes": {
+        "top": "00000000000000000000000000000001",
+        "src": "dut.sv:1.1-15.10"
+      },
+      "ports": {
+        "mode": {
+          "direction": "input",
+          "bits": [ 2 ]
+        },
+        "too_cold": {
+          "direction": "input",
+          "bits": [ 3 ]
+        },
+        "too_hot": {
+          "direction": "input",
+          "bits": [ 4 ]
+        },
+        "fan_on": {
+          "direction": "input",
+          "bits": [ 5 ]
+        },
+        "heater": {
+          "direction": "output",
+          "bits": [ 6 ]
+        },
+        "aircon": {
+          "direction": "output",
+          "bits": [ 7 ]
+        },
+        "fan": {
+          "direction": "output",
+          "bits": [ 8 ]
+        }
+      },
+      "cells": {
+        "$auto$simplemap.cc:38:simplemap_not$84": {
+          "hide_name": 1,
+          "type": "$_NOT_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "dut.sv:12.22-12.27"
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 2 ],
+            "Y": [ 9 ]
+          }
+        },
+        "$auto$simplemap.cc:83:simplemap_bitop$83": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "dut.sv:11.21-11.36"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 2 ],
+            "B": [ 3 ],
+            "Y": [ 6 ]
+          }
+        },
+        "$auto$simplemap.cc:83:simplemap_bitop$85": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "dut.sv:12.21-12.38"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 9 ],
+            "B": [ 4 ],
+            "Y": [ 7 ]
+          }
+        },
+        "$auto$simplemap.cc:83:simplemap_bitop$86": {
+          "hide_name": 1,
+          "type": "$_OR_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "dut.sv:13.18-13.33"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 5 ],
+            "B": [ 6 ],
+            "Y": [ 10 ]
+          }
+        },
+        "$auto$simplemap.cc:83:simplemap_bitop$87": {
+          "hide_name": 1,
+          "type": "$_OR_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "dut.sv:13.18-13.42"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 10 ],
+            "B": [ 7 ],
+            "Y": [ 8 ]
+          }
+        }
+      },
+      "netnames": {
+        "$not$dut.sv:12$2_Y": {
+          "hide_name": 1,
+          "bits": [ 9 ],
+          "attributes": {
+            "src": "dut.sv:12.22-12.27"
+          }
+        },
+        "$or$dut.sv:13$4_Y": {
+          "hide_name": 1,
+          "bits": [ 10 ],
+          "attributes": {
+            "src": "dut.sv:13.18-13.33"
+          }
+        },
+        "aircon": {
+          "hide_name": 0,
+          "bits": [ 7 ],
+          "attributes": {
+            "src": "dut.sv:7.12-7.18"
+          }
+        },
+        "fan": {
+          "hide_name": 0,
+          "bits": [ 8 ],
+          "attributes": {
+            "src": "dut.sv:8.12-8.15"
+          }
+        },
+        "fan_on": {
+          "hide_name": 0,
+          "bits": [ 5 ],
+          "attributes": {
+            "src": "dut.sv:5.12-5.18"
+          }
+        },
+        "heater": {
+          "hide_name": 0,
+          "bits": [ 6 ],
+          "attributes": {
+            "src": "dut.sv:6.12-6.18"
+          }
+        },
+        "mode": {
+          "hide_name": 0,
+          "bits": [ 2 ],
+          "attributes": {
+            "src": "dut.sv:2.12-2.16"
+          }
+        },
+        "too_cold": {
+          "hide_name": 0,
+          "bits": [ 3 ],
+          "attributes": {
+            "src": "dut.sv:3.12-3.20"
+          }
+        },
+        "too_hot": {
+          "hide_name": 0,
+          "bits": [ 4 ],
+          "attributes": {
+            "src": "dut.sv:4.12-4.19"
+          }
+        }
+      }
+    }
+  }
+}

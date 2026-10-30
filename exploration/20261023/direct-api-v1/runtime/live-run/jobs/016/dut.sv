@@ -1,0 +1,45 @@
+module TopModule (
+    input  logic clk,
+    input  logic areset,
+    input  logic x,
+    output logic z
+);
+
+    localparam logic [1:0] COPY = 2'b00;
+    localparam logic [1:0] INV0 = 2'b01;
+    localparam logic [1:0] INV1 = 2'b10;
+
+    logic [1:0] state;
+
+    always_ff @(posedge clk or posedge areset) begin
+        if (areset) begin
+            state <= COPY;
+        end else begin
+            case (state)
+                COPY: begin
+                    if (x)
+                        state <= INV1;
+                    else
+                        state <= COPY;
+                end
+                INV0: begin
+                    if (x)
+                        state <= INV0;
+                    else
+                        state <= INV1;
+                end
+                default: begin
+                    if (x)
+                        state <= INV0;
+                    else
+                        state <= INV1;
+                end
+            endcase
+        end
+    end
+
+    always_comb begin
+        z = (state == INV1);
+    end
+
+endmodule

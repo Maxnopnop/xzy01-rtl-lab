@@ -1,0 +1,17 @@
+{
+  "per_task": {
+    "Prob089_ece241_2014_q5a": "异步reset_test(1)、定向位序列、400个双边沿随机reset/x事件；不是任意长度穷尽。",
+    "Prob023_vector100r": "两边沿更新100位随机输入，100个negedge后结束；非2^100穷尽。",
+    "Prob146_fsm_serialdata": "启动reset、9/10拍低电平的有效/缺失停止序列、800个双边沿随机in/reset事件；out_byte参考为X时不评分。非全载荷/复位相位穷尽。",
+    "Prob032_vector0": "count++驱动10次3位vec，静态可见覆盖0..7并回绕；实际采样数/通过与工具语义未经运行核验。",
+    "Prob064_vector3": "零、1到0x400单比特、交替5位分组和100个双边沿随机输入；不是30位输入穷尽，也未覆盖全部walking-one位置。"
+  },
+  "common": [
+    "测试与参考来自同一公开仓库版本，不是独立oracle。",
+    "tb_match用参考X作don’t-care；实际错误数/检查次数未知。",
+    "TB在posedge/negedge比较，刺激多用NBA赋值；不能将其说成独立的边沿间稳定性或中途复位证明。",
+    "所有测试为原文件，无新增向量；依赖静态见RefModule、TopModule、stimulus_gen、tb，无include/readmem。",
+    "冻结旧SAT14/32及旧事件检查器尚无这些题的适配/假设审查，当前状态NOT_EVALUATED/NOT_SUPPORTED_PENDING_REVIEW，不机械复制，不省略分母。",
+    "后续参考同源校准即使通过也不是独立功能证明；本次0 compile/sim/SAT。"
+  ]
+}

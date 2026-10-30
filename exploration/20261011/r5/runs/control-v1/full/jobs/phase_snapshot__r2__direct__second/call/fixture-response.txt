@@ -1,0 +1,1 @@
+module phase_snapshot(input clk); broken syntax; endmodule

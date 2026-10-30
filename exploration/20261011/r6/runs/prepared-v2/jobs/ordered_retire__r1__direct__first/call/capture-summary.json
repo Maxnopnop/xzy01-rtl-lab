@@ -1,0 +1,37 @@
+{
+  "status": "GENERATED",
+  "usage": {
+    "input_tokens": 10739,
+    "cached_input_tokens": 2944,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 1323,
+    "reasoning_output_tokens": 317
+  },
+  "source": "READ_ONLY_SAVED_EVIDENCE",
+  "reserved_calls": 1,
+  "response": "```verilog\nmodule ordered_retire (\n    input  wire       clk,\n    input  wire       rst_n,\n    input  wire       flush,\n    input  wire       issue,\n    input  wire [1:0] issue_tag,\n    input  wire       finish,\n    input  wire [1:0] finish_tag,\n    output reg  [1:0] count,\n    output reg        retired,\n    output reg  [1:0] retired_tag\n);\n\n    reg        valid0, valid1;\n    reg        done0, done1;\n    reg [1:0]  tag0, tag1;\n\n    reg        valid0_next, valid1_next;\n    reg        done0_next, done1_next;\n    reg [1:0]  tag0_next, tag1_next;\n    reg [1:0]  count_next;\n    reg        retired_next;\n    reg [1:0]  retired_tag_next;\n\n    reg        accept_issue;\n    reg        retire_head;\n    reg        old_done0, old_done1;\n\n    always @* begin\n        valid0_next     = valid0;\n        valid1_next     = valid1;\n        done0_next      = done0;\n        done1_next      = done1;\n        tag0_next       = tag0;\n        tag1_next       = tag1;\n        count_next      = count;\n        retired_next    = 1'b0;\n        retired_tag_next = retired_tag;\n\n        retire_head = valid0 && done0;\n\n        accept_issue = issue &&\n                       (count < 2) &&\n                       !(valid0 && (tag0 == issue_tag)) &&\n                       !(valid1 && (tag1 == issue_tag));\n\n        old_done0 = done0 || (finish && valid0 &&\n                              (tag0 == finish_tag));\n        old_done1 = done1 || (finish && valid1 &&\n                              (tag1 == finish_tag));\n\n        done0_next = old_done0;\n        done1_next = old_done1;\n\n        if (retire_head) begin\n            retired_next     = 1'b1;\n            retired_tag_next = tag0;\n\n            valid0_next = valid1;\n            tag0_next   = tag1;\n            done0_next  = old_done1;\n\n            valid1_next = 1'b0;\n            tag1_next   = 2'b00;\n            done1_next  = 1'b0;\n\n            count_next = count - 1'b1;\n        end\n\n        if (accept_issue) begin\n            if (retire_head) begin\n                if (valid1) begin\n                    valid1_next = 1'b1;\n                    tag1_next   = issue_tag;\n                    done1_next  = 1'b0;\n                end else begin\n                    valid0_next = 1'b1;\n                    tag0_next   = issue_tag;\n                    done0_next  = 1'b0;\n                end\n            end else if (!valid0) begin\n                valid0_next = 1'b1;\n                tag0_next   = issue_tag;\n                done0_next  = 1'b0;\n            end else begin\n                valid1_next = 1'b1;\n                tag1_next   = issue_tag;\n                done1_next  = 1'b0;\n            end\n\n            count_next = count_next + 1'b1;\n        end\n    end\n\n    always @(posedge clk or negedge rst_n) begin\n        if (!rst_n) begin\n            valid0      <= 1'b0;\n            valid1      <= 1'b0;\n            done0       <= 1'b0;\n            done1       <= 1'b0;\n            tag0        <= 2'b00;\n            tag1        <= 2'b00;\n            count       <= 2'b00;\n            retired     <= 1'b0;\n            retired_tag <= 2'b00;\n        end else if (flush) begin\n            valid0      <= 1'b0;\n            valid1      <= 1'b0;\n            done0       <= 1'b0;\n            done1       <= 1'b0;\n            tag0        <= 2'b00;\n            tag1        <= 2'b00;\n            count       <= 2'b00;\n            retired     <= 1'b0;\n            retired_tag <= 2'b00;\n        end else begin\n            valid0      <= valid0_next;\n            valid1      <= valid1_next;\n            done0       <= done0_next;\n            done1       <= done1_next;\n            tag0        <= tag0_next;\n            tag1        <= tag1_next;\n            count       <= count_next;\n            retired     <= retired_next;\n            retired_tag <= retired_tag_next;\n        end\n    end\n\nendmodule\n```",
+  "response_sha256": "bfdffb3101c550bb8fd75ec2c9b804a9a3ed1b1c8eb328e82a7679af2e63e32c",
+  "thread_id": "01a12a04-b7db-7812-9149-541482d27aa2",
+  "exit": {
+    "utc": "2026-10-11T08:12:18.208611+00:00",
+    "pid": 19540,
+    "identity": "134361799144380600",
+    "nonce": "e7eb9403bb4a486caa7142434ea90885",
+    "request_sha256": "8332ad0c356325161e93f21e0cb9f0859952dfed75e6e6722200bafa0f925a47",
+    "returncode": 0,
+    "reason": null,
+    "elapsed_seconds": 23.75,
+    "streams_closed": true,
+    "reader_errors": [],
+    "counts": {
+      "stdout": 4298,
+      "stderr": 0
+    },
+    "descendant_cleanup": "UNVERIFIED",
+    "sha256": {
+      "stdout": "a84456244e081b73412e8b05a82c47efe108d8f79421c97987d4b1a9094e7ffd",
+      "stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "reconstructed_without_summary": true
+}

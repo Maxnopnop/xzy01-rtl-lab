@@ -1,0 +1,15 @@
+{
+  "model": "gpt-5.6-sol",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs."
+    },
+    {
+      "role": "user",
+      "content": "Implement module request_delay(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. Initially idle with q=0. In idle, a sampled din=1 accepts a request. q remains 0 on that accepting edge, then is 1 for exactly the following clock cycle, regardless of din. At the next edge q returns to 0 and enters cooldown. In cooldown, remain there while din=1; an edge with din=0 returns to idle. The edge returning to idle does not accept a request.\n\n<generic_reference_context>\nThe following are retrieved generic style-guide excerpts, not task requirements or solutions. The original specification above takes precedence. Do not infer extra task behavior from these excerpts.\nSource: lowRISC contributors, lowRISC Verilog Coding Style Guide, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Excerpts selected without text rewriting.\nPinned source: https://github.com/lowRISC/style-guides/blob/9c15ff5dce23eef969e00ab3715153967419eadd/VerilogCodingStyle.md\n[LR006; Sequential Logic (Registers); lines 1818-1820]\nSequential statements for state assignments should only contain reset values and\na next-state to state assignment, use a separate combinational-only block to\ngenerate that next-state value.\n\n[LR018; Case Statements; lines 2245-2252]\n`casex` should not be used. `casex` implements a symmetric wildcard operator\nsuch that an `X` in the case expression may match one or more case items.\n`casez` only treats high-impedance states (`Z` or `?`) as a wildcard, and\nperforms exact matches for undriven `X` inputs. While this does not completely\nfix the problems with symmetric wildcard matching, it is harder to accidentally\nproduce a `Z` input than an `X` input, so this form is preferred.\n`case inside` does not treat either `X` or `Z` in the case expression as a\nwildcard, so this form is preferred over `casez`.\n</generic_reference_context>\n"
+    }
+  ],
+  "stream": false,
+  "max_completion_tokens": 8192
+}

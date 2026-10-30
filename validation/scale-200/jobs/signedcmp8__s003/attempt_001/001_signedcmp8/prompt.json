@@ -1,0 +1,18 @@
+{
+  "mode": "offline",
+  "request": {
+    "model": "",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs."
+      },
+      {
+        "role": "user",
+        "content": "Implement module signedcmp8(input wire signed [7:0] a, b, output wire lt, eq, gt). Combinational two's-complement signed comparison: lt=(a<b), eq=(a==b), gt=(a>b)."
+      }
+    ],
+    "stream": false,
+    "max_tokens": 4096
+  }
+}

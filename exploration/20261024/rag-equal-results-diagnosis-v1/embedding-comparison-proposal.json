@@ -1,0 +1,12 @@
+{
+  "status": "RECORDED_NOT_AUTHORIZED_FOR_EXECUTION",
+  "user_request": "可以考虑横向对比是否有embedding会不会影响RAG表现；先记录方案，优先分析已有RTL有无RAG结果一致",
+  "goal": "分开测检索层差异与最终RTL原测试结果；不能仅凭片段变化断言生成收益",
+  "proposed_retrieval_arms": ["frozen lexical baseline without embedding", "frozen dense embedding retriever", "optional hybrid lexical+dense ranked fusion, separately approved"],
+  "controls": ["同一冻结语料、切块、查询、上下文预算和包装", "固定embedding模型版本、权重hash、归一化及距离度量", "固定生成模型及解码参数，逐题同条件三模型完整输入相同", "不用当前题目成绩调参；所有结果及费用保留", "独立相关性标注缺失时不宣称检索准确率"],
+  "execution_gate": "Current no-generative/no-embedding restriction remains; proposal requires separate frozen scope/budget/review before execution",
+  "embedding_model": null,
+  "generative_calls": 0,
+  "embedding_calls": 0,
+  "current_priority": "Read-only diagnosis of existing240/96 model experiment results; no method changes or reruns"
+}

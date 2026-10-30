@@ -1,0 +1,36 @@
+XZY01 - Recorded synthesis library setup (reference only; no job executed by this report)
+
+1. School Linux terminal: launch Design Compiler in a separate tcsh
+tcsh -f
+source /usr/eelocal/synopsys/syn-vx2025.06-sp2/.cshrc
+dc_shell
+
+2. Inside dc_shell> (Tcl, NOT Linux shell):
+set_app_var target_library [list "/staff/ee/dept/public/course_PDK/nangate/freepdk-45nm/lib/NangateOpenCellLibrary_PDKv1_3_v2010_12/Front_End/Liberty/NLDM/NangateOpenCellLibrary_typical.db"]
+set_app_var link_library [concat [list "*"] $target_library]
+printvar target_library
+printvar link_library
+
+The existing synthesis script then analyzes dut.sv, elaborates sequence_detector,
+links the design, reads constraints.sdc, and runs compile. Setting a path alone
+does not demonstrate successful library loading or synthesis.
+Exit DC, then exit tcsh before starting the other environment.
+
+3. School Linux terminal: launch Genus in a separate tcsh
+tcsh -f
+source /usr/eelocal/cadence/genus211/.cshrc
+genus
+
+4. Inside Genus prompt (Tcl, NOT Linux shell):
+set_db library [list "/staff/ee/dept/public/course_PDK/nangate/freepdk-45nm/lib/NangateOpenCellLibrary_PDKv1_3_v2010_12/Front_End/Liberty/NLDM/NangateOpenCellLibrary_typical.lib"]
+get_db library
+
+The existing script next uses read_hdl -sv dut.sv, elaborate sequence_detector,
+read_sdc constraints.sdc, syn_generic, syn_map, syn_opt.
+
+Library-setting lines are copied from the archived synthesis.tcl files.
+printvar/get_db are optional inspection commands, not additional archived run evidence.
+The school library is Nangate Open Cell Library / FreePDK45, typical (1.10 V, 25 C).
+The .db and .lib are synthesis inputs. NangateOpenCellLibrary.v is a separate
+Verilog cell simulation model. TETRAMAX in the functional check is a model macro,
+not a run of the TetraMAX product. No library bytes are included in this package.

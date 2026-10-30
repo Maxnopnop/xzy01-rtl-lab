@@ -1,0 +1,45 @@
+def execute(root,slots,mode,transport,judge_fn=core.judge,request_loader=None,gate=None):
+ ledger=core.Ledger(root,slots,mode);ledger.lock()
+ try:
+  if ledger.recover() or (ledger.root/'STOP.json').exists():return ledger.summary()
+  start=core.read(ledger.root/'identity.json')['start_epoch']
+  for slot in slots:
+   if (ledger.root/'results'/f"{slot['id']}.json").exists():continue
+   elapsed=time.time()-start
+   if elapsed<0 or elapsed>=12000 or core.size(ledger.root)>524288000:ledger.stop('WALL_OR_STORAGE_LIMIT');break
+   if gate:
+    check=gate()
+    if not check['ready']:ledger.stop('TECHNICAL_GATE_CHANGED');break
+   raw=request_loader(slot) if request_loader else (core.BATCH/slot['request']).read_bytes();validate_payload(slot,raw)
+   folder=ledger.root/'jobs'/f"{slot['ordinal']:03d}";folder.mkdir(parents=True) # never overwrite prior attempt
+   core.save_bytes(folder/'request.json',raw)
+   # Durable reservation is committed BEFORE the transport callback is invoked.
+   ledger.reserve(slot,core.digest(raw))
+   env=None
+   try:
+    env=transport(slot,folder,min(180,12000-elapsed))
+    if env.get('outcome')=='UNKNOWN' and (folder/'transport-response.json').exists():
+     stored=core.read(folder/'transport-response.json')
+     if stored.get('outcome')=='HTTP_OK':env=dict(stored,forced_stop='WORKER_FAILURE_AFTER_DURABLE_RESPONSE')
+    if env.get('request_sha256') not in (None,slot['request_sha256']) or (mode=='LIVE' and env.get('outcome')=='HTTP_OK' and not env.get('request_sha256')):result={'slot':slot['id'],'status':'PAYLOAD_MISMATCH','stage':'transport','stop':True,'complete_http_return':False}
+    else:
+     if not (folder/'transport-response.json').exists():core.save(folder/'transport-response.json',env)
+     result=core.process_response(slot,folder,env,judge_fn)
+   except BaseException as e:
+    # After reservation any interruption is conservatively unknown; never resend.
+    complete=isinstance(env,dict) and env.get('outcome')=='HTTP_OK'
+    usage=None
+    if complete:
+     try:usage=json.loads(env['body']).get('usage')
+     except (ValueError,TypeError,AttributeError):pass
+    result={'slot':slot['id'],'status':'POSTPROCESSING_ERROR' if complete else 'UNKNOWN','stage':'postprocessing' if complete else 'transport','stop':True,'complete_http_return':complete,'usage':usage,'error_type':type(e).__name__}
+   result['mode']=mode;result['utc']=core.utc();result['request_sha256']=slot['request_sha256']
+   label=next(r for r in core.read(core.BATCH/'task-labels.json') if r['id']==slot['task']);result['task_label']=label['current_label'];result['clear_subset']=label['clear_subset'];result['not_a_spec_violation_claim']=True
+   ledger.finish(slot,result)
+   if result.get('stop'):ledger.stop(result['status'])
+   core.save(ledger.root/'summaries'/f'{len(ledger.reservations()):03d}.json',ledger.summary())
+   if result.get('stop'):break
+  return ledger.summary()
+ except BaseException:
+  ledger.stop('UNEXPECTED_INFRASTRUCTURE_FAILURE_NO_AUTOMATIC_RESUME');raise
+ finally:ledger.unlock()

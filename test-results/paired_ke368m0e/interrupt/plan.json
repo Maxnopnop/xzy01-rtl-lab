@@ -1,0 +1,339 @@
+{
+  "schema": 2,
+  "kind": "PAIRED_FIXED_IR_REPAIR_V1",
+  "stage": "A",
+  "created_utc": "2026-09-30T17:19:25.126798+00:00",
+  "config": {
+    "mode": "offline",
+    "repeats": 1,
+    "api_timeout": 180,
+    "compile_timeout": 15,
+    "sim_timeout": 10,
+    "codex_executable": null,
+    "codex_reasoning": "low",
+    "iverilog": null,
+    "vvp": null,
+    "synthesis": "none"
+  },
+  "jobs": [
+    {
+      "id": "m01__real_overlap__s001__control",
+      "pair_id": "m01__real_overlap__s001",
+      "task": "rt_sequence",
+      "case": "real_overlap",
+      "model": "gpt-5.6-sol",
+      "arm": "control",
+      "sample": 1
+    },
+    {
+      "id": "m01__real_overlap__s001__feedback",
+      "pair_id": "m01__real_overlap__s001",
+      "task": "rt_sequence",
+      "case": "real_overlap",
+      "model": "gpt-5.6-sol",
+      "arm": "feedback",
+      "sample": 1
+    },
+    {
+      "id": "m02__real_overlap__s001__feedback",
+      "pair_id": "m02__real_overlap__s001",
+      "task": "rt_sequence",
+      "case": "real_overlap",
+      "model": "gpt-5.6-terra",
+      "arm": "feedback",
+      "sample": 1
+    },
+    {
+      "id": "m02__real_overlap__s001__control",
+      "pair_id": "m02__real_overlap__s001",
+      "task": "rt_sequence",
+      "case": "real_overlap",
+      "model": "gpt-5.6-terra",
+      "arm": "control",
+      "sample": 1
+    },
+    {
+      "id": "m01__rt_sequence_sync_reset__s001__feedback",
+      "pair_id": "m01__rt_sequence_sync_reset__s001",
+      "task": "rt_sequence",
+      "case": "rt_sequence_sync_reset",
+      "model": "gpt-5.6-sol",
+      "arm": "feedback",
+      "sample": 1
+    },
+    {
+      "id": "m01__rt_sequence_sync_reset__s001__control",
+      "pair_id": "m01__rt_sequence_sync_reset__s001",
+      "task": "rt_sequence",
+      "case": "rt_sequence_sync_reset",
+      "model": "gpt-5.6-sol",
+      "arm": "control",
+      "sample": 1
+    },
+    {
+      "id": "m02__rt_sequence_sync_reset__s001__control",
+      "pair_id": "m02__rt_sequence_sync_reset__s001",
+      "task": "rt_sequence",
+      "case": "rt_sequence_sync_reset",
+      "model": "gpt-5.6-terra",
+      "arm": "control",
+      "sample": 1
+    },
+    {
+      "id": "m02__rt_sequence_sync_reset__s001__feedback",
+      "pair_id": "m02__rt_sequence_sync_reset__s001",
+      "task": "rt_sequence",
+      "case": "rt_sequence_sync_reset",
+      "model": "gpt-5.6-terra",
+      "arm": "feedback",
+      "sample": 1
+    },
+    {
+      "id": "m01__rt_sequence_reset_polarity__s001__control",
+      "pair_id": "m01__rt_sequence_reset_polarity__s001",
+      "task": "rt_sequence",
+      "case": "rt_sequence_reset_polarity",
+      "model": "gpt-5.6-sol",
+      "arm": "control",
+      "sample": 1
+    },
+    {
+      "id": "m01__rt_sequence_reset_polarity__s001__feedback",
+      "pair_id": "m01__rt_sequence_reset_polarity__s001",
+      "task": "rt_sequence",
+      "case": "rt_sequence_reset_polarity",
+      "model": "gpt-5.6-sol",
+      "arm": "feedback",
+      "sample": 1
+    },
+    {
+      "id": "m02__rt_sequence_reset_polarity__s001__feedback",
+      "pair_id": "m02__rt_sequence_reset_polarity__s001",
+      "task": "rt_sequence",
+      "case": "rt_sequence_reset_polarity",
+      "model": "gpt-5.6-terra",
+      "arm": "feedback",
+      "sample": 1
+    },
+    {
+      "id": "m02__rt_sequence_reset_polarity__s001__control",
+      "pair_id": "m02__rt_sequence_reset_polarity__s001",
+      "task": "rt_sequence",
+      "case": "rt_sequence_reset_polarity",
+      "model": "gpt-5.6-terra",
+      "arm": "control",
+      "sample": 1
+    },
+    {
+      "id": "m01__rt_sequence_early_output__s001__feedback",
+      "pair_id": "m01__rt_sequence_early_output__s001",
+      "task": "rt_sequence",
+      "case": "rt_sequence_early_output",
+      "model": "gpt-5.6-sol",
+      "arm": "feedback",
+      "sample": 1
+    },
+    {
+      "id": "m01__rt_sequence_early_output__s001__control",
+      "pair_id": "m01__rt_sequence_early_output__s001",
+      "task": "rt_sequence",
+      "case": "rt_sequence_early_output",
+      "model": "gpt-5.6-sol",
+      "arm": "control",
+      "sample": 1
+    },
+    {
+      "id": "m02__rt_sequence_early_output__s001__control",
+      "pair_id": "m02__rt_sequence_early_output__s001",
+      "task": "rt_sequence",
+      "case": "rt_sequence_early_output",
+      "model": "gpt-5.6-terra",
+      "arm": "control",
+      "sample": 1
+    },
+    {
+      "id": "m02__rt_sequence_early_output__s001__feedback",
+      "pair_id": "m02__rt_sequence_early_output__s001",
+      "task": "rt_sequence",
+      "case": "rt_sequence_early_output",
+      "model": "gpt-5.6-terra",
+      "arm": "feedback",
+      "sample": 1
+    }
+  ],
+  "tasks": [
+    {
+      "id": "rt_sequence",
+      "module": "sequence_detector",
+      "checks": 1840,
+      "spec": "Please act as a professional Verilog designer.\n\nImplement a module of a sequence detector to detect a specific 4-bit binary sequence 1001.\n\nModule name:\n    sequence_detector\n\nInput ports:\n    clk: Clock signal to synchronize the detector.\n    rst_n: Active-low reset signal to initialize the state machine.\n    data_in: 1-bit binary input signal to feed the bitstream for sequence detection.\n\nOutput ports:\n    sequence_detected: 1-bit output signal that is set high when the specific sequence is detected.\n    \nInternal logic:\n    State Machine: The sequence detector uses a finite state machine (FSM) with the following states:\n    IDLE: Waiting for the start of the sequence.\n    S1: The first bit of the desired sequence is detected.\n    S2: The second bit of the desired sequence is detected.\n    S3: The third bit of the desired sequence is detected.\n    S4: The fourth and final bit of the desired sequence is detected, and the output sequence_detected is set high.\n\nImplementation:\n    -FSM Design: The FSM transitions through states based on the bitstream data_in. On each clock cycle, the detector checks for a match of the specific sequence.\n\n    -Sequence Detection: The module checks the input data_in and transitions between states. Once the complete sequence is detected, sequence_detected is asserted.\n\n    -Reset Behavior: When rst_n is low, the state machine returns to the IDLE state, resetting the detection process.\n\nDevelopment-subset clarification (part of the fixed specification): Use asynchronous active-low reset, overlapping detections, and a Moore output high after the edge consuming the final 1; matching the archived reference.",
+      "category": "fsm",
+      "split": "development",
+      "family": "sequence1001",
+      "benchmark": "RTLLM",
+      "suite_version": "dev10-v1",
+      "synthesis_eligible": true,
+      "origin": {
+        "repository": "https://github.com/hkust-zhiyao/RTLLM",
+        "commit": "51ed553d0ffd32797a1a0a13e051656bf302c81f",
+        "path": "Control/Finite State Machine/sequence_detector",
+        "license": "MIT",
+        "files": {
+          "upstream/RTLLM/sequence_detector/design_description.txt": "eaa043dd75258c345f8e2f21817c2454a38923e476e50523a5e41bff8ef93b13",
+          "upstream/RTLLM/sequence_detector/verified_sequence_detector.v": "573bbf1a2e9afb77960131b731cd6aae85b3508a09465c7589a131b517401f23",
+          "upstream/RTLLM/sequence_detector/testbench.v": "0d5e90177af40049a62b48bf63ae8ff113435115a7544d6727a272123583bcae"
+        }
+      },
+      "adaptations": [
+        "Independent deterministic vector oracle replaces upstream TB; upstream TB archived.",
+        "Reference module renamed; timescale directive removed.",
+        "Use asynchronous active-low reset, overlapping detections, and a Moore output high after the edge consuming the final 1; matching the archived reference."
+      ],
+      "mutation": "Breaks sequence prefix transition",
+      "reference_sha256": "6acb22c07d9e2bef30be3a8ed023a845da6a565b1b5f13938ea90d3bbb0ae010",
+      "mutant_sha256": "a18f13b6c6d5d4c88681df2b627226c00f7343f4a88e2d0cda5b230004ef933d",
+      "tb_sha256": "6abb900b5f8cae1ea0ab98321c1830bd58f4132c75efb676b9cc4250a5e90e4b",
+      "assets": {
+        "rt_sequence.hex": "6f656556d2940534fe990384d84ed61cb498a683531b24ee599374d98aec4c40"
+      },
+      "ports": {
+        "reset_port": "rst_n",
+        "input_port": "data_in",
+        "output_port": "sequence_detected",
+        "active": 0,
+        "examples": [
+          {
+            "bits": "1001",
+            "outputs": [
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "bits": "1011",
+            "outputs": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "bits": "1001001",
+            "outputs": [
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              1
+            ]
+          }
+        ]
+      },
+      "public_contract": {
+        "clock_edge": "posedge",
+        "output_kind": "moore",
+        "reset": {
+          "kind": "async",
+          "active": 0,
+          "output": 0
+        },
+        "trace_convention": "Each trace starts after reset. List output after each rising edge; reset is then inactive.",
+        "examples": [
+          {
+            "bits": "1001",
+            "outputs": [
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "bits": "1011",
+            "outputs": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "bits": "1001001",
+            "outputs": [
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              1
+            ]
+          }
+        ]
+      },
+      "bank_directory": "rt_sequence"
+    }
+  ],
+  "cases": [
+    {
+      "id": "real_overlap",
+      "task": "rt_sequence",
+      "stage": "A",
+      "kind": "REAL_RETAINED_IR",
+      "error_type": "overlap_fallback",
+      "ir_file": "real_overlap.json",
+      "origin": "evidence/fsm48/jobs/m02__rt_sequence__table__s001/stage1/response.txt",
+      "origin_sha256": "5ce2fcb30c7f978419ad41299ba7440957ca700efd21075f7407ce426efcdc09",
+      "ir_sha256": "5ce2fcb30c7f978419ad41299ba7440957ca700efd21075f7407ce426efcdc09"
+    },
+    {
+      "id": "rt_sequence_sync_reset",
+      "task": "rt_sequence",
+      "stage": "A",
+      "kind": "INJECTED_FAULT",
+      "error_type": "sync_reset",
+      "ir_file": "rt_sequence_sync_reset.json",
+      "ir_sha256": "2b7a13163359d209cd2e71721af0787f9bfb484e387ecc6f09a952c4d97064b2"
+    },
+    {
+      "id": "rt_sequence_reset_polarity",
+      "task": "rt_sequence",
+      "stage": "A",
+      "kind": "INJECTED_FAULT",
+      "error_type": "reset_polarity",
+      "ir_file": "rt_sequence_reset_polarity.json",
+      "ir_sha256": "16360ab50212202b795fb783aaa605d2a4a90b177283ad6e7b5acb0239b1c6bd"
+    },
+    {
+      "id": "rt_sequence_early_output",
+      "task": "rt_sequence",
+      "stage": "A",
+      "kind": "INJECTED_FAULT",
+      "error_type": "early_output",
+      "ir_file": "rt_sequence_early_output.json",
+      "ir_sha256": "e7df3db996dc6a81d5fcc966d228942df27246ee4d72616541deb7ac364c94a2"
+    }
+  ],
+  "source_hashes": {
+    "batch.py": "caf3dfdf2cdd753a72c574f43e17ca04bcb9bcefc21a2dd59686a7a1a0489c10",
+    "rtl_lab.py": "ab4f386a3bb5aa84bb729f18fe3b19e43399ba66dc567e297328d1c046432702",
+    "backends.py": "ff9d4e787157a57b4c6c506c52fc4c798e388a0ca1cf694df2b50d79c76de5b0",
+    "codex_adapter.py": "33a6080d45ff8f36c6441afeda8ba53d6e5204bd0bd0ad33a8d38c165d63af9d",
+    "api_worker.py": "3696301af3270a50d959773e15476700395a9703aa2a8185d0f2a669b695efc8",
+    "synthesis.py": "0bf4a414c99cc0700b3ecc25f640fe7f4f3ddc22d1ab4ab234264d402fd221c3",
+    "fsm_ir.py": "ccdfb042eba75880b42fe18aacaea31641bb52d84825400f7d71c17d08420f26",
+    "fsm_checks.py": "5f8a82a5628511b685dec53adb2f5433dd0740b2456a409d7a0029af4cedda82",
+    "fsm_study.py": "ba60bd48153b7297426558bbb575e61ffa5da141624b6fa329dbbe4d7a4cf801",
+    "paired_bank.py": "2b1ad37bf00bc07adf6ed56025909d4e73ed1b70f1f788be7c63eb98bba3fc8f",
+    "paired_study.py": "949a25a5e40f9fd1f2fd1f0f9468f04885224e9c072ecc1fa5ba8150ad0b7960",
+    "benchmarks/paired-v1/bank-lock.json": "0e11e5f7baa2cc2c96a3044548c806355bcbf26637925207c49b23531fe29ec8"
+  },
+  "max_calls": 999,
+  "expansion_gate": null,
+  "fixture_cost_note": "Shared initial IRs are retained or deliberately injected, not freshly generated. One new turn per branch; historical generation costs are not zeroed."
+}

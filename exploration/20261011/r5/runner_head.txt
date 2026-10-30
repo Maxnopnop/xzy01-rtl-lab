@@ -1,0 +1,15 @@
+"""R4 prepare-gated 48 unique calls; model-produced intents only in real campaign."""
+import sys,json,time,argparse
+from pathlib import Path
+from types import SimpleNamespace
+from collections import Counter
+BASE=Path(__file__).resolve().parent;ROOT=BASE.parents[2];V3=BASE.parent/'r3-runner-v3'
+sys.path[:0]=[str(BASE),str(ROOT),str(V3)]
+import tasks,intent,prompts,judge,batch,rtl_lab as lab,cli_adapter as adapter
+RUN=BASE/'runs/prepared-v2';ASSETS=BASE/'assets-v1'
+FUNCTIONAL={'PASS','FUNCTION_FAIL','COMPILE_FAIL','RTL_REJECTED','EXTRACTION_ERROR','IR_INVALID','UNSUPPORTED','INPUT_LIMIT'}
+MAX_INPUT=256*1024
+def hashes():
+    paths=sorted(BASE.glob('*.py'))+[BASE/'PROTOCOL.md']+sorted((BASE/'references').glob('*.sv'))+sorted(ASSETS.glob('*.json'))
+    paths+=[V3/'cli_adapter.py',V3/'stdin_process.py']+[ROOT/n for n in ('rtl_lab.py','backends.py','batch.py','fsm_study.py')]
+    return {str(p.relative_to(ROOT)):lab.digest(p.read_bytes()) for p in paths}

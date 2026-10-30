@@ -1,0 +1,15 @@
+{
+  "model": "gpt-5.6-luna",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs."
+    },
+    {
+      "role": "user",
+      "content": "\nI would like you to implement a module named TopModule with the following\ninterface. All input and output ports are one bit unless otherwise\nspecified.\n\n - input  a\n - input  b\n - input  c\n - input  d\n - input  e\n - output out (25 bits)\n\nImplement a module that given five 1-bit signals (a, b, c, d, and e),\ncompute all 25 pairwise one-bit comparisons in the 25-bit output vector.\nThe output should be 1 if the two bits being compared are equal. Example:\nout[24] = ~a ^ a; out[23] = ~a ^ b; out[22] = ~a ^ c; ...\nout[ 1] = ~e ^ d; out[ 0] = ~e ^ e.\n\n"
+    }
+  ],
+  "stream": false,
+  "max_completion_tokens": 8192
+}

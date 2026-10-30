@@ -1,0 +1,37 @@
+{
+  "status": "GENERATED",
+  "usage": {
+    "input_tokens": 11204,
+    "cached_input_tokens": 7424,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 1057,
+    "reasoning_output_tokens": 241
+  },
+  "source": "READ_ONLY_SAVED_EVIDENCE",
+  "reserved_calls": 1,
+  "response": "```verilog\nmodule ordered_retire (\n    input  wire       clk,\n    input  wire       rst_n,\n    input  wire       flush,\n    input  wire       issue,\n    input  wire [1:0] issue_tag,\n    input  wire       finish,\n    input  wire [1:0] finish_tag,\n    output reg  [1:0] count,\n    output reg        retired,\n    output reg  [1:0] retired_tag\n);\n\n    reg [1:0] tag0, tag1;\n    reg       fin0, fin1;\n\n    wire issue_accept =\n        issue && (count < 2) &&\n        ((count == 0) || (issue_tag != tag0)) &&\n        ((count < 2) || (issue_tag != tag1));\n\n    always @(posedge clk or negedge rst_n) begin\n        if (!rst_n) begin\n            count       <= 2'd0;\n            tag0        <= 2'd0;\n            tag1        <= 2'd0;\n            fin0        <= 1'b0;\n            fin1        <= 1'b0;\n            retired     <= 1'b0;\n            retired_tag <= 2'd0;\n        end else if (flush) begin\n            count       <= 2'd0;\n            tag0        <= 2'd0;\n            tag1        <= 2'd0;\n            fin0        <= 1'b0;\n            fin1        <= 1'b0;\n            retired     <= 1'b0;\n            retired_tag <= 2'd0;\n        end else begin\n            retired <= (count != 0) && fin0;\n\n            if ((count != 0) && fin0)\n                retired_tag <= tag0;\n\n            if ((count != 0) && fin0) begin\n                if (count == 2) begin\n                    count <= 2'd1;\n                    tag0  <= tag1;\n                    fin0  <= fin1 || (finish && (finish_tag == tag1));\n                    tag1  <= 2'd0;\n                    fin1  <= 1'b0;\n                end else if (issue_accept) begin\n                    count <= 2'd1;\n                    tag0  <= issue_tag;\n                    fin0  <= 1'b0;\n                    tag1  <= 2'd0;\n                    fin1  <= 1'b0;\n                end else begin\n                    count <= 2'd0;\n                    tag0  <= 2'd0;\n                    tag1  <= 2'd0;\n                    fin0  <= 1'b0;\n                    fin1  <= 1'b0;\n                end\n            end else begin\n                case (count)\n                    2'd0: begin\n                        if (issue_accept) begin\n                            count <= 2'd1;\n                            tag0  <= issue_tag;\n                            fin0  <= 1'b0;\n                        end\n                    end\n\n                    2'd1: begin\n                        if (finish && (finish_tag == tag0))\n                            fin0 <= 1'b1;\n\n                        if (issue_accept) begin\n                            count <= 2'd2;\n                            tag1  <= issue_tag;\n                            fin1  <= 1'b0;\n                        end\n                    end\n\n                    2'd2: begin\n                        if (finish && (finish_tag == tag0))\n                            fin0 <= 1'b1;\n                        if (finish && (finish_tag == tag1))\n                            fin1 <= 1'b1;\n                    end\n\n                    default: begin\n                        count <= 2'd0;\n                        tag0  <= 2'd0;\n                        tag1  <= 2'd0;\n                        fin0  <= 1'b0;\n                        fin1  <= 1'b0;\n                    end\n                endcase\n            end\n        end\n    end\n\nendmodule\n```",
+  "response_sha256": "e0a9ca530aa2eac76101ab3374626f549efe03a92d91aa97848f0495fd0c0a0c",
+  "thread_id": "01a12a08-840c-7ac2-8abc-ea16c6187dee",
+  "exit": {
+    "utc": "2026-10-11T08:16:24.921576+00:00",
+    "pid": 34196,
+    "identity": "134361801633752567",
+    "nonce": "99ce261735294daca3571fd55bbbd7ca",
+    "request_sha256": "a43ab956d4ad73e8e1a19f3c61f8e25dc19742cea5a23f6f23410461c73026fe",
+    "returncode": 0,
+    "reason": null,
+    "elapsed_seconds": 21.53099999999904,
+    "streams_closed": true,
+    "reader_errors": [],
+    "counts": {
+      "stdout": 3748,
+      "stderr": 0
+    },
+    "descendant_cleanup": "UNVERIFIED",
+    "sha256": {
+      "stdout": "1c478132ee86fef8fef2e33c618f77f308c4d82789c28aaa5f01139862e9bd28",
+      "stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "reconstructed_without_summary": true
+}

@@ -1,0 +1,16 @@
+Clock edge rising; reset async_low.
+Register l0 has width 2 and reset 0.
+Register l1 has width 2 and reset 0.
+Register s0 has width 2 and reset 0.
+Register s1 has width 2 and reset 0.
+Register mask has width 2 and reset 0.
+Register pulse has width 1 and reset 0.
+On the clock edge, set l0 to (data if write and slot == 0 else s0) if commit and ((mask | (2 if slot else 1) if write else mask) & 1) and not abort_tx else l0.
+On the clock edge, set l1 to (data if write and slot == 1 else s1) if commit and ((mask | (2 if slot else 1) if write else mask) & 2) and not abort_tx else l1.
+On the clock edge, set s0 to l0 if abort_tx else (data if write and slot == 0 else s0).
+On the clock edge, set s1 to l1 if abort_tx else (data if write and slot == 1 else s1).
+On the clock edge, set mask to 0 if abort_tx or commit else (mask | (2 if slot else 1) if write else mask).
+On the clock edge, set pulse to 1 if commit and not abort_tx else 0.
+Continuously output visible as (l1 if read_slot else l0) if rst_n else 0.
+Continuously output dirty as mask.
+Continuously output committed as pulse.

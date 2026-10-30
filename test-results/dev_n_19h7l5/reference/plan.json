@@ -1,0 +1,453 @@
+{
+  "schema": 2,
+  "created_utc": "2026-09-30T14:10:38.660674+00:00",
+  "config": {
+    "mode": "offline",
+    "model": "",
+    "base_url": "",
+    "api_key_env": "LLM_API_KEY",
+    "allow_anonymous": false,
+    "codex_executable": null,
+    "codex_reasoning": "low",
+    "temperature": null,
+    "seed": null,
+    "max_output_tokens": 4096,
+    "token_field": "max_tokens",
+    "api_timeout": 180,
+    "compile_timeout": 15,
+    "sim_timeout": 10,
+    "iverilog": null,
+    "vvp": null,
+    "rtl_dir": "/mnt/e/Codex/2026-09-25/xzy01-using-llm-for-digital-chip-2/outputs/rtl-batch/benchmarks/dev10/reference",
+    "label": "OFFLINE_FIXTURE",
+    "backend": "icarus",
+    "suite": "dev10",
+    "task_dir": "benchmarks/dev10/tasks",
+    "synthesis": "yosys",
+    "yosys": null,
+    "synth_timeout": 60
+  },
+  "tasks": [
+    {
+      "id": "ve_addsub",
+      "module": "TopModule",
+      "checks": 131072,
+      "spec": "Consider the following adder-subtractor with a zero flag:\n\n  synthesis verilog_input_version verilog_2001\n  module TopModule (\n      input do_sub,\n      input [7:0] a,\n      input [7:0] b,\n      output reg [7:0] out,\n      output reg result_is_zero\n  );\n\n      always @(*) begin\n          case (do_sub)\n            0: out = a+b;\n            1: out = a-b;\n          endcase\n\n          if (~out)\n              result_is_zero = 1;\n      end\n\n  endmodule\n\nUnfortunately, this module has a bug. Implement a new version of this\nmodule that fixes the bug.",
+      "category": "arithmetic",
+      "split": "development",
+      "family": "addsub",
+      "benchmark": "verilog-eval",
+      "suite_version": "dev10-v1",
+      "synthesis_eligible": true,
+      "origin": {
+        "repository": "https://github.com/NVlabs/verilog-eval",
+        "commit": "c498220d0a52248f8e3fdffe279075215bde2da6",
+        "path": "dataset_spec-to-rtl/Prob123_bugs_addsubz",
+        "license": "MIT",
+        "files": {
+          "upstream/verilog-eval/Prob123_bugs_addsubz_prompt.txt": "3a8f9a585971b0860d638de476315cb5e4b328db6ba03e45408cd0181a25fcd4",
+          "upstream/verilog-eval/Prob123_bugs_addsubz_ref.sv": "8790d9ac5eddb0a9f59275aaee7b67911fb595fd9b519f8ef07de116b0875a20",
+          "upstream/verilog-eval/Prob123_bugs_addsubz_test.sv": "f3eaacb4d5bcf7eecea48772ca9c917e5e51e4adbc374a8039cb5754c832276f"
+        }
+      },
+      "adaptations": [
+        "Independent deterministic vector oracle replaces upstream TB; upstream TB archived.",
+        "Reference module renamed; timescale directive removed."
+      ],
+      "mutation": "Incorrect zero flag",
+      "reference_sha256": "63e1905a9d24ee4c310dd63b872d159bd171187aee7c9267a50f22555f80c8d3",
+      "mutant_sha256": "7cd5ea829e09bf760426659dc1d87d4543009c73daf81ebb1defe2c820258c7d",
+      "tb_sha256": "5e0e9b37dad3ebc91fc40742d7315ce2cb9ba8bd5ec2c364a39eff9256538aeb",
+      "assets": {
+        "ve_addsub.hex": "88e8b8c58b07ed14a0982d9bd1e8ba423123577094a517d1242c83bca8f8484d"
+      }
+    },
+    {
+      "id": "ve_popcount",
+      "module": "TopModule",
+      "checks": 1112,
+      "spec": "I would like you to implement a module named TopModule with the following\ninterface. All input and output ports are one bit unless otherwise\nspecified.\n\n - input  in  (255 bits)\n - output out (  8 bits)\n\nA \"population count\" circuit counts the number of '1's in an input\nvector. The module should implement a population count circuit for a\n255-bit input vector.",
+      "category": "arithmetic",
+      "split": "development",
+      "family": "popcount",
+      "benchmark": "verilog-eval",
+      "suite_version": "dev10-v1",
+      "synthesis_eligible": true,
+      "origin": {
+        "repository": "https://github.com/NVlabs/verilog-eval",
+        "commit": "c498220d0a52248f8e3fdffe279075215bde2da6",
+        "path": "dataset_spec-to-rtl/Prob030_popcount255",
+        "license": "MIT",
+        "files": {
+          "upstream/verilog-eval/Prob030_popcount255_prompt.txt": "5e741f3f7e69e3d850d6aad2a705f9896e3b5b19bf75e7386fa435b0f4ebbb39",
+          "upstream/verilog-eval/Prob030_popcount255_ref.sv": "22b15d60c088cb92db08008302f287e4ba9ec76a6cd50f9ed91f16dcf9bf1eac",
+          "upstream/verilog-eval/Prob030_popcount255_test.sv": "ddcbf4f9702214d74f9157eb20b7f511c4a9b278f273fbf43dc2c78e09e28dda"
+        }
+      },
+      "adaptations": [
+        "Independent deterministic vector oracle replaces upstream TB; upstream TB archived.",
+        "Reference module renamed; timescale directive removed."
+      ],
+      "mutation": "Drops most significant input bit",
+      "reference_sha256": "9cc75018964d53c983b6bf72e4b34b51119f54e540105a4fbd5618f88c16a4db",
+      "mutant_sha256": "031c2553053080c008af7bb7246799a462362554ad5fca7c5112d7f9548baccc",
+      "tb_sha256": "180ab80c4cf9d575067886cf64899f9c76531b5412e7e05a157d9564d1559935",
+      "assets": {
+        "ve_popcount.hex": "094a321c1fb9a1882eedba65cbda764359031ab6bc55fd6613c2700ae2892ff7"
+      }
+    },
+    {
+      "id": "ve_count10",
+      "module": "TopModule",
+      "checks": 639,
+      "spec": "I would like you to implement a module named TopModule with the following\ninterface. All input and output ports are one bit unless otherwise\nspecified.\n\n - input  clk\n - input  reset\n - output q (4 bits)\n\nThe module should implement a decade counter that counts from 0 through\n9, inclusive, with a period of 10. Assume all sequential logic is\ntriggered on the positive edge of the clock. The reset input is active\nhigh synchronous, and should reset the counter to 0.",
+      "category": "sequential",
+      "split": "development",
+      "family": "counter",
+      "benchmark": "verilog-eval",
+      "suite_version": "dev10-v1",
+      "synthesis_eligible": true,
+      "origin": {
+        "repository": "https://github.com/NVlabs/verilog-eval",
+        "commit": "c498220d0a52248f8e3fdffe279075215bde2da6",
+        "path": "dataset_spec-to-rtl/Prob040_count10",
+        "license": "MIT",
+        "files": {
+          "upstream/verilog-eval/Prob040_count10_prompt.txt": "e35cbdcf9ccefc9728dda97ac8aa8e1c3090f9565e006eda4c9edeb9d6acfe32",
+          "upstream/verilog-eval/Prob040_count10_ref.sv": "6a28cdd1ae1cbc4faab5b7cbfe1f4e01834585633a1ec2e051de897fea411743",
+          "upstream/verilog-eval/Prob040_count10_test.sv": "01022deff71a14634d19c6ebf75673ae678dcfbb6a23c13b27722042e991a3e4"
+        }
+      },
+      "adaptations": [
+        "Independent deterministic vector oracle replaces upstream TB; upstream TB archived.",
+        "Reference module renamed; timescale directive removed."
+      ],
+      "mutation": "Wrong counter wrap",
+      "reference_sha256": "2c51c017ccaccfebb355056fab37fed390c40d1614a82f59157af77700d66e55",
+      "mutant_sha256": "081a92589ec4ed207288810e2294dacd1660723d01796e78f8337ad12e3f8a43",
+      "tb_sha256": "6a94125b254425506fd629f6e0e96481d8db2b0d71cbfd5c2c64b61e92052e47",
+      "assets": {
+        "ve_count10.hex": "8f718ad534f63da41424678630f8f937baa8e8160b157291fdc5ed20850a97cd"
+      }
+    },
+    {
+      "id": "ve_rotate",
+      "module": "TopModule",
+      "checks": 839,
+      "spec": "I would like you to implement a module named TopModule with the following\ninterface. All input and output ports are one bit unless otherwise\nspecified.\n\n - input  clk\n - input  load\n - input  ena  (  2 bits)\n - input  data (100 bits)\n - output q    (100 bits)\n\nThe module should implement a 100-bit left/right rotator, with\nsynchronous load and left/right enable. A rotator shifts-in the\nshifted-out bit from the other end of the register, unlike a shifter that\ndiscards the shifted-out bit and shifts in a zero. If enabled, a rotator\nrotates the bits around and does not modify/discard them.\n\n  (1) load: Loads shift register with data[99:0] instead of rotating.\n      Synchronous active high.\n\n  (2) ena[1:0]: Synchronous. Chooses whether and which direction to\n      rotate:\n      (a) 2'b01 rotates right by one bit,\n      (b) 2'b10 rotates left by one bit,\n      (c) 2'b00 and 2'b11 do not rotate.\n\n  (3) q: The contents of the rotator.",
+      "category": "sequential",
+      "split": "development",
+      "family": "rotate",
+      "benchmark": "verilog-eval",
+      "suite_version": "dev10-v1",
+      "synthesis_eligible": true,
+      "origin": {
+        "repository": "https://github.com/NVlabs/verilog-eval",
+        "commit": "c498220d0a52248f8e3fdffe279075215bde2da6",
+        "path": "dataset_spec-to-rtl/Prob105_rotate100",
+        "license": "MIT",
+        "files": {
+          "upstream/verilog-eval/Prob105_rotate100_prompt.txt": "e224cc89d91c9985106be012fe57c5f7001988fa084901810cc4a81219e8383a",
+          "upstream/verilog-eval/Prob105_rotate100_ref.sv": "d987e7b9143311e743be174c27b1b4ab2b1fa5c6cbf4a980485885ab349bfb1f",
+          "upstream/verilog-eval/Prob105_rotate100_test.sv": "ab0b6f491d7830cbd7809ea6956d08599934c0e06fe29400de9bce853d358fc1"
+        }
+      },
+      "adaptations": [
+        "Independent deterministic vector oracle replaces upstream TB; upstream TB archived.",
+        "Reference module renamed; timescale directive removed."
+      ],
+      "mutation": "Wrong rotate direction",
+      "reference_sha256": "91daaa983042154903707a2fe7b768cfcf8e382ec5055212e1b701fdc1d66b0b",
+      "mutant_sha256": "955219efb89e31bc4ce7cf50ef21bd472ae1060d7b30630a45d3699a37186e57",
+      "tb_sha256": "b54c555523b45792e7cbb50c0531479783350b6320acddedd0000b49f15cf3fb",
+      "assets": {
+        "ve_rotate.hex": "e861d4d834e888baea11be24de50e447415d68490d5ebf254cce4eae15394ad5"
+      }
+    },
+    {
+      "id": "ve_fsm",
+      "module": "TopModule",
+      "checks": 1600,
+      "spec": "I would like you to implement a module named TopModule with the following\ninterface. All input and output ports are one bit unless otherwise\nspecified.\n\n - input  clk\n - input  areset\n - input  in\n - output out\n\nThe module should implement a Moore state machine with the following\nstate transition table with one input, one output, and four states.\nImplement this state machine. Include a positive edge triggered\nasynchronous reset that resets the FSM to state A. Assume all sequential\nlogic is triggered on the positive edge of the clock.\n\n  state | next state in=0, next state in=1 | output\n  A     | A, B                             | 0\n  B     | C, B                             | 0\n  C     | A, D                             | 0\n  D     | C, B                             | 1",
+      "category": "fsm",
+      "split": "development",
+      "family": "fsm3",
+      "benchmark": "verilog-eval",
+      "suite_version": "dev10-v1",
+      "synthesis_eligible": true,
+      "origin": {
+        "repository": "https://github.com/NVlabs/verilog-eval",
+        "commit": "c498220d0a52248f8e3fdffe279075215bde2da6",
+        "path": "dataset_spec-to-rtl/Prob119_fsm3",
+        "license": "MIT",
+        "files": {
+          "upstream/verilog-eval/Prob119_fsm3_prompt.txt": "c4bd7a8a42e599d4cb22412c5c0e1a8ed082a7cb12ac441d90de91cd577ae9a4",
+          "upstream/verilog-eval/Prob119_fsm3_ref.sv": "893c89407124afc3d51d6089262eff8a80abc0eeee15950006c6d063978f0c9b",
+          "upstream/verilog-eval/Prob119_fsm3_test.sv": "671afe85dfc599fa6f07f2052df26d03f9c7a91d1d953182948bdd21e9b3f1cc"
+        }
+      },
+      "adaptations": [
+        "Independent deterministic vector oracle replaces upstream TB; upstream TB archived.",
+        "Reference module renamed; timescale directive removed."
+      ],
+      "mutation": "Wrong Moore output state",
+      "reference_sha256": "6ff14fa807ced9355a7f0e062111d132779841b7e78cbf1d67aae4ecb88d4923",
+      "mutant_sha256": "d285ef7b16842a5644d2a37a67e574468e2f74eff49a167fd68c33b46ad81e88",
+      "tb_sha256": "73ac7f8b8c2835b3c2d303a54a06175f4b086d8e366bd40a303299646fa5f292",
+      "assets": {
+        "ve_fsm.hex": "0f6497d7fcdab38012e9c05fe485aebad980fb99e41464772027bd29b0e5aa27"
+      }
+    },
+    {
+      "id": "rt_comparator",
+      "module": "comparator_3bit",
+      "checks": 64,
+      "spec": "Please act as a professional Verilog designer.\n\nImplement a module of a 3-bit comparator for comparing binary numbers.\n\nModule name:  \n    comparator_3bit               \nInput ports:\n    A [2:0]: First 3-bit input operand (the first binary number to compare).\n    B [2:0]: Second 3-bit input operand (the second binary number to compare).\nOutput ports:\n    A_greater: 1-bit output indicating if A is greater than B.\n    A_equal: 1-bit output indicating if A is equal to B.\n    A_less: 1-bit output indicating if A is less than B.\n\nImplementation:\nComparison Logic: The module compares the two 3-bit binary numbers A and B using combinational logic.\n- The outputs A_greater, A_equal, and A_less are determined based on the comparison of A and B.\n- A_greater is set to 1 if A > B, A_equal is set to 1 if A == B, and A_less is set to 1 if A < B.\n\nOutput Encoding: The outputs are mutually exclusive, meaning only one of the three outputs will be high (1) at any given time, based on the comparison results.\n\nGive me the complete code.",
+      "category": "combinational",
+      "split": "development",
+      "family": "comparator",
+      "benchmark": "RTLLM",
+      "suite_version": "dev10-v1",
+      "synthesis_eligible": true,
+      "origin": {
+        "repository": "https://github.com/hkust-zhiyao/RTLLM",
+        "commit": "51ed553d0ffd32797a1a0a13e051656bf302c81f",
+        "path": "Arithmetic/Comparator/comparator_3bit",
+        "license": "MIT",
+        "files": {
+          "upstream/RTLLM/comparator_3bit/design_description.txt": "e27a26ad0d4202d5c0dd43df6c36d0c718790a4bb0742672fa34d75a1a6b773d",
+          "upstream/RTLLM/comparator_3bit/verified_comparator_3bit.v": "f20a0ea6b8e785eca0c3ee8500004f9619afe3edfa2d707e0a8a706438d4f407",
+          "upstream/RTLLM/comparator_3bit/testbench.v": "a46023a6a223269a2c8fa3c791fe52dd712eba526f1fcce3b62bf2739c7f7125"
+        }
+      },
+      "adaptations": [
+        "Independent deterministic vector oracle replaces upstream TB; upstream TB archived.",
+        "Reference module renamed; timescale directive removed."
+      ],
+      "mutation": "Signed instead of unsigned comparison",
+      "reference_sha256": "5e7404689a5f3f9b7670c01fbb179c00d8ad95b0cdb5bd8302ad64b3e2851e95",
+      "mutant_sha256": "98629f3ca0b2922f84a1ef6a770139873a4f49db730cd7c4843f8cf5ddbd608c",
+      "tb_sha256": "a688ad671c672323681232728acc4fbc58f67d35967868816392063da9e699fd",
+      "assets": {
+        "rt_comparator.hex": "c8377b8892d8abdbf46a15da64da75932e91ca16493d92c9a2d64a7d1426e146"
+      }
+    },
+    {
+      "id": "rt_counter12",
+      "module": "counter_12",
+      "checks": 960,
+      "spec": "Please act as a professional verilog designer.\n\nImplement a module of a counter design that requires counting from 4 'b0000 to 4' d11. The counting can be controlled by the input signal valid_count. That is, the count is paused if valid_count is 0. The counter increments on each clock cycle when the valid_count signal is active and resets to 0 when the reset signal (rst_n) is active.\n\nModule name:  \n    counter_12               \nInput ports:\n    rst_n: Reset signal (active low)\n    clk: Clock signal\n    valid_count: Signal to enable counting\nOutput ports:\n    out: 4-bit output representing the current count value\n\nImplementation:\nIf the reset signal is active (!rst_n), the counter is reset to 0 by assigning the value 4'b0000 to the output register (out). If the valid_count signal is 1, the counter increments. It checks if the current count value (out) is equal to 4'd11 (maximum count value). If it is, the counter wraps around and resets to 0 by assigning the value 4'b0000 to the output register (out). Otherwise, it increments the output register by 1. If the valid_count = 0, the counter will stop, and the output register (out) remains unchanged.\n\nGive me the complete code.\n\nDevelopment-subset clarification (part of the fixed specification): rst_n is asynchronous active-low; counting is on rising clk edges, matching the archived reference.",
+      "category": "sequential",
+      "split": "development",
+      "family": "counter",
+      "benchmark": "RTLLM",
+      "suite_version": "dev10-v1",
+      "synthesis_eligible": true,
+      "origin": {
+        "repository": "https://github.com/hkust-zhiyao/RTLLM",
+        "commit": "51ed553d0ffd32797a1a0a13e051656bf302c81f",
+        "path": "Control/Counter/counter_12",
+        "license": "MIT",
+        "files": {
+          "upstream/RTLLM/counter_12/design_description.txt": "4249cde4988e7190234109aab68ac1bd94fdd247e5a07ea17f57b0901b829a7b",
+          "upstream/RTLLM/counter_12/verified_counter_12.v": "9e42bf55ab4dbdf96c12a7a309ff98877d6ea2e89a2b5b0c337041edfd232bbb",
+          "upstream/RTLLM/counter_12/testbench.v": "d42e3a798a72ffc19a6af5d51b0e686e77e93993e7ea6b5566894c4eb58c1b33"
+        }
+      },
+      "adaptations": [
+        "Independent deterministic vector oracle replaces upstream TB; upstream TB archived.",
+        "Reference module renamed; timescale directive removed.",
+        "rst_n is asynchronous active-low; counting is on rising clk edges, matching the archived reference."
+      ],
+      "mutation": "Wrong counter wrap",
+      "reference_sha256": "3087dfa46f5af08fe53aef48ccc6432e6537ab69a7d50146738cdd51b6706c55",
+      "mutant_sha256": "d92067c407c05cb88afb16664940bb3f94dd3ed4a1ac973a0354ee9f2591dacc",
+      "tb_sha256": "1771f170f9f088c5195f095af249e7397dfa8b056270eeef5527521c020ed7dc",
+      "assets": {
+        "rt_counter12.hex": "0f4c93c20e85f4bc4fbc9263953e558f9355fa0e6474d704002447e546f66fd2"
+      }
+    },
+    {
+      "id": "rt_sequence",
+      "module": "sequence_detector",
+      "checks": 1840,
+      "spec": "Please act as a professional Verilog designer.\n\nImplement a module of a sequence detector to detect a specific 4-bit binary sequence 1001.\n\nModule name:\n    sequence_detector\n\nInput ports:\n    clk: Clock signal to synchronize the detector.\n    rst_n: Active-low reset signal to initialize the state machine.\n    data_in: 1-bit binary input signal to feed the bitstream for sequence detection.\n\nOutput ports:\n    sequence_detected: 1-bit output signal that is set high when the specific sequence is detected.\n    \nInternal logic:\n    State Machine: The sequence detector uses a finite state machine (FSM) with the following states:\n    IDLE: Waiting for the start of the sequence.\n    S1: The first bit of the desired sequence is detected.\n    S2: The second bit of the desired sequence is detected.\n    S3: The third bit of the desired sequence is detected.\n    S4: The fourth and final bit of the desired sequence is detected, and the output sequence_detected is set high.\n\nImplementation:\n    -FSM Design: The FSM transitions through states based on the bitstream data_in. On each clock cycle, the detector checks for a match of the specific sequence.\n\n    -Sequence Detection: The module checks the input data_in and transitions between states. Once the complete sequence is detected, sequence_detected is asserted.\n\n    -Reset Behavior: When rst_n is low, the state machine returns to the IDLE state, resetting the detection process.\n\nDevelopment-subset clarification (part of the fixed specification): Use asynchronous active-low reset, overlapping detections, and a Moore output high after the edge consuming the final 1; matching the archived reference.",
+      "category": "fsm",
+      "split": "development",
+      "family": "sequence1001",
+      "benchmark": "RTLLM",
+      "suite_version": "dev10-v1",
+      "synthesis_eligible": true,
+      "origin": {
+        "repository": "https://github.com/hkust-zhiyao/RTLLM",
+        "commit": "51ed553d0ffd32797a1a0a13e051656bf302c81f",
+        "path": "Control/Finite State Machine/sequence_detector",
+        "license": "MIT",
+        "files": {
+          "upstream/RTLLM/sequence_detector/design_description.txt": "eaa043dd75258c345f8e2f21817c2454a38923e476e50523a5e41bff8ef93b13",
+          "upstream/RTLLM/sequence_detector/verified_sequence_detector.v": "573bbf1a2e9afb77960131b731cd6aae85b3508a09465c7589a131b517401f23",
+          "upstream/RTLLM/sequence_detector/testbench.v": "0d5e90177af40049a62b48bf63ae8ff113435115a7544d6727a272123583bcae"
+        }
+      },
+      "adaptations": [
+        "Independent deterministic vector oracle replaces upstream TB; upstream TB archived.",
+        "Reference module renamed; timescale directive removed.",
+        "Use asynchronous active-low reset, overlapping detections, and a Moore output high after the edge consuming the final 1; matching the archived reference."
+      ],
+      "mutation": "Breaks sequence prefix transition",
+      "reference_sha256": "6acb22c07d9e2bef30be3a8ed023a845da6a565b1b5f13938ea90d3bbb0ae010",
+      "mutant_sha256": "a18f13b6c6d5d4c88681df2b627226c00f7343f4a88e2d0cda5b230004ef933d",
+      "tb_sha256": "6abb900b5f8cae1ea0ab98321c1830bd58f4132c75efb676b9cc4250a5e90e4b",
+      "assets": {
+        "rt_sequence.hex": "6f656556d2940534fe990384d84ed61cb498a683531b24ee599374d98aec4c40"
+      }
+    },
+    {
+      "id": "rt_shift",
+      "module": "right_shifter",
+      "checks": 1280,
+      "spec": "Please act as a professional verilog designer.\n\nImplement a right shifter. The module performs an 8-bit right shift on a 1-bit input by first initializing the q register to 0. On each rising edge of the clock, the module shifts the contents of the q register to the right by one bit and inserts the new input bit d into the most significant position of the register.\n\nModule name:  \n    right_shifter    \n\nInput ports:\n    clk: Clock signal used for synchronous operation.\n    d: Input signal to be right-shifted.\n\nOutput ports:\n    q: Output signal representing the result of the right shift operation.\n\nImplementation:\nThe register is defined as reg [7:0] q and initialized to 0 using the initial statement. The value of q is right-shifted by 1 bit using the >> operator: q <= (q >> 1).\nThe most significant bit (q[7]) of the register is assigned the value of the input signal (d): q[7] <= d.\n\nGive me the complete code.\n\nDevelopment-subset clarification (part of the fixed specification): Output q is 8 bits. The specified initial q=0 is required; this generic synthesis check retains initialization and makes no ASIC power-up guarantee.",
+      "category": "sequential",
+      "split": "development",
+      "family": "shiftregister",
+      "benchmark": "RTLLM",
+      "suite_version": "dev10-v1",
+      "synthesis_eligible": true,
+      "origin": {
+        "repository": "https://github.com/hkust-zhiyao/RTLLM",
+        "commit": "51ed553d0ffd32797a1a0a13e051656bf302c81f",
+        "path": "Memory/Shifter/right_shifter",
+        "license": "MIT",
+        "files": {
+          "upstream/RTLLM/right_shifter/design_description.txt": "ec6b1076293e4d554ef55d2e6e8f14e04ee9949118baa88689e960c2caf83cda",
+          "upstream/RTLLM/right_shifter/verified_right_shifter.v": "f8bf2e2eb843f69221cafa21de06d349ec772f95c9336460312b27f1d92e4299",
+          "upstream/RTLLM/right_shifter/testbench.v": "e3fa4fa4dbe08b79c1742ce1b8fb4a863da7cd510ae1d4f08e4399ca9746c790"
+        }
+      },
+      "adaptations": [
+        "Independent deterministic vector oracle replaces upstream TB; upstream TB archived.",
+        "Reference module renamed; timescale directive removed.",
+        "Output q is 8 bits. The specified initial q=0 is required; this generic synthesis check retains initialization and makes no ASIC power-up guarantee."
+      ],
+      "mutation": "Wrong shift direction",
+      "reference_sha256": "547d1fd22da552c8e6c23c1be730602b58f28e77af8288cee352fe682d2a03a2",
+      "mutant_sha256": "bbee0047e1707cbbb53ff5c4ba522ef1a63bc8ba4e1889bfe295c47ff5ac365d",
+      "tb_sha256": "317bd44b09d6e386c553285adc6ff088ff99215393b965eafced38f91ad2173b",
+      "assets": {
+        "rt_shift.hex": "686adbf96be798f4d0a2e43e15bdea6139a47cd5bb8e95d142b0f66a691152cd"
+      }
+    },
+    {
+      "id": "rt_pipeline",
+      "module": "multi_pipe_4bit",
+      "checks": 1024,
+      "spec": "Please act as a professional verilog designer.\n\nImplement the design of 4bit unsigned number pipeline multiplier. It consists of two levels of registers to store intermediate values and control the multiplication process.\n\nModule name:  \n    multi_pipe_4bit \n\nInput ports:\n    clk: Clock signal used for synchronous operation.\n    rst_n: Active-low reset signal. Defined as 0 for chip reset and 1 for reset signal inactive.\n    mul_a: Input signal representing the multiplicand with a data width of \"size\" bits.\n    mul_b: Input signal representing the multiplier with a data width of \"size\" bits.\t\n\nOutput ports:\n    mul_out: Product output signal with a data width of 2*size bits.\n\nParameter:\n    size = 4\n\nImplementation:\nExtension of input signals:\nThe input signals (mul_a and mul_b) are extended by adding \"size\" number of zero bits at the most significant bit positions.\nMultiplication operation:\nThe module uses a generate block to perform multiplication for each bit position of the multiplier (mul_b) and generate the partial products.\nFor each bit position i from 0 to size-1, the partial product is calculated as follows:\nIf the corresponding bit in the multiplier is 1, the multiplicand is left-shifted by i positions.\nIf the corresponding bit in the multiplier is 0, the partial product is set to 0 ('d0).\nAdd of partial products:\nThe module uses registers to store the intermediate sum values.\nOn the positive edge of the clock signal (clk) or the falling edge of the reset signal (rst_n), the module performs add operations.\nIf the reset signal (rst_n) is low, indicating a reset condition, the registers are set to 0.\nIf the reset signal (rst_n) is high, the registers are updated with the sum of the corresponding partial products.\nFinal product calculation:\nOn the positive edge of the clock signal (clk) or the falling edge of the reset signal (rst_n), the module calculates the final product.\nIf the reset signal (rst_n) is low, indicating a reset condition, the product output (mul_out) is set to 0.\nIf the reset signal (rst_n) is high, the product output (mul_out) is updated with the sum of registers.\n\nGive me the complete code.\n\nDevelopment-subset clarification (part of the fixed specification): Evaluate only size=4. Keep parameter size=4 and the specified port widths. The output after an edge equals the product of inputs sampled one rising edge earlier (two register stages).",
+      "category": "pipeline",
+      "split": "development",
+      "family": "multiplier",
+      "benchmark": "RTLLM",
+      "suite_version": "dev10-v1",
+      "synthesis_eligible": true,
+      "origin": {
+        "repository": "https://github.com/hkust-zhiyao/RTLLM",
+        "commit": "51ed553d0ffd32797a1a0a13e051656bf302c81f",
+        "path": "Arithmetic/Multiplier/multi_pipe_4bit",
+        "license": "MIT",
+        "files": {
+          "upstream/RTLLM/multi_pipe_4bit/design_description.txt": "32fb915aec3e775111d00720102b10a6670a0c1bc3d2a185985836bb95a59a6c",
+          "upstream/RTLLM/multi_pipe_4bit/verified_multi_pipe_4bit.v": "95da22f99f6ccf56608f98758234744aaaf7934643d2b7f636f19eb78e3eb6fc",
+          "upstream/RTLLM/multi_pipe_4bit/testbench.v": "9ee2469af2d3d9632bcf360a9a911f59ca57baa2ea8721b1f2f2e0557569fb8b"
+        }
+      },
+      "adaptations": [
+        "Independent deterministic vector oracle replaces upstream TB; upstream TB archived.",
+        "Reference module renamed; timescale directive removed.",
+        "Evaluate only size=4. Keep parameter size=4 and the specified port widths. The output after an edge equals the product of inputs sampled one rising edge earlier (two register stages)."
+      ],
+      "mutation": "Drops high partial product",
+      "reference_sha256": "166a836e1dd5964767081d60e77c47e1c5eb0990087ce486c23571e99ed63134",
+      "mutant_sha256": "1a75c14572644bb2f287a9ac6d8d04f21ce3975e90192a792eb5c67fc254bab9",
+      "tb_sha256": "1b02333ec06c55a46836b4f55d8048fc31a74086fde10c33ce46d2ffddbadffb",
+      "assets": {
+        "rt_pipeline.hex": "8754b366d9c3b310243b0526850db1c32ef5936f796f69aac368be9fc293e40b"
+      }
+    }
+  ],
+  "jobs": [
+    {
+      "id": "ve_addsub__s001",
+      "task": "ve_addsub",
+      "sample": 1
+    },
+    {
+      "id": "ve_popcount__s001",
+      "task": "ve_popcount",
+      "sample": 1
+    },
+    {
+      "id": "ve_count10__s001",
+      "task": "ve_count10",
+      "sample": 1
+    },
+    {
+      "id": "ve_rotate__s001",
+      "task": "ve_rotate",
+      "sample": 1
+    },
+    {
+      "id": "ve_fsm__s001",
+      "task": "ve_fsm",
+      "sample": 1
+    },
+    {
+      "id": "rt_comparator__s001",
+      "task": "rt_comparator",
+      "sample": 1
+    },
+    {
+      "id": "rt_counter12__s001",
+      "task": "rt_counter12",
+      "sample": 1
+    },
+    {
+      "id": "rt_sequence__s001",
+      "task": "rt_sequence",
+      "sample": 1
+    },
+    {
+      "id": "rt_shift__s001",
+      "task": "rt_shift",
+      "sample": 1
+    },
+    {
+      "id": "rt_pipeline__s001",
+      "task": "rt_pipeline",
+      "sample": 1
+    }
+  ],
+  "source_hashes": {
+    "batch.py": "e192219c9bceefb088f21aa9ce0d0e360e671292057fee4990e950e3abe7ac2d",
+    "rtl_lab.py": "474d2425ea1f1b0f56528ca7738062db445e72ed58373cee4ea992d68cb9ecad",
+    "backends.py": "ff9d4e787157a57b4c6c506c52fc4c798e388a0ca1cf694df2b50d79c76de5b0",
+    "codex_adapter.py": "7196928f4419a8b430fd35825a83dce0cee524e496f445eb87a581e12604c7fe",
+    "api_worker.py": "3696301af3270a50d959773e15476700395a9703aa2a8185d0f2a669b695efc8",
+    "synthesis.py": "0bf4a414c99cc0700b3ecc25f640fe7f4f3ddc22d1ab4ab234264d402fd221c3",
+    "benchmarks/dev10/tasks/manifest.json": "194cb7fa4578e3d8986bf0077e12f004cb9c50531a8d218f6676bdf1bdb19ab1",
+    "benchmarks/dev10/source-lock.json": "217fa57e80e4e43050864c8f007f6ae17b340c3fdce2184f4888206f73fa67f4",
+    "benchmarks/dev10/split-lock.json": "e859533df48bc125aac0a9330b42442f5dd46c4fdb56326e0e800895a03980ae"
+  },
+  "fixture_hashes": {
+    "ve_addsub": "63e1905a9d24ee4c310dd63b872d159bd171187aee7c9267a50f22555f80c8d3",
+    "ve_popcount": "9cc75018964d53c983b6bf72e4b34b51119f54e540105a4fbd5618f88c16a4db",
+    "ve_count10": "2c51c017ccaccfebb355056fab37fed390c40d1614a82f59157af77700d66e55",
+    "ve_rotate": "91daaa983042154903707a2fe7b768cfcf8e382ec5055212e1b701fdc1d66b0b",
+    "ve_fsm": "6ff14fa807ced9355a7f0e062111d132779841b7e78cbf1d67aae4ecb88d4923",
+    "rt_comparator": "5e7404689a5f3f9b7670c01fbb179c00d8ad95b0cdb5bd8302ad64b3e2851e95",
+    "rt_counter12": "3087dfa46f5af08fe53aef48ccc6432e6537ab69a7d50146738cdd51b6706c55",
+    "rt_sequence": "6acb22c07d9e2bef30be3a8ed023a845da6a565b1b5f13938ea90d3bbb0ae010",
+    "rt_shift": "547d1fd22da552c8e6c23c1be730602b58f28e77af8288cee352fe682d2a03a2",
+    "rt_pipeline": "166a836e1dd5964767081d60e77c47e1c5eb0990087ce486c23571e99ed63134"
+  },
+  "max_calls": 10,
+  "note": "Adapted development subset, not official benchmark scoring."
+}

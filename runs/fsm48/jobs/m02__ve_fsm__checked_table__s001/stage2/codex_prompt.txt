@@ -1,0 +1,79 @@
+Implement the given digital circuit in synthesizable SystemVerilog.
+Return only one complete module in a single ```systemverilog code block.
+Use exactly the specified module name and ports. Do not provide a testbench.
+No includes, preprocessor directives, strings, hierarchical references, extra
+modules, simulation system tasks, file IO, or attributes. Only $signed,
+$unsigned and $clog2 system functions are permitted. Do not use delays.
+The independent evaluator will supply all input stimuli and check outputs.
+
+I would like you to implement a module named TopModule with the following
+interface. All input and output ports are one bit unless otherwise
+specified.
+
+ - input  clk
+ - input  areset
+ - input  in
+ - output out
+
+The module should implement a Moore state machine with the following
+state transition table with one input, one output, and four states.
+Implement this state machine. Include a positive edge triggered
+asynchronous reset that resets the FSM to state A. Assume all sequential
+logic is triggered on the positive edge of the clock.
+
+  state | next state in=0, next state in=1 | output
+  A     | A, B                             | 0
+  B     | C, B                             | 0
+  C     | A, D                             | 0
+  D     | C, B                             | 1
+
+Common implementation convention:
+Use reg/localparam state encodings and case/if assignments for Icarus compatibility. Avoid enum-valued ternary assignments. Preserve the specified reset, overlap and cycle timing.
+
+Public specification examples (same in every condition):
+{
+  "clock_edge": "posedge",
+  "output_kind": "moore",
+  "reset": {
+    "kind": "async",
+    "active": 1,
+    "output": 0
+  },
+  "trace_convention": "Each trace starts after reset. List output after each rising edge; reset is then inactive.",
+  "examples": [
+    {
+      "bits": "1101",
+      "outputs": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "bits": "10101",
+      "outputs": [
+        0,
+        0,
+        1,
+        0,
+        1
+      ]
+    }
+  ]
+}
+
+Previous-stage design artifact:
+{"schema":1,"clock_edge":"posedge","output_kind":"moore","reset":{"kind":"async","active":1,"state":"A"},"states":[{"name":"A","output":0},{"name":"B","output":0},{"name":"C","output":0},{"name":"D","output":1}],"transitions":[{"from":"A","input":0,"to":"A"},{"from":"A","input":1,"to":"B"},{"from":"B","input":0,"to":"C"},{"from":"B","input":1,"to":"B"},{"from":"C","input":0,"to":"A"},{"from":"C","input":1,"to":"D"},{"from":"D","input":0,"to":"C"},{"from":"D","input":1,"to":"B"}]}
+
+Use the artifact to implement the specification. Resolve any contradictions in favor of the specification. Return only RTL.
+
+Executable checks of the already-public contract:
+{
+  "status": "PUBLIC_CHECK_PASS",
+  "errors": [],
+  "note": "Only the public examples and schema were checked; passing is not full equivalence."
+}
+Correct any reported problems while implementing RTL; no additional model turn is available.
+
+Do not invoke tools, read files, run tests, or delegate. Reply directly.

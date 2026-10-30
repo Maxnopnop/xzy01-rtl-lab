@@ -1,0 +1,21 @@
+{
+  "model": "openai/gpt-4.1-mini",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs."
+    },
+    {
+      "role": "user",
+      "content": "\nI would like you to implement a module named TopModule with the following\ninterface. All input and output ports are one bit unless otherwise\nspecified.\n\n - input  clk\n - input  reset\n - input  in (8 bits)\n - output done\n\nThe PS/2 mouse protocol sends messages that are three bytes long.\nHowever, within a continuous byte stream, it's not obvious where messages\nstart and end. The only indication is that the first byte of each three\nbyte message always has in[3]=1 (but in[3] of the other two bytes may be\n1 or 0 depending on data).\n\nThe module should implement a finite state machine that will search for\nmessage boundaries when given an input byte stream. The algorithm we'll\nuse is to discard bytes until we see one with in[3]=1. We then assume\nthat this is byte 1 of a message, and signal the receipt of a message\nonce all 3 bytes have been received (done). The FSM should signal done in\nthe cycle immediately after the third byte of each message was\nsuccessfully received. Reset should be active high synchronous. Assume\nall sequential logic is triggered on the positive edge of the clock.\n\n"
+    }
+  ],
+  "stream": false,
+  "provider": {
+    "only": [
+      "openai"
+    ],
+    "allow_fallbacks": false,
+    "require_parameters": true
+  }
+}

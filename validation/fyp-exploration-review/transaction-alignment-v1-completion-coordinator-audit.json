@@ -1,0 +1,460 @@
+{
+  "status": "ACCEPTED_FINITE_DEVELOPMENT_TRANSACTION_ALIGNMENT",
+  "plan_sha256": "c2aeef0482f72c1deded6bf45d6aae6012a889dc4f71801a633e4aa04e942c10",
+  "source_bindings": 24,
+  "prior_bindings": 20354,
+  "run_bindings": 270,
+  "denominator": 12,
+  "executed_pairs": 11,
+  "preclassified_unexecuted": 1,
+  "actual_calls": {
+    "ir": 11,
+    "compile": 11,
+    "sim": 11
+  },
+  "model_calls": 0,
+  "executed_axes": {
+    "ir_spec": {
+      "PASS": 10,
+      "INPUT_PROTOCOL_FAIL": 1
+    },
+    "rtl_spec": {
+      "PASS": 7,
+      "FUNCTION_FAIL": 2,
+      "INPUT_PROTOCOL_FAIL": 1,
+      "TRACE_INVALID": 1
+    },
+    "intent": {
+      "PASS": 6,
+      "FUNCTION_FAIL": 2,
+      "NOT_EVALUABLE": 3
+    }
+  },
+  "raw_native_events": 1760,
+  "ir_events_independently_recomputed": 1760,
+  "same_mapping_phase_comparisons": 320,
+  "case_details": {
+    "01_same_mapping": {
+      "observed": {
+        "ir_spec": "PASS",
+        "rtl_spec": "PASS",
+        "intent": "PASS"
+      },
+      "ir_accept_cycles": [
+        3,
+        5,
+        7
+      ],
+      "rtl_accept_cycles": [
+        3,
+        5,
+        7
+      ],
+      "rtl_counts": {},
+      "ir_cancelled": [],
+      "rtl_cancelled": []
+    },
+    "02_legal_stuttering": {
+      "observed": {
+        "ir_spec": "PASS",
+        "rtl_spec": "PASS",
+        "intent": "PASS"
+      },
+      "ir_accept_cycles": [
+        3,
+        5,
+        7
+      ],
+      "rtl_accept_cycles": [
+        3,
+        7,
+        11
+      ],
+      "rtl_counts": {},
+      "ir_cancelled": [],
+      "rtl_cancelled": []
+    },
+    "03_two_slot_buffer": {
+      "observed": {
+        "ir_spec": "PASS",
+        "rtl_spec": "PASS",
+        "intent": "PASS"
+      },
+      "ir_accept_cycles": [
+        3,
+        5,
+        7,
+        9,
+        11,
+        13,
+        15,
+        17
+      ],
+      "rtl_accept_cycles": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "rtl_counts": {},
+      "ir_cancelled": [],
+      "rtl_cancelled": []
+    },
+    "04_early_valid_wait": {
+      "observed": {
+        "ir_spec": "PASS",
+        "rtl_spec": "PASS",
+        "intent": "PASS"
+      },
+      "ir_accept_cycles": [
+        3
+      ],
+      "rtl_accept_cycles": [
+        7
+      ],
+      "rtl_counts": {},
+      "ir_cancelled": [],
+      "rtl_cancelled": []
+    },
+    "05_same_edge_legal": {
+      "observed": {
+        "ir_spec": "PASS",
+        "rtl_spec": "PASS",
+        "intent": "PASS"
+      },
+      "ir_accept_cycles": [
+        3
+      ],
+      "rtl_accept_cycles": [
+        3
+      ],
+      "rtl_counts": {},
+      "ir_cancelled": [],
+      "rtl_cancelled": []
+    },
+    "06_early_consume_flat_equal": {
+      "observed": {
+        "ir_spec": "PASS",
+        "rtl_spec": "FUNCTION_FAIL",
+        "intent": "FUNCTION_FAIL"
+      },
+      "ir_accept_cycles": [
+        3
+      ],
+      "rtl_accept_cycles": [
+        7
+      ],
+      "rtl_counts": {
+        "UNEXPECTED_TRANSACTION": 2,
+        "MISSING_TRANSACTION": 2
+      },
+      "ir_cancelled": [],
+      "rtl_cancelled": []
+    },
+    "07_partial_delivery_reset": {
+      "observed": {
+        "ir_spec": "PASS",
+        "rtl_spec": "PASS",
+        "intent": "PASS"
+      },
+      "ir_accept_cycles": [
+        3,
+        10,
+        12,
+        14
+      ],
+      "rtl_accept_cycles": [
+        3,
+        10,
+        12,
+        14
+      ],
+      "rtl_counts": {},
+      "ir_cancelled": [
+        {
+          "epoch": 0,
+          "pending": [
+            [],
+            [
+              [
+                0,
+                0
+              ]
+            ]
+          ],
+          "unaccepted": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ]
+          ]
+        }
+      ],
+      "rtl_cancelled": [
+        {
+          "epoch": 0,
+          "pending": [
+            [],
+            [
+              [
+                0,
+                0
+              ]
+            ]
+          ],
+          "unaccepted": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ]
+          ]
+        }
+      ]
+    },
+    "08_stale_across_epoch": {
+      "observed": {
+        "ir_spec": "PASS",
+        "rtl_spec": "FUNCTION_FAIL",
+        "intent": "FUNCTION_FAIL"
+      },
+      "ir_accept_cycles": [
+        3,
+        10,
+        12,
+        14
+      ],
+      "rtl_accept_cycles": [
+        3,
+        11,
+        13,
+        15
+      ],
+      "rtl_counts": {
+        "UNEXPECTED_TRANSACTION": 1
+      },
+      "ir_cancelled": [
+        {
+          "epoch": 0,
+          "pending": [
+            [],
+            [
+              [
+                0,
+                0
+              ]
+            ]
+          ],
+          "unaccepted": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ]
+          ]
+        }
+      ],
+      "rtl_cancelled": [
+        {
+          "epoch": 0,
+          "pending": [
+            [],
+            [
+              [
+                0,
+                0
+              ]
+            ]
+          ],
+          "unaccepted": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ]
+          ]
+        }
+      ]
+    },
+    "09_reset_acceptance_gap": {
+      "observed": {
+        "ir_spec": "PASS",
+        "rtl_spec": "PASS",
+        "intent": "NOT_EVALUABLE"
+      },
+      "ir_accept_cycles": [
+        3,
+        10,
+        12,
+        14
+      ],
+      "rtl_accept_cycles": [
+        3,
+        4,
+        10,
+        11,
+        12
+      ],
+      "rtl_counts": {},
+      "ir_cancelled": [
+        {
+          "epoch": 0,
+          "pending": [
+            [],
+            [
+              [
+                0,
+                0
+              ]
+            ]
+          ],
+          "unaccepted": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ]
+          ]
+        }
+      ],
+      "rtl_cancelled": [
+        {
+          "epoch": 0,
+          "pending": [
+            [],
+            [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                1
+              ]
+            ]
+          ],
+          "unaccepted": [
+            [
+              0,
+              2
+            ]
+          ]
+        }
+      ]
+    },
+    "11_source_protocol_break": {
+      "observed": {
+        "ir_spec": "INPUT_PROTOCOL_FAIL",
+        "rtl_spec": "INPUT_PROTOCOL_FAIL",
+        "intent": "NOT_EVALUABLE"
+      },
+      "ir_accept_cycles": [
+        3,
+        10,
+        12,
+        14
+      ],
+      "rtl_accept_cycles": [
+        3,
+        10,
+        12,
+        14
+      ],
+      "rtl_counts": {
+        "INPUT_PROTOCOL_FAIL": 1
+      },
+      "ir_cancelled": [
+        {
+          "epoch": 0,
+          "pending": [
+            [],
+            [
+              [
+                0,
+                0
+              ]
+            ]
+          ],
+          "unaccepted": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ]
+          ]
+        }
+      ],
+      "rtl_cancelled": [
+        {
+          "epoch": 0,
+          "pending": [
+            [],
+            [
+              [
+                0,
+                0
+              ]
+            ]
+          ],
+          "unaccepted": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ]
+          ]
+        }
+      ]
+    },
+    "12_missing_pre_sample": {
+      "observed": {
+        "ir_spec": "PASS",
+        "rtl_spec": "TRACE_INVALID",
+        "intent": "NOT_EVALUABLE"
+      },
+      "ir_accept_cycles": [
+        3,
+        5,
+        7
+      ],
+      "rtl_accept_cycles": null,
+      "rtl_counts": {},
+      "ir_cancelled": [],
+      "rtl_cancelled": null
+    }
+  },
+  "review_method": "Own read-only raw normalization, closed-form slot arithmetic, temporal queue/hold/reset ledger and receipt/hash checks; no target modules imported or IR/EDA reruns",
+  "external_preparation_readiness": "YES for separately authorized bounded source/contract screening; no source or model release",
+  "limitations": [
+    "Synthetic same-author development fixtures; no natural model benefit or cognitive-stage attribution",
+    "Original batch-run versus inserted-yield runtime equivalence not directly replayed",
+    "Restricted witnesses and bounded sync-reset coverage; no physical release timing",
+    "Tool transitive dependencies incomplete; default regression failures preserved"
+  ]
+}

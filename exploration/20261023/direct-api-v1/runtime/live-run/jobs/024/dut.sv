@@ -1,0 +1,59 @@
+module TopModule (
+    input  logic clk,
+    input  logic areset,
+    input  logic x,
+    output logic z
+);
+
+    typedef enum logic [1:0] {
+        COPY_ZERO,
+        OUTPUT_ONE,
+        OUTPUT_ZERO
+    } state_t;
+
+    state_t state, next_state;
+
+    always_ff @(posedge clk or posedge areset) begin
+        if (areset)
+            state <= COPY_ZERO;
+        else
+            state <= next_state;
+    end
+
+    always_comb begin
+        next_state = COPY_ZERO;
+
+        case (state)
+            COPY_ZERO: begin
+                if (x)
+                    next_state = OUTPUT_ONE;
+                else
+                    next_state = COPY_ZERO;
+            end
+
+            OUTPUT_ONE: begin
+                if (x)
+                    next_state = OUTPUT_ZERO;
+                else
+                    next_state = OUTPUT_ONE;
+            end
+
+            OUTPUT_ZERO: begin
+                if (x)
+                    next_state = OUTPUT_ZERO;
+                else
+                    next_state = OUTPUT_ONE;
+            end
+
+            default: next_state = COPY_ZERO;
+        endcase
+    end
+
+    always_comb begin
+        case (state)
+            OUTPUT_ONE: z = 1'b1;
+            default:    z = 1'b0;
+        endcase
+    end
+
+endmodule

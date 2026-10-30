@@ -1,0 +1,117 @@
+module ordered_retire (
+    input  wire       clk,
+    input  wire       rst_n,
+    input  wire       flush,
+    input  wire       issue,
+    input  wire [1:0] issue_tag,
+    input  wire       finish,
+    input  wire [1:0] finish_tag,
+    output reg  [1:0] count,
+    output reg        retired,
+    output reg  [1:0] retired_tag
+);
+
+    reg       valid0, valid1;
+    reg       finished0, finished1;
+    reg [1:0] tag0, tag1;
+
+    reg       n_valid0, n_valid1;
+    reg       n_finished0, n_finished1;
+    reg [1:0] n_tag0, n_tag1;
+    reg [1:0] n_count;
+    reg       n_retired;
+    reg [1:0] n_retired_tag;
+
+    reg retire_old_head;
+    reg accept_old_issue;
+
+    always @* begin
+        n_valid0      = valid0;
+        n_valid1      = valid1;
+        n_finished0   = finished0;
+        n_finished1   = finished1;
+        n_tag0        = tag0;
+        n_tag1        = tag1;
+        n_count       = count;
+        n_retired     = 1'b0;
+        n_retired_tag = retired_tag;
+
+        retire_old_head = valid0 && finished0;
+
+        accept_old_issue =
+            issue &&
+            (count < 2) &&
+            !(valid0 && (tag0 == issue_tag)) &&
+            !(valid1 && (tag1 == issue_tag));
+
+        if (finish && valid0 && (finish_tag == tag0))
+            n_finished0 = 1'b1;
+
+        if (finish && valid1 && (finish_tag == tag1))
+            n_finished1 = 1'b1;
+
+        if (retire_old_head) begin
+            n_retired     = 1'b1;
+            n_retired_tag = tag0;
+
+            n_valid0      = valid1;
+            n_finished0   = n_finished1;
+            n_tag0        = tag1;
+
+            n_valid1      = 1'b0;
+            n_finished1   = 1'b0;
+            n_tag1        = 2'b00;
+
+            n_count       = count - 2'b01;
+        end
+
+        if (accept_old_issue) begin
+            if (retire_old_head || !valid0) begin
+                n_valid0    = 1'b1;
+                n_finished0 = 1'b0;
+                n_tag0      = issue_tag;
+            end else begin
+                n_valid1    = 1'b1;
+                n_finished1 = 1'b0;
+                n_tag1      = issue_tag;
+            end
+
+            n_count = n_count + 2'b01;
+        end
+    end
+
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            valid0      <= 1'b0;
+            valid1      <= 1'b0;
+            finished0   <= 1'b0;
+            finished1   <= 1'b0;
+            tag0        <= 2'b00;
+            tag1        <= 2'b00;
+            count       <= 2'b00;
+            retired     <= 1'b0;
+            retired_tag <= 2'b00;
+        end else if (flush) begin
+            valid0      <= 1'b0;
+            valid1      <= 1'b0;
+            finished0   <= 1'b0;
+            finished1   <= 1'b0;
+            tag0        <= 2'b00;
+            tag1        <= 2'b00;
+            count       <= 2'b00;
+            retired     <= 1'b0;
+            retired_tag <= 2'b00;
+        end else begin
+            valid0      <= n_valid0;
+            valid1      <= n_valid1;
+            finished0   <= n_finished0;
+            finished1   <= n_finished1;
+            tag0        <= n_tag0;
+            tag1        <= n_tag1;
+            count       <= n_count;
+            retired     <= n_retired;
+            retired_tag <= n_retired_tag;
+        end
+    end
+
+endmodule

@@ -1,0 +1,543 @@
+{
+  "kind": "R6_PREPARATION_NOT_RELEASE",
+  "created_utc": "2026-10-11T08:00:01.388185+00:00",
+  "model": "gpt-5.6-sol",
+  "reasoning": "low",
+  "api_timeout": 180,
+  "max_calls": 48,
+  "workers": 1,
+  "retries": 0,
+  "output_byte_limit": 2097152,
+  "wall_budget_seconds": 10800,
+  "disk_budget_bytes": 786432000,
+  "input_byte_limit": 262144,
+  "cases": [
+    {
+      "id": "ordered_retire__r1",
+      "task": "ordered_retire",
+      "repeat": 1
+    },
+    {
+      "id": "ordered_retire__r2",
+      "task": "ordered_retire",
+      "repeat": 2
+    },
+    {
+      "id": "restoring_divide__r1",
+      "task": "restoring_divide",
+      "repeat": 1
+    },
+    {
+      "id": "restoring_divide__r2",
+      "task": "restoring_divide",
+      "repeat": 2
+    },
+    {
+      "id": "tagged_join__r1",
+      "task": "tagged_join",
+      "repeat": 1
+    },
+    {
+      "id": "tagged_join__r2",
+      "task": "tagged_join",
+      "repeat": 2
+    }
+  ],
+  "jobs": [
+    {
+      "case": "ordered_retire__r1",
+      "task": "ordered_retire",
+      "arm": "shared",
+      "id": "ordered_retire__r1__direct__first",
+      "role": "direct_first",
+      "representation": "direct",
+      "prompt": "Implement module ordered_retire with clk,rst_n and ports {\"inputs\": [[\"flush\", 1], [\"issue\", 1], [\"issue_tag\", 2], [\"finish\", 1], [\"finish_tag\", 2]], \"outputs\": [[\"count\", 2], [\"retired\", 1], [\"retired_tag\", 2]]}\nSpecification:\nTwo-slot ordered retirement queue with distinct 2-bit tags. Async active-low reset clears all state and outputs. Only rising edges act. flush has priority: clear queue and retired_tag and retired pulse. Otherwise retired is one iff the OLD head exists and was already finished; retire that head and update retired_tag, else retired=0 and hold retired_tag. finish marks any OLD queued matching tag finished; unknown tags ignored, and a just-issued tag cannot finish on that same edge. issue appends unfinished issue_tag iff OLD count<2 and issue_tag differs from all OLD queued tags; otherwise ignored. A full OLD queue rejects issue even when retiring; an OLD duplicate rejects issue even if that tag retires. Accepted issue appends after survivors. count reflects occupied slots. Completion can occur out of order; retirement stays in order, at most one per edge. Falling edges and stable clock input/reset-release changes hold all outputs; reset assertion immediately clears at either clock level.\nPublic ordered binary events (clk,rst_n,packed input,packed output; ports packed in listed order; sample after #2):\n[{\"clk\":0,\"rst_n\":0,\"input\":0,\"expected\":0,\"category\":\"reset_low\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":0,\"category\":\"release_low\"},{\"clk\":0,\"rst_n\":1,\"input\":40,\"expected\":0,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":40,\"expected\":8,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":41,\"expected\":8,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":40,\"expected\":8,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":48,\"expected\":8,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":48,\"expected\":16,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":49,\"expected\":16,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":48,\"expected\":16,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":6,\"expected\":16,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":6,\"expected\":16,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":7,\"expected\":16,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":6,\"expected\":16,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":5,\"expected\":16,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":5,\"expected\":16,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":4,\"expected\":16,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":5,\"expected\":16,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":56,\"expected\":16,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":56,\"expected\":13,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":57,\"expected\":13,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":56,\"expected\":13,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":13,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":0,\"expected\":6,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1,\"expected\":6,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":6,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":6,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":0,\"expected\":2,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1,\"expected\":2,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":2,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":0,\"input\":0,\"expected\":0,\"category\":\"end_reset\"}]\nReturn only complete synthesizable Verilog RTL, one module or one code block, no tb, delays/tools.",
+      "prompt_sha256": "aa2b40406e91faa71374fb1743930c456fecb5969fc79c1917a2a7889fc7ae03"
+    },
+    {
+      "case": "ordered_retire__r1",
+      "task": "ordered_retire",
+      "arm": "shared",
+      "id": "ordered_retire__r1__structured__intent",
+      "role": "intent",
+      "representation": "structured",
+      "prompt": "Implement module ordered_retire with clk,rst_n and ports {\"inputs\": [[\"flush\", 1], [\"issue\", 1], [\"issue_tag\", 2], [\"finish\", 1], [\"finish_tag\", 2]], \"outputs\": [[\"count\", 2], [\"retired\", 1], [\"retired_tag\", 2]]}\nSpecification:\nTwo-slot ordered retirement queue with distinct 2-bit tags. Async active-low reset clears all state and outputs. Only rising edges act. flush has priority: clear queue and retired_tag and retired pulse. Otherwise retired is one iff the OLD head exists and was already finished; retire that head and update retired_tag, else retired=0 and hold retired_tag. finish marks any OLD queued matching tag finished; unknown tags ignored, and a just-issued tag cannot finish on that same edge. issue appends unfinished issue_tag iff OLD count<2 and issue_tag differs from all OLD queued tags; otherwise ignored. A full OLD queue rejects issue even when retiring; an OLD duplicate rejects issue even if that tag retires. Accepted issue appends after survivors. count reflects occupied slots. Completion can occur out of order; retirement stays in order, at most one per edge. Falling edges and stable clock input/reset-release changes hold all outputs; reset assertion immediately clears at either clock level.\nPublic ordered binary events (clk,rst_n,packed input,packed output; ports packed in listed order; sample after #2):\n[{\"clk\":0,\"rst_n\":0,\"input\":0,\"expected\":0,\"category\":\"reset_low\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":0,\"category\":\"release_low\"},{\"clk\":0,\"rst_n\":1,\"input\":40,\"expected\":0,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":40,\"expected\":8,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":41,\"expected\":8,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":40,\"expected\":8,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":48,\"expected\":8,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":48,\"expected\":16,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":49,\"expected\":16,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":48,\"expected\":16,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":6,\"expected\":16,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":6,\"expected\":16,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":7,\"expected\":16,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":6,\"expected\":16,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":5,\"expected\":16,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":5,\"expected\":16,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":4,\"expected\":16,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":5,\"expected\":16,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":56,\"expected\":16,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":56,\"expected\":13,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":57,\"expected\":13,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":56,\"expected\":13,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":13,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":0,\"expected\":6,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1,\"expected\":6,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":6,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":6,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":0,\"expected\":2,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1,\"expected\":2,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":2,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":0,\"input\":0,\"expected\":0,\"category\":\"end_reset\"}]\nReturn ONLY one executable JSON intention, no fences. Schema: timing:{reset:async_low|sync_low|none}, registers:{name:{width:1..8,reset:int}}, next_rising:{name:expression}, next_falling:{name:expression}, outputs:{port:expression}. Each register belongs to exactly one next bank; union covers all. Max16 registers,16KiB. Expressions: inputs/rst_n/register names, int0..65535, + - & | ^, << >> constant0..7, single comparisons, and/or/not, a if condition else b; no calls or arrays. Parallel old-state update on declared edge, assignment wraps to width, outputs continuous. Max4096 chars/512 AST nodes per expression.",
+      "prompt_sha256": "1c479bb4619ac7334f183a84b84d4fc78c6f276b571452709522adc2be09d000"
+    },
+    {
+      "case": "ordered_retire__r1",
+      "task": "ordered_retire",
+      "arm": "shared",
+      "id": "ordered_retire__r1__direct__second",
+      "role": "direct_second",
+      "representation": "direct",
+      "first_id": "ordered_retire__r1__direct__first"
+    },
+    {
+      "case": "ordered_retire__r1",
+      "task": "ordered_retire",
+      "arm": "shared",
+      "id": "ordered_retire__r1__structured__first",
+      "role": "first_rtl",
+      "representation": "structured",
+      "intent_id": "ordered_retire__r1__structured__intent"
+    },
+    {
+      "id": "ordered_retire__r1__structured__feedback",
+      "case": "ordered_retire__r1",
+      "task": "ordered_retire",
+      "arm": "feedback",
+      "representation": "structured",
+      "role": "branch",
+      "first_id": "ordered_retire__r1__structured__first",
+      "intent_id": "ordered_retire__r1__structured__intent"
+    },
+    {
+      "id": "ordered_retire__r1__structured__regeneration",
+      "case": "ordered_retire__r1",
+      "task": "ordered_retire",
+      "arm": "regeneration",
+      "representation": "structured",
+      "role": "branch",
+      "first_id": "ordered_retire__r1__structured__first",
+      "intent_id": "ordered_retire__r1__structured__intent"
+    },
+    {
+      "id": "ordered_retire__r1__direct__feedback",
+      "case": "ordered_retire__r1",
+      "task": "ordered_retire",
+      "arm": "feedback",
+      "representation": "direct",
+      "role": "branch",
+      "first_id": "ordered_retire__r1__direct__second"
+    },
+    {
+      "id": "ordered_retire__r1__direct__regeneration",
+      "case": "ordered_retire__r1",
+      "task": "ordered_retire",
+      "arm": "regeneration",
+      "representation": "direct",
+      "role": "branch",
+      "first_id": "ordered_retire__r1__direct__second"
+    },
+    {
+      "case": "ordered_retire__r2",
+      "task": "ordered_retire",
+      "arm": "shared",
+      "id": "ordered_retire__r2__structured__intent",
+      "role": "intent",
+      "representation": "structured",
+      "prompt": "Implement module ordered_retire with clk,rst_n and ports {\"inputs\": [[\"flush\", 1], [\"issue\", 1], [\"issue_tag\", 2], [\"finish\", 1], [\"finish_tag\", 2]], \"outputs\": [[\"count\", 2], [\"retired\", 1], [\"retired_tag\", 2]]}\nSpecification:\nTwo-slot ordered retirement queue with distinct 2-bit tags. Async active-low reset clears all state and outputs. Only rising edges act. flush has priority: clear queue and retired_tag and retired pulse. Otherwise retired is one iff the OLD head exists and was already finished; retire that head and update retired_tag, else retired=0 and hold retired_tag. finish marks any OLD queued matching tag finished; unknown tags ignored, and a just-issued tag cannot finish on that same edge. issue appends unfinished issue_tag iff OLD count<2 and issue_tag differs from all OLD queued tags; otherwise ignored. A full OLD queue rejects issue even when retiring; an OLD duplicate rejects issue even if that tag retires. Accepted issue appends after survivors. count reflects occupied slots. Completion can occur out of order; retirement stays in order, at most one per edge. Falling edges and stable clock input/reset-release changes hold all outputs; reset assertion immediately clears at either clock level.\nPublic ordered binary events (clk,rst_n,packed input,packed output; ports packed in listed order; sample after #2):\n[{\"clk\":0,\"rst_n\":0,\"input\":0,\"expected\":0,\"category\":\"reset_low\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":0,\"category\":\"release_low\"},{\"clk\":0,\"rst_n\":1,\"input\":40,\"expected\":0,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":40,\"expected\":8,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":41,\"expected\":8,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":40,\"expected\":8,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":48,\"expected\":8,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":48,\"expected\":16,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":49,\"expected\":16,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":48,\"expected\":16,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":6,\"expected\":16,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":6,\"expected\":16,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":7,\"expected\":16,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":6,\"expected\":16,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":5,\"expected\":16,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":5,\"expected\":16,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":4,\"expected\":16,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":5,\"expected\":16,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":56,\"expected\":16,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":56,\"expected\":13,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":57,\"expected\":13,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":56,\"expected\":13,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":13,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":0,\"expected\":6,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1,\"expected\":6,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":6,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":6,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":0,\"expected\":2,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1,\"expected\":2,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":2,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":0,\"input\":0,\"expected\":0,\"category\":\"end_reset\"}]\nReturn ONLY one executable JSON intention, no fences. Schema: timing:{reset:async_low|sync_low|none}, registers:{name:{width:1..8,reset:int}}, next_rising:{name:expression}, next_falling:{name:expression}, outputs:{port:expression}. Each register belongs to exactly one next bank; union covers all. Max16 registers,16KiB. Expressions: inputs/rst_n/register names, int0..65535, + - & | ^, << >> constant0..7, single comparisons, and/or/not, a if condition else b; no calls or arrays. Parallel old-state update on declared edge, assignment wraps to width, outputs continuous. Max4096 chars/512 AST nodes per expression.",
+      "prompt_sha256": "1c479bb4619ac7334f183a84b84d4fc78c6f276b571452709522adc2be09d000"
+    },
+    {
+      "case": "ordered_retire__r2",
+      "task": "ordered_retire",
+      "arm": "shared",
+      "id": "ordered_retire__r2__direct__first",
+      "role": "direct_first",
+      "representation": "direct",
+      "prompt": "Implement module ordered_retire with clk,rst_n and ports {\"inputs\": [[\"flush\", 1], [\"issue\", 1], [\"issue_tag\", 2], [\"finish\", 1], [\"finish_tag\", 2]], \"outputs\": [[\"count\", 2], [\"retired\", 1], [\"retired_tag\", 2]]}\nSpecification:\nTwo-slot ordered retirement queue with distinct 2-bit tags. Async active-low reset clears all state and outputs. Only rising edges act. flush has priority: clear queue and retired_tag and retired pulse. Otherwise retired is one iff the OLD head exists and was already finished; retire that head and update retired_tag, else retired=0 and hold retired_tag. finish marks any OLD queued matching tag finished; unknown tags ignored, and a just-issued tag cannot finish on that same edge. issue appends unfinished issue_tag iff OLD count<2 and issue_tag differs from all OLD queued tags; otherwise ignored. A full OLD queue rejects issue even when retiring; an OLD duplicate rejects issue even if that tag retires. Accepted issue appends after survivors. count reflects occupied slots. Completion can occur out of order; retirement stays in order, at most one per edge. Falling edges and stable clock input/reset-release changes hold all outputs; reset assertion immediately clears at either clock level.\nPublic ordered binary events (clk,rst_n,packed input,packed output; ports packed in listed order; sample after #2):\n[{\"clk\":0,\"rst_n\":0,\"input\":0,\"expected\":0,\"category\":\"reset_low\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":0,\"category\":\"release_low\"},{\"clk\":0,\"rst_n\":1,\"input\":40,\"expected\":0,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":40,\"expected\":8,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":41,\"expected\":8,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":40,\"expected\":8,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":48,\"expected\":8,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":48,\"expected\":16,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":49,\"expected\":16,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":48,\"expected\":16,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":6,\"expected\":16,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":6,\"expected\":16,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":7,\"expected\":16,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":6,\"expected\":16,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":5,\"expected\":16,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":5,\"expected\":16,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":4,\"expected\":16,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":5,\"expected\":16,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":56,\"expected\":16,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":56,\"expected\":13,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":57,\"expected\":13,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":56,\"expected\":13,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":13,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":0,\"expected\":6,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1,\"expected\":6,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":6,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":6,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":0,\"expected\":2,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1,\"expected\":2,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":2,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":0,\"input\":0,\"expected\":0,\"category\":\"end_reset\"}]\nReturn only complete synthesizable Verilog RTL, one module or one code block, no tb, delays/tools.",
+      "prompt_sha256": "aa2b40406e91faa71374fb1743930c456fecb5969fc79c1917a2a7889fc7ae03"
+    },
+    {
+      "case": "ordered_retire__r2",
+      "task": "ordered_retire",
+      "arm": "shared",
+      "id": "ordered_retire__r2__structured__first",
+      "role": "first_rtl",
+      "representation": "structured",
+      "intent_id": "ordered_retire__r2__structured__intent"
+    },
+    {
+      "case": "ordered_retire__r2",
+      "task": "ordered_retire",
+      "arm": "shared",
+      "id": "ordered_retire__r2__direct__second",
+      "role": "direct_second",
+      "representation": "direct",
+      "first_id": "ordered_retire__r2__direct__first"
+    },
+    {
+      "id": "ordered_retire__r2__structured__regeneration",
+      "case": "ordered_retire__r2",
+      "task": "ordered_retire",
+      "arm": "regeneration",
+      "representation": "structured",
+      "role": "branch",
+      "first_id": "ordered_retire__r2__structured__first",
+      "intent_id": "ordered_retire__r2__structured__intent"
+    },
+    {
+      "id": "ordered_retire__r2__structured__feedback",
+      "case": "ordered_retire__r2",
+      "task": "ordered_retire",
+      "arm": "feedback",
+      "representation": "structured",
+      "role": "branch",
+      "first_id": "ordered_retire__r2__structured__first",
+      "intent_id": "ordered_retire__r2__structured__intent"
+    },
+    {
+      "id": "ordered_retire__r2__direct__regeneration",
+      "case": "ordered_retire__r2",
+      "task": "ordered_retire",
+      "arm": "regeneration",
+      "representation": "direct",
+      "role": "branch",
+      "first_id": "ordered_retire__r2__direct__second"
+    },
+    {
+      "id": "ordered_retire__r2__direct__feedback",
+      "case": "ordered_retire__r2",
+      "task": "ordered_retire",
+      "arm": "feedback",
+      "representation": "direct",
+      "role": "branch",
+      "first_id": "ordered_retire__r2__direct__second"
+    },
+    {
+      "case": "restoring_divide__r1",
+      "task": "restoring_divide",
+      "arm": "shared",
+      "id": "restoring_divide__r1__structured__intent",
+      "role": "intent",
+      "representation": "structured",
+      "prompt": "Implement module restoring_divide with clk,rst_n and ports {\"inputs\": [[\"abort\", 1], [\"start\", 1], [\"advance\", 1], [\"numerator\", 4], [\"denominator\", 4]], \"outputs\": [[\"busy\", 1], [\"done\", 1], [\"quotient\", 4], [\"remainder\", 4]]}\nSpecification:\nUnsigned 4-bit restoring divider, rising edges only, async active-low reset zeroes all state/output. abort highest priority: busy=done=quotient=remainder=0 and discard work. Otherwise done is a one-edge pulse (default 0 each rising edge). When OLD busy=0, start accepts current numerator/denominator regardless advance: for denominator=0 finish immediately with busy=0,done=1,quotient=15,remainder=numerator; otherwise busy=1, load work, four accepted advance edges required, hold previous quotient/remainder. When OLD busy=1, start and operand changes ignored. advance=0 pauses all work and holds busy/quotient/remainder, done still clears. Each advance shifts next numerator MSB into partial remainder, shifts quotient, conditionally subtracts latched denominator and sets quotient low bit iff trial>=denominator. On the fourth advance publish new quotient/remainder, busy=0,done=1. A start simultaneous with that fourth advance is ignored (OLD busy). No implicit extra advance at acceptance. Falling/stable clock changes hold all output; reset assertion clears immediately, release alone does not act.\nPublic ordered binary events (clk,rst_n,packed input,packed output; ports packed in listed order; sample after #2):\n[{\"clk\":0,\"rst_n\":0,\"input\":0,\"expected\":0,\"category\":\"reset_low\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":0,\"category\":\"release_low\"},{\"clk\":0,\"rst_n\":1,\"input\":723,\"expected\":0,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":723,\"expected\":512,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":722,\"expected\":512,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":723,\"expected\":512,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":256,\"expected\":512,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":256,\"expected\":512,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":257,\"expected\":512,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":256,\"expected\":512,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":512,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":0,\"expected\":512,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1,\"expected\":512,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":512,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":256,\"expected\":512,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":256,\"expected\":512,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":257,\"expected\":512,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":256,\"expected\":512,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":256,\"expected\":512,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":256,\"expected\":512,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":257,\"expected\":512,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":256,\"expected\":512,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":898,\"expected\":512,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":898,\"expected\":321,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":899,\"expected\":321,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":898,\"expected\":321,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":321,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":0,\"expected\":65,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1,\"expected\":65,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":65,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":0,\"input\":0,\"expected\":0,\"category\":\"end_reset\"}]\nReturn ONLY one executable JSON intention, no fences. Schema: timing:{reset:async_low|sync_low|none}, registers:{name:{width:1..8,reset:int}}, next_rising:{name:expression}, next_falling:{name:expression}, outputs:{port:expression}. Each register belongs to exactly one next bank; union covers all. Max16 registers,16KiB. Expressions: inputs/rst_n/register names, int0..65535, + - & | ^, << >> constant0..7, single comparisons, and/or/not, a if condition else b; no calls or arrays. Parallel old-state update on declared edge, assignment wraps to width, outputs continuous. Max4096 chars/512 AST nodes per expression.",
+      "prompt_sha256": "969923cf3fccc8c8b0cca188c978b2d3f23b51b39cb94bd5097df4a12e75d963"
+    },
+    {
+      "case": "restoring_divide__r1",
+      "task": "restoring_divide",
+      "arm": "shared",
+      "id": "restoring_divide__r1__direct__first",
+      "role": "direct_first",
+      "representation": "direct",
+      "prompt": "Implement module restoring_divide with clk,rst_n and ports {\"inputs\": [[\"abort\", 1], [\"start\", 1], [\"advance\", 1], [\"numerator\", 4], [\"denominator\", 4]], \"outputs\": [[\"busy\", 1], [\"done\", 1], [\"quotient\", 4], [\"remainder\", 4]]}\nSpecification:\nUnsigned 4-bit restoring divider, rising edges only, async active-low reset zeroes all state/output. abort highest priority: busy=done=quotient=remainder=0 and discard work. Otherwise done is a one-edge pulse (default 0 each rising edge). When OLD busy=0, start accepts current numerator/denominator regardless advance: for denominator=0 finish immediately with busy=0,done=1,quotient=15,remainder=numerator; otherwise busy=1, load work, four accepted advance edges required, hold previous quotient/remainder. When OLD busy=1, start and operand changes ignored. advance=0 pauses all work and holds busy/quotient/remainder, done still clears. Each advance shifts next numerator MSB into partial remainder, shifts quotient, conditionally subtracts latched denominator and sets quotient low bit iff trial>=denominator. On the fourth advance publish new quotient/remainder, busy=0,done=1. A start simultaneous with that fourth advance is ignored (OLD busy). No implicit extra advance at acceptance. Falling/stable clock changes hold all output; reset assertion clears immediately, release alone does not act.\nPublic ordered binary events (clk,rst_n,packed input,packed output; ports packed in listed order; sample after #2):\n[{\"clk\":0,\"rst_n\":0,\"input\":0,\"expected\":0,\"category\":\"reset_low\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":0,\"category\":\"release_low\"},{\"clk\":0,\"rst_n\":1,\"input\":723,\"expected\":0,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":723,\"expected\":512,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":722,\"expected\":512,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":723,\"expected\":512,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":256,\"expected\":512,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":256,\"expected\":512,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":257,\"expected\":512,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":256,\"expected\":512,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":512,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":0,\"expected\":512,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1,\"expected\":512,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":512,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":256,\"expected\":512,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":256,\"expected\":512,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":257,\"expected\":512,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":256,\"expected\":512,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":256,\"expected\":512,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":256,\"expected\":512,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":257,\"expected\":512,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":256,\"expected\":512,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":898,\"expected\":512,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":898,\"expected\":321,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":899,\"expected\":321,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":898,\"expected\":321,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":321,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":0,\"expected\":65,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1,\"expected\":65,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":65,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":0,\"input\":0,\"expected\":0,\"category\":\"end_reset\"}]\nReturn only complete synthesizable Verilog RTL, one module or one code block, no tb, delays/tools.",
+      "prompt_sha256": "4eeb0963b90b41ea314a7763e03460e4a1b03a62d397f1820f8581f5a36419fb"
+    },
+    {
+      "case": "restoring_divide__r1",
+      "task": "restoring_divide",
+      "arm": "shared",
+      "id": "restoring_divide__r1__structured__first",
+      "role": "first_rtl",
+      "representation": "structured",
+      "intent_id": "restoring_divide__r1__structured__intent"
+    },
+    {
+      "case": "restoring_divide__r1",
+      "task": "restoring_divide",
+      "arm": "shared",
+      "id": "restoring_divide__r1__direct__second",
+      "role": "direct_second",
+      "representation": "direct",
+      "first_id": "restoring_divide__r1__direct__first"
+    },
+    {
+      "id": "restoring_divide__r1__structured__regeneration",
+      "case": "restoring_divide__r1",
+      "task": "restoring_divide",
+      "arm": "regeneration",
+      "representation": "structured",
+      "role": "branch",
+      "first_id": "restoring_divide__r1__structured__first",
+      "intent_id": "restoring_divide__r1__structured__intent"
+    },
+    {
+      "id": "restoring_divide__r1__structured__feedback",
+      "case": "restoring_divide__r1",
+      "task": "restoring_divide",
+      "arm": "feedback",
+      "representation": "structured",
+      "role": "branch",
+      "first_id": "restoring_divide__r1__structured__first",
+      "intent_id": "restoring_divide__r1__structured__intent"
+    },
+    {
+      "id": "restoring_divide__r1__direct__regeneration",
+      "case": "restoring_divide__r1",
+      "task": "restoring_divide",
+      "arm": "regeneration",
+      "representation": "direct",
+      "role": "branch",
+      "first_id": "restoring_divide__r1__direct__second"
+    },
+    {
+      "id": "restoring_divide__r1__direct__feedback",
+      "case": "restoring_divide__r1",
+      "task": "restoring_divide",
+      "arm": "feedback",
+      "representation": "direct",
+      "role": "branch",
+      "first_id": "restoring_divide__r1__direct__second"
+    },
+    {
+      "case": "restoring_divide__r2",
+      "task": "restoring_divide",
+      "arm": "shared",
+      "id": "restoring_divide__r2__direct__first",
+      "role": "direct_first",
+      "representation": "direct",
+      "prompt": "Implement module restoring_divide with clk,rst_n and ports {\"inputs\": [[\"abort\", 1], [\"start\", 1], [\"advance\", 1], [\"numerator\", 4], [\"denominator\", 4]], \"outputs\": [[\"busy\", 1], [\"done\", 1], [\"quotient\", 4], [\"remainder\", 4]]}\nSpecification:\nUnsigned 4-bit restoring divider, rising edges only, async active-low reset zeroes all state/output. abort highest priority: busy=done=quotient=remainder=0 and discard work. Otherwise done is a one-edge pulse (default 0 each rising edge). When OLD busy=0, start accepts current numerator/denominator regardless advance: for denominator=0 finish immediately with busy=0,done=1,quotient=15,remainder=numerator; otherwise busy=1, load work, four accepted advance edges required, hold previous quotient/remainder. When OLD busy=1, start and operand changes ignored. advance=0 pauses all work and holds busy/quotient/remainder, done still clears. Each advance shifts next numerator MSB into partial remainder, shifts quotient, conditionally subtracts latched denominator and sets quotient low bit iff trial>=denominator. On the fourth advance publish new quotient/remainder, busy=0,done=1. A start simultaneous with that fourth advance is ignored (OLD busy). No implicit extra advance at acceptance. Falling/stable clock changes hold all output; reset assertion clears immediately, release alone does not act.\nPublic ordered binary events (clk,rst_n,packed input,packed output; ports packed in listed order; sample after #2):\n[{\"clk\":0,\"rst_n\":0,\"input\":0,\"expected\":0,\"category\":\"reset_low\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":0,\"category\":\"release_low\"},{\"clk\":0,\"rst_n\":1,\"input\":723,\"expected\":0,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":723,\"expected\":512,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":722,\"expected\":512,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":723,\"expected\":512,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":256,\"expected\":512,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":256,\"expected\":512,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":257,\"expected\":512,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":256,\"expected\":512,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":512,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":0,\"expected\":512,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1,\"expected\":512,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":512,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":256,\"expected\":512,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":256,\"expected\":512,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":257,\"expected\":512,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":256,\"expected\":512,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":256,\"expected\":512,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":256,\"expected\":512,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":257,\"expected\":512,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":256,\"expected\":512,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":898,\"expected\":512,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":898,\"expected\":321,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":899,\"expected\":321,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":898,\"expected\":321,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":321,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":0,\"expected\":65,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1,\"expected\":65,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":65,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":0,\"input\":0,\"expected\":0,\"category\":\"end_reset\"}]\nReturn only complete synthesizable Verilog RTL, one module or one code block, no tb, delays/tools.",
+      "prompt_sha256": "4eeb0963b90b41ea314a7763e03460e4a1b03a62d397f1820f8581f5a36419fb"
+    },
+    {
+      "case": "restoring_divide__r2",
+      "task": "restoring_divide",
+      "arm": "shared",
+      "id": "restoring_divide__r2__structured__intent",
+      "role": "intent",
+      "representation": "structured",
+      "prompt": "Implement module restoring_divide with clk,rst_n and ports {\"inputs\": [[\"abort\", 1], [\"start\", 1], [\"advance\", 1], [\"numerator\", 4], [\"denominator\", 4]], \"outputs\": [[\"busy\", 1], [\"done\", 1], [\"quotient\", 4], [\"remainder\", 4]]}\nSpecification:\nUnsigned 4-bit restoring divider, rising edges only, async active-low reset zeroes all state/output. abort highest priority: busy=done=quotient=remainder=0 and discard work. Otherwise done is a one-edge pulse (default 0 each rising edge). When OLD busy=0, start accepts current numerator/denominator regardless advance: for denominator=0 finish immediately with busy=0,done=1,quotient=15,remainder=numerator; otherwise busy=1, load work, four accepted advance edges required, hold previous quotient/remainder. When OLD busy=1, start and operand changes ignored. advance=0 pauses all work and holds busy/quotient/remainder, done still clears. Each advance shifts next numerator MSB into partial remainder, shifts quotient, conditionally subtracts latched denominator and sets quotient low bit iff trial>=denominator. On the fourth advance publish new quotient/remainder, busy=0,done=1. A start simultaneous with that fourth advance is ignored (OLD busy). No implicit extra advance at acceptance. Falling/stable clock changes hold all output; reset assertion clears immediately, release alone does not act.\nPublic ordered binary events (clk,rst_n,packed input,packed output; ports packed in listed order; sample after #2):\n[{\"clk\":0,\"rst_n\":0,\"input\":0,\"expected\":0,\"category\":\"reset_low\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":0,\"category\":\"release_low\"},{\"clk\":0,\"rst_n\":1,\"input\":723,\"expected\":0,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":723,\"expected\":512,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":722,\"expected\":512,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":723,\"expected\":512,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":256,\"expected\":512,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":256,\"expected\":512,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":257,\"expected\":512,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":256,\"expected\":512,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":512,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":0,\"expected\":512,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1,\"expected\":512,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":512,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":256,\"expected\":512,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":256,\"expected\":512,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":257,\"expected\":512,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":256,\"expected\":512,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":256,\"expected\":512,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":256,\"expected\":512,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":257,\"expected\":512,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":256,\"expected\":512,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":898,\"expected\":512,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":898,\"expected\":321,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":899,\"expected\":321,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":898,\"expected\":321,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":321,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":0,\"expected\":65,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1,\"expected\":65,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":65,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":0,\"input\":0,\"expected\":0,\"category\":\"end_reset\"}]\nReturn ONLY one executable JSON intention, no fences. Schema: timing:{reset:async_low|sync_low|none}, registers:{name:{width:1..8,reset:int}}, next_rising:{name:expression}, next_falling:{name:expression}, outputs:{port:expression}. Each register belongs to exactly one next bank; union covers all. Max16 registers,16KiB. Expressions: inputs/rst_n/register names, int0..65535, + - & | ^, << >> constant0..7, single comparisons, and/or/not, a if condition else b; no calls or arrays. Parallel old-state update on declared edge, assignment wraps to width, outputs continuous. Max4096 chars/512 AST nodes per expression.",
+      "prompt_sha256": "969923cf3fccc8c8b0cca188c978b2d3f23b51b39cb94bd5097df4a12e75d963"
+    },
+    {
+      "case": "restoring_divide__r2",
+      "task": "restoring_divide",
+      "arm": "shared",
+      "id": "restoring_divide__r2__direct__second",
+      "role": "direct_second",
+      "representation": "direct",
+      "first_id": "restoring_divide__r2__direct__first"
+    },
+    {
+      "case": "restoring_divide__r2",
+      "task": "restoring_divide",
+      "arm": "shared",
+      "id": "restoring_divide__r2__structured__first",
+      "role": "first_rtl",
+      "representation": "structured",
+      "intent_id": "restoring_divide__r2__structured__intent"
+    },
+    {
+      "id": "restoring_divide__r2__structured__feedback",
+      "case": "restoring_divide__r2",
+      "task": "restoring_divide",
+      "arm": "feedback",
+      "representation": "structured",
+      "role": "branch",
+      "first_id": "restoring_divide__r2__structured__first",
+      "intent_id": "restoring_divide__r2__structured__intent"
+    },
+    {
+      "id": "restoring_divide__r2__structured__regeneration",
+      "case": "restoring_divide__r2",
+      "task": "restoring_divide",
+      "arm": "regeneration",
+      "representation": "structured",
+      "role": "branch",
+      "first_id": "restoring_divide__r2__structured__first",
+      "intent_id": "restoring_divide__r2__structured__intent"
+    },
+    {
+      "id": "restoring_divide__r2__direct__feedback",
+      "case": "restoring_divide__r2",
+      "task": "restoring_divide",
+      "arm": "feedback",
+      "representation": "direct",
+      "role": "branch",
+      "first_id": "restoring_divide__r2__direct__second"
+    },
+    {
+      "id": "restoring_divide__r2__direct__regeneration",
+      "case": "restoring_divide__r2",
+      "task": "restoring_divide",
+      "arm": "regeneration",
+      "representation": "direct",
+      "role": "branch",
+      "first_id": "restoring_divide__r2__direct__second"
+    },
+    {
+      "case": "tagged_join__r1",
+      "task": "tagged_join",
+      "arm": "shared",
+      "id": "tagged_join__r1__direct__first",
+      "role": "direct_first",
+      "representation": "direct",
+      "prompt": "Implement module tagged_join with clk,rst_n and ports {\"inputs\": [[\"clear\", 1], [\"a_valid\", 1], [\"a_tag\", 2], [\"a_data\", 2], [\"b_valid\", 1], [\"b_tag\", 2], [\"b_data\", 2], [\"take\", 1]], \"outputs\": [[\"a_full\", 1], [\"b_full\", 1], [\"out_valid\", 1], [\"out_tag\", 2], [\"out_data\", 4]]}\nSpecification:\nJoin two tagged streams with one holding slot per input and one output register. Async low reset clears all state. Rising edges only. clear highest priority clears every slot and output field. Otherwise decisions use OLD slots: capture A iff a_valid and OLD a_full=0; capture B iff b_valid and OLD b_full=0, retaining captured tag/data. If both OLD input slots full and tags unequal, discard the slot with smaller unsigned tag, even when output blocked. If both full and tags equal, move them to output only if OLD out_valid=0 or take=1; clear both input full flags and set out_valid=1,out_tag=old tag,out_data={old a_data,old b_data}. This replacement wins over take. If no move and take=1 clear out_valid but hold out_tag/out_data; ignored take on empty has same field-hold behavior. Input capture cannot replace a full OLD slot on its discard/move edge; newly captured slots are not compared until a later edge. Output blocked equal slots hold; unequal drop does not change output. All falling/stable clock changes hold all outputs; asynchronous reset immediate and release alone no update.\nPublic ordered binary events (clk,rst_n,packed input,packed output; ports packed in listed order; sample after #2):\n[{\"clk\":0,\"rst_n\":0,\"input\":0,\"expected\":0,\"category\":\"reset_low\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":0,\"category\":\"release_low\"},{\"clk\":0,\"rst_n\":1,\"input\":1408,\"expected\":0,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":1408,\"expected\":256,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1409,\"expected\":256,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":1408,\"expected\":256,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":46,\"expected\":256,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":46,\"expected\":384,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":47,\"expected\":384,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":46,\"expected\":384,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":384,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":0,\"expected\":91,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1,\"expected\":91,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":91,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":1140,\"expected\":91,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":1140,\"expected\":475,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1141,\"expected\":475,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":1140,\"expected\":475,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":475,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":0,\"expected\":219,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1,\"expected\":219,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":219,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":1600,\"expected\":219,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":1600,\"expected\":475,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1601,\"expected\":475,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":1600,\"expected\":475,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":475,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":0,\"expected\":475,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1,\"expected\":475,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":475,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":1,\"expected\":475,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":1,\"expected\":102,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":0,\"expected\":102,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":1,\"expected\":102,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":0,\"input\":0,\"expected\":0,\"category\":\"end_reset\"}]\nReturn only complete synthesizable Verilog RTL, one module or one code block, no tb, delays/tools.",
+      "prompt_sha256": "1eb3d8bb0dd5ffd1feb057afc463799c88ecacee8cf20db9888ad54e0b708ee2"
+    },
+    {
+      "case": "tagged_join__r1",
+      "task": "tagged_join",
+      "arm": "shared",
+      "id": "tagged_join__r1__structured__intent",
+      "role": "intent",
+      "representation": "structured",
+      "prompt": "Implement module tagged_join with clk,rst_n and ports {\"inputs\": [[\"clear\", 1], [\"a_valid\", 1], [\"a_tag\", 2], [\"a_data\", 2], [\"b_valid\", 1], [\"b_tag\", 2], [\"b_data\", 2], [\"take\", 1]], \"outputs\": [[\"a_full\", 1], [\"b_full\", 1], [\"out_valid\", 1], [\"out_tag\", 2], [\"out_data\", 4]]}\nSpecification:\nJoin two tagged streams with one holding slot per input and one output register. Async low reset clears all state. Rising edges only. clear highest priority clears every slot and output field. Otherwise decisions use OLD slots: capture A iff a_valid and OLD a_full=0; capture B iff b_valid and OLD b_full=0, retaining captured tag/data. If both OLD input slots full and tags unequal, discard the slot with smaller unsigned tag, even when output blocked. If both full and tags equal, move them to output only if OLD out_valid=0 or take=1; clear both input full flags and set out_valid=1,out_tag=old tag,out_data={old a_data,old b_data}. This replacement wins over take. If no move and take=1 clear out_valid but hold out_tag/out_data; ignored take on empty has same field-hold behavior. Input capture cannot replace a full OLD slot on its discard/move edge; newly captured slots are not compared until a later edge. Output blocked equal slots hold; unequal drop does not change output. All falling/stable clock changes hold all outputs; asynchronous reset immediate and release alone no update.\nPublic ordered binary events (clk,rst_n,packed input,packed output; ports packed in listed order; sample after #2):\n[{\"clk\":0,\"rst_n\":0,\"input\":0,\"expected\":0,\"category\":\"reset_low\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":0,\"category\":\"release_low\"},{\"clk\":0,\"rst_n\":1,\"input\":1408,\"expected\":0,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":1408,\"expected\":256,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1409,\"expected\":256,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":1408,\"expected\":256,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":46,\"expected\":256,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":46,\"expected\":384,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":47,\"expected\":384,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":46,\"expected\":384,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":384,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":0,\"expected\":91,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1,\"expected\":91,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":91,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":1140,\"expected\":91,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":1140,\"expected\":475,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1141,\"expected\":475,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":1140,\"expected\":475,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":475,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":0,\"expected\":219,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1,\"expected\":219,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":219,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":1600,\"expected\":219,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":1600,\"expected\":475,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1601,\"expected\":475,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":1600,\"expected\":475,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":475,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":0,\"expected\":475,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1,\"expected\":475,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":475,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":1,\"expected\":475,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":1,\"expected\":102,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":0,\"expected\":102,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":1,\"expected\":102,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":0,\"input\":0,\"expected\":0,\"category\":\"end_reset\"}]\nReturn ONLY one executable JSON intention, no fences. Schema: timing:{reset:async_low|sync_low|none}, registers:{name:{width:1..8,reset:int}}, next_rising:{name:expression}, next_falling:{name:expression}, outputs:{port:expression}. Each register belongs to exactly one next bank; union covers all. Max16 registers,16KiB. Expressions: inputs/rst_n/register names, int0..65535, + - & | ^, << >> constant0..7, single comparisons, and/or/not, a if condition else b; no calls or arrays. Parallel old-state update on declared edge, assignment wraps to width, outputs continuous. Max4096 chars/512 AST nodes per expression.",
+      "prompt_sha256": "44c796ac8a06f28a2e900b78b89a86d3613c115937eb10dcefcc2533dab20d0d"
+    },
+    {
+      "case": "tagged_join__r1",
+      "task": "tagged_join",
+      "arm": "shared",
+      "id": "tagged_join__r1__direct__second",
+      "role": "direct_second",
+      "representation": "direct",
+      "first_id": "tagged_join__r1__direct__first"
+    },
+    {
+      "case": "tagged_join__r1",
+      "task": "tagged_join",
+      "arm": "shared",
+      "id": "tagged_join__r1__structured__first",
+      "role": "first_rtl",
+      "representation": "structured",
+      "intent_id": "tagged_join__r1__structured__intent"
+    },
+    {
+      "id": "tagged_join__r1__structured__feedback",
+      "case": "tagged_join__r1",
+      "task": "tagged_join",
+      "arm": "feedback",
+      "representation": "structured",
+      "role": "branch",
+      "first_id": "tagged_join__r1__structured__first",
+      "intent_id": "tagged_join__r1__structured__intent"
+    },
+    {
+      "id": "tagged_join__r1__structured__regeneration",
+      "case": "tagged_join__r1",
+      "task": "tagged_join",
+      "arm": "regeneration",
+      "representation": "structured",
+      "role": "branch",
+      "first_id": "tagged_join__r1__structured__first",
+      "intent_id": "tagged_join__r1__structured__intent"
+    },
+    {
+      "id": "tagged_join__r1__direct__feedback",
+      "case": "tagged_join__r1",
+      "task": "tagged_join",
+      "arm": "feedback",
+      "representation": "direct",
+      "role": "branch",
+      "first_id": "tagged_join__r1__direct__second"
+    },
+    {
+      "id": "tagged_join__r1__direct__regeneration",
+      "case": "tagged_join__r1",
+      "task": "tagged_join",
+      "arm": "regeneration",
+      "representation": "direct",
+      "role": "branch",
+      "first_id": "tagged_join__r1__direct__second"
+    },
+    {
+      "case": "tagged_join__r2",
+      "task": "tagged_join",
+      "arm": "shared",
+      "id": "tagged_join__r2__structured__intent",
+      "role": "intent",
+      "representation": "structured",
+      "prompt": "Implement module tagged_join with clk,rst_n and ports {\"inputs\": [[\"clear\", 1], [\"a_valid\", 1], [\"a_tag\", 2], [\"a_data\", 2], [\"b_valid\", 1], [\"b_tag\", 2], [\"b_data\", 2], [\"take\", 1]], \"outputs\": [[\"a_full\", 1], [\"b_full\", 1], [\"out_valid\", 1], [\"out_tag\", 2], [\"out_data\", 4]]}\nSpecification:\nJoin two tagged streams with one holding slot per input and one output register. Async low reset clears all state. Rising edges only. clear highest priority clears every slot and output field. Otherwise decisions use OLD slots: capture A iff a_valid and OLD a_full=0; capture B iff b_valid and OLD b_full=0, retaining captured tag/data. If both OLD input slots full and tags unequal, discard the slot with smaller unsigned tag, even when output blocked. If both full and tags equal, move them to output only if OLD out_valid=0 or take=1; clear both input full flags and set out_valid=1,out_tag=old tag,out_data={old a_data,old b_data}. This replacement wins over take. If no move and take=1 clear out_valid but hold out_tag/out_data; ignored take on empty has same field-hold behavior. Input capture cannot replace a full OLD slot on its discard/move edge; newly captured slots are not compared until a later edge. Output blocked equal slots hold; unequal drop does not change output. All falling/stable clock changes hold all outputs; asynchronous reset immediate and release alone no update.\nPublic ordered binary events (clk,rst_n,packed input,packed output; ports packed in listed order; sample after #2):\n[{\"clk\":0,\"rst_n\":0,\"input\":0,\"expected\":0,\"category\":\"reset_low\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":0,\"category\":\"release_low\"},{\"clk\":0,\"rst_n\":1,\"input\":1408,\"expected\":0,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":1408,\"expected\":256,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1409,\"expected\":256,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":1408,\"expected\":256,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":46,\"expected\":256,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":46,\"expected\":384,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":47,\"expected\":384,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":46,\"expected\":384,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":384,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":0,\"expected\":91,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1,\"expected\":91,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":91,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":1140,\"expected\":91,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":1140,\"expected\":475,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1141,\"expected\":475,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":1140,\"expected\":475,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":475,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":0,\"expected\":219,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1,\"expected\":219,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":219,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":1600,\"expected\":219,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":1600,\"expected\":475,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1601,\"expected\":475,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":1600,\"expected\":475,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":475,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":0,\"expected\":475,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1,\"expected\":475,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":475,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":1,\"expected\":475,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":1,\"expected\":102,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":0,\"expected\":102,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":1,\"expected\":102,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":0,\"input\":0,\"expected\":0,\"category\":\"end_reset\"}]\nReturn ONLY one executable JSON intention, no fences. Schema: timing:{reset:async_low|sync_low|none}, registers:{name:{width:1..8,reset:int}}, next_rising:{name:expression}, next_falling:{name:expression}, outputs:{port:expression}. Each register belongs to exactly one next bank; union covers all. Max16 registers,16KiB. Expressions: inputs/rst_n/register names, int0..65535, + - & | ^, << >> constant0..7, single comparisons, and/or/not, a if condition else b; no calls or arrays. Parallel old-state update on declared edge, assignment wraps to width, outputs continuous. Max4096 chars/512 AST nodes per expression.",
+      "prompt_sha256": "44c796ac8a06f28a2e900b78b89a86d3613c115937eb10dcefcc2533dab20d0d"
+    },
+    {
+      "case": "tagged_join__r2",
+      "task": "tagged_join",
+      "arm": "shared",
+      "id": "tagged_join__r2__direct__first",
+      "role": "direct_first",
+      "representation": "direct",
+      "prompt": "Implement module tagged_join with clk,rst_n and ports {\"inputs\": [[\"clear\", 1], [\"a_valid\", 1], [\"a_tag\", 2], [\"a_data\", 2], [\"b_valid\", 1], [\"b_tag\", 2], [\"b_data\", 2], [\"take\", 1]], \"outputs\": [[\"a_full\", 1], [\"b_full\", 1], [\"out_valid\", 1], [\"out_tag\", 2], [\"out_data\", 4]]}\nSpecification:\nJoin two tagged streams with one holding slot per input and one output register. Async low reset clears all state. Rising edges only. clear highest priority clears every slot and output field. Otherwise decisions use OLD slots: capture A iff a_valid and OLD a_full=0; capture B iff b_valid and OLD b_full=0, retaining captured tag/data. If both OLD input slots full and tags unequal, discard the slot with smaller unsigned tag, even when output blocked. If both full and tags equal, move them to output only if OLD out_valid=0 or take=1; clear both input full flags and set out_valid=1,out_tag=old tag,out_data={old a_data,old b_data}. This replacement wins over take. If no move and take=1 clear out_valid but hold out_tag/out_data; ignored take on empty has same field-hold behavior. Input capture cannot replace a full OLD slot on its discard/move edge; newly captured slots are not compared until a later edge. Output blocked equal slots hold; unequal drop does not change output. All falling/stable clock changes hold all outputs; asynchronous reset immediate and release alone no update.\nPublic ordered binary events (clk,rst_n,packed input,packed output; ports packed in listed order; sample after #2):\n[{\"clk\":0,\"rst_n\":0,\"input\":0,\"expected\":0,\"category\":\"reset_low\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":0,\"category\":\"release_low\"},{\"clk\":0,\"rst_n\":1,\"input\":1408,\"expected\":0,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":1408,\"expected\":256,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1409,\"expected\":256,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":1408,\"expected\":256,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":46,\"expected\":256,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":46,\"expected\":384,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":47,\"expected\":384,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":46,\"expected\":384,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":384,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":0,\"expected\":91,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1,\"expected\":91,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":91,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":1140,\"expected\":91,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":1140,\"expected\":475,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1141,\"expected\":475,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":1140,\"expected\":475,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":475,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":0,\"expected\":219,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1,\"expected\":219,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":219,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":1600,\"expected\":219,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":1600,\"expected\":475,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1601,\"expected\":475,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":1600,\"expected\":475,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":475,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":0,\"expected\":475,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":1,\"expected\":475,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":0,\"expected\":475,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":1,\"input\":1,\"expected\":475,\"category\":\"low_hold\"},{\"clk\":1,\"rst_n\":1,\"input\":1,\"expected\":102,\"category\":\"rising\"},{\"clk\":1,\"rst_n\":1,\"input\":0,\"expected\":102,\"category\":\"high_hold\"},{\"clk\":0,\"rst_n\":1,\"input\":1,\"expected\":102,\"category\":\"falling\"},{\"clk\":0,\"rst_n\":0,\"input\":0,\"expected\":0,\"category\":\"end_reset\"}]\nReturn only complete synthesizable Verilog RTL, one module or one code block, no tb, delays/tools.",
+      "prompt_sha256": "1eb3d8bb0dd5ffd1feb057afc463799c88ecacee8cf20db9888ad54e0b708ee2"
+    },
+    {
+      "case": "tagged_join__r2",
+      "task": "tagged_join",
+      "arm": "shared",
+      "id": "tagged_join__r2__structured__first",
+      "role": "first_rtl",
+      "representation": "structured",
+      "intent_id": "tagged_join__r2__structured__intent"
+    },
+    {
+      "case": "tagged_join__r2",
+      "task": "tagged_join",
+      "arm": "shared",
+      "id": "tagged_join__r2__direct__second",
+      "role": "direct_second",
+      "representation": "direct",
+      "first_id": "tagged_join__r2__direct__first"
+    },
+    {
+      "id": "tagged_join__r2__structured__regeneration",
+      "case": "tagged_join__r2",
+      "task": "tagged_join",
+      "arm": "regeneration",
+      "representation": "structured",
+      "role": "branch",
+      "first_id": "tagged_join__r2__structured__first",
+      "intent_id": "tagged_join__r2__structured__intent"
+    },
+    {
+      "id": "tagged_join__r2__structured__feedback",
+      "case": "tagged_join__r2",
+      "task": "tagged_join",
+      "arm": "feedback",
+      "representation": "structured",
+      "role": "branch",
+      "first_id": "tagged_join__r2__structured__first",
+      "intent_id": "tagged_join__r2__structured__intent"
+    },
+    {
+      "id": "tagged_join__r2__direct__regeneration",
+      "case": "tagged_join__r2",
+      "task": "tagged_join",
+      "arm": "regeneration",
+      "representation": "direct",
+      "role": "branch",
+      "first_id": "tagged_join__r2__direct__second"
+    },
+    {
+      "id": "tagged_join__r2__direct__feedback",
+      "case": "tagged_join__r2",
+      "task": "tagged_join",
+      "arm": "feedback",
+      "representation": "direct",
+      "role": "branch",
+      "first_id": "tagged_join__r2__direct__second"
+    }
+  ],
+  "source_hashes": {
+    "exploration\\20261011\\r6\\build_calibrate.py": "42fc10bdcda460fec5dd2074c143a70c2f340104388aa965b87b35f2efd188ab",
+    "exploration\\20261011\\r6\\cli_adapter.py": "5f87d54c8718477a6e0e53ae73591857946707f4a652e8883e29df239d21b51e",
+    "exploration\\20261011\\r6\\control_tests.py": "1df4415a6c73f4cd893e931ea6da63bed09c1d4b3e0e2460113b1644a70930a9",
+    "exploration\\20261011\\r6\\control_tests_v2.py": "81fb23e7c077453b4f61c8592eac584f3cde481135ceddc45cf6997f2877431c",
+    "exploration\\20261011\\r6\\intent.py": "c38c058f97f3fba37dab70cd5aae3c99a3a1bdb2c9fdd16bdc3f438c90f1db6e",
+    "exploration\\20261011\\r6\\judge.py": "7a8bfc9630555dbdc6900f486fbeeee9f4acde4857bfd4450acd2c231985dafa",
+    "exploration\\20261011\\r6\\mock_cli.py": "7ef9fd4985c97d65df64ad68496611e42fd070e2232ba86cf0c9c6641327070e",
+    "exploration\\20261011\\r6\\process_acceptance.py": "89672a35651b186302fb2d460c49b038905a8f800b093bad22f5add47c1ee70b",
+    "exploration\\20261011\\r6\\process_acceptance_v2.py": "e00a2356488a0f9a3ac4eaf07b834f2eacfe9bd5fb5f08b07516115188551298",
+    "exploration\\20261011\\r6\\process_acceptance_v3.py": "a43578880742bd4e2c23539bd8a38147f8c66ff8bc60950ca301a5638496f946",
+    "exploration\\20261011\\r6\\prompts.py": "80d08fc6716cadc9c0d2237fffdb6057df7d44ded613eb6331fde25eac54cff5",
+    "exploration\\20261011\\r6\\record_worker.py": "143c91acdc3da33a1a9708af4d66f063b1ac549a61e6c848d4e9edbb988da743",
+    "exploration\\20261011\\r6\\recover_batch.py": "2219e510d85a4caa1e5217b8ec1ebda39c5e05b5e23f06a77f86de74b1de0a45",
+    "exploration\\20261011\\r6\\recovery_boundaries.py": "ff06b8c9d611d8b807533b99072ccdae57b39aa32bd627a2f98db60a4e952d09",
+    "exploration\\20261011\\r6\\reference_alt.py": "a4dd20266cd492506e3c403df52504b1131e5429a885af448ac083a4728d0eb1",
+    "exploration\\20261011\\r6\\runner.py": "8f56f6cf48b15e8cf459e74beff95728e1c117942e400c5f6290f0d31c541700",
+    "exploration\\20261011\\r6\\stage_categories.py": "4dbac122895b7f2c0b9bc08d5efb72b68dfe61c5bed4dba87b0b69158ff018b7",
+    "exploration\\20261011\\r6\\stream_process.py": "9bfcfb72df6ae61abbc41973f615fca2d108f6f97590f9edbc0bb8378ad92403",
+    "exploration\\20261011\\r6\\tasks.py": "64b95dbcf5ad3d01c0007a5f7e32cab53b622587beae59b5f1b7d7b422ad299d",
+    "exploration\\20261011\\r6\\teacher.py": "796aa39108067fe42215d26deca42ce7507c5c0c2f8656e111745b6abffab309",
+    "exploration\\20261011\\r6\\verify.py": "a99eb2dfd36ece048f63ddac331dbb1fa9b19c0e1addc62f3ef041566f2ba5be",
+    "exploration\\20261011\\r6\\PROTOCOL.md": "8b563a95296cd398dc0039d54babebb6e1bbe0019717bfcd412208c8f30c681a",
+    "exploration\\20261011\\r6\\references\\ordered_retire.sv": "3bfad58a4f59725bdb1a88591a3ab5977a8d8af519ba49c92308644b139bd0ab",
+    "exploration\\20261011\\r6\\references\\restoring_divide.sv": "07a9c9a89f5e3e6c4dde9306f05c9a2b9d212c24eb9e5843e38165095520aaba",
+    "exploration\\20261011\\r6\\references\\tagged_join.sv": "46a6c48cf02cee1745617bd42579f9d7226ca0dcae90ed72c8e056007dd6dbf0",
+    "exploration\\20261011\\r6\\assets\\lock.json": "6e81ffb1fd2ae6bbeef5b48330722c9733b63d0b09da91c0d990b817288fd085",
+    "exploration\\20261011\\r6\\assets\\ordered_retire-private.json": "2db2755cf41499fd22ddf73a21f7a1be4e5527544c40b89e6c65eb6d82095513",
+    "exploration\\20261011\\r6\\assets\\ordered_retire-public.json": "2892efd7fa6f03d5fefcc335e4ec8705b7bf4d60593540914464c45278902135",
+    "exploration\\20261011\\r6\\assets\\restoring_divide-private.json": "00791084ccbaa892d0f2b481f315c33dd0f8f822891e2a67a673c1cfcdc8b448",
+    "exploration\\20261011\\r6\\assets\\restoring_divide-public.json": "9c1b722e0a79003719bfdc3895aaf0fb102cf7111821719e74c1ac7f99b37f8b",
+    "exploration\\20261011\\r6\\assets\\tagged_join-private.json": "412ab0f2d1d0a322b3e337a9f1894347508006997496fd71da8280533ad56d23",
+    "exploration\\20261011\\r6\\assets\\tagged_join-public.json": "e62f2685eb1d6aae02e616ee566d596b1281826cf091e1b63d830a01f6ac473a",
+    "rtl_lab.py": "ab4f386a3bb5aa84bb729f18fe3b19e43399ba66dc567e297328d1c046432702",
+    "backends.py": "ff9d4e787157a57b4c6c506c52fc4c798e388a0ca1cf694df2b50d79c76de5b0",
+    "batch.py": "caf3dfdf2cdd753a72c574f43e17ca04bcb9bcefc21a2dd59686a7a1a0489c10",
+    "fsm_study.py": "ba60bd48153b7297426558bbb575e61ffa5da141624b6fa329dbbe4d7a4cf801",
+    "codex_adapter.py": "33a6080d45ff8f36c6441afeda8ba53d6e5204bd0bd0ad33a8d38c165d63af9d"
+  }
+}

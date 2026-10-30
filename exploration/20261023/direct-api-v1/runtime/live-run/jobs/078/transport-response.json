@@ -1,0 +1,9 @@
+{
+  "request_sha256": "fcd33db9febe39308965046634df562cbb23af82f30c6f1f4817dfcf4890bc3b",
+  "client_post_invocations": 1,
+  "http_status": 200,
+  "response_bytes": 1086,
+  "raw_body_sha256": "bc11589366c48e169859609ae127bcb85a6e0d8106b534a4c19f11e87c5bc108",
+  "body": "\n         \n{\"id\":\"gen-1792763151-dkUNasdNATfoOZjaC26W\",\"object\":\"chat.completion\",\"created\":1792763151,\"model\":\"openai/gpt-5.6-sol\",\"provider\":\"OpenAI\",\"system_fingerprint\":null,\"service_tier\":\"default\",\"choices\":[{\"index\":0,\"logprobs\":null,\"finish_reason\":\"stop\",\"native_finish_reason\":\"completed\",\"message\":{\"role\":\"assistant\",\"content\":\"```systemverilog\\nmodule TopModule (\\n    input  logic [7:0] a,\\n    input  logic [7:0] b,\\n    output logic [7:0] s,\\n    output logic       overflow\\n);\\n\\n    always_comb begin\\n        s = a + b;\\n        overflow = (~(a[7] ^ b[7])) & (s[7] ^ a[7]);\\n    end\\n\\nendmodule\\n```\",\"refusal\":null,\"reasoning\":null}}],\"usage\":{\"prompt_tokens\":224,\"completion_tokens\":95,\"total_tokens\":319,\"cost\":0.002796,\"is_byok\":false,\"prompt_tokens_details\":{\"cached_tokens\":0,\"cache_write_tokens\":0,\"audio_tokens\":0,\"video_tokens\":0},\"cost_details\":{\"upstream_inference_cost\":0.002796,\"upstream_inference_prompt_cost\":0.000896,\"upstream_inference_completions_cost\":0.0019},\"completion_tokens_details\":{\"reasoning_tokens\":0,\"image_tokens\":0,\"audio_tokens\":0}}}",
+  "outcome": "HTTP_OK"
+}

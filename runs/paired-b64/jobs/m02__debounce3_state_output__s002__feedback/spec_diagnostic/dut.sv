@@ -1,0 +1,58 @@
+module debounce3(
+    input clk,
+    input rst_n,
+    input din,
+    output q
+);
+
+    localparam S0 = 3'd0;
+    localparam S1 = 3'd1;
+    localparam S2 = 3'd2;
+    localparam S3 = 3'd3;
+    localparam S4 = 3'd4;
+
+    reg [2:0] state;
+
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            state <= S0;
+        end else begin
+            case (state)
+                S0: begin
+                    if (din)
+                        state <= S1;
+                    else
+                        state <= S0;
+                end
+                S1: begin
+                    if (din)
+                        state <= S2;
+                    else
+                        state <= S0;
+                end
+                S2: begin
+                    if (din)
+                        state <= S3;
+                    else
+                        state <= S0;
+                end
+                S3: begin
+                    if (din)
+                        state <= S3;
+                    else
+                        state <= S4;
+                end
+                S4: begin
+                    if (din)
+                        state <= S3;
+                    else
+                        state <= S0;
+                end
+                default: state <= S0;
+            endcase
+        end
+    end
+
+    assign q = (state == S3) || (state == S4);
+
+endmodule

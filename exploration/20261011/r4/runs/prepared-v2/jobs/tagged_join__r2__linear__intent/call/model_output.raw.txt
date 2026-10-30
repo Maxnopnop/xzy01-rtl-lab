@@ -1,0 +1,21 @@
+Clock edge rising; reset async_low.
+Register a_valid has width 1 and reset 0.
+Register a_tag has width 1 and reset 0.
+Register a_data has width 2 and reset 0.
+Register b_valid has width 1 and reset 0.
+Register b_tag has width 1 and reset 0.
+Register b_data has width 2 and reset 0.
+Register joined_reg has width 1 and reset 0.
+Register result_reg has width 2 and reset 0.
+On the clock edge, set a_valid to 0 if flush else (0 if (av or a_valid) and (bv or b_valid) and ((atag if av else a_tag) == (btag if bv else b_tag)) else (1 if av else a_valid)).
+On the clock edge, set a_tag to 0 if flush else (atag if av else a_tag).
+On the clock edge, set a_data to 0 if flush else (adata if av else a_data).
+On the clock edge, set b_valid to 0 if flush else (0 if (av or a_valid) and (bv or b_valid) and ((atag if av else a_tag) == (btag if bv else b_tag)) else (1 if bv else b_valid)).
+On the clock edge, set b_tag to 0 if flush else (btag if bv else b_tag).
+On the clock edge, set b_data to 0 if flush else (bdata if bv else b_data).
+On the clock edge, set joined_reg to 0 if flush else (1 if (av or a_valid) and (bv or b_valid) and ((atag if av else a_tag) == (btag if bv else b_tag)) else 0).
+On the clock edge, set result_reg to 0 if flush else (((adata if av else a_data) ^ (bdata if bv else b_data)) if (av or a_valid) and (bv or b_valid) and ((atag if av else a_tag) == (btag if bv else b_tag)) else result_reg).
+Continuously output pending_a as a_valid.
+Continuously output pending_b as b_valid.
+Continuously output joined as joined_reg.
+Continuously output result as result_reg.

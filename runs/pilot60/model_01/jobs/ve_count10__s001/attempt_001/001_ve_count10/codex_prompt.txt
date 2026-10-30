@@ -1,0 +1,22 @@
+Implement the given digital circuit in synthesizable SystemVerilog.
+Return only one complete module in a single ```systemverilog code block.
+Use exactly the specified module name and ports. Do not provide a testbench.
+No includes, preprocessor directives, strings, hierarchical references, extra
+modules, simulation system tasks, file IO, or attributes. Only $signed,
+$unsigned and $clog2 system functions are permitted. Do not use delays.
+The independent evaluator will supply all input stimuli and check outputs.
+
+I would like you to implement a module named TopModule with the following
+interface. All input and output ports are one bit unless otherwise
+specified.
+
+ - input  clk
+ - input  reset
+ - output q (4 bits)
+
+The module should implement a decade counter that counts from 0 through
+9, inclusive, with a period of 10. Assume all sequential logic is
+triggered on the positive edge of the clock. The reset input is active
+high synchronous, and should reset the counter to 0.
+
+Reply directly with the RTL. Do not invoke tools, read files, run tests, or delegate.

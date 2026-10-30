@@ -1,0 +1,10 @@
+[
+  {
+    "role": "system",
+    "content": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs."
+  },
+  {
+    "role": "user",
+    "content": "\nI would like you to implement a module named TopModule with the following\ninterface. All input and output ports are one bit unless otherwise\nspecified.\n\n - input  a   (8 bits)\n - input  b   (8 bits)\n - input  c   (8 bits)\n - input  d   (8 bits)\n - output min (8 bits)\n\nThe module should find the minimum of the four input values. Unsigned\nnumbers can be compared with standard comparison operators (a < b).\n\n"
+  }
+]

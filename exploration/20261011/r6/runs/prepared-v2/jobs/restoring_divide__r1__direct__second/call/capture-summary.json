@@ -1,0 +1,37 @@
+{
+  "status": "GENERATED",
+  "usage": {
+    "input_tokens": 11600,
+    "cached_input_tokens": 7424,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 794,
+    "reasoning_output_tokens": 0
+  },
+  "source": "READ_ONLY_SAVED_EVIDENCE",
+  "reserved_calls": 1,
+  "response": "module restoring_divide (\n    input  wire       clk,\n    input  wire       rst_n,\n    input  wire       abort,\n    input  wire       start,\n    input  wire       advance,\n    input  wire [3:0] numerator,\n    input  wire [3:0] denominator,\n    output reg        busy,\n    output reg        done,\n    output reg  [3:0] quotient,\n    output reg  [3:0] remainder\n);\n\n    reg [3:0] numerator_work;\n    reg [3:0] denominator_work;\n    reg [3:0] quotient_work;\n    reg [3:0] remainder_work;\n    reg [2:0] advance_count;\n\n    reg [4:0] trial_remainder;\n    reg [4:0] reduced_remainder;\n    reg [3:0] next_quotient;\n\n    always @* begin\n        trial_remainder = {remainder_work, numerator_work[3]};\n\n        if (trial_remainder >= {1'b0, denominator_work}) begin\n            reduced_remainder = trial_remainder -\n                                {1'b0, denominator_work};\n            next_quotient = {quotient_work[2:0], 1'b1};\n        end else begin\n            reduced_remainder = trial_remainder;\n            next_quotient = {quotient_work[2:0], 1'b0};\n        end\n    end\n\n    always @(posedge clk or negedge rst_n) begin\n        if (!rst_n) begin\n            busy             <= 1'b0;\n            done             <= 1'b0;\n            quotient         <= 4'b0000;\n            remainder        <= 4'b0000;\n            numerator_work   <= 4'b0000;\n            denominator_work <= 4'b0000;\n            quotient_work    <= 4'b0000;\n            remainder_work   <= 4'b0000;\n            advance_count    <= 3'b000;\n        end else if (abort) begin\n            busy             <= 1'b0;\n            done             <= 1'b0;\n            quotient         <= 4'b0000;\n            remainder        <= 4'b0000;\n            numerator_work   <= 4'b0000;\n            denominator_work <= 4'b0000;\n            quotient_work    <= 4'b0000;\n            remainder_work   <= 4'b0000;\n            advance_count    <= 3'b000;\n        end else begin\n            done <= 1'b0;\n\n            if (!busy) begin\n                if (start) begin\n                    if (denominator == 4'b0000) begin\n                        busy      <= 1'b0;\n                        done      <= 1'b1;\n                        quotient  <= 4'b1111;\n                        remainder <= numerator;\n                    end else begin\n                        busy             <= 1'b1;\n                        numerator_work   <= numerator;\n                        denominator_work <= denominator;\n                        quotient_work    <= 4'b0000;\n                        remainder_work   <= 4'b0000;\n                        advance_count    <= 3'b000;\n                    end\n                end\n            end else if (advance) begin\n                numerator_work <= {numerator_work[2:0], 1'b0};\n                quotient_work  <= next_quotient;\n                remainder_work <= reduced_remainder[3:0];\n\n                if (advance_count == 3'd3) begin\n                    busy          <= 1'b0;\n                    done          <= 1'b1;\n                    quotient      <= next_quotient;\n                    remainder     <= reduced_remainder[3:0];\n                    advance_count <= 3'b000;\n                end else begin\n                    advance_count <= advance_count + 3'd1;\n                end\n            end\n        end\n    end\n\nendmodule",
+  "response_sha256": "4d5eb916f0e5c505a776395999d213978e13490bb7c3fed5740c4ac8adc31e87",
+  "thread_id": "01a12a0b-4e77-7080-9bdd-dbb3fe79d253",
+  "exit": {
+    "utc": "2026-10-11T08:19:21.633097+00:00",
+    "pid": 28756,
+    "identity": "134361803463285072",
+    "nonce": "69716cb4a8134a77b3424c606ff38618",
+    "request_sha256": "36be7a8e8980ca5d69ccedff8cc16188ba46f332903d0dc728bac231c3e6cc25",
+    "returncode": 0,
+    "reason": null,
+    "elapsed_seconds": 15.281000000002678,
+    "streams_closed": true,
+    "reader_errors": [],
+    "counts": {
+      "stdout": 3745,
+      "stderr": 0
+    },
+    "descendant_cleanup": "UNVERIFIED",
+    "sha256": {
+      "stdout": "335c8beeef331f533dae290aaa65a09b1fb929417fbc19fe40715a2279cf35f9",
+      "stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "reconstructed_without_summary": true
+}

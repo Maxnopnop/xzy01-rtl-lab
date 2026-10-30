@@ -1,0 +1,116 @@
+RAG corpus: 18 frozen excerpts
+Source: lowRISC contributors, Verilog Coding Style Guide
+https://github.com/lowRISC/style-guides/blob/9c15ff5dce23eef969e00ab3715153967419eadd/VerilogCodingStyle.md
+License: CC BY 4.0, https://creativecommons.org/licenses/by/4.0/
+Excerpts unchanged; labels and source links added for review.
+
+LR001 | Blocking and Non-blocking Assignments | lines 1772-1773
+https://github.com/lowRISC/style-guides/blob/9c15ff5dce23eef969e00ab3715153967419eadd/VerilogCodingStyle.md#L1772-L1773
+***Sequential logic must use non-blocking assignments.  Combinational
+blocks must use blocking assignments.***
+
+LR002 | Delay Modeling | lines 1789-1790
+https://github.com/lowRISC/style-guides/blob/9c15ff5dce23eef969e00ab3715153967419eadd/VerilogCodingStyle.md#L1789-L1790
+Synthesizable design modules must be designed around a zero-delay simulation
+methodology. All forms of `#delay`, including `#0`, are not permitted.
+
+LR003 | Sequential Logic (Latches) | lines 1802-1803
+https://github.com/lowRISC/style-guides/blob/9c15ff5dce23eef969e00ab3715153967419eadd/VerilogCodingStyle.md#L1802-L1803
+If you must use a latch, use `always_latch` over `always`, and use non-blocking
+assignments (`<=`). Never use blocking assignments (`=`).
+
+LR004 | Sequential Logic (Registers) | lines 1809-1810
+https://github.com/lowRISC/style-guides/blob/9c15ff5dce23eef969e00ab3715153967419eadd/VerilogCodingStyle.md#L1809-L1810
+In a sequential always block, only use non-blocking assignments (`<=`). Never
+use blocking assignments (`=`).
+
+LR005 | Sequential Logic (Registers) | lines 1812-1816
+https://github.com/lowRISC/style-guides/blob/9c15ff5dce23eef969e00ab3715153967419eadd/VerilogCodingStyle.md#L1812-L1816
+Designs that mix blocking and non-blocking assignments for registers simulate
+incorrectly because some simulators process some of the blocking assignments in
+an always block as occurring in a separate simulation event as the non-blocking
+assignment. This process makes some signals jump registers, potentially leading
+to total protonic reversal. That's bad.
+
+LR006 | Sequential Logic (Registers) | lines 1818-1820
+https://github.com/lowRISC/style-guides/blob/9c15ff5dce23eef969e00ab3715153967419eadd/VerilogCodingStyle.md#L1818-L1820
+Sequential statements for state assignments should only contain reset values and
+a next-state to state assignment, use a separate combinational-only block to
+generate that next-state value.
+
+LR007 | Sequential Logic (Registers) | lines 1860-1862
+https://github.com/lowRISC/style-guides/blob/9c15ff5dce23eef969e00ab3715153967419eadd/VerilogCodingStyle.md#L1860-L1862
+Exception: It is fine to set default values first, then specific values.
+However, it is preferred to do this work in a separate combinational block with
+explicit blocking assignments.
+
+LR008 | Sequential Logic (Registers) | lines 1897-1901
+https://github.com/lowRISC/style-guides/blob/9c15ff5dce23eef969e00ab3715153967419eadd/VerilogCodingStyle.md#L1897-L1901
+Keep work in sequential blocks simple. If a sequential block becomes
+sufficiently complicated, consider splitting the combinational logic into a
+separate combinational (`always_comb`) block. Ideally, sequential blocks should
+contain only a register instantiation, with perhaps a load enable or an
+increment.
+
+LR009 | Combinational Logic | lines 2136-2138
+https://github.com/lowRISC/style-guides/blob/9c15ff5dce23eef969e00ab3715153967419eadd/VerilogCodingStyle.md#L2136-L2138
+Use `always_comb` for SystemVerilog combinational blocks. Use `always @*` if
+only Verilog-2001 is supported. Never explicitly declare sensitivity lists for
+combinational logic.
+
+LR010 | Combinational Logic | lines 2152-2153
+https://github.com/lowRISC/style-guides/blob/9c15ff5dce23eef969e00ab3715153967419eadd/VerilogCodingStyle.md#L2152-L2153
+Do not use three-state logic (`Z` state) to accomplish on-chip logic such as
+muxing.
+
+LR011 | Combinational Logic | lines 2155-2156
+https://github.com/lowRISC/style-guides/blob/9c15ff5dce23eef969e00ab3715153967419eadd/VerilogCodingStyle.md#L2155-L2156
+Do not infer a latch inside a function, as this may cause a
+simulation/synthesis mismatch.
+
+LR012 | Case Statements | lines 2160-2161
+https://github.com/lowRISC/style-guides/blob/9c15ff5dce23eef969e00ab3715153967419eadd/VerilogCodingStyle.md#L2160-L2161
+***Avoid case-modifying pragmas. `unique case` is the best
+practice. Always define a default case.***
+
+LR013 | Case Statements | lines 2163-2164
+https://github.com/lowRISC/style-guides/blob/9c15ff5dce23eef969e00ab3715153967419eadd/VerilogCodingStyle.md#L2163-L2164
+Never use either the `full_case` or `parallel_case` pragmas. These pragmas can
+easily cause simulation/synthesis mismatches.
+
+LR014 | Case Statements | lines 2181-2185
+https://github.com/lowRISC/style-guides/blob/9c15ff5dce23eef969e00ab3715153967419eadd/VerilogCodingStyle.md#L2181-L2185
+The `unique` prefix is recommended before all case statements, as it creates
+simulation assertions that can catch certain mistakes. In some cases, `priority`
+may be used instead of `unique`, though in such cases, cascaded ternary
+structures should be the preferred way of representing priority encoders as
+they are a more readable representation for priority encoders.
+
+LR015 | Case Statements | lines 2189-2192
+https://github.com/lowRISC/style-guides/blob/9c15ff5dce23eef969e00ab3715153967419eadd/VerilogCodingStyle.md#L2189-L2192
+  - a `default:` statement is **always** included in order to avoid accidental
+  inference of latches, even if all cases are covered. In simulation, a case
+  expression that evaluates to `X` will not match any case and will behave as a
+  latch, leading to different behavior than synthesis if no default is specified.
+
+LR016 | Case Statements | lines 2238-2240
+https://github.com/lowRISC/style-guides/blob/9c15ff5dce23eef969e00ab3715153967419eadd/VerilogCodingStyle.md#L2238-L2240
+Use `case` if wildcard operator behavior is not needed.
+Use `case inside` if wildcard operator behavior is needed.
+Use `casez` if wildcard operator behavior is needed and Verilog-2001 compatibility is required.
+
+LR017 | Case Statements | lines 2242-2243
+https://github.com/lowRISC/style-guides/blob/9c15ff5dce23eef969e00ab3715153967419eadd/VerilogCodingStyle.md#L2242-L2243
+When expressing a wildcard in a case item, use the '?' character since it more
+clearly expresses the intent.
+
+LR018 | Case Statements | lines 2245-2252
+https://github.com/lowRISC/style-guides/blob/9c15ff5dce23eef969e00ab3715153967419eadd/VerilogCodingStyle.md#L2245-L2252
+`casex` should not be used. `casex` implements a symmetric wildcard operator
+such that an `X` in the case expression may match one or more case items.
+`casez` only treats high-impedance states (`Z` or `?`) as a wildcard, and
+performs exact matches for undriven `X` inputs. While this does not completely
+fix the problems with symmetric wildcard matching, it is harder to accidentally
+produce a `Z` input than an `X` input, so this form is preferred.
+`case inside` does not treat either `X` or `Z` in the case expression as a
+wildcard, so this form is preferred over `casez`.

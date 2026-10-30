@@ -1,0 +1,278 @@
+[
+  {
+    "task": "phase_snapshot",
+    "commands": [
+      [
+        1,
+        {
+          "publish": 1,
+          "data": 2
+        }
+      ],
+      [
+        0,
+        {
+          "capture": 1,
+          "data": 3
+        }
+      ],
+      [
+        1,
+        {
+          "publish": 1,
+          "data": 1
+        }
+      ],
+      [
+        0,
+        {
+          "capture": 1,
+          "clear_sample": 1,
+          "data": 2
+        }
+      ]
+    ],
+    "expected_states": [
+      {
+        "sampled": 0,
+        "visible": 0,
+        "published": 1
+      },
+      {
+        "sampled": 3,
+        "visible": 0,
+        "published": 1
+      },
+      {
+        "sampled": 3,
+        "visible": 3,
+        "published": 1
+      },
+      {
+        "sampled": 0,
+        "visible": 3,
+        "published": 1
+      }
+    ],
+    "label": "Hand calculated observable states; same author"
+  },
+  {
+    "task": "escape_frame",
+    "commands": [
+      [
+        1,
+        {
+          "feed": 1,
+          "symbol": 0
+        }
+      ],
+      [
+        1,
+        {
+          "feed": 1,
+          "symbol": 2
+        }
+      ],
+      [
+        1,
+        {
+          "feed": 0,
+          "symbol": 1
+        }
+      ],
+      [
+        1,
+        {
+          "feed": 1,
+          "symbol": 1
+        }
+      ],
+      [
+        1,
+        {
+          "feed": 1,
+          "symbol": 3
+        }
+      ],
+      [
+        1,
+        {
+          "feed": 1,
+          "symbol": 1
+        }
+      ]
+    ],
+    "expected_states": [
+      {
+        "active": 1,
+        "escaped": 0,
+        "work_sum": 0,
+        "work_count": 0,
+        "last_sum": 0,
+        "last_count": 0,
+        "completed": 0
+      },
+      {
+        "active": 1,
+        "escaped": 1,
+        "work_sum": 0,
+        "work_count": 0,
+        "last_sum": 0,
+        "last_count": 0,
+        "completed": 0
+      },
+      {
+        "active": 1,
+        "escaped": 1,
+        "work_sum": 0,
+        "work_count": 0,
+        "last_sum": 0,
+        "last_count": 0,
+        "completed": 0
+      },
+      {
+        "active": 1,
+        "escaped": 0,
+        "work_sum": 1,
+        "work_count": 1,
+        "last_sum": 0,
+        "last_count": 0,
+        "completed": 0
+      },
+      {
+        "active": 1,
+        "escaped": 0,
+        "work_sum": 2,
+        "work_count": 2,
+        "last_sum": 0,
+        "last_count": 0,
+        "completed": 0
+      },
+      {
+        "active": 0,
+        "escaped": 0,
+        "work_sum": 0,
+        "work_count": 0,
+        "last_sum": 2,
+        "last_count": 2,
+        "completed": 1
+      }
+    ],
+    "label": "Hand calculated observable states; same author"
+  },
+  {
+    "task": "masked_ring_alloc",
+    "commands": [
+      [
+        1,
+        {
+          "allocate": 1
+        }
+      ],
+      [
+        1,
+        {
+          "allocate": 1
+        }
+      ],
+      [
+        1,
+        {
+          "allocate": 1
+        }
+      ],
+      [
+        1,
+        {
+          "allocate": 1
+        }
+      ],
+      [
+        1,
+        {
+          "allocate": 1
+        }
+      ],
+      [
+        1,
+        {
+          "release": 1,
+          "release_id": 2,
+          "allocate": 1
+        }
+      ],
+      [
+        1,
+        {
+          "release": 1,
+          "release_id": 0
+        }
+      ],
+      [
+        1,
+        {
+          "allocate": 1
+        }
+      ]
+    ],
+    "expected_states": [
+      {
+        "occupied": 1,
+        "hint": 1,
+        "last_alloc": 0,
+        "alloc_valid": 1,
+        "rejected": 0
+      },
+      {
+        "occupied": 3,
+        "hint": 2,
+        "last_alloc": 1,
+        "alloc_valid": 1,
+        "rejected": 0
+      },
+      {
+        "occupied": 7,
+        "hint": 3,
+        "last_alloc": 2,
+        "alloc_valid": 1,
+        "rejected": 0
+      },
+      {
+        "occupied": 15,
+        "hint": 0,
+        "last_alloc": 3,
+        "alloc_valid": 1,
+        "rejected": 0
+      },
+      {
+        "occupied": 15,
+        "hint": 0,
+        "last_alloc": 3,
+        "alloc_valid": 0,
+        "rejected": 1
+      },
+      {
+        "occupied": 15,
+        "hint": 3,
+        "last_alloc": 2,
+        "alloc_valid": 1,
+        "rejected": 0
+      },
+      {
+        "occupied": 14,
+        "hint": 3,
+        "last_alloc": 2,
+        "alloc_valid": 0,
+        "rejected": 0
+      },
+      {
+        "occupied": 15,
+        "hint": 1,
+        "last_alloc": 0,
+        "alloc_valid": 1,
+        "rejected": 0
+      }
+    ],
+    "label": "Hand calculated observable states; same author"
+  }
+]

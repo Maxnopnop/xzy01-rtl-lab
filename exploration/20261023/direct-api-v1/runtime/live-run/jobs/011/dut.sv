@@ -1,0 +1,79 @@
+module TopModule (
+    input  logic       clk,
+    input  logic       reset,
+    input  logic [2:0] s,
+    output logic       fr2,
+    output logic       fr1,
+    output logic       fr0,
+    output logic       dfr
+);
+
+    logic [1:0] level;
+    logic [1:0] next_level;
+    logic       direction;
+    logic       next_direction;
+
+    always_comb begin
+        if (s[2])
+            next_level = 2'd3;
+        else if (s[1])
+            next_level = 2'd2;
+        else if (s[0])
+            next_level = 2'd1;
+        else
+            next_level = 2'd0;
+
+        next_direction = direction;
+
+        if (next_level == 2'd0)
+            next_direction = 1'b1;
+        else if (next_level == 2'd3)
+            next_direction = 1'b0;
+        else if (next_level > level)
+            next_direction = 1'b1;
+        else if (next_level < level)
+            next_direction = 1'b0;
+    end
+
+    always_ff @(posedge clk) begin
+        if (reset) begin
+            level     <= 2'd0;
+            direction <= 1'b1;
+        end else begin
+            level     <= next_level;
+            direction <= next_direction;
+        end
+    end
+
+    always_comb begin
+        fr2 = 1'b0;
+        fr1 = 1'b0;
+        fr0 = 1'b0;
+        dfr = direction;
+
+        case (level)
+            2'd0: begin
+                fr2 = 1'b1;
+                fr1 = 1'b1;
+                fr0 = 1'b1;
+            end
+            2'd1: begin
+                fr1 = 1'b1;
+                fr0 = 1'b1;
+            end
+            2'd2: begin
+                fr0 = 1'b1;
+            end
+            2'd3: begin
+                dfr = 1'b0;
+            end
+            default: begin
+                fr2 = 1'b1;
+                fr1 = 1'b1;
+                fr0 = 1'b1;
+                dfr = 1'b1;
+            end
+        endcase
+    end
+
+endmodule

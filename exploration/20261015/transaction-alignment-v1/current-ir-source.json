@@ -1,0 +1,331 @@
+{
+  "path": "exploration/20261011/r6/intent.py",
+  "sha256": "c38c058f97f3fba37dab70cd5aae3c99a3a1bdb2c9fdd16bdc3f438c90f1db6e",
+  "r6_plan_sha256": "f5c7793ad63cccde246ba9b81e28b1aab0c1bdec9c02b407207094d9a21db7b4",
+  "numbered_lines": [
+    {
+      "line": 1,
+      "text": "\"\"\"Bounded two-serialization temporal contract interpreter; never eval/exec model text.\"\"\""
+    },
+    {
+      "line": 2,
+      "text": "import ast,json,re"
+    },
+    {
+      "line": 3,
+      "text": "import tasks"
+    },
+    {
+      "line": 4,
+      "text": "MAX_BYTES=16384"
+    },
+    {
+      "line": 5,
+      "text": "OPS={ast.Add:lambda a,b:a+b,ast.Sub:lambda a,b:a-b,ast.BitAnd:lambda a,b:a&b,ast.BitOr:lambda a,b:a|b,ast.BitXor:lambda a,b:a^b,ast.LShift:lambda a,b:a<<b,ast.RShift:lambda a,b:a>>b}"
+    },
+    {
+      "line": 6,
+      "text": "CMP={ast.Eq:lambda a,b:a==b,ast.NotEq:lambda a,b:a!=b,ast.Lt:lambda a,b:a<b,ast.LtE:lambda a,b:a<=b,ast.Gt:lambda a,b:a>b,ast.GtE:lambda a,b:a>=b}"
+    },
+    {
+      "line": 7,
+      "text": "class Invalid(Exception):"
+    },
+    {
+      "line": 8,
+      "text": "    def __init__(self,status,message):self.status=status;self.message=message"
+    },
+    {
+      "line": 9,
+      "text": "def expression(text,names):"
+    },
+    {
+      "line": 10,
+      "text": "    if not isinstance(text,str) or len(text)>4096:raise Invalid('UNSUPPORTED','Expression size/type')"
+    },
+    {
+      "line": 11,
+      "text": "    try:tree=ast.parse(text,mode='eval').body"
+    },
+    {
+      "line": 12,
+      "text": "    except SyntaxError:raise Invalid('IR_INVALID','Expression syntax') from None"
+    },
+    {
+      "line": 13,
+      "text": "    if sum(1 for _ in ast.walk(tree))>512:raise Invalid('UNSUPPORTED','Expression nodes')"
+    },
+    {
+      "line": 14,
+      "text": "    def validate(n):"
+    },
+    {
+      "line": 15,
+      "text": "        if isinstance(n,ast.Constant) and type(n.value)==int and 0<=n.value<=65535:return"
+    },
+    {
+      "line": 16,
+      "text": "        if isinstance(n,ast.Name) and n.id in names:return"
+    },
+    {
+      "line": 17,
+      "text": "        if isinstance(n,ast.BinOp) and type(n.op) in OPS:"
+    },
+    {
+      "line": 18,
+      "text": "            if isinstance(n.op,(ast.LShift,ast.RShift)) and not (isinstance(n.right,ast.Constant) and type(n.right.value)==int and 0<=n.right.value<=7):raise Invalid(\"UNSUPPORTED\",\"Shift must be constant0..7\")"
+    },
+    {
+      "line": 19,
+      "text": "            validate(n.left);validate(n.right);return"
+    },
+    {
+      "line": 20,
+      "text": "        if isinstance(n,ast.Compare) and len(n.ops)==1 and type(n.ops[0]) in CMP:validate(n.left);validate(n.comparators[0]);return"
+    },
+    {
+      "line": 21,
+      "text": "        if isinstance(n,ast.BoolOp) and isinstance(n.op,(ast.And,ast.Or)):"
+    },
+    {
+      "line": 22,
+      "text": "            for v in n.values:validate(v)"
+    },
+    {
+      "line": 23,
+      "text": "            return"
+    },
+    {
+      "line": 24,
+      "text": "        if isinstance(n,ast.UnaryOp) and isinstance(n.op,ast.Not):validate(n.operand);return"
+    },
+    {
+      "line": 25,
+      "text": "        if isinstance(n,ast.IfExp):validate(n.test);validate(n.body);validate(n.orelse);return"
+    },
+    {
+      "line": 26,
+      "text": "        raise Invalid('UNSUPPORTED','Unsupported operator, reference or literal')"
+    },
+    {
+      "line": 27,
+      "text": "    validate(tree);return tree"
+    },
+    {
+      "line": 28,
+      "text": "def evaluate(n,env):"
+    },
+    {
+      "line": 29,
+      "text": "    if isinstance(n,ast.Constant):return n.value"
+    },
+    {
+      "line": 30,
+      "text": "    if isinstance(n,ast.Name):return env[n.id]"
+    },
+    {
+      "line": 31,
+      "text": "    if isinstance(n,ast.BinOp):return OPS[type(n.op)](evaluate(n.left,env),evaluate(n.right,env))"
+    },
+    {
+      "line": 32,
+      "text": "    if isinstance(n,ast.Compare):return int(CMP[type(n.ops[0])](evaluate(n.left,env),evaluate(n.comparators[0],env)))"
+    },
+    {
+      "line": 33,
+      "text": "    if isinstance(n,ast.BoolOp):"
+    },
+    {
+      "line": 34,
+      "text": "        v=[bool(evaluate(x,env)) for x in n.values];return int(all(v) if isinstance(n.op,ast.And) else any(v))"
+    },
+    {
+      "line": 35,
+      "text": "    if isinstance(n,ast.UnaryOp):return int(not evaluate(n.operand,env))"
+    },
+    {
+      "line": 36,
+      "text": "    if isinstance(n,ast.IfExp):return evaluate(n.body if evaluate(n.test,env) else n.orelse,env)"
+    },
+    {
+      "line": 37,
+      "text": "    raise AssertionError('Unvalidated expression')"
+    },
+    {
+      "line": 38,
+      "text": "def parse(raw,representation,task):"
+    },
+    {
+      "line": 39,
+      "text": "    if representation!='structured':raise Invalid('UNSUPPORTED','Only S has IR')"
+    },
+    {
+      "line": 40,
+      "text": "    if len(raw.encode())>MAX_BYTES or '```' in raw:raise Invalid('EXTRACTION_ERROR','Intent bytes/fences')"
+    },
+    {
+      "line": 41,
+      "text": "    def unique(pairs):"
+    },
+    {
+      "line": 42,
+      "text": "        d={}"
+    },
+    {
+      "line": 43,
+      "text": "        for k,v in pairs:"
+    },
+    {
+      "line": 44,
+      "text": "            if k in d:raise Invalid('IR_INVALID','Duplicate key')"
+    },
+    {
+      "line": 45,
+      "text": "            d[k]=v"
+    },
+    {
+      "line": 46,
+      "text": "        return d"
+    },
+    {
+      "line": 47,
+      "text": "    try:p=json.loads(raw,object_pairs_hook=unique)"
+    },
+    {
+      "line": 48,
+      "text": "    except (ValueError,TypeError):raise Invalid('EXTRACTION_ERROR','Invalid JSON') from None"
+    },
+    {
+      "line": 49,
+      "text": "    keys={'timing','registers','next_rising','next_falling','outputs'}"
+    },
+    {
+      "line": 50,
+      "text": "    if not isinstance(p,dict) or set(p)!=keys or any(not isinstance(v,dict) for v in p.values()):raise Invalid('IR_INVALID','Dictionary sections')"
+    },
+    {
+      "line": 51,
+      "text": "    if set(p['timing'])!={'reset'}:raise Invalid('IR_INVALID','Timing keys')"
+    },
+    {
+      "line": 52,
+      "text": "    if p['timing']['reset'] not in ('async_low','sync_low','none'):raise Invalid('UNSUPPORTED','Reset domain')"
+    },
+    {
+      "line": 53,
+      "text": "    regs=p['registers'];inputs={n for n,w in tasks.TASKS[task]['inputs']}|{'rst_n'}"
+    },
+    {
+      "line": 54,
+      "text": "    if not 1<=len(regs)<=16:raise Invalid('UNSUPPORTED','Register count')"
+    },
+    {
+      "line": 55,
+      "text": "    for n,r in regs.items():"
+    },
+    {
+      "line": 56,
+      "text": "        if not re.fullmatch('[A-Za-z][A-Za-z0-9_]*',n) or n in inputs:raise Invalid('IR_INVALID','Register name')"
+    },
+    {
+      "line": 57,
+      "text": "        if not isinstance(r,dict) or set(r)!={'width','reset'}:raise Invalid('IR_INVALID','Register fields')"
+    },
+    {
+      "line": 58,
+      "text": "        if type(r['width'])!=int or not 1<=r['width']<=8:raise Invalid('UNSUPPORTED','Register width')"
+    },
+    {
+      "line": 59,
+      "text": "        if type(r['reset'])!=int or not 0<=r['reset']<(1<<r['width']):raise Invalid('IR_INVALID','Reset range')"
+    },
+    {
+      "line": 60,
+      "text": "    a=set(p['next_rising']);b=set(p['next_falling'])"
+    },
+    {
+      "line": 61,
+      "text": "    if a&b or a|b!=set(regs):raise Invalid('IR_INVALID','Disjoint complete edge banks')"
+    },
+    {
+      "line": 62,
+      "text": "    if set(p['outputs'])!={n for n,w in tasks.TASKS[task]['outputs']}:raise Invalid('IR_INVALID','Output keys')"
+    },
+    {
+      "line": 63,
+      "text": "    p['trees']={k:{n:expression(e,inputs|set(regs)) for n,e in p[k].items()} for k in ('next_rising','next_falling','outputs')}"
+    },
+    {
+      "line": 64,
+      "text": "    return p"
+    },
+    {
+      "line": 65,
+      "text": "def run(p,task,rows):"
+    },
+    {
+      "line": 66,
+      "text": "    state={n:r['reset'] for n,r in p['registers'].items()};last=0;answers=[]"
+    },
+    {
+      "line": 67,
+      "text": "    for row in rows:"
+    },
+    {
+      "line": 68,
+      "text": "        edge=row['clk']!=last;bank='next_rising' if row['clk'] else 'next_falling';reset=not row['rst_n']"
+    },
+    {
+      "line": 69,
+      "text": "        if reset and p['timing']['reset']=='async_low':state={n:r['reset'] for n,r in p['registers'].items()}"
+    },
+    {
+      "line": 70,
+      "text": "        elif edge:"
+    },
+    {
+      "line": 71,
+      "text": "            env=state|tasks.unpack(task,row['input'])|{'rst_n':row['rst_n']}"
+    },
+    {
+      "line": 72,
+      "text": "            for n,t in p['trees'][bank].items():state[n]=p['registers'][n]['reset'] if reset and p['timing']['reset']=='sync_low' else evaluate(t,env)&((1<<p['registers'][n]['width'])-1)"
+    },
+    {
+      "line": 73,
+      "text": "        env=state|tasks.unpack(task,row['input'])|{'rst_n':row['rst_n']};value=0"
+    },
+    {
+      "line": 74,
+      "text": "        for n,w in tasks.TASKS[task]['outputs']:value=(value<<w)|(evaluate(p['trees']['outputs'][n],env)&((1<<w)-1))"
+    },
+    {
+      "line": 75,
+      "text": "        answers.append(value);last=row['clk']"
+    },
+    {
+      "line": 76,
+      "text": "    return answers"
+    },
+    {
+      "line": 77,
+      "text": "def check(raw,representation,task,rows):"
+    },
+    {
+      "line": 78,
+      "text": "    try:p=parse(raw,representation,task);answers=run(p,task,rows)"
+    },
+    {
+      "line": 79,
+      "text": "    except Invalid as e:return dict(status=e.status,stage='intent',message=e.message,mismatches=[]),None"
+    },
+    {
+      "line": 80,
+      "text": "    mismatch=[dict(event=i,expected=r['expected'],observed=a,category=r['category']) for i,(r,a) in enumerate(zip(rows,answers)) if r['expected']!=a]"
+    },
+    {
+      "line": 81,
+      "text": "    return dict(status='FUNCTION_FAIL' if mismatch else 'PASS',stage='intent',checks=len(rows),errors=len(mismatch),mismatches=mismatch[:8]),answers"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+# 准备决策
+
+当前R6 run只返回整条post-event输出列表，动态driver无法从该API逐拍获得ready。拟采用唯一透明插桩：在run循环末尾last更新之后增加yield value，将其生成器化，保留parse/evaluate/状态与边沿逻辑；新插桩adapter单独哈希，不能声称未经修改调用原run。阶段B每case一个生成器完整执行，静态AST只核插入点；语义等价尚未运行验证，交总控审查该取舍。
+
+本阶段至少提供one-slot完整IR映射，与不同微架构RTL比较；语法及结构可静态核验但不调用原parse，不把静态通过当映射功能通过。源ready驱动器各自推进offer，但共享外部offer序列、reset与consumer-ready日程。

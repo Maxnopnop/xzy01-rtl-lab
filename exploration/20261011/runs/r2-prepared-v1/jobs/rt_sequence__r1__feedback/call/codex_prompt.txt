@@ -1,0 +1,202 @@
+Implement the given digital circuit in synthesizable SystemVerilog.
+Return only one complete module in a single ```systemverilog code block.
+Use exactly the specified module name and ports. Do not provide a testbench.
+No includes, preprocessor directives, strings, hierarchical references, extra
+modules, simulation system tasks, file IO, or attributes. Only $signed,
+$unsigned and $clog2 system functions are permitted. Do not use delays.
+The independent evaluator will supply all input stimuli and check outputs.
+
+Please act as a professional Verilog designer.
+
+Implement a module of a sequence detector to detect a specific 4-bit binary sequence 1001.
+
+Module name:
+    sequence_detector
+
+Input ports:
+    clk: Clock signal to synchronize the detector.
+    rst_n: Active-low reset signal to initialize the state machine.
+    data_in: 1-bit binary input signal to feed the bitstream for sequence detection.
+
+Output ports:
+    sequence_detected: 1-bit output signal that is set high when the specific sequence is detected.
+    
+Internal logic:
+    State Machine: The sequence detector uses a finite state machine (FSM) with the following states:
+    IDLE: Waiting for the start of the sequence.
+    S1: The first bit of the desired sequence is detected.
+    S2: The second bit of the desired sequence is detected.
+    S3: The third bit of the desired sequence is detected.
+    S4: The fourth and final bit of the desired sequence is detected, and the output sequence_detected is set high.
+
+Implementation:
+    -FSM Design: The FSM transitions through states based on the bitstream data_in. On each clock cycle, the detector checks for a match of the specific sequence.
+
+    -Sequence Detection: The module checks the input data_in and transitions between states. Once the complete sequence is detected, sequence_detected is asserted.
+
+    -Reset Behavior: When rst_n is low, the state machine returns to the IDLE state, resetting the detection process.
+
+Development-subset clarification (part of the fixed specification): Use asynchronous active-low reset, overlapping detections, and a Moore output high after the edge consuming the final 1; matching the archived reference.
+
+Use reg/localparam state encodings and case/if assignments for Icarus compatibility. Avoid enum-valued ternary assignments. Preserve the specified reset, overlap and cycle timing.
+
+Public specification examples shared across conditions:
+{
+  "clock_edge": "posedge",
+  "output_kind": "moore",
+  "reset": {
+    "kind": "async",
+    "active": 0,
+    "output": 0
+  },
+  "trace_convention": "Each trace starts after reset. List output after each rising edge; reset is then inactive.",
+  "examples": [
+    {
+      "bits": "1001",
+      "outputs": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "bits": "1011",
+      "outputs": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "bits": "1001001",
+      "outputs": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "bits": "100001",
+      "outputs": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "bits": "10011001",
+      "outputs": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "bits": "11001",
+      "outputs": [
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "bits": "001",
+      "outputs": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "bits": "101001",
+      "outputs": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "bits": "01",
+      "outputs": [
+        0,
+        0
+      ]
+    },
+    {
+      "bits": "0001",
+      "outputs": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "bits": "1000001",
+      "outputs": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ]
+}
+
+Candidate intermediate state table (may contain mistakes):
+{"schema":1,"clock_edge":"posedge","output_kind":"moore","reset":{"kind":"async","active":0,"state":"IDLE"},"states":[{"name":"IDLE","output":0},{"name":"S1","output":0},{"name":"S2","output":0},{"name":"S3","output":0},{"name":"S4","output":1}],"transitions":[{"from":"IDLE","input":0,"to":"IDLE"},{"from":"IDLE","input":1,"to":"S1"},{"from":"S1","input":0,"to":"S2"},{"from":"S1","input":1,"to":"S1"},{"from":"S2","input":0,"to":"S3"},{"from":"S2","input":1,"to":"S1"},{"from":"S3","input":0,"to":"IDLE"},{"from":"S3","input":1,"to":"S4"},{"from":"S4","input":0,"to":"S3"},{"from":"S4","input":1,"to":"S1"}]}
+
+Implement the specification. You may correct the candidate table while producing RTL. There is no extra repair turn. Return only the specified RTL module.
+
+Executable results on the already-public contract:
+{
+  "status": "PUBLIC_CHECK_FAIL",
+  "errors": [
+    {
+      "bits": "1001001",
+      "expected": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1
+      ],
+      "observed": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "scope": "Only disclosed examples/reset/schema; private tests were not consulted."
+}
+
+Do not invoke tools, read files, run tests, or delegate. Reply directly.

@@ -1,0 +1,176 @@
+
+
+<generic_reference_context>
+These are generic style excerpts, not new task requirements or solutions. The original specification above takes precedence.
+Source: lowRISC contributors; CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/); unmodified contiguous excerpts.
+https://github.com/lowRISC/style-guides/blob/9c15ff5dce23eef969e00ab3715153967419eadd/VerilogCodingStyle.md
+[GEN023; lowRISC Verilog Coding Style Guide; lines 1424-1511]
+While cyclic dependencies are permitted by the SystemVerilog language
+specification, their use can break some tools.
+
+For example:
+
+```systemverilog
+package foo;
+
+  // Package "bar" must not depend on anything in "foo":
+  parameter int unsigned PageSizeBytes = 16 * bar::Kibi;
+
+endpackage
+```
+
+### Module Declaration
+
+***Use the Verilog-2001 full port declaration style, and use the format
+below.***
+
+Use the Verilog-2001 combined port and I/O declaration style. Do not use the
+Verilog-95 list style. The port declaration in the module statement should fully
+declare the port name, type, and direction.
+
+The opening parenthesis should be on the same line as the module declaration,
+and the first port should be declared on the following line.
+
+The closing parenthesis should be on its own line, in column zero.
+
+Indentation for module declaration follows the standard indentation
+rule of two space indentation.
+
+The clock port(s) must be declared first in the port list, followed by any and
+all reset inputs.
+
+Example without parameters:
+
+&#x1f44d;
+```systemverilog {.good}
+module foo (
+  input              clk_i,
+  input              rst_ni,
+  input [7:0]        d_i,
+  output logic [7:0] q_o
+);
+```
+
+Example with parameters:
+
+&#x1f44d;
+```systemverilog {.good}
+module foo #(
+  parameter int unsigned Width = 8,
+) (
+  input                    clk_i,
+  input                    rst_ni,
+  input [Width-1:0]        d_i,
+  output logic [Width-1:0] q_o
+);
+```
+
+Do not use Verilog-95 style:
+
+&#x1f44e;
+```systemverilog {.bad}
+// WRONG:
+module foo(a, b, c d);
+input wire [2:0] a;
+output logic b;
+...
+```
+
+### Module Instantiation
+
+***Use named ports to fully specify all instantiations.***
+
+When connecting signals to ports for an instantiation, use the named port style,
+like this:
+
+```systemverilog
+my_module i_my_instance (
+  .clk_i (clk_i),
+  .rst_ni(rst_ni),
+  .d_i   (from_here),
+  .q_o   (to_there)
+);
+```
+
+If the port and the connecting signal have the same name, you can use the
+
+
+[GEN021; lowRISC Verilog Coding Style Guide; lines 1295-1356]
+Use common prefixes to identify groups of signals that operate together. For
+example, all elements of an AXI-S interface would share a prefix: `foo_valid`,
+`foo_ready`, and `foo_data`.
+
+Additionally, prefixes should be used to clearly label which signal is in which
+clock group for any module with multiple clocks. See the section on [clock
+domains](#clocks) for more details.
+
+Examples:
+
+-   Signals associated with controlling a blockram might share a `bram_` prefix.
+-   Signals that are synchronous with `clk_dram` rather than `clk` should share
+    a `dram_` prefix.
+
+Code example:
+
+&#x1f44d;
+```systemverilog {.good}
+module fifo_controller (
+  input         clk_i,
+  input         rst_ni,
+
+  // writer interface
+  input [15:0]  wr_data_i,
+  input         wr_valid_i,
+  output        wr_ready_o,
+
+  // reader interface
+  output [15:0] rd_data_o,
+  output        rd_valid_o,
+  output [7:0]  rd_fullness_o,
+  input         rd_ack_i,
+
+  // memory interface:
+  output [7:0]  mem_addr_o,
+  output [15:0] mem_wdata_o,
+  output        mem_we_o,
+  input  [15:0] mem_rdata_i
+);
+```
+
+This naming convention makes it easier to map port names onto similar signal
+names using simple and consistent rules. See the section on [Hierarchical
+Consistency](#hierarchical-consistency) for more information.
+
+#### Hierarchical consistency
+
+***The same signal should have the same name at any level of the hierarchy.***
+
+A signal that connects to a port of an instance should have the same name as
+that port. By proceeding in this manner, signals that are directly connected
+should maintain the same name at any level of hierarchy.
+
+Exceptions to this convention are expected, such as:
+
+*   When connecting a port to an element of an array of signals.
+
+*   When mapping a generic port name to something more specific to the design.
+    For example, two generic blocks, one with a `host_bus` port and one with a
+    `device_bus` port might be connected by a `foo_bar_bus` signal.
+
+In each exceptional case, care should be taken to make the mapping of port names
+
+
+[GEN048; lowRISC Verilog Coding Style Guide; lines 3162-3172]
+* When printing use `0b` and `0x` as a prefix for binary and hex. Use
+  `_` for clarity
+* Use logical constructs (i.e `||`) for logical comparison, bit-wise
+  (i.e `|`) for data comparison
+* Bit vectors and packed arrays must be little-endian, unpacked arrays
+  must be big-endian
+* FSMs: **no logic** except for reset should be performed in the process
+  for the state register
+* A combinational process should first define **default value** of all
+  outputs in the process
+* Default value for next state variable should be the current state
+
+</generic_reference_context>

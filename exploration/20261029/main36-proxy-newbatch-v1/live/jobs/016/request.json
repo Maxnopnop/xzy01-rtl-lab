@@ -1,0 +1,21 @@
+{
+  "model": "openai/gpt-4.1-mini",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs."
+    },
+    {
+      "role": "user",
+      "content": "\nI would like you to implement a module named TopModule with the following\ninterface. All input and output ports are one bit unless otherwise\nspecified.\n\n - input  clk\n - input  load\n - input  data (512 bits)\n - output q    (512 bits)\n\nThe module should implement Rule 110, a one-dimensional cellular\nautomaton with interesting properties (such as being Turing-complete).\nThere is a one-dimensional array of cells (on or off). At each time step,\nthe state of each cell changes. In Rule 110, the next state of each cell\ndepends only on itself and its two neighbours, according to the following\ntable:\n\n  Left[i+1] | Center[i] | Right[i-1] | Center's next state \n  1         | 1         | 1          | 0\n  1         | 1         | 0          | 1\n  1         | 0         | 1          | 1\n  1         | 0         | 0          | 0\n  0         | 1         | 1          | 1\n  0         | 1         | 0          | 1\n  0         | 0         | 1          | 1\n  0         | 0         | 0          | 0\n\nIn this circuit, create a 512-cell system (q[511:0]), and advance by one\ntime step each clock cycle. The synchronous active high load input\nindicates the state of the system should be loaded with data[511:0].\nAssume the boundaries (q[-1] and q[512], if they existed) are both zero\n(off). Assume all sequential logic is triggered on the positive edge of the clock.\n\n"
+    }
+  ],
+  "stream": false,
+  "provider": {
+    "only": [
+      "openai"
+    ],
+    "allow_fallbacks": false,
+    "require_parameters": true
+  }
+}

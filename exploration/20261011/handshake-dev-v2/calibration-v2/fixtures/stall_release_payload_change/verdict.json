@@ -1,0 +1,82 @@
+{
+  "status": "FUNCTION_FAIL",
+  "counts": {
+    "BACKPRESSURE_FAIL": 1,
+    "DATA_OR_ORDER_FAIL": 1
+  },
+  "errors": [
+    {
+      "category": "BACKPRESSURE_FAIL",
+      "cycle": 3,
+      "epoch": 0,
+      "endpoint": "consumer0",
+      "expected": [
+        81,
+        1
+      ],
+      "observed": [
+        80,
+        1
+      ],
+      "valid": 1
+    },
+    {
+      "category": "DATA_OR_ORDER_FAIL",
+      "cycle": 3,
+      "epoch": 0,
+      "consumer": 0,
+      "source_cycle": 1,
+      "expected": [
+        81,
+        1
+      ],
+      "observed": [
+        80,
+        1
+      ]
+    }
+  ],
+  "cycles": 32,
+  "accepted": [
+    {
+      "epoch": 0,
+      "cycle": 1,
+      "beat": [
+        81,
+        1
+      ]
+    }
+  ],
+  "delivered": [
+    [
+      {
+        "epoch": 0,
+        "cycle": 3,
+        "beat": [
+          80,
+          1
+        ]
+      }
+    ],
+    [
+      {
+        "epoch": 0,
+        "cycle": 2,
+        "beat": [
+          81,
+          1
+        ]
+      }
+    ]
+  ],
+  "aborted": [],
+  "pending": [
+    0,
+    0
+  ],
+  "source_accepted_per_epoch": [
+    1
+  ],
+  "assessment": "finite_contract",
+  "latency": "Variable; bounded by declared trace/drain, not exact reference cycles"
+}

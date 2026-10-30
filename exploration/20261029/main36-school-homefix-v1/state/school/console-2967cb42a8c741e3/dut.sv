@@ -1,0 +1,33 @@
+module TopModule (
+    input  logic         clk,
+    input  logic         load,
+    input  logic [511:0] data,
+    output logic [511:0] q
+);
+    logic [511:0] state, next_state;
+    logic left, center, right;
+    // Compute next state combinationally
+    always_comb begin
+        // For each cell i, determine left, center, right neighbors with boundary zeros
+        for (int i = 0; i < 512; i++) begin
+            left   = (i == 511) ? 1'b0 : state[i+1];
+            center = state[i];
+            right  = (i == 0)   ? 1'b0 : state[i-1];
+            // Rule 110 next state logic
+            // next_state[i] = NOT (left & center & right) & (left | center | right)
+            // Derived from the truth table:
+            // next = (~(L & C & R)) & (L | C | R)
+            next_state[i] = (~(left & center & right)) & (left | center | right);
+        end
+    end
+
+    always_ff @(posedge clk) begin
+        if (load)
+            state <= data;
+        else
+            state <= next_state;
+    end
+
+    assign q = state;
+
+endmodule

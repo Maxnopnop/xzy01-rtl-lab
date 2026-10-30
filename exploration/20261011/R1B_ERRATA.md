@@ -1,0 +1,5 @@
+# R1b 更精确的换行问题记录
+
+执行v2后追加的只读复核澄清：v1的`original_sha256`字段对read_text规范化后的UTF8字符串计算，24份均不匹配源文件hash；但Windows write_text又将LF转换为CRLF，所以v1的original.sv实际复制字节与原文件相同。R1B_AMENDMENT.md执行前曾推断“original.sv哈希不同”，该推断过宽，现以实际字节审计纠正。首轮与v1/v2锁均未改写。
+
+v2使用read_bytes/decode与write_bytes，修复元数据hash和平台相关读写链条；24份的original.sv、original_sha256和原source hash必须三者一致，mapped.sv仅模块声明改名。v1结果可作有瑕疵的先行运行保留，但最终R1b交付采用v2，v1重跑成本计入，不增加研究样本。

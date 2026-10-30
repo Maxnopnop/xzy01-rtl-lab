@@ -1,0 +1,10 @@
+[
+  {
+    "role": "system",
+    "content": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs."
+  },
+  {
+    "role": "user",
+    "content": "Implement module debounce3(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. Initially q=0. While q=0, require three consecutive sampled ones to change q to 1 on the third edge; any zero restarts this count. While q=1, require two consecutive sampled zeros to change q to 0 on the second edge; any one restarts this count. q otherwise holds."
+  }
+]

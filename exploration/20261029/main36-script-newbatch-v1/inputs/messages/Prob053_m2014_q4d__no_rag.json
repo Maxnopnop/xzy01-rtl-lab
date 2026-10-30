@@ -1,0 +1,10 @@
+[
+  {
+    "role": "system",
+    "content": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs."
+  },
+  {
+    "role": "user",
+    "content": "\nI would like you to implement a module named TopModule with the following\ninterface. All input and output ports are one bit unless otherwise\nspecified.\n\n - input  clk\n - input  in\n - output out\n\nThe module should implement the following circuit: A D flip-flop takes as\ninput the output of a two-input XOR. The flip-flop is positive edge\ntriggered by clk, but there is no reset. The XOR takes as input 'in'\nalong with the output 'out' of the flip-flop.\n\n"
+  }
+]

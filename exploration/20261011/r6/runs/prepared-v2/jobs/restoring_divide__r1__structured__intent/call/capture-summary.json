@@ -1,0 +1,37 @@
+{
+  "status": "GENERATED",
+  "usage": {
+    "input_tokens": 10918,
+    "cached_input_tokens": 7424,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 1233,
+    "reasoning_output_tokens": 516
+  },
+  "source": "READ_ONLY_SAVED_EVIDENCE",
+  "reserved_calls": 1,
+  "response": "{\"timing\":{\"reset\":\"async_low\"},\"registers\":{\"busy_r\":{\"width\":1,\"reset\":0},\"done_r\":{\"width\":1,\"reset\":0},\"quotient_r\":{\"width\":4,\"reset\":0},\"remainder_r\":{\"width\":4,\"reset\":0},\"divisor_r\":{\"width\":4,\"reset\":0},\"dividend_r\":{\"width\":4,\"reset\":0},\"partial_r\":{\"width\":5,\"reset\":0},\"quotient_work_r\":{\"width\":4,\"reset\":0},\"count_r\":{\"width\":2,\"reset\":0}},\"next_rising\":{\"busy_r\":\"0 if abort else (0 if busy_r and advance and count_r == 3 else (busy_r if busy_r else (0 if start and denominator == 0 else (1 if start else 0))))\",\"done_r\":\"0 if abort else (1 if busy_r and advance and count_r == 3 else (1 if not busy_r and start and denominator == 0 else 0))\",\"quotient_r\":\"0 if abort else (((quotient_work_r << 1) | (1 if ((partial_r << 1) | ((dividend_r >> 3) & 1)) >= divisor_r else 0)) if busy_r and advance and count_r == 3 else (15 if not busy_r and start and denominator == 0 else quotient_r))\",\"remainder_r\":\"0 if abort else ((((partial_r << 1) | ((dividend_r >> 3) & 1)) - divisor_r if ((partial_r << 1) | ((dividend_r >> 3) & 1)) >= divisor_r else ((partial_r << 1) | ((dividend_r >> 3) & 1))) if busy_r and advance and count_r == 3 else (numerator if not busy_r and start and denominator == 0 else remainder_r))\",\"divisor_r\":\"0 if abort else (denominator if not busy_r and start and not denominator == 0 else (0 if not busy_r and start else divisor_r))\",\"dividend_r\":\"0 if abort else ((dividend_r << 1) if busy_r and advance else (numerator if not busy_r and start and not denominator == 0 else (0 if not busy_r and start else dividend_r)))\",\"partial_r\":\"0 if abort else ((((partial_r << 1) | ((dividend_r >> 3) & 1)) - divisor_r if ((partial_r << 1) | ((dividend_r >> 3) & 1)) >= divisor_r else ((partial_r << 1) | ((dividend_r >> 3) & 1))) if busy_r and advance else (0 if not busy_r and start else partial_r))\",\"quotient_work_r\":\"0 if abort else (((quotient_work_r << 1) | (1 if ((partial_r << 1) | ((dividend_r >> 3) & 1)) >= divisor_r else 0)) if busy_r and advance else (0 if not busy_r and start else quotient_work_r))\",\"count_r\":\"0 if abort else ((count_r + 1) if busy_r and advance else (0 if not busy_r and start else count_r))\"},\"next_falling\":{},\"outputs\":{\"busy\":\"busy_r\",\"done\":\"done_r\",\"quotient\":\"quotient_r\",\"remainder\":\"remainder_r\"}}",
+  "response_sha256": "ed7bad93a50a04473a592221cd6320a6716e4bc1de422a3419e46eb5e26bf03d",
+  "thread_id": "01a12a0a-4858-7ca3-87a4-9deb6cfc68b4",
+  "exit": {
+    "utc": "2026-10-11T08:18:28.650771+00:00",
+    "pid": 41796,
+    "identity": "134361802791604958",
+    "nonce": "2e73dc5712fb4258a408efdd96a931cb",
+    "request_sha256": "82d50932838e510a3ccc550c59491ea2467dea66fb6398244013d6abccb34d32",
+    "returncode": 0,
+    "reason": null,
+    "elapsed_seconds": 29.48400000000038,
+    "streams_closed": true,
+    "reader_errors": [],
+    "counts": {
+      "stdout": 2728,
+      "stderr": 0
+    },
+    "descendant_cleanup": "UNVERIFIED",
+    "sha256": {
+      "stdout": "957c90f46085c3522dd9cd911a948d5cb697d75ed68318d0617f77e2ab71d69d",
+      "stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "reconstructed_without_summary": true
+}

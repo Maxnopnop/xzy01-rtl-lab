@@ -1,0 +1,46 @@
+module request_delay(
+    input clk,
+    input rst_n,
+    input din,
+    output q
+);
+
+    reg [1:0] state;
+    localparam IDLE     = 2'b00;
+    localparam DELAY    = 2'b01;
+    localparam ASSERT_Q = 2'b10;
+    localparam COOLDOWN = 2'b11;
+
+    assign q = (state == ASSERT_Q);
+
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            state <= IDLE;
+        end else begin
+            case (state)
+                IDLE: begin
+                    if (din)
+                        state <= DELAY;
+                    else
+                        state <= IDLE;
+                end
+                DELAY: begin
+                    state <= ASSERT_Q;
+                end
+                ASSERT_Q: begin
+                    state <= COOLDOWN;
+                end
+                COOLDOWN: begin
+                    if (din)
+                        state <= COOLDOWN;
+                    else
+                        state <= IDLE;
+                end
+                default: begin
+                    state <= IDLE;
+                end
+            endcase
+        end
+    end
+
+endmodule

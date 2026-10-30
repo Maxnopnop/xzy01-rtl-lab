@@ -1,0 +1,30 @@
+{
+  "task": "rotating_owner",
+  "module": "rotating_owner",
+  "inputs": [
+    [
+      "req0",
+      1
+    ],
+    [
+      "req1",
+      1
+    ],
+    [
+      "retire",
+      1
+    ]
+  ],
+  "outputs": [
+    [
+      "grant0",
+      1
+    ],
+    [
+      "grant1",
+      1
+    ]
+  ],
+  "seed": 31004,
+  "spec": "Two-client rotating ownership arbiter with registered one-hot grants. Async active-low rst_n clears both grants and initializes tie preference to client0. When idle before a rising edge, select a requesting client, breaking simultaneous requests by current preference. retire while idle is ignored. Once owned, hold that grant even if its request drops or the other client requests, until retire=1 at a rising edge. On retire set tie preference to the opposite of the retiring owner and immediately select among current req0/req1 using that new preference; if neither requests become idle. A retired owner can regain ownership when it is the sole requester. Preference persists through idle edges; it changes only on retire of a real owner. Both requesting with retire every edge must alternate owners after the first grant. Registered grants hold between edges; reset dominates retire and requests."
+}

@@ -1,0 +1,51 @@
+{
+  "status": "PASS",
+  "real_model_calls": 0,
+  "real_cli_generation_calls": 0,
+  "simulator_calls": 0,
+  "sources": 33,
+  "preserved_bindings": 7419,
+  "sealed_files": {
+    "failed_first": 35,
+    "transport": 585,
+    "regression": 2
+  },
+  "byte_exact_branch_prompts": 16,
+  "mixed_stress_bytes": 1048609,
+  "old_transport": {
+    "received": 4,
+    "createprocess_winerror_206": 12
+  },
+  "negative": [
+    {
+      "mode": "nonzero",
+      "status": "API_ERROR",
+      "stage": "codex"
+    },
+    {
+      "mode": "timeout",
+      "status": "API_ERROR",
+      "stage": "codex_timeout"
+    },
+    {
+      "mode": "overflow",
+      "status": "API_ERROR",
+      "stage": "codex"
+    }
+  ],
+  "plan_sha256": "50c9e29dff46e590471a21f65ac2329f75f6213ea7049b5f7a59f1c402867a75",
+  "pending_slots": 24,
+  "regression": {
+    "status": "REGRESSION_FAILED",
+    "exit_code": 1,
+    "real_model_calls": 0,
+    "environment": "Unmodified default proxy; no loopback isolation",
+    "ran": [
+      "Ran 34 tests in 75.126s"
+    ],
+    "result_lines": [
+      "FAILED (failures=3, errors=1, skipped=2)"
+    ]
+  },
+  "limit": "Offline receiver only; real CLI stdin interface verified with local help; model/server context acceptance untested"
+}

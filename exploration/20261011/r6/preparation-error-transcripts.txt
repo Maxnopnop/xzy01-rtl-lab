@@ -1,0 +1,25 @@
+Tool-returned error text retained from original invocations. These are UTF-8
+transcriptions of the tool display, not claimed as original native stderr bytes.
+No model invocation was involved. Original failed prepare sources are sealed in
+runs/prepare-failure-v1/source-snapshot; no plan was created on that failure.
+
+Runner adaptation helper, exit 1:
+Traceback (most recent call last):
+  File "<stdin>", line 7, in <module>
+  File "C:\Users\A\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1028, in read_text
+    return f.read()
+           ^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0xad in position 815: illegal multibyte sequence
+
+runner.py prepare, exit 1:
+Traceback (most recent call last):
+  File "E:\Codex\2026-09-25\xzy01-using-llm-for-digital-chip-2\outputs\rtl-batch\exploration\20261011\r6\runner.py", line 149, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "E:\Codex\2026-09-25\xzy01-using-llm-for-digital-chip-2\outputs\rtl-batch\exploration\20261011\r6\runner.py", line 139, in main
+    if args.command=='prepare':prepare();print('PREPARED; 0 model calls');return
+                               ^^^^^^^^^
+  File "E:\Codex\2026-09-25\xzy01-using-llm-for-digital-chip-2\outputs\rtl-batch\exploration\20261011\r6\runner.py", line 55, in prepare
+    for name in ('calibration-v1','control-v2','process-v3','recovery-boundaries-v1'):assert batch.read(BASE/'runs'/name/'summary.json')['status']=='PASS'
+                                                                                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+KeyError: 'status'

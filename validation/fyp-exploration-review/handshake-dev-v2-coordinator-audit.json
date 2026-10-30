@@ -1,0 +1,40 @@
+{
+  "status": "NATIVE_EVIDENCE_ACCEPTED_WITH_RETAINED_CATEGORY_MISMATCH_DESIGN_CORRECTION_PENDING",
+  "packet_sha256": "c614a32526e2fa0cb182be7b9dde7aca6e6249df54169a2b190da1f5569eaf16",
+  "bindings": {
+    "prior-lock.json": 20231,
+    "packet-lock.json": 113,
+    "calibration-v2/source-lock.json": 8,
+    "calibration-v2/evidence-lock.json": 90
+  },
+  "fixtures": {
+    "PASS": 4,
+    "FUNCTION_FAIL": 4
+  },
+  "native": {
+    "PASS": 5,
+    "FUNCTION_FAIL": 3
+  },
+  "compile_receipts": 8,
+  "simulation_receipts": 8,
+  "raw_events": 640,
+  "fully_matched_conditions": 15,
+  "condition_denominator": 16,
+  "category_mismatches": [
+    {
+      "name": "shared_reset_stale",
+      "expected_category": "DATA_OR_ORDER_FAIL",
+      "actual_counts": {
+        "UNEXPECTED_TRANSACTION": 1
+      }
+    }
+  ],
+  "new_model_calls": 0,
+  "causality_counterexample": "sink cycle3 vs source cycle7; final flat sequence equal but causality fails",
+  "reset_cancellation_verified": true,
+  "checker_v1_unchanged": true,
+  "design_issue": "Current R6 uses r6/intent.py not old fsm_ir.py; domain conclusions require separate sealed correction",
+  "intent_comparison": "DESIGN_ONLY_NOT_VERIFIED",
+  "external_holdout_readiness": "Not ready for model execution; candidate-preparation decision pending current-IR domain correction and explicit scope",
+  "audit_method": "Independent hashes/file sets, raw mapping and temporal queue/stall/reset recomputation, no target imports or compiler/model reruns"
+}

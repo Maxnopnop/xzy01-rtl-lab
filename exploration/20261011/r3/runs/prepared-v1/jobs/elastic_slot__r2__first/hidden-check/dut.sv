@@ -1,0 +1,40 @@
+module elastic_slot (
+    input  logic       clk,
+    input  logic       rst_n,
+    input  logic       in_valid,
+    input  logic       out_ready,
+    input  logic [1:0] in_data,
+    output logic       in_ready,
+    output logic       out_valid,
+    output logic [1:0] out_data
+);
+
+    logic       occupied;
+    logic [1:0] stored_data;
+
+    always_comb begin
+        if (!rst_n) begin
+            in_ready = 1'b0;
+            out_valid = 1'b0;
+            out_data  = 2'b00;
+        end else begin
+            in_ready = !occupied || out_ready;
+            out_valid = occupied;
+            out_data = occupied ? stored_data : 2'b00;
+        end
+    end
+
+    always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            occupied  <= 1'b0;
+            stored_data <= 2'b00;
+        end else if (in_valid && in_ready) begin
+            occupied  <= 1'b1;
+            stored_data <= in_data;
+        end else if (occupied && out_ready) begin
+            occupied  <= 1'b0;
+            stored_data <= 2'b00;
+        end
+    end
+
+endmodule

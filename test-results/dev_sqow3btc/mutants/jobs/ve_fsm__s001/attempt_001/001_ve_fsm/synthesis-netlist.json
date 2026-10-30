@@ -1,0 +1,536 @@
+{
+  "creator": "Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)",
+  "modules": {
+    "TopModule": {
+      "attributes": {
+        "top": "00000000000000000000000000000001",
+        "src": "dut.sv:1.1-28.10"
+      },
+      "parameter_default_values": {
+        "A": "00000000000000000000000000000000",
+        "B": "00000000000000000000000000000001",
+        "C": "00000000000000000000000000000010",
+        "D": "00000000000000000000000000000011"
+      },
+      "ports": {
+        "clk": {
+          "direction": "input",
+          "bits": [ 2 ]
+        },
+        "in": {
+          "direction": "input",
+          "bits": [ 3 ]
+        },
+        "areset": {
+          "direction": "input",
+          "bits": [ 4 ]
+        },
+        "out": {
+          "direction": "output",
+          "bits": [ 5 ]
+        }
+      },
+      "cells": {
+        "$auto$ff.cc:266:slice$138": {
+          "hide_name": 1,
+          "type": "$_DFF_PP0_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "dut.sv:21.3-24.6"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 6 ],
+            "Q": [ 7 ],
+            "R": [ 4 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$139": {
+          "hide_name": 1,
+          "type": "$_DFF_PP0_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "dut.sv:21.3-24.6"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 8 ],
+            "Q": [ 9 ],
+            "R": [ 4 ]
+          }
+        },
+        "$auto$opt_expr.cc:617:replace_const_cells$156": {
+          "hide_name": 1,
+          "type": "$_NOT_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 9 ],
+            "Y": [ 10 ]
+          }
+        },
+        "$auto$opt_expr.cc:617:replace_const_cells$158": {
+          "hide_name": 1,
+          "type": "$_NOT_",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 7 ],
+            "Y": [ 11 ]
+          }
+        },
+        "$auto$simplemap.cc:134:simplemap_reduce$107": {
+          "hide_name": 1,
+          "type": "$_OR_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "dut.sv:26.17-26.25"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 7 ],
+            "B": [ 10 ],
+            "Y": [ 12 ]
+          }
+        },
+        "$auto$simplemap.cc:134:simplemap_reduce$117": {
+          "hide_name": 1,
+          "type": "$_OR_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "dut.sv:0.0-0.0|dut.sv:13.3-18.10"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 11 ],
+            "B": [ 10 ],
+            "Y": [ 13 ]
+          }
+        },
+        "$auto$simplemap.cc:134:simplemap_reduce$127": {
+          "hide_name": 1,
+          "type": "$_OR_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": ""
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 14 ],
+            "B": [ 15 ],
+            "Y": [ 16 ]
+          }
+        },
+        "$auto$simplemap.cc:134:simplemap_reduce$135": {
+          "hide_name": 1,
+          "type": "$_OR_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "dut.sv:0.0-0.0|dut.sv:13.3-18.10"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 11 ],
+            "B": [ 9 ],
+            "Y": [ 17 ]
+          }
+        },
+        "$auto$simplemap.cc:134:simplemap_reduce$141": {
+          "hide_name": 1,
+          "type": "$_OR_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "dut.sv:0.0-0.0|dut.sv:13.3-18.10|/usr/bin/../share/yosys/techmap.v:594.20-594.31"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 18 ],
+            "B": [ 19 ],
+            "Y": [ 20 ]
+          }
+        },
+        "$auto$simplemap.cc:134:simplemap_reduce$143": {
+          "hide_name": 1,
+          "type": "$_OR_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "dut.sv:0.0-0.0|dut.sv:13.3-18.10|/usr/bin/../share/yosys/techmap.v:594.20-594.31"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 21 ],
+            "B": [ 19 ],
+            "Y": [ 22 ]
+          }
+        },
+        "$auto$simplemap.cc:134:simplemap_reduce$151": {
+          "hide_name": 1,
+          "type": "$_OR_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "dut.sv:0.0-0.0|dut.sv:13.3-18.10|/usr/bin/../share/yosys/techmap.v:598.13-598.15"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 16 ],
+            "B": [ 5 ],
+            "Y": [ 23 ]
+          }
+        },
+        "$auto$simplemap.cc:204:simplemap_lognot$109": {
+          "hide_name": 1,
+          "type": "$_NOT_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "dut.sv:26.17-26.25"
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 12 ],
+            "Y": [ 5 ]
+          }
+        },
+        "$auto$simplemap.cc:204:simplemap_lognot$119": {
+          "hide_name": 1,
+          "type": "$_NOT_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "dut.sv:0.0-0.0|dut.sv:13.3-18.10"
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 13 ],
+            "Y": [ 14 ]
+          }
+        },
+        "$auto$simplemap.cc:204:simplemap_lognot$137": {
+          "hide_name": 1,
+          "type": "$_NOT_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "dut.sv:0.0-0.0|dut.sv:13.3-18.10"
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 17 ],
+            "Y": [ 15 ]
+          }
+        },
+        "$auto$simplemap.cc:275:simplemap_mux$148": {
+          "hide_name": 1,
+          "type": "$_MUX_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "dut.sv:0.0-0.0|dut.sv:13.3-18.10|/usr/bin/../share/yosys/techmap.v:598.13-598.25"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 3 ],
+            "B": [ 22 ],
+            "S": [ 23 ],
+            "Y": [ 6 ]
+          }
+        },
+        "$auto$simplemap.cc:275:simplemap_mux$149": {
+          "hide_name": 1,
+          "type": "$_MUX_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "dut.sv:0.0-0.0|dut.sv:13.3-18.10|/usr/bin/../share/yosys/techmap.v:598.13-598.25"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "0" ],
+            "B": [ 20 ],
+            "S": [ 23 ],
+            "Y": [ 8 ]
+          }
+        },
+        "$auto$simplemap.cc:275:simplemap_mux$99": {
+          "hide_name": 1,
+          "type": "$_NOT_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "dut.sv:15.15-15.25"
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 3 ],
+            "Y": [ 24 ]
+          }
+        },
+        "$auto$simplemap.cc:83:simplemap_bitop$145": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "dut.sv:0.0-0.0|dut.sv:13.3-18.10|/usr/bin/../share/yosys/techmap.v:586.44-586.84"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 3 ],
+            "B": [ 5 ],
+            "Y": [ 19 ]
+          }
+        },
+        "$auto$simplemap.cc:83:simplemap_bitop$146": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "dut.sv:0.0-0.0|dut.sv:13.3-18.10|/usr/bin/../share/yosys/techmap.v:586.44-586.84"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 3 ],
+            "B": [ 16 ],
+            "Y": [ 21 ]
+          }
+        },
+        "$auto$simplemap.cc:83:simplemap_bitop$147": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "dut.sv:0.0-0.0|dut.sv:13.3-18.10|/usr/bin/../share/yosys/techmap.v:586.44-586.84"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 24 ],
+            "B": [ 16 ],
+            "Y": [ 18 ]
+          }
+        }
+      },
+      "netnames": {
+        "$auto$rtlil.cc:3016:NotGate$153": {
+          "hide_name": 1,
+          "bits": [ 10 ],
+          "attributes": {
+          }
+        },
+        "$auto$rtlil.cc:3016:NotGate$155": {
+          "hide_name": 1,
+          "bits": [ 11 ],
+          "attributes": {
+          }
+        },
+        "$auto$simplemap.cc:254:simplemap_eqne$104": {
+          "hide_name": 1,
+          "bits": [ 12 ],
+          "attributes": {
+          }
+        },
+        "$auto$simplemap.cc:254:simplemap_eqne$114": {
+          "hide_name": 1,
+          "bits": [ 13 ],
+          "attributes": {
+          }
+        },
+        "$auto$simplemap.cc:254:simplemap_eqne$132": {
+          "hide_name": 1,
+          "bits": [ 17 ],
+          "attributes": {
+          }
+        },
+        "$procmux$11_CMP": {
+          "hide_name": 1,
+          "bits": [ 15 ],
+          "attributes": {
+          }
+        },
+        "$procmux$8.B": {
+          "hide_name": 1,
+          "bits": [ 3, 24, 3, 3 ],
+          "attributes": {
+            "force_downto": "00000000000000000000000000000001",
+            "src": "dut.sv:0.0-0.0|dut.sv:13.3-18.10|/usr/bin/../share/yosys/techmap.v:572.28-572.29"
+          }
+        },
+        "$procmux$8.B_AND_S": {
+          "hide_name": 1,
+          "bits": [ 21, 18, 19, 19 ],
+          "attributes": {
+            "force_downto": "00000000000000000000000000000001",
+            "src": "dut.sv:0.0-0.0|dut.sv:13.3-18.10|/usr/bin/../share/yosys/techmap.v:584.28-584.35"
+          }
+        },
+        "$procmux$8.S": {
+          "hide_name": 1,
+          "bits": [ 16, 5 ],
+          "attributes": {
+            "force_downto": "00000000000000000000000000000001",
+            "src": "dut.sv:0.0-0.0|dut.sv:13.3-18.10|/usr/bin/../share/yosys/techmap.v:574.22-574.23"
+          }
+        },
+        "$procmux$8.Y_B": {
+          "hide_name": 1,
+          "bits": [ 22, 20 ],
+          "attributes": {
+            "force_downto": "00000000000000000000000000000001",
+            "src": "dut.sv:0.0-0.0|dut.sv:13.3-18.10|/usr/bin/../share/yosys/techmap.v:579.19-579.22"
+          }
+        },
+        "$procmux$9_CMP": {
+          "hide_name": 1,
+          "bits": [ 14 ],
+          "attributes": {
+          }
+        },
+        "$techmap$procmux$8.$reduce_or$/usr/bin/../share/yosys/techmap.v:598$120_Y": {
+          "hide_name": 1,
+          "bits": [ 23 ],
+          "attributes": {
+            "src": "dut.sv:0.0-0.0|dut.sv:13.3-18.10|/usr/bin/../share/yosys/techmap.v:598.13-598.15"
+          }
+        },
+        "areset": {
+          "hide_name": 0,
+          "bits": [ 4 ],
+          "attributes": {
+            "src": "dut.sv:4.9-4.15"
+          }
+        },
+        "clk": {
+          "hide_name": 0,
+          "bits": [ 2 ],
+          "attributes": {
+            "src": "dut.sv:2.9-2.12"
+          }
+        },
+        "in": {
+          "hide_name": 0,
+          "bits": [ 3 ],
+          "attributes": {
+            "src": "dut.sv:3.9-3.11"
+          }
+        },
+        "next": {
+          "hide_name": 0,
+          "bits": [ 6, 8 ],
+          "attributes": {
+            "src": "dut.sv:10.13-10.17"
+          }
+        },
+        "out": {
+          "hide_name": 0,
+          "bits": [ 5 ],
+          "attributes": {
+            "src": "dut.sv:5.10-5.13"
+          }
+        },
+        "state": {
+          "hide_name": 0,
+          "bits": [ 7, 9 ],
+          "attributes": {
+            "src": "dut.sv:9.13-9.18"
+          }
+        }
+      }
+    }
+  }
+}

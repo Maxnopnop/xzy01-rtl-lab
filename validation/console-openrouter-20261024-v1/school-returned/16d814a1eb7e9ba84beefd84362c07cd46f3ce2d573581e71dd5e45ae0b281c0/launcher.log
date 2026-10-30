@@ -1,0 +1,56 @@
+TOOL:	xrun(64)	23.03-s004: Started on Oct 24, 2026 at 17:13:26 HKT
+xrun(64): 23.03-s004: (c) Copyright 1995-2023 Cadence Design Systems, Inc.
+file: testbench.sv
+	module worklib.stimulus_gen:sv
+		errors: 0, warnings: 0
+	module worklib.tb:sv
+		errors: 0, warnings: 0
+file: reference.sv
+	module worklib.RefModule:sv
+		errors: 0, warnings: 0
+file: dut.sv
+	module worklib.TopModule:sv
+		errors: 0, warnings: 0
+	Elaborating the design hierarchy:
+		Caching library 'worklib' ....... Done
+	Top level design units:
+		tb
+	Building instance overlay tables: .................... Done
+	Generating native compiled code:
+		worklib.TopModule:sv <0x2826fb6a>
+			streams:   1, words:   500
+		worklib.RefModule:sv <0x550614f2>
+			streams:   3, words:   632
+		worklib.tb:sv <0x388f4c0b>
+			streams:  19, words: 18141
+		worklib.stimulus_gen:sv <0x7a192420>
+			streams:  11, words:  7222
+	Building instance specific data structures.
+	Loading native compiled code:     .................... Done
+	Design hierarchy summary:
+		                 Instances  Unique
+		Modules:                 4       4
+		Registers:              17      18
+		Scalar wires:            6       -
+		Vectored wires:         20       -
+		Always blocks:           1       1
+		Initial blocks:          6       6
+		Final blocks:            1       1
+		Cont. assignments:       5      10
+		Pseudo assignments:      9       -
+		Simulation timescale:  1ps
+	Writing initial simulation snapshot: worklib.tb:sv
+Loading snapshot worklib.tb:sv .................... Done
+xcelium> source /usr/eelocal/cadence/xcelium2303hf/tools/xcelium/files/xmsimrc
+xcelium> run
+Hint: Output 'out_both' has no mismatches.
+Hint: Output 'out_any' has no mismatches.
+Hint: Output 'out_different' has no mismatches.
+Hint: Total mismatched samples is 0 out of 211 samples
+
+Simulation finished at 1056 ps
+Mismatches: 0 in 211 samples
+Simulation complete via $finish(1) at time 1056 PS + 0
+./testbench.sv:44 		#1 $finish;
+xcelium> exit
+TOOL:	xrun(64)	23.03-s004: Exiting on Oct 24, 2026 at 17:13:30 HKT  (total: 00:00:04)

@@ -1,0 +1,948 @@
+{
+  "schema": 1,
+  "kind": "POSTHOC_READ_ONLY_EVIDENCE_AUDIT",
+  "stages": [
+    {
+      "stage": "A",
+      "evidence": "paired-a32",
+      "verified_files": 232,
+      "plan_sha256": "a0e6f2331fb73c0b6d7433d4b7d39df831efe67730fb6557420f8762e77456bc",
+      "planned": 32,
+      "reserved_calls": 32,
+      "started_calls": 32,
+      "observed_generations": 32,
+      "usage_of_observed_generations": {
+        "input_tokens": 314020,
+        "cached_input_tokens": 189952,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 13638,
+        "reasoning_output_tokens": 862
+      },
+      "synthesis_counts": {
+        "SYNTH_PASS": 32
+      },
+      "by_model": {
+        "groups": [
+          {
+            "model": "gpt-5.6-sol",
+            "arm": "control",
+            "planned": 8,
+            "passes": 8,
+            "infrastructure_missing": 0,
+            "functional_observations": 8,
+            "statuses": {
+              "PASS": 8
+            }
+          },
+          {
+            "model": "gpt-5.6-sol",
+            "arm": "feedback",
+            "planned": 8,
+            "passes": 8,
+            "infrastructure_missing": 0,
+            "functional_observations": 8,
+            "statuses": {
+              "PASS": 8
+            }
+          },
+          {
+            "model": "gpt-5.6-terra",
+            "arm": "control",
+            "planned": 8,
+            "passes": 6,
+            "infrastructure_missing": 0,
+            "functional_observations": 8,
+            "statuses": {
+              "FUNCTION_FAIL": 2,
+              "PASS": 6
+            }
+          },
+          {
+            "model": "gpt-5.6-terra",
+            "arm": "feedback",
+            "planned": 8,
+            "passes": 8,
+            "infrastructure_missing": 0,
+            "functional_observations": 8,
+            "statuses": {
+              "PASS": 8
+            }
+          }
+        ],
+        "pairs": {
+          "both_pass": 14,
+          "feedback_only": 2
+        }
+      },
+      "by_kind": {
+        "INJECTED_FAULT": {
+          "groups": [
+            {
+              "model": "gpt-5.6-sol",
+              "arm": "control",
+              "planned": 6,
+              "passes": 6,
+              "infrastructure_missing": 0,
+              "functional_observations": 6,
+              "statuses": {
+                "PASS": 6
+              }
+            },
+            {
+              "model": "gpt-5.6-sol",
+              "arm": "feedback",
+              "planned": 6,
+              "passes": 6,
+              "infrastructure_missing": 0,
+              "functional_observations": 6,
+              "statuses": {
+                "PASS": 6
+              }
+            },
+            {
+              "model": "gpt-5.6-terra",
+              "arm": "control",
+              "planned": 6,
+              "passes": 6,
+              "infrastructure_missing": 0,
+              "functional_observations": 6,
+              "statuses": {
+                "PASS": 6
+              }
+            },
+            {
+              "model": "gpt-5.6-terra",
+              "arm": "feedback",
+              "planned": 6,
+              "passes": 6,
+              "infrastructure_missing": 0,
+              "functional_observations": 6,
+              "statuses": {
+                "PASS": 6
+              }
+            }
+          ],
+          "pairs": {
+            "both_pass": 12
+          }
+        },
+        "REAL_RETAINED_IR": {
+          "groups": [
+            {
+              "model": "gpt-5.6-sol",
+              "arm": "control",
+              "planned": 2,
+              "passes": 2,
+              "infrastructure_missing": 0,
+              "functional_observations": 2,
+              "statuses": {
+                "PASS": 2
+              }
+            },
+            {
+              "model": "gpt-5.6-sol",
+              "arm": "feedback",
+              "planned": 2,
+              "passes": 2,
+              "infrastructure_missing": 0,
+              "functional_observations": 2,
+              "statuses": {
+                "PASS": 2
+              }
+            },
+            {
+              "model": "gpt-5.6-terra",
+              "arm": "control",
+              "planned": 2,
+              "passes": 0,
+              "infrastructure_missing": 0,
+              "functional_observations": 2,
+              "statuses": {
+                "FUNCTION_FAIL": 2
+              }
+            },
+            {
+              "model": "gpt-5.6-terra",
+              "arm": "feedback",
+              "planned": 2,
+              "passes": 2,
+              "infrastructure_missing": 0,
+              "functional_observations": 2,
+              "statuses": {
+                "PASS": 2
+              }
+            }
+          ],
+          "pairs": {
+            "both_pass": 2,
+            "feedback_only": 2
+          }
+        }
+      },
+      "by_task": {
+        "rt_sequence": {
+          "groups": [
+            {
+              "model": "gpt-5.6-sol",
+              "arm": "control",
+              "planned": 8,
+              "passes": 8,
+              "infrastructure_missing": 0,
+              "functional_observations": 8,
+              "statuses": {
+                "PASS": 8
+              }
+            },
+            {
+              "model": "gpt-5.6-sol",
+              "arm": "feedback",
+              "planned": 8,
+              "passes": 8,
+              "infrastructure_missing": 0,
+              "functional_observations": 8,
+              "statuses": {
+                "PASS": 8
+              }
+            },
+            {
+              "model": "gpt-5.6-terra",
+              "arm": "control",
+              "planned": 8,
+              "passes": 6,
+              "infrastructure_missing": 0,
+              "functional_observations": 8,
+              "statuses": {
+                "FUNCTION_FAIL": 2,
+                "PASS": 6
+              }
+            },
+            {
+              "model": "gpt-5.6-terra",
+              "arm": "feedback",
+              "planned": 8,
+              "passes": 8,
+              "infrastructure_missing": 0,
+              "functional_observations": 8,
+              "statuses": {
+                "PASS": 8
+              }
+            }
+          ],
+          "pairs": {
+            "both_pass": 14,
+            "feedback_only": 2
+          }
+        }
+      },
+      "by_error_type": {
+        "early_output": {
+          "groups": [
+            {
+              "model": "gpt-5.6-sol",
+              "arm": "control",
+              "planned": 2,
+              "passes": 2,
+              "infrastructure_missing": 0,
+              "functional_observations": 2,
+              "statuses": {
+                "PASS": 2
+              }
+            },
+            {
+              "model": "gpt-5.6-sol",
+              "arm": "feedback",
+              "planned": 2,
+              "passes": 2,
+              "infrastructure_missing": 0,
+              "functional_observations": 2,
+              "statuses": {
+                "PASS": 2
+              }
+            },
+            {
+              "model": "gpt-5.6-terra",
+              "arm": "control",
+              "planned": 2,
+              "passes": 2,
+              "infrastructure_missing": 0,
+              "functional_observations": 2,
+              "statuses": {
+                "PASS": 2
+              }
+            },
+            {
+              "model": "gpt-5.6-terra",
+              "arm": "feedback",
+              "planned": 2,
+              "passes": 2,
+              "infrastructure_missing": 0,
+              "functional_observations": 2,
+              "statuses": {
+                "PASS": 2
+              }
+            }
+          ],
+          "pairs": {
+            "both_pass": 4
+          }
+        },
+        "overlap_fallback": {
+          "groups": [
+            {
+              "model": "gpt-5.6-sol",
+              "arm": "control",
+              "planned": 2,
+              "passes": 2,
+              "infrastructure_missing": 0,
+              "functional_observations": 2,
+              "statuses": {
+                "PASS": 2
+              }
+            },
+            {
+              "model": "gpt-5.6-sol",
+              "arm": "feedback",
+              "planned": 2,
+              "passes": 2,
+              "infrastructure_missing": 0,
+              "functional_observations": 2,
+              "statuses": {
+                "PASS": 2
+              }
+            },
+            {
+              "model": "gpt-5.6-terra",
+              "arm": "control",
+              "planned": 2,
+              "passes": 0,
+              "infrastructure_missing": 0,
+              "functional_observations": 2,
+              "statuses": {
+                "FUNCTION_FAIL": 2
+              }
+            },
+            {
+              "model": "gpt-5.6-terra",
+              "arm": "feedback",
+              "planned": 2,
+              "passes": 2,
+              "infrastructure_missing": 0,
+              "functional_observations": 2,
+              "statuses": {
+                "PASS": 2
+              }
+            }
+          ],
+          "pairs": {
+            "both_pass": 2,
+            "feedback_only": 2
+          }
+        },
+        "reset_polarity": {
+          "groups": [
+            {
+              "model": "gpt-5.6-sol",
+              "arm": "control",
+              "planned": 2,
+              "passes": 2,
+              "infrastructure_missing": 0,
+              "functional_observations": 2,
+              "statuses": {
+                "PASS": 2
+              }
+            },
+            {
+              "model": "gpt-5.6-sol",
+              "arm": "feedback",
+              "planned": 2,
+              "passes": 2,
+              "infrastructure_missing": 0,
+              "functional_observations": 2,
+              "statuses": {
+                "PASS": 2
+              }
+            },
+            {
+              "model": "gpt-5.6-terra",
+              "arm": "control",
+              "planned": 2,
+              "passes": 2,
+              "infrastructure_missing": 0,
+              "functional_observations": 2,
+              "statuses": {
+                "PASS": 2
+              }
+            },
+            {
+              "model": "gpt-5.6-terra",
+              "arm": "feedback",
+              "planned": 2,
+              "passes": 2,
+              "infrastructure_missing": 0,
+              "functional_observations": 2,
+              "statuses": {
+                "PASS": 2
+              }
+            }
+          ],
+          "pairs": {
+            "both_pass": 4
+          }
+        },
+        "sync_reset": {
+          "groups": [
+            {
+              "model": "gpt-5.6-sol",
+              "arm": "control",
+              "planned": 2,
+              "passes": 2,
+              "infrastructure_missing": 0,
+              "functional_observations": 2,
+              "statuses": {
+                "PASS": 2
+              }
+            },
+            {
+              "model": "gpt-5.6-sol",
+              "arm": "feedback",
+              "planned": 2,
+              "passes": 2,
+              "infrastructure_missing": 0,
+              "functional_observations": 2,
+              "statuses": {
+                "PASS": 2
+              }
+            },
+            {
+              "model": "gpt-5.6-terra",
+              "arm": "control",
+              "planned": 2,
+              "passes": 2,
+              "infrastructure_missing": 0,
+              "functional_observations": 2,
+              "statuses": {
+                "PASS": 2
+              }
+            },
+            {
+              "model": "gpt-5.6-terra",
+              "arm": "feedback",
+              "planned": 2,
+              "passes": 2,
+              "infrastructure_missing": 0,
+              "functional_observations": 2,
+              "statuses": {
+                "PASS": 2
+              }
+            }
+          ],
+          "pairs": {
+            "both_pass": 4
+          }
+        }
+      },
+      "nonpasses": [
+        {
+          "job_id": "m02__real_overlap__s001__control",
+          "status": "FUNCTION_FAIL",
+          "localization": "SPEC_TO_IR_ERROR"
+        },
+        {
+          "job_id": "m02__real_overlap__s002__control",
+          "status": "FUNCTION_FAIL",
+          "localization": "SPEC_TO_IR_ERROR"
+        }
+      ]
+    },
+    {
+      "stage": "B",
+      "evidence": "paired-b64",
+      "verified_files": 450,
+      "plan_sha256": "d404312bcf4e6f6437faea6e36891c799a09903013beb1f708ca6ea692e77c2d",
+      "planned": 64,
+      "reserved_calls": 64,
+      "started_calls": 64,
+      "observed_generations": 62,
+      "usage_of_observed_generations": {
+        "input_tokens": 589778,
+        "cached_input_tokens": 315136,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 18702,
+        "reasoning_output_tokens": 1662
+      },
+      "synthesis_counts": {
+        "SYNTH_PASS": 62,
+        "NOT_RUN": 2
+      },
+      "by_model": {
+        "groups": [
+          {
+            "model": "gpt-5.6-sol",
+            "arm": "control",
+            "planned": 16,
+            "passes": 15,
+            "infrastructure_missing": 1,
+            "functional_observations": 15,
+            "statuses": {
+              "PASS": 15,
+              "TIMEOUT": 1
+            }
+          },
+          {
+            "model": "gpt-5.6-sol",
+            "arm": "feedback",
+            "planned": 16,
+            "passes": 15,
+            "infrastructure_missing": 1,
+            "functional_observations": 15,
+            "statuses": {
+              "PASS": 15,
+              "TIMEOUT": 1
+            }
+          },
+          {
+            "model": "gpt-5.6-terra",
+            "arm": "control",
+            "planned": 16,
+            "passes": 13,
+            "infrastructure_missing": 0,
+            "functional_observations": 16,
+            "statuses": {
+              "PASS": 13,
+              "FUNCTION_FAIL": 3
+            }
+          },
+          {
+            "model": "gpt-5.6-terra",
+            "arm": "feedback",
+            "planned": 16,
+            "passes": 16,
+            "infrastructure_missing": 0,
+            "functional_observations": 16,
+            "statuses": {
+              "PASS": 16
+            }
+          }
+        ],
+        "pairs": {
+          "both_pass": 28,
+          "infrastructure_incomplete": 1,
+          "feedback_only": 3
+        }
+      },
+      "by_kind": {
+        "INJECTED_FAULT": {
+          "groups": [
+            {
+              "model": "gpt-5.6-sol",
+              "arm": "control",
+              "planned": 16,
+              "passes": 15,
+              "infrastructure_missing": 1,
+              "functional_observations": 15,
+              "statuses": {
+                "PASS": 15,
+                "TIMEOUT": 1
+              }
+            },
+            {
+              "model": "gpt-5.6-sol",
+              "arm": "feedback",
+              "planned": 16,
+              "passes": 15,
+              "infrastructure_missing": 1,
+              "functional_observations": 15,
+              "statuses": {
+                "PASS": 15,
+                "TIMEOUT": 1
+              }
+            },
+            {
+              "model": "gpt-5.6-terra",
+              "arm": "control",
+              "planned": 16,
+              "passes": 13,
+              "infrastructure_missing": 0,
+              "functional_observations": 16,
+              "statuses": {
+                "PASS": 13,
+                "FUNCTION_FAIL": 3
+              }
+            },
+            {
+              "model": "gpt-5.6-terra",
+              "arm": "feedback",
+              "planned": 16,
+              "passes": 16,
+              "infrastructure_missing": 0,
+              "functional_observations": 16,
+              "statuses": {
+                "PASS": 16
+              }
+            }
+          ],
+          "pairs": {
+            "both_pass": 28,
+            "infrastructure_incomplete": 1,
+            "feedback_only": 3
+          }
+        }
+      },
+      "by_task": {
+        "debounce3": {
+          "groups": [
+            {
+              "model": "gpt-5.6-sol",
+              "arm": "control",
+              "planned": 4,
+              "passes": 4,
+              "infrastructure_missing": 0,
+              "functional_observations": 4,
+              "statuses": {
+                "PASS": 4
+              }
+            },
+            {
+              "model": "gpt-5.6-sol",
+              "arm": "feedback",
+              "planned": 4,
+              "passes": 4,
+              "infrastructure_missing": 0,
+              "functional_observations": 4,
+              "statuses": {
+                "PASS": 4
+              }
+            },
+            {
+              "model": "gpt-5.6-terra",
+              "arm": "control",
+              "planned": 4,
+              "passes": 4,
+              "infrastructure_missing": 0,
+              "functional_observations": 4,
+              "statuses": {
+                "PASS": 4
+              }
+            },
+            {
+              "model": "gpt-5.6-terra",
+              "arm": "feedback",
+              "planned": 4,
+              "passes": 4,
+              "infrastructure_missing": 0,
+              "functional_observations": 4,
+              "statuses": {
+                "PASS": 4
+              }
+            }
+          ],
+          "pairs": {
+            "both_pass": 8
+          }
+        },
+        "event_parity": {
+          "groups": [
+            {
+              "model": "gpt-5.6-sol",
+              "arm": "control",
+              "planned": 4,
+              "passes": 3,
+              "infrastructure_missing": 1,
+              "functional_observations": 3,
+              "statuses": {
+                "PASS": 3,
+                "TIMEOUT": 1
+              }
+            },
+            {
+              "model": "gpt-5.6-sol",
+              "arm": "feedback",
+              "planned": 4,
+              "passes": 3,
+              "infrastructure_missing": 1,
+              "functional_observations": 3,
+              "statuses": {
+                "PASS": 3,
+                "TIMEOUT": 1
+              }
+            },
+            {
+              "model": "gpt-5.6-terra",
+              "arm": "control",
+              "planned": 4,
+              "passes": 4,
+              "infrastructure_missing": 0,
+              "functional_observations": 4,
+              "statuses": {
+                "PASS": 4
+              }
+            },
+            {
+              "model": "gpt-5.6-terra",
+              "arm": "feedback",
+              "planned": 4,
+              "passes": 4,
+              "infrastructure_missing": 0,
+              "functional_observations": 4,
+              "statuses": {
+                "PASS": 4
+              }
+            }
+          ],
+          "pairs": {
+            "both_pass": 7,
+            "infrastructure_incomplete": 1
+          }
+        },
+        "request_delay": {
+          "groups": [
+            {
+              "model": "gpt-5.6-sol",
+              "arm": "control",
+              "planned": 4,
+              "passes": 4,
+              "infrastructure_missing": 0,
+              "functional_observations": 4,
+              "statuses": {
+                "PASS": 4
+              }
+            },
+            {
+              "model": "gpt-5.6-sol",
+              "arm": "feedback",
+              "planned": 4,
+              "passes": 4,
+              "infrastructure_missing": 0,
+              "functional_observations": 4,
+              "statuses": {
+                "PASS": 4
+              }
+            },
+            {
+              "model": "gpt-5.6-terra",
+              "arm": "control",
+              "planned": 4,
+              "passes": 1,
+              "infrastructure_missing": 0,
+              "functional_observations": 4,
+              "statuses": {
+                "PASS": 1,
+                "FUNCTION_FAIL": 3
+              }
+            },
+            {
+              "model": "gpt-5.6-terra",
+              "arm": "feedback",
+              "planned": 4,
+              "passes": 4,
+              "infrastructure_missing": 0,
+              "functional_observations": 4,
+              "statuses": {
+                "PASS": 4
+              }
+            }
+          ],
+          "pairs": {
+            "both_pass": 5,
+            "feedback_only": 3
+          }
+        },
+        "sticky_alarm": {
+          "groups": [
+            {
+              "model": "gpt-5.6-sol",
+              "arm": "control",
+              "planned": 4,
+              "passes": 4,
+              "infrastructure_missing": 0,
+              "functional_observations": 4,
+              "statuses": {
+                "PASS": 4
+              }
+            },
+            {
+              "model": "gpt-5.6-sol",
+              "arm": "feedback",
+              "planned": 4,
+              "passes": 4,
+              "infrastructure_missing": 0,
+              "functional_observations": 4,
+              "statuses": {
+                "PASS": 4
+              }
+            },
+            {
+              "model": "gpt-5.6-terra",
+              "arm": "control",
+              "planned": 4,
+              "passes": 4,
+              "infrastructure_missing": 0,
+              "functional_observations": 4,
+              "statuses": {
+                "PASS": 4
+              }
+            },
+            {
+              "model": "gpt-5.6-terra",
+              "arm": "feedback",
+              "planned": 4,
+              "passes": 4,
+              "infrastructure_missing": 0,
+              "functional_observations": 4,
+              "statuses": {
+                "PASS": 4
+              }
+            }
+          ],
+          "pairs": {
+            "both_pass": 8
+          }
+        }
+      },
+      "by_error_type": {
+        "state_output": {
+          "groups": [
+            {
+              "model": "gpt-5.6-sol",
+              "arm": "control",
+              "planned": 8,
+              "passes": 7,
+              "infrastructure_missing": 1,
+              "functional_observations": 7,
+              "statuses": {
+                "PASS": 7,
+                "TIMEOUT": 1
+              }
+            },
+            {
+              "model": "gpt-5.6-sol",
+              "arm": "feedback",
+              "planned": 8,
+              "passes": 7,
+              "infrastructure_missing": 1,
+              "functional_observations": 7,
+              "statuses": {
+                "PASS": 7,
+                "TIMEOUT": 1
+              }
+            },
+            {
+              "model": "gpt-5.6-terra",
+              "arm": "control",
+              "planned": 8,
+              "passes": 6,
+              "infrastructure_missing": 0,
+              "functional_observations": 8,
+              "statuses": {
+                "PASS": 6,
+                "FUNCTION_FAIL": 2
+              }
+            },
+            {
+              "model": "gpt-5.6-terra",
+              "arm": "feedback",
+              "planned": 8,
+              "passes": 8,
+              "infrastructure_missing": 0,
+              "functional_observations": 8,
+              "statuses": {
+                "PASS": 8
+              }
+            }
+          ],
+          "pairs": {
+            "both_pass": 13,
+            "infrastructure_incomplete": 1,
+            "feedback_only": 2
+          }
+        },
+        "transition": {
+          "groups": [
+            {
+              "model": "gpt-5.6-sol",
+              "arm": "control",
+              "planned": 8,
+              "passes": 8,
+              "infrastructure_missing": 0,
+              "functional_observations": 8,
+              "statuses": {
+                "PASS": 8
+              }
+            },
+            {
+              "model": "gpt-5.6-sol",
+              "arm": "feedback",
+              "planned": 8,
+              "passes": 8,
+              "infrastructure_missing": 0,
+              "functional_observations": 8,
+              "statuses": {
+                "PASS": 8
+              }
+            },
+            {
+              "model": "gpt-5.6-terra",
+              "arm": "control",
+              "planned": 8,
+              "passes": 7,
+              "infrastructure_missing": 0,
+              "functional_observations": 8,
+              "statuses": {
+                "PASS": 7,
+                "FUNCTION_FAIL": 1
+              }
+            },
+            {
+              "model": "gpt-5.6-terra",
+              "arm": "feedback",
+              "planned": 8,
+              "passes": 8,
+              "infrastructure_missing": 0,
+              "functional_observations": 8,
+              "statuses": {
+                "PASS": 8
+              }
+            }
+          ],
+          "pairs": {
+            "both_pass": 15,
+            "feedback_only": 1
+          }
+        }
+      },
+      "nonpasses": [
+        {
+          "job_id": "m01__event_parity_state_output__s001__feedback",
+          "status": "TIMEOUT",
+          "localization": "INCONCLUSIVE"
+        },
+        {
+          "job_id": "m01__event_parity_state_output__s001__control",
+          "status": "TIMEOUT",
+          "localization": "INCONCLUSIVE"
+        },
+        {
+          "job_id": "m02__request_delay_state_output__s001__control",
+          "status": "FUNCTION_FAIL",
+          "localization": "BOTH_DIVERGE"
+        },
+        {
+          "job_id": "m02__request_delay_transition__s002__control",
+          "status": "FUNCTION_FAIL",
+          "localization": "BOTH_DIVERGE"
+        },
+        {
+          "job_id": "m02__request_delay_state_output__s002__control",
+          "status": "FUNCTION_FAIL",
+          "localization": "BOTH_DIVERGE"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Infrastructure-incomplete pairs are separate from functional failures.",
+    "Usage of the two unknown timed-out calls is unavailable, not zero.",
+    "Descriptive results only; no independent-task population inference.",
+    "Current frozen runtime source is checked; use its recorded revision for future replay."
+  ]
+}

@@ -1,0 +1,880 @@
+{
+  "new_model_calls": 0,
+  "cases": [
+    {
+      "task": "rt_sequence",
+      "kind": "ADVERSARIAL_FIXTURE",
+      "reference_states": 5,
+      "candidate_states": 9,
+      "ir": {
+        "clock_edge": "posedge",
+        "output_kind": "moore",
+        "reset": {
+          "active": 0,
+          "kind": "async",
+          "state": "T0"
+        },
+        "schema": 1,
+        "states": [
+          {
+            "name": "S0",
+            "output": 0
+          },
+          {
+            "name": "S1",
+            "output": 0
+          },
+          {
+            "name": "S2",
+            "output": 0
+          },
+          {
+            "name": "S3",
+            "output": 0
+          },
+          {
+            "name": "S4",
+            "output": 1
+          },
+          {
+            "name": "T0",
+            "output": 0
+          },
+          {
+            "name": "T1",
+            "output": 0
+          },
+          {
+            "name": "T2",
+            "output": 0
+          },
+          {
+            "name": "T3",
+            "output": 1
+          }
+        ],
+        "transitions": [
+          {
+            "from": "S0",
+            "input": 0,
+            "to": "S0"
+          },
+          {
+            "from": "S0",
+            "input": 1,
+            "to": "S1"
+          },
+          {
+            "from": "S1",
+            "input": 0,
+            "to": "S2"
+          },
+          {
+            "from": "S1",
+            "input": 1,
+            "to": "S1"
+          },
+          {
+            "from": "S2",
+            "input": 0,
+            "to": "S3"
+          },
+          {
+            "from": "S2",
+            "input": 1,
+            "to": "S1"
+          },
+          {
+            "from": "S3",
+            "input": 0,
+            "to": "S0"
+          },
+          {
+            "from": "S3",
+            "input": 1,
+            "to": "S4"
+          },
+          {
+            "from": "S4",
+            "input": 0,
+            "to": "S2"
+          },
+          {
+            "from": "S4",
+            "input": 1,
+            "to": "S1"
+          },
+          {
+            "from": "T0",
+            "input": 0,
+            "to": "T1"
+          },
+          {
+            "from": "T0",
+            "input": 1,
+            "to": "S1"
+          },
+          {
+            "from": "T1",
+            "input": 0,
+            "to": "S0"
+          },
+          {
+            "from": "T1",
+            "input": 1,
+            "to": "T2"
+          },
+          {
+            "from": "T2",
+            "input": 0,
+            "to": "T3"
+          },
+          {
+            "from": "T2",
+            "input": 1,
+            "to": "S1"
+          },
+          {
+            "from": "T3",
+            "input": 0,
+            "to": "S3"
+          },
+          {
+            "from": "T3",
+            "input": 1,
+            "to": "S1"
+          }
+        ]
+      },
+      "public_feedback": {
+        "status": "PUBLIC_CHECK_PASS",
+        "errors": [],
+        "scope": "Only disclosed examples/reset/schema; private tests were not consulted."
+      },
+      "diagnosis": {
+        "status": "IR_SPEC_MISMATCH",
+        "reset_contract_errors": [],
+        "shortest_counterexample": {
+          "bits": "010",
+          "expected": 0,
+          "observed": 1
+        },
+        "visited_pairs": 8,
+        "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+      },
+      "bits": "010",
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "observed": [
+        0,
+        0,
+        1
+      ],
+      "fixed_test": {
+        "backend": "icarus",
+        "compile_seconds": 0.094,
+        "status": "FUNCTION_FAIL",
+        "message": "Independent testbench found 4 mismatches",
+        "stage": "simulate",
+        "receipt_nonce": "de413f7d628c4fd79e812e045cd0790f",
+        "simulate_seconds": 0.047,
+        "rtl_sha256": "65474aa259486d3bc9d0c571000a583f1579a4ca527bacbab2428e38d68bc33b",
+        "tb_sha256": "6abb900b5f8cae1ea0ab98321c1830bd58f4132c75efb676b9cc4250a5e90e4b"
+      },
+      "witness_test": {
+        "checks": 8,
+        "stimulus_count": 4,
+        "tb_sha256": "9f958fb7e022692af417f4a50b799285e2eca4d4992f8c5fe7fea17b1b4064cd",
+        "vectors_sha256": "29323b6ebc9c7acf738130e175da4e433c5c78bb29078d9cde470edc00ff1c17",
+        "backend": "icarus",
+        "compile_seconds": 0.094,
+        "status": "FUNCTION_FAIL",
+        "message": "Independent testbench found 1 mismatches",
+        "stage": "simulate",
+        "receipt_nonce": "c098f1b95fdf4d49886c73f2d3c5faa7",
+        "simulate_seconds": 0.031,
+        "mismatches": [
+          {
+            "cycle": 3,
+            "phase": "post",
+            "reset": 1,
+            "input": 0,
+            "expected": 0,
+            "observed": "1"
+          }
+        ]
+      }
+    },
+    {
+      "task": "sticky_alarm",
+      "kind": "ADVERSARIAL_FIXTURE",
+      "reference_states": 3,
+      "candidate_states": 6,
+      "ir": {
+        "clock_edge": "posedge",
+        "output_kind": "moore",
+        "reset": {
+          "active": 0,
+          "kind": "async",
+          "state": "T0"
+        },
+        "schema": 1,
+        "states": [
+          {
+            "name": "S0",
+            "output": 0
+          },
+          {
+            "name": "S1",
+            "output": 0
+          },
+          {
+            "name": "S2",
+            "output": 1
+          },
+          {
+            "name": "T0",
+            "output": 0
+          },
+          {
+            "name": "T1",
+            "output": 0
+          },
+          {
+            "name": "T2",
+            "output": 1
+          }
+        ],
+        "transitions": [
+          {
+            "from": "S0",
+            "input": 0,
+            "to": "S0"
+          },
+          {
+            "from": "S0",
+            "input": 1,
+            "to": "S1"
+          },
+          {
+            "from": "S1",
+            "input": 0,
+            "to": "S0"
+          },
+          {
+            "from": "S1",
+            "input": 1,
+            "to": "S2"
+          },
+          {
+            "from": "S2",
+            "input": 0,
+            "to": "S2"
+          },
+          {
+            "from": "S2",
+            "input": 1,
+            "to": "S2"
+          },
+          {
+            "from": "T0",
+            "input": 0,
+            "to": "T1"
+          },
+          {
+            "from": "T0",
+            "input": 1,
+            "to": "S1"
+          },
+          {
+            "from": "T1",
+            "input": 0,
+            "to": "T2"
+          },
+          {
+            "from": "T1",
+            "input": 1,
+            "to": "S1"
+          },
+          {
+            "from": "T2",
+            "input": 0,
+            "to": "S0"
+          },
+          {
+            "from": "T2",
+            "input": 1,
+            "to": "S1"
+          }
+        ]
+      },
+      "public_feedback": {
+        "status": "PUBLIC_CHECK_PASS",
+        "errors": [],
+        "scope": "Only disclosed examples/reset/schema; private tests were not consulted."
+      },
+      "diagnosis": {
+        "status": "IR_SPEC_MISMATCH",
+        "reset_contract_errors": [],
+        "shortest_counterexample": {
+          "bits": "00",
+          "expected": 0,
+          "observed": 1
+        },
+        "visited_pairs": 6,
+        "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+      },
+      "bits": "00",
+      "expected": [
+        0,
+        0
+      ],
+      "observed": [
+        0,
+        1
+      ],
+      "fixed_test": {
+        "backend": "icarus",
+        "compile_seconds": 0.094,
+        "status": "FUNCTION_FAIL",
+        "message": "Independent testbench found 263 mismatches",
+        "stage": "simulate",
+        "receipt_nonce": "21fc21fb0dcb4ce3b25e49c93030837b",
+        "simulate_seconds": 0.062,
+        "rtl_sha256": "2936d2c93101e6bbd6d12e662a832b1912b39de8f3dad64cb8a08a3211d9276b",
+        "tb_sha256": "afd042df366768a2fad95fc4b58384b3eeebdf184e6baf3be028728dd5c0b5c6"
+      },
+      "witness_test": {
+        "checks": 6,
+        "stimulus_count": 3,
+        "tb_sha256": "3a9a44ea6cf0c728193c537051eb1d78c87d3ec70d2c66d1dfaf8d2c8ed46176",
+        "vectors_sha256": "0429387fd23ad83a2665ae869d0a8c991b6b65d8bf1a6a5699895f2a7f8bd323",
+        "backend": "icarus",
+        "compile_seconds": 0.109,
+        "status": "FUNCTION_FAIL",
+        "message": "Independent testbench found 1 mismatches",
+        "stage": "simulate",
+        "receipt_nonce": "1ba9284d88a0444e836301c1b433be2b",
+        "simulate_seconds": 0.047,
+        "mismatches": [
+          {
+            "cycle": 2,
+            "phase": "post",
+            "reset": 1,
+            "input": 0,
+            "expected": 0,
+            "observed": "1"
+          }
+        ]
+      }
+    },
+    {
+      "task": "event_parity",
+      "kind": "ADVERSARIAL_FIXTURE",
+      "reference_states": 2,
+      "candidate_states": 5,
+      "ir": {
+        "clock_edge": "posedge",
+        "output_kind": "moore",
+        "reset": {
+          "active": 0,
+          "kind": "async",
+          "state": "T0"
+        },
+        "schema": 1,
+        "states": [
+          {
+            "name": "S0",
+            "output": 0
+          },
+          {
+            "name": "S1",
+            "output": 1
+          },
+          {
+            "name": "T0",
+            "output": 0
+          },
+          {
+            "name": "T1",
+            "output": 0
+          },
+          {
+            "name": "T2",
+            "output": 0
+          }
+        ],
+        "transitions": [
+          {
+            "from": "S0",
+            "input": 0,
+            "to": "S0"
+          },
+          {
+            "from": "S0",
+            "input": 1,
+            "to": "S1"
+          },
+          {
+            "from": "S1",
+            "input": 0,
+            "to": "S1"
+          },
+          {
+            "from": "S1",
+            "input": 1,
+            "to": "S0"
+          },
+          {
+            "from": "T0",
+            "input": 0,
+            "to": "T1"
+          },
+          {
+            "from": "T0",
+            "input": 1,
+            "to": "S1"
+          },
+          {
+            "from": "T1",
+            "input": 0,
+            "to": "S0"
+          },
+          {
+            "from": "T1",
+            "input": 1,
+            "to": "T2"
+          },
+          {
+            "from": "T2",
+            "input": 0,
+            "to": "S1"
+          },
+          {
+            "from": "T2",
+            "input": 1,
+            "to": "S0"
+          }
+        ]
+      },
+      "public_feedback": {
+        "status": "PUBLIC_CHECK_PASS",
+        "errors": [],
+        "scope": "Only disclosed examples/reset/schema; private tests were not consulted."
+      },
+      "diagnosis": {
+        "status": "IR_SPEC_MISMATCH",
+        "reset_contract_errors": [],
+        "shortest_counterexample": {
+          "bits": "01",
+          "expected": 1,
+          "observed": 0
+        },
+        "visited_pairs": 5,
+        "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+      },
+      "bits": "01",
+      "expected": [
+        0,
+        1
+      ],
+      "observed": [
+        0,
+        0
+      ],
+      "fixed_test": {
+        "backend": "icarus",
+        "compile_seconds": 0.125,
+        "status": "FUNCTION_FAIL",
+        "message": "Independent testbench found 273 mismatches",
+        "stage": "simulate",
+        "receipt_nonce": "ff9500b85dec4a3daa6dea517e8630e8",
+        "simulate_seconds": 0.062,
+        "rtl_sha256": "49d29d349dd9e3a741b376800526c70515e59916207ce19a889f703821b43aab",
+        "tb_sha256": "ac111343afe9debbc5ed26b6e474fb73303080b082052eeacdfd90f66b27e65c"
+      },
+      "witness_test": {
+        "checks": 6,
+        "stimulus_count": 3,
+        "tb_sha256": "fa4cd6a6bc250f80abc8a7f9762ab54f094a7c2561dd3823d1ff1128fe4d84f7",
+        "vectors_sha256": "72ef508d1137bf0e3da59ca2ab259fbb41b1bf50343354726e388fc08686dbb8",
+        "backend": "icarus",
+        "compile_seconds": 0.094,
+        "status": "FUNCTION_FAIL",
+        "message": "Independent testbench found 1 mismatches",
+        "stage": "simulate",
+        "receipt_nonce": "23f294cf6c9b46b5ad01861e3ee8030e",
+        "simulate_seconds": 0.031,
+        "mismatches": [
+          {
+            "cycle": 2,
+            "phase": "post",
+            "reset": 1,
+            "input": 1,
+            "expected": 1,
+            "observed": "0"
+          }
+        ]
+      }
+    },
+    {
+      "task": "request_delay",
+      "kind": "ADVERSARIAL_FIXTURE",
+      "reference_states": 4,
+      "candidate_states": 6,
+      "ir": {
+        "clock_edge": "posedge",
+        "output_kind": "moore",
+        "reset": {
+          "active": 0,
+          "kind": "async",
+          "state": "T0"
+        },
+        "schema": 1,
+        "states": [
+          {
+            "name": "S0",
+            "output": 0
+          },
+          {
+            "name": "S1",
+            "output": 0
+          },
+          {
+            "name": "S2",
+            "output": 1
+          },
+          {
+            "name": "S3",
+            "output": 0
+          },
+          {
+            "name": "T0",
+            "output": 0
+          },
+          {
+            "name": "T1",
+            "output": 1
+          }
+        ],
+        "transitions": [
+          {
+            "from": "S0",
+            "input": 0,
+            "to": "S0"
+          },
+          {
+            "from": "S0",
+            "input": 1,
+            "to": "S1"
+          },
+          {
+            "from": "S1",
+            "input": 0,
+            "to": "S2"
+          },
+          {
+            "from": "S1",
+            "input": 1,
+            "to": "S2"
+          },
+          {
+            "from": "S2",
+            "input": 0,
+            "to": "S3"
+          },
+          {
+            "from": "S2",
+            "input": 1,
+            "to": "S3"
+          },
+          {
+            "from": "S3",
+            "input": 0,
+            "to": "S0"
+          },
+          {
+            "from": "S3",
+            "input": 1,
+            "to": "S3"
+          },
+          {
+            "from": "T0",
+            "input": 0,
+            "to": "T1"
+          },
+          {
+            "from": "T0",
+            "input": 1,
+            "to": "S1"
+          },
+          {
+            "from": "T1",
+            "input": 0,
+            "to": "S0"
+          },
+          {
+            "from": "T1",
+            "input": 1,
+            "to": "S1"
+          }
+        ]
+      },
+      "public_feedback": {
+        "status": "PUBLIC_CHECK_PASS",
+        "errors": [],
+        "scope": "Only disclosed examples/reset/schema; private tests were not consulted."
+      },
+      "diagnosis": {
+        "status": "IR_SPEC_MISMATCH",
+        "reset_contract_errors": [],
+        "shortest_counterexample": {
+          "bits": "0",
+          "expected": 0,
+          "observed": 1
+        },
+        "visited_pairs": 3,
+        "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+      },
+      "bits": "0",
+      "expected": [
+        0
+      ],
+      "observed": [
+        1
+      ],
+      "fixed_test": {
+        "backend": "icarus",
+        "compile_seconds": 0.109,
+        "status": "FUNCTION_FAIL",
+        "message": "Independent testbench found 540 mismatches",
+        "stage": "simulate",
+        "receipt_nonce": "203f4ab4c2484db79fd1f67c271f73e0",
+        "simulate_seconds": 0.047,
+        "rtl_sha256": "4ad5d1d2c50fd026d4093630e99b5d2c516a8ad848b9463c8714d8362ae15ca5",
+        "tb_sha256": "a4cc1b10234e3d9f87d786e5ae2a33001cba8f70761e274a3bbf269d3fc8c788"
+      },
+      "witness_test": {
+        "checks": 4,
+        "stimulus_count": 2,
+        "tb_sha256": "817ee8b939264c3095b8cde3b6678d0ded34414275cc01825660602564468a08",
+        "vectors_sha256": "ec56acb24a2c51b5c8a84e87f4d01b4c528602fd2dd06aebbb6dbb4d88d843d9",
+        "backend": "icarus",
+        "compile_seconds": 0.094,
+        "status": "FUNCTION_FAIL",
+        "message": "Independent testbench found 1 mismatches",
+        "stage": "simulate",
+        "receipt_nonce": "8fb4d2e5936b4a1dabc2bc88b12ad5fc",
+        "simulate_seconds": 0.031,
+        "mismatches": [
+          {
+            "cycle": 1,
+            "phase": "post",
+            "reset": 1,
+            "input": 0,
+            "expected": 0,
+            "observed": "1"
+          }
+        ]
+      }
+    },
+    {
+      "task": "debounce3",
+      "kind": "ADVERSARIAL_FIXTURE",
+      "reference_states": 5,
+      "candidate_states": 8,
+      "ir": {
+        "clock_edge": "posedge",
+        "output_kind": "moore",
+        "reset": {
+          "active": 0,
+          "kind": "async",
+          "state": "T0"
+        },
+        "schema": 1,
+        "states": [
+          {
+            "name": "S0",
+            "output": 0
+          },
+          {
+            "name": "S1",
+            "output": 0
+          },
+          {
+            "name": "S2",
+            "output": 0
+          },
+          {
+            "name": "S3",
+            "output": 1
+          },
+          {
+            "name": "S4",
+            "output": 1
+          },
+          {
+            "name": "T0",
+            "output": 0
+          },
+          {
+            "name": "T1",
+            "output": 0
+          },
+          {
+            "name": "T2",
+            "output": 1
+          }
+        ],
+        "transitions": [
+          {
+            "from": "S0",
+            "input": 0,
+            "to": "S0"
+          },
+          {
+            "from": "S0",
+            "input": 1,
+            "to": "S1"
+          },
+          {
+            "from": "S1",
+            "input": 0,
+            "to": "S0"
+          },
+          {
+            "from": "S1",
+            "input": 1,
+            "to": "S2"
+          },
+          {
+            "from": "S2",
+            "input": 0,
+            "to": "S0"
+          },
+          {
+            "from": "S2",
+            "input": 1,
+            "to": "S3"
+          },
+          {
+            "from": "S3",
+            "input": 0,
+            "to": "S4"
+          },
+          {
+            "from": "S3",
+            "input": 1,
+            "to": "S3"
+          },
+          {
+            "from": "S4",
+            "input": 0,
+            "to": "S0"
+          },
+          {
+            "from": "S4",
+            "input": 1,
+            "to": "S3"
+          },
+          {
+            "from": "T0",
+            "input": 0,
+            "to": "T1"
+          },
+          {
+            "from": "T0",
+            "input": 1,
+            "to": "S1"
+          },
+          {
+            "from": "T1",
+            "input": 0,
+            "to": "T2"
+          },
+          {
+            "from": "T1",
+            "input": 1,
+            "to": "S1"
+          },
+          {
+            "from": "T2",
+            "input": 0,
+            "to": "S0"
+          },
+          {
+            "from": "T2",
+            "input": 1,
+            "to": "S1"
+          }
+        ]
+      },
+      "public_feedback": {
+        "status": "PUBLIC_CHECK_PASS",
+        "errors": [],
+        "scope": "Only disclosed examples/reset/schema; private tests were not consulted."
+      },
+      "diagnosis": {
+        "status": "IR_SPEC_MISMATCH",
+        "reset_contract_errors": [],
+        "shortest_counterexample": {
+          "bits": "00",
+          "expected": 0,
+          "observed": 1
+        },
+        "visited_pairs": 6,
+        "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+      },
+      "bits": "00",
+      "expected": [
+        0,
+        0
+      ],
+      "observed": [
+        0,
+        1
+      ],
+      "fixed_test": {
+        "backend": "icarus",
+        "compile_seconds": 0.093,
+        "status": "FUNCTION_FAIL",
+        "message": "Independent testbench found 263 mismatches",
+        "stage": "simulate",
+        "receipt_nonce": "53fc8022e52a4b5cbecd21bd1685ff23",
+        "simulate_seconds": 0.063,
+        "rtl_sha256": "c5b65ebee9c6397ed52351423eb4f241bf532e8f08cba97a6d7a4d27505e411a",
+        "tb_sha256": "cff80605ce4e08a7469025e72d6ace782184cdf9b6d9b18a9a58fefff42eae0e"
+      },
+      "witness_test": {
+        "checks": 6,
+        "stimulus_count": 3,
+        "tb_sha256": "a8b779f9d9a0812e67dcc091ae3893eebd67d61a3a6a3b368bcf6dac1a940a7d",
+        "vectors_sha256": "0429387fd23ad83a2665ae869d0a8c991b6b65d8bf1a6a5699895f2a7f8bd323",
+        "backend": "icarus",
+        "compile_seconds": 0.094,
+        "status": "FUNCTION_FAIL",
+        "message": "Independent testbench found 1 mismatches",
+        "stage": "simulate",
+        "receipt_nonce": "e24c17ef84f744ddb2e4be9b5b591385",
+        "simulate_seconds": 0.031,
+        "mismatches": [
+          {
+            "cycle": 2,
+            "phase": "post",
+            "reset": 1,
+            "input": 0,
+            "expected": 0,
+            "observed": "1"
+          }
+        ]
+      }
+    }
+  ],
+  "public_pass_but_wrong": 5,
+  "fixed_test_detected": 5,
+  "witness_reproduced": 5,
+  "limit": "Deliberately adversarial expanded-state circuits; no estimate of natural model error frequency"
+}

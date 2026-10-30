@@ -1,0 +1,202 @@
+
+
+<generic_reference_context>
+These are generic style excerpts, not new task requirements or solutions. The original specification above takes precedence.
+Source: lowRISC contributors; CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/); unmodified contiguous excerpts.
+https://github.com/lowRISC/style-guides/blob/9c15ff5dce23eef969e00ab3715153967419eadd/VerilogCodingStyle.md
+[GEN043; lowRISC Verilog Coding Style Guide; lines 2841-2885]
+two process blocks: a combinational block and a clocked block.***
+
+Every state machine description has three parts:
+
+1.  An enum that declares and describes the states.
+1.  A combinational process block that decodes state to produce next state and
+    other combinational outputs.
+1.  A clocked process block that updates state from next state.
+
+*Enumerating States*
+
+The enum statement for the state machine should list each state in the state
+machine. Comments describing the states should be deferred to the case statement in
+the combinational process block, below.
+
+States should be named in `UpperCamelCase`, like other
+[enumeration constants](#enumerations).
+
+Barring special circumstances, the initial idle state of the state
+machines will be named `Idle` or `StIdle`. (Alternate names are acceptable
+if they improve clarity.)
+
+Ideally, each module should only contain one state machine. If your module needs
+more than one state machine, you will need to add a unique prefix (or suffix) to
+the states of each state machine, to distinguish which state is associated with
+which state machine. For example, a module with a "reader" machine and a
+"writer" machine might have a `StRdIdle` state and a `StWrIdle` state.
+
+*Combinational Decode of State*
+
+The combinational process block should contain:
+
+-   A case statement that decodes state to produce next state and combinational
+    outputs. For clarity, only cases where the output value deviates from the
+    default should be coded.
+-   Before the case statement should be a block of code that defines default
+    values for every combinational output, including "next state."
+-   The default value for the "next state" variable should be the current state.
+    The case statement that decodes state will then only assign to "next state"
+    when transitioning between states.
+-   Within the case statement, each state alternative should be preceded with a
+    comment that describes the function of that state within the state machine.
+
+*The State Register*
+
+
+
+[GEN019; lowRISC Verilog Coding Style Guide; lines 1162-1224]
+* If the signal is active low `_n` will be the first suffix
+* If the signal is a module input/output the letters will come last.
+* It is not mandatory to propagate `_d` and `_q` to module boundaries.
+
+Example:
+
+&#x1f44d;
+```systemverilog {.good}
+module simple (
+  input        clk_i,
+  input        rst_ni,              // Active low reset
+
+  // writer interface
+  input [15:0] data_i,
+  input        valid_i,
+  output       ready_o,
+
+  // bi-directional bus
+  inout [7:0]  driver_io,         // Bi directional signal
+
+  // Differential pair output
+  output       lvds_po,           // Positive part of the differential signal
+  output       lvds_no            // Negative part of the differential signal
+);
+
+  logic valid_d, valid_q, valid_q2, valid_q3;
+  assign valid_d = valid_i; // next state assignment
+
+  always_ff @(posedge clk_i or negedge rst_ni) begin
+    if (!rst_ni) begin
+      valid_q  <= '0;
+      valid_q2 <= '0;
+      valid_q3 <= '0;
+    end else begin
+      valid_q  <= valid_d;
+      valid_q2 <= valid_q;
+      valid_q3 <= valid_q2;
+    end
+  end
+
+  assign ready_o = valid_q3; // three clock cycles delay
+
+endmodule // simple
+```
+
+### Enumerations
+
+***Name enumeration types `snake_case_e`.  Name enumeration values `ALL_CAPS` or
+`UpperCamelCase`.***
+
+Always name `enum` types using `typedef`. The storage type of any enumerated
+type must be specified. For synthesizable enums, the storage type must be a
+4-state data type (`logic` rather than `bit`).
+
+Anonymous `enum` types are not allowed as they make it harder to use the type in
+other places throughout the project and across projects.
+
+Enumeration type names should contain only lower-case alphanumeric characters
+and underscores. You must suffix enumeration type names with `_e`.
+
+Enumeration value names (constants) should typically be `ALL_CAPS`, for example,
+`READY_TO_SEND`, to reflect their constant nature, especially for truly unchangeable
+values like defined opcode assignments.  There are times when `UpperCamelCase`
+
+
+[GEN044; lowRISC Verilog Coding Style Guide; lines 2886-2964]
+No logic except for reset should be performed in this process. The state
+variable should latch the value of the "next state" variable.
+
+*Other Guidelines*
+
+When possible, try to choose state names that differ near the beginning of their
+name, to make them more readable when viewing waveform traces.
+
+*Example*
+
+&#x1f44d;
+```systemverilog {.good}
+// Define the states
+typedef enum {
+  StIdle, StFrameStart, StDynInstrRead, StBandCorr, StAccStoreWrite, StBandEnd
+} alcor_state_e;
+
+alcor_state_e alcor_state_d, alcor_state_q;
+
+// Combinational decode of the state
+always_comb begin
+  alcor_state_d = alcor_state_q;
+  foo = 1'b0;
+  bar = 1'b0;
+  bum = 1'b0;
+  unique case (alcor_state_q)
+    // StIdle: waiting for frame_start
+    StIdle:
+      if (frame_start) begin
+        foo = 1'b1;
+        alcor_state_d = StFrameStart;
+      end
+    // StFrameStart: Reset accumulators
+    StFrameStart: begin
+      // ... etc ...
+    end
+    // may be empty or used to catch parasitic states
+    default: alcor_state_d = StIdle;
+  endcase
+end
+
+// Register the state
+always_ff @(posedge clk or negedge rst_n) begin
+  if (!rst_n) begin
+    alcor_state_q <= StIdle;
+  end else begin
+    alcor_state_q <= alcor_state_d;
+  end
+end
+```
+
+### Active-Low Signals
+
+***The `_n` suffix indicates an active-low signal.***
+
+If active-low signals are used, they must have the `_n` suffix in their
+name. Otherwise, all signals are assumed to be active-high.
+
+### Differential Pairs
+
+***Use the `_p` and `_n` suffixes to indicate a differential pair.***
+
+For example, `in_p` and `in_n` comprise a differential pair set.
+
+### Delays
+
+***Signals delayed by a single clock cycle should end in a `_q` suffix.***
+
+If one signal is only a delayed version of another signal, the `_q` suffix
+should be used to indicate this relationship.
+
+If another signal is then delayed by another clock cycle, the next signal should
+be identified with the `_q2` suffix, and then `_q3` and so on.
+
+Example:
+
+```systemverilog
+always_ff @(posedge clk) begin
+  data_valid_q <= data_valid_d;
+
+</generic_reference_context>

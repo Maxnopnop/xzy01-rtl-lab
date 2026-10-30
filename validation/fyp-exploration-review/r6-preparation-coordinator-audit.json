@@ -1,0 +1,175 @@
+{
+  "status": "PASS_WITH_LIMITS",
+  "plan_sha256": "f5c7793ad63cccde246ba9b81e28b1aab0c1bdec9c02b407207094d9a21db7b4",
+  "sources": 41,
+  "prior_bindings": 16445,
+  "sealed_bindings": 1398,
+  "seals": {
+    "runs\\calibration-v1\\evidence-lock.json": 166,
+    "runs\\control-boundaries-v1\\evidence-lock.json": 9,
+    "runs\\control-boundaries-v2\\evidence-lock.json": 9,
+    "runs\\control-v1\\evidence-lock.json": 353,
+    "runs\\control-v2\\evidence-lock.json": 353,
+    "runs\\extraction-multi-v1\\evidence-lock.json": 1,
+    "runs\\extraction-multi-v2\\evidence-lock.json": 1,
+    "runs\\extraction-over-v1\\evidence-lock.json": 1,
+    "runs\\extraction-over-v2\\evidence-lock.json": 1,
+    "runs\\prepare-failure-v1\\evidence-lock.json": 23,
+    "runs\\process-v1\\evidence-lock.json": 111,
+    "runs\\process-v2\\evidence-lock.json": 110,
+    "runs\\process-v3\\evidence-lock.json": 113,
+    "runs\\recovery-boundaries-v1\\evidence-lock.json": 66,
+    "runs\\recovery-job-binding-v2\\evidence-lock.json": 73,
+    "runs\\required-default-v1\\evidence-lock.json": 3,
+    "runs\\recovery-boundaries-v1\\reconstructed-new-output\\evidence-lock.json": 1,
+    "runs\\recovery-job-binding-v2\\correct-new-output\\evidence-lock.json": 1,
+    "runs\\recovery-job-binding-v2\\swapped-prompt-new-output\\evidence-lock.json": 1,
+    "runs\\recovery-job-binding-v2\\wrong-model-new-output\\evidence-lock.json": 1,
+    "runs\\recovery-job-binding-v2\\wrong-parent-new-output\\evidence-lock.json": 1
+  },
+  "calibration_receipts": [
+    {
+      "task": "ordered_retire",
+      "split": "public",
+      "checks": 31,
+      "errors": 0,
+      "nonce": "60dae93c1e65481e8414157dc31c2d76"
+    },
+    {
+      "task": "ordered_retire",
+      "split": "private",
+      "checks": 3354,
+      "errors": 0,
+      "nonce": "92b9e628008941f080f706726b575728"
+    },
+    {
+      "task": "ordered_retire",
+      "split": "target-negative",
+      "checks": 3354,
+      "errors": 291,
+      "nonce": "8c0b2a742b1c4abba23f4d508c876001"
+    },
+    {
+      "task": "restoring_divide",
+      "split": "public",
+      "checks": 31,
+      "errors": 0,
+      "nonce": "e19d4a88cfcb47549cb58313e0e55d9d"
+    },
+    {
+      "task": "restoring_divide",
+      "split": "private",
+      "checks": 9790,
+      "errors": 0,
+      "nonce": "e8c6714e2db343359df71c6435979689"
+    },
+    {
+      "task": "restoring_divide",
+      "split": "target-negative",
+      "checks": 9790,
+      "errors": 2615,
+      "nonce": "8882a9c15e784f5fbaded53790464f9e"
+    },
+    {
+      "task": "tagged_join",
+      "split": "public",
+      "checks": 35,
+      "errors": 0,
+      "nonce": "a49189c96c9c42179953569e1ec71d51"
+    },
+    {
+      "task": "tagged_join",
+      "split": "private",
+      "checks": 3155,
+      "errors": 0,
+      "nonce": "20881ffc91674ecbaa9b23f73d5f6850"
+    },
+    {
+      "task": "tagged_join",
+      "split": "target-negative",
+      "checks": 3155,
+      "errors": 293,
+      "nonce": "e3db2988bd584774a1000ac405fcf2e5"
+    }
+  ],
+  "calibration_compiles": 9,
+  "calibration_simulations": 9,
+  "event_bindings": 32695,
+  "assets": {
+    "ordered_retire-public": 31,
+    "ordered_retire-private": 3354,
+    "restoring_divide-public": 31,
+    "restoring_divide-private": 9790,
+    "tagged_join-public": 35,
+    "tagged_join-private": 3155
+  },
+  "pure_reference_checks": 12,
+  "manual_public_anchors": 22,
+  "saved_stream_recovery_checks": [
+    {
+      "case": "clean",
+      "status": "GENERATED",
+      "boundary": null
+    },
+    {
+      "case": "hang",
+      "status": "UNKNOWN_INTERRUPTED",
+      "boundary": "TIMEOUT"
+    },
+    {
+      "case": "limit",
+      "status": "UNKNOWN_INTERRUPTED",
+      "boundary": "OUTPUT_LIMIT"
+    },
+    {
+      "case": "missingusage",
+      "status": "UNKNOWN_INTERRUPTED",
+      "boundary": "MISSING_RESPONSE_OR_USAGE"
+    },
+    {
+      "case": "nonzero",
+      "status": "UNKNOWN_INTERRUPTED",
+      "boundary": "NONZERO_EXIT"
+    },
+    {
+      "case": "partial",
+      "status": "UNKNOWN_INTERRUPTED",
+      "boundary": "TIMEOUT"
+    },
+    {
+      "case": "reserved-only",
+      "status": "UNKNOWN_INTERRUPTED",
+      "boundary": "RESERVED_NO_START_PROOF"
+    },
+    {
+      "case": "tool",
+      "status": "UNKNOWN_INTERRUPTED",
+      "boundary": "TOOL_EVENT"
+    },
+    {
+      "case": "writer-kill-clean",
+      "status": "GENERATED",
+      "boundary": null
+    },
+    {
+      "case": "writer-kill-completed-hang",
+      "status": "UNKNOWN_INTERRUPTED",
+      "boundary": "PARTIAL_OR_EXIT_UNOBSERVED"
+    },
+    {
+      "case": "writer-kill-partial",
+      "status": "UNKNOWN_INTERRUPTED",
+      "boundary": "PARTIAL_OR_EXIT_UNOBSERVED"
+    }
+  ],
+  "mock_prompt_role_response_checks": 48,
+  "planned_unique_calls": 48,
+  "strategy_denominator": 6,
+  "strategy_opportunities": 18,
+  "half_shared_calls": 12,
+  "pending": 48,
+  "model_calls": 0,
+  "new_simulator_calls": 0,
+  "scope": "Same-author different references, development fixed bounded binary events; workflowIR vs2RTL attempts, equal opportunities not tokens; artificial recording/recovery tests not production root-cause fix; descendants unverified; regression failures retained.",
+  "audit_note": "Original seal policies differ on run.lock; all exact file sets matched their policies; no original files changed."
+}

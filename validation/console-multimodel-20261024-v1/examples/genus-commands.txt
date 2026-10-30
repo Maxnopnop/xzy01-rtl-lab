@@ -1,0 +1,7 @@
+# OFFLINE SCRIPT EXAMPLE ONLY. No school run authorized.
+# Stage and check only:
+printf "%s  %s\n" "545d081f94f0fbb6d603044fa60af6623d1d5e4aec33bc586c656f4d29309296" "$HOME/tsclient/FYP/stage-console-a5b103dc29b54bb1.sh" | sha256sum -c - && bash "$HOME/tsclient/FYP/stage-console-a5b103dc29b54bb1.sh"
+# One manual run (NOT EXECUTED):
+printf "%s  %s\n" "545d081f94f0fbb6d603044fa60af6623d1d5e4aec33bc586c656f4d29309296" "$HOME/tsclient/FYP/stage-console-a5b103dc29b54bb1.sh" | sha256sum -c - && bash "$HOME/tsclient/FYP/stage-console-a5b103dc29b54bb1.sh" && bash "$HOME/xzy01-console-v3/console-a5b103dc29b54bb1/run-one.sh" run "$HOME/tsclient/FYP"
+# Ship existing result only:
+bash "$HOME/xzy01-console-v3/console-a5b103dc29b54bb1/ship-only.sh" "$HOME/tsclient/FYP"

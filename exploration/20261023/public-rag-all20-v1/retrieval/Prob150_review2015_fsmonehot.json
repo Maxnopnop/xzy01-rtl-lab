@@ -1,0 +1,468 @@
+{
+  "query": "I would like you to implement a module named TopModule with the following\ninterface. All input and output ports are one bit unless otherwise\nspecified.\n\n - input  d\n - input  done_counting\n - input  ack\n - input  state (10 bits)\n - output B3_next\n - output S_next\n - output S1_next\n - output Count_next\n - output Wait_next\n - output done\n - output counting\n - output shift_ena\n\nThe module should implement the following Moore state machine with 3\ninput (d, done_counting, ack) and 3 outputs (shift_ena, counting, done).\nUnless otherwise stated in the diagram below, assume outputs are 0 and\ninputs are don't cares.\n\nstate   (output)      --input--> next state\n-------------------------------------------\n  S     ()            --d=0--> S\n  S     ()            --d=1--> S1\n  S1    ()            --d=0--> S\n  S1    ()            --d=1--> S11\n  S11   ()            --d=0--> S110\n  S11   ()            --d=1--> S11\n  S110  ()            --d=0--> S\n  S110  ()            --d=1--> B0\n  B0    (shift_ena=1) --(always go to next cycle)--> B1\n  B1    (shift_ena=1) --(always go to next cycle)--> B2\n  B2    (shift_ena=1) --(always go to next cycle)--> B3\n  B3    (shift_ena=1) --(always go to next cycle)--> Count\n  Count (counting=1)  --done_counting=0--> Count\n  Count (counting=1)  --done_counting=1--> Wait\n  Wait  (done=1)      --ack=0--> Wait\n  Wait  (done=1)      --ack=1--> S\n\nAt reset, the state machine starts in state \"S\". Derive next-state logic\nequations and output logic equations by inspection assuming the following\none-hot encoding is used: (S, S1, S11, S110, B0, B1, B2, B3, Count, Wait)\n= (10'b0000000001, 10'b0000000010, 10'b0000000100, ... , 10'b1000000000)\n\nDerive state transition and output logic equations by inspection assuming\na one-hot encoding. Implement only the state transition logic and output\nlogic (the combinational logic portion) for this state machine.\n\nWrite code that generates the following signals:\n\n - B3_next -- Assert when next-state is B3 state\n - S_next -- Assert when next-state is S state\n - S1_next -- Assert when next-state is S1 state\n - Count_next -- Assert when next-state is Count state\n - Wait_next -- Assert when next-state is Wait state\n - done -- output logic\n - counting -- output logic\n - shift_ena -- output logic\n\n",
+  "query_sha256": "9c02d1cfaafd494a2696d041d713358e9df12ef080c8de0c352cee109417a1ad",
+  "query_terms": [
+    "ack",
+    "all",
+    "always",
+    "assert",
+    "assume",
+    "assuming",
+    "b0",
+    "b0000000001",
+    "b0000000010",
+    "b0000000100",
+    "b1",
+    "b1000000000",
+    "b2",
+    "b3",
+    "b3_next",
+    "below",
+    "bit",
+    "bits",
+    "cares",
+    "code",
+    "combinational",
+    "count",
+    "count_next",
+    "counting",
+    "cycle",
+    "d",
+    "derive",
+    "diagram",
+    "don",
+    "done",
+    "done_counting",
+    "encoding",
+    "equations",
+    "following",
+    "generates",
+    "go",
+    "hot",
+    "i",
+    "implement",
+    "input",
+    "inputs",
+    "inspection",
+    "interface",
+    "like",
+    "logic",
+    "machine",
+    "module",
+    "moore",
+    "named",
+    "next",
+    "one",
+    "otherwise",
+    "output",
+    "outputs",
+    "portion",
+    "ports",
+    "reset",
+    "s",
+    "s1",
+    "s11",
+    "s110",
+    "s1_next",
+    "s_next",
+    "shift_ena",
+    "signals",
+    "specified",
+    "starts",
+    "state",
+    "stated",
+    "t",
+    "topmodule",
+    "transition",
+    "unless",
+    "used",
+    "wait",
+    "wait_next",
+    "would",
+    "write",
+    "you"
+  ],
+  "rankings": [
+    {
+      "chunk_id": "LR006",
+      "score": 11.304752928463838,
+      "matched": [
+        {
+          "term": "combinational",
+          "tf": 1,
+          "df": 7,
+          "contribution": 0.9674075006233499
+        },
+        {
+          "term": "logic",
+          "tf": 1,
+          "df": 10,
+          "contribution": 0.6172265716997789
+        },
+        {
+          "term": "next",
+          "tf": 2,
+          "df": 1,
+          "contribution": 3.5876465455211903
+        },
+        {
+          "term": "reset",
+          "tf": 1,
+          "df": 1,
+          "contribution": 2.642417804238559
+        },
+        {
+          "term": "state",
+          "tf": 4,
+          "df": 2,
+          "contribution": 3.4900545063809605
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR018",
+      "score": 6.351972316613687,
+      "matched": [
+        {
+          "term": "input",
+          "tf": 2,
+          "df": 1,
+          "contribution": 2.2996556405251556
+        },
+        {
+          "term": "inputs",
+          "tf": 1,
+          "df": 1,
+          "contribution": 1.4478732306989897
+        },
+        {
+          "term": "one",
+          "tf": 1,
+          "df": 1,
+          "contribution": 1.4478732306989897
+        },
+        {
+          "term": "used",
+          "tf": 1,
+          "df": 2,
+          "contribution": 1.1565702146905528
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR010",
+      "score": 5.425544321663798,
+      "matched": [
+        {
+          "term": "combinational",
+          "tf": 1,
+          "df": 7,
+          "contribution": 1.158581278870686
+        },
+        {
+          "term": "logic",
+          "tf": 3,
+          "df": 10,
+          "contribution": 1.0396137986159448
+        },
+        {
+          "term": "state",
+          "tf": 2,
+          "df": 2,
+          "contribution": 3.227349244177168
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR005",
+      "score": 5.135358517528205,
+      "matched": [
+        {
+          "term": "always",
+          "tf": 1,
+          "df": 6,
+          "contribution": 0.8168241167296748
+        },
+        {
+          "term": "logic",
+          "tf": 1,
+          "df": 10,
+          "contribution": 0.45162421228380634
+        },
+        {
+          "term": "s",
+          "tf": 1,
+          "df": 1,
+          "contribution": 1.9334550942573623
+        },
+        {
+          "term": "signals",
+          "tf": 1,
+          "df": 1,
+          "contribution": 1.9334550942573623
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR003",
+      "score": 4.916859834615807,
+      "matched": [
+        {
+          "term": "always",
+          "tf": 1,
+          "df": 6,
+          "contribution": 1.2543194345914999
+        },
+        {
+          "term": "logic",
+          "tf": 1,
+          "df": 10,
+          "contribution": 0.6935165294429357
+        },
+        {
+          "term": "you",
+          "tf": 1,
+          "df": 1,
+          "contribution": 2.969023870581372
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR015",
+      "score": 4.267503005426203,
+      "matched": [
+        {
+          "term": "all",
+          "tf": 1,
+          "df": 3,
+          "contribution": 1.361275165744766
+        },
+        {
+          "term": "always",
+          "tf": 1,
+          "df": 6,
+          "contribution": 0.8631403599604089
+        },
+        {
+          "term": "specified",
+          "tf": 1,
+          "df": 1,
+          "contribution": 2.043087479721028
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR009",
+      "score": 3.6362852089823714,
+      "matched": [
+        {
+          "term": "always",
+          "tf": 1,
+          "df": 6,
+          "contribution": 1.2046858858851432
+        },
+        {
+          "term": "combinational",
+          "tf": 3,
+          "df": 7,
+          "contribution": 1.5496759745300797
+        },
+        {
+          "term": "logic",
+          "tf": 2,
+          "df": 10,
+          "contribution": 0.8819233485671484
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR014",
+      "score": 2.910781473470987,
+      "matched": [
+        {
+          "term": "all",
+          "tf": 1,
+          "df": 3,
+          "contribution": 1.3237451152255943
+        },
+        {
+          "term": "used",
+          "tf": 1,
+          "df": 2,
+          "contribution": 1.5870363582453926
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR004",
+      "score": 2.076142860011765,
+      "matched": [
+        {
+          "term": "always",
+          "tf": 1,
+          "df": 6,
+          "contribution": 1.3369433496377818
+        },
+        {
+          "term": "logic",
+          "tf": 1,
+          "df": 10,
+          "contribution": 0.739199510373983
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR011",
+      "score": 1.9403861783601948,
+      "matched": [
+        {
+          "term": "combinational",
+          "tf": 1,
+          "df": 7,
+          "contribution": 1.1845915570271508
+        },
+        {
+          "term": "logic",
+          "tf": 1,
+          "df": 10,
+          "contribution": 0.7557946213330441
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR002",
+      "score": 1.9382821572553182,
+      "matched": [
+        {
+          "term": "all",
+          "tf": 1,
+          "df": 3,
+          "contribution": 1.9382821572553182
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR008",
+      "score": 1.8719019603004234,
+      "matched": [
+        {
+          "term": "combinational",
+          "tf": 2,
+          "df": 7,
+          "contribution": 1.142782443249722
+        },
+        {
+          "term": "logic",
+          "tf": 2,
+          "df": 10,
+          "contribution": 0.7291195170507013
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR001",
+      "score": 1.8570061887330462,
+      "matched": [
+        {
+          "term": "combinational",
+          "tf": 1,
+          "df": 7,
+          "contribution": 1.1336886837543663
+        },
+        {
+          "term": "logic",
+          "tf": 1,
+          "df": 10,
+          "contribution": 0.72331750497868
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR007",
+      "score": 1.6142294976996963,
+      "matched": [
+        {
+          "term": "combinational",
+          "tf": 1,
+          "df": 7,
+          "contribution": 0.9854752911583952
+        },
+        {
+          "term": "logic",
+          "tf": 1,
+          "df": 10,
+          "contribution": 0.6287542065413011
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR012",
+      "score": 1.2807021596504224,
+      "matched": [
+        {
+          "term": "always",
+          "tf": 1,
+          "df": 6,
+          "contribution": 1.2807021596504224
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR013",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR016",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR017",
+      "score": 0.0,
+      "matched": []
+    }
+  ],
+  "selected_ids": [
+    "LR006",
+    "LR018",
+    "LR010"
+  ],
+  "no_hit": false,
+  "selected_chunks": [
+    {
+      "id": "LR006",
+      "section": "Sequential Logic (Registers)",
+      "start_line": 1818,
+      "end_line": 1820,
+      "text": "Sequential statements for state assignments should only contain reset values and\na next-state to state assignment, use a separate combinational-only block to\ngenerate that next-state value.",
+      "sha256": "e21796acf251a073061ee4e103ad61404d82cbafca689dc2df125e2c0df8e647",
+      "characters": 189,
+      "use": "General synthesizable language/style guidance, not task requirements or a solution"
+    },
+    {
+      "id": "LR018",
+      "section": "Case Statements",
+      "start_line": 2245,
+      "end_line": 2252,
+      "text": "`casex` should not be used. `casex` implements a symmetric wildcard operator\nsuch that an `X` in the case expression may match one or more case items.\n`casez` only treats high-impedance states (`Z` or `?`) as a wildcard, and\nperforms exact matches for undriven `X` inputs. While this does not completely\nfix the problems with symmetric wildcard matching, it is harder to accidentally\nproduce a `Z` input than an `X` input, so this form is preferred.\n`case inside` does not treat either `X` or `Z` in the case expression as a\nwildcard, so this form is preferred over `casez`.",
+      "sha256": "38b511f542f8fcb62c5ad046b40e95a8c569d5e5b69bdce9dbe2cc6e393640e9",
+      "characters": 574,
+      "use": "General synthesizable language/style guidance, not task requirements or a solution"
+    },
+    {
+      "id": "LR010",
+      "section": "Combinational Logic",
+      "start_line": 2152,
+      "end_line": 2153,
+      "text": "Do not use three-state logic (`Z` state) to accomplish on-chip logic such as\nmuxing.",
+      "sha256": "f1044589bb7940ec2cb3d3cd0e6488dcce2a40da913569935f328601dce6cf4f",
+      "characters": 84,
+      "use": "General synthesizable language/style guidance, not task requirements or a solution"
+    }
+  ],
+  "elapsed_seconds": 0.00038189999759197235,
+  "a_lock_sha256": "c0609d940a0e586e2b7b5fc81ca6d58bd1eeee5e1d4cecbe40415317f341ead1",
+  "task_source_sha256": "9c02d1cfaafd494a2696d041d713358e9df12ef080c8de0c352cee109417a1ad",
+  "context_sha256": "ee08936fb7164426615c740195605d75108e4c53c76757bed3a4edb042c90a86"
+}

@@ -1,6 +1,6 @@
 # Design Compiler / Genus 接入与单案例综合
 
-依据 [学校实际启动记录](ECE_SYNTHESIS_STARTUP.md)，新增 DC X-2025.06-SP2 和 Genus 21.14-s082_1；两个环境脚本已写入接入模块。启动记录不是综合结果。目前还没有确认 FYP 标准单元库和 SDC，默认明确阻止实际综合。
+依据 [学校实际启动记录](ECE_SYNTHESIS_STARTUP.md)，新增 DC X-2025.06-SP2 和 Genus 21.14-s082_1；两个环境脚本已写入接入模块。启动记录不是综合结果。2026-10-09 已据用户提供的 Nangate typical 库路径/元数据准备相同 RTL 和 10ns smoke SDC 的 DC/Genus 就绪单例包；真实库加载、综合及报告仍待验证。缺少库或审核约束的其他配置继续阻止实际综合。当前状态见 [总控核查](FYP_STATUS_AUDIT_20261009.md)；共享读取超时时用 [私有 GitHub 备用路径](ECE_SYNTHESIS_GITHUB.md)。
 
 ## 窗口操作
 

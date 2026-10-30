@@ -1,0 +1,15 @@
+{
+  "timing":{"reset":"sync_low"},
+  "registers":{"data":{"width":8,"reset":0},"last":{"width":1,"reset":0},"pending":{"width":2,"reset":0}},
+  "next_rising":{
+    "data":"s_data if s_valid and pending == 0 else data",
+    "last":"s_last if s_valid and pending == 0 else last",
+    "pending":"3 if s_valid and pending == 0 else pending & (3 ^ (m_ready0 | (m_ready1 << 1)))"
+  },
+  "next_falling":{},
+  "outputs":{
+    "s_ready":"1 if pending == 0 else 0",
+    "m_valid0":"pending & 1","m_data0":"data","m_last0":"last",
+    "m_valid1":"(pending >> 1) & 1","m_data1":"data","m_last1":"last"
+  }
+}

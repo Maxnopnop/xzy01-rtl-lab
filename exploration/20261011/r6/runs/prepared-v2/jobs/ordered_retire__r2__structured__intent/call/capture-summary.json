@@ -1,0 +1,37 @@
+{
+  "status": "GENERATED",
+  "usage": {
+    "input_tokens": 10870,
+    "cached_input_tokens": 7424,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 1486,
+    "reasoning_output_tokens": 1034
+  },
+  "source": "READ_ONLY_SAVED_EVIDENCE",
+  "reserved_calls": 1,
+  "response": "{\"timing\":{\"reset\":\"async_low\"},\"registers\":{\"count\":{\"width\":2,\"reset\":0},\"tag0\":{\"width\":2,\"reset\":0},\"tag1\":{\"width\":2,\"reset\":0},\"fin0\":{\"width\":1,\"reset\":0},\"fin1\":{\"width\":1,\"reset\":0},\"retired\":{\"width\":1,\"reset\":0},\"retired_tag\":{\"width\":2,\"reset\":0}},\"next_rising\":{\"count\":\"0 if flush else (count if (count > 0 and fin0 and issue and count < 2 and (count == 0 or issue_tag != tag0)) else (count - 1 if count > 0 and fin0 else (count + 1 if issue and count < 2 and (count == 0 or issue_tag != tag0) else count)))\",\"tag0\":\"0 if flush else ((issue_tag if count == 1 and issue and count < 2 and issue_tag != tag0 else tag1) if count > 0 and fin0 else (issue_tag if issue and count == 0 else tag0))\",\"tag1\":\"0 if flush else (issue_tag if not (count > 0 and fin0) and issue and count == 1 and issue_tag != tag0 else tag1)\",\"fin0\":\"0 if flush else (((fin1 | (finish and finish_tag == tag1)) if count == 2 else 0) if count > 0 and fin0 else ((fin0 | (finish and finish_tag == tag0)) if count > 0 else 0))\",\"fin1\":\"0 if flush else ((fin1 | (finish and finish_tag == tag1)) if not (count > 0 and fin0) and count == 2 else 0)\",\"retired\":\"0 if flush else (1 if count > 0 and fin0 else 0)\",\"retired_tag\":\"0 if flush else (tag0 if count > 0 and fin0 else retired_tag)\"},\"next_falling\":{},\"outputs\":{\"count\":\"count\",\"retired\":\"retired\",\"retired_tag\":\"retired_tag\"}}",
+  "response_sha256": "30466ae19d90ebf7bdef0b3483e8008986eeb4636b758edc44050c9250040d0f",
+  "thread_id": "01a12a07-a5d4-7ab3-abe5-7a90ab8e77a5",
+  "exit": {
+    "utc": "2026-10-11T08:15:41.067655+00:00",
+    "pid": 51424,
+    "identity": "134361801064288210",
+    "nonce": "ebef8fba9d774661b92d95cd2a7518ab",
+    "request_sha256": "f0c9b057df7ab0182c8ac5d72880f7497321a002703592dce706139486efda95",
+    "returncode": 0,
+    "reason": null,
+    "elapsed_seconds": 34.625,
+    "streams_closed": true,
+    "reader_errors": [],
+    "counts": {
+      "stdout": 1804,
+      "stderr": 0
+    },
+    "descendant_cleanup": "UNVERIFIED",
+    "sha256": {
+      "stdout": "bd77dbd083df2775927dba6450d0e6e222b05a4fb596a3fa2dcfb61494ab87d7",
+      "stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "reconstructed_without_summary": true
+}

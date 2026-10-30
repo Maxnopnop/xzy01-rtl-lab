@@ -1,0 +1,122 @@
+{
+  "creator": "Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)",
+  "modules": {
+    "bad": {
+      "attributes": {
+        "top": "00000000000000000000000000000001",
+        "src": "dut.sv:1.1-1.140"
+      },
+      "ports": {
+        "clk": {
+          "direction": "input",
+          "bits": [ 2 ]
+        },
+        "a": {
+          "direction": "input",
+          "bits": [ 3 ]
+        },
+        "b": {
+          "direction": "input",
+          "bits": [ 4 ]
+        },
+        "d": {
+          "direction": "input",
+          "bits": [ 5 ]
+        },
+        "q": {
+          "direction": "output",
+          "bits": [ 6 ]
+        }
+      },
+      "cells": {
+        "$auto$ff.cc:266:slice$93": {
+          "hide_name": 1,
+          "type": "$_DFFSR_PPP_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "dut.sv:1.43-1.130"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input",
+            "S": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 5 ],
+            "Q": [ 6 ],
+            "R": [ 3 ],
+            "S": [ 7 ]
+          }
+        },
+        "$auto$simplemap.cc:275:simplemap_mux$92": {
+          "hide_name": 1,
+          "type": "$_MUX_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": ""
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 4 ],
+            "B": [ "0" ],
+            "S": [ 3 ],
+            "Y": [ 7 ]
+          }
+        }
+      },
+      "netnames": {
+        "$auto$rtlil.cc:2914:Mux$9": {
+          "hide_name": 1,
+          "bits": [ 7 ],
+          "attributes": {
+          }
+        },
+        "a": {
+          "hide_name": 0,
+          "bits": [ 3 ],
+          "attributes": {
+            "src": "dut.sv:1.22-1.23"
+          }
+        },
+        "b": {
+          "hide_name": 0,
+          "bits": [ 4 ],
+          "attributes": {
+            "src": "dut.sv:1.24-1.25"
+          }
+        },
+        "clk": {
+          "hide_name": 0,
+          "bits": [ 2 ],
+          "attributes": {
+            "src": "dut.sv:1.18-1.21"
+          }
+        },
+        "d": {
+          "hide_name": 0,
+          "bits": [ 5 ],
+          "attributes": {
+            "src": "dut.sv:1.26-1.27"
+          }
+        },
+        "q": {
+          "hide_name": 0,
+          "bits": [ 6 ],
+          "attributes": {
+            "src": "dut.sv:1.39-1.40"
+          }
+        }
+      }
+    }
+  }
+}

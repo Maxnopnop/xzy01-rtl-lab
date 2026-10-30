@@ -1,0 +1,83 @@
+{
+  "name": "queue_reset_stale",
+  "parameters": {
+    "KIND": 1,
+    "SCENE": 0,
+    "FAULT": 1
+  },
+  "expected": "FUNCTION_FAIL",
+  "expected_category": "DATA_OR_ORDER_FAIL",
+  "commands": [
+    {
+      "argv": [
+        "D:/iverilog/bin/iverilog.exe",
+        "-g2012",
+        "-s",
+        "tb",
+        "-Ptb.KIND=1",
+        "-Ptb.SCENE=0",
+        "-Ptb.FAULT=1",
+        "-o",
+        "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v2\\calibration-v2\\rtl\\queue_reset_stale\\sim.vvp",
+        "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v2\\development.v",
+        "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v2\\tb.v"
+      ],
+      "returncode": 0,
+      "timeout": false,
+      "seconds": 0.07799999999406282,
+      "executable_sha256": "803b8844af2cc8ed70b5f08b07ffa749901280e81339617ca3e72cbbb852bd2b"
+    },
+    {
+      "argv": [
+        "D:/iverilog/bin/vvp.exe",
+        "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v2\\calibration-v2\\rtl\\queue_reset_stale\\sim.vvp"
+      ],
+      "returncode": 0,
+      "timeout": false,
+      "seconds": 0.031000000002677552,
+      "executable_sha256": "e2f442f4d5aa76e55c85c3ff77e4446fbfdb9946b7cfe8a2dff87f275da17b62"
+    }
+  ],
+  "source_plan": [
+    {
+      "beats": [
+        [
+          17,
+          0
+        ],
+        [
+          18,
+          0
+        ],
+        [
+          19,
+          1
+        ]
+      ],
+      "termination": "reset"
+    },
+    {
+      "beats": [
+        [
+          161,
+          0
+        ],
+        [
+          162,
+          0
+        ],
+        [
+          163,
+          1
+        ]
+      ],
+      "termination": "drain"
+    }
+  ],
+  "observed": "FUNCTION_FAIL",
+  "counts": {
+    "UNEXPECTED_TRANSACTION": 2,
+    "DATA_OR_ORDER_FAIL": 3
+  },
+  "matched": true
+}

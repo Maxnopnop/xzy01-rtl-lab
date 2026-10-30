@@ -1,0 +1,60 @@
+Implement the given digital circuit in synthesizable SystemVerilog.
+Return only one complete module in a single ```systemverilog code block.
+Use exactly the specified module name and ports. Do not provide a testbench.
+No includes, preprocessor directives, strings, hierarchical references, extra
+modules, simulation system tasks, file IO, or attributes. Only $signed,
+$unsigned and $clog2 system functions are permitted. Do not use delays.
+The independent evaluator will supply all input stimuli and check outputs.
+Module: elastic_slot
+Interface: input clk, rst_n; input in_valid, input out_ready, input [1:0] in_data; output in_ready, output out_valid, output [1:0] out_data
+Specification: One-entry elastic ready/valid buffer, no combinational data bypass. Async active-low rst_n clears occupancy and data. While reset is low force in_ready=0, out_valid=0 and out_data=0. Otherwise in_ready = !occupied || out_ready, out_valid=occupied, out_data=stored data (zero when empty). At a rising edge use pre-edge occupied and out_ready: if in_valid && in_ready, store in_data and set occupied=1, including simultaneous consume/replace. Else if occupied && out_ready, clear occupied and stored data=0. Else retain state. Empty input acceptance is visible only after its rising edge. Under occupied && !out_ready, out_data and out_valid hold despite arbitrary changes in in_valid/in_data. in_ready may change combinationally with out_ready; it is not a Moore hold output. Producer need not hold invalid data; input data on an accepted edge is authoritative. No output consumption happens while empty.
+Public input concatenation, MSB first: in_valid,out_ready,in_data
+Public expected output concatenation, MSB first: in_ready,out_valid,out_data
+Public event examples [clk,rst_n,packed_input,packed_expected_output], check after settling:
+[[0,0,0,0],[1,0,0,0],[0,1,0,8],[0,1,9,8],[1,1,9,5],[1,1,6,13],[1,1,9,5],[0,1,9,5],[0,1,10,5],[1,1,10,5],[1,1,5,13],[1,1,10,5],[0,1,10,5],[0,1,11,5],[1,1,11,5],[1,1,4,13],[1,1,11,5],[0,1,11,5],[0,1,5,13],[1,1,5,8],[1,1,10,8],[1,1,5,8],[0,1,5,8],[0,1,15,8],[1,1,15,15],[1,1,0,7],[1,1,15,15],[0,1,15,15],[0,0,15,0],[0,0,0,0],[0,1,15,8],[0,1,15,8],[0,1,4,8],[1,1,4,8],[1,1,11,8],[1,1,4,8],[0,1,4,8],[0,0,0,0],[1,0,0,0],[0,1,0,8],[0,1,15,8],[1,1,15,15],[1,1,0,7],[1,1,15,15],[0,1,15,15],[0,1,14,15],[1,1,14,14],[1,1,1,6],[1,1,14,14],[0,1,14,14],[0,1,13,14],[1,1,13,13],[1,1,2,5],[1,1,13,13],[0,1,13,13],[0,1,12,13],[1,1,12,12],[1,1,3,4],[1,1,12,12],[0,1,12,12],[0,1,4,12],[1,1,4,8],[1,1,11,8],[1,1,4,8],[0,1,4,8],[0,0,4,0],[0,0,11,0],[0,1,4,8],[0,1,4,8],[0,0,0,0],[1,0,0,0],[0,1,0,8],[0,1,9,8],[1,1,9,5],[1,1,6,13],[1,1,9,5],[0,1,9,5],[0,1,5,13],[1,1,5,8],[1,1,10,8],[1,1,5,8],[0,1,5,8],[0,1,11,8],[1,1,11,7],[1,1,4,15],[1,1,11,7],[0,1,11,7],[0,1,7,15],[1,1,7,8],[1,1,8,8],[1,1,7,8],[0,1,7,8],[0,1,4,8],[1,1,4,8],[1,1,11,8],[1,1,4,8],[0,1,4,8],[0,0,4,0],[0,0,11,0],[0,1,4,8],[0,1,4,8]]
+
+Shared first candidate (untrusted; may contain errors):
+```systemverilog
+module elastic_slot (
+    input  logic       clk,
+    input  logic       rst_n,
+    input  logic       in_valid,
+    input  logic       out_ready,
+    input  logic [1:0] in_data,
+    output logic       in_ready,
+    output logic       out_valid,
+    output logic [1:0] out_data
+);
+
+    logic       occupied;
+    logic [1:0] stored_data;
+
+    always_comb begin
+        if (!rst_n) begin
+            in_ready = 1'b0;
+            out_valid = 1'b0;
+            out_data  = 2'b00;
+        end else begin
+            in_ready = !occupied || out_ready;
+            out_valid = occupied;
+            out_data = occupied ? stored_data : 2'b00;
+        end
+    end
+
+    always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            occupied  <= 1'b0;
+            stored_data <= 2'b00;
+        end else if (in_valid && in_ready) begin
+            occupied  <= 1'b1;
+            stored_data <= in_data;
+        end else if (occupied && out_ready) begin
+            occupied  <= 1'b0;
+            stored_data <= 2'b00;
+        end
+    end
+
+endmodule
+```
+Implement the specification. You may correct the candidate while producing RTL. Return only the specified module. No further repair turn.
+Do not invoke tools, read files, run tests, or delegate. Reply directly.

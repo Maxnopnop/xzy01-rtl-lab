@@ -1,0 +1,37 @@
+{
+  "source_checks": [
+    {
+      "task": "Prob018_mux256to1",
+      "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob018_mux256to1_prompt.txt",
+      "byte_equal": true,
+      "sha256": "60e907332df45bd577d462dc0f8043139dbd5484af7e6bd36d4e8ec621a851b2"
+    },
+    {
+      "task": "Prob095_review2015_fsmshift",
+      "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob095_review2015_fsmshift_prompt.txt",
+      "byte_equal": true,
+      "sha256": "31a48288034070f7ab847da07c03fcbfcd2cc973fed3b0f2da5c68d1fed349b0"
+    }
+  ],
+  "argv": [
+    "D:\\iverilog\\bin\\iverilog.exe",
+    "-Wall",
+    "-Winfloop",
+    "-Wno-timescale",
+    "-g2012",
+    "-s",
+    "tb",
+    "-o",
+    "sim.vvp",
+    "reference_alias.sv",
+    "testbench.sv",
+    "reference.sv"
+  ],
+  "only_environment_change": "Add COMSPEC pointing to System32/cmd.exe; working/output directory isolated",
+  "original_source_bytes_equal": true,
+  "returncode": 0,
+  "stdout_bytes": 0,
+  "stderr_bytes": 0,
+  "simulations": 0,
+  "model_calls": 0
+}

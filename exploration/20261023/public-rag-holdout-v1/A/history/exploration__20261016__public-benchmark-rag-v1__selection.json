@@ -1,0 +1,484 @@
+{
+  "reviewed": 19,
+  "target": 5,
+  "selected": 2,
+  "shortfall": 3,
+  "selection_fixed_before_calibration": true,
+  "rows": [
+    {
+      "id": "Prob017_mux2to1v",
+      "stratum": "mux",
+      "order": 1,
+      "files": {
+        "prompt.txt": {
+          "path": "upstream/dataset_spec-to-rtl/Prob017_mux2to1v_prompt.txt",
+          "sha256": "ca1ab98b3e6a272305637437b38ff985ebc6f164ab9500d9d8cee342c87b180f"
+        },
+        "ref.sv": {
+          "path": "upstream/dataset_spec-to-rtl/Prob017_mux2to1v_ref.sv",
+          "sha256": "1e45bcb124de9c52b905bf1fd7c13e67648a3730c693fd3f86974c6a219f7505"
+        },
+        "test.sv": {
+          "path": "upstream/dataset_spec-to-rtl/Prob017_mux2to1v_test.sv",
+          "sha256": "a6edd3a92e7fa15b4a023c3a2176fa893a3caa89c2cb9ec1222378d3b55e5b36"
+        }
+      },
+      "decision": "EXCLUDE_NEAR_DUPLICATE",
+      "reason": "custom mux8: same two-input selection function, only data width differs.",
+      "module_author": "UNKNOWN; dataset copyright NVIDIA Research Projects, not proof of each HDLBits module author",
+      "reference_independence": "NOT_ESTABLISHED; upstream RefModule and testbench are correlated benchmark assets",
+      "training_contamination": "UNKNOWN",
+      "source_claim": "public official originals, developmental screening, not private/model-unseen holdout"
+    },
+    {
+      "id": "Prob018_mux256to1",
+      "stratum": "mux",
+      "order": 2,
+      "files": {
+        "prompt.txt": {
+          "path": "upstream/dataset_spec-to-rtl/Prob018_mux256to1_prompt.txt",
+          "sha256": "60e907332df45bd577d462dc0f8043139dbd5484af7e6bd36d4e8ec621a851b2"
+        },
+        "ref.sv": {
+          "path": "upstream/dataset_spec-to-rtl/Prob018_mux256to1_ref.sv",
+          "sha256": "0b292d75ef9e56274a3143e5d99bfb3ccfa0f592831487036060568640d56713"
+        },
+        "test.sv": {
+          "path": "upstream/dataset_spec-to-rtl/Prob018_mux256to1_test.sv",
+          "sha256": "11f3a87789b5ccef3d6982a5fe672f45e0d82194ff11f8aa5bd6378cd3ebffa0"
+        }
+      },
+      "decision": "SELECTED_CONDITIONAL",
+      "reason": "Self-contained 256-index packed bit selector. Changes selection arity/address contract from old two-input mux8, not merely data width; same broad mux component family disclosed.",
+      "module_author": "UNKNOWN; dataset copyright NVIDIA Research Projects, not proof of each HDLBits module author",
+      "reference_independence": "NOT_ESTABLISHED; upstream RefModule and testbench are correlated benchmark assets",
+      "training_contamination": "UNKNOWN",
+      "source_claim": "public official originals, developmental screening, not private/model-unseen holdout"
+    },
+    {
+      "id": "Prob021_mux256to1v",
+      "stratum": "mux",
+      "order": 3,
+      "files": {
+        "prompt.txt": {
+          "path": "upstream/dataset_spec-to-rtl/Prob021_mux256to1v_prompt.txt",
+          "sha256": "557d570e145897380ecea674885667077ef1245fe10fc57624aa22606dba1729"
+        },
+        "ref.sv": {
+          "path": "upstream/dataset_spec-to-rtl/Prob021_mux256to1v_ref.sv",
+          "sha256": "1e40712c23700dcb47156ce6fa7809ed417fafd52e8583c323cab5a5e5fd4788"
+        },
+        "test.sv": {
+          "path": "upstream/dataset_spec-to-rtl/Prob021_mux256to1v_test.sv",
+          "sha256": "df41724f53f058edd7d013b63f0dcec5e256a2f813d1e2ceee09ba058195d51e"
+        }
+      },
+      "decision": "NOT_SELECTED_STRATUM_FILLED",
+      "reason": "Self-contained but first eligible Prob018 already fills mux stratum; closely related 256-way grouped-word variant, not independent mechanism.",
+      "module_author": "UNKNOWN; dataset copyright NVIDIA Research Projects, not proof of each HDLBits module author",
+      "reference_independence": "NOT_ESTABLISHED; upstream RefModule and testbench are correlated benchmark assets",
+      "training_contamination": "UNKNOWN",
+      "source_claim": "public official originals, developmental screening, not private/model-unseen holdout"
+    },
+    {
+      "id": "Prob022_mux2to1",
+      "stratum": "mux",
+      "order": 4,
+      "files": {
+        "prompt.txt": {
+          "path": "upstream/dataset_spec-to-rtl/Prob022_mux2to1_prompt.txt",
+          "sha256": "19998e11c624a0953c35bec9af412ffaf4a85cd06353c9ca671481bed93bc1a6"
+        },
+        "ref.sv": {
+          "path": "upstream/dataset_spec-to-rtl/Prob022_mux2to1_ref.sv",
+          "sha256": "7903c8758323f1f61f3aa91c96acdbcfe50df0e1f9af86dff8d744de865c3af0"
+        },
+        "test.sv": {
+          "path": "upstream/dataset_spec-to-rtl/Prob022_mux2to1_test.sv",
+          "sha256": "1e40ee964c9647dadcd4c37c44954246879042cd071a4055c763866e0fbf7e03"
+        }
+      },
+      "decision": "EXCLUDE_NEAR_DUPLICATE",
+      "reason": "custom mux8 two-input selection, width-only reduction.",
+      "module_author": "UNKNOWN; dataset copyright NVIDIA Research Projects, not proof of each HDLBits module author",
+      "reference_independence": "NOT_ESTABLISHED; upstream RefModule and testbench are correlated benchmark assets",
+      "training_contamination": "UNKNOWN",
+      "source_claim": "public official originals, developmental screening, not private/model-unseen holdout"
+    },
+    {
+      "id": "Prob009_popcount3",
+      "stratum": "arithmetic",
+      "order": 5,
+      "files": {
+        "prompt.txt": {
+          "path": "upstream/dataset_spec-to-rtl/Prob009_popcount3_prompt.txt",
+          "sha256": "d15e01d44228cef9753c4f592176873c9bb1e89b322d7f06b36290baee5e891e"
+        },
+        "ref.sv": {
+          "path": "upstream/dataset_spec-to-rtl/Prob009_popcount3_ref.sv",
+          "sha256": "69e2707f010de1da3f810a77c8805da28b04ac6c56438290f3d8fa177a39561c"
+        },
+        "test.sv": {
+          "path": "upstream/dataset_spec-to-rtl/Prob009_popcount3_test.sv",
+          "sha256": "2eaa55a73c5efd6bb0b67046bb2c0a92a92364de7e57c948e8257f4f6562a270"
+        }
+      },
+      "decision": "EXCLUDE_NEAR_DUPLICATE",
+      "reason": "Population count width variant of historical popcount8 / ve_popcount255.",
+      "module_author": "UNKNOWN; dataset copyright NVIDIA Research Projects, not proof of each HDLBits module author",
+      "reference_independence": "NOT_ESTABLISHED; upstream RefModule and testbench are correlated benchmark assets",
+      "training_contamination": "UNKNOWN",
+      "source_claim": "public official originals, developmental screening, not private/model-unseen holdout"
+    },
+    {
+      "id": "Prob030_popcount255",
+      "stratum": "arithmetic",
+      "order": 6,
+      "files": {
+        "prompt.txt": {
+          "path": "upstream/dataset_spec-to-rtl/Prob030_popcount255_prompt.txt",
+          "sha256": "9e44a73bf745744322ea2e326c046888370760e0708b08bbc25c6a65bfbb397e"
+        },
+        "ref.sv": {
+          "path": "upstream/dataset_spec-to-rtl/Prob030_popcount255_ref.sv",
+          "sha256": "9159b1dda6cad0c06ec47be5bbd680dd13007eacd0ee6832c443550c8283c9bb"
+        },
+        "test.sv": {
+          "path": "upstream/dataset_spec-to-rtl/Prob030_popcount255_test.sv",
+          "sha256": "d232308e7f686aaf721e7a3eac277a25dab267d0a4fce2b51fb6ff8b3e790354"
+        }
+      },
+      "decision": "EXCLUDE_EXACT_PRIOR_TASK",
+      "reason": "Same official task and commit as ve_popcount in dev10; prior adapted task/tests and model experiments.",
+      "module_author": "UNKNOWN; dataset copyright NVIDIA Research Projects, not proof of each HDLBits module author",
+      "reference_independence": "NOT_ESTABLISHED; upstream RefModule and testbench are correlated benchmark assets",
+      "training_contamination": "UNKNOWN",
+      "source_claim": "public official originals, developmental screening, not private/model-unseen holdout"
+    },
+    {
+      "id": "Prob123_bugs_addsubz",
+      "stratum": "arithmetic",
+      "order": 7,
+      "files": {
+        "prompt.txt": {
+          "path": "upstream/dataset_spec-to-rtl/Prob123_bugs_addsubz_prompt.txt",
+          "sha256": "104c8b48752ca525a21220ee6fb2bfad62c6a9b42bf9d1aed3b8810106b089cb"
+        },
+        "ref.sv": {
+          "path": "upstream/dataset_spec-to-rtl/Prob123_bugs_addsubz_ref.sv",
+          "sha256": "7669a9ce6ae5f5ab094ac215fd29f6891733813ad143488ea3daa22c7477a649"
+        },
+        "test.sv": {
+          "path": "upstream/dataset_spec-to-rtl/Prob123_bugs_addsubz_test.sv",
+          "sha256": "b3259685e3ac8b6f30533fb60c7758738d92db8b5e12e792208ec114c792e182"
+        }
+      },
+      "decision": "EXCLUDE_EXACT_PRIOR_TASK",
+      "reason": "Same official task and commit as ve_addsub; includes supplied faulty RTL and is not new pure specification task.",
+      "module_author": "UNKNOWN; dataset copyright NVIDIA Research Projects, not proof of each HDLBits module author",
+      "reference_independence": "NOT_ESTABLISHED; upstream RefModule and testbench are correlated benchmark assets",
+      "training_contamination": "UNKNOWN",
+      "source_claim": "public official originals, developmental screening, not private/model-unseen holdout"
+    },
+    {
+      "id": "Prob031_dff",
+      "stratum": "registers",
+      "order": 8,
+      "files": {
+        "prompt.txt": {
+          "path": "upstream/dataset_spec-to-rtl/Prob031_dff_prompt.txt",
+          "sha256": "77d3eaeac41532ec5a55e1695c9adbf9c84a909c0cbcc24befaae2c273d7552e"
+        },
+        "ref.sv": {
+          "path": "upstream/dataset_spec-to-rtl/Prob031_dff_ref.sv",
+          "sha256": "fbfa1604c31f03dca7217b6d4f2ce1b67e85898ec94195ea3dc460868a186e40"
+        },
+        "test.sv": {
+          "path": "upstream/dataset_spec-to-rtl/Prob031_dff_test.sv",
+          "sha256": "60f190b0ab719f7c116072537965ebbcfa8420f3fdee1878db2aa3d8235f6012"
+        }
+      },
+      "decision": "EXCLUDE_SPEC_INTERFACE_CONFLICT",
+      "reason": "Original prompt declares input q; expected flip-flop output and RefModule declare output q. Cannot fix or silently reinterpret.",
+      "module_author": "UNKNOWN; dataset copyright NVIDIA Research Projects, not proof of each HDLBits module author",
+      "reference_independence": "NOT_ESTABLISHED; upstream RefModule and testbench are correlated benchmark assets",
+      "training_contamination": "UNKNOWN",
+      "source_claim": "public official originals, developmental screening, not private/model-unseen holdout"
+    },
+    {
+      "id": "Prob034_dff8",
+      "stratum": "registers",
+      "order": 9,
+      "files": {
+        "prompt.txt": {
+          "path": "upstream/dataset_spec-to-rtl/Prob034_dff8_prompt.txt",
+          "sha256": "af4a3759be65a9c2ab59af1cd4b207a64bdf9528cc79953c96c8694ec46432d8"
+        },
+        "ref.sv": {
+          "path": "upstream/dataset_spec-to-rtl/Prob034_dff8_ref.sv",
+          "sha256": "f2cefccbae78a8cd532c6b66eb75eb08b60cf11497b3f89bd09bcb9d892fef69"
+        },
+        "test.sv": {
+          "path": "upstream/dataset_spec-to-rtl/Prob034_dff8_test.sv",
+          "sha256": "021b074f53d3d1a1fd6982a73d5460a9151f8b6eb9a5f2034ff821835fe94e1b"
+        }
+      },
+      "decision": "EXCLUDE_NEAR_DUPLICATE_AND_INITIALIZATION_GAP",
+      "reason": "Plain DFF is a restricted old dff8 family variant; upstream reference additionally initializes q=0, not stated by prompt. Do not infer initial requirement from reference.",
+      "module_author": "UNKNOWN; dataset copyright NVIDIA Research Projects, not proof of each HDLBits module author",
+      "reference_independence": "NOT_ESTABLISHED; upstream RefModule and testbench are correlated benchmark assets",
+      "training_contamination": "UNKNOWN",
+      "source_claim": "public official originals, developmental screening, not private/model-unseen holdout"
+    },
+    {
+      "id": "Prob041_dff8r",
+      "stratum": "registers",
+      "order": 10,
+      "files": {
+        "prompt.txt": {
+          "path": "upstream/dataset_spec-to-rtl/Prob041_dff8r_prompt.txt",
+          "sha256": "b91c4b97d7cf8584234d1edc18113be65ec11ceade3478077af4b68670da2deb"
+        },
+        "ref.sv": {
+          "path": "upstream/dataset_spec-to-rtl/Prob041_dff8r_ref.sv",
+          "sha256": "43fd5e0d5b05deb692cbf8480c4b52011f89021bcdf329cb9e3a984d9e6e825c"
+        },
+        "test.sv": {
+          "path": "upstream/dataset_spec-to-rtl/Prob041_dff8r_test.sv",
+          "sha256": "bdf9aea14b8efdf55deb7ee2b9c5514282198da56b6c77fac55d393f28d8d51f"
+        }
+      },
+      "decision": "EXCLUDE_NEAR_DUPLICATE",
+      "reason": "Old dff8 contract with enable fixed high; same posedge/sync-high-zero register behavior.",
+      "module_author": "UNKNOWN; dataset copyright NVIDIA Research Projects, not proof of each HDLBits module author",
+      "reference_independence": "NOT_ESTABLISHED; upstream RefModule and testbench are correlated benchmark assets",
+      "training_contamination": "UNKNOWN",
+      "source_claim": "public official originals, developmental screening, not private/model-unseen holdout"
+    },
+    {
+      "id": "Prob046_dff8p",
+      "stratum": "registers",
+      "order": 11,
+      "files": {
+        "prompt.txt": {
+          "path": "upstream/dataset_spec-to-rtl/Prob046_dff8p_prompt.txt",
+          "sha256": "9811f11e20c7952afb66fb74c415f59bd762031f13340ec5002ac24082cc77e8"
+        },
+        "ref.sv": {
+          "path": "upstream/dataset_spec-to-rtl/Prob046_dff8p_ref.sv",
+          "sha256": "24e7078cf9aeaf5730228768d2d5131e5ff8095fdcf41e2f819cc6712cb28a72"
+        },
+        "test.sv": {
+          "path": "upstream/dataset_spec-to-rtl/Prob046_dff8p_test.sv",
+          "sha256": "65eeebd77d5ea10a4adf8e95880c02bcb530fde9cfb6bd75c13e1dcf578bc312"
+        }
+      },
+      "decision": "EXCLUDE_NEAR_DUPLICATE",
+      "reason": "Same DFF mechanism with edge polarity/reset constant changes and enable removed; conservative near-duplicate exclusion, not claimed identical RTL behavior.",
+      "module_author": "UNKNOWN; dataset copyright NVIDIA Research Projects, not proof of each HDLBits module author",
+      "reference_independence": "NOT_ESTABLISHED; upstream RefModule and testbench are correlated benchmark assets",
+      "training_contamination": "UNKNOWN",
+      "source_claim": "public official originals, developmental screening, not private/model-unseen holdout"
+    },
+    {
+      "id": "Prob035_count1to10",
+      "stratum": "counter",
+      "order": 12,
+      "files": {
+        "prompt.txt": {
+          "path": "upstream/dataset_spec-to-rtl/Prob035_count1to10_prompt.txt",
+          "sha256": "a9eda404ddf70c583de56770ee5d69d0ee2173d7b1f19a6c4dd664ee113ea9d3"
+        },
+        "ref.sv": {
+          "path": "upstream/dataset_spec-to-rtl/Prob035_count1to10_ref.sv",
+          "sha256": "16a12abd3a6d1fef7f92b3e13af89c47560f9f7ec5a529270312854946784655"
+        },
+        "test.sv": {
+          "path": "upstream/dataset_spec-to-rtl/Prob035_count1to10_test.sv",
+          "sha256": "299c2512ac7f00c02c569ded0ebbbbf2f332edb708b97fda73be45be589df2be"
+        }
+      },
+      "decision": "EXCLUDE_NEAR_DUPLICATE",
+      "reason": "Historical ve_count10 decade counter with value offset and reset-to1; same modulus mechanism.",
+      "module_author": "UNKNOWN; dataset copyright NVIDIA Research Projects, not proof of each HDLBits module author",
+      "reference_independence": "NOT_ESTABLISHED; upstream RefModule and testbench are correlated benchmark assets",
+      "training_contamination": "UNKNOWN",
+      "source_claim": "public official originals, developmental screening, not private/model-unseen holdout"
+    },
+    {
+      "id": "Prob037_review2015_count1k",
+      "stratum": "counter",
+      "order": 13,
+      "files": {
+        "prompt.txt": {
+          "path": "upstream/dataset_spec-to-rtl/Prob037_review2015_count1k_prompt.txt",
+          "sha256": "d1fd8dc7f283ecd625b9966bc0c8022538813261a762e45f04ad20cd74de994a"
+        },
+        "ref.sv": {
+          "path": "upstream/dataset_spec-to-rtl/Prob037_review2015_count1k_ref.sv",
+          "sha256": "bedfffe16c74a3b58ff1021594cefc719320bc14422e7b74d12e80fe1952644e"
+        },
+        "test.sv": {
+          "path": "upstream/dataset_spec-to-rtl/Prob037_review2015_count1k_test.sv",
+          "sha256": "58236493db81e2c9b7d4abd649a3cd0bc50e61bf62fcabc5f7971555137ac21b"
+        }
+      },
+      "decision": "EXCLUDE_NEAR_DUPLICATE",
+      "reason": "Historical decade/modulo-counter mechanism with width/modulus changed; no new independent task mechanism.",
+      "module_author": "UNKNOWN; dataset copyright NVIDIA Research Projects, not proof of each HDLBits module author",
+      "reference_independence": "NOT_ESTABLISHED; upstream RefModule and testbench are correlated benchmark assets",
+      "training_contamination": "UNKNOWN",
+      "source_claim": "public official originals, developmental screening, not private/model-unseen holdout"
+    },
+    {
+      "id": "Prob038_count15",
+      "stratum": "counter",
+      "order": 14,
+      "files": {
+        "prompt.txt": {
+          "path": "upstream/dataset_spec-to-rtl/Prob038_count15_prompt.txt",
+          "sha256": "84f0cef58602292de0886f359511ef9b09a21561d43823c918a97e3612bc2161"
+        },
+        "ref.sv": {
+          "path": "upstream/dataset_spec-to-rtl/Prob038_count15_ref.sv",
+          "sha256": "189870e9a4af7d545ae06dfff5284ef5a61595f48cb469dabaf473bbccb95872"
+        },
+        "test.sv": {
+          "path": "upstream/dataset_spec-to-rtl/Prob038_count15_test.sv",
+          "sha256": "f1438d994a34216bc2732869299f704bdab6f43e65ecbe55b33a165cc1a75966"
+        }
+      },
+      "decision": "EXCLUDE_NEAR_DUPLICATE",
+      "reason": "custom counter4 modulo16 sync reset contract with enable fixed high.",
+      "module_author": "UNKNOWN; dataset copyright NVIDIA Research Projects, not proof of each HDLBits module author",
+      "reference_independence": "NOT_ESTABLISHED; upstream RefModule and testbench are correlated benchmark assets",
+      "training_contamination": "UNKNOWN",
+      "source_claim": "public official originals, developmental screening, not private/model-unseen holdout"
+    },
+    {
+      "id": "Prob040_count10",
+      "stratum": "counter",
+      "order": 15,
+      "files": {
+        "prompt.txt": {
+          "path": "upstream/dataset_spec-to-rtl/Prob040_count10_prompt.txt",
+          "sha256": "e44a5be4ed4095b36166dbaadf0ed8e94dfe4e941034a36e5ab86e50b36afe5f"
+        },
+        "ref.sv": {
+          "path": "upstream/dataset_spec-to-rtl/Prob040_count10_ref.sv",
+          "sha256": "483155e5ba707375665d5f67910c053b1b3955db9b4aad743bf2d70f41da45c6"
+        },
+        "test.sv": {
+          "path": "upstream/dataset_spec-to-rtl/Prob040_count10_test.sv",
+          "sha256": "1aa97a4ea53514d8ef826fb74f85416cbd9df608bd9ae91ae734e0bb1ef2b844"
+        }
+      },
+      "decision": "EXCLUDE_EXACT_PRIOR_TASK",
+      "reason": "Same official source as dev10 ve_count10.",
+      "module_author": "UNKNOWN; dataset copyright NVIDIA Research Projects, not proof of each HDLBits module author",
+      "reference_independence": "NOT_ESTABLISHED; upstream RefModule and testbench are correlated benchmark assets",
+      "training_contamination": "UNKNOWN",
+      "source_claim": "public official originals, developmental screening, not private/model-unseen holdout"
+    },
+    {
+      "id": "Prob079_fsm3onehot",
+      "stratum": "state_machine",
+      "order": 16,
+      "files": {
+        "prompt.txt": {
+          "path": "upstream/dataset_spec-to-rtl/Prob079_fsm3onehot_prompt.txt",
+          "sha256": "b70183c5ac379e2c8213559e1e9bc261ff2ec5e7fb2b0bd68a86c666a68b7d3d"
+        },
+        "ref.sv": {
+          "path": "upstream/dataset_spec-to-rtl/Prob079_fsm3onehot_ref.sv",
+          "sha256": "0dd374e8dee82065d86e5dac85d17d78f323bc8cf511f465887b046ac0dd6795"
+        },
+        "test.sv": {
+          "path": "upstream/dataset_spec-to-rtl/Prob079_fsm3onehot_test.sv",
+          "sha256": "eeee9fd5fe6dba4bc88e1f7c997c1db9c106f179be870283f243754a9470588c"
+        }
+      },
+      "decision": "EXCLUDE_NEAR_DUPLICATE_AND_DOMAIN_GAP",
+      "reason": "Same four-state graph as prior ve_fsm/Prob119; combinational one-hot variant. Invalid/multi-hot input state behavior unspecified, reference equation behavior must not be silently added to spec.",
+      "module_author": "UNKNOWN; dataset copyright NVIDIA Research Projects, not proof of each HDLBits module author",
+      "reference_independence": "NOT_ESTABLISHED; upstream RefModule and testbench are correlated benchmark assets",
+      "training_contamination": "UNKNOWN",
+      "source_claim": "public official originals, developmental screening, not private/model-unseen holdout"
+    },
+    {
+      "id": "Prob095_review2015_fsmshift",
+      "stratum": "state_machine",
+      "order": 17,
+      "files": {
+        "prompt.txt": {
+          "path": "upstream/dataset_spec-to-rtl/Prob095_review2015_fsmshift_prompt.txt",
+          "sha256": "31a48288034070f7ab847da07c03fcbfcd2cc973fed3b0f2da5c68d1fed349b0"
+        },
+        "ref.sv": {
+          "path": "upstream/dataset_spec-to-rtl/Prob095_review2015_fsmshift_ref.sv",
+          "sha256": "a0926e66cc422a056dcaa0e090a7d43be84aaed96e119e4ba762a78a0c87f84a"
+        },
+        "test.sv": {
+          "path": "upstream/dataset_spec-to-rtl/Prob095_review2015_fsmshift_test.sv",
+          "sha256": "04a07679a16566bb0ed4d8c28ea3f18c89efff880f820a83cbcfd0617b6e153e"
+        }
+      },
+      "decision": "SELECTED_CONDITIONAL",
+      "reason": "Reset-started four-cycle enable then terminal hold is explicit; distinct from periodic pulse_div4 or input-request delay. Same FSM/counter building blocks disclosed; independently specified implementation correctness still unverified.",
+      "module_author": "UNKNOWN; dataset copyright NVIDIA Research Projects, not proof of each HDLBits module author",
+      "reference_independence": "NOT_ESTABLISHED; upstream RefModule and testbench are correlated benchmark assets",
+      "training_contamination": "UNKNOWN",
+      "source_claim": "public official originals, developmental screening, not private/model-unseen holdout"
+    },
+    {
+      "id": "Prob096_review2015_fsmseq",
+      "stratum": "state_machine",
+      "order": 18,
+      "files": {
+        "prompt.txt": {
+          "path": "upstream/dataset_spec-to-rtl/Prob096_review2015_fsmseq_prompt.txt",
+          "sha256": "85dfba16e16b110e0f6ec996cab75ac3d082d65434a1de912c1b55b059bcc45b"
+        },
+        "ref.sv": {
+          "path": "upstream/dataset_spec-to-rtl/Prob096_review2015_fsmseq_ref.sv",
+          "sha256": "0fb569e05f0af10285612204baabc9997637a47106bee5de8c4afc7e4fb4bfbd"
+        },
+        "test.sv": {
+          "path": "upstream/dataset_spec-to-rtl/Prob096_review2015_fsmseq_test.sv",
+          "sha256": "a69cc992533c8b2dec59616462e5e842098fde509721af776865c56156338f4f"
+        }
+      },
+      "decision": "NOT_SELECTED_STRATUM_FILLED",
+      "reason": "First eligible Prob095 fills state-machine stratum. Sequence1101 latch shares detector/sticky building blocks with exposed tasks; not promoted as independent holdout.",
+      "module_author": "UNKNOWN; dataset copyright NVIDIA Research Projects, not proof of each HDLBits module author",
+      "reference_independence": "NOT_ESTABLISHED; upstream RefModule and testbench are correlated benchmark assets",
+      "training_contamination": "UNKNOWN",
+      "source_claim": "public official originals, developmental screening, not private/model-unseen holdout"
+    },
+    {
+      "id": "Prob100_fsm3comb",
+      "stratum": "state_machine",
+      "order": 19,
+      "files": {
+        "prompt.txt": {
+          "path": "upstream/dataset_spec-to-rtl/Prob100_fsm3comb_prompt.txt",
+          "sha256": "147b4dd29a0d6326c686d30943e9a099fb5c63696007e0713e5b2823cde6f2d6"
+        },
+        "ref.sv": {
+          "path": "upstream/dataset_spec-to-rtl/Prob100_fsm3comb_ref.sv",
+          "sha256": "d4a2719711748110fc288874c24d0c73a42a3edbc687e0a8aae8c6b7e1665c1e"
+        },
+        "test.sv": {
+          "path": "upstream/dataset_spec-to-rtl/Prob100_fsm3comb_test.sv",
+          "sha256": "2bc594d2dffaf74377c4941d07c6c4698949cf3ef1cb2e18fea6a0f2f875187c"
+        }
+      },
+      "decision": "EXCLUDE_NEAR_DUPLICATE",
+      "reason": "Exact state-transition graph of prior ve_fsm/Prob119 exposed as combinational current-state interface.",
+      "module_author": "UNKNOWN; dataset copyright NVIDIA Research Projects, not proof of each HDLBits module author",
+      "reference_independence": "NOT_ESTABLISHED; upstream RefModule and testbench are correlated benchmark assets",
+      "training_contamination": "UNKNOWN",
+      "source_claim": "public official originals, developmental screening, not private/model-unseen holdout"
+    }
+  ]
+}

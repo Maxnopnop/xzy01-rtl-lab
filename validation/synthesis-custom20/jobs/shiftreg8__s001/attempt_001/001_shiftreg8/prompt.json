@@ -1,0 +1,18 @@
+{
+  "mode": "offline",
+  "request": {
+    "model": "",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs."
+      },
+      {
+        "role": "user",
+        "content": "Implement module shiftreg8(input wire clk, rst, en, serial_in, output reg [7:0] q). All state changes only on rising clk. rst is active-high synchronous and has priority. State before the first reset edge is unspecified. On rst q=0; else if en q={q[6:0],serial_in}; else hold."
+      }
+    ],
+    "stream": false,
+    "max_tokens": 4096
+  }
+}

@@ -1,0 +1,668 @@
+{
+  "kind": "HANDSHAKE_DEVELOPMENT_CALIBRATION_ONLY",
+  "fixture_denominator": 22,
+  "rtl_denominator": 10,
+  "trace_fixtures": [
+    {
+      "name": "independent_consumer_stalls",
+      "expected": "PASS",
+      "observed": "PASS",
+      "expected_category": null,
+      "matched": true
+    },
+    {
+      "name": "legal_five_cycle_delay",
+      "expected": "PASS",
+      "observed": "PASS",
+      "expected_category": null,
+      "matched": true
+    },
+    {
+      "name": "invalid_payload_changes",
+      "expected": "PASS",
+      "observed": "PASS",
+      "expected_category": null,
+      "matched": true
+    },
+    {
+      "name": "invalid_payload_unknowns",
+      "expected": "PASS",
+      "observed": "PASS",
+      "expected_category": null,
+      "matched": true
+    },
+    {
+      "name": "zero_cycle_combinational",
+      "expected": "PASS",
+      "observed": "PASS",
+      "expected_category": null,
+      "matched": true
+    },
+    {
+      "name": "simultaneous_enqueue_and_dequeue",
+      "expected": "PASS",
+      "observed": "PASS",
+      "expected_category": null,
+      "matched": true
+    },
+    {
+      "name": "last_transaction_lost",
+      "expected": "FUNCTION_FAIL",
+      "observed": "FUNCTION_FAIL",
+      "expected_category": "MISSING_TRANSACTION",
+      "matched": true
+    },
+    {
+      "name": "late_extra_duplicate",
+      "expected": "FUNCTION_FAIL",
+      "observed": "FUNCTION_FAIL",
+      "expected_category": "UNEXPECTED_TRANSACTION",
+      "matched": true
+    },
+    {
+      "name": "ordered_beats_swapped",
+      "expected": "FUNCTION_FAIL",
+      "observed": "FUNCTION_FAIL",
+      "expected_category": "DATA_OR_ORDER_FAIL",
+      "matched": true
+    },
+    {
+      "name": "accepted_payload_corrupted",
+      "expected": "FUNCTION_FAIL",
+      "observed": "FUNCTION_FAIL",
+      "expected_category": "DATA_OR_ORDER_FAIL",
+      "matched": true
+    },
+    {
+      "name": "accepted_last_corrupted",
+      "expected": "FUNCTION_FAIL",
+      "observed": "FUNCTION_FAIL",
+      "expected_category": "DATA_OR_ORDER_FAIL",
+      "matched": true
+    },
+    {
+      "name": "stalled_payload_changed",
+      "expected": "FUNCTION_FAIL",
+      "observed": "FUNCTION_FAIL",
+      "expected_category": "BACKPRESSURE_FAIL",
+      "matched": true
+    },
+    {
+      "name": "stalled_last_changed",
+      "expected": "FUNCTION_FAIL",
+      "observed": "FUNCTION_FAIL",
+      "expected_category": "BACKPRESSURE_FAIL",
+      "matched": true
+    },
+    {
+      "name": "stalled_valid_withdrawn",
+      "expected": "FUNCTION_FAIL",
+      "observed": "FUNCTION_FAIL",
+      "expected_category": "BACKPRESSURE_FAIL",
+      "matched": true
+    },
+    {
+      "name": "never_accepts_source",
+      "expected": "FUNCTION_FAIL",
+      "observed": "FUNCTION_FAIL",
+      "expected_category": "LIVENESS_FAIL",
+      "matched": true
+    },
+    {
+      "name": "accepted_but_beyond_horizon",
+      "expected": "FUNCTION_FAIL",
+      "observed": "FUNCTION_FAIL",
+      "expected_category": "MISSING_TRANSACTION",
+      "matched": true
+    },
+    {
+      "name": "source_changes_while_stalled",
+      "expected": "INPUT_PROTOCOL_FAIL",
+      "observed": "INPUT_PROTOCOL_FAIL",
+      "expected_category": "INPUT_PROTOCOL_FAIL",
+      "matched": true
+    },
+    {
+      "name": "unknown_valid_control",
+      "expected": "TRACE_INVALID",
+      "observed": "TRACE_INVALID",
+      "expected_category": null,
+      "matched": true
+    },
+    {
+      "name": "insufficient_fair_drain",
+      "expected": "TRACE_INVALID",
+      "observed": "TRACE_INVALID",
+      "expected_category": null,
+      "matched": true
+    },
+    {
+      "name": "missing_cycle",
+      "expected": "TRACE_INVALID",
+      "observed": "TRACE_INVALID",
+      "expected_category": null,
+      "matched": true
+    },
+    {
+      "name": "declared_reset_cancels_inflight",
+      "expected": "PASS",
+      "observed": "PASS",
+      "expected_category": null,
+      "matched": true
+    },
+    {
+      "name": "stale_output_after_reset",
+      "expected": "FUNCTION_FAIL",
+      "observed": "FUNCTION_FAIL",
+      "expected_category": "DATA_OR_ORDER_FAIL",
+      "matched": true
+    }
+  ],
+  "rtl": [
+    {
+      "name": "legal_no_added_delay",
+      "parameters": {
+        "LATENCY": 0,
+        "INVALID_STYLE": 0,
+        "MODE": 0
+      },
+      "expected_status": "PASS",
+      "expected_category": null,
+      "commands": [
+        {
+          "argv": [
+            "D:/iverilog/bin/iverilog.exe",
+            "-g2012",
+            "-s",
+            "tb",
+            "-Ptb.LATENCY=0",
+            "-Ptb.INVALID_STYLE=0",
+            "-Ptb.MODE=0",
+            "-o",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\calibration-v1\\rtl\\legal_no_added_delay\\sim.vvp",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\development_broadcast.v",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\tb.v"
+          ],
+          "returncode": 0,
+          "timeout": false,
+          "seconds": 0.18800000000192085,
+          "executable_sha256": "803b8844af2cc8ed70b5f08b07ffa749901280e81339617ca3e72cbbb852bd2b"
+        },
+        {
+          "argv": [
+            "D:/iverilog/bin/vvp.exe",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\calibration-v1\\rtl\\legal_no_added_delay\\sim.vvp"
+          ],
+          "returncode": 0,
+          "timeout": false,
+          "seconds": 0.07800000000133878,
+          "executable_sha256": "e2f442f4d5aa76e55c85c3ff77e4446fbfdb9946b7cfe8a2dff87f275da17b62"
+        }
+      ],
+      "observed_status": "PASS",
+      "observed_categories": [],
+      "matched": true
+    },
+    {
+      "name": "legal_three_cycle_delay_changed_idle",
+      "parameters": {
+        "LATENCY": 3,
+        "INVALID_STYLE": 1,
+        "MODE": 0
+      },
+      "expected_status": "PASS",
+      "expected_category": null,
+      "commands": [
+        {
+          "argv": [
+            "D:/iverilog/bin/iverilog.exe",
+            "-g2012",
+            "-s",
+            "tb",
+            "-Ptb.LATENCY=3",
+            "-Ptb.INVALID_STYLE=1",
+            "-Ptb.MODE=0",
+            "-o",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\calibration-v1\\rtl\\legal_three_cycle_delay_changed_idle\\sim.vvp",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\development_broadcast.v",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\tb.v"
+          ],
+          "returncode": 0,
+          "timeout": false,
+          "seconds": 0.125,
+          "executable_sha256": "803b8844af2cc8ed70b5f08b07ffa749901280e81339617ca3e72cbbb852bd2b"
+        },
+        {
+          "argv": [
+            "D:/iverilog/bin/vvp.exe",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\calibration-v1\\rtl\\legal_three_cycle_delay_changed_idle\\sim.vvp"
+          ],
+          "returncode": 0,
+          "timeout": false,
+          "seconds": 0.046000000002095476,
+          "executable_sha256": "e2f442f4d5aa76e55c85c3ff77e4446fbfdb9946b7cfe8a2dff87f275da17b62"
+        }
+      ],
+      "observed_status": "PASS",
+      "observed_categories": [],
+      "matched": true
+    },
+    {
+      "name": "legal_three_cycle_delay_unknown_idle",
+      "parameters": {
+        "LATENCY": 3,
+        "INVALID_STYLE": 2,
+        "MODE": 0
+      },
+      "expected_status": "PASS",
+      "expected_category": null,
+      "commands": [
+        {
+          "argv": [
+            "D:/iverilog/bin/iverilog.exe",
+            "-g2012",
+            "-s",
+            "tb",
+            "-Ptb.LATENCY=3",
+            "-Ptb.INVALID_STYLE=2",
+            "-Ptb.MODE=0",
+            "-o",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\calibration-v1\\rtl\\legal_three_cycle_delay_unknown_idle\\sim.vvp",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\development_broadcast.v",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\tb.v"
+          ],
+          "returncode": 0,
+          "timeout": false,
+          "seconds": 0.125,
+          "executable_sha256": "803b8844af2cc8ed70b5f08b07ffa749901280e81339617ca3e72cbbb852bd2b"
+        },
+        {
+          "argv": [
+            "D:/iverilog/bin/vvp.exe",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\calibration-v1\\rtl\\legal_three_cycle_delay_unknown_idle\\sim.vvp"
+          ],
+          "returncode": 0,
+          "timeout": false,
+          "seconds": 0.046999999998661224,
+          "executable_sha256": "e2f442f4d5aa76e55c85c3ff77e4446fbfdb9946b7cfe8a2dff87f275da17b62"
+        }
+      ],
+      "observed_status": "PASS",
+      "observed_categories": [],
+      "matched": true
+    },
+    {
+      "name": "loss_final_consumer0",
+      "parameters": {
+        "LATENCY": 0,
+        "INVALID_STYLE": 0,
+        "MODE": 1
+      },
+      "expected_status": "FUNCTION_FAIL",
+      "expected_category": "MISSING_TRANSACTION",
+      "commands": [
+        {
+          "argv": [
+            "D:/iverilog/bin/iverilog.exe",
+            "-g2012",
+            "-s",
+            "tb",
+            "-Ptb.LATENCY=0",
+            "-Ptb.INVALID_STYLE=0",
+            "-Ptb.MODE=1",
+            "-o",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\calibration-v1\\rtl\\loss_final_consumer0\\sim.vvp",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\development_broadcast.v",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\tb.v"
+          ],
+          "returncode": 0,
+          "timeout": false,
+          "seconds": 0.125,
+          "executable_sha256": "803b8844af2cc8ed70b5f08b07ffa749901280e81339617ca3e72cbbb852bd2b"
+        },
+        {
+          "argv": [
+            "D:/iverilog/bin/vvp.exe",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\calibration-v1\\rtl\\loss_final_consumer0\\sim.vvp"
+          ],
+          "returncode": 0,
+          "timeout": false,
+          "seconds": 0.046999999998661224,
+          "executable_sha256": "e2f442f4d5aa76e55c85c3ff77e4446fbfdb9946b7cfe8a2dff87f275da17b62"
+        }
+      ],
+      "observed_status": "FUNCTION_FAIL",
+      "observed_categories": [
+        "MISSING_TRANSACTION"
+      ],
+      "matched": true
+    },
+    {
+      "name": "duplicate_consumer0",
+      "parameters": {
+        "LATENCY": 0,
+        "INVALID_STYLE": 0,
+        "MODE": 2
+      },
+      "expected_status": "FUNCTION_FAIL",
+      "expected_category": "UNEXPECTED_TRANSACTION",
+      "commands": [
+        {
+          "argv": [
+            "D:/iverilog/bin/iverilog.exe",
+            "-g2012",
+            "-s",
+            "tb",
+            "-Ptb.LATENCY=0",
+            "-Ptb.INVALID_STYLE=0",
+            "-Ptb.MODE=2",
+            "-o",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\calibration-v1\\rtl\\duplicate_consumer0\\sim.vvp",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\development_broadcast.v",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\tb.v"
+          ],
+          "returncode": 0,
+          "timeout": false,
+          "seconds": 0.13999999999941792,
+          "executable_sha256": "803b8844af2cc8ed70b5f08b07ffa749901280e81339617ca3e72cbbb852bd2b"
+        },
+        {
+          "argv": [
+            "D:/iverilog/bin/vvp.exe",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\calibration-v1\\rtl\\duplicate_consumer0\\sim.vvp"
+          ],
+          "returncode": 0,
+          "timeout": false,
+          "seconds": 0.046999999998661224,
+          "executable_sha256": "e2f442f4d5aa76e55c85c3ff77e4446fbfdb9946b7cfe8a2dff87f275da17b62"
+        }
+      ],
+      "observed_status": "FUNCTION_FAIL",
+      "observed_categories": [
+        "UNEXPECTED_TRANSACTION"
+      ],
+      "matched": true
+    },
+    {
+      "name": "stall_data_break",
+      "parameters": {
+        "LATENCY": 0,
+        "INVALID_STYLE": 0,
+        "MODE": 3
+      },
+      "expected_status": "FUNCTION_FAIL",
+      "expected_category": "BACKPRESSURE_FAIL",
+      "commands": [
+        {
+          "argv": [
+            "D:/iverilog/bin/iverilog.exe",
+            "-g2012",
+            "-s",
+            "tb",
+            "-Ptb.LATENCY=0",
+            "-Ptb.INVALID_STYLE=0",
+            "-Ptb.MODE=3",
+            "-o",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\calibration-v1\\rtl\\stall_data_break\\sim.vvp",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\development_broadcast.v",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\tb.v"
+          ],
+          "returncode": 0,
+          "timeout": false,
+          "seconds": 0.1559999999954016,
+          "executable_sha256": "803b8844af2cc8ed70b5f08b07ffa749901280e81339617ca3e72cbbb852bd2b"
+        },
+        {
+          "argv": [
+            "D:/iverilog/bin/vvp.exe",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\calibration-v1\\rtl\\stall_data_break\\sim.vvp"
+          ],
+          "returncode": 0,
+          "timeout": false,
+          "seconds": 0.046999999998661224,
+          "executable_sha256": "e2f442f4d5aa76e55c85c3ff77e4446fbfdb9946b7cfe8a2dff87f275da17b62"
+        }
+      ],
+      "observed_status": "FUNCTION_FAIL",
+      "observed_categories": [
+        "BACKPRESSURE_FAIL",
+        "DATA_OR_ORDER_FAIL"
+      ],
+      "matched": true
+    },
+    {
+      "name": "stall_valid_break",
+      "parameters": {
+        "LATENCY": 0,
+        "INVALID_STYLE": 0,
+        "MODE": 4
+      },
+      "expected_status": "FUNCTION_FAIL",
+      "expected_category": "BACKPRESSURE_FAIL",
+      "commands": [
+        {
+          "argv": [
+            "D:/iverilog/bin/iverilog.exe",
+            "-g2012",
+            "-s",
+            "tb",
+            "-Ptb.LATENCY=0",
+            "-Ptb.INVALID_STYLE=0",
+            "-Ptb.MODE=4",
+            "-o",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\calibration-v1\\rtl\\stall_valid_break\\sim.vvp",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\development_broadcast.v",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\tb.v"
+          ],
+          "returncode": 0,
+          "timeout": false,
+          "seconds": 0.15600000000267755,
+          "executable_sha256": "803b8844af2cc8ed70b5f08b07ffa749901280e81339617ca3e72cbbb852bd2b"
+        },
+        {
+          "argv": [
+            "D:/iverilog/bin/vvp.exe",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\calibration-v1\\rtl\\stall_valid_break\\sim.vvp"
+          ],
+          "returncode": 0,
+          "timeout": false,
+          "seconds": 0.046999999998661224,
+          "executable_sha256": "e2f442f4d5aa76e55c85c3ff77e4446fbfdb9946b7cfe8a2dff87f275da17b62"
+        }
+      ],
+      "observed_status": "FUNCTION_FAIL",
+      "observed_categories": [
+        "BACKPRESSURE_FAIL",
+        "DATA_OR_ORDER_FAIL",
+        "MISSING_TRANSACTION"
+      ],
+      "matched": true
+    },
+    {
+      "name": "stall_last_break",
+      "parameters": {
+        "LATENCY": 0,
+        "INVALID_STYLE": 0,
+        "MODE": 5
+      },
+      "expected_status": "FUNCTION_FAIL",
+      "expected_category": "BACKPRESSURE_FAIL",
+      "commands": [
+        {
+          "argv": [
+            "D:/iverilog/bin/iverilog.exe",
+            "-g2012",
+            "-s",
+            "tb",
+            "-Ptb.LATENCY=0",
+            "-Ptb.INVALID_STYLE=0",
+            "-Ptb.MODE=5",
+            "-o",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\calibration-v1\\rtl\\stall_last_break\\sim.vvp",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\development_broadcast.v",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\tb.v"
+          ],
+          "returncode": 0,
+          "timeout": false,
+          "seconds": 0.13999999999941792,
+          "executable_sha256": "803b8844af2cc8ed70b5f08b07ffa749901280e81339617ca3e72cbbb852bd2b"
+        },
+        {
+          "argv": [
+            "D:/iverilog/bin/vvp.exe",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\calibration-v1\\rtl\\stall_last_break\\sim.vvp"
+          ],
+          "returncode": 0,
+          "timeout": false,
+          "seconds": 0.046999999998661224,
+          "executable_sha256": "e2f442f4d5aa76e55c85c3ff77e4446fbfdb9946b7cfe8a2dff87f275da17b62"
+        }
+      ],
+      "observed_status": "FUNCTION_FAIL",
+      "observed_categories": [
+        "BACKPRESSURE_FAIL",
+        "DATA_OR_ORDER_FAIL"
+      ],
+      "matched": true
+    },
+    {
+      "name": "data_corrupt",
+      "parameters": {
+        "LATENCY": 0,
+        "INVALID_STYLE": 0,
+        "MODE": 6
+      },
+      "expected_status": "FUNCTION_FAIL",
+      "expected_category": "DATA_OR_ORDER_FAIL",
+      "commands": [
+        {
+          "argv": [
+            "D:/iverilog/bin/iverilog.exe",
+            "-g2012",
+            "-s",
+            "tb",
+            "-Ptb.LATENCY=0",
+            "-Ptb.INVALID_STYLE=0",
+            "-Ptb.MODE=6",
+            "-o",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\calibration-v1\\rtl\\data_corrupt\\sim.vvp",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\development_broadcast.v",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\tb.v"
+          ],
+          "returncode": 0,
+          "timeout": false,
+          "seconds": 0.13999999999941792,
+          "executable_sha256": "803b8844af2cc8ed70b5f08b07ffa749901280e81339617ca3e72cbbb852bd2b"
+        },
+        {
+          "argv": [
+            "D:/iverilog/bin/vvp.exe",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\calibration-v1\\rtl\\data_corrupt\\sim.vvp"
+          ],
+          "returncode": 0,
+          "timeout": false,
+          "seconds": 0.046999999998661224,
+          "executable_sha256": "e2f442f4d5aa76e55c85c3ff77e4446fbfdb9946b7cfe8a2dff87f275da17b62"
+        }
+      ],
+      "observed_status": "FUNCTION_FAIL",
+      "observed_categories": [
+        "DATA_OR_ORDER_FAIL"
+      ],
+      "matched": true
+    },
+    {
+      "name": "never_input_ready",
+      "parameters": {
+        "LATENCY": 0,
+        "INVALID_STYLE": 0,
+        "MODE": 7
+      },
+      "expected_status": "FUNCTION_FAIL",
+      "expected_category": "LIVENESS_FAIL",
+      "commands": [
+        {
+          "argv": [
+            "D:/iverilog/bin/iverilog.exe",
+            "-g2012",
+            "-s",
+            "tb",
+            "-Ptb.LATENCY=0",
+            "-Ptb.INVALID_STYLE=0",
+            "-Ptb.MODE=7",
+            "-o",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\calibration-v1\\rtl\\never_input_ready\\sim.vvp",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\development_broadcast.v",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\tb.v"
+          ],
+          "returncode": 0,
+          "timeout": false,
+          "seconds": 0.14100000000325963,
+          "executable_sha256": "803b8844af2cc8ed70b5f08b07ffa749901280e81339617ca3e72cbbb852bd2b"
+        },
+        {
+          "argv": [
+            "D:/iverilog/bin/vvp.exe",
+            "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261011\\handshake-dev-v1\\calibration-v1\\rtl\\never_input_ready\\sim.vvp"
+          ],
+          "returncode": 0,
+          "timeout": false,
+          "seconds": 0.046000000002095476,
+          "executable_sha256": "e2f442f4d5aa76e55c85c3ff77e4446fbfdb9946b7cfe8a2dff87f275da17b62"
+        }
+      ],
+      "observed_status": "FUNCTION_FAIL",
+      "observed_categories": [
+        "LIVENESS_FAIL"
+      ],
+      "matched": true
+    }
+  ],
+  "all_expected_outcomes": true,
+  "new_model_calls": 0,
+  "source_plan": [
+    {
+      "beats": [
+        [
+          17,
+          0
+        ],
+        [
+          34,
+          1
+        ],
+        [
+          17,
+          1
+        ],
+        [
+          128,
+          0
+        ],
+        [
+          254,
+          1
+        ]
+      ],
+      "termination": "drain"
+    }
+  ],
+  "source_sha256": {
+    "checker.py": "d62f30aa84fffa108caff0373df3e92047cbe5d37f9d70b23d07d7f3e1de734a",
+    "fixtures.py": "53476732f1a7756e1302ac59bc6e842630725adaca165ae8be76397a955f0e49",
+    "calibrate.py": "db551dfa56f7ca8c89f09818f61408ab66735edab0c13c11400269de24ac6c0f",
+    "development_broadcast.v": "01a669323b97aea0ff3f7f02757808c4284fd2488294fe16269e330593476118",
+    "tb.v": "6608dfcdf6b293847267ef1e966982f211b7e2b8dfd27fb5f22f8b6a0650a01e",
+    "CONTRACT.md": "45aa588c90738eda156497ef2f77fae5965d68c9a6ef226ac5ca75dbb52152c9",
+    "test_checker.py": "672170b9ba75a794d9e59b2b9885af30053ebd925abdb9267bb3c5f9513faa32"
+  },
+  "seconds": 2.6089999999967404,
+  "tool_compile": 10,
+  "tool_simulate": 10,
+  "limitations": [
+    "Original same-author synthetic development, not external heldout or model improvement",
+    "Bounded80-cycle trace/8-cycle fair drain, no unbounded liveness",
+    "Native tests initial sync reset only; mid-reset semantic witness is hand trace",
+    "No IR/prompt/production runner integration or R7 rescoring"
+  ]
+}

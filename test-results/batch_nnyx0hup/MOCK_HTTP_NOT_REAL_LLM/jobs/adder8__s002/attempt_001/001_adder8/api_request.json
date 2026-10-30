@@ -1,0 +1,18 @@
+{
+  "endpoint": "http://127.0.0.1:49828/v1/chat/completions",
+  "payload": {
+    "model": "MOCK_NOT_REAL_LLM",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs."
+      },
+      {
+        "role": "user",
+        "content": "Implement module adder8(input wire [7:0] a, input wire [7:0] b, output wire [8:0] sum). Purely combinational unsigned addition. sum must contain the full 9-bit result a+b, including carry. No clock or state."
+      }
+    ],
+    "stream": false,
+    "max_tokens": 4096
+  }
+}

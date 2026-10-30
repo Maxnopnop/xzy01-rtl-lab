@@ -1,0 +1,9 @@
+{
+  "request_sha256": "258351de3e99076a03137814ad28902e46b9f81623a5300a0af44cd984064161",
+  "client_post_invocations": 1,
+  "http_status": 200,
+  "response_bytes": 1436,
+  "raw_body_sha256": "4438d2df06a18d0cd127a675e19609281cd32f4bf9f1d2938cfe3e21f3050c2d",
+  "body": "\n         \n{\"id\":\"gen-1792770264-rG0xYTzyiaCZYEFRhx2R\",\"object\":\"chat.completion\",\"created\":1792770264,\"model\":\"openai/gpt-5.6-terra\",\"provider\":\"OpenAI\",\"system_fingerprint\":null,\"service_tier\":\"default\",\"choices\":[{\"index\":0,\"logprobs\":null,\"finish_reason\":\"stop\",\"native_finish_reason\":\"completed\",\"message\":{\"role\":\"assistant\",\"content\":\"```systemverilog\\nmodule TopModule (\\n    input  clk,\\n    input  areset,\\n    input  bump_left,\\n    input  bump_right,\\n    output walk_left,\\n    output walk_right\\n);\\n\\n    logic walking_left;\\n\\n    always_ff @(posedge clk or posedge areset) begin\\n        if (areset)\\n            walking_left <= 1'b1;\\n        else if (walking_left) begin\\n            if (bump_left)\\n                walking_left <= 1'b0;\\n        end else begin\\n            if (bump_right)\\n                walking_left <= 1'b1;\\n        end\\n    end\\n\\n    assign walk_left  = walking_left;\\n    assign walk_right = ~walking_left;\\n\\nendmodule\\n```\",\"refusal\":null,\"reasoning\":null}}],\"usage\":{\"prompt_tokens\":401,\"completion_tokens\":154,\"total_tokens\":555,\"cost\":0.00265,\"is_byok\":false,\"prompt_tokens_details\":{\"cached_tokens\":0,\"cache_write_tokens\":0,\"audio_tokens\":0,\"video_tokens\":0},\"cost_details\":{\"upstream_inference_cost\":0.00265,\"upstream_inference_prompt_cost\":0.000802,\"upstream_inference_completions_cost\":0.001848},\"completion_tokens_details\":{\"reasoning_tokens\":0,\"image_tokens\":0,\"audio_tokens\":0}}}",
+  "outcome": "HTTP_OK"
+}

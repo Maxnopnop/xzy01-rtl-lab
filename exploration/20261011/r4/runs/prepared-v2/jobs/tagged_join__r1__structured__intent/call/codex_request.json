@@ -1,0 +1,22 @@
+{
+  "transport": "codex_exec_chatgpt_login",
+  "network_adapter": "configured_proxy_stdin_v3",
+  "prompt_transport": "stdin_utf8_file",
+  "prompt_bytes": 3038,
+  "prompt_sha256": "d8bc8bcfb5adb2467dd89f97f9a6d207e36007ac587732e60387ba1f087ce087",
+  "proxy_env_names": [
+    "HTTPS_PROXY",
+    "HTTP_PROXY"
+  ],
+  "adapter_sha256": "daed24ab563f3469005c8010dc43e422bd55d6e8d6e982ab008bd2e17fd6559f",
+  "requested_model": "gpt-5.6-sol",
+  "reasoning_effort": "low",
+  "prompt": "Module tagged_join\nClock clk and reset rst_n. Input fields MSB first [[\"av\", 1], [\"atag\", 1], [\"adata\", 2], [\"bv\", 1], [\"btag\", 1], [\"bdata\", 2], [\"flush\", 1]]; output fields MSB first [[\"pending_a\", 1], [\"pending_b\", 1], [\"joined\", 1], [\"result\", 2]]\nSpecification: Two-channel tagged rendezvous with replacement before comparison. Async active-low rst_n clears cached-valid flags, cached tags/data, joined pulse and result. Each rising edge clears joined. flush=1 has priority: clear both caches/flags and result, ignore new samples. Otherwise independently replace channel A cache when av=1 and B cache when bv=1, setting its valid flag; no sample holds that cache. Then compare the UPDATED caches, including both newly sampled values on the same edge. If both valid and tags equal, joined=1, result=updated_A_data XOR updated_B_data, and clear both valid flags; keep the cached tag/data values until replaced or flush. Otherwise keep flags/caches and the old result. Thus incompatible tags can wait indefinitely, a newer sample supersedes an old matching sample BEFORE comparison, and consecutive matching pairs may join on consecutive edges. Invalid input tags/data have no effect. pending_a/pending_b report registered valid flags, all outputs hold between edges; reset dominates flush/samples. All binary inputs are defined.\nPublic settled events [clk,rst_n,packed_input,packed_expected_output]:\n[[0,0,0,0],[1,0,511,0],[0,1,0,0],[0,1,288,0],[1,1,288,16],[1,1,223,16],[1,1,288,16],[0,1,288,16],[0,1,28,16],[1,1,28,24],[1,1,483,24],[1,1,28,24],[0,1,28,24],[0,1,480,24],[1,1,480,5],[1,1,31,5],[1,1,480,5],[0,1,480,5],[0,1,338,5],[1,1,338,7],[1,1,173,7],[1,1,338,7],[0,1,338,7],[0,1,371,7],[1,1,371,0],[1,1,140,0],[1,1,371,0],[0,1,371,0],[0,0,0,0],[1,0,511,0],[0,1,0,0],[0,1,288,0],[1,1,288,16],[1,1,223,16],[1,1,288,16],[0,1,288,16],[0,1,470,16],[1,1,470,24],[1,1,41,24],[1,1,470,24],[0,1,470,24],[0,1,26,24],[1,1,26,7],[1,1,485,7],[1,1,26,7],[0,1,26,7]]\nProduce an implementation intent contract, not RTL.\nOne binary-event clock; edge rising/falling; reset async_low/sync_low/none. Declare 1..16 unsigned registers width 1..8 and reset values. Parallel next expressions use old registers plus inputs/rst_n. Combinational output expressions cover every interface output. Assignments wrap to declared/output width. Expressions are integer constants 0..65535, names, + - & | ^, single == != < <= > >= comparison, and/or/not, and Python-style a if condition else b; no calls, attributes, arrays, loops or output-name references. Max intent UTF8 16KiB, each expression 4096 chars/512 AST nodes. Use all specification facts; do not add assumptions.\nReturn only one JSON object with exactly timing, registers, next, outputs dictionaries. timing has edge/reset strings; registers maps names to {\"width\":integer,\"reset\":integer}; next maps every register name to expression string; outputs maps every output name to expression string. No markdown fences or extra prose.\nDo not invoke tools, read files, run tests, or delegate. Reply directly.",
+  "temperature": null,
+  "seed": null,
+  "max_output_tokens": null,
+  "sampling_note": "CLI defaults; no temperature/seed/token limit sent",
+  "codex_executable_sha256": "d13914ced6c7af174d8d638db938284231227312104b06a25e9608c632a7daec",
+  "cli_auth": "ChatGPT (confirmed by login status)",
+  "server_model_snapshot": "Not exposed by exec JSONL; requested model is recorded without claiming a snapshot"
+}

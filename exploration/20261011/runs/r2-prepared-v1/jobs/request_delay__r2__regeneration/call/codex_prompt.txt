@@ -1,0 +1,139 @@
+Implement the given digital circuit in synthesizable SystemVerilog.
+Return only one complete module in a single ```systemverilog code block.
+Use exactly the specified module name and ports. Do not provide a testbench.
+No includes, preprocessor directives, strings, hierarchical references, extra
+modules, simulation system tasks, file IO, or attributes. Only $signed,
+$unsigned and $clog2 system functions are permitted. Do not use delays.
+The independent evaluator will supply all input stimuli and check outputs.
+
+Implement module request_delay(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. Initially idle with q=0. In idle, a sampled din=1 accepts a request. q remains 0 on that accepting edge, then is 1 for exactly the following clock cycle, regardless of din. At the next edge q returns to 0 and enters cooldown. In cooldown, remain there while din=1; an edge with din=0 returns to idle. The edge returning to idle does not accept a request.
+
+Use reg/localparam state encodings and case/if assignments for Icarus compatibility. Avoid enum-valued ternary assignments. Preserve the specified reset, overlap and cycle timing.
+
+Public specification examples shared across conditions:
+{
+  "clock_edge": "posedge",
+  "output_kind": "moore",
+  "reset": {
+    "kind": "async",
+    "active": 0,
+    "output": 0
+  },
+  "trace_convention": "Each trace starts after reset; output is sampled after every rising edge.",
+  "examples": [
+    {
+      "bits": "11111001100",
+      "outputs": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "bits": "100000",
+      "outputs": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "bits": "10010",
+      "outputs": [
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
+    }
+  ]
+}
+
+Candidate intermediate state table (may contain mistakes):
+{
+  "schema": 1,
+  "clock_edge": "posedge",
+  "output_kind": "moore",
+  "reset": {
+    "kind": "async",
+    "active": 0,
+    "state": "S0"
+  },
+  "states": [
+    {
+      "name": "S0",
+      "output": 0
+    },
+    {
+      "name": "S1",
+      "output": 0
+    },
+    {
+      "name": "S2",
+      "output": 1
+    },
+    {
+      "name": "S3",
+      "output": 0
+    }
+  ],
+  "transitions": [
+    {
+      "from": "S0",
+      "input": 0,
+      "to": "S0"
+    },
+    {
+      "from": "S0",
+      "input": 1,
+      "to": "S0"
+    },
+    {
+      "from": "S1",
+      "input": 0,
+      "to": "S2"
+    },
+    {
+      "from": "S1",
+      "input": 1,
+      "to": "S2"
+    },
+    {
+      "from": "S2",
+      "input": 0,
+      "to": "S3"
+    },
+    {
+      "from": "S2",
+      "input": 1,
+      "to": "S3"
+    },
+    {
+      "from": "S3",
+      "input": 0,
+      "to": "S0"
+    },
+    {
+      "from": "S3",
+      "input": 1,
+      "to": "S3"
+    }
+  ]
+}
+
+
+Implement the specification. You may correct the candidate table while producing RTL. There is no extra repair turn. Return only the specified RTL module.
+
+Do not invoke tools, read files, run tests, or delegate. Reply directly.

@@ -1,0 +1,38 @@
+{
+  "dataset": "NVlabs/verilog-eval",
+  "commit": "c498220d0a52248f8e3fdffe279075215bde2da6",
+  "task_directory": "dataset_spec-to-rtl",
+  "supplementary_dataset": "NONE; no RTLLM fallback/refill",
+  "metadata_order": "sort SHA256(UTF8(seed + newline + task_id)), tie task_id ascending",
+  "seed": "public-rag-holdout-v1/2026-10-23",
+  "max_new_candidates": 20,
+  "target_selected": 5,
+  "selection": "First up to5 statically eligible in fixed candidate order; review all20. No strata/ease preference, reseeding/replacement or RAG before selection freeze.",
+  "eligibility": [
+    "Original prompt/ref/test present and byte-bound to tree",
+    "Self-contained prompt with no missing diagram/table or material interface/timing/init contradiction requiring additions",
+    "No exact prior task or substantive functional near-duplicate; shared primitives alone are not duplication",
+    "Original TB/ref dependencies available; expected candidate single TopModule under frozen extraction policy"
+  ],
+  "not_selection_criteria": [
+    "RAG relevance/hits",
+    "anticipated model success",
+    "model outputs/scores",
+    "SAT/event support",
+    "implementation simplicity"
+  ],
+  "uncertainty": "Exclude unresolved material ambiguity or history overlap. Correlated upstream reference may be conditionally selected with explicit independence limitation.",
+  "http_max_requests": 60,
+  "raw_file_limit_bytes": 524288,
+  "raw_total_limit_bytes": 8388608,
+  "timeout_seconds": 30,
+  "retry": 0,
+  "prepare_model_calls": 0,
+  "prepare_eda_calls": 0,
+  "corpus_sources_max": 3,
+  "corpus_chunks_max": 60,
+  "actual_sources": 1,
+  "actual_chunks": 18,
+  "phase_order": "A exact lock/time -> B start binding A -> B candidate IDs -> new content receipts -> B selection lock -> C retrieval",
+  "prompt_assembly": "system exact A/system.txt; no_rag user original UTF8 bytes decoded; rag user original plus frozen context; no sample/model IDs in content"
+}

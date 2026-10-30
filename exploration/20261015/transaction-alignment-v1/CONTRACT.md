@@ -1,0 +1,11 @@
+# 冻结事务契约：开发准备，不是执行结果
+
+单时钟，8bit data+1bit last，两个消费者；posedge同步active-low reset（新TB用rst高有效表示，再记rst_n=1-rst）。只验证离散数字事件，不宣称异步reset、恢复/释放物理时序或采样间glitch。阶段B每轨迹80周期，首3周期reset；reset场景额外8/9周期reset，末16周期两消费者全ready。公平尾需至少8拍，有限完成义务不等于任意延迟/无界活性证明。
+
+外部源计划是独立载荷序列、驱动策略、reset日程和consumer-ready日程，不从DUT输出反推期望。每实现有自己的source driver cursor，offer_id=(epoch,ordinal)固定，尚未握手时保持valid和payload/last，接受后下一周期才推进。两实现可以在不同周期接受同一offer，不要求源波形或ready逐拍相等。11号场景故意破坏外部保持，预期INPUT_PROTOCOL_FAIL而不是DUT功能错误。10号是缺少reset取消契约的反事实descriptor，预先SPEC_AMBIGUOUS，不执行、不靠运行结果猜规格。
+
+每消费者必须按各自已接受输入顺序、字段相同、恰好一次交付，允许同拍先记输入接受再输出交付。输出valid允许先呈现，但相应consumer不能在该offer输入接受之前握手；任何提前消费不能在事后由未来输入抵消。valid且未ready的源/输出，下一非reset采样必须继续valid、字段相同，包括ready释放拍；valid=0载荷不解释，包括X/Z。非法控制、有效载荷未知或缺样为TRACE_INVALID，非函数失败；输入协议失败、规格含糊不进入功能正确率。
+
+reset行不计source或sink握手。此前已交付永不撤销；episode结束时分别取消每sink尚未交付的已接受offer及当前episode全部尚未接受offer，原始账留存。下epoch必须用新offer_id，不能消费旧token；取消不能用于截断最终drain来隐藏丢失。不同实现固定时间reset前接受/取消集合不同可以分别规格合法，但两者意图关系NOT_EVALUABLE，不移动reset或删掉不利事务强行对齐。
+
+spec判据沿用逐字复制的v1/v2开发checker（本目录spec_checker.py），其在线有界账已有独立核验；新transaction_relation.py负责额外offer/epoch账与IR/RTL关系。新harness/IR插桩/适配尚未执行，旧checker已验证不等于新组合已验证。人工IR/RTL、同作者不同推导手算仅development，不是自然模型/外部盲独立参考。

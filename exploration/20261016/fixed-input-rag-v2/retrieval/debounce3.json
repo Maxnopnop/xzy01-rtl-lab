@@ -1,0 +1,226 @@
+{
+  "query": "Implement module debounce3(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. Initially q=0. While q=0, require three consecutive sampled ones to change q to 1 on the third edge; any zero restarts this count. While q=1, require two consecutive sampled zeros to change q to 0 on the second edge; any one restarts this count. q otherwise holds.",
+  "query_sha256": "02ad944b79e5d06b3ef423bd779eb40c7dc02b24ccd1ee950ae109864f0123ea",
+  "query_terms": [
+    "active",
+    "any",
+    "asynchronous",
+    "change",
+    "clk",
+    "clock",
+    "consecutive",
+    "count",
+    "debounce3",
+    "din",
+    "edge",
+    "edges",
+    "holds",
+    "implement",
+    "initially",
+    "input",
+    "low",
+    "module",
+    "moore",
+    "one",
+    "ones",
+    "otherwise",
+    "output",
+    "outputs",
+    "q",
+    "require",
+    "reset",
+    "restarts",
+    "rising",
+    "rst_n",
+    "sampled",
+    "second",
+    "third",
+    "three",
+    "two",
+    "while",
+    "zero",
+    "zeros"
+  ],
+  "rankings": [
+    {
+      "chunk_id": "LR018",
+      "score": 5.434080066547983,
+      "matched": [
+        {
+          "term": "input",
+          "tf": 2,
+          "df": 1,
+          "contribution": 2.397649658310781
+        },
+        {
+          "term": "one",
+          "tf": 1,
+          "df": 1,
+          "contribution": 1.518215204118601
+        },
+        {
+          "term": "while",
+          "tf": 1,
+          "df": 1,
+          "contribution": 1.518215204118601
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR010",
+      "score": 3.263633430566704,
+      "matched": [
+        {
+          "term": "three",
+          "tf": 1,
+          "df": 1,
+          "contribution": 3.263633430566704
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR002",
+      "score": 3.007515341247334,
+      "matched": [
+        {
+          "term": "zero",
+          "tf": 1,
+          "df": 1,
+          "contribution": 3.007515341247334
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR006",
+      "score": 2.73884690359542,
+      "matched": [
+        {
+          "term": "reset",
+          "tf": 1,
+          "df": 1,
+          "contribution": 2.73884690359542
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR015",
+      "score": 2.129966987430874,
+      "matched": [
+        {
+          "term": "any",
+          "tf": 1,
+          "df": 1,
+          "contribution": 2.129966987430874
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR001",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR003",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR004",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR005",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR007",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR008",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR009",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR011",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR012",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR013",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR014",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR016",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR017",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR019",
+      "score": 0.0,
+      "matched": []
+    }
+  ],
+  "selected_ids": [
+    "LR018",
+    "LR010",
+    "LR002"
+  ],
+  "no_hit": false,
+  "selected_chunks": [
+    {
+      "id": "LR018",
+      "section": "Case Statements",
+      "start_line": 2245,
+      "end_line": 2252,
+      "text": "`casex` should not be used. `casex` implements a symmetric wildcard operator\nsuch that an `X` in the case expression may match one or more case items.\n`casez` only treats high-impedance states (`Z` or `?`) as a wildcard, and\nperforms exact matches for undriven `X` inputs. While this does not completely\nfix the problems with symmetric wildcard matching, it is harder to accidentally\nproduce a `Z` input than an `X` input, so this form is preferred.\n`case inside` does not treat either `X` or `Z` in the case expression as a\nwildcard, so this form is preferred over `casez`.",
+      "sha256": "38b511f542f8fcb62c5ad046b40e95a8c569d5e5b69bdce9dbe2cc6e393640e9",
+      "characters": 574,
+      "use": "General synthesizable language/style guidance, not task requirements or a solution"
+    },
+    {
+      "id": "LR010",
+      "section": "Combinational Logic",
+      "start_line": 2152,
+      "end_line": 2153,
+      "text": "Do not use three-state logic (`Z` state) to accomplish on-chip logic such as\nmuxing.",
+      "sha256": "f1044589bb7940ec2cb3d3cd0e6488dcce2a40da913569935f328601dce6cf4f",
+      "characters": 84,
+      "use": "General synthesizable language/style guidance, not task requirements or a solution"
+    },
+    {
+      "id": "LR002",
+      "section": "Delay Modeling",
+      "start_line": 1789,
+      "end_line": 1790,
+      "text": "Synthesizable design modules must be designed around a zero-delay simulation\nmethodology. All forms of `#delay`, including `#0`, are not permitted.",
+      "sha256": "f08d2bb9835cd2c97e28e5887e08b5b4a8a22fbf1363bff522ea521583dc5538",
+      "characters": 147,
+      "use": "General synthesizable language/style guidance, not task requirements or a solution"
+    }
+  ]
+}

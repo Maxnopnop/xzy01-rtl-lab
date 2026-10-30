@@ -1,0 +1,14 @@
+module ordered_retire(input clk,rst_n,flush,issue,input [1:0] issue_tag,input finish,input [1:0] finish_tag,output reg [1:0] count,output reg retired,output reg [1:0] retired_tag);
+reg [1:0] t0,t1;reg d0,d1;reg [1:0] nc,nt0,nt1;reg nd0,nd1;reg pop,push;
+always @* begin
+ pop=(count!=0 && d0);push=issue && count<2 && (count==0 || issue_tag!=t0) && (count<2 || issue_tag!=t1);
+ nc=count;nt0=t0;nt1=t1;nd0=d0;nd1=d1;
+ if(finish)begin if(count>0 && finish_tag==t0)nd0=1;if(count>1 && finish_tag==t1)nd1=1;end
+ if(pop)begin nc=count-1;nt0=t1;nd0=nd1;nt1=0;nd1=0;end
+ if(push)begin if(nc==0)begin nt0=issue_tag;nd0=0;end else begin nt1=issue_tag;nd1=0;end nc=nc+1;end
+end
+always @(posedge clk or negedge rst_n)begin
+ if(!rst_n || flush)begin count<=0;retired<=0;retired_tag<=0;t0<=0;t1<=0;d0<=0;d1<=0;end
+ else begin count<=nc;t0<=nt0;t1<=nt1;d0<=nd0;d1<=nd1;retired<=pop;if(pop)retired_tag<=t0;end
+end
+endmodule

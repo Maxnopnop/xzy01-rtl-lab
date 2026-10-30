@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "kind": "PAIRED_FIXED_IR_REPAIR_V1",
+  "stage": "A",
+  "mode": "offline",
+  "planned": 16,
+  "completed": 1,
+  "pending": 15,
+  "max_calls": 0,
+  "model_call_reservations": 0,
+  "model_turns_started": 0,
+  "real_generations": 0,
+  "infra_failures": 1,
+  "checker_inconsistencies": 0,
+  "groups": [
+    {
+      "model": "gpt-5.6-sol",
+      "arm": "control",
+      "planned": 4,
+      "completed": 1,
+      "passes": 0,
+      "counts": {
+        "INTERRUPTED": 1
+      },
+      "localizations": {
+        "INCONCLUSIVE": 1
+      },
+      "usage": {}
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "arm": "feedback",
+      "planned": 4,
+      "completed": 0,
+      "passes": 0,
+      "counts": {},
+      "localizations": {},
+      "usage": {}
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "arm": "control",
+      "planned": 4,
+      "completed": 0,
+      "passes": 0,
+      "counts": {},
+      "localizations": {},
+      "usage": {}
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "arm": "feedback",
+      "planned": 4,
+      "completed": 0,
+      "passes": 0,
+      "counts": {},
+      "localizations": {},
+      "usage": {}
+    }
+  ],
+  "pair_counts": {},
+  "pairs": [],
+  "results": [
+    {
+      "job_id": "m01__real_overlap__s001__control",
+      "task": "rt_sequence",
+      "case": "real_overlap",
+      "pair_id": "m01__real_overlap__s001",
+      "arm": "control",
+      "sample": 1,
+      "requested_model": "gpt-5.6-sol",
+      "mode": "offline",
+      "status": "INTERRUPTED",
+      "localization": "INCONCLUSIVE",
+      "message": "Unknown outcome; no refund or model retry",
+      "directory": "jobs/m01__real_overlap__s001__control"
+    }
+  ],
+  "limitations": [
+    "Conditional repair of fixed erroneous tables, not end-to-end generation accuracy.",
+    "Injected faults and one retained natural error must be reported separately.",
+    "Two repeats and a small number of families do not establish population efficacy.",
+    "Equal new-turn count; token use and cached input differ. No paired random seed is exposed."
+  ]
+}

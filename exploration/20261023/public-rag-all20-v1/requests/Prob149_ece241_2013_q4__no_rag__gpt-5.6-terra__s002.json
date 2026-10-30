@@ -1,0 +1,15 @@
+{
+  "model": "gpt-5.6-terra",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs."
+    },
+    {
+      "role": "user",
+      "content": "\nI would like you to implement a module named TopModule with the following\ninterface. All input and output ports are one bit unless otherwise\nspecified.\n\n - input  clk\n - input  reset\n - input  s (3 bits)\n - output fr2\n - output fr1\n - output fr0\n - output dfr\n\nA large reservior of water serves several users. In order to keep the\nlevel of water succificently high, three sensors are placed vertically at\n5-inch intervals. When the water level is above the highest sensor s[2],\nthe input flow rate should be zero. When the level is below the lowest\nsensor s[0], the flow rate should be at maximum (both Nominal flow valve\nand Supplemental flow valve opened). The flow rate when the level is\nbetween the upper and lower sensors is determined by two factors: the\nwater level and the level previous to the last sensor change. Each water\nlevel has a nominal flow rate associated with it as show in the table\nbelow. If the sensor change indicates that the previous level was lower\nthan the current level, the flow rate should be increased by opening the\nSupplemental flow valve (controlled by dfr).\n\n  Water Level           | Sensors Asserted | Nominal Flow Rate Inputs to be Asserted\n  Above s[2]            | s[0], s[1], s[2] | None\n  Between s[2] and s[1] | s[0], s[1]       | fr0\n  Between s[1] and s[0] | s[0]             | fr0, fr1\n  Below s[0]            | None             | fr0, fr1, fr2\n\nAlso include an active-high synchronous reset that resets the state\nmachine to a state equivalent to if the water level had been low for a\nlong time (no sensors asserted, and all four outputs asserted).\n\n"
+    }
+  ],
+  "stream": false,
+  "max_completion_tokens": 8192
+}

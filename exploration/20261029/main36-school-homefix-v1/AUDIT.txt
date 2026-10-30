@@ -1,0 +1,26 @@
+HOME alias repair, 2026-10-29
+
+School evidence: /staff/ee/smaap resolves to /dfs/usrhome/smaap.
+Old runner resolved __file__, but compared its parent against unresolved Path.home().
+All four reported 001 invocations stopped at this guard before work.mkdir or execute.
+These tracebacks are environment/preflight failures, not RTL failures or completed EDA.
+
+Versioned change: canonical HOME comparison, new staging roots and return branch namespace.
+Original task IDs and xzy01-console-single/<key> execution directories retained to prevent repeats.
+No source RTL, reference, testbench, SDC or synthesis Tcl changed. Old package hashes verified.
+Git remote get-url replaced by config --get remote.origin.url for old school Git.
+School commands use cd and git checkout, without git -C.
+
+Offline evidence:
+- alias-audit.json: 6 checks; old failure reproduced; fixed alias/normal HOME accepted;
+  duplicate execution and foreign stage rejected; Python 3.6 syntax; 432 shell scripts parsed.
+- offline-audit.json: 13 local Git checks including transfer-only push/fetch, unchanged HEAD/index,
+  duplicate upload suppression and refusal to overwrite differing staged data.
+- preservation-audit.json: original and new delivery hashes verified; synthetic FUNCTION_FAIL
+  return independently imported with failure intact. Synthetic fixture is not EDA evidence.
+- default-regression.log: 24 tests, 22 passed and 2 skipped (native Yosys unavailable).
+
+No models or commercial EDA invoked. School runtime verification remains pending.
+Published independent branch and exact commit recorded in published.json; original branch retained.
+Next: user stages/checks in school Linux, then manually launches only 001/vcs and inspects output.
+Never remove an existing execution directory or rerun an actual attempted tool job.

@@ -1,0 +1,35 @@
+Implement the given digital circuit in synthesizable SystemVerilog.
+Return only one complete module in a single ```systemverilog code block.
+Use exactly the specified module name and ports. Do not provide a testbench.
+No includes, preprocessor directives, strings, hierarchical references, extra
+modules, simulation system tasks, file IO, or attributes. Only $signed,
+$unsigned and $clog2 system functions are permitted. Do not use delays.
+The independent evaluator will supply all input stimuli and check outputs.
+
+Consider the following adder-subtractor with a zero flag:
+
+  synthesis verilog_input_version verilog_2001
+  module TopModule (
+      input do_sub,
+      input [7:0] a,
+      input [7:0] b,
+      output reg [7:0] out,
+      output reg result_is_zero
+  );
+
+      always @(*) begin
+          case (do_sub)
+            0: out = a+b;
+            1: out = a-b;
+          endcase
+
+          if (~out)
+              result_is_zero = 1;
+      end
+
+  endmodule
+
+Unfortunately, this module has a bug. Implement a new version of this
+module that fixes the bug.
+
+Reply directly with the RTL. Do not invoke tools, read files, run tests, or delegate.

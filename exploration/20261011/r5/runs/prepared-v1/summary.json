@@ -1,0 +1,355 @@
+{
+  "planned_unique_calls": 48,
+  "started": 21,
+  "statuses": {
+    "PASS": 20,
+    "UNKNOWN_INTERRUPTED": 1,
+    "PENDING": 27
+  },
+  "role_statuses": {
+    "intent": {
+      "PASS": 3,
+      "PENDING": 3
+    },
+    "first_rtl": {
+      "PASS": 3,
+      "PENDING": 3
+    },
+    "direct_first": {
+      "PASS": 3,
+      "PENDING": 3
+    },
+    "direct_second": {
+      "PASS": 3,
+      "PENDING": 3
+    },
+    "branch": {
+      "PASS": 8,
+      "UNKNOWN_INTERRUPTED": 1,
+      "PENDING": 15
+    }
+  },
+  "strategies": {
+    "structured_regeneration": {
+      "denominator": 6,
+      "passes": 2,
+      "statuses": {
+        "PASS": 2,
+        "UNKNOWN_INTERRUPTED": 1,
+        "PENDING": 3
+      },
+      "opportunities": 18,
+      "allocated_calls": 12,
+      "shared_full_usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cached_input_tokens": null,
+        "cache_write_input_tokens": null,
+        "reasoning_output_tokens": null
+      },
+      "shared_half_usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cached_input_tokens": null,
+        "cache_write_input_tokens": null,
+        "reasoning_output_tokens": null
+      }
+    },
+    "structured_feedback": {
+      "denominator": 6,
+      "passes": 2,
+      "statuses": {
+        "PASS": 2,
+        "PENDING": 4
+      },
+      "opportunities": 18,
+      "allocated_calls": 12,
+      "shared_full_usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cached_input_tokens": null,
+        "cache_write_input_tokens": null,
+        "reasoning_output_tokens": null
+      },
+      "shared_half_usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cached_input_tokens": null,
+        "cache_write_input_tokens": null,
+        "reasoning_output_tokens": null
+      }
+    },
+    "direct_regeneration": {
+      "denominator": 6,
+      "passes": 2,
+      "statuses": {
+        "PASS": 2,
+        "PENDING": 4
+      },
+      "opportunities": 18,
+      "allocated_calls": 12,
+      "shared_full_usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cached_input_tokens": null,
+        "cache_write_input_tokens": null,
+        "reasoning_output_tokens": null
+      },
+      "shared_half_usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cached_input_tokens": null,
+        "cache_write_input_tokens": null,
+        "reasoning_output_tokens": null
+      }
+    },
+    "direct_feedback": {
+      "denominator": 6,
+      "passes": 2,
+      "statuses": {
+        "PASS": 2,
+        "PENDING": 4
+      },
+      "opportunities": 18,
+      "allocated_calls": 12,
+      "shared_full_usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cached_input_tokens": null,
+        "cache_write_input_tokens": null,
+        "reasoning_output_tokens": null
+      },
+      "shared_half_usage": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cached_input_tokens": null,
+        "cache_write_input_tokens": null,
+        "reasoning_output_tokens": null
+      }
+    }
+  },
+  "comparisons": [
+    {
+      "case": "phase_snapshot__r1",
+      "representation": "structured",
+      "regeneration": "PASS",
+      "feedback": "PASS",
+      "effect": "no_change"
+    },
+    {
+      "case": "phase_snapshot__r2",
+      "representation": "structured",
+      "regeneration": "PASS",
+      "feedback": "PASS",
+      "effect": "no_change"
+    },
+    {
+      "case": "escape_frame__r1",
+      "representation": "structured",
+      "regeneration": "UNKNOWN_INTERRUPTED",
+      "feedback": "PENDING",
+      "effect": "inconclusive"
+    },
+    {
+      "case": "escape_frame__r2",
+      "representation": "structured",
+      "regeneration": "PENDING",
+      "feedback": "PENDING",
+      "effect": "inconclusive"
+    },
+    {
+      "case": "masked_ring_alloc__r1",
+      "representation": "structured",
+      "regeneration": "PENDING",
+      "feedback": "PENDING",
+      "effect": "inconclusive"
+    },
+    {
+      "case": "masked_ring_alloc__r2",
+      "representation": "structured",
+      "regeneration": "PENDING",
+      "feedback": "PENDING",
+      "effect": "inconclusive"
+    },
+    {
+      "case": "phase_snapshot__r1",
+      "representation": "direct",
+      "regeneration": "PASS",
+      "feedback": "PASS",
+      "effect": "no_change"
+    },
+    {
+      "case": "phase_snapshot__r2",
+      "representation": "direct",
+      "regeneration": "PASS",
+      "feedback": "PASS",
+      "effect": "no_change"
+    },
+    {
+      "case": "escape_frame__r1",
+      "representation": "direct",
+      "regeneration": "PENDING",
+      "feedback": "PENDING",
+      "effect": "inconclusive"
+    },
+    {
+      "case": "escape_frame__r2",
+      "representation": "direct",
+      "regeneration": "PENDING",
+      "feedback": "PENDING",
+      "effect": "inconclusive"
+    },
+    {
+      "case": "masked_ring_alloc__r1",
+      "representation": "direct",
+      "regeneration": "PENDING",
+      "feedback": "PENDING",
+      "effect": "inconclusive"
+    },
+    {
+      "case": "masked_ring_alloc__r2",
+      "representation": "direct",
+      "regeneration": "PENDING",
+      "feedback": "PENDING",
+      "effect": "inconclusive"
+    }
+  ],
+  "representation_pairs": [
+    {
+      "case": "phase_snapshot__r1",
+      "arm": "regeneration",
+      "structured": "PASS",
+      "direct": "PASS"
+    },
+    {
+      "case": "phase_snapshot__r1",
+      "arm": "feedback",
+      "structured": "PASS",
+      "direct": "PASS"
+    },
+    {
+      "case": "phase_snapshot__r2",
+      "arm": "regeneration",
+      "structured": "PASS",
+      "direct": "PASS"
+    },
+    {
+      "case": "phase_snapshot__r2",
+      "arm": "feedback",
+      "structured": "PASS",
+      "direct": "PASS"
+    },
+    {
+      "case": "escape_frame__r1",
+      "arm": "regeneration",
+      "structured": "UNKNOWN_INTERRUPTED",
+      "direct": "PENDING"
+    },
+    {
+      "case": "escape_frame__r1",
+      "arm": "feedback",
+      "structured": "PENDING",
+      "direct": "PENDING"
+    },
+    {
+      "case": "escape_frame__r2",
+      "arm": "regeneration",
+      "structured": "PENDING",
+      "direct": "PENDING"
+    },
+    {
+      "case": "escape_frame__r2",
+      "arm": "feedback",
+      "structured": "PENDING",
+      "direct": "PENDING"
+    },
+    {
+      "case": "masked_ring_alloc__r1",
+      "arm": "regeneration",
+      "structured": "PENDING",
+      "direct": "PENDING"
+    },
+    {
+      "case": "masked_ring_alloc__r1",
+      "arm": "feedback",
+      "structured": "PENDING",
+      "direct": "PENDING"
+    },
+    {
+      "case": "masked_ring_alloc__r2",
+      "arm": "regeneration",
+      "structured": "PENDING",
+      "direct": "PENDING"
+    },
+    {
+      "case": "masked_ring_alloc__r2",
+      "arm": "feedback",
+      "structured": "PENDING",
+      "direct": "PENDING"
+    }
+  ],
+  "effects": {
+    "no_change": 4,
+    "inconclusive": 8
+  },
+  "actual_unique_usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "cached_input_tokens": null,
+    "cache_write_input_tokens": null,
+    "reasoning_output_tokens": null
+  },
+  "cost": "UNKNOWN",
+  "observations": [
+    {
+      "id": "phase_snapshot__r1__structured__first",
+      "intent_spec": "PASS",
+      "rtl_spec": "PASS",
+      "rtl_intent": "PASS",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "phase_snapshot__r1__structured__feedback",
+      "intent_spec": "PASS",
+      "rtl_spec": "PASS",
+      "rtl_intent": "PASS",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "phase_snapshot__r1__structured__regeneration",
+      "intent_spec": "PASS",
+      "rtl_spec": "PASS",
+      "rtl_intent": "PASS",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "phase_snapshot__r2__structured__first",
+      "intent_spec": "PASS",
+      "rtl_spec": "PASS",
+      "rtl_intent": "PASS",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "phase_snapshot__r2__structured__regeneration",
+      "intent_spec": "PASS",
+      "rtl_spec": "PASS",
+      "rtl_intent": "PASS",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "phase_snapshot__r2__structured__feedback",
+      "intent_spec": "PASS",
+      "rtl_spec": "PASS",
+      "rtl_intent": "PASS",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "escape_frame__r1__structured__first",
+      "intent_spec": "PASS",
+      "rtl_spec": "PASS",
+      "rtl_intent": "PASS",
+      "category": "ALL_MATCH"
+    }
+  ],
+  "label": "OFFLINE fixtures never model evidence; reservation not confirmed provider usage"
+}

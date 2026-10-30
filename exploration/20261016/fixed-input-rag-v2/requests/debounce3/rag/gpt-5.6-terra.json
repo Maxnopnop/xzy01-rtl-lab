@@ -1,0 +1,15 @@
+{
+  "model": "gpt-5.6-terra",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs."
+    },
+    {
+      "role": "user",
+      "content": "Implement module debounce3(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. Initially q=0. While q=0, require three consecutive sampled ones to change q to 1 on the third edge; any zero restarts this count. While q=1, require two consecutive sampled zeros to change q to 0 on the second edge; any one restarts this count. q otherwise holds.\n\n<generic_reference_context>\nThe following are retrieved generic style-guide excerpts, not task requirements or solutions. The original specification above takes precedence. Do not infer extra task behavior from these excerpts.\nSource: lowRISC contributors, lowRISC Verilog Coding Style Guide, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Excerpts selected without text rewriting.\nPinned source: https://github.com/lowRISC/style-guides/blob/9c15ff5dce23eef969e00ab3715153967419eadd/VerilogCodingStyle.md\n[LR018; Case Statements; lines 2245-2252]\n`casex` should not be used. `casex` implements a symmetric wildcard operator\nsuch that an `X` in the case expression may match one or more case items.\n`casez` only treats high-impedance states (`Z` or `?`) as a wildcard, and\nperforms exact matches for undriven `X` inputs. While this does not completely\nfix the problems with symmetric wildcard matching, it is harder to accidentally\nproduce a `Z` input than an `X` input, so this form is preferred.\n`case inside` does not treat either `X` or `Z` in the case expression as a\nwildcard, so this form is preferred over `casez`.\n\n[LR010; Combinational Logic; lines 2152-2153]\nDo not use three-state logic (`Z` state) to accomplish on-chip logic such as\nmuxing.\n\n[LR002; Delay Modeling; lines 1789-1790]\nSynthesizable design modules must be designed around a zero-delay simulation\nmethodology. All forms of `#delay`, including `#0`, are not permitted.\n</generic_reference_context>\n"
+    }
+  ],
+  "stream": false,
+  "max_completion_tokens": 8192
+}

@@ -1,0 +1,162 @@
+{
+  "creator": "Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)",
+  "modules": {
+    "edge_detector": {
+      "attributes": {
+        "top": "00000000000000000000000000000001",
+        "src": "dut.sv:1.1-20.10"
+      },
+      "ports": {
+        "clk": {
+          "direction": "input",
+          "bits": [ 2 ]
+        },
+        "rst": {
+          "direction": "input",
+          "bits": [ 3 ]
+        },
+        "din": {
+          "direction": "input",
+          "bits": [ 4 ]
+        },
+        "pulse": {
+          "direction": "output",
+          "bits": [ 5 ]
+        }
+      },
+      "cells": {
+        "$auto$ff.cc:266:slice$93": {
+          "hide_name": 1,
+          "type": "$_SDFF_PP0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "dut.sv:10.5-18.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 4 ],
+            "Q": [ 6 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$94": {
+          "hide_name": 1,
+          "type": "$_SDFF_PP0_",
+          "parameters": {
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "src": "dut.sv:10.5-18.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output",
+            "R": "input"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 7 ],
+            "Q": [ 5 ],
+            "R": [ 3 ]
+          }
+        },
+        "$auto$simplemap.cc:38:simplemap_not$91": {
+          "hide_name": 1,
+          "type": "$_NOT_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "dut.sv:15.34-15.46"
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 6 ],
+            "Y": [ 8 ]
+          }
+        },
+        "$auto$simplemap.cc:83:simplemap_bitop$92": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "dut.sv:15.28-15.46"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 4 ],
+            "B": [ 8 ],
+            "Y": [ 7 ]
+          }
+        }
+      },
+      "netnames": {
+        "$and$dut.sv:15$3_Y": {
+          "hide_name": 1,
+          "bits": [ 7 ],
+          "attributes": {
+            "src": "dut.sv:15.28-15.46"
+          }
+        },
+        "$not$dut.sv:15$2_Y": {
+          "hide_name": 1,
+          "bits": [ 8 ],
+          "attributes": {
+            "src": "dut.sv:15.34-15.46"
+          }
+        },
+        "clk": {
+          "hide_name": 0,
+          "bits": [ 2 ],
+          "attributes": {
+            "src": "dut.sv:2.17-2.20"
+          }
+        },
+        "din": {
+          "hide_name": 0,
+          "bits": [ 4 ],
+          "attributes": {
+            "src": "dut.sv:4.17-4.20"
+          }
+        },
+        "din_history": {
+          "hide_name": 0,
+          "bits": [ 6 ],
+          "attributes": {
+            "src": "dut.sv:8.9-8.20"
+          }
+        },
+        "pulse": {
+          "hide_name": 0,
+          "bits": [ 5 ],
+          "attributes": {
+            "src": "dut.sv:5.17-5.22"
+          }
+        },
+        "rst": {
+          "hide_name": 0,
+          "bits": [ 3 ],
+          "attributes": {
+            "src": "dut.sv:3.17-3.20"
+          }
+        }
+      }
+    }
+  }
+}

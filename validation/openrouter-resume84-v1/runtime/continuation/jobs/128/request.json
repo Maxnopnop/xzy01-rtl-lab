@@ -1,0 +1,21 @@
+{
+  "model": "openai/gpt-5.6-luna",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs."
+    },
+    {
+      "role": "user",
+      "content": "\nI would like you to implement a module named TopModule with the following\ninterface. All input and output ports are one bit unless otherwise\nspecified.\n\n - input  p1a\n - input  p1b\n - input  p1c\n - input  p1d\n - input  p2a\n - input  p2b\n - input  p2c\n - input  p2d\n - output p1y\n - output p2y\n\nThe 7400-series integrated circuits are a series of digital chips with a\nfew gates each. The 7420 is a chip with two 4-input NAND gates. The\nmodule should implement the same functionality as the 7420 chip.\n\n\n\n<generic_reference_context>\nThese are generic style excerpts, not new task requirements or solutions. The original specification above takes precedence.\nSource: lowRISC contributors; CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/); unmodified selected prose.\nhttps://github.com/lowRISC/style-guides/blob/9c15ff5dce23eef969e00ab3715153967419eadd/VerilogCodingStyle.md\n[LR018; Case Statements; lines 2245-2252]\n`casex` should not be used. `casex` implements a symmetric wildcard operator\nsuch that an `X` in the case expression may match one or more case items.\n`casez` only treats high-impedance states (`Z` or `?`) as a wildcard, and\nperforms exact matches for undriven `X` inputs. While this does not completely\nfix the problems with symmetric wildcard matching, it is harder to accidentally\nproduce a `Z` input than an `X` input, so this form is preferred.\n`case inside` does not treat either `X` or `Z` in the case expression as a\nwildcard, so this form is preferred over `casez`.\n\n[LR015; Case Statements; lines 2189-2192]\n  - a `default:` statement is **always** included in order to avoid accidental\n  inference of latches, even if all cases are covered. In simulation, a case\n  expression that evaluates to `X` will not match any case and will behave as a\n  latch, leading to different behavior than synthesis if no default is specified.\n\n[LR010; Combinational Logic; lines 2152-2153]\nDo not use three-state logic (`Z` state) to accomplish on-chip logic such as\nmuxing.\n</generic_reference_context>\r\n"
+    }
+  ],
+  "stream": false,
+  "provider": {
+    "only": [
+      "openai"
+    ],
+    "allow_fallbacks": false,
+    "require_parameters": true
+  }
+}

@@ -1,0 +1,22 @@
+Implement module ordered_retire with clk,rst_n and ports {"inputs": [["flush", 1], ["issue", 1], ["issue_tag", 2], ["finish", 1], ["finish_tag", 2]], "outputs": [["count", 2], ["retired", 1], ["retired_tag", 2]]}
+Specification:
+Two-slot ordered retirement queue with distinct 2-bit tags. Async active-low reset clears all state and outputs. Only rising edges act. flush has priority: clear queue and retired_tag and retired pulse. Otherwise retired is one iff the OLD head exists and was already finished; retire that head and update retired_tag, else retired=0 and hold retired_tag. finish marks any OLD queued matching tag finished; unknown tags ignored, and a just-issued tag cannot finish on that same edge. issue appends unfinished issue_tag iff OLD count<2 and issue_tag differs from all OLD queued tags; otherwise ignored. A full OLD queue rejects issue even when retiring; an OLD duplicate rejects issue even if that tag retires. Accepted issue appends after survivors. count reflects occupied slots. Completion can occur out of order; retirement stays in order, at most one per edge. Falling edges and stable clock input/reset-release changes hold all outputs; reset assertion immediately clears at either clock level.
+Public ordered binary events (clk,rst_n,packed input,packed output; ports packed in listed order; sample after #2):
+[{"clk":0,"rst_n":0,"input":0,"expected":0,"category":"reset_low"},{"clk":0,"rst_n":1,"input":0,"expected":0,"category":"release_low"},{"clk":0,"rst_n":1,"input":40,"expected":0,"category":"low_hold"},{"clk":1,"rst_n":1,"input":40,"expected":8,"category":"rising"},{"clk":1,"rst_n":1,"input":41,"expected":8,"category":"high_hold"},{"clk":0,"rst_n":1,"input":40,"expected":8,"category":"falling"},{"clk":0,"rst_n":1,"input":48,"expected":8,"category":"low_hold"},{"clk":1,"rst_n":1,"input":48,"expected":16,"category":"rising"},{"clk":1,"rst_n":1,"input":49,"expected":16,"category":"high_hold"},{"clk":0,"rst_n":1,"input":48,"expected":16,"category":"falling"},{"clk":0,"rst_n":1,"input":6,"expected":16,"category":"low_hold"},{"clk":1,"rst_n":1,"input":6,"expected":16,"category":"rising"},{"clk":1,"rst_n":1,"input":7,"expected":16,"category":"high_hold"},{"clk":0,"rst_n":1,"input":6,"expected":16,"category":"falling"},{"clk":0,"rst_n":1,"input":5,"expected":16,"category":"low_hold"},{"clk":1,"rst_n":1,"input":5,"expected":16,"category":"rising"},{"clk":1,"rst_n":1,"input":4,"expected":16,"category":"high_hold"},{"clk":0,"rst_n":1,"input":5,"expected":16,"category":"falling"},{"clk":0,"rst_n":1,"input":56,"expected":16,"category":"low_hold"},{"clk":1,"rst_n":1,"input":56,"expected":13,"category":"rising"},{"clk":1,"rst_n":1,"input":57,"expected":13,"category":"high_hold"},{"clk":0,"rst_n":1,"input":56,"expected":13,"category":"falling"},{"clk":0,"rst_n":1,"input":0,"expected":13,"category":"low_hold"},{"clk":1,"rst_n":1,"input":0,"expected":6,"category":"rising"},{"clk":1,"rst_n":1,"input":1,"expected":6,"category":"high_hold"},{"clk":0,"rst_n":1,"input":0,"expected":6,"category":"falling"},{"clk":0,"rst_n":1,"input":0,"expected":6,"category":"low_hold"},{"clk":1,"rst_n":1,"input":0,"expected":2,"category":"rising"},{"clk":1,"rst_n":1,"input":1,"expected":2,"category":"high_hold"},{"clk":0,"rst_n":1,"input":0,"expected":2,"category":"falling"},{"clk":0,"rst_n":0,"input":0,"expected":0,"category":"end_reset"}]
+Earlier RTL (untrusted):
+module ordered_retire(input clk,rst_n,flush,issue,input [1:0] issue_tag,input finish,input [1:0] finish_tag,output reg [1:0] count,output reg retired,output reg [1:0] retired_tag);
+reg [1:0] t0,t1;reg d0,d1;reg [1:0] nc,nt0,nt1;reg nd0,nd1;reg pop,push;
+always @* begin
+ pop=(count!=0 && d0);push=issue && count<2 && (count==0 || issue_tag!=t0) && (count<2 || issue_tag!=t1);
+ nc=count;nt0=t0;nt1=t1;nd0=d0;nd1=d1;
+ if(finish)begin if(count>0 && finish_tag==t0)nd0=1;if(count>1 && finish_tag==t1)nd1=1;end
+ if(pop)begin nc=count-1;nt0=t1;nd0=nd1;nt1=0;nd1=0;end
+ if(push)begin if(nc==0)begin nt0=issue_tag;nd0=0;end else begin nt1=issue_tag;nd1=0;end nc=nc+1;end
+end
+always @(posedge clk or negedge rst_n)begin
+ if(!rst_n || flush)begin count<=0;retired<=0;retired_tag<=0;t0<=0;t1<=0;d0<=0;d1<=0;end
+ else begin count<=nc;t0<=nt0;t1<=nt1;d0<=nd0;d1<=nd1;retired<=pop;if(pop)retired_tag<=t0;end
+end
+endmodule
+
+Independently reconsider the full specification and generate a complete improved RTL. No execution results are supplied. Return only RTL; no tools/tb/delays.

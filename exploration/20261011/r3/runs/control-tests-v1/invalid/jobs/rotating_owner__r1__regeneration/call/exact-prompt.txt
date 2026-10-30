@@ -1,0 +1,19 @@
+Implement the given digital circuit in synthesizable SystemVerilog.
+Return only one complete module in a single ```systemverilog code block.
+Use exactly the specified module name and ports. Do not provide a testbench.
+No includes, preprocessor directives, strings, hierarchical references, extra
+modules, simulation system tasks, file IO, or attributes. Only $signed,
+$unsigned and $clog2 system functions are permitted. Do not use delays.
+The independent evaluator will supply all input stimuli and check outputs.
+Module: rotating_owner
+Interface: input clk, rst_n; input req0, input req1, input retire; output grant0, output grant1
+Specification: Two-client rotating ownership arbiter with registered one-hot grants. Async active-low rst_n clears both grants and initializes tie preference to client0. When idle before a rising edge, select a requesting client, breaking simultaneous requests by current preference. retire while idle is ignored. Once owned, hold that grant even if its request drops or the other client requests, until retire=1 at a rising edge. On retire set tie preference to the opposite of the retiring owner and immediately select among current req0/req1 using that new preference; if neither requests become idle. A retired owner can regain ownership when it is the sole requester. Preference persists through idle edges; it changes only on retire of a real owner. Both requesting with retire every edge must alternate owners after the first grant. Registered grants hold between edges; reset dominates retire and requests.
+Public input concatenation, MSB first: req0,req1,retire
+Public expected output concatenation, MSB first: grant0,grant1
+Public event examples [clk,rst_n,packed_input,packed_expected_output], check after settling:
+[[0,0,0,0],[1,0,0,0],[0,1,0,0],[0,1,6,0],[1,1,6,2],[1,1,1,2],[1,1,6,2],[0,1,6,2],[0,1,7,2],[1,1,7,1],[1,1,0,1],[1,1,7,1],[0,1,7,1],[0,1,7,1],[1,1,7,2],[1,1,0,2],[1,1,7,2],[0,1,7,2],[0,1,7,2],[1,1,7,1],[1,1,0,1],[1,1,7,1],[0,1,7,1],[0,1,7,1],[1,1,7,2],[1,1,0,2],[1,1,7,2],[0,1,7,2],[0,0,7,0],[0,0,0,0],[0,1,7,0],[0,1,7,0],[0,1,0,0],[1,1,0,0],[1,1,7,0],[1,1,0,0],[0,1,0,0],[0,1,1,0],[1,1,1,0],[1,1,6,0],[1,1,1,0],[0,1,1,0],[0,1,6,0],[1,1,6,2],[1,1,1,2],[1,1,6,2],[0,1,6,2],[0,0,0,0],[1,0,0,0],[0,1,0,0],[0,1,4,0],[1,1,4,2],[1,1,3,2],[1,1,4,2],[0,1,4,2],[0,1,2,2],[1,1,2,2],[1,1,5,2],[1,1,2,2],[0,1,2,2],[0,1,0,2],[1,1,0,2],[1,1,7,2],[1,1,0,2],[0,1,0,2],[0,1,3,2],[1,1,3,1],[1,1,4,1],[1,1,3,1],[0,1,3,1],[0,1,1,1],[1,1,1,0],[1,1,6,0],[1,1,1,0],[0,1,1,0],[0,0,1,0],[0,0,6,0],[0,1,1,0],[0,1,1,0],[0,1,6,0],[1,1,6,2],[1,1,1,2],[1,1,6,2],[0,1,6,2],[0,0,0,0],[1,0,0,0],[0,1,0,0],[0,1,2,0],[1,1,2,1],[1,1,5,1],[1,1,2,1],[0,1,2,1],[0,1,0,1],[1,1,0,1],[1,1,7,1],[1,1,0,1],[0,1,0,1],[0,1,1,1],[1,1,1,0],[1,1,6,0],[1,1,1,0],[0,1,1,0],[0,1,6,0],[1,1,6,2],[1,1,1,2],[1,1,6,2],[0,1,6,2],[0,1,7,2],[1,1,7,1],[1,1,0,1],[1,1,7,1],[0,1,7,1],[0,0,7,0],[0,0,0,0],[0,1,7,0],[0,1,7,0]]
+
+Shared first candidate (untrusted; may contain errors):
+not valid RTL
+Implement the specification. You may correct the candidate while producing RTL. Return only the specified module. No further repair turn.
+Do not invoke tools, read files, run tests, or delegate. Reply directly.

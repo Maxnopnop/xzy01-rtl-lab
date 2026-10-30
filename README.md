@@ -1,5 +1,7 @@
 # XZY01 RTL Lab
 
+总控核查入口：[FYP 状态、Proposal 缺口与近期优先级（2026-10-09）](FYP_STATUS_AUDIT_20261009.md)。当前优先完成已有 DC/Genus 单例真实综合与回传审阅；已配置 Nangate typical 与 smoke SDC，尚无真实综合回传。
+
 按钮窗口：双击 **Open-Lab.cmd**。可配置模型、隐藏输入 API 密钥、粘贴完整原文提示词、设置预算、启动实验及收取学校结果。打开窗口不调用 API。
 
 新增第4页：[DC / Genus 学校综合](ECE_SYNTHESIS_GUIDE.md)。保留独立库/约束配置、单案例打包、回传与报告；学校启动已验证，缺库和审核后的 SDC 时阻止实际综合。
@@ -180,7 +182,7 @@ tcsh run_vcs.csh
 python school_bridge.py import --package exports\vcs-check --returned returned\vcs-check
 ```
 
-导入会核对原始源码/向量哈希、nonce、检查数、退出码、工具版本与日志，并保存独立的 `commercial_results.json`。不能把合成测试凭据当作学校运行记录。**这些脚本和导入器已本地验证接口逻辑，但尚未在学校 VCS/Xcelium 上实际运行。** 手动运行没有自动墙钟超时，需要在 VDI 中观察并按需停止。
+导入会核对原始源码/向量哈希、nonce、检查数、退出码、工具版本与日志，并保存独立的 `commercial_results.json`。不能把合成测试凭据当作学校运行记录。2026-10-08 同一个历史 FSM 已在学校 VCS/Xcelium 实际运行通过，各 1840 次检查、0 错误，证据见本文开头；其他案例仍需逐项验证。本节旧手动脚本没有自动墙钟超时，需要在 VDI 中观察并按需停止。
 
 未来获准使用 SSH 或专用服务器后，可增加 transport 层上传、执行、取消和下载；仍复用同一任务规格与判题协议。详见 [ARCHITECTURE.md](ARCHITECTURE.md)。
 

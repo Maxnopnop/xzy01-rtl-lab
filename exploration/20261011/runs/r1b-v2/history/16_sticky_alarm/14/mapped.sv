@@ -1,0 +1,39 @@
+module gate(
+    input  clk,
+    input  rst_n,
+    input  din,
+    output q
+);
+
+    localparam [1:0] S0 = 2'b00;
+    localparam [1:0] S1 = 2'b01;
+    localparam [1:0] S2 = 2'b10;
+
+    reg [1:0] state;
+
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            state <= S0;
+        end else begin
+            case (state)
+                S0: begin
+                    if (din)
+                        state <= S1;
+                    else
+                        state <= S0;
+                end
+                S1: begin
+                    if (din)
+                        state <= S2;
+                    else
+                        state <= S0;
+                end
+                S2: state <= S2;
+                default: state <= S0;
+            endcase
+        end
+    end
+
+    assign q = (state == S2);
+
+endmodule

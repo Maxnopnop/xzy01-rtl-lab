@@ -1,0 +1,1 @@
+module bad( INVALID; endmodule

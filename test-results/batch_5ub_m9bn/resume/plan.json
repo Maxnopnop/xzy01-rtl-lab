@@ -1,0 +1,107 @@
+{
+  "schema": 2,
+  "created_utc": "2026-10-09T08:52:37.643083+00:00",
+  "config": {
+    "mode": "offline",
+    "model": "",
+    "base_url": "",
+    "api_key_env": "LLM_API_KEY",
+    "allow_anonymous": false,
+    "codex_executable": null,
+    "codex_reasoning": "low",
+    "temperature": null,
+    "seed": null,
+    "max_output_tokens": 4096,
+    "token_field": "max_tokens",
+    "api_timeout": 180,
+    "compile_timeout": 15,
+    "sim_timeout": 10,
+    "iverilog": null,
+    "vvp": null,
+    "rtl_dir": "/mnt/e/Codex/2026-09-25/xzy01-using-llm-for-digital-chip-2/outputs/rtl-batch/examples/correct",
+    "label": "OFFLINE_FIXTURE",
+    "backend": "icarus",
+    "suite": "custom",
+    "task_dir": "tasks",
+    "synthesis": "none",
+    "yosys": null,
+    "synth_timeout": 60
+  },
+  "tasks": [
+    {
+      "id": "adder8",
+      "module": "adder8",
+      "checks": 65536,
+      "spec": "Implement module adder8(input wire [7:0] a, input wire [7:0] b, output wire [8:0] sum). Purely combinational unsigned addition. sum must contain the full 9-bit result a+b, including carry. No clock or state.",
+      "tb_sha256": "c22243b768f841920d968019e2579b14245c4b9fbab08752d003565381fbff8b",
+      "category": "combinational",
+      "origin": "local_handwritten_v1"
+    },
+    {
+      "id": "encoder4",
+      "module": "encoder4",
+      "checks": 16,
+      "spec": "Implement module encoder4(input wire [3:0] req, output reg valid, output reg [1:0] index). Purely combinational priority encoder. valid is 1 iff any req bit is 1. index is the highest asserted bit number (bit 3 has highest priority). For req=0, valid=0 and index=0. Assign outputs for every input.",
+      "tb_sha256": "a1aab6ae268c4e7bce2a1fddc560ca9704252b167edb6d0e3962127d1fe6a425",
+      "category": "combinational",
+      "origin": "local_handwritten_v1"
+    },
+    {
+      "id": "counter4",
+      "module": "counter4",
+      "checks": 181,
+      "spec": "Implement module counter4(input wire clk, input wire rst, input wire en, output reg [3:0] q). On each rising clk edge: if active-high synchronous rst is 1, set q=0; else if en=1 increment modulo 16; else hold. Reset has priority over enable. No asynchronous reset. State before the first reset edge is unspecified.",
+      "tb_sha256": "4efaff4a6d490ff75fea91b7e24f8d3fa2e8f89a699c61c6dcf32e4de83d8334",
+      "category": "sequential",
+      "origin": "local_handwritten_v1"
+    }
+  ],
+  "jobs": [
+    {
+      "id": "adder8__s001",
+      "task": "adder8",
+      "sample": 1
+    },
+    {
+      "id": "encoder4__s001",
+      "task": "encoder4",
+      "sample": 1
+    },
+    {
+      "id": "counter4__s001",
+      "task": "counter4",
+      "sample": 1
+    },
+    {
+      "id": "adder8__s002",
+      "task": "adder8",
+      "sample": 2
+    },
+    {
+      "id": "encoder4__s002",
+      "task": "encoder4",
+      "sample": 2
+    },
+    {
+      "id": "counter4__s002",
+      "task": "counter4",
+      "sample": 2
+    }
+  ],
+  "source_hashes": {
+    "batch.py": "caf3dfdf2cdd753a72c574f43e17ca04bcb9bcefc21a2dd59686a7a1a0489c10",
+    "rtl_lab.py": "ab4f386a3bb5aa84bb729f18fe3b19e43399ba66dc567e297328d1c046432702",
+    "backends.py": "ff9d4e787157a57b4c6c506c52fc4c798e388a0ca1cf694df2b50d79c76de5b0",
+    "codex_adapter.py": "33a6080d45ff8f36c6441afeda8ba53d6e5204bd0bd0ad33a8d38c165d63af9d",
+    "api_worker.py": "3696301af3270a50d959773e15476700395a9703aa2a8185d0f2a669b695efc8",
+    "synthesis.py": "0bf4a414c99cc0700b3ecc25f640fe7f4f3ddc22d1ab4ab234264d402fd221c3",
+    "tasks/manifest.json": "fc1f917d5cdd12b44c0a00027ae15de0f8c9e7cb8261ae4546493f5c7fe9a67f"
+  },
+  "fixture_hashes": {
+    "adder8": "ef8c9d8903fc3efed7b0c057bf3260baa89699803b41ca4d7ae2c9ed662f1e80",
+    "encoder4": "1afdbc1f489da5969238f1c3b285b9501d36e617ab9ee61dacdfa3771ae0baff",
+    "counter4": "1eecdf1526603830ac92b039f2c985c01d3771357adc4dace71d8472d1b780df"
+  },
+  "max_calls": 6,
+  "note": "Local custom suite; offline repeats are not model samples."
+}

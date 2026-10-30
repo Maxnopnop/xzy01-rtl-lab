@@ -1,0 +1,29 @@
+{
+  "status": "PASS_OFFLINE_USER_REVIEW_AND_GATE_CHECKS",
+  "complete_original_prompt_blocks": 2,
+  "source_bindings": 12,
+  "gate_fixture_cases": [
+    {
+      "case": "wrong_hash",
+      "exit_code": 2,
+      "result": {
+        "status": "BLOCKED_PLAN_HASH_MISMATCH",
+        "calls": 0
+      }
+    },
+    {
+      "case": "matching_hash",
+      "exit_code": 2,
+      "result": {
+        "status": "BLOCKED_NO_EXECUTION_AUTHORIZATION_OR_VALIDATED_TRANSPORT",
+        "calls": 0,
+        "blockers": [
+          "OFFLINE_FIXTURE_ONLY"
+        ]
+      }
+    }
+  ],
+  "experiment_model_calls": 0,
+  "eda_calls": 0,
+  "scope": "summary bytes and fail-closed gate only; not actual service prompt or EDA verification"
+}

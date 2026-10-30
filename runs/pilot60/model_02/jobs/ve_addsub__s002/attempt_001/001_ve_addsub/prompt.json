@@ -1,0 +1,8 @@
+{
+  "mode": "codex",
+  "request": {
+    "model": "gpt-5.6-terra",
+    "prompt": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs.\n\nConsider the following adder-subtractor with a zero flag:\n\n  synthesis verilog_input_version verilog_2001\n  module TopModule (\n      input do_sub,\n      input [7:0] a,\n      input [7:0] b,\n      output reg [7:0] out,\n      output reg result_is_zero\n  );\n\n      always @(*) begin\n          case (do_sub)\n            0: out = a+b;\n            1: out = a-b;\n          endcase\n\n          if (~out)\n              result_is_zero = 1;\n      end\n\n  endmodule\n\nUnfortunately, this module has a bug. Implement a new version of this\nmodule that fixes the bug.",
+    "note": "Exact CLI prompt and arguments are saved in codex_request.json and codex.json"
+  }
+}

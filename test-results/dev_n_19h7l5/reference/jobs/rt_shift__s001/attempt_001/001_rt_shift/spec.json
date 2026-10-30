@@ -1,0 +1,35 @@
+{
+  "id": "rt_shift",
+  "module": "right_shifter",
+  "checks": 1280,
+  "spec": "Please act as a professional verilog designer.\n\nImplement a right shifter. The module performs an 8-bit right shift on a 1-bit input by first initializing the q register to 0. On each rising edge of the clock, the module shifts the contents of the q register to the right by one bit and inserts the new input bit d into the most significant position of the register.\n\nModule name:  \n    right_shifter    \n\nInput ports:\n    clk: Clock signal used for synchronous operation.\n    d: Input signal to be right-shifted.\n\nOutput ports:\n    q: Output signal representing the result of the right shift operation.\n\nImplementation:\nThe register is defined as reg [7:0] q and initialized to 0 using the initial statement. The value of q is right-shifted by 1 bit using the >> operator: q <= (q >> 1).\nThe most significant bit (q[7]) of the register is assigned the value of the input signal (d): q[7] <= d.\n\nGive me the complete code.\n\nDevelopment-subset clarification (part of the fixed specification): Output q is 8 bits. The specified initial q=0 is required; this generic synthesis check retains initialization and makes no ASIC power-up guarantee.",
+  "category": "sequential",
+  "split": "development",
+  "family": "shiftregister",
+  "benchmark": "RTLLM",
+  "suite_version": "dev10-v1",
+  "synthesis_eligible": true,
+  "origin": {
+    "repository": "https://github.com/hkust-zhiyao/RTLLM",
+    "commit": "51ed553d0ffd32797a1a0a13e051656bf302c81f",
+    "path": "Memory/Shifter/right_shifter",
+    "license": "MIT",
+    "files": {
+      "upstream/RTLLM/right_shifter/design_description.txt": "ec6b1076293e4d554ef55d2e6e8f14e04ee9949118baa88689e960c2caf83cda",
+      "upstream/RTLLM/right_shifter/verified_right_shifter.v": "f8bf2e2eb843f69221cafa21de06d349ec772f95c9336460312b27f1d92e4299",
+      "upstream/RTLLM/right_shifter/testbench.v": "e3fa4fa4dbe08b79c1742ce1b8fb4a863da7cd510ae1d4f08e4399ca9746c790"
+    }
+  },
+  "adaptations": [
+    "Independent deterministic vector oracle replaces upstream TB; upstream TB archived.",
+    "Reference module renamed; timescale directive removed.",
+    "Output q is 8 bits. The specified initial q=0 is required; this generic synthesis check retains initialization and makes no ASIC power-up guarantee."
+  ],
+  "mutation": "Wrong shift direction",
+  "reference_sha256": "547d1fd22da552c8e6c23c1be730602b58f28e77af8288cee352fe682d2a03a2",
+  "mutant_sha256": "bbee0047e1707cbbb53ff5c4ba522ef1a63bc8ba4e1889bfe295c47ff5ac365d",
+  "tb_sha256": "317bd44b09d6e386c553285adc6ff088ff99215393b965eafced38f91ad2173b",
+  "assets": {
+    "rt_shift.hex": "686adbf96be798f4d0a2e43e15bdea6139a47cd5bb8e95d142b0f66a691152cd"
+  }
+}

@@ -1,0 +1,406 @@
+{
+  "query": "Please act as a professional Verilog designer.\n\nImplement a module of a sequence detector to detect a specific 4-bit binary sequence 1001.\n\nModule name:\n    sequence_detector\n\nInput ports:\n    clk: Clock signal to synchronize the detector.\n    rst_n: Active-low reset signal to initialize the state machine.\n    data_in: 1-bit binary input signal to feed the bitstream for sequence detection.\n\nOutput ports:\n    sequence_detected: 1-bit output signal that is set high when the specific sequence is detected.\n    \nInternal logic:\n    State Machine: The sequence detector uses a finite state machine (FSM) with the following states:\n    IDLE: Waiting for the start of the sequence.\n    S1: The first bit of the desired sequence is detected.\n    S2: The second bit of the desired sequence is detected.\n    S3: The third bit of the desired sequence is detected.\n    S4: The fourth and final bit of the desired sequence is detected, and the output sequence_detected is set high.\n\nImplementation:\n    -FSM Design: The FSM transitions through states based on the bitstream data_in. On each clock cycle, the detector checks for a match of the specific sequence.\n\n    -Sequence Detection: The module checks the input data_in and transitions between states. Once the complete sequence is detected, sequence_detected is asserted.\n\n    -Reset Behavior: When rst_n is low, the state machine returns to the IDLE state, resetting the detection process.\n\nDevelopment-subset clarification (part of the fixed specification): Use asynchronous active-low reset, overlapping detections, and a Moore output high after the edge consuming the final 1; matching the archived reference.",
+  "query_sha256": "ae2dffdf42472024419f147497a696c4adb572126e97c2b6b33c056c8ae1dea1",
+  "query_terms": [
+    "act",
+    "active",
+    "archived",
+    "asserted",
+    "asynchronous",
+    "based",
+    "behavior",
+    "between",
+    "binary",
+    "bit",
+    "bitstream",
+    "checks",
+    "clarification",
+    "clk",
+    "clock",
+    "complete",
+    "consuming",
+    "cycle",
+    "data_in",
+    "design",
+    "designer",
+    "desired",
+    "detect",
+    "detected",
+    "detection",
+    "detections",
+    "detector",
+    "development",
+    "edge",
+    "feed",
+    "final",
+    "finite",
+    "first",
+    "fixed",
+    "following",
+    "fourth",
+    "fsm",
+    "high",
+    "idle",
+    "implement",
+    "implementation",
+    "initialize",
+    "input",
+    "internal",
+    "logic",
+    "low",
+    "machine",
+    "match",
+    "matching",
+    "module",
+    "moore",
+    "name",
+    "once",
+    "output",
+    "overlapping",
+    "part",
+    "please",
+    "ports",
+    "process",
+    "professional",
+    "reference",
+    "reset",
+    "resetting",
+    "returns",
+    "rst_n",
+    "s1",
+    "s2",
+    "s3",
+    "s4",
+    "second",
+    "sequence",
+    "sequence_detected",
+    "sequence_detector",
+    "set",
+    "signal",
+    "specific",
+    "specification",
+    "start",
+    "state",
+    "states",
+    "subset",
+    "synchronize",
+    "third",
+    "through",
+    "transitions",
+    "uses",
+    "verilog",
+    "waiting"
+  ],
+  "rankings": [
+    {
+      "chunk_id": "LR007",
+      "score": 8.704061003262044,
+      "matched": [
+        {
+          "term": "first",
+          "tf": 1,
+          "df": 1,
+          "contribution": 2.6917689322402474
+        },
+        {
+          "term": "logic",
+          "tf": 1,
+          "df": 10,
+          "contribution": 0.6287542065413011
+        },
+        {
+          "term": "set",
+          "tf": 1,
+          "df": 1,
+          "contribution": 2.6917689322402474
+        },
+        {
+          "term": "specific",
+          "tf": 1,
+          "df": 1,
+          "contribution": 2.6917689322402474
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR018",
+      "score": 7.799845547312678,
+      "matched": [
+        {
+          "term": "high",
+          "tf": 1,
+          "df": 1,
+          "contribution": 1.4478732306989897
+        },
+        {
+          "term": "input",
+          "tf": 2,
+          "df": 1,
+          "contribution": 2.2996556405251556
+        },
+        {
+          "term": "match",
+          "tf": 1,
+          "df": 2,
+          "contribution": 1.1565702146905528
+        },
+        {
+          "term": "matching",
+          "tf": 1,
+          "df": 1,
+          "contribution": 1.4478732306989897
+        },
+        {
+          "term": "states",
+          "tf": 1,
+          "df": 1,
+          "contribution": 1.4478732306989897
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR006",
+      "score": 6.749698882319299,
+      "matched": [
+        {
+          "term": "logic",
+          "tf": 1,
+          "df": 10,
+          "contribution": 0.6172265716997789
+        },
+        {
+          "term": "reset",
+          "tf": 1,
+          "df": 1,
+          "contribution": 2.642417804238559
+        },
+        {
+          "term": "state",
+          "tf": 4,
+          "df": 2,
+          "contribution": 3.4900545063809605
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR016",
+      "score": 5.165114205436563,
+      "matched": [
+        {
+          "term": "behavior",
+          "tf": 3,
+          "df": 2,
+          "contribution": 3.1643792470478207
+        },
+        {
+          "term": "verilog",
+          "tf": 1,
+          "df": 2,
+          "contribution": 2.000734958388742
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR010",
+      "score": 4.266963042793113,
+      "matched": [
+        {
+          "term": "logic",
+          "tf": 3,
+          "df": 10,
+          "contribution": 1.0396137986159448
+        },
+        {
+          "term": "state",
+          "tf": 2,
+          "df": 2,
+          "contribution": 3.227349244177168
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR005",
+      "score": 3.3242132524230663,
+      "matched": [
+        {
+          "term": "logic",
+          "tf": 1,
+          "df": 10,
+          "contribution": 0.45162421228380634
+        },
+        {
+          "term": "process",
+          "tf": 2,
+          "df": 1,
+          "contribution": 2.87258904013926
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR015",
+      "score": 3.2640621774763483,
+      "matched": [
+        {
+          "term": "behavior",
+          "tf": 1,
+          "df": 2,
+          "contribution": 1.6320310887381742
+        },
+        {
+          "term": "match",
+          "tf": 1,
+          "df": 2,
+          "contribution": 1.6320310887381742
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR009",
+      "score": 3.159750813405919,
+      "matched": [
+        {
+          "term": "logic",
+          "tf": 2,
+          "df": 10,
+          "contribution": 0.8819233485671484
+        },
+        {
+          "term": "verilog",
+          "tf": 1,
+          "df": 2,
+          "contribution": 2.2778274648387704
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR002",
+      "score": 2.909095903096425,
+      "matched": [
+        {
+          "term": "design",
+          "tf": 1,
+          "df": 1,
+          "contribution": 2.909095903096425
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR011",
+      "score": 0.7557946213330441,
+      "matched": [
+        {
+          "term": "logic",
+          "tf": 1,
+          "df": 10,
+          "contribution": 0.7557946213330441
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR004",
+      "score": 0.739199510373983,
+      "matched": [
+        {
+          "term": "logic",
+          "tf": 1,
+          "df": 10,
+          "contribution": 0.739199510373983
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR008",
+      "score": 0.7291195170507013,
+      "matched": [
+        {
+          "term": "logic",
+          "tf": 2,
+          "df": 10,
+          "contribution": 0.7291195170507013
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR001",
+      "score": 0.72331750497868,
+      "matched": [
+        {
+          "term": "logic",
+          "tf": 1,
+          "df": 10,
+          "contribution": 0.72331750497868
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR003",
+      "score": 0.6935165294429357,
+      "matched": [
+        {
+          "term": "logic",
+          "tf": 1,
+          "df": 10,
+          "contribution": 0.6935165294429357
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR012",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR013",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR014",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR017",
+      "score": 0.0,
+      "matched": []
+    }
+  ],
+  "selected_ids": [
+    "LR007",
+    "LR018",
+    "LR006"
+  ],
+  "no_hit": false,
+  "selected_chunks": [
+    {
+      "id": "LR007",
+      "section": "Sequential Logic (Registers)",
+      "start_line": 1860,
+      "end_line": 1862,
+      "text": "Exception: It is fine to set default values first, then specific values.\nHowever, it is preferred to do this work in a separate combinational block with\nexplicit blocking assignments.",
+      "sha256": "95cb4e3e557c9542e94391c30886dee9c2e07f8caa40eafb0993a9810c70456d",
+      "characters": 183,
+      "use": "General synthesizable language/style guidance, not task requirements or a solution"
+    },
+    {
+      "id": "LR018",
+      "section": "Case Statements",
+      "start_line": 2245,
+      "end_line": 2252,
+      "text": "`casex` should not be used. `casex` implements a symmetric wildcard operator\nsuch that an `X` in the case expression may match one or more case items.\n`casez` only treats high-impedance states (`Z` or `?`) as a wildcard, and\nperforms exact matches for undriven `X` inputs. While this does not completely\nfix the problems with symmetric wildcard matching, it is harder to accidentally\nproduce a `Z` input than an `X` input, so this form is preferred.\n`case inside` does not treat either `X` or `Z` in the case expression as a\nwildcard, so this form is preferred over `casez`.",
+      "sha256": "38b511f542f8fcb62c5ad046b40e95a8c569d5e5b69bdce9dbe2cc6e393640e9",
+      "characters": 574,
+      "use": "General synthesizable language/style guidance, not task requirements or a solution"
+    },
+    {
+      "id": "LR006",
+      "section": "Sequential Logic (Registers)",
+      "start_line": 1818,
+      "end_line": 1820,
+      "text": "Sequential statements for state assignments should only contain reset values and\na next-state to state assignment, use a separate combinational-only block to\ngenerate that next-state value.",
+      "sha256": "e21796acf251a073061ee4e103ad61404d82cbafca689dc2df125e2c0df8e647",
+      "characters": 189,
+      "use": "General synthesizable language/style guidance, not task requirements or a solution"
+    }
+  ]
+}

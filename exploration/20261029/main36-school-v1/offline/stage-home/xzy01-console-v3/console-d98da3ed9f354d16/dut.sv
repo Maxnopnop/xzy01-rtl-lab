@@ -1,0 +1,54 @@
+module TopModule (
+    input  logic        clk,
+    input  logic        load,
+    input  logic [511:0] data,
+    output logic [511:0] q
+);
+    logic [511:0] state, next_state;
+
+    // Compute next state based on Rule 110 for each cell
+    always_comb begin
+        // Treat boundaries as zero
+        for (int i = 0; i < 512; i++) begin
+            logic left  = (i == 511) ? 1'b0 : state[i+1];
+            logic center = state[i];
+            logic right = (i == 0) ? 1'b0 : state[i-1];
+            // The pattern as 3-bits: {left, center, right}
+            logic [2:0] pattern = {left, center, right};
+
+            // Rule 110 output for given pattern (pattern -> next bit):
+            // 111 -> 0
+            // 110 -> 1
+            // 101 -> 1
+            // 100 -> 0
+            // 011 -> 1
+            // 010 -> 1
+            // 001 -> 1
+            // 000 -> 0
+
+            case (pattern)
+                3'b111: next_state[i] = 1'b0;
+                3'b110: next_state[i] = 1'b1;
+                3'b101: next_state[i] = 1'b1;
+                3'b100: next_state[i] = 1'b0;
+                3'b011: next_state[i] = 1'b1;
+                3'b010: next_state[i] = 1'b1;
+                3'b001: next_state[i] = 1'b1;
+                3'b000: next_state[i] = 1'b0;
+                default: next_state[i] = 1'b0; // default safe
+            endcase
+        end
+    end
+
+    // State register update with synchronous load
+    always_ff @(posedge clk) begin
+        if (load) begin
+            state <= data;
+        end else begin
+            state <= next_state;
+        end
+    end
+
+    assign q = state;
+
+endmodule

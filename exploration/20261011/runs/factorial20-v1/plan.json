@@ -1,0 +1,1800 @@
+{
+  "kind": "DEVELOPMENT_FIXED_COMPOUND_IR_FACTORIAL_V1",
+  "created_utc": "2026-10-10T23:55:08.725807+00:00",
+  "model": "gpt-5.6-sol",
+  "max_calls": 20,
+  "workers": 2,
+  "api_timeout": 180,
+  "reasoning": "low",
+  "retries": 0,
+  "jobs": [
+    {
+      "id": "rt_sequence__v1__control",
+      "task": "rt_sequence",
+      "profile": "v1",
+      "arm": "control",
+      "spec": {
+        "id": "rt_sequence",
+        "module": "sequence_detector",
+        "checks": 1840,
+        "spec": "Please act as a professional Verilog designer.\n\nImplement a module of a sequence detector to detect a specific 4-bit binary sequence 1001.\n\nModule name:\n    sequence_detector\n\nInput ports:\n    clk: Clock signal to synchronize the detector.\n    rst_n: Active-low reset signal to initialize the state machine.\n    data_in: 1-bit binary input signal to feed the bitstream for sequence detection.\n\nOutput ports:\n    sequence_detected: 1-bit output signal that is set high when the specific sequence is detected.\n    \nInternal logic:\n    State Machine: The sequence detector uses a finite state machine (FSM) with the following states:\n    IDLE: Waiting for the start of the sequence.\n    S1: The first bit of the desired sequence is detected.\n    S2: The second bit of the desired sequence is detected.\n    S3: The third bit of the desired sequence is detected.\n    S4: The fourth and final bit of the desired sequence is detected, and the output sequence_detected is set high.\n\nImplementation:\n    -FSM Design: The FSM transitions through states based on the bitstream data_in. On each clock cycle, the detector checks for a match of the specific sequence.\n\n    -Sequence Detection: The module checks the input data_in and transitions between states. Once the complete sequence is detected, sequence_detected is asserted.\n\n    -Reset Behavior: When rst_n is low, the state machine returns to the IDLE state, resetting the detection process.\n\nDevelopment-subset clarification (part of the fixed specification): Use asynchronous active-low reset, overlapping detections, and a Moore output high after the edge consuming the final 1; matching the archived reference.",
+        "category": "fsm",
+        "split": "development",
+        "family": "sequence1001",
+        "benchmark": "RTLLM",
+        "suite_version": "dev10-v1",
+        "synthesis_eligible": true,
+        "origin": {
+          "repository": "https://github.com/hkust-zhiyao/RTLLM",
+          "commit": "51ed553d0ffd32797a1a0a13e051656bf302c81f",
+          "path": "Control/Finite State Machine/sequence_detector",
+          "license": "MIT",
+          "files": {
+            "upstream/RTLLM/sequence_detector/design_description.txt": "eaa043dd75258c345f8e2f21817c2454a38923e476e50523a5e41bff8ef93b13",
+            "upstream/RTLLM/sequence_detector/verified_sequence_detector.v": "573bbf1a2e9afb77960131b731cd6aae85b3508a09465c7589a131b517401f23",
+            "upstream/RTLLM/sequence_detector/testbench.v": "0d5e90177af40049a62b48bf63ae8ff113435115a7544d6727a272123583bcae"
+          }
+        },
+        "adaptations": [
+          "Independent deterministic vector oracle replaces upstream TB; upstream TB archived.",
+          "Reference module renamed; timescale directive removed.",
+          "Use asynchronous active-low reset, overlapping detections, and a Moore output high after the edge consuming the final 1; matching the archived reference."
+        ],
+        "mutation": "Breaks sequence prefix transition",
+        "reference_sha256": "6acb22c07d9e2bef30be3a8ed023a845da6a565b1b5f13938ea90d3bbb0ae010",
+        "mutant_sha256": "a18f13b6c6d5d4c88681df2b627226c00f7343f4a88e2d0cda5b230004ef933d",
+        "tb_sha256": "6abb900b5f8cae1ea0ab98321c1830bd58f4132c75efb676b9cc4250a5e90e4b",
+        "assets": {
+          "rt_sequence.hex": "6f656556d2940534fe990384d84ed61cb498a683531b24ee599374d98aec4c40"
+        },
+        "ports": {
+          "reset_port": "rst_n",
+          "input_port": "data_in",
+          "output_port": "sequence_detected",
+          "active": 0,
+          "examples": [
+            {
+              "bits": "1001",
+              "outputs": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "bits": "1011",
+              "outputs": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "bits": "1001001",
+              "outputs": [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        "public_contract": {
+          "clock_edge": "posedge",
+          "output_kind": "moore",
+          "reset": {
+            "kind": "async",
+            "active": 0,
+            "output": 0
+          },
+          "trace_convention": "Each trace starts after reset. List output after each rising edge; reset is then inactive.",
+          "examples": [
+            {
+              "bits": "1001",
+              "outputs": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "bits": "1011",
+              "outputs": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "bits": "1001001",
+              "outputs": [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        "bank_directory": "rt_sequence"
+      },
+      "ir": "{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":0},{\"name\":\"S2\",\"output\":0},{\"name\":\"S3\",\"output\":0},{\"name\":\"S4\",\"output\":1}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S2\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S1\"},{\"from\":\"S2\",\"input\":0,\"to\":\"S3\"},{\"from\":\"S2\",\"input\":1,\"to\":\"S1\"},{\"from\":\"S3\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S3\",\"input\":1,\"to\":\"S4\"},{\"from\":\"S4\",\"input\":0,\"to\":\"S2\"},{\"from\":\"S4\",\"input\":1,\"to\":\"S1\"}]}",
+      "prompt": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs.\n\nPlease act as a professional Verilog designer.\n\nImplement a module of a sequence detector to detect a specific 4-bit binary sequence 1001.\n\nModule name:\n    sequence_detector\n\nInput ports:\n    clk: Clock signal to synchronize the detector.\n    rst_n: Active-low reset signal to initialize the state machine.\n    data_in: 1-bit binary input signal to feed the bitstream for sequence detection.\n\nOutput ports:\n    sequence_detected: 1-bit output signal that is set high when the specific sequence is detected.\n    \nInternal logic:\n    State Machine: The sequence detector uses a finite state machine (FSM) with the following states:\n    IDLE: Waiting for the start of the sequence.\n    S1: The first bit of the desired sequence is detected.\n    S2: The second bit of the desired sequence is detected.\n    S3: The third bit of the desired sequence is detected.\n    S4: The fourth and final bit of the desired sequence is detected, and the output sequence_detected is set high.\n\nImplementation:\n    -FSM Design: The FSM transitions through states based on the bitstream data_in. On each clock cycle, the detector checks for a match of the specific sequence.\n\n    -Sequence Detection: The module checks the input data_in and transitions between states. Once the complete sequence is detected, sequence_detected is asserted.\n\n    -Reset Behavior: When rst_n is low, the state machine returns to the IDLE state, resetting the detection process.\n\nDevelopment-subset clarification (part of the fixed specification): Use asynchronous active-low reset, overlapping detections, and a Moore output high after the edge consuming the final 1; matching the archived reference.\n\nUse reg/localparam state encodings and case/if assignments for Icarus compatibility. Avoid enum-valued ternary assignments. Preserve the specified reset, overlap and cycle timing.\n\nPublic specification examples shared across conditions:\n{\n  \"clock_edge\": \"posedge\",\n  \"output_kind\": \"moore\",\n  \"reset\": {\n    \"kind\": \"async\",\n    \"active\": 0,\n    \"output\": 0\n  },\n  \"trace_convention\": \"Each trace starts after reset. List output after each rising edge; reset is then inactive.\",\n  \"examples\": [\n    {\n      \"bits\": \"1001\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        1\n      ]\n    },\n    {\n      \"bits\": \"1011\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        0\n      ]\n    },\n    {\n      \"bits\": \"1001001\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        1,\n        0,\n        0,\n        1\n      ]\n    }\n  ]\n}\n\nCandidate intermediate state table (may contain mistakes):\n{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":0},{\"name\":\"S2\",\"output\":0},{\"name\":\"S3\",\"output\":0},{\"name\":\"S4\",\"output\":1}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S2\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S1\"},{\"from\":\"S2\",\"input\":0,\"to\":\"S3\"},{\"from\":\"S2\",\"input\":1,\"to\":\"S1\"},{\"from\":\"S3\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S3\",\"input\":1,\"to\":\"S4\"},{\"from\":\"S4\",\"input\":0,\"to\":\"S2\"},{\"from\":\"S4\",\"input\":1,\"to\":\"S1\"}]}\n\nImplement the specification. You may correct the candidate table while producing RTL. There is no extra repair turn. Return only the specified RTL module.\n\nDo not invoke tools, read files, run tests, or delegate. Reply directly.",
+      "case_id": "rt_sequence__edge_00_S1__edge_01_S0"
+    },
+    {
+      "id": "rt_sequence__v1__feedback",
+      "task": "rt_sequence",
+      "profile": "v1",
+      "arm": "feedback",
+      "spec": {
+        "id": "rt_sequence",
+        "module": "sequence_detector",
+        "checks": 1840,
+        "spec": "Please act as a professional Verilog designer.\n\nImplement a module of a sequence detector to detect a specific 4-bit binary sequence 1001.\n\nModule name:\n    sequence_detector\n\nInput ports:\n    clk: Clock signal to synchronize the detector.\n    rst_n: Active-low reset signal to initialize the state machine.\n    data_in: 1-bit binary input signal to feed the bitstream for sequence detection.\n\nOutput ports:\n    sequence_detected: 1-bit output signal that is set high when the specific sequence is detected.\n    \nInternal logic:\n    State Machine: The sequence detector uses a finite state machine (FSM) with the following states:\n    IDLE: Waiting for the start of the sequence.\n    S1: The first bit of the desired sequence is detected.\n    S2: The second bit of the desired sequence is detected.\n    S3: The third bit of the desired sequence is detected.\n    S4: The fourth and final bit of the desired sequence is detected, and the output sequence_detected is set high.\n\nImplementation:\n    -FSM Design: The FSM transitions through states based on the bitstream data_in. On each clock cycle, the detector checks for a match of the specific sequence.\n\n    -Sequence Detection: The module checks the input data_in and transitions between states. Once the complete sequence is detected, sequence_detected is asserted.\n\n    -Reset Behavior: When rst_n is low, the state machine returns to the IDLE state, resetting the detection process.\n\nDevelopment-subset clarification (part of the fixed specification): Use asynchronous active-low reset, overlapping detections, and a Moore output high after the edge consuming the final 1; matching the archived reference.",
+        "category": "fsm",
+        "split": "development",
+        "family": "sequence1001",
+        "benchmark": "RTLLM",
+        "suite_version": "dev10-v1",
+        "synthesis_eligible": true,
+        "origin": {
+          "repository": "https://github.com/hkust-zhiyao/RTLLM",
+          "commit": "51ed553d0ffd32797a1a0a13e051656bf302c81f",
+          "path": "Control/Finite State Machine/sequence_detector",
+          "license": "MIT",
+          "files": {
+            "upstream/RTLLM/sequence_detector/design_description.txt": "eaa043dd75258c345f8e2f21817c2454a38923e476e50523a5e41bff8ef93b13",
+            "upstream/RTLLM/sequence_detector/verified_sequence_detector.v": "573bbf1a2e9afb77960131b731cd6aae85b3508a09465c7589a131b517401f23",
+            "upstream/RTLLM/sequence_detector/testbench.v": "0d5e90177af40049a62b48bf63ae8ff113435115a7544d6727a272123583bcae"
+          }
+        },
+        "adaptations": [
+          "Independent deterministic vector oracle replaces upstream TB; upstream TB archived.",
+          "Reference module renamed; timescale directive removed.",
+          "Use asynchronous active-low reset, overlapping detections, and a Moore output high after the edge consuming the final 1; matching the archived reference."
+        ],
+        "mutation": "Breaks sequence prefix transition",
+        "reference_sha256": "6acb22c07d9e2bef30be3a8ed023a845da6a565b1b5f13938ea90d3bbb0ae010",
+        "mutant_sha256": "a18f13b6c6d5d4c88681df2b627226c00f7343f4a88e2d0cda5b230004ef933d",
+        "tb_sha256": "6abb900b5f8cae1ea0ab98321c1830bd58f4132c75efb676b9cc4250a5e90e4b",
+        "assets": {
+          "rt_sequence.hex": "6f656556d2940534fe990384d84ed61cb498a683531b24ee599374d98aec4c40"
+        },
+        "ports": {
+          "reset_port": "rst_n",
+          "input_port": "data_in",
+          "output_port": "sequence_detected",
+          "active": 0,
+          "examples": [
+            {
+              "bits": "1001",
+              "outputs": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "bits": "1011",
+              "outputs": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "bits": "1001001",
+              "outputs": [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        "public_contract": {
+          "clock_edge": "posedge",
+          "output_kind": "moore",
+          "reset": {
+            "kind": "async",
+            "active": 0,
+            "output": 0
+          },
+          "trace_convention": "Each trace starts after reset. List output after each rising edge; reset is then inactive.",
+          "examples": [
+            {
+              "bits": "1001",
+              "outputs": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "bits": "1011",
+              "outputs": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "bits": "1001001",
+              "outputs": [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        "bank_directory": "rt_sequence"
+      },
+      "ir": "{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":0},{\"name\":\"S2\",\"output\":0},{\"name\":\"S3\",\"output\":0},{\"name\":\"S4\",\"output\":1}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S2\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S1\"},{\"from\":\"S2\",\"input\":0,\"to\":\"S3\"},{\"from\":\"S2\",\"input\":1,\"to\":\"S1\"},{\"from\":\"S3\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S3\",\"input\":1,\"to\":\"S4\"},{\"from\":\"S4\",\"input\":0,\"to\":\"S2\"},{\"from\":\"S4\",\"input\":1,\"to\":\"S1\"}]}",
+      "prompt": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs.\n\nPlease act as a professional Verilog designer.\n\nImplement a module of a sequence detector to detect a specific 4-bit binary sequence 1001.\n\nModule name:\n    sequence_detector\n\nInput ports:\n    clk: Clock signal to synchronize the detector.\n    rst_n: Active-low reset signal to initialize the state machine.\n    data_in: 1-bit binary input signal to feed the bitstream for sequence detection.\n\nOutput ports:\n    sequence_detected: 1-bit output signal that is set high when the specific sequence is detected.\n    \nInternal logic:\n    State Machine: The sequence detector uses a finite state machine (FSM) with the following states:\n    IDLE: Waiting for the start of the sequence.\n    S1: The first bit of the desired sequence is detected.\n    S2: The second bit of the desired sequence is detected.\n    S3: The third bit of the desired sequence is detected.\n    S4: The fourth and final bit of the desired sequence is detected, and the output sequence_detected is set high.\n\nImplementation:\n    -FSM Design: The FSM transitions through states based on the bitstream data_in. On each clock cycle, the detector checks for a match of the specific sequence.\n\n    -Sequence Detection: The module checks the input data_in and transitions between states. Once the complete sequence is detected, sequence_detected is asserted.\n\n    -Reset Behavior: When rst_n is low, the state machine returns to the IDLE state, resetting the detection process.\n\nDevelopment-subset clarification (part of the fixed specification): Use asynchronous active-low reset, overlapping detections, and a Moore output high after the edge consuming the final 1; matching the archived reference.\n\nUse reg/localparam state encodings and case/if assignments for Icarus compatibility. Avoid enum-valued ternary assignments. Preserve the specified reset, overlap and cycle timing.\n\nPublic specification examples shared across conditions:\n{\n  \"clock_edge\": \"posedge\",\n  \"output_kind\": \"moore\",\n  \"reset\": {\n    \"kind\": \"async\",\n    \"active\": 0,\n    \"output\": 0\n  },\n  \"trace_convention\": \"Each trace starts after reset. List output after each rising edge; reset is then inactive.\",\n  \"examples\": [\n    {\n      \"bits\": \"1001\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        1\n      ]\n    },\n    {\n      \"bits\": \"1011\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        0\n      ]\n    },\n    {\n      \"bits\": \"1001001\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        1,\n        0,\n        0,\n        1\n      ]\n    }\n  ]\n}\n\nCandidate intermediate state table (may contain mistakes):\n{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":0},{\"name\":\"S2\",\"output\":0},{\"name\":\"S3\",\"output\":0},{\"name\":\"S4\",\"output\":1}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S2\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S1\"},{\"from\":\"S2\",\"input\":0,\"to\":\"S3\"},{\"from\":\"S2\",\"input\":1,\"to\":\"S1\"},{\"from\":\"S3\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S3\",\"input\":1,\"to\":\"S4\"},{\"from\":\"S4\",\"input\":0,\"to\":\"S2\"},{\"from\":\"S4\",\"input\":1,\"to\":\"S1\"}]}\n\nImplement the specification. You may correct the candidate table while producing RTL. There is no extra repair turn. Return only the specified RTL module.\n\nExecutable results on the already-public contract:\n{\n  \"status\": \"PUBLIC_CHECK_FAIL\",\n  \"errors\": [\n    {\n      \"bits\": \"1001\",\n      \"expected\": [\n        0,\n        0,\n        0,\n        1\n      ],\n      \"observed\": [\n        0,\n        0,\n        0,\n        0\n      ]\n    },\n    {\n      \"bits\": \"1001001\",\n      \"expected\": [\n        0,\n        0,\n        0,\n        1,\n        0,\n        0,\n        1\n      ],\n      \"observed\": [\n        0,\n        0,\n        0,\n        0,\n        0,\n        0,\n        1\n      ]\n    }\n  ],\n  \"scope\": \"Only disclosed examples/reset/schema; private tests were not consulted.\"\n}\n\nDo not invoke tools, read files, run tests, or delegate. Reply directly.",
+      "case_id": "rt_sequence__edge_00_S1__edge_01_S0"
+    },
+    {
+      "id": "rt_sequence__v2__control",
+      "task": "rt_sequence",
+      "profile": "v2",
+      "arm": "control",
+      "spec": {
+        "id": "rt_sequence",
+        "module": "sequence_detector",
+        "checks": 1840,
+        "spec": "Please act as a professional Verilog designer.\n\nImplement a module of a sequence detector to detect a specific 4-bit binary sequence 1001.\n\nModule name:\n    sequence_detector\n\nInput ports:\n    clk: Clock signal to synchronize the detector.\n    rst_n: Active-low reset signal to initialize the state machine.\n    data_in: 1-bit binary input signal to feed the bitstream for sequence detection.\n\nOutput ports:\n    sequence_detected: 1-bit output signal that is set high when the specific sequence is detected.\n    \nInternal logic:\n    State Machine: The sequence detector uses a finite state machine (FSM) with the following states:\n    IDLE: Waiting for the start of the sequence.\n    S1: The first bit of the desired sequence is detected.\n    S2: The second bit of the desired sequence is detected.\n    S3: The third bit of the desired sequence is detected.\n    S4: The fourth and final bit of the desired sequence is detected, and the output sequence_detected is set high.\n\nImplementation:\n    -FSM Design: The FSM transitions through states based on the bitstream data_in. On each clock cycle, the detector checks for a match of the specific sequence.\n\n    -Sequence Detection: The module checks the input data_in and transitions between states. Once the complete sequence is detected, sequence_detected is asserted.\n\n    -Reset Behavior: When rst_n is low, the state machine returns to the IDLE state, resetting the detection process.\n\nDevelopment-subset clarification (part of the fixed specification): Use asynchronous active-low reset, overlapping detections, and a Moore output high after the edge consuming the final 1; matching the archived reference.",
+        "category": "fsm",
+        "split": "development",
+        "family": "sequence1001",
+        "benchmark": "RTLLM",
+        "suite_version": "dev10-v1",
+        "synthesis_eligible": true,
+        "origin": {
+          "repository": "https://github.com/hkust-zhiyao/RTLLM",
+          "commit": "51ed553d0ffd32797a1a0a13e051656bf302c81f",
+          "path": "Control/Finite State Machine/sequence_detector",
+          "license": "MIT",
+          "files": {
+            "upstream/RTLLM/sequence_detector/design_description.txt": "eaa043dd75258c345f8e2f21817c2454a38923e476e50523a5e41bff8ef93b13",
+            "upstream/RTLLM/sequence_detector/verified_sequence_detector.v": "573bbf1a2e9afb77960131b731cd6aae85b3508a09465c7589a131b517401f23",
+            "upstream/RTLLM/sequence_detector/testbench.v": "0d5e90177af40049a62b48bf63ae8ff113435115a7544d6727a272123583bcae"
+          }
+        },
+        "adaptations": [
+          "Independent deterministic vector oracle replaces upstream TB; upstream TB archived.",
+          "Reference module renamed; timescale directive removed.",
+          "Use asynchronous active-low reset, overlapping detections, and a Moore output high after the edge consuming the final 1; matching the archived reference."
+        ],
+        "mutation": "Breaks sequence prefix transition",
+        "reference_sha256": "6acb22c07d9e2bef30be3a8ed023a845da6a565b1b5f13938ea90d3bbb0ae010",
+        "mutant_sha256": "a18f13b6c6d5d4c88681df2b627226c00f7343f4a88e2d0cda5b230004ef933d",
+        "tb_sha256": "6abb900b5f8cae1ea0ab98321c1830bd58f4132c75efb676b9cc4250a5e90e4b",
+        "assets": {
+          "rt_sequence.hex": "6f656556d2940534fe990384d84ed61cb498a683531b24ee599374d98aec4c40"
+        },
+        "ports": {
+          "reset_port": "rst_n",
+          "input_port": "data_in",
+          "output_port": "sequence_detected",
+          "active": 0,
+          "examples": [
+            {
+              "bits": "1001",
+              "outputs": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "bits": "1011",
+              "outputs": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "bits": "1001001",
+              "outputs": [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        "public_contract": {
+          "clock_edge": "posedge",
+          "output_kind": "moore",
+          "reset": {
+            "kind": "async",
+            "active": 0,
+            "output": 0
+          },
+          "trace_convention": "Each trace starts after reset. List output after each rising edge; reset is then inactive.",
+          "examples": [
+            {
+              "bits": "1001",
+              "outputs": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "bits": "1011",
+              "outputs": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "bits": "1001001",
+              "outputs": [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "bits": "100001",
+              "outputs": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "bits": "10011001",
+              "outputs": [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "bits": "11001",
+              "outputs": [
+                0,
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "bits": "001",
+              "outputs": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "bits": "101001",
+              "outputs": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "bits": "01",
+              "outputs": [
+                0,
+                0
+              ]
+            },
+            {
+              "bits": "0001",
+              "outputs": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "bits": "1000001",
+              "outputs": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        "bank_directory": "rt_sequence"
+      },
+      "ir": "{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":0},{\"name\":\"S2\",\"output\":0},{\"name\":\"S3\",\"output\":0},{\"name\":\"S4\",\"output\":1}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S2\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S1\"},{\"from\":\"S2\",\"input\":0,\"to\":\"S3\"},{\"from\":\"S2\",\"input\":1,\"to\":\"S1\"},{\"from\":\"S3\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S3\",\"input\":1,\"to\":\"S4\"},{\"from\":\"S4\",\"input\":0,\"to\":\"S2\"},{\"from\":\"S4\",\"input\":1,\"to\":\"S1\"}]}",
+      "prompt": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs.\n\nPlease act as a professional Verilog designer.\n\nImplement a module of a sequence detector to detect a specific 4-bit binary sequence 1001.\n\nModule name:\n    sequence_detector\n\nInput ports:\n    clk: Clock signal to synchronize the detector.\n    rst_n: Active-low reset signal to initialize the state machine.\n    data_in: 1-bit binary input signal to feed the bitstream for sequence detection.\n\nOutput ports:\n    sequence_detected: 1-bit output signal that is set high when the specific sequence is detected.\n    \nInternal logic:\n    State Machine: The sequence detector uses a finite state machine (FSM) with the following states:\n    IDLE: Waiting for the start of the sequence.\n    S1: The first bit of the desired sequence is detected.\n    S2: The second bit of the desired sequence is detected.\n    S3: The third bit of the desired sequence is detected.\n    S4: The fourth and final bit of the desired sequence is detected, and the output sequence_detected is set high.\n\nImplementation:\n    -FSM Design: The FSM transitions through states based on the bitstream data_in. On each clock cycle, the detector checks for a match of the specific sequence.\n\n    -Sequence Detection: The module checks the input data_in and transitions between states. Once the complete sequence is detected, sequence_detected is asserted.\n\n    -Reset Behavior: When rst_n is low, the state machine returns to the IDLE state, resetting the detection process.\n\nDevelopment-subset clarification (part of the fixed specification): Use asynchronous active-low reset, overlapping detections, and a Moore output high after the edge consuming the final 1; matching the archived reference.\n\nUse reg/localparam state encodings and case/if assignments for Icarus compatibility. Avoid enum-valued ternary assignments. Preserve the specified reset, overlap and cycle timing.\n\nPublic specification examples shared across conditions:\n{\n  \"clock_edge\": \"posedge\",\n  \"output_kind\": \"moore\",\n  \"reset\": {\n    \"kind\": \"async\",\n    \"active\": 0,\n    \"output\": 0\n  },\n  \"trace_convention\": \"Each trace starts after reset. List output after each rising edge; reset is then inactive.\",\n  \"examples\": [\n    {\n      \"bits\": \"1001\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        1\n      ]\n    },\n    {\n      \"bits\": \"1011\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        0\n      ]\n    },\n    {\n      \"bits\": \"1001001\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        1,\n        0,\n        0,\n        1\n      ]\n    },\n    {\n      \"bits\": \"100001\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        0,\n        0,\n        0\n      ]\n    },\n    {\n      \"bits\": \"10011001\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        1,\n        0,\n        0,\n        0,\n        1\n      ]\n    },\n    {\n      \"bits\": \"11001\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        0,\n        1\n      ]\n    },\n    {\n      \"bits\": \"001\",\n      \"outputs\": [\n        0,\n        0,\n        0\n      ]\n    },\n    {\n      \"bits\": \"101001\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        0,\n        0,\n        1\n      ]\n    },\n    {\n      \"bits\": \"01\",\n      \"outputs\": [\n        0,\n        0\n      ]\n    },\n    {\n      \"bits\": \"0001\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        0\n      ]\n    },\n    {\n      \"bits\": \"1000001\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        0,\n        0,\n        0,\n        0\n      ]\n    }\n  ]\n}\n\nCandidate intermediate state table (may contain mistakes):\n{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":0},{\"name\":\"S2\",\"output\":0},{\"name\":\"S3\",\"output\":0},{\"name\":\"S4\",\"output\":1}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S2\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S1\"},{\"from\":\"S2\",\"input\":0,\"to\":\"S3\"},{\"from\":\"S2\",\"input\":1,\"to\":\"S1\"},{\"from\":\"S3\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S3\",\"input\":1,\"to\":\"S4\"},{\"from\":\"S4\",\"input\":0,\"to\":\"S2\"},{\"from\":\"S4\",\"input\":1,\"to\":\"S1\"}]}\n\nImplement the specification. You may correct the candidate table while producing RTL. There is no extra repair turn. Return only the specified RTL module.\n\nDo not invoke tools, read files, run tests, or delegate. Reply directly.",
+      "case_id": "rt_sequence__edge_00_S1__edge_01_S0"
+    },
+    {
+      "id": "rt_sequence__v2__feedback",
+      "task": "rt_sequence",
+      "profile": "v2",
+      "arm": "feedback",
+      "spec": {
+        "id": "rt_sequence",
+        "module": "sequence_detector",
+        "checks": 1840,
+        "spec": "Please act as a professional Verilog designer.\n\nImplement a module of a sequence detector to detect a specific 4-bit binary sequence 1001.\n\nModule name:\n    sequence_detector\n\nInput ports:\n    clk: Clock signal to synchronize the detector.\n    rst_n: Active-low reset signal to initialize the state machine.\n    data_in: 1-bit binary input signal to feed the bitstream for sequence detection.\n\nOutput ports:\n    sequence_detected: 1-bit output signal that is set high when the specific sequence is detected.\n    \nInternal logic:\n    State Machine: The sequence detector uses a finite state machine (FSM) with the following states:\n    IDLE: Waiting for the start of the sequence.\n    S1: The first bit of the desired sequence is detected.\n    S2: The second bit of the desired sequence is detected.\n    S3: The third bit of the desired sequence is detected.\n    S4: The fourth and final bit of the desired sequence is detected, and the output sequence_detected is set high.\n\nImplementation:\n    -FSM Design: The FSM transitions through states based on the bitstream data_in. On each clock cycle, the detector checks for a match of the specific sequence.\n\n    -Sequence Detection: The module checks the input data_in and transitions between states. Once the complete sequence is detected, sequence_detected is asserted.\n\n    -Reset Behavior: When rst_n is low, the state machine returns to the IDLE state, resetting the detection process.\n\nDevelopment-subset clarification (part of the fixed specification): Use asynchronous active-low reset, overlapping detections, and a Moore output high after the edge consuming the final 1; matching the archived reference.",
+        "category": "fsm",
+        "split": "development",
+        "family": "sequence1001",
+        "benchmark": "RTLLM",
+        "suite_version": "dev10-v1",
+        "synthesis_eligible": true,
+        "origin": {
+          "repository": "https://github.com/hkust-zhiyao/RTLLM",
+          "commit": "51ed553d0ffd32797a1a0a13e051656bf302c81f",
+          "path": "Control/Finite State Machine/sequence_detector",
+          "license": "MIT",
+          "files": {
+            "upstream/RTLLM/sequence_detector/design_description.txt": "eaa043dd75258c345f8e2f21817c2454a38923e476e50523a5e41bff8ef93b13",
+            "upstream/RTLLM/sequence_detector/verified_sequence_detector.v": "573bbf1a2e9afb77960131b731cd6aae85b3508a09465c7589a131b517401f23",
+            "upstream/RTLLM/sequence_detector/testbench.v": "0d5e90177af40049a62b48bf63ae8ff113435115a7544d6727a272123583bcae"
+          }
+        },
+        "adaptations": [
+          "Independent deterministic vector oracle replaces upstream TB; upstream TB archived.",
+          "Reference module renamed; timescale directive removed.",
+          "Use asynchronous active-low reset, overlapping detections, and a Moore output high after the edge consuming the final 1; matching the archived reference."
+        ],
+        "mutation": "Breaks sequence prefix transition",
+        "reference_sha256": "6acb22c07d9e2bef30be3a8ed023a845da6a565b1b5f13938ea90d3bbb0ae010",
+        "mutant_sha256": "a18f13b6c6d5d4c88681df2b627226c00f7343f4a88e2d0cda5b230004ef933d",
+        "tb_sha256": "6abb900b5f8cae1ea0ab98321c1830bd58f4132c75efb676b9cc4250a5e90e4b",
+        "assets": {
+          "rt_sequence.hex": "6f656556d2940534fe990384d84ed61cb498a683531b24ee599374d98aec4c40"
+        },
+        "ports": {
+          "reset_port": "rst_n",
+          "input_port": "data_in",
+          "output_port": "sequence_detected",
+          "active": 0,
+          "examples": [
+            {
+              "bits": "1001",
+              "outputs": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "bits": "1011",
+              "outputs": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "bits": "1001001",
+              "outputs": [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        "public_contract": {
+          "clock_edge": "posedge",
+          "output_kind": "moore",
+          "reset": {
+            "kind": "async",
+            "active": 0,
+            "output": 0
+          },
+          "trace_convention": "Each trace starts after reset. List output after each rising edge; reset is then inactive.",
+          "examples": [
+            {
+              "bits": "1001",
+              "outputs": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "bits": "1011",
+              "outputs": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "bits": "1001001",
+              "outputs": [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "bits": "100001",
+              "outputs": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "bits": "10011001",
+              "outputs": [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "bits": "11001",
+              "outputs": [
+                0,
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "bits": "001",
+              "outputs": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "bits": "101001",
+              "outputs": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "bits": "01",
+              "outputs": [
+                0,
+                0
+              ]
+            },
+            {
+              "bits": "0001",
+              "outputs": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "bits": "1000001",
+              "outputs": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        "bank_directory": "rt_sequence"
+      },
+      "ir": "{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":0},{\"name\":\"S2\",\"output\":0},{\"name\":\"S3\",\"output\":0},{\"name\":\"S4\",\"output\":1}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S2\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S1\"},{\"from\":\"S2\",\"input\":0,\"to\":\"S3\"},{\"from\":\"S2\",\"input\":1,\"to\":\"S1\"},{\"from\":\"S3\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S3\",\"input\":1,\"to\":\"S4\"},{\"from\":\"S4\",\"input\":0,\"to\":\"S2\"},{\"from\":\"S4\",\"input\":1,\"to\":\"S1\"}]}",
+      "prompt": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs.\n\nPlease act as a professional Verilog designer.\n\nImplement a module of a sequence detector to detect a specific 4-bit binary sequence 1001.\n\nModule name:\n    sequence_detector\n\nInput ports:\n    clk: Clock signal to synchronize the detector.\n    rst_n: Active-low reset signal to initialize the state machine.\n    data_in: 1-bit binary input signal to feed the bitstream for sequence detection.\n\nOutput ports:\n    sequence_detected: 1-bit output signal that is set high when the specific sequence is detected.\n    \nInternal logic:\n    State Machine: The sequence detector uses a finite state machine (FSM) with the following states:\n    IDLE: Waiting for the start of the sequence.\n    S1: The first bit of the desired sequence is detected.\n    S2: The second bit of the desired sequence is detected.\n    S3: The third bit of the desired sequence is detected.\n    S4: The fourth and final bit of the desired sequence is detected, and the output sequence_detected is set high.\n\nImplementation:\n    -FSM Design: The FSM transitions through states based on the bitstream data_in. On each clock cycle, the detector checks for a match of the specific sequence.\n\n    -Sequence Detection: The module checks the input data_in and transitions between states. Once the complete sequence is detected, sequence_detected is asserted.\n\n    -Reset Behavior: When rst_n is low, the state machine returns to the IDLE state, resetting the detection process.\n\nDevelopment-subset clarification (part of the fixed specification): Use asynchronous active-low reset, overlapping detections, and a Moore output high after the edge consuming the final 1; matching the archived reference.\n\nUse reg/localparam state encodings and case/if assignments for Icarus compatibility. Avoid enum-valued ternary assignments. Preserve the specified reset, overlap and cycle timing.\n\nPublic specification examples shared across conditions:\n{\n  \"clock_edge\": \"posedge\",\n  \"output_kind\": \"moore\",\n  \"reset\": {\n    \"kind\": \"async\",\n    \"active\": 0,\n    \"output\": 0\n  },\n  \"trace_convention\": \"Each trace starts after reset. List output after each rising edge; reset is then inactive.\",\n  \"examples\": [\n    {\n      \"bits\": \"1001\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        1\n      ]\n    },\n    {\n      \"bits\": \"1011\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        0\n      ]\n    },\n    {\n      \"bits\": \"1001001\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        1,\n        0,\n        0,\n        1\n      ]\n    },\n    {\n      \"bits\": \"100001\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        0,\n        0,\n        0\n      ]\n    },\n    {\n      \"bits\": \"10011001\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        1,\n        0,\n        0,\n        0,\n        1\n      ]\n    },\n    {\n      \"bits\": \"11001\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        0,\n        1\n      ]\n    },\n    {\n      \"bits\": \"001\",\n      \"outputs\": [\n        0,\n        0,\n        0\n      ]\n    },\n    {\n      \"bits\": \"101001\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        0,\n        0,\n        1\n      ]\n    },\n    {\n      \"bits\": \"01\",\n      \"outputs\": [\n        0,\n        0\n      ]\n    },\n    {\n      \"bits\": \"0001\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        0\n      ]\n    },\n    {\n      \"bits\": \"1000001\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        0,\n        0,\n        0,\n        0\n      ]\n    }\n  ]\n}\n\nCandidate intermediate state table (may contain mistakes):\n{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":0},{\"name\":\"S2\",\"output\":0},{\"name\":\"S3\",\"output\":0},{\"name\":\"S4\",\"output\":1}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S2\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S1\"},{\"from\":\"S2\",\"input\":0,\"to\":\"S3\"},{\"from\":\"S2\",\"input\":1,\"to\":\"S1\"},{\"from\":\"S3\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S3\",\"input\":1,\"to\":\"S4\"},{\"from\":\"S4\",\"input\":0,\"to\":\"S2\"},{\"from\":\"S4\",\"input\":1,\"to\":\"S1\"}]}\n\nImplement the specification. You may correct the candidate table while producing RTL. There is no extra repair turn. Return only the specified RTL module.\n\nExecutable results on the already-public contract:\n{\n  \"status\": \"PUBLIC_CHECK_FAIL\",\n  \"errors\": [\n    {\n      \"bits\": \"1001\",\n      \"expected\": [\n        0,\n        0,\n        0,\n        1\n      ],\n      \"observed\": [\n        0,\n        0,\n        0,\n        0\n      ]\n    },\n    {\n      \"bits\": \"1001001\",\n      \"expected\": [\n        0,\n        0,\n        0,\n        1,\n        0,\n        0,\n        1\n      ],\n      \"observed\": [\n        0,\n        0,\n        0,\n        0,\n        0,\n        0,\n        1\n      ]\n    },\n    {\n      \"bits\": \"10011001\",\n      \"expected\": [\n        0,\n        0,\n        0,\n        1,\n        0,\n        0,\n        0,\n        1\n      ],\n      \"observed\": [\n        0,\n        0,\n        0,\n        0,\n        0,\n        0,\n        0,\n        1\n      ]\n    },\n    {\n      \"bits\": \"11001\",\n      \"expected\": [\n        0,\n        0,\n        0,\n        0,\n        1\n      ],\n      \"observed\": [\n        0,\n        0,\n        0,\n        0,\n        0\n      ]\n    },\n    {\n      \"bits\": \"0001\",\n      \"expected\": [\n        0,\n        0,\n        0,\n        0\n      ],\n      \"observed\": [\n        0,\n        0,\n        0,\n        1\n      ]\n    }\n  ],\n  \"scope\": \"Only disclosed examples/reset/schema; private tests were not consulted.\"\n}\n\nDo not invoke tools, read files, run tests, or delegate. Reply directly.",
+      "case_id": "rt_sequence__edge_00_S1__edge_01_S0"
+    },
+    {
+      "id": "sticky_alarm__v1__feedback",
+      "task": "sticky_alarm",
+      "profile": "v1",
+      "arm": "feedback",
+      "spec": {
+        "id": "sticky_alarm",
+        "module": "sticky_alarm",
+        "category": "fsm",
+        "family": "sticky_alarm",
+        "split": "development",
+        "spec": "Implement module sticky_alarm(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. q starts at 0. Two consecutive sampled ones set q to 1. Once set, q remains 1 until reset, regardless of later input. A zero before activation breaks the consecutive-one count.",
+        "checks": 9216,
+        "tb_sha256": "afd042df366768a2fad95fc4b58384b3eeebdf184e6baf3be028728dd5c0b5c6",
+        "assets": {
+          "agreement.hex": "cba61869ef75bc2738e16b4473340a5becf2b11008d6e2d9c6062552afdca370"
+        },
+        "ports": {
+          "reset_port": "rst_n",
+          "input_port": "din",
+          "output_port": "q",
+          "active": 0
+        },
+        "public_contract": {
+          "clock_edge": "posedge",
+          "output_kind": "moore",
+          "reset": {
+            "kind": "async",
+            "active": 0,
+            "output": 0
+          },
+          "trace_convention": "Each trace starts after reset; output is sampled after every rising edge.",
+          "examples": [
+            {
+              "bits": "1011000",
+              "outputs": [
+                0,
+                0,
+                0,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            {
+              "bits": "01010",
+              "outputs": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        "bank_directory": "sticky_alarm"
+      },
+      "ir": "{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":0},{\"name\":\"S2\",\"output\":1}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S2\"},{\"from\":\"S2\",\"input\":0,\"to\":\"S2\"},{\"from\":\"S2\",\"input\":1,\"to\":\"S2\"}]}",
+      "prompt": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs.\n\nImplement module sticky_alarm(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. q starts at 0. Two consecutive sampled ones set q to 1. Once set, q remains 1 until reset, regardless of later input. A zero before activation breaks the consecutive-one count.\n\nUse reg/localparam state encodings and case/if assignments for Icarus compatibility. Avoid enum-valued ternary assignments. Preserve the specified reset, overlap and cycle timing.\n\nPublic specification examples shared across conditions:\n{\n  \"clock_edge\": \"posedge\",\n  \"output_kind\": \"moore\",\n  \"reset\": {\n    \"kind\": \"async\",\n    \"active\": 0,\n    \"output\": 0\n  },\n  \"trace_convention\": \"Each trace starts after reset; output is sampled after every rising edge.\",\n  \"examples\": [\n    {\n      \"bits\": \"1011000\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        1,\n        1,\n        1,\n        1\n      ]\n    },\n    {\n      \"bits\": \"01010\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        0,\n        0\n      ]\n    }\n  ]\n}\n\nCandidate intermediate state table (may contain mistakes):\n{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":0},{\"name\":\"S2\",\"output\":1}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S2\"},{\"from\":\"S2\",\"input\":0,\"to\":\"S2\"},{\"from\":\"S2\",\"input\":1,\"to\":\"S2\"}]}\n\nImplement the specification. You may correct the candidate table while producing RTL. There is no extra repair turn. Return only the specified RTL module.\n\nExecutable results on the already-public contract:\n{\n  \"status\": \"PUBLIC_CHECK_FAIL\",\n  \"errors\": [\n    {\n      \"bits\": \"1011000\",\n      \"expected\": [\n        0,\n        0,\n        0,\n        1,\n        1,\n        1,\n        1\n      ],\n      \"observed\": [\n        0,\n        0,\n        1,\n        1,\n        1,\n        1,\n        1\n      ]\n    },\n    {\n      \"bits\": \"01010\",\n      \"expected\": [\n        0,\n        0,\n        0,\n        0,\n        0\n      ],\n      \"observed\": [\n        0,\n        1,\n        1,\n        1,\n        1\n      ]\n    }\n  ],\n  \"scope\": \"Only disclosed examples/reset/schema; private tests were not consulted.\"\n}\n\nDo not invoke tools, read files, run tests, or delegate. Reply directly.",
+      "case_id": "sticky_alarm__edge_00_S1__edge_01_S0"
+    },
+    {
+      "id": "sticky_alarm__v2__control",
+      "task": "sticky_alarm",
+      "profile": "v2",
+      "arm": "control",
+      "spec": {
+        "id": "sticky_alarm",
+        "module": "sticky_alarm",
+        "category": "fsm",
+        "family": "sticky_alarm",
+        "split": "development",
+        "spec": "Implement module sticky_alarm(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. q starts at 0. Two consecutive sampled ones set q to 1. Once set, q remains 1 until reset, regardless of later input. A zero before activation breaks the consecutive-one count.",
+        "checks": 9216,
+        "tb_sha256": "afd042df366768a2fad95fc4b58384b3eeebdf184e6baf3be028728dd5c0b5c6",
+        "assets": {
+          "agreement.hex": "cba61869ef75bc2738e16b4473340a5becf2b11008d6e2d9c6062552afdca370"
+        },
+        "ports": {
+          "reset_port": "rst_n",
+          "input_port": "din",
+          "output_port": "q",
+          "active": 0
+        },
+        "public_contract": {
+          "clock_edge": "posedge",
+          "output_kind": "moore",
+          "reset": {
+            "kind": "async",
+            "active": 0,
+            "output": 0
+          },
+          "trace_convention": "Each trace starts after reset; output is sampled after every rising edge.",
+          "examples": [
+            {
+              "bits": "1011000",
+              "outputs": [
+                0,
+                0,
+                0,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            {
+              "bits": "01010",
+              "outputs": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "bits": "111",
+              "outputs": [
+                0,
+                1,
+                1
+              ]
+            }
+          ]
+        },
+        "bank_directory": "sticky_alarm"
+      },
+      "ir": "{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":0},{\"name\":\"S2\",\"output\":1}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S2\"},{\"from\":\"S2\",\"input\":0,\"to\":\"S2\"},{\"from\":\"S2\",\"input\":1,\"to\":\"S2\"}]}",
+      "prompt": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs.\n\nImplement module sticky_alarm(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. q starts at 0. Two consecutive sampled ones set q to 1. Once set, q remains 1 until reset, regardless of later input. A zero before activation breaks the consecutive-one count.\n\nUse reg/localparam state encodings and case/if assignments for Icarus compatibility. Avoid enum-valued ternary assignments. Preserve the specified reset, overlap and cycle timing.\n\nPublic specification examples shared across conditions:\n{\n  \"clock_edge\": \"posedge\",\n  \"output_kind\": \"moore\",\n  \"reset\": {\n    \"kind\": \"async\",\n    \"active\": 0,\n    \"output\": 0\n  },\n  \"trace_convention\": \"Each trace starts after reset; output is sampled after every rising edge.\",\n  \"examples\": [\n    {\n      \"bits\": \"1011000\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        1,\n        1,\n        1,\n        1\n      ]\n    },\n    {\n      \"bits\": \"01010\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        0,\n        0\n      ]\n    },\n    {\n      \"bits\": \"111\",\n      \"outputs\": [\n        0,\n        1,\n        1\n      ]\n    }\n  ]\n}\n\nCandidate intermediate state table (may contain mistakes):\n{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":0},{\"name\":\"S2\",\"output\":1}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S2\"},{\"from\":\"S2\",\"input\":0,\"to\":\"S2\"},{\"from\":\"S2\",\"input\":1,\"to\":\"S2\"}]}\n\nImplement the specification. You may correct the candidate table while producing RTL. There is no extra repair turn. Return only the specified RTL module.\n\nDo not invoke tools, read files, run tests, or delegate. Reply directly.",
+      "case_id": "sticky_alarm__edge_00_S1__edge_01_S0"
+    },
+    {
+      "id": "sticky_alarm__v2__feedback",
+      "task": "sticky_alarm",
+      "profile": "v2",
+      "arm": "feedback",
+      "spec": {
+        "id": "sticky_alarm",
+        "module": "sticky_alarm",
+        "category": "fsm",
+        "family": "sticky_alarm",
+        "split": "development",
+        "spec": "Implement module sticky_alarm(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. q starts at 0. Two consecutive sampled ones set q to 1. Once set, q remains 1 until reset, regardless of later input. A zero before activation breaks the consecutive-one count.",
+        "checks": 9216,
+        "tb_sha256": "afd042df366768a2fad95fc4b58384b3eeebdf184e6baf3be028728dd5c0b5c6",
+        "assets": {
+          "agreement.hex": "cba61869ef75bc2738e16b4473340a5becf2b11008d6e2d9c6062552afdca370"
+        },
+        "ports": {
+          "reset_port": "rst_n",
+          "input_port": "din",
+          "output_port": "q",
+          "active": 0
+        },
+        "public_contract": {
+          "clock_edge": "posedge",
+          "output_kind": "moore",
+          "reset": {
+            "kind": "async",
+            "active": 0,
+            "output": 0
+          },
+          "trace_convention": "Each trace starts after reset; output is sampled after every rising edge.",
+          "examples": [
+            {
+              "bits": "1011000",
+              "outputs": [
+                0,
+                0,
+                0,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            {
+              "bits": "01010",
+              "outputs": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "bits": "111",
+              "outputs": [
+                0,
+                1,
+                1
+              ]
+            }
+          ]
+        },
+        "bank_directory": "sticky_alarm"
+      },
+      "ir": "{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":0},{\"name\":\"S2\",\"output\":1}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S2\"},{\"from\":\"S2\",\"input\":0,\"to\":\"S2\"},{\"from\":\"S2\",\"input\":1,\"to\":\"S2\"}]}",
+      "prompt": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs.\n\nImplement module sticky_alarm(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. q starts at 0. Two consecutive sampled ones set q to 1. Once set, q remains 1 until reset, regardless of later input. A zero before activation breaks the consecutive-one count.\n\nUse reg/localparam state encodings and case/if assignments for Icarus compatibility. Avoid enum-valued ternary assignments. Preserve the specified reset, overlap and cycle timing.\n\nPublic specification examples shared across conditions:\n{\n  \"clock_edge\": \"posedge\",\n  \"output_kind\": \"moore\",\n  \"reset\": {\n    \"kind\": \"async\",\n    \"active\": 0,\n    \"output\": 0\n  },\n  \"trace_convention\": \"Each trace starts after reset; output is sampled after every rising edge.\",\n  \"examples\": [\n    {\n      \"bits\": \"1011000\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        1,\n        1,\n        1,\n        1\n      ]\n    },\n    {\n      \"bits\": \"01010\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        0,\n        0\n      ]\n    },\n    {\n      \"bits\": \"111\",\n      \"outputs\": [\n        0,\n        1,\n        1\n      ]\n    }\n  ]\n}\n\nCandidate intermediate state table (may contain mistakes):\n{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":0},{\"name\":\"S2\",\"output\":1}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S2\"},{\"from\":\"S2\",\"input\":0,\"to\":\"S2\"},{\"from\":\"S2\",\"input\":1,\"to\":\"S2\"}]}\n\nImplement the specification. You may correct the candidate table while producing RTL. There is no extra repair turn. Return only the specified RTL module.\n\nExecutable results on the already-public contract:\n{\n  \"status\": \"PUBLIC_CHECK_FAIL\",\n  \"errors\": [\n    {\n      \"bits\": \"1011000\",\n      \"expected\": [\n        0,\n        0,\n        0,\n        1,\n        1,\n        1,\n        1\n      ],\n      \"observed\": [\n        0,\n        0,\n        1,\n        1,\n        1,\n        1,\n        1\n      ]\n    },\n    {\n      \"bits\": \"01010\",\n      \"expected\": [\n        0,\n        0,\n        0,\n        0,\n        0\n      ],\n      \"observed\": [\n        0,\n        1,\n        1,\n        1,\n        1\n      ]\n    },\n    {\n      \"bits\": \"111\",\n      \"expected\": [\n        0,\n        1,\n        1\n      ],\n      \"observed\": [\n        0,\n        0,\n        0\n      ]\n    }\n  ],\n  \"scope\": \"Only disclosed examples/reset/schema; private tests were not consulted.\"\n}\n\nDo not invoke tools, read files, run tests, or delegate. Reply directly.",
+      "case_id": "sticky_alarm__edge_00_S1__edge_01_S0"
+    },
+    {
+      "id": "sticky_alarm__v1__control",
+      "task": "sticky_alarm",
+      "profile": "v1",
+      "arm": "control",
+      "spec": {
+        "id": "sticky_alarm",
+        "module": "sticky_alarm",
+        "category": "fsm",
+        "family": "sticky_alarm",
+        "split": "development",
+        "spec": "Implement module sticky_alarm(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. q starts at 0. Two consecutive sampled ones set q to 1. Once set, q remains 1 until reset, regardless of later input. A zero before activation breaks the consecutive-one count.",
+        "checks": 9216,
+        "tb_sha256": "afd042df366768a2fad95fc4b58384b3eeebdf184e6baf3be028728dd5c0b5c6",
+        "assets": {
+          "agreement.hex": "cba61869ef75bc2738e16b4473340a5becf2b11008d6e2d9c6062552afdca370"
+        },
+        "ports": {
+          "reset_port": "rst_n",
+          "input_port": "din",
+          "output_port": "q",
+          "active": 0
+        },
+        "public_contract": {
+          "clock_edge": "posedge",
+          "output_kind": "moore",
+          "reset": {
+            "kind": "async",
+            "active": 0,
+            "output": 0
+          },
+          "trace_convention": "Each trace starts after reset; output is sampled after every rising edge.",
+          "examples": [
+            {
+              "bits": "1011000",
+              "outputs": [
+                0,
+                0,
+                0,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            {
+              "bits": "01010",
+              "outputs": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        "bank_directory": "sticky_alarm"
+      },
+      "ir": "{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":0},{\"name\":\"S2\",\"output\":1}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S2\"},{\"from\":\"S2\",\"input\":0,\"to\":\"S2\"},{\"from\":\"S2\",\"input\":1,\"to\":\"S2\"}]}",
+      "prompt": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs.\n\nImplement module sticky_alarm(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. q starts at 0. Two consecutive sampled ones set q to 1. Once set, q remains 1 until reset, regardless of later input. A zero before activation breaks the consecutive-one count.\n\nUse reg/localparam state encodings and case/if assignments for Icarus compatibility. Avoid enum-valued ternary assignments. Preserve the specified reset, overlap and cycle timing.\n\nPublic specification examples shared across conditions:\n{\n  \"clock_edge\": \"posedge\",\n  \"output_kind\": \"moore\",\n  \"reset\": {\n    \"kind\": \"async\",\n    \"active\": 0,\n    \"output\": 0\n  },\n  \"trace_convention\": \"Each trace starts after reset; output is sampled after every rising edge.\",\n  \"examples\": [\n    {\n      \"bits\": \"1011000\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        1,\n        1,\n        1,\n        1\n      ]\n    },\n    {\n      \"bits\": \"01010\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        0,\n        0\n      ]\n    }\n  ]\n}\n\nCandidate intermediate state table (may contain mistakes):\n{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":0},{\"name\":\"S2\",\"output\":1}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S2\"},{\"from\":\"S2\",\"input\":0,\"to\":\"S2\"},{\"from\":\"S2\",\"input\":1,\"to\":\"S2\"}]}\n\nImplement the specification. You may correct the candidate table while producing RTL. There is no extra repair turn. Return only the specified RTL module.\n\nDo not invoke tools, read files, run tests, or delegate. Reply directly.",
+      "case_id": "sticky_alarm__edge_00_S1__edge_01_S0"
+    },
+    {
+      "id": "event_parity__v2__control",
+      "task": "event_parity",
+      "profile": "v2",
+      "arm": "control",
+      "spec": {
+        "id": "event_parity",
+        "module": "event_parity",
+        "category": "fsm",
+        "family": "event_parity",
+        "split": "development",
+        "spec": "Implement module event_parity(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. q starts at 0. On each rising clock edge with din=1, toggle q. With din=0 hold q. Thus q is the parity of the number of sampled ones since reset.",
+        "checks": 9216,
+        "tb_sha256": "ac111343afe9debbc5ed26b6e474fb73303080b082052eeacdfd90f66b27e65c",
+        "assets": {
+          "agreement.hex": "68acba1204d4451cc6dc7b305053d9e90f616c8cd5b020cd448b91926fc8ede3"
+        },
+        "ports": {
+          "reset_port": "rst_n",
+          "input_port": "din",
+          "output_port": "q",
+          "active": 0
+        },
+        "public_contract": {
+          "clock_edge": "posedge",
+          "output_kind": "moore",
+          "reset": {
+            "kind": "async",
+            "active": 0,
+            "output": 0
+          },
+          "trace_convention": "Each trace starts after reset; output is sampled after every rising edge.",
+          "examples": [
+            {
+              "bits": "101101",
+              "outputs": [
+                1,
+                1,
+                0,
+                1,
+                1,
+                0
+              ]
+            },
+            {
+              "bits": "000",
+              "outputs": [
+                0,
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        "bank_directory": "event_parity"
+      },
+      "ir": "{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":1}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S0\"}]}",
+      "prompt": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs.\n\nImplement module event_parity(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. q starts at 0. On each rising clock edge with din=1, toggle q. With din=0 hold q. Thus q is the parity of the number of sampled ones since reset.\n\nUse reg/localparam state encodings and case/if assignments for Icarus compatibility. Avoid enum-valued ternary assignments. Preserve the specified reset, overlap and cycle timing.\n\nPublic specification examples shared across conditions:\n{\n  \"clock_edge\": \"posedge\",\n  \"output_kind\": \"moore\",\n  \"reset\": {\n    \"kind\": \"async\",\n    \"active\": 0,\n    \"output\": 0\n  },\n  \"trace_convention\": \"Each trace starts after reset; output is sampled after every rising edge.\",\n  \"examples\": [\n    {\n      \"bits\": \"101101\",\n      \"outputs\": [\n        1,\n        1,\n        0,\n        1,\n        1,\n        0\n      ]\n    },\n    {\n      \"bits\": \"000\",\n      \"outputs\": [\n        0,\n        0,\n        0\n      ]\n    }\n  ]\n}\n\nCandidate intermediate state table (may contain mistakes):\n{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":1}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S0\"}]}\n\nImplement the specification. You may correct the candidate table while producing RTL. There is no extra repair turn. Return only the specified RTL module.\n\nDo not invoke tools, read files, run tests, or delegate. Reply directly.",
+      "case_id": "event_parity__edge_00_S1__edge_01_S0"
+    },
+    {
+      "id": "event_parity__v2__feedback",
+      "task": "event_parity",
+      "profile": "v2",
+      "arm": "feedback",
+      "spec": {
+        "id": "event_parity",
+        "module": "event_parity",
+        "category": "fsm",
+        "family": "event_parity",
+        "split": "development",
+        "spec": "Implement module event_parity(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. q starts at 0. On each rising clock edge with din=1, toggle q. With din=0 hold q. Thus q is the parity of the number of sampled ones since reset.",
+        "checks": 9216,
+        "tb_sha256": "ac111343afe9debbc5ed26b6e474fb73303080b082052eeacdfd90f66b27e65c",
+        "assets": {
+          "agreement.hex": "68acba1204d4451cc6dc7b305053d9e90f616c8cd5b020cd448b91926fc8ede3"
+        },
+        "ports": {
+          "reset_port": "rst_n",
+          "input_port": "din",
+          "output_port": "q",
+          "active": 0
+        },
+        "public_contract": {
+          "clock_edge": "posedge",
+          "output_kind": "moore",
+          "reset": {
+            "kind": "async",
+            "active": 0,
+            "output": 0
+          },
+          "trace_convention": "Each trace starts after reset; output is sampled after every rising edge.",
+          "examples": [
+            {
+              "bits": "101101",
+              "outputs": [
+                1,
+                1,
+                0,
+                1,
+                1,
+                0
+              ]
+            },
+            {
+              "bits": "000",
+              "outputs": [
+                0,
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        "bank_directory": "event_parity"
+      },
+      "ir": "{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":1}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S0\"}]}",
+      "prompt": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs.\n\nImplement module event_parity(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. q starts at 0. On each rising clock edge with din=1, toggle q. With din=0 hold q. Thus q is the parity of the number of sampled ones since reset.\n\nUse reg/localparam state encodings and case/if assignments for Icarus compatibility. Avoid enum-valued ternary assignments. Preserve the specified reset, overlap and cycle timing.\n\nPublic specification examples shared across conditions:\n{\n  \"clock_edge\": \"posedge\",\n  \"output_kind\": \"moore\",\n  \"reset\": {\n    \"kind\": \"async\",\n    \"active\": 0,\n    \"output\": 0\n  },\n  \"trace_convention\": \"Each trace starts after reset; output is sampled after every rising edge.\",\n  \"examples\": [\n    {\n      \"bits\": \"101101\",\n      \"outputs\": [\n        1,\n        1,\n        0,\n        1,\n        1,\n        0\n      ]\n    },\n    {\n      \"bits\": \"000\",\n      \"outputs\": [\n        0,\n        0,\n        0\n      ]\n    }\n  ]\n}\n\nCandidate intermediate state table (may contain mistakes):\n{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":1}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S0\"}]}\n\nImplement the specification. You may correct the candidate table while producing RTL. There is no extra repair turn. Return only the specified RTL module.\n\nExecutable results on the already-public contract:\n{\n  \"status\": \"PUBLIC_CHECK_FAIL\",\n  \"errors\": [\n    {\n      \"bits\": \"101101\",\n      \"expected\": [\n        1,\n        1,\n        0,\n        1,\n        1,\n        0\n      ],\n      \"observed\": [\n        0,\n        1,\n        0,\n        0,\n        1,\n        0\n      ]\n    },\n    {\n      \"bits\": \"000\",\n      \"expected\": [\n        0,\n        0,\n        0\n      ],\n      \"observed\": [\n        1,\n        1,\n        1\n      ]\n    }\n  ],\n  \"scope\": \"Only disclosed examples/reset/schema; private tests were not consulted.\"\n}\n\nDo not invoke tools, read files, run tests, or delegate. Reply directly.",
+      "case_id": "event_parity__edge_00_S1__edge_01_S0"
+    },
+    {
+      "id": "event_parity__v1__control",
+      "task": "event_parity",
+      "profile": "v1",
+      "arm": "control",
+      "spec": {
+        "id": "event_parity",
+        "module": "event_parity",
+        "category": "fsm",
+        "family": "event_parity",
+        "split": "development",
+        "spec": "Implement module event_parity(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. q starts at 0. On each rising clock edge with din=1, toggle q. With din=0 hold q. Thus q is the parity of the number of sampled ones since reset.",
+        "checks": 9216,
+        "tb_sha256": "ac111343afe9debbc5ed26b6e474fb73303080b082052eeacdfd90f66b27e65c",
+        "assets": {
+          "agreement.hex": "68acba1204d4451cc6dc7b305053d9e90f616c8cd5b020cd448b91926fc8ede3"
+        },
+        "ports": {
+          "reset_port": "rst_n",
+          "input_port": "din",
+          "output_port": "q",
+          "active": 0
+        },
+        "public_contract": {
+          "clock_edge": "posedge",
+          "output_kind": "moore",
+          "reset": {
+            "kind": "async",
+            "active": 0,
+            "output": 0
+          },
+          "trace_convention": "Each trace starts after reset; output is sampled after every rising edge.",
+          "examples": [
+            {
+              "bits": "101101",
+              "outputs": [
+                1,
+                1,
+                0,
+                1,
+                1,
+                0
+              ]
+            },
+            {
+              "bits": "000",
+              "outputs": [
+                0,
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        "bank_directory": "event_parity"
+      },
+      "ir": "{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":1}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S0\"}]}",
+      "prompt": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs.\n\nImplement module event_parity(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. q starts at 0. On each rising clock edge with din=1, toggle q. With din=0 hold q. Thus q is the parity of the number of sampled ones since reset.\n\nUse reg/localparam state encodings and case/if assignments for Icarus compatibility. Avoid enum-valued ternary assignments. Preserve the specified reset, overlap and cycle timing.\n\nPublic specification examples shared across conditions:\n{\n  \"clock_edge\": \"posedge\",\n  \"output_kind\": \"moore\",\n  \"reset\": {\n    \"kind\": \"async\",\n    \"active\": 0,\n    \"output\": 0\n  },\n  \"trace_convention\": \"Each trace starts after reset; output is sampled after every rising edge.\",\n  \"examples\": [\n    {\n      \"bits\": \"101101\",\n      \"outputs\": [\n        1,\n        1,\n        0,\n        1,\n        1,\n        0\n      ]\n    },\n    {\n      \"bits\": \"000\",\n      \"outputs\": [\n        0,\n        0,\n        0\n      ]\n    }\n  ]\n}\n\nCandidate intermediate state table (may contain mistakes):\n{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":1}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S0\"}]}\n\nImplement the specification. You may correct the candidate table while producing RTL. There is no extra repair turn. Return only the specified RTL module.\n\nDo not invoke tools, read files, run tests, or delegate. Reply directly.",
+      "case_id": "event_parity__edge_00_S1__edge_01_S0"
+    },
+    {
+      "id": "event_parity__v1__feedback",
+      "task": "event_parity",
+      "profile": "v1",
+      "arm": "feedback",
+      "spec": {
+        "id": "event_parity",
+        "module": "event_parity",
+        "category": "fsm",
+        "family": "event_parity",
+        "split": "development",
+        "spec": "Implement module event_parity(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. q starts at 0. On each rising clock edge with din=1, toggle q. With din=0 hold q. Thus q is the parity of the number of sampled ones since reset.",
+        "checks": 9216,
+        "tb_sha256": "ac111343afe9debbc5ed26b6e474fb73303080b082052eeacdfd90f66b27e65c",
+        "assets": {
+          "agreement.hex": "68acba1204d4451cc6dc7b305053d9e90f616c8cd5b020cd448b91926fc8ede3"
+        },
+        "ports": {
+          "reset_port": "rst_n",
+          "input_port": "din",
+          "output_port": "q",
+          "active": 0
+        },
+        "public_contract": {
+          "clock_edge": "posedge",
+          "output_kind": "moore",
+          "reset": {
+            "kind": "async",
+            "active": 0,
+            "output": 0
+          },
+          "trace_convention": "Each trace starts after reset; output is sampled after every rising edge.",
+          "examples": [
+            {
+              "bits": "101101",
+              "outputs": [
+                1,
+                1,
+                0,
+                1,
+                1,
+                0
+              ]
+            },
+            {
+              "bits": "000",
+              "outputs": [
+                0,
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        "bank_directory": "event_parity"
+      },
+      "ir": "{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":1}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S0\"}]}",
+      "prompt": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs.\n\nImplement module event_parity(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. q starts at 0. On each rising clock edge with din=1, toggle q. With din=0 hold q. Thus q is the parity of the number of sampled ones since reset.\n\nUse reg/localparam state encodings and case/if assignments for Icarus compatibility. Avoid enum-valued ternary assignments. Preserve the specified reset, overlap and cycle timing.\n\nPublic specification examples shared across conditions:\n{\n  \"clock_edge\": \"posedge\",\n  \"output_kind\": \"moore\",\n  \"reset\": {\n    \"kind\": \"async\",\n    \"active\": 0,\n    \"output\": 0\n  },\n  \"trace_convention\": \"Each trace starts after reset; output is sampled after every rising edge.\",\n  \"examples\": [\n    {\n      \"bits\": \"101101\",\n      \"outputs\": [\n        1,\n        1,\n        0,\n        1,\n        1,\n        0\n      ]\n    },\n    {\n      \"bits\": \"000\",\n      \"outputs\": [\n        0,\n        0,\n        0\n      ]\n    }\n  ]\n}\n\nCandidate intermediate state table (may contain mistakes):\n{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":1}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S0\"}]}\n\nImplement the specification. You may correct the candidate table while producing RTL. There is no extra repair turn. Return only the specified RTL module.\n\nExecutable results on the already-public contract:\n{\n  \"status\": \"PUBLIC_CHECK_FAIL\",\n  \"errors\": [\n    {\n      \"bits\": \"101101\",\n      \"expected\": [\n        1,\n        1,\n        0,\n        1,\n        1,\n        0\n      ],\n      \"observed\": [\n        0,\n        1,\n        0,\n        0,\n        1,\n        0\n      ]\n    },\n    {\n      \"bits\": \"000\",\n      \"expected\": [\n        0,\n        0,\n        0\n      ],\n      \"observed\": [\n        1,\n        1,\n        1\n      ]\n    }\n  ],\n  \"scope\": \"Only disclosed examples/reset/schema; private tests were not consulted.\"\n}\n\nDo not invoke tools, read files, run tests, or delegate. Reply directly.",
+      "case_id": "event_parity__edge_00_S1__edge_01_S0"
+    },
+    {
+      "id": "request_delay__v2__feedback",
+      "task": "request_delay",
+      "profile": "v2",
+      "arm": "feedback",
+      "spec": {
+        "id": "request_delay",
+        "module": "request_delay",
+        "category": "fsm",
+        "family": "request_delay",
+        "split": "development",
+        "spec": "Implement module request_delay(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. Initially idle with q=0. In idle, a sampled din=1 accepts a request. q remains 0 on that accepting edge, then is 1 for exactly the following clock cycle, regardless of din. At the next edge q returns to 0 and enters cooldown. In cooldown, remain there while din=1; an edge with din=0 returns to idle. The edge returning to idle does not accept a request.",
+        "checks": 9216,
+        "tb_sha256": "a4cc1b10234e3d9f87d786e5ae2a33001cba8f70761e274a3bbf269d3fc8c788",
+        "assets": {
+          "agreement.hex": "e6b00b9db43bcbabecf07ba74c906a80dd888a638726bbac52366c5a42e98a9e"
+        },
+        "ports": {
+          "reset_port": "rst_n",
+          "input_port": "din",
+          "output_port": "q",
+          "active": 0
+        },
+        "public_contract": {
+          "clock_edge": "posedge",
+          "output_kind": "moore",
+          "reset": {
+            "kind": "async",
+            "active": 0,
+            "output": 0
+          },
+          "trace_convention": "Each trace starts after reset; output is sampled after every rising edge.",
+          "examples": [
+            {
+              "bits": "11111001100",
+              "outputs": [
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0
+              ]
+            },
+            {
+              "bits": "100000",
+              "outputs": [
+                0,
+                1,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "bits": "10010",
+              "outputs": [
+                0,
+                1,
+                0,
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        "bank_directory": "request_delay"
+      },
+      "ir": "{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":0},{\"name\":\"S2\",\"output\":1},{\"name\":\"S3\",\"output\":0}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S2\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S2\"},{\"from\":\"S2\",\"input\":0,\"to\":\"S3\"},{\"from\":\"S2\",\"input\":1,\"to\":\"S3\"},{\"from\":\"S3\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S3\",\"input\":1,\"to\":\"S3\"}]}",
+      "prompt": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs.\n\nImplement module request_delay(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. Initially idle with q=0. In idle, a sampled din=1 accepts a request. q remains 0 on that accepting edge, then is 1 for exactly the following clock cycle, regardless of din. At the next edge q returns to 0 and enters cooldown. In cooldown, remain there while din=1; an edge with din=0 returns to idle. The edge returning to idle does not accept a request.\n\nUse reg/localparam state encodings and case/if assignments for Icarus compatibility. Avoid enum-valued ternary assignments. Preserve the specified reset, overlap and cycle timing.\n\nPublic specification examples shared across conditions:\n{\n  \"clock_edge\": \"posedge\",\n  \"output_kind\": \"moore\",\n  \"reset\": {\n    \"kind\": \"async\",\n    \"active\": 0,\n    \"output\": 0\n  },\n  \"trace_convention\": \"Each trace starts after reset; output is sampled after every rising edge.\",\n  \"examples\": [\n    {\n      \"bits\": \"11111001100\",\n      \"outputs\": [\n        0,\n        1,\n        0,\n        0,\n        0,\n        0,\n        0,\n        0,\n        1,\n        0,\n        0\n      ]\n    },\n    {\n      \"bits\": \"100000\",\n      \"outputs\": [\n        0,\n        1,\n        0,\n        0,\n        0,\n        0\n      ]\n    },\n    {\n      \"bits\": \"10010\",\n      \"outputs\": [\n        0,\n        1,\n        0,\n        0,\n        0\n      ]\n    }\n  ]\n}\n\nCandidate intermediate state table (may contain mistakes):\n{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":0},{\"name\":\"S2\",\"output\":1},{\"name\":\"S3\",\"output\":0}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S2\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S2\"},{\"from\":\"S2\",\"input\":0,\"to\":\"S3\"},{\"from\":\"S2\",\"input\":1,\"to\":\"S3\"},{\"from\":\"S3\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S3\",\"input\":1,\"to\":\"S3\"}]}\n\nImplement the specification. You may correct the candidate table while producing RTL. There is no extra repair turn. Return only the specified RTL module.\n\nExecutable results on the already-public contract:\n{\n  \"status\": \"PUBLIC_CHECK_FAIL\",\n  \"errors\": [\n    {\n      \"bits\": \"11111001100\",\n      \"expected\": [\n        0,\n        1,\n        0,\n        0,\n        0,\n        0,\n        0,\n        0,\n        1,\n        0,\n        0\n      ],\n      \"observed\": [\n        0,\n        0,\n        0,\n        0,\n        0,\n        0,\n        1,\n        0,\n        0,\n        0,\n        0\n      ]\n    },\n    {\n      \"bits\": \"100000\",\n      \"expected\": [\n        0,\n        1,\n        0,\n        0,\n        0,\n        0\n      ],\n      \"observed\": [\n        0,\n        0,\n        1,\n        0,\n        0,\n        0\n      ]\n    },\n    {\n      \"bits\": \"10010\",\n      \"expected\": [\n        0,\n        1,\n        0,\n        0,\n        0\n      ],\n      \"observed\": [\n        0,\n        0,\n        1,\n        0,\n        0\n      ]\n    }\n  ],\n  \"scope\": \"Only disclosed examples/reset/schema; private tests were not consulted.\"\n}\n\nDo not invoke tools, read files, run tests, or delegate. Reply directly.",
+      "case_id": "request_delay__edge_00_S1__edge_01_S0"
+    },
+    {
+      "id": "request_delay__v1__control",
+      "task": "request_delay",
+      "profile": "v1",
+      "arm": "control",
+      "spec": {
+        "id": "request_delay",
+        "module": "request_delay",
+        "category": "fsm",
+        "family": "request_delay",
+        "split": "development",
+        "spec": "Implement module request_delay(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. Initially idle with q=0. In idle, a sampled din=1 accepts a request. q remains 0 on that accepting edge, then is 1 for exactly the following clock cycle, regardless of din. At the next edge q returns to 0 and enters cooldown. In cooldown, remain there while din=1; an edge with din=0 returns to idle. The edge returning to idle does not accept a request.",
+        "checks": 9216,
+        "tb_sha256": "a4cc1b10234e3d9f87d786e5ae2a33001cba8f70761e274a3bbf269d3fc8c788",
+        "assets": {
+          "agreement.hex": "e6b00b9db43bcbabecf07ba74c906a80dd888a638726bbac52366c5a42e98a9e"
+        },
+        "ports": {
+          "reset_port": "rst_n",
+          "input_port": "din",
+          "output_port": "q",
+          "active": 0
+        },
+        "public_contract": {
+          "clock_edge": "posedge",
+          "output_kind": "moore",
+          "reset": {
+            "kind": "async",
+            "active": 0,
+            "output": 0
+          },
+          "trace_convention": "Each trace starts after reset; output is sampled after every rising edge.",
+          "examples": [
+            {
+              "bits": "11111001100",
+              "outputs": [
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0
+              ]
+            },
+            {
+              "bits": "100000",
+              "outputs": [
+                0,
+                1,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        "bank_directory": "request_delay"
+      },
+      "ir": "{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":0},{\"name\":\"S2\",\"output\":1},{\"name\":\"S3\",\"output\":0}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S2\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S2\"},{\"from\":\"S2\",\"input\":0,\"to\":\"S3\"},{\"from\":\"S2\",\"input\":1,\"to\":\"S3\"},{\"from\":\"S3\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S3\",\"input\":1,\"to\":\"S3\"}]}",
+      "prompt": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs.\n\nImplement module request_delay(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. Initially idle with q=0. In idle, a sampled din=1 accepts a request. q remains 0 on that accepting edge, then is 1 for exactly the following clock cycle, regardless of din. At the next edge q returns to 0 and enters cooldown. In cooldown, remain there while din=1; an edge with din=0 returns to idle. The edge returning to idle does not accept a request.\n\nUse reg/localparam state encodings and case/if assignments for Icarus compatibility. Avoid enum-valued ternary assignments. Preserve the specified reset, overlap and cycle timing.\n\nPublic specification examples shared across conditions:\n{\n  \"clock_edge\": \"posedge\",\n  \"output_kind\": \"moore\",\n  \"reset\": {\n    \"kind\": \"async\",\n    \"active\": 0,\n    \"output\": 0\n  },\n  \"trace_convention\": \"Each trace starts after reset; output is sampled after every rising edge.\",\n  \"examples\": [\n    {\n      \"bits\": \"11111001100\",\n      \"outputs\": [\n        0,\n        1,\n        0,\n        0,\n        0,\n        0,\n        0,\n        0,\n        1,\n        0,\n        0\n      ]\n    },\n    {\n      \"bits\": \"100000\",\n      \"outputs\": [\n        0,\n        1,\n        0,\n        0,\n        0,\n        0\n      ]\n    }\n  ]\n}\n\nCandidate intermediate state table (may contain mistakes):\n{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":0},{\"name\":\"S2\",\"output\":1},{\"name\":\"S3\",\"output\":0}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S2\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S2\"},{\"from\":\"S2\",\"input\":0,\"to\":\"S3\"},{\"from\":\"S2\",\"input\":1,\"to\":\"S3\"},{\"from\":\"S3\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S3\",\"input\":1,\"to\":\"S3\"}]}\n\nImplement the specification. You may correct the candidate table while producing RTL. There is no extra repair turn. Return only the specified RTL module.\n\nDo not invoke tools, read files, run tests, or delegate. Reply directly.",
+      "case_id": "request_delay__edge_00_S1__edge_01_S0"
+    },
+    {
+      "id": "request_delay__v1__feedback",
+      "task": "request_delay",
+      "profile": "v1",
+      "arm": "feedback",
+      "spec": {
+        "id": "request_delay",
+        "module": "request_delay",
+        "category": "fsm",
+        "family": "request_delay",
+        "split": "development",
+        "spec": "Implement module request_delay(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. Initially idle with q=0. In idle, a sampled din=1 accepts a request. q remains 0 on that accepting edge, then is 1 for exactly the following clock cycle, regardless of din. At the next edge q returns to 0 and enters cooldown. In cooldown, remain there while din=1; an edge with din=0 returns to idle. The edge returning to idle does not accept a request.",
+        "checks": 9216,
+        "tb_sha256": "a4cc1b10234e3d9f87d786e5ae2a33001cba8f70761e274a3bbf269d3fc8c788",
+        "assets": {
+          "agreement.hex": "e6b00b9db43bcbabecf07ba74c906a80dd888a638726bbac52366c5a42e98a9e"
+        },
+        "ports": {
+          "reset_port": "rst_n",
+          "input_port": "din",
+          "output_port": "q",
+          "active": 0
+        },
+        "public_contract": {
+          "clock_edge": "posedge",
+          "output_kind": "moore",
+          "reset": {
+            "kind": "async",
+            "active": 0,
+            "output": 0
+          },
+          "trace_convention": "Each trace starts after reset; output is sampled after every rising edge.",
+          "examples": [
+            {
+              "bits": "11111001100",
+              "outputs": [
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0
+              ]
+            },
+            {
+              "bits": "100000",
+              "outputs": [
+                0,
+                1,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        "bank_directory": "request_delay"
+      },
+      "ir": "{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":0},{\"name\":\"S2\",\"output\":1},{\"name\":\"S3\",\"output\":0}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S2\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S2\"},{\"from\":\"S2\",\"input\":0,\"to\":\"S3\"},{\"from\":\"S2\",\"input\":1,\"to\":\"S3\"},{\"from\":\"S3\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S3\",\"input\":1,\"to\":\"S3\"}]}",
+      "prompt": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs.\n\nImplement module request_delay(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. Initially idle with q=0. In idle, a sampled din=1 accepts a request. q remains 0 on that accepting edge, then is 1 for exactly the following clock cycle, regardless of din. At the next edge q returns to 0 and enters cooldown. In cooldown, remain there while din=1; an edge with din=0 returns to idle. The edge returning to idle does not accept a request.\n\nUse reg/localparam state encodings and case/if assignments for Icarus compatibility. Avoid enum-valued ternary assignments. Preserve the specified reset, overlap and cycle timing.\n\nPublic specification examples shared across conditions:\n{\n  \"clock_edge\": \"posedge\",\n  \"output_kind\": \"moore\",\n  \"reset\": {\n    \"kind\": \"async\",\n    \"active\": 0,\n    \"output\": 0\n  },\n  \"trace_convention\": \"Each trace starts after reset; output is sampled after every rising edge.\",\n  \"examples\": [\n    {\n      \"bits\": \"11111001100\",\n      \"outputs\": [\n        0,\n        1,\n        0,\n        0,\n        0,\n        0,\n        0,\n        0,\n        1,\n        0,\n        0\n      ]\n    },\n    {\n      \"bits\": \"100000\",\n      \"outputs\": [\n        0,\n        1,\n        0,\n        0,\n        0,\n        0\n      ]\n    }\n  ]\n}\n\nCandidate intermediate state table (may contain mistakes):\n{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":0},{\"name\":\"S2\",\"output\":1},{\"name\":\"S3\",\"output\":0}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S2\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S2\"},{\"from\":\"S2\",\"input\":0,\"to\":\"S3\"},{\"from\":\"S2\",\"input\":1,\"to\":\"S3\"},{\"from\":\"S3\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S3\",\"input\":1,\"to\":\"S3\"}]}\n\nImplement the specification. You may correct the candidate table while producing RTL. There is no extra repair turn. Return only the specified RTL module.\n\nExecutable results on the already-public contract:\n{\n  \"status\": \"PUBLIC_CHECK_FAIL\",\n  \"errors\": [\n    {\n      \"bits\": \"11111001100\",\n      \"expected\": [\n        0,\n        1,\n        0,\n        0,\n        0,\n        0,\n        0,\n        0,\n        1,\n        0,\n        0\n      ],\n      \"observed\": [\n        0,\n        0,\n        0,\n        0,\n        0,\n        0,\n        1,\n        0,\n        0,\n        0,\n        0\n      ]\n    },\n    {\n      \"bits\": \"100000\",\n      \"expected\": [\n        0,\n        1,\n        0,\n        0,\n        0,\n        0\n      ],\n      \"observed\": [\n        0,\n        0,\n        1,\n        0,\n        0,\n        0\n      ]\n    }\n  ],\n  \"scope\": \"Only disclosed examples/reset/schema; private tests were not consulted.\"\n}\n\nDo not invoke tools, read files, run tests, or delegate. Reply directly.",
+      "case_id": "request_delay__edge_00_S1__edge_01_S0"
+    },
+    {
+      "id": "request_delay__v2__control",
+      "task": "request_delay",
+      "profile": "v2",
+      "arm": "control",
+      "spec": {
+        "id": "request_delay",
+        "module": "request_delay",
+        "category": "fsm",
+        "family": "request_delay",
+        "split": "development",
+        "spec": "Implement module request_delay(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. Initially idle with q=0. In idle, a sampled din=1 accepts a request. q remains 0 on that accepting edge, then is 1 for exactly the following clock cycle, regardless of din. At the next edge q returns to 0 and enters cooldown. In cooldown, remain there while din=1; an edge with din=0 returns to idle. The edge returning to idle does not accept a request.",
+        "checks": 9216,
+        "tb_sha256": "a4cc1b10234e3d9f87d786e5ae2a33001cba8f70761e274a3bbf269d3fc8c788",
+        "assets": {
+          "agreement.hex": "e6b00b9db43bcbabecf07ba74c906a80dd888a638726bbac52366c5a42e98a9e"
+        },
+        "ports": {
+          "reset_port": "rst_n",
+          "input_port": "din",
+          "output_port": "q",
+          "active": 0
+        },
+        "public_contract": {
+          "clock_edge": "posedge",
+          "output_kind": "moore",
+          "reset": {
+            "kind": "async",
+            "active": 0,
+            "output": 0
+          },
+          "trace_convention": "Each trace starts after reset; output is sampled after every rising edge.",
+          "examples": [
+            {
+              "bits": "11111001100",
+              "outputs": [
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0
+              ]
+            },
+            {
+              "bits": "100000",
+              "outputs": [
+                0,
+                1,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "bits": "10010",
+              "outputs": [
+                0,
+                1,
+                0,
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        "bank_directory": "request_delay"
+      },
+      "ir": "{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":0},{\"name\":\"S2\",\"output\":1},{\"name\":\"S3\",\"output\":0}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S2\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S2\"},{\"from\":\"S2\",\"input\":0,\"to\":\"S3\"},{\"from\":\"S2\",\"input\":1,\"to\":\"S3\"},{\"from\":\"S3\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S3\",\"input\":1,\"to\":\"S3\"}]}",
+      "prompt": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs.\n\nImplement module request_delay(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. Initially idle with q=0. In idle, a sampled din=1 accepts a request. q remains 0 on that accepting edge, then is 1 for exactly the following clock cycle, regardless of din. At the next edge q returns to 0 and enters cooldown. In cooldown, remain there while din=1; an edge with din=0 returns to idle. The edge returning to idle does not accept a request.\n\nUse reg/localparam state encodings and case/if assignments for Icarus compatibility. Avoid enum-valued ternary assignments. Preserve the specified reset, overlap and cycle timing.\n\nPublic specification examples shared across conditions:\n{\n  \"clock_edge\": \"posedge\",\n  \"output_kind\": \"moore\",\n  \"reset\": {\n    \"kind\": \"async\",\n    \"active\": 0,\n    \"output\": 0\n  },\n  \"trace_convention\": \"Each trace starts after reset; output is sampled after every rising edge.\",\n  \"examples\": [\n    {\n      \"bits\": \"11111001100\",\n      \"outputs\": [\n        0,\n        1,\n        0,\n        0,\n        0,\n        0,\n        0,\n        0,\n        1,\n        0,\n        0\n      ]\n    },\n    {\n      \"bits\": \"100000\",\n      \"outputs\": [\n        0,\n        1,\n        0,\n        0,\n        0,\n        0\n      ]\n    },\n    {\n      \"bits\": \"10010\",\n      \"outputs\": [\n        0,\n        1,\n        0,\n        0,\n        0\n      ]\n    }\n  ]\n}\n\nCandidate intermediate state table (may contain mistakes):\n{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":0},{\"name\":\"S2\",\"output\":1},{\"name\":\"S3\",\"output\":0}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S2\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S2\"},{\"from\":\"S2\",\"input\":0,\"to\":\"S3\"},{\"from\":\"S2\",\"input\":1,\"to\":\"S3\"},{\"from\":\"S3\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S3\",\"input\":1,\"to\":\"S3\"}]}\n\nImplement the specification. You may correct the candidate table while producing RTL. There is no extra repair turn. Return only the specified RTL module.\n\nDo not invoke tools, read files, run tests, or delegate. Reply directly.",
+      "case_id": "request_delay__edge_00_S1__edge_01_S0"
+    },
+    {
+      "id": "debounce3__v1__control",
+      "task": "debounce3",
+      "profile": "v1",
+      "arm": "control",
+      "spec": {
+        "id": "debounce3",
+        "module": "debounce3",
+        "category": "fsm",
+        "family": "debounce3",
+        "split": "development",
+        "spec": "Implement module debounce3(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. Initially q=0. While q=0, require three consecutive sampled ones to change q to 1 on the third edge; any zero restarts this count. While q=1, require two consecutive sampled zeros to change q to 0 on the second edge; any one restarts this count. q otherwise holds.",
+        "checks": 9216,
+        "tb_sha256": "cff80605ce4e08a7469025e72d6ace782184cdf9b6d9b18a9a58fefff42eae0e",
+        "assets": {
+          "agreement.hex": "7149675d5fecdde1559c88400e4708bfb742dc2dc0f76125fe042941663de1a0"
+        },
+        "ports": {
+          "reset_port": "rst_n",
+          "input_port": "din",
+          "output_port": "q",
+          "active": 0
+        },
+        "public_contract": {
+          "clock_edge": "posedge",
+          "output_kind": "moore",
+          "reset": {
+            "kind": "async",
+            "active": 0,
+            "output": 0
+          },
+          "trace_convention": "Each trace starts after reset; output is sampled after every rising edge.",
+          "examples": [
+            {
+              "bits": "01110100111",
+              "outputs": [
+                0,
+                0,
+                0,
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "bits": "110110",
+              "outputs": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        "bank_directory": "debounce3"
+      },
+      "ir": "{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":0},{\"name\":\"S2\",\"output\":0},{\"name\":\"S3\",\"output\":1},{\"name\":\"S4\",\"output\":1}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S2\"},{\"from\":\"S2\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S2\",\"input\":1,\"to\":\"S3\"},{\"from\":\"S3\",\"input\":0,\"to\":\"S4\"},{\"from\":\"S3\",\"input\":1,\"to\":\"S3\"},{\"from\":\"S4\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S4\",\"input\":1,\"to\":\"S3\"}]}",
+      "prompt": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs.\n\nImplement module debounce3(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. Initially q=0. While q=0, require three consecutive sampled ones to change q to 1 on the third edge; any zero restarts this count. While q=1, require two consecutive sampled zeros to change q to 0 on the second edge; any one restarts this count. q otherwise holds.\n\nUse reg/localparam state encodings and case/if assignments for Icarus compatibility. Avoid enum-valued ternary assignments. Preserve the specified reset, overlap and cycle timing.\n\nPublic specification examples shared across conditions:\n{\n  \"clock_edge\": \"posedge\",\n  \"output_kind\": \"moore\",\n  \"reset\": {\n    \"kind\": \"async\",\n    \"active\": 0,\n    \"output\": 0\n  },\n  \"trace_convention\": \"Each trace starts after reset; output is sampled after every rising edge.\",\n  \"examples\": [\n    {\n      \"bits\": \"01110100111\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        1,\n        1,\n        1,\n        1,\n        0,\n        0,\n        0,\n        1\n      ]\n    },\n    {\n      \"bits\": \"110110\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        0,\n        0,\n        0\n      ]\n    }\n  ]\n}\n\nCandidate intermediate state table (may contain mistakes):\n{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":0},{\"name\":\"S2\",\"output\":0},{\"name\":\"S3\",\"output\":1},{\"name\":\"S4\",\"output\":1}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S2\"},{\"from\":\"S2\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S2\",\"input\":1,\"to\":\"S3\"},{\"from\":\"S3\",\"input\":0,\"to\":\"S4\"},{\"from\":\"S3\",\"input\":1,\"to\":\"S3\"},{\"from\":\"S4\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S4\",\"input\":1,\"to\":\"S3\"}]}\n\nImplement the specification. You may correct the candidate table while producing RTL. There is no extra repair turn. Return only the specified RTL module.\n\nDo not invoke tools, read files, run tests, or delegate. Reply directly.",
+      "case_id": "debounce3__edge_00_S1__edge_01_S0"
+    },
+    {
+      "id": "debounce3__v1__feedback",
+      "task": "debounce3",
+      "profile": "v1",
+      "arm": "feedback",
+      "spec": {
+        "id": "debounce3",
+        "module": "debounce3",
+        "category": "fsm",
+        "family": "debounce3",
+        "split": "development",
+        "spec": "Implement module debounce3(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. Initially q=0. While q=0, require three consecutive sampled ones to change q to 1 on the third edge; any zero restarts this count. While q=1, require two consecutive sampled zeros to change q to 0 on the second edge; any one restarts this count. q otherwise holds.",
+        "checks": 9216,
+        "tb_sha256": "cff80605ce4e08a7469025e72d6ace782184cdf9b6d9b18a9a58fefff42eae0e",
+        "assets": {
+          "agreement.hex": "7149675d5fecdde1559c88400e4708bfb742dc2dc0f76125fe042941663de1a0"
+        },
+        "ports": {
+          "reset_port": "rst_n",
+          "input_port": "din",
+          "output_port": "q",
+          "active": 0
+        },
+        "public_contract": {
+          "clock_edge": "posedge",
+          "output_kind": "moore",
+          "reset": {
+            "kind": "async",
+            "active": 0,
+            "output": 0
+          },
+          "trace_convention": "Each trace starts after reset; output is sampled after every rising edge.",
+          "examples": [
+            {
+              "bits": "01110100111",
+              "outputs": [
+                0,
+                0,
+                0,
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "bits": "110110",
+              "outputs": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        "bank_directory": "debounce3"
+      },
+      "ir": "{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":0},{\"name\":\"S2\",\"output\":0},{\"name\":\"S3\",\"output\":1},{\"name\":\"S4\",\"output\":1}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S2\"},{\"from\":\"S2\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S2\",\"input\":1,\"to\":\"S3\"},{\"from\":\"S3\",\"input\":0,\"to\":\"S4\"},{\"from\":\"S3\",\"input\":1,\"to\":\"S3\"},{\"from\":\"S4\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S4\",\"input\":1,\"to\":\"S3\"}]}",
+      "prompt": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs.\n\nImplement module debounce3(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. Initially q=0. While q=0, require three consecutive sampled ones to change q to 1 on the third edge; any zero restarts this count. While q=1, require two consecutive sampled zeros to change q to 0 on the second edge; any one restarts this count. q otherwise holds.\n\nUse reg/localparam state encodings and case/if assignments for Icarus compatibility. Avoid enum-valued ternary assignments. Preserve the specified reset, overlap and cycle timing.\n\nPublic specification examples shared across conditions:\n{\n  \"clock_edge\": \"posedge\",\n  \"output_kind\": \"moore\",\n  \"reset\": {\n    \"kind\": \"async\",\n    \"active\": 0,\n    \"output\": 0\n  },\n  \"trace_convention\": \"Each trace starts after reset; output is sampled after every rising edge.\",\n  \"examples\": [\n    {\n      \"bits\": \"01110100111\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        1,\n        1,\n        1,\n        1,\n        0,\n        0,\n        0,\n        1\n      ]\n    },\n    {\n      \"bits\": \"110110\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        0,\n        0,\n        0\n      ]\n    }\n  ]\n}\n\nCandidate intermediate state table (may contain mistakes):\n{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":0},{\"name\":\"S2\",\"output\":0},{\"name\":\"S3\",\"output\":1},{\"name\":\"S4\",\"output\":1}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S2\"},{\"from\":\"S2\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S2\",\"input\":1,\"to\":\"S3\"},{\"from\":\"S3\",\"input\":0,\"to\":\"S4\"},{\"from\":\"S3\",\"input\":1,\"to\":\"S3\"},{\"from\":\"S4\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S4\",\"input\":1,\"to\":\"S3\"}]}\n\nImplement the specification. You may correct the candidate table while producing RTL. There is no extra repair turn. Return only the specified RTL module.\n\nExecutable results on the already-public contract:\n{\n  \"status\": \"PUBLIC_CHECK_FAIL\",\n  \"errors\": [\n    {\n      \"bits\": \"01110100111\",\n      \"expected\": [\n        0,\n        0,\n        0,\n        1,\n        1,\n        1,\n        1,\n        0,\n        0,\n        0,\n        1\n      ],\n      \"observed\": [\n        0,\n        0,\n        1,\n        1,\n        1,\n        1,\n        1,\n        0,\n        0,\n        0,\n        0\n      ]\n    },\n    {\n      \"bits\": \"110110\",\n      \"expected\": [\n        0,\n        0,\n        0,\n        0,\n        0,\n        0\n      ],\n      \"observed\": [\n        0,\n        0,\n        0,\n        0,\n        1,\n        1\n      ]\n    }\n  ],\n  \"scope\": \"Only disclosed examples/reset/schema; private tests were not consulted.\"\n}\n\nDo not invoke tools, read files, run tests, or delegate. Reply directly.",
+      "case_id": "debounce3__edge_00_S1__edge_01_S0"
+    },
+    {
+      "id": "debounce3__v2__control",
+      "task": "debounce3",
+      "profile": "v2",
+      "arm": "control",
+      "spec": {
+        "id": "debounce3",
+        "module": "debounce3",
+        "category": "fsm",
+        "family": "debounce3",
+        "split": "development",
+        "spec": "Implement module debounce3(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. Initially q=0. While q=0, require three consecutive sampled ones to change q to 1 on the third edge; any zero restarts this count. While q=1, require two consecutive sampled zeros to change q to 0 on the second edge; any one restarts this count. q otherwise holds.",
+        "checks": 9216,
+        "tb_sha256": "cff80605ce4e08a7469025e72d6ace782184cdf9b6d9b18a9a58fefff42eae0e",
+        "assets": {
+          "agreement.hex": "7149675d5fecdde1559c88400e4708bfb742dc2dc0f76125fe042941663de1a0"
+        },
+        "ports": {
+          "reset_port": "rst_n",
+          "input_port": "din",
+          "output_port": "q",
+          "active": 0
+        },
+        "public_contract": {
+          "clock_edge": "posedge",
+          "output_kind": "moore",
+          "reset": {
+            "kind": "async",
+            "active": 0,
+            "output": 0
+          },
+          "trace_convention": "Each trace starts after reset; output is sampled after every rising edge.",
+          "examples": [
+            {
+              "bits": "01110100111",
+              "outputs": [
+                0,
+                0,
+                0,
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "bits": "110110",
+              "outputs": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "bits": "1011",
+              "outputs": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "bits": "11110",
+              "outputs": [
+                0,
+                0,
+                1,
+                1,
+                1
+              ]
+            }
+          ]
+        },
+        "bank_directory": "debounce3"
+      },
+      "ir": "{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":0},{\"name\":\"S2\",\"output\":0},{\"name\":\"S3\",\"output\":1},{\"name\":\"S4\",\"output\":1}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S2\"},{\"from\":\"S2\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S2\",\"input\":1,\"to\":\"S3\"},{\"from\":\"S3\",\"input\":0,\"to\":\"S4\"},{\"from\":\"S3\",\"input\":1,\"to\":\"S3\"},{\"from\":\"S4\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S4\",\"input\":1,\"to\":\"S3\"}]}",
+      "prompt": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs.\n\nImplement module debounce3(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. Initially q=0. While q=0, require three consecutive sampled ones to change q to 1 on the third edge; any zero restarts this count. While q=1, require two consecutive sampled zeros to change q to 0 on the second edge; any one restarts this count. q otherwise holds.\n\nUse reg/localparam state encodings and case/if assignments for Icarus compatibility. Avoid enum-valued ternary assignments. Preserve the specified reset, overlap and cycle timing.\n\nPublic specification examples shared across conditions:\n{\n  \"clock_edge\": \"posedge\",\n  \"output_kind\": \"moore\",\n  \"reset\": {\n    \"kind\": \"async\",\n    \"active\": 0,\n    \"output\": 0\n  },\n  \"trace_convention\": \"Each trace starts after reset; output is sampled after every rising edge.\",\n  \"examples\": [\n    {\n      \"bits\": \"01110100111\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        1,\n        1,\n        1,\n        1,\n        0,\n        0,\n        0,\n        1\n      ]\n    },\n    {\n      \"bits\": \"110110\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        0,\n        0,\n        0\n      ]\n    },\n    {\n      \"bits\": \"1011\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        0\n      ]\n    },\n    {\n      \"bits\": \"11110\",\n      \"outputs\": [\n        0,\n        0,\n        1,\n        1,\n        1\n      ]\n    }\n  ]\n}\n\nCandidate intermediate state table (may contain mistakes):\n{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":0},{\"name\":\"S2\",\"output\":0},{\"name\":\"S3\",\"output\":1},{\"name\":\"S4\",\"output\":1}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S2\"},{\"from\":\"S2\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S2\",\"input\":1,\"to\":\"S3\"},{\"from\":\"S3\",\"input\":0,\"to\":\"S4\"},{\"from\":\"S3\",\"input\":1,\"to\":\"S3\"},{\"from\":\"S4\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S4\",\"input\":1,\"to\":\"S3\"}]}\n\nImplement the specification. You may correct the candidate table while producing RTL. There is no extra repair turn. Return only the specified RTL module.\n\nDo not invoke tools, read files, run tests, or delegate. Reply directly.",
+      "case_id": "debounce3__edge_00_S1__edge_01_S0"
+    },
+    {
+      "id": "debounce3__v2__feedback",
+      "task": "debounce3",
+      "profile": "v2",
+      "arm": "feedback",
+      "spec": {
+        "id": "debounce3",
+        "module": "debounce3",
+        "category": "fsm",
+        "family": "debounce3",
+        "split": "development",
+        "spec": "Implement module debounce3(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. Initially q=0. While q=0, require three consecutive sampled ones to change q to 1 on the third edge; any zero restarts this count. While q=1, require two consecutive sampled zeros to change q to 0 on the second edge; any one restarts this count. q otherwise holds.",
+        "checks": 9216,
+        "tb_sha256": "cff80605ce4e08a7469025e72d6ace782184cdf9b6d9b18a9a58fefff42eae0e",
+        "assets": {
+          "agreement.hex": "7149675d5fecdde1559c88400e4708bfb742dc2dc0f76125fe042941663de1a0"
+        },
+        "ports": {
+          "reset_port": "rst_n",
+          "input_port": "din",
+          "output_port": "q",
+          "active": 0
+        },
+        "public_contract": {
+          "clock_edge": "posedge",
+          "output_kind": "moore",
+          "reset": {
+            "kind": "async",
+            "active": 0,
+            "output": 0
+          },
+          "trace_convention": "Each trace starts after reset; output is sampled after every rising edge.",
+          "examples": [
+            {
+              "bits": "01110100111",
+              "outputs": [
+                0,
+                0,
+                0,
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "bits": "110110",
+              "outputs": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "bits": "1011",
+              "outputs": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "bits": "11110",
+              "outputs": [
+                0,
+                0,
+                1,
+                1,
+                1
+              ]
+            }
+          ]
+        },
+        "bank_directory": "debounce3"
+      },
+      "ir": "{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":0},{\"name\":\"S2\",\"output\":0},{\"name\":\"S3\",\"output\":1},{\"name\":\"S4\",\"output\":1}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S2\"},{\"from\":\"S2\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S2\",\"input\":1,\"to\":\"S3\"},{\"from\":\"S3\",\"input\":0,\"to\":\"S4\"},{\"from\":\"S3\",\"input\":1,\"to\":\"S3\"},{\"from\":\"S4\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S4\",\"input\":1,\"to\":\"S3\"}]}",
+      "prompt": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs.\n\nImplement module debounce3(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. Initially q=0. While q=0, require three consecutive sampled ones to change q to 1 on the third edge; any zero restarts this count. While q=1, require two consecutive sampled zeros to change q to 0 on the second edge; any one restarts this count. q otherwise holds.\n\nUse reg/localparam state encodings and case/if assignments for Icarus compatibility. Avoid enum-valued ternary assignments. Preserve the specified reset, overlap and cycle timing.\n\nPublic specification examples shared across conditions:\n{\n  \"clock_edge\": \"posedge\",\n  \"output_kind\": \"moore\",\n  \"reset\": {\n    \"kind\": \"async\",\n    \"active\": 0,\n    \"output\": 0\n  },\n  \"trace_convention\": \"Each trace starts after reset; output is sampled after every rising edge.\",\n  \"examples\": [\n    {\n      \"bits\": \"01110100111\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        1,\n        1,\n        1,\n        1,\n        0,\n        0,\n        0,\n        1\n      ]\n    },\n    {\n      \"bits\": \"110110\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        0,\n        0,\n        0\n      ]\n    },\n    {\n      \"bits\": \"1011\",\n      \"outputs\": [\n        0,\n        0,\n        0,\n        0\n      ]\n    },\n    {\n      \"bits\": \"11110\",\n      \"outputs\": [\n        0,\n        0,\n        1,\n        1,\n        1\n      ]\n    }\n  ]\n}\n\nCandidate intermediate state table (may contain mistakes):\n{\"clock_edge\":\"posedge\",\"output_kind\":\"moore\",\"reset\":{\"active\":0,\"kind\":\"async\",\"state\":\"S0\"},\"schema\":1,\"states\":[{\"name\":\"S0\",\"output\":0},{\"name\":\"S1\",\"output\":0},{\"name\":\"S2\",\"output\":0},{\"name\":\"S3\",\"output\":1},{\"name\":\"S4\",\"output\":1}],\"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S1\"},{\"from\":\"S0\",\"input\":1,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S1\",\"input\":1,\"to\":\"S2\"},{\"from\":\"S2\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S2\",\"input\":1,\"to\":\"S3\"},{\"from\":\"S3\",\"input\":0,\"to\":\"S4\"},{\"from\":\"S3\",\"input\":1,\"to\":\"S3\"},{\"from\":\"S4\",\"input\":0,\"to\":\"S0\"},{\"from\":\"S4\",\"input\":1,\"to\":\"S3\"}]}\n\nImplement the specification. You may correct the candidate table while producing RTL. There is no extra repair turn. Return only the specified RTL module.\n\nExecutable results on the already-public contract:\n{\n  \"status\": \"PUBLIC_CHECK_FAIL\",\n  \"errors\": [\n    {\n      \"bits\": \"01110100111\",\n      \"expected\": [\n        0,\n        0,\n        0,\n        1,\n        1,\n        1,\n        1,\n        0,\n        0,\n        0,\n        1\n      ],\n      \"observed\": [\n        0,\n        0,\n        1,\n        1,\n        1,\n        1,\n        1,\n        0,\n        0,\n        0,\n        0\n      ]\n    },\n    {\n      \"bits\": \"110110\",\n      \"expected\": [\n        0,\n        0,\n        0,\n        0,\n        0,\n        0\n      ],\n      \"observed\": [\n        0,\n        0,\n        0,\n        0,\n        1,\n        1\n      ]\n    },\n    {\n      \"bits\": \"1011\",\n      \"expected\": [\n        0,\n        0,\n        0,\n        0\n      ],\n      \"observed\": [\n        0,\n        0,\n        0,\n        1\n      ]\n    },\n    {\n      \"bits\": \"11110\",\n      \"expected\": [\n        0,\n        0,\n        1,\n        1,\n        1\n      ],\n      \"observed\": [\n        0,\n        0,\n        0,\n        0,\n        0\n      ]\n    }\n  ],\n  \"scope\": \"Only disclosed examples/reset/schema; private tests were not consulted.\"\n}\n\nDo not invoke tools, read files, run tests, or delegate. Reply directly.",
+      "case_id": "debounce3__edge_00_S1__edge_01_S0"
+    }
+  ],
+  "seed": null,
+  "selection": "First semantic compound fault per family in frozen enumeration order; no model-based selection",
+  "source_hashes": {
+    "exploration\\20261011\\model_factorial.py": "9dc22ba83f2b8c2ce487d38dbf7c423d528219dd5b0ef7df0cae26b35e3cdd51",
+    "exploration\\20261011\\PROTOCOL.md": "5103a5415be5fd20adb926b243165a7121a972546d3668f33c27ccc9af447978",
+    "exploration\\20261011\\runs\\compound-v1\\cases.json": "57d53c23f1a92ceb49615ee143a07daf2655c3c6974ab33f0659a76f219dc8ff",
+    "codex_adapter.py": "33a6080d45ff8f36c6441afeda8ba53d6e5204bd0bd0ad33a8d38c165d63af9d",
+    "paired_study.py": "949a25a5e40f9fd1f2fd1f0f9468f04885224e9c072ecc1fa5ba8150ad0b7960",
+    "rtl_lab.py": "ab4f386a3bb5aa84bb729f18fe3b19e43399ba66dc567e297328d1c046432702",
+    "backends.py": "ff9d4e787157a57b4c6c506c52fc4c798e388a0ca1cf694df2b50d79c76de5b0",
+    "fsm_ir.py": "ccdfb042eba75880b42fe18aacaea31641bb52d84825400f7d71c17d08420f26",
+    "fsm_checks.py": "5f8a82a5628511b685dec53adb2f5433dd0740b2456a409d7a0029af4cedda82",
+    "paired_bank.py": "2b1ad37bf00bc07adf6ed56025909d4e73ed1b70f1f788be7c63eb98bba3fc8f",
+    "evidence\\mutation-v1\\contracts-v2.json": "c105271d38bbb1f5b55271f991b89ff56a8510c5a1a69c6bd8589c9999f9443e",
+    "benchmarks\\paired-v1\\bank-lock.json": "0e11e5f7baa2cc2c96a3044548c806355bcbf26637925207c49b23531fe29ec8"
+  }
+}

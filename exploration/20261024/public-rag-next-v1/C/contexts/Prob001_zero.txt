@@ -1,0 +1,20 @@
+
+
+<generic_reference_context>
+These are generic style excerpts, not new task requirements or solutions. The original specification above takes precedence.
+Source: lowRISC contributors; CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/); unmodified selected prose.
+https://github.com/lowRISC/style-guides/blob/9c15ff5dce23eef969e00ab3715153967419eadd/VerilogCodingStyle.md
+[LR002; Delay Modeling; lines 1789-1790]
+Synthesizable design modules must be designed around a zero-delay simulation
+methodology. All forms of `#delay`, including `#0`, are not permitted.
+
+[LR015; Case Statements; lines 2189-2192]
+  - a `default:` statement is **always** included in order to avoid accidental
+  inference of latches, even if all cases are covered. In simulation, a case
+  expression that evaluates to `X` will not match any case and will behave as a
+  latch, leading to different behavior than synthesis if no default is specified.
+
+[LR003; Sequential Logic (Latches); lines 1802-1803]
+If you must use a latch, use `always_latch` over `always`, and use non-blocking
+assignments (`<=`). Never use blocking assignments (`=`).
+</generic_reference_context>

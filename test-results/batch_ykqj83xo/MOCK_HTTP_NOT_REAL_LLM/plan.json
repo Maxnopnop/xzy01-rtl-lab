@@ -1,0 +1,70 @@
+{
+  "schema": 2,
+  "created_utc": "2026-10-09T09:22:35.269747+00:00",
+  "config": {
+    "mode": "live",
+    "model": "MOCK_NOT_REAL_LLM",
+    "base_url": "http://127.0.0.1:37189/v1",
+    "api_key_env": "UNUSED_MOCK_KEY",
+    "allow_anonymous": true,
+    "codex_executable": null,
+    "codex_reasoning": "low",
+    "temperature": null,
+    "seed": null,
+    "max_output_tokens": 4096,
+    "token_field": "max_tokens",
+    "api_timeout": 180,
+    "compile_timeout": 15,
+    "sim_timeout": 10,
+    "iverilog": null,
+    "vvp": null,
+    "rtl_dir": "/mnt/e/Codex/2026-09-25/xzy01-using-llm-for-digital-chip-2/outputs/rtl-batch/examples/correct",
+    "label": "LIVE_API",
+    "backend": "icarus",
+    "suite": "custom",
+    "task_dir": "tasks",
+    "synthesis": "none",
+    "yosys": null,
+    "synth_timeout": 60
+  },
+  "tasks": [
+    {
+      "id": "adder8",
+      "module": "adder8",
+      "checks": 65536,
+      "spec": "Implement module adder8(input wire [7:0] a, input wire [7:0] b, output wire [8:0] sum). Purely combinational unsigned addition. sum must contain the full 9-bit result a+b, including carry. No clock or state.",
+      "tb_sha256": "c22243b768f841920d968019e2579b14245c4b9fbab08752d003565381fbff8b",
+      "category": "combinational",
+      "origin": "local_handwritten_v1"
+    }
+  ],
+  "jobs": [
+    {
+      "id": "adder8__s001",
+      "task": "adder8",
+      "sample": 1
+    },
+    {
+      "id": "adder8__s002",
+      "task": "adder8",
+      "sample": 2
+    },
+    {
+      "id": "adder8__s003",
+      "task": "adder8",
+      "sample": 3
+    }
+  ],
+  "source_hashes": {
+    "batch.py": "caf3dfdf2cdd753a72c574f43e17ca04bcb9bcefc21a2dd59686a7a1a0489c10",
+    "rtl_lab.py": "ab4f386a3bb5aa84bb729f18fe3b19e43399ba66dc567e297328d1c046432702",
+    "backends.py": "ff9d4e787157a57b4c6c506c52fc4c798e388a0ca1cf694df2b50d79c76de5b0",
+    "codex_adapter.py": "33a6080d45ff8f36c6441afeda8ba53d6e5204bd0bd0ad33a8d38c165d63af9d",
+    "api_worker.py": "3696301af3270a50d959773e15476700395a9703aa2a8185d0f2a669b695efc8",
+    "synthesis.py": "0bf4a414c99cc0700b3ecc25f640fe7f4f3ddc22d1ab4ab234264d402fd221c3",
+    "tasks/manifest.json": "fc1f917d5cdd12b44c0a00027ae15de0f8c9e7cb8261ae4546493f5c7fe9a67f"
+  },
+  "fixture_hashes": {},
+  "max_calls": 3,
+  "note": "Local custom suite; offline repeats are not model samples."
+}

@@ -1,0 +1,80 @@
+test_codex_missing_executable_as_script (test_lab.Regression.test_codex_missing_executable_as_script) ... ok
+test_endpoint_policy (test_lab.Regression.test_endpoint_policy) ... ok
+test_environment_failure_recorded (test_lab.Regression.test_environment_failure_recorded) ... ok
+test_extraction_and_policy (test_lab.Regression.test_extraction_and_policy) ... ok
+test_mock_http_transport (test_lab.Regression.test_mock_http_transport) ... 
+  test_mock_http_transport (test_lab.Regression.test_mock_http_transport) (case='ok') ... ERROR
+  test_mock_http_transport (test_lab.Regression.test_mock_http_transport) (case='truncated') ... FAIL
+test_mock_http_transport (test_lab.Regression.test_mock_http_transport) ... FAIL
+test_offline_matrix (test_lab.Regression.test_offline_matrix) ... ok
+test_output_limit (test_lab.Regression.test_output_limit) ... ok
+test_timeout_cleans_process_tree (test_lab.Regression.test_timeout_cleans_process_tree) ... ok
+test_unconfigured_live_recorded (test_lab.Regression.test_unconfigured_live_recorded) ... ok
+test_unique_runs (test_lab.Regression.test_unique_runs) ... ok
+test_verdict_protocol (test_lab.Regression.test_verdict_protocol) ... ok
+test_call_cap_with_explicit_mock_http_not_real_llm (test_batch.BatchTests.test_call_cap_with_explicit_mock_http_not_real_llm) ... FAIL
+test_interrupt_persists_and_releases_lock (test_batch.BatchTests.test_interrupt_persists_and_releases_lock) ... ok
+test_lock_and_input_change (test_batch.BatchTests.test_lock_and_input_change) ... ok
+test_manual_bridge_receipt_source_and_license (test_batch.BatchTests.test_manual_bridge_receipt_source_and_license) ... ok
+test_parallel_resume_and_no_duplicate (test_batch.BatchTests.test_parallel_resume_and_no_duplicate) ... ok
+test_plan_source_change_rejected (test_batch.BatchTests.test_plan_source_change_rejected) ... ok
+test_bootstrap_keeps_pairs_and_benchmarks (test_dev.DevelopmentTests.test_bootstrap_keeps_pairs_and_benchmarks) ... ok
+test_pilot_plan_no_calls_and_settings_guard (test_dev.DevelopmentTests.test_pilot_plan_no_calls_and_settings_guard) ... ok
+test_reference_and_mutants (test_dev.DevelopmentTests.test_reference_and_mutants) ... ok
+test_replay_binding_resume_and_tamper (test_dev.DevelopmentTests.test_replay_binding_resume_and_tamper) ... skipped 'Native Yosys required; execute this test in WSL/Linux'
+test_sources_split_and_deterministic_rebuild (test_dev.DevelopmentTests.test_sources_split_and_deterministic_rebuild) ... ok
+test_synthesis_faults_and_timeout (test_dev.DevelopmentTests.test_synthesis_faults_and_timeout) ... skipped 'Native Yosys required; execute this test in WSL/Linux'
+test_wildcard_allowed_but_attributes_rejected (test_dev.DevelopmentTests.test_wildcard_allowed_but_attributes_rejected) ... ok
+test_budget_is_reserved_in_pairs_and_never_reissued (test_fsm.FSMTests.test_budget_is_reserved_in_pairs_and_never_reissued) ... ok
+test_interrupted_job_is_terminal_and_source_changes_block_resume (test_fsm.FSMTests.test_interrupted_job_is_terminal_and_source_changes_block_resume) ... ok
+test_offline_roundtrip_resume_csv_and_curated_hashes (test_fsm.FSMTests.test_offline_roundtrip_resume_csv_and_curated_hashes) ... ok
+test_oracle_matches_every_frozen_vector (test_fsm.FSMTests.test_oracle_matches_every_frozen_vector) ... ok
+test_prompts_have_equal_public_information_and_no_private_feedback (test_fsm.FSMTests.test_prompts_have_equal_public_information_and_no_private_feedback) ... ok
+test_public_is_not_private_and_counterexample_is_replayable (test_fsm.FSMTests.test_public_is_not_private_and_counterexample_is_replayable) ... ok
+test_real_simulation_localizes_deliberate_faults (test_fsm.FSMTests.test_real_simulation_localizes_deliberate_faults) ... ok
+test_schema_rejects_ambiguous_or_incomplete_data (test_fsm.FSMTests.test_schema_rejects_ambiguous_or_incomplete_data) ... ok
+test_state_renaming_and_redundancy_do_not_change_semantics (test_fsm.FSMTests.test_state_renaming_and_redundancy_do_not_change_semantics) ... ok
+test_timed_reset_and_output_latency_mutations (test_fsm.FSMTests.test_timed_reset_and_output_latency_mutations) ... ok
+
+======================================================================
+ERROR: test_mock_http_transport (test_lab.Regression.test_mock_http_transport) (case='ok')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Codex\2026-09-25\xzy01-using-llm-for-digital-chip-2\outputs\rtl-batch\test_lab.py", line 211, in test_mock_http_transport
+    raw, meta = lab.generate(args, dest, payload, secret)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Codex\2026-09-25\xzy01-using-llm-for-digital-chip-2\outputs\rtl-batch\rtl_lab.py", line 250, in generate
+    raise LabError("API_ERROR", "api", str(envelope.get("error", "API request failed")))
+rtl_lab.LabError: RemoteDisconnected; request failed; no retry
+
+======================================================================
+FAIL: test_mock_http_transport (test_lab.Regression.test_mock_http_transport) (case='truncated')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Codex\2026-09-25\xzy01-using-llm-for-digital-chip-2\outputs\rtl-batch\test_lab.py", line 217, in test_mock_http_transport
+    self.assertEqual(caught.exception.status, "EXTRACTION_ERROR" if case == "truncated" else "API_ERROR")
+AssertionError: 'API_ERROR' != 'EXTRACTION_ERROR'
+- API_ERROR
++ EXTRACTION_ERROR
+
+
+======================================================================
+FAIL: test_mock_http_transport (test_lab.Regression.test_mock_http_transport)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Codex\2026-09-25\xzy01-using-llm-for-digital-chip-2\outputs\rtl-batch\test_lab.py", line 220, in test_mock_http_transport
+    self.assertEqual(len(observed), 6)
+AssertionError: 0 != 6
+
+======================================================================
+FAIL: test_call_cap_with_explicit_mock_http_not_real_llm (test_batch.BatchTests.test_call_cap_with_explicit_mock_http_not_real_llm)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Codex\2026-09-25\xzy01-using-llm-for-digital-chip-2\outputs\rtl-batch\test_batch.py", line 125, in test_call_cap_with_explicit_mock_http_not_real_llm
+    self.assertEqual(len(counter),1)
+AssertionError: 0 != 1
+
+----------------------------------------------------------------------
+Ran 34 tests in 75.819s
+
+FAILED (failures=3, errors=1, skipped=2)

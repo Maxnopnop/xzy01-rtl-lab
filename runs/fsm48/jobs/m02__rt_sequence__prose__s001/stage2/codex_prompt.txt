@@ -1,0 +1,105 @@
+Implement the given digital circuit in synthesizable SystemVerilog.
+Return only one complete module in a single ```systemverilog code block.
+Use exactly the specified module name and ports. Do not provide a testbench.
+No includes, preprocessor directives, strings, hierarchical references, extra
+modules, simulation system tasks, file IO, or attributes. Only $signed,
+$unsigned and $clog2 system functions are permitted. Do not use delays.
+The independent evaluator will supply all input stimuli and check outputs.
+
+Please act as a professional Verilog designer.
+
+Implement a module of a sequence detector to detect a specific 4-bit binary sequence 1001.
+
+Module name:
+    sequence_detector
+
+Input ports:
+    clk: Clock signal to synchronize the detector.
+    rst_n: Active-low reset signal to initialize the state machine.
+    data_in: 1-bit binary input signal to feed the bitstream for sequence detection.
+
+Output ports:
+    sequence_detected: 1-bit output signal that is set high when the specific sequence is detected.
+    
+Internal logic:
+    State Machine: The sequence detector uses a finite state machine (FSM) with the following states:
+    IDLE: Waiting for the start of the sequence.
+    S1: The first bit of the desired sequence is detected.
+    S2: The second bit of the desired sequence is detected.
+    S3: The third bit of the desired sequence is detected.
+    S4: The fourth and final bit of the desired sequence is detected, and the output sequence_detected is set high.
+
+Implementation:
+    -FSM Design: The FSM transitions through states based on the bitstream data_in. On each clock cycle, the detector checks for a match of the specific sequence.
+
+    -Sequence Detection: The module checks the input data_in and transitions between states. Once the complete sequence is detected, sequence_detected is asserted.
+
+    -Reset Behavior: When rst_n is low, the state machine returns to the IDLE state, resetting the detection process.
+
+Development-subset clarification (part of the fixed specification): Use asynchronous active-low reset, overlapping detections, and a Moore output high after the edge consuming the final 1; matching the archived reference.
+
+Common implementation convention:
+Use reg/localparam state encodings and case/if assignments for Icarus compatibility. Avoid enum-valued ternary assignments. Preserve the specified reset, overlap and cycle timing.
+
+Public specification examples (same in every condition):
+{
+  "clock_edge": "posedge",
+  "output_kind": "moore",
+  "reset": {
+    "kind": "async",
+    "active": 0,
+    "output": 0
+  },
+  "trace_convention": "Each trace starts after reset. List output after each rising edge; reset is then inactive.",
+  "examples": [
+    {
+      "bits": "1001",
+      "outputs": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "bits": "1011",
+      "outputs": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "bits": "1001001",
+      "outputs": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1
+      ]
+    }
+  ]
+}
+
+Previous-stage design artifact:
+Use a five-state Moore FSM: IDLE, S1, S2, S3, and S4. IDLE represents no partial match. S1 means `1` matched, S2 means `10` matched, S3 means `100` matched, and S4 means `1001` matched.
+
+Use an asynchronous active-low reset. When `rst_n` is low, immediately return the state register to IDLE and drive `sequence_detected` low.
+
+On each rising clock edge, update the FSM state based on `data_in`:
+
+- IDLE: `1` advances to S1; `0` remains in IDLE.
+- S1: `0` advances to S2; `1` remains in S1 because that new `1` can begin another match.
+- S2: `0` advances to S3; `1` returns to S1 because it can start a new candidate sequence.
+- S3: `1` advances to S4 and completes `1001`; `0` returns to IDLE.
+- S4: assert `sequence_detected` high. For overlap support, a following `1` transitions to S1, while a following `0` transitions to IDLE.
+
+Generate `sequence_detected` as a Moore output: it is high whenever the registered current state is S4, and low in all other states. Therefore, it becomes high immediately after the rising edge that consumes the final `1` of `1001`, remains high for that clock cycle, and deasserts after the next state transition unless another detection completes.
+
+Use the artifact to implement the specification. Resolve any contradictions in favor of the specification. Return only RTL.
+
+Do not invoke tools, read files, run tests, or delegate. Reply directly.

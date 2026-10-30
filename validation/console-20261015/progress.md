@@ -1,0 +1,16 @@
+# Progress
+Read AGENTS, README, ARCHITECTURE, root plan/progress/findings and console documentation. Inspected initial Git status; no existing files changed.
+
+Completed 3 isolated GUI tests, zero skips. Offline adder8 PASS 65536 checks / 0 model generations. Unified report generated in separate state. Original test failure and WSL failure retained. No application/core files modified. User interaction remains unverified.
+
+Received user-authorized ECE guidance handoff: await actual interface feedback; console handles packaging/collection, dedicated synthesis chat handles DC then Genus execution/review. School ZIP completion/path still unconfirmed. No inter-chat messages sent.
+
+2026-10-16: Resumed user-guided console operation. Read latest FYP_SYNTHESIS_EXECUTION.md: DC and Genus school mapped fixed tests completed 1840/0 each. DC retains 3 hold violations, worst -0.07 ns; Genus hold unreported. Supersedes prior pending-download/awaiting-school status. No old school commands to repeat. Await current console launch status; no new model or school calls authorized for this walkthrough.
+
+User interaction confirmed: console appeared; doctor returned Python3.12.14, Icarus/vvp found, WSL found, native Yosys/Git absent from process discovery, shared directory exists. User opened workflow/lab-report.html. Read-only inspection: 196 rows/6 runs; DC and Genus each 195 NOT_RUN + 1 BLOCKED_PREREQUISITES, inconsistent with latest school evidence. Next guided action is refresh summary, then inspect whether stale status is generation time or missing integration. No current evidence overwritten by agent.
+
+User refreshed report successfully: Packages10/returns0 and Unified report output. Reinspection:197 rows; paired-a32/m01__real_overlap__s001__control now DC and Genus COMPLETED_REVIEW_REQUIRED, Icarus PASS/Yosys SYNTH_PASS. Refresh fixes stale prerequisite status, but unified columns do not express separately reviewed mapped functional PASS or hold limitations. returns0 is simulation transport registry count, not proof synthesis results missing. Next UI step: open refreshed report then inspect synthesis details.
+
+2026-10-16 user-guided interactive acceptance: screenshots confirm visible four-tab GUI; report refresh, synthesis details and returned-directory links worked. User opened DC constraints/timing/area reports. Read-back: hold -0.07/-0.03/-0.02 ns, four reported max-delay paths MET (+8.65/+8.77 ns), cell area25.270001 library units; no new EDA. Prompt paste visibly produced180 UTF8 bytes and SHA prefix82aaf377acb284d4. Initial budget preview rejected no enabled profiles (English error). User added preview_only with example.invalid and no key. Screenshot confirmed planned1/cap2 and no API; samples3/cap2 correctly rejected. User confirmed samples restored1. No model execution. Next guided cleanup: disable preview_only and save; not yet confirmed.
+
+2026-10-16 rules sync: read AGENTS/FYP_FIXED_INPUT_RTL_RULES/R1BC provenance review. Added pending fixed-input hash, exact actual cross-model prompts, one-call direct RTL, equal opportunity/output budget and pre-execution freeze/review acceptance requirements to console guide. No application/config changes or experiment launches. Exploration chat remains exclusive batch owner. Demo disabling remains awaiting user confirmation.

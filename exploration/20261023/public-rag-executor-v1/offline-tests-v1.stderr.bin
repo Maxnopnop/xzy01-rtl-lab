@@ -1,0 +1,47 @@
+test_128k_exact_and_one_over (__main__.Tests.test_128k_exact_and_one_over) ... ok
+test_403_stops_remaining_without_retry (__main__.Tests.test_403_stops_remaining_without_retry) ... ok
+test_actual_sent_payload_hash_mismatch (__main__.Tests.test_actual_sent_payload_hash_mismatch) ... ok
+test_all240_frozen_payloads (__main__.Tests.test_all240_frozen_payloads) ... ok
+test_attempt240_cap_and_duplicate (__main__.Tests.test_attempt240_cap_and_duplicate) ... ok
+test_concurrent_lock_rejected (__main__.Tests.test_concurrent_lock_rejected) ... ok
+test_crash_after_response_keeps_complete_return (__main__.Tests.test_crash_after_response_keeps_complete_return) ... ERROR
+test_crash_reserved_recovery (__main__.Tests.test_crash_reserved_recovery) ... ok
+test_duplicate_slot_before_cap (__main__.Tests.test_duplicate_slot_before_cap) ... ok
+test_exact_payload_reserve_before_send (__main__.Tests.test_exact_payload_reserve_before_send) ... ok
+test_gate_change_stops_before_send (__main__.Tests.test_gate_change_stops_before_send) ... ok
+test_judge_mock_compile_failure_stage (__main__.Tests.test_judge_mock_compile_failure_stage) ... ok
+test_judge_mock_receipt_rejects_exit0_timeout (__main__.Tests.test_judge_mock_receipt_rejects_exit0_timeout) ... ok
+test_model_mismatch_no_substitution (__main__.Tests.test_model_mismatch_no_substitution) ... ok
+test_multiple_blocks_no_cherry_pick (__main__.Tests.test_multiple_blocks_no_cherry_pick) ... ok
+test_no_redirect (__main__.Tests.test_no_redirect) ... ok
+test_postprocessing_error_keeps_http_return (__main__.Tests.test_postprocessing_error_keeps_http_return) ... ok
+test_request_tamper_prevents_reservation (__main__.Tests.test_request_tamper_prevents_reservation) ... ok
+test_stage_isolation_length_retained (__main__.Tests.test_stage_isolation_length_retained) ... ok
+test_unknown_stops_and_never_resends (__main__.Tests.test_unknown_stops_and_never_resends) ... ok
+test_usage_invalid_does_not_crash_ledger (__main__.Tests.test_usage_invalid_does_not_crash_ledger) ... ok
+test_usage_over8192_stops (__main__.Tests.test_usage_over8192_stops) ... ok
+test_wall_deadline_no_send (__main__.Tests.test_wall_deadline_no_send) ... ok
+test_worker403_no_retry (__main__.Tests.test_worker403_no_retry) ... ok
+test_worker_body_boundary_and_secret_redaction (__main__.Tests.test_worker_body_boundary_and_secret_redaction) ... ok
+test_worker_disconnect_unknown (__main__.Tests.test_worker_disconnect_unknown) ... ok
+test_worker_exact_wire_bytes (__main__.Tests.test_worker_exact_wire_bytes) ... ok
+
+======================================================================
+ERROR: test_crash_after_response_keeps_complete_return (__main__.Tests.test_crash_after_response_keeps_complete_return)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Codex\2026-09-25\xzy01-using-llm-for-digital-chip-2\outputs\rtl-batch\exploration\20261023\public-rag-executor-v1\tests.py", line 33, in test_crash_after_response_keeps_complete_return
+    l=core.Ledger(self.root/'run',SLOTS[:2],'OFFLINE_MOCK');l.reserve(SLOTS[0],SLOTS[0]['request_sha256']);core.save(l.root/'jobs'/SLOTS[0]['id']/'transport-response.json',response(SLOTS[0]))
+                                                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Codex\2026-09-25\xzy01-using-llm-for-digital-chip-2\outputs\rtl-batch\exploration\20261023\public-rag-executor-v1\core.py", line 14, in save
+    with p.open('xb') as f:f.write((json.dumps(obj,ensure_ascii=False,indent=2)+'\n').encode());f.flush();os.fsync(f.fileno())
+         ^^^^^^^^^^^^
+  File "C:\Users\A\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261023\\public-rag-executor-v1\\offline-tests-v1\\test_crash_after_response_keeps_complete_return\\run\\jobs\\Prob149_ece241_2013_q4__no_rag__gpt-5.6-luna__s001\\transport-response.json'
+
+----------------------------------------------------------------------
+Ran 27 tests in 6.010s
+
+FAILED (errors=1)

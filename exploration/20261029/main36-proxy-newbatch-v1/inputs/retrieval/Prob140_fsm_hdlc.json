@@ -1,0 +1,5685 @@
+{
+  "query": "\nI would like you to implement a module named TopModule with the following\ninterface. All input and output ports are one bit unless otherwise\nspecified.\n\n - input  clk\n - input  reset\n - input  in\n - output disc\n - output flag\n - output err\n\nSynchronous HDLC framing involves decoding a continuous bit stream of\ndata to look for bit patterns that indicate the beginning and end of\nframes (packets). Seeing exactly 6 consecutive 1s (i.e., 01111110) is a\n\"flag\" that indicate frame boundaries. To avoid the data stream from\naccidentally containing \"flags\", the sender inserts a zero after every 5\nconsecutive 1s which the receiver must detect and discard. We also need\nto signal an error if there are 7 or more consecutive 1s. Create a\nMoore-type finite state machine to recognize these three sequences:\n\n  (1) 0111110: Signal a bit needs to be discarded (disc).\n  (2) 01111110: Flag the beginning/end of a frame (flag).\n  (3) 01111111...: Error (7 or more 1s) (err).\n\nWhen the FSM is reset, it should be in a state that behaves as though the\nprevious input were 0. The reset signal is active high synchronous. The\noutput signals should be asserted for a complete cycle beginning on the\nclock cycle after the condition occurs. Assume all sequential\nlogic is triggered on the positive edge of the clock.\n\n",
+  "query_sha256": "8cccb78555aa84398c381d96b7385e3eee9b34333b7bc5807e6afc38c216eead",
+  "rankings": [
+    {
+      "chunk_id": "GEN019",
+      "score": 0.2296602842008536,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.003506328968917201
+        },
+        {
+          "term": "active",
+          "contribution": 0.009136733717527623
+        },
+        {
+          "term": "and",
+          "contribution": 0.002738556378353211
+        },
+        {
+          "term": "are",
+          "contribution": 0.0026892201116513626
+        },
+        {
+          "term": "as",
+          "contribution": 0.000863238608521115
+        },
+        {
+          "term": "be",
+          "contribution": 0.0035198664732380503
+        },
+        {
+          "term": "bit",
+          "contribution": 0.006664047904008904
+        },
+        {
+          "term": "boundaries",
+          "contribution": 0.010961787831792583
+        },
+        {
+          "term": "clock",
+          "contribution": 0.008327211442120236
+        },
+        {
+          "term": "data",
+          "contribution": 0.007058216595619383
+        },
+        {
+          "term": "end",
+          "contribution": 0.004493395455291704
+        },
+        {
+          "term": "for",
+          "contribution": 0.0024974504789566747
+        },
+        {
+          "term": "if",
+          "contribution": 0.0024330290545909257
+        },
+        {
+          "term": "in",
+          "contribution": 0.0012916412778816394
+        },
+        {
+          "term": "input",
+          "contribution": 0.017943124471246095
+        },
+        {
+          "term": "interface",
+          "contribution": 0.007641236340432796
+        },
+        {
+          "term": "is",
+          "contribution": 0.003980585501845777
+        },
+        {
+          "term": "it",
+          "contribution": 0.0023393088403699967
+        },
+        {
+          "term": "like",
+          "contribution": 0.0033666801219068444
+        },
+        {
+          "term": "logic",
+          "contribution": 0.0023393088403699967
+        },
+        {
+          "term": "module",
+          "contribution": 0.0034829458708688977
+        },
+        {
+          "term": "must",
+          "contribution": 0.002540578343010659
+        },
+        {
+          "term": "of",
+          "contribution": 0.0031139632978231693
+        },
+        {
+          "term": "or",
+          "contribution": 0.0033235675276001428
+        },
+        {
+          "term": "output",
+          "contribution": 0.021487317237479483
+        },
+        {
+          "term": "positive",
+          "contribution": 0.010961787831792583
+        },
+        {
+          "term": "reset",
+          "contribution": 0.009474945182788888
+        },
+        {
+          "term": "should",
+          "contribution": 0.003625243160610884
+        },
+        {
+          "term": "signal",
+          "contribution": 0.012913335709018271
+        },
+        {
+          "term": "specified",
+          "contribution": 0.008946858747037623
+        },
+        {
+          "term": "state",
+          "contribution": 0.007554288340845607
+        },
+        {
+          "term": "the",
+          "contribution": 0.007784446156672205
+        },
+        {
+          "term": "there",
+          "contribution": 0.0031556458671842215
+        },
+        {
+          "term": "three",
+          "contribution": 0.00669939538490696
+        },
+        {
+          "term": "to",
+          "contribution": 0.0048780368337760305
+        },
+        {
+          "term": "type",
+          "contribution": 0.009296249186962454
+        },
+        {
+          "term": "when",
+          "contribution": 0.0013816334853986867
+        },
+        {
+          "term": "with",
+          "contribution": 0.0013816334853986867
+        },
+        {
+          "term": "you",
+          "contribution": 0.0038674441370360286
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN044",
+      "score": 0.22217519520347,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.0052745479138774495
+        },
+        {
+          "term": "active",
+          "contribution": 0.012568996259457801
+        },
+        {
+          "term": "all",
+          "contribution": 0.0022833258206846514
+        },
+        {
+          "term": "an",
+          "contribution": 0.0014106081438611112
+        },
+        {
+          "term": "and",
+          "contribution": 0.003039441684604324
+        },
+        {
+          "term": "are",
+          "contribution": 0.002624863212788451
+        },
+        {
+          "term": "be",
+          "contribution": 0.003756898548472801
+        },
+        {
+          "term": "beginning",
+          "contribution": 0.012240812101153246
+        },
+        {
+          "term": "clk",
+          "contribution": 0.005563868951914846
+        },
+        {
+          "term": "clock",
+          "contribution": 0.013761780603201847
+        },
+        {
+          "term": "cycle",
+          "contribution": 0.025034581173055917
+        },
+        {
+          "term": "end",
+          "contribution": 0.006156618635309658
+        },
+        {
+          "term": "for",
+          "contribution": 0.002437682902776142
+        },
+        {
+          "term": "high",
+          "contribution": 0.006539069233335695
+        },
+        {
+          "term": "if",
+          "contribution": 0.0029528567398775874
+        },
+        {
+          "term": "in",
+          "contribution": 0.0026457844095424503
+        },
+        {
+          "term": "indicate",
+          "contribution": 0.015099619569462644
+        },
+        {
+          "term": "is",
+          "contribution": 0.0031346552416428282
+        },
+        {
+          "term": "logic",
+          "contribution": 0.0013485690121336801
+        },
+        {
+          "term": "more",
+          "contribution": 0.005215107889050146
+        },
+        {
+          "term": "must",
+          "contribution": 0.0011816278159161872
+        },
+        {
+          "term": "of",
+          "contribution": 0.003456094578349762
+        },
+        {
+          "term": "on",
+          "contribution": 0.00287604285826006
+        },
+        {
+          "term": "one",
+          "contribution": 0.0021819991612642186
+        },
+        {
+          "term": "or",
+          "contribution": 0.0032440297841811144
+        },
+        {
+          "term": "otherwise",
+          "contribution": 0.006539069233335695
+        },
+        {
+          "term": "reset",
+          "contribution": 0.015658557218009714
+        },
+        {
+          "term": "should",
+          "contribution": 0.005453429760757331
+        },
+        {
+          "term": "signal",
+          "contribution": 0.012604301042570765
+        },
+        {
+          "term": "signals",
+          "contribution": 0.004942372314244016
+        },
+        {
+          "term": "state",
+          "contribution": 0.011363866928133876
+        },
+        {
+          "term": "that",
+          "contribution": 0.0021801450331439486
+        },
+        {
+          "term": "the",
+          "contribution": 0.008201766356213155
+        },
+        {
+          "term": "to",
+          "contribution": 0.005570310240068553
+        },
+        {
+          "term": "when",
+          "contribution": 0.002283325820684651
+        },
+        {
+          "term": "with",
+          "contribution": 0.0013485690121336801
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN021",
+      "score": 0.2190521430713746,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.006930431941225192
+        },
+        {
+          "term": "all",
+          "contribution": 0.0023039864876120966
+        },
+        {
+          "term": "an",
+          "contribution": 0.0033965846429369227
+        },
+        {
+          "term": "and",
+          "contribution": 0.0026972055944061496
+        },
+        {
+          "term": "are",
+          "contribution": 0.0032828891305749738
+        },
+        {
+          "term": "as",
+          "contribution": 0.0014395207633837853
+        },
+        {
+          "term": "be",
+          "contribution": 0.003048784662881865
+        },
+        {
+          "term": "clk",
+          "contribution": 0.0033158449945235803
+        },
+        {
+          "term": "clock",
+          "contribution": 0.013886304034240732
+        },
+        {
+          "term": "for",
+          "contribution": 0.003058468468959473
+        },
+        {
+          "term": "in",
+          "contribution": 0.0026697247819379207
+        },
+        {
+          "term": "input",
+          "contribution": 0.018906949553229264
+        },
+        {
+          "term": "interface",
+          "contribution": 0.017958911616677734
+        },
+        {
+          "term": "is",
+          "contribution": 0.0018681300696310064
+        },
+        {
+          "term": "it",
+          "contribution": 0.0013607715348468046
+        },
+        {
+          "term": "module",
+          "contribution": 0.002767588968705725
+        },
+        {
+          "term": "more",
+          "contribution": 0.011043520683548667
+        },
+        {
+          "term": "of",
+          "contribution": 0.004500342920283667
+        },
+        {
+          "term": "on",
+          "contribution": 0.004913626090770352
+        },
+        {
+          "term": "one",
+          "contribution": 0.0037278749091079846
+        },
+        {
+          "term": "output",
+          "contribution": 0.02389170205226132
+        },
+        {
+          "term": "s",
+          "contribution": 0.005854131858280126
+        },
+        {
+          "term": "should",
+          "contribution": 0.0058872542741341145
+        },
+        {
+          "term": "signal",
+          "contribution": 0.012718351023232623
+        },
+        {
+          "term": "signals",
+          "contribution": 0.005453438891155617
+        },
+        {
+          "term": "synchronous",
+          "contribution": 0.01491961643778525
+        },
+        {
+          "term": "that",
+          "contribution": 0.005740429579407863
+        },
+        {
+          "term": "the",
+          "contribution": 0.007422312086842174
+        },
+        {
+          "term": "to",
+          "contribution": 0.006437045349303123
+        },
+        {
+          "term": "when",
+          "contribution": 0.002303986487612096
+        },
+        {
+          "term": "which",
+          "contribution": 0.006951641178073102
+        },
+        {
+          "term": "with",
+          "contribution": 0.0035508488331903922
+        },
+        {
+          "term": "would",
+          "contribution": 0.004843923170612902
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN043",
+      "score": 0.21226288545307742,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.007697686486039264
+        },
+        {
+          "term": "an",
+          "contribution": 0.0015068671567140006
+        },
+        {
+          "term": "and",
+          "contribution": 0.00379853715349692
+        },
+        {
+          "term": "are",
+          "contribution": 0.0016560770736927114
+        },
+        {
+          "term": "be",
+          "contribution": 0.004530754980983906
+        },
+        {
+          "term": "every",
+          "contribution": 0.015794802459879066
+        },
+        {
+          "term": "for",
+          "contribution": 0.003237878500323882
+        },
+        {
+          "term": "from",
+          "contribution": 0.005234976186359067
+        },
+        {
+          "term": "if",
+          "contribution": 0.002046721263715482
+        },
+        {
+          "term": "in",
+          "contribution": 0.0028263310741795974
+        },
+        {
+          "term": "is",
+          "contribution": 0.0019777147450287945
+        },
+        {
+          "term": "like",
+          "contribution": 0.0035103527556807138
+        },
+        {
+          "term": "machine",
+          "contribution": 0.026312769111698883
+        },
+        {
+          "term": "module",
+          "contribution": 0.0036315801302698584
+        },
+        {
+          "term": "more",
+          "contribution": 0.005570983572531746
+        },
+        {
+          "term": "named",
+          "contribution": 0.006827593672396744
+        },
+        {
+          "term": "need",
+          "contribution": 0.006985291206544133
+        },
+        {
+          "term": "needs",
+          "contribution": 0.009328664773640956
+        },
+        {
+          "term": "of",
+          "contribution": 0.004037171066163193
+        },
+        {
+          "term": "one",
+          "contribution": 0.003946552381559809
+        },
+        {
+          "term": "or",
+          "contribution": 0.003465400337051956
+        },
+        {
+          "term": "output",
+          "contribution": 0.014537135743711908
+        },
+        {
+          "term": "should",
+          "contribution": 0.007137801711740602
+        },
+        {
+          "term": "state",
+          "contribution": 0.020317036595677976
+        },
+        {
+          "term": "that",
+          "contribution": 0.0071717630163021925
+        },
+        {
+          "term": "the",
+          "contribution": 0.01005441009890506
+        },
+        {
+          "term": "three",
+          "contribution": 0.006985291206544133
+        },
+        {
+          "term": "to",
+          "contribution": 0.006278985254154271
+        },
+        {
+          "term": "when",
+          "contribution": 0.0014405945136430247
+        },
+        {
+          "term": "which",
+          "contribution": 0.007359425065482778
+        },
+        {
+          "term": "with",
+          "contribution": 0.0030232493493191114
+        },
+        {
+          "term": "you",
+          "contribution": 0.004032486809645676
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN022",
+      "score": 0.2085178125904504,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.006153863218842447
+        },
+        {
+          "term": "active",
+          "contribution": 0.00921640099775737
+        },
+        {
+          "term": "all",
+          "contribution": 0.003995330108780499
+        },
+        {
+          "term": "and",
+          "contribution": 0.003434842570635624
+        },
+        {
+          "term": "are",
+          "contribution": 0.004180699967315099
+        },
+        {
+          "term": "as",
+          "contribution": 0.00207790297722575
+        },
+        {
+          "term": "be",
+          "contribution": 0.004153847669284006
+        },
+        {
+          "term": "clk",
+          "contribution": 0.00886174434998666
+        },
+        {
+          "term": "clock",
+          "contribution": 0.02474511538434663
+        },
+        {
+          "term": "end",
+          "contribution": 0.006029632210998704
+        },
+        {
+          "term": "following",
+          "contribution": 0.0033960357162590503
+        },
+        {
+          "term": "for",
+          "contribution": 0.0020324963764510443
+        },
+        {
+          "term": "from",
+          "contribution": 0.00506449560485653
+        },
+        {
+          "term": "if",
+          "contribution": 0.00305163400628168
+        },
+        {
+          "term": "in",
+          "contribution": 0.0031091116990422255
+        },
+        {
+          "term": "input",
+          "contribution": 0.006936198227579731
+        },
+        {
+          "term": "is",
+          "contribution": 0.005636436728729112
+        },
+        {
+          "term": "it",
+          "contribution": 0.0013936805675900939
+        },
+        {
+          "term": "like",
+          "contribution": 0.0033960357162590503
+        },
+        {
+          "term": "logic",
+          "contribution": 0.0023597063236163516
+        },
+        {
+          "term": "module",
+          "contribution": 0.002834520612746439
+        },
+        {
+          "term": "must",
+          "contribution": 0.0034091708962634163
+        },
+        {
+          "term": "named",
+          "contribution": 0.00660524841272465
+        },
+        {
+          "term": "of",
+          "contribution": 0.0035717058676727744
+        },
+        {
+          "term": "on",
+          "contribution": 0.006237601614954169
+        },
+        {
+          "term": "or",
+          "contribution": 0.0019800683853086936
+        },
+        {
+          "term": "reset",
+          "contribution": 0.01618235827375995
+        },
+        {
+          "term": "should",
+          "contribution": 0.0036568532820948126
+        },
+        {
+          "term": "signal",
+          "contribution": 0.004991853921571456
+        },
+        {
+          "term": "signals",
+          "contribution": 0.0036240670446545196
+        },
+        {
+          "term": "synchronous",
+          "contribution": 0.01528043391029629
+        },
+        {
+          "term": "that",
+          "contribution": 0.005879256693402827
+        },
+        {
+          "term": "the",
+          "contribution": 0.00896981651433151
+        },
+        {
+          "term": "there",
+          "contribution": 0.003183161359194733
+        },
+        {
+          "term": "these",
+          "contribution": 0.0042050451575264365
+        },
+        {
+          "term": "to",
+          "contribution": 0.005756645056487554
+        },
+        {
+          "term": "with",
+          "contribution": 0.0029247951656225174
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN047",
+      "score": 0.20354210279507046,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.0045765715849732675
+        },
+        {
+          "term": "active",
+          "contribution": 0.011925554128487
+        },
+        {
+          "term": "all",
+          "contribution": 0.005878434415253145
+        },
+        {
+          "term": "and",
+          "contribution": 0.004393521110276613
+        },
+        {
+          "term": "are",
+          "contribution": 0.003510055233785707
+        },
+        {
+          "term": "as",
+          "contribution": 0.0009090357352637329
+        },
+        {
+          "term": "be",
+          "contribution": 0.004575849905702905
+        },
+        {
+          "term": "clk",
+          "contribution": 0.0035452915448933183
+        },
+        {
+          "term": "clock",
+          "contribution": 0.018402715157550698
+        },
+        {
+          "term": "for",
+          "contribution": 0.003691766892027204
+        },
+        {
+          "term": "high",
+          "contribution": 0.007054816303889163
+        },
+        {
+          "term": "i",
+          "contribution": 0.009621461981468484
+        },
+        {
+          "term": "in",
+          "contribution": 0.002302961764508842
+        },
+        {
+          "term": "input",
+          "contribution": 0.0072410442599911235
+        },
+        {
+          "term": "is",
+          "contribution": 0.005884158220721487
+        },
+        {
+          "term": "logic",
+          "contribution": 0.0024634154574687045
+        },
+        {
+          "term": "module",
+          "contribution": 0.0036677255041143667
+        },
+        {
+          "term": "must",
+          "contribution": 0.0030421070686352334
+        },
+        {
+          "term": "named",
+          "contribution": 0.00971847595404538
+        },
+        {
+          "term": "of",
+          "contribution": 0.004362238194311635
+        },
+        {
+          "term": "or",
+          "contribution": 0.003499891711663129
+        },
+        {
+          "term": "output",
+          "contribution": 0.008671322288066023
+        },
+        {
+          "term": "ports",
+          "contribution": 0.006292856005625566
+        },
+        {
+          "term": "reset",
+          "contribution": 0.016893573200576814
+        },
+        {
+          "term": "sequential",
+          "contribution": 0.005682590439826113
+        },
+        {
+          "term": "should",
+          "contribution": 0.006642201202548526
+        },
+        {
+          "term": "signal",
+          "contribution": 0.01093638486970782
+        },
+        {
+          "term": "signals",
+          "contribution": 0.00688102572774939
+        },
+        {
+          "term": "state",
+          "contribution": 0.004698388727585168
+        },
+        {
+          "term": "the",
+          "contribution": 0.0059230829933434636
+        },
+        {
+          "term": "to",
+          "contribution": 0.005136829789659137
+        },
+        {
+          "term": "when",
+          "contribution": 0.0024634154574687045
+        },
+        {
+          "term": "with",
+          "contribution": 0.003053339963882581
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN023",
+      "score": 0.20196137632979946,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.003975480900525516
+        },
+        {
+          "term": "all",
+          "contribution": 0.00449075420575742
+        },
+        {
+          "term": "an",
+          "contribution": 0.0016385627305596985
+        },
+        {
+          "term": "and",
+          "contribution": 0.0041305176654983025
+        },
+        {
+          "term": "are",
+          "contribution": 0.0018008131372407874
+        },
+        {
+          "term": "as",
+          "contribution": 0.0009787411937653115
+        },
+        {
+          "term": "be",
+          "contribution": 0.0039908297426750694
+        },
+        {
+          "term": "clock",
+          "contribution": 0.00944140448208135
+        },
+        {
+          "term": "following",
+          "contribution": 0.0038171468340441475
+        },
+        {
+          "term": "for",
+          "contribution": 0.0028316129967025394
+        },
+        {
+          "term": "i",
+          "contribution": 0.01035924201899274
+        },
+        {
+          "term": "if",
+          "contribution": 0.001314474286967792
+        },
+        {
+          "term": "in",
+          "contribution": 0.0034946440115070226
+        },
+        {
+          "term": "input",
+          "contribution": 0.022967176611149498
+        },
+        {
+          "term": "like",
+          "contribution": 0.0038171468340441475
+        },
+        {
+          "term": "logic",
+          "contribution": 0.0032874720820020966
+        },
+        {
+          "term": "module",
+          "contribution": 0.0057946003601171865
+        },
+        {
+          "term": "must",
+          "contribution": 0.0023239784860727667
+        },
+        {
+          "term": "named",
+          "contribution": 0.007424304445914655
+        },
+        {
+          "term": "of",
+          "contribution": 0.0016823575032227443
+        },
+        {
+          "term": "on",
+          "contribution": 0.007972160878994144
+        },
+        {
+          "term": "output",
+          "contribution": 0.01959315846293307
+        },
+        {
+          "term": "ports",
+          "contribution": 0.01147174322049892
+        },
+        {
+          "term": "reset",
+          "contribution": 0.010742706671740404
+        },
+        {
+          "term": "s",
+          "contribution": 0.006739181392923236
+        },
+        {
+          "term": "should",
+          "contribution": 0.005792999041101818
+        },
+        {
+          "term": "signal",
+          "contribution": 0.0056108477603784585
+        },
+        {
+          "term": "signals",
+          "contribution": 0.002405847686772218
+        },
+        {
+          "term": "the",
+          "contribution": 0.010933134744110529
+        },
+        {
+          "term": "to",
+          "contribution": 0.0039242149104045726
+        },
+        {
+          "term": "type",
+          "contribution": 0.0035778758881506974
+        },
+        {
+          "term": "when",
+          "contribution": 0.0015664980614825711
+        },
+        {
+          "term": "with",
+          "contribution": 0.0015664980614825711
+        },
+        {
+          "term": "you",
+          "contribution": 0.004384913804988497
+        },
+        {
+          "term": "zero",
+          "contribution": 0.006118335214996966
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN029",
+      "score": 0.18780922115521806,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.004986075268931274
+        },
+        {
+          "term": "accidentally",
+          "contribution": 0.007050461520953132
+        },
+        {
+          "term": "all",
+          "contribution": 0.0021584474330916966
+        },
+        {
+          "term": "an",
+          "contribution": 0.0013334599467290668
+        },
+        {
+          "term": "and",
+          "contribution": 0.0033614092176486032
+        },
+        {
+          "term": "are",
+          "contribution": 0.002481305651841325
+        },
+        {
+          "term": "as",
+          "contribution": 0.0007964981478945493
+        },
+        {
+          "term": "be",
+          "contribution": 0.0023043625033815776
+        },
+        {
+          "term": "detect",
+          "contribution": 0.0171249778307168
+        },
+        {
+          "term": "end",
+          "contribution": 0.004145992918492229
+        },
+        {
+          "term": "flag",
+          "contribution": 0.04134097563156725
+        },
+        {
+          "term": "for",
+          "contribution": 0.0018591451582820725
+        },
+        {
+          "term": "if",
+          "contribution": 0.0022449217593213076
+        },
+        {
+          "term": "in",
+          "contribution": 0.003810385998277375
+        },
+        {
+          "term": "indicate",
+          "contribution": 0.014273799562515004
+        },
+        {
+          "term": "input",
+          "contribution": 0.006344611238228281
+        },
+        {
+          "term": "is",
+          "contribution": 0.004885923438826142
+        },
+        {
+          "term": "it",
+          "contribution": 0.0012748138247366484
+        },
+        {
+          "term": "logic",
+          "contribution": 0.0012748138247366484
+        },
+        {
+          "term": "more",
+          "contribution": 0.004929886104927982
+        },
+        {
+          "term": "must",
+          "contribution": 0.0011170028837011463
+        },
+        {
+          "term": "of",
+          "contribution": 0.004033245786822995
+        },
+        {
+          "term": "or",
+          "contribution": 0.00306660910900538
+        },
+        {
+          "term": "s",
+          "contribution": 0.005484335932708149
+        },
+        {
+          "term": "sequential",
+          "contribution": 0.010449184127178783
+        },
+        {
+          "term": "should",
+          "contribution": 0.0033449609813453137
+        },
+        {
+          "term": "signal",
+          "contribution": 0.007731078795204703
+        },
+        {
+          "term": "that",
+          "contribution": 0.0020609097518750796
+        },
+        {
+          "term": "the",
+          "contribution": 0.006697297346350556
+        },
+        {
+          "term": "there",
+          "contribution": 0.0029116701498434444
+        },
+        {
+          "term": "these",
+          "contribution": 0.0038463976790076484
+        },
+        {
+          "term": "to",
+          "contribution": 0.006408921672719564
+        },
+        {
+          "term": "with",
+          "contribution": 0.0026753399583563245
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN048",
+      "score": 0.18211757999405956,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.006648131932572007
+        },
+        {
+          "term": "all",
+          "contribution": 0.004435417765896174
+        },
+        {
+          "term": "and",
+          "contribution": 0.005192406151696901
+        },
+        {
+          "term": "as",
+          "contribution": 0.0016367329505053553
+        },
+        {
+          "term": "be",
+          "contribution": 0.0066737995512012325
+        },
+        {
+          "term": "bit",
+          "contribution": 0.02139339902991349
+        },
+        {
+          "term": "data",
+          "contribution": 0.013382644798111347
+        },
+        {
+          "term": "e",
+          "contribution": 0.01578870687502392
+        },
+        {
+          "term": "for",
+          "contribution": 0.006647083589087525
+        },
+        {
+          "term": "i",
+          "contribution": 0.0293313903298244
+        },
+        {
+          "term": "in",
+          "contribution": 0.004146518401316757
+        },
+        {
+          "term": "logic",
+          "contribution": 0.0026196291833467927
+        },
+        {
+          "term": "must",
+          "contribution": 0.0038863513548331647
+        },
+        {
+          "term": "of",
+          "contribution": 0.002813379039929173
+        },
+        {
+          "term": "reset",
+          "contribution": 0.017964853323081217
+        },
+        {
+          "term": "should",
+          "contribution": 0.008519647208465946
+        },
+        {
+          "term": "state",
+          "contribution": 0.017753256464095202
+        },
+        {
+          "term": "the",
+          "contribution": 0.010664602861812174
+        },
+        {
+          "term": "when",
+          "contribution": 0.0026196291833467927
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN018",
+      "score": 0.1790302520998171,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.006727029336593382
+        },
+        {
+          "term": "active",
+          "contribution": 0.010556080470123274
+        },
+        {
+          "term": "after",
+          "contribution": 0.008516579256807972
+        },
+        {
+          "term": "all",
+          "contribution": 0.002180528596006157
+        },
+        {
+          "term": "and",
+          "contribution": 0.003174027366495283
+        },
+        {
+          "term": "are",
+          "contribution": 0.003532888069970552
+        },
+        {
+          "term": "avoid",
+          "contribution": 0.005030028903920467
+        },
+        {
+          "term": "be",
+          "contribution": 0.0038384368154958212
+        },
+        {
+          "term": "clk",
+          "contribution": 0.005313378951079051
+        },
+        {
+          "term": "cycle",
+          "contribution": 0.014120156719214018
+        },
+        {
+          "term": "following",
+          "contribution": 0.006585796255111905
+        },
+        {
+          "term": "high",
+          "contribution": 0.006244674905956749
+        },
+        {
+          "term": "i",
+          "contribution": 0.014419822156679732
+        },
+        {
+          "term": "in",
+          "contribution": 0.0031416883964855134
+        },
+        {
+          "term": "indicate",
+          "contribution": 0.008516579256807972
+        },
+        {
+          "term": "input",
+          "contribution": 0.006409517333337378
+        },
+        {
+          "term": "is",
+          "contribution": 0.005208449603905641
+        },
+        {
+          "term": "it",
+          "contribution": 0.0012878553152626863
+        },
+        {
+          "term": "module",
+          "contribution": 0.0015469943868916163
+        },
+        {
+          "term": "must",
+          "contribution": 0.0011284299503383903
+        },
+        {
+          "term": "of",
+          "contribution": 0.004259194436371429
+        },
+        {
+          "term": "one",
+          "contribution": 0.0020837637469414798
+        },
+        {
+          "term": "output",
+          "contribution": 0.0076755490662312326
+        },
+        {
+          "term": "should",
+          "contribution": 0.004188406897944252
+        },
+        {
+          "term": "signal",
+          "contribution": 0.01358892791000239
+        },
+        {
+          "term": "signals",
+          "contribution": 0.0019779046060163365
+        },
+        {
+          "term": "that",
+          "contribution": 0.005432831710845456
+        },
+        {
+          "term": "the",
+          "contribution": 0.007656654958614969
+        },
+        {
+          "term": "three",
+          "contribution": 0.006244674905956749
+        },
+        {
+          "term": "to",
+          "contribution": 0.005867691183883872
+        },
+        {
+          "term": "when",
+          "contribution": 0.0012878553152626863
+        },
+        {
+          "term": "with",
+          "contribution": 0.0012878553152626863
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN041",
+      "score": 0.1720289629044704,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.006767719789741656
+        },
+        {
+          "term": "all",
+          "contribution": 0.004857917982349346
+        },
+        {
+          "term": "and",
+          "contribution": 0.0033695107560043716
+        },
+        {
+          "term": "are",
+          "contribution": 0.003298331139239401
+        },
+        {
+          "term": "as",
+          "contribution": 0.0014462919613184842
+        },
+        {
+          "term": "be",
+          "contribution": 0.0038087243833495824
+        },
+        {
+          "term": "bit",
+          "contribution": 0.01573593416226668
+        },
+        {
+          "term": "continuous",
+          "contribution": 0.022763760520966923
+        },
+        {
+          "term": "data",
+          "contribution": 0.011825515938145549
+        },
+        {
+          "term": "for",
+          "contribution": 0.003889099861259085
+        },
+        {
+          "term": "i",
+          "contribution": 0.009041102075268077
+        },
+        {
+          "term": "if",
+          "contribution": 0.002407563218401635
+        },
+        {
+          "term": "in",
+          "contribution": 0.002164048709901575
+        },
+        {
+          "term": "is",
+          "contribution": 0.005239901796310502
+        },
+        {
+          "term": "it",
+          "contribution": 0.0028691646173032463
+        },
+        {
+          "term": "logic",
+          "contribution": 0.004210127216041878
+        },
+        {
+          "term": "must",
+          "contribution": 0.0020282687357616003
+        },
+        {
+          "term": "of",
+          "contribution": 0.0030813703129214088
+        },
+        {
+          "term": "on",
+          "contribution": 0.004936738737481679
+        },
+        {
+          "term": "or",
+          "contribution": 0.004076358875256557
+        },
+        {
+          "term": "ports",
+          "contribution": 0.005913275300719002
+        },
+        {
+          "term": "should",
+          "contribution": 0.0035872987520555234
+        },
+        {
+          "term": "signals",
+          "contribution": 0.002099720662358863
+        },
+        {
+          "term": "state",
+          "contribution": 0.013006149654978429
+        },
+        {
+          "term": "that",
+          "contribution": 0.004638394426540456
+        },
+        {
+          "term": "the",
+          "contribution": 0.003949106255523541
+        },
+        {
+          "term": "there",
+          "contribution": 0.0031226166024602795
+        },
+        {
+          "term": "these",
+          "contribution": 0.004125063841032875
+        },
+        {
+          "term": "to",
+          "contribution": 0.006680446359290426
+        },
+        {
+          "term": "with",
+          "contribution": 0.0032624755817763293
+        },
+        {
+          "term": "you",
+          "contribution": 0.0038269646784454487
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN013",
+      "score": 0.16982694777661247,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.0077794139009968845
+        },
+        {
+          "term": "after",
+          "contribution": 0.01979352812683051
+        },
+        {
+          "term": "also",
+          "contribution": 0.006168757913067446
+        },
+        {
+          "term": "an",
+          "contribution": 0.0025259270618968295
+        },
+        {
+          "term": "and",
+          "contribution": 0.0013470679630838904
+        },
+        {
+          "term": "are",
+          "contribution": 0.001639576450280772
+        },
+        {
+          "term": "as",
+          "contribution": 0.0008911091212251229
+        },
+        {
+          "term": "be",
+          "contribution": 0.003973280032408413
+        },
+        {
+          "term": "beginning",
+          "contribution": 0.012945831162181988
+        },
+        {
+          "term": "bit",
+          "contribution": 0.006879203285076704
+        },
+        {
+          "term": "clk",
+          "contribution": 0.003475376721180463
+        },
+        {
+          "term": "condition",
+          "contribution": 0.007887941217158835
+        },
+        {
+          "term": "end",
+          "contribution": 0.004638469174058044
+        },
+        {
+          "term": "error",
+          "contribution": 0.015637428089207234
+        },
+        {
+          "term": "following",
+          "contribution": 0.005884324296850368
+        },
+        {
+          "term": "for",
+          "contribution": 0.002931492058078378
+        },
+        {
+          "term": "if",
+          "contribution": 0.0028558745851837066
+        },
+        {
+          "term": "in",
+          "contribution": 0.003181749346942662
+        },
+        {
+          "term": "it",
+          "contribution": 0.001426240889686426
+        },
+        {
+          "term": "like",
+          "contribution": 0.003475376721180463
+        },
+        {
+          "term": "module",
+          "contribution": 0.0029007430357937134
+        },
+        {
+          "term": "must",
+          "contribution": 0.0012496845858738102
+        },
+        {
+          "term": "need",
+          "contribution": 0.006915691994374068
+        },
+        {
+          "term": "of",
+          "contribution": 0.0039969459821556
+        },
+        {
+          "term": "on",
+          "contribution": 0.005150030161437572
+        },
+        {
+          "term": "one",
+          "contribution": 0.002307673094262101
+        },
+        {
+          "term": "or",
+          "contribution": 0.0034308721941039956
+        },
+        {
+          "term": "that",
+          "contribution": 0.004838795907095729
+        },
+        {
+          "term": "the",
+          "contribution": 0.00902234315491293
+        },
+        {
+          "term": "to",
+          "contribution": 0.006746744071902949
+        },
+        {
+          "term": "when",
+          "contribution": 0.001426240889686426
+        },
+        {
+          "term": "with",
+          "contribution": 0.001426240889686426
+        },
+        {
+          "term": "would",
+          "contribution": 0.005076973698752016
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN046",
+      "score": 0.16802802488934288,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.006077531478470717
+        },
+        {
+          "term": "after",
+          "contribution": 0.00870739553316504
+        },
+        {
+          "term": "all",
+          "contribution": 0.0022293839327127804
+        },
+        {
+          "term": "an",
+          "contribution": 0.0013772835671497818
+        },
+        {
+          "term": "and",
+          "contribution": 0.003829646990817878
+        },
+        {
+          "term": "as",
+          "contribution": 0.001392909410688593
+        },
+        {
+          "term": "be",
+          "contribution": 0.003924438037122368
+        },
+        {
+          "term": "clk",
+          "contribution": 0.005432426652714477
+        },
+        {
+          "term": "condition",
+          "contribution": 0.012329789125302039
+        },
+        {
+          "term": "e",
+          "contribution": 0.007935912981215688
+        },
+        {
+          "term": "end",
+          "contribution": 0.0034548917675891414
+        },
+        {
+          "term": "for",
+          "contribution": 0.0031662118980790824
+        },
+        {
+          "term": "i",
+          "contribution": 0.014742902196998647
+        },
+        {
+          "term": "in",
+          "contribution": 0.0029374009797250513
+        },
+        {
+          "term": "is",
+          "contribution": 0.003060601324175879
+        },
+        {
+          "term": "module",
+          "contribution": 0.002677975071624844
+        },
+        {
+          "term": "more",
+          "contribution": 0.005091904812658705
+        },
+        {
+          "term": "must",
+          "contribution": 0.002421195713863154
+        },
+        {
+          "term": "named",
+          "contribution": 0.0036857116388311793
+        },
+        {
+          "term": "of",
+          "contribution": 0.003689993071004642
+        },
+        {
+          "term": "on",
+          "contribution": 0.005893109951805594
+        },
+        {
+          "term": "one",
+          "contribution": 0.003607167173164294
+        },
+        {
+          "term": "reset",
+          "contribution": 0.01894986945220642
+        },
+        {
+          "term": "should",
+          "contribution": 0.0034548917675891414
+        },
+        {
+          "term": "signal",
+          "contribution": 0.009897396980508925
+        },
+        {
+          "term": "signals",
+          "contribution": 0.002022220097075476
+        },
+        {
+          "term": "that",
+          "contribution": 0.0044671915629841425
+        },
+        {
+          "term": "the",
+          "contribution": 0.007828204397010189
+        },
+        {
+          "term": "these",
+          "contribution": 0.00833738364521372
+        },
+        {
+          "term": "to",
+          "contribution": 0.0040883736137357395
+        },
+        {
+          "term": "with",
+          "contribution": 0.0013167100641395479
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN037",
+      "score": 0.15813630814138271,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.005692816452712152
+        },
+        {
+          "term": "all",
+          "contribution": 0.004834048565617359
+        },
+        {
+          "term": "and",
+          "contribution": 0.003352954639431344
+        },
+        {
+          "term": "are",
+          "contribution": 0.0026479975938600757
+        },
+        {
+          "term": "as",
+          "contribution": 0.0008500061963642553
+        },
+        {
+          "term": "be",
+          "contribution": 0.003790010187298152
+        },
+        {
+          "term": "bit",
+          "contribution": 0.006561896045150351
+        },
+        {
+          "term": "data",
+          "contribution": 0.006950022603641163
+        },
+        {
+          "term": "end",
+          "contribution": 0.004424517094127989
+        },
+        {
+          "term": "following",
+          "contribution": 0.0033150729549733596
+        },
+        {
+          "term": "for",
+          "contribution": 0.0030577563552674765
+        },
+        {
+          "term": "from",
+          "contribution": 0.0029198620136134177
+        },
+        {
+          "term": "if",
+          "contribution": 0.0019328628146365208
+        },
+        {
+          "term": "in",
+          "contribution": 0.0033187926467928186
+        },
+        {
+          "term": "input",
+          "contribution": 0.006770836668323701
+        },
+        {
+          "term": "is",
+          "contribution": 0.005502061969598874
+        },
+        {
+          "term": "it",
+          "contribution": 0.002855066955265329
+        },
+        {
+          "term": "logic",
+          "contribution": 0.003550022076891288
+        },
+        {
+          "term": "module",
+          "contribution": 0.003429556489499213
+        },
+        {
+          "term": "must",
+          "contribution": 0.0025016343251925695
+        },
+        {
+          "term": "of",
+          "contribution": 0.003486555064292639
+        },
+        {
+          "term": "on",
+          "contribution": 0.006088894860155052
+        },
+        {
+          "term": "one",
+          "contribution": 0.003727006935221129
+        },
+        {
+          "term": "or",
+          "contribution": 0.0056940401823693445
+        },
+        {
+          "term": "output",
+          "contribution": 0.013728439533254469
+        },
+        {
+          "term": "s",
+          "contribution": 0.005852768820703199
+        },
+        {
+          "term": "should",
+          "contribution": 0.004424517094127989
+        },
+        {
+          "term": "state",
+          "contribution": 0.0043932921187270005
+        },
+        {
+          "term": "that",
+          "contribution": 0.002199359865270222
+        },
+        {
+          "term": "the",
+          "contribution": 0.00788632966766309
+        },
+        {
+          "term": "to",
+          "contribution": 0.005619404485876516
+        },
+        {
+          "term": "type",
+          "contribution": 0.005261071538754677
+        },
+        {
+          "term": "unless",
+          "contribution": 0.004842795343385719
+        },
+        {
+          "term": "when",
+          "contribution": 0.0013604547017483177
+        },
+        {
+          "term": "zero",
+          "contribution": 0.005313583281575952
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN040",
+      "score": 0.15493393596849128,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.0035091866015519797
+        },
+        {
+          "term": "all",
+          "contribution": 0.006536110151002383
+        },
+        {
+          "term": "an",
+          "contribution": 0.001446371526806337
+        },
+        {
+          "term": "and",
+          "contribution": 0.002740788281904856
+        },
+        {
+          "term": "are",
+          "contribution": 0.0037932324437313317
+        },
+        {
+          "term": "as",
+          "contribution": 0.0008639421417152843
+        },
+        {
+          "term": "be",
+          "contribution": 0.0030980483265376146
+        },
+        {
+          "term": "data",
+          "contribution": 0.014824532130997728
+        },
+        {
+          "term": "e",
+          "contribution": 0.004922193507234774
+        },
+        {
+          "term": "end",
+          "contribution": 0.002142872013198547
+        },
+        {
+          "term": "error",
+          "contribution": 0.015160694456515862
+        },
+        {
+          "term": "for",
+          "contribution": 0.002499485882952043
+        },
+        {
+          "term": "in",
+          "contribution": 0.0033732046183230615
+        },
+        {
+          "term": "input",
+          "contribution": 0.016422108591422818
+        },
+        {
+          "term": "is",
+          "contribution": 0.004529941181156078
+        },
+        {
+          "term": "logic",
+          "contribution": 0.00425812706693431
+        },
+        {
+          "term": "module",
+          "contribution": 0.00396362292051523
+        },
+        {
+          "term": "must",
+          "contribution": 0.0028912004162756316
+        },
+        {
+          "term": "of",
+          "contribution": 0.0038750922753392376
+        },
+        {
+          "term": "on",
+          "contribution": 0.0029489596513145055
+        },
+        {
+          "term": "output",
+          "contribution": 0.013953518813745213
+        },
+        {
+          "term": "sequential",
+          "contribution": 0.005400700065602844
+        },
+        {
+          "term": "signals",
+          "contribution": 0.0059287470005099825
+        },
+        {
+          "term": "state",
+          "contribution": 0.004465320627624422
+        },
+        {
+          "term": "that",
+          "contribution": 0.0022354186128661253
+        },
+        {
+          "term": "the",
+          "contribution": 0.006155657864090485
+        },
+        {
+          "term": "to",
+          "contribution": 0.00488201239835466
+        },
+        {
+          "term": "type",
+          "contribution": 0.005347327386965601
+        },
+        {
+          "term": "when",
+          "contribution": 0.0013827595066511643
+        },
+        {
+          "term": "with",
+          "contribution": 0.0013827595066511643
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN026",
+      "score": 0.1461294329729849,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.008537979879133881
+        },
+        {
+          "term": "also",
+          "contribution": 0.006165928602545638
+        },
+        {
+          "term": "an",
+          "contribution": 0.0025247685414759827
+        },
+        {
+          "term": "and",
+          "contribution": 0.003966521097988917
+        },
+        {
+          "term": "be",
+          "contribution": 0.0015219590634237379
+        },
+        {
+          "term": "bit",
+          "contribution": 0.023962385844370163
+        },
+        {
+          "term": "end",
+          "contribution": 0.0037405713173012493
+        },
+        {
+          "term": "from",
+          "contribution": 0.005180439447456455
+        },
+        {
+          "term": "if",
+          "contribution": 0.002854564733812216
+        },
+        {
+          "term": "in",
+          "contribution": 0.0022565108436709636
+        },
+        {
+          "term": "is",
+          "contribution": 0.004107217997415787
+        },
+        {
+          "term": "it",
+          "contribution": 0.0029917538554463914
+        },
+        {
+          "term": "logic",
+          "contribution": 0.00439001103476309
+        },
+        {
+          "term": "module",
+          "contribution": 0.0017124397918424838
+        },
+        {
+          "term": "must",
+          "contribution": 0.0012491114160724363
+        },
+        {
+          "term": "need",
+          "contribution": 0.006912520101360756
+        },
+        {
+          "term": "of",
+          "contribution": 0.003213026348556263
+        },
+        {
+          "term": "on",
+          "contribution": 0.006380401916558098
+        },
+        {
+          "term": "s",
+          "contribution": 0.010384023058025346
+        },
+        {
+          "term": "signal",
+          "contribution": 0.010715797122371203
+        },
+        {
+          "term": "signals",
+          "contribution": 0.003707034489348137
+        },
+        {
+          "term": "the",
+          "contribution": 0.006789729900861924
+        },
+        {
+          "term": "to",
+          "contribution": 0.006495219345763566
+        },
+        {
+          "term": "when",
+          "contribution": 0.0014255867420585417
+        },
+        {
+          "term": "which",
+          "contribution": 0.004301313203134433
+        },
+        {
+          "term": "would",
+          "contribution": 0.005074645136777749
+        },
+        {
+          "term": "zero",
+          "contribution": 0.005567972141449482
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN030",
+      "score": 0.14481651601645942,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.00467511763973066
+        },
+        {
+          "term": "accidentally",
+          "contribution": 0.0072289332211007895
+        },
+        {
+          "term": "all",
+          "contribution": 0.0022130852439525015
+        },
+        {
+          "term": "an",
+          "contribution": 0.0032625761451014835
+        },
+        {
+          "term": "and",
+          "contribution": 0.002590790324934997
+        },
+        {
+          "term": "are",
+          "contribution": 0.003153366363679271
+        },
+        {
+          "term": "as",
+          "contribution": 0.0019487918353398154
+        },
+        {
+          "term": "be",
+          "contribution": 0.0036413273416050144
+        },
+        {
+          "term": "beginning",
+          "contribution": 0.011864255372426257
+        },
+        {
+          "term": "for",
+          "contribution": 0.0011258363180617615
+        },
+        {
+          "term": "if",
+          "contribution": 0.0010967955103166854
+        },
+        {
+          "term": "in",
+          "contribution": 0.0020689367207504757
+        },
+        {
+          "term": "indicate",
+          "contribution": 0.008643737081327627
+        },
+        {
+          "term": "input",
+          "contribution": 0.013651925006193718
+        },
+        {
+          "term": "is",
+          "contribution": 0.005009603152604753
+        },
+        {
+          "term": "it",
+          "contribution": 0.0022130852439525015
+        },
+        {
+          "term": "logic",
+          "contribution": 0.0036490635645567452
+        },
+        {
+          "term": "module",
+          "contribution": 0.0032950143133243185
+        },
+        {
+          "term": "must",
+          "contribution": 0.0019391244049946437
+        },
+        {
+          "term": "of",
+          "contribution": 0.0033497768228087014
+        },
+        {
+          "term": "on",
+          "contribution": 0.0058500263162212535
+        },
+        {
+          "term": "or",
+          "contribution": 0.0018570362259435022
+        },
+        {
+          "term": "s",
+          "contribution": 0.005623163547777382
+        },
+        {
+          "term": "signal",
+          "contribution": 0.009825038608065672
+        },
+        {
+          "term": "signals",
+          "contribution": 0.003398884521921316
+        },
+        {
+          "term": "that",
+          "contribution": 0.0055139472668100506
+        },
+        {
+          "term": "the",
+          "contribution": 0.007576947402414282
+        },
+        {
+          "term": "to",
+          "contribution": 0.006386834418513812
+        },
+        {
+          "term": "when",
+          "contribution": 0.002743062116603955
+        },
+        {
+          "term": "which",
+          "contribution": 0.006677371848821513
+        },
+        {
+          "term": "with",
+          "contribution": 0.002743062116603955
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN034",
+      "score": 0.13716459272993833,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.00670408144001476
+        },
+        {
+          "term": "all",
+          "contribution": 0.004812237916816207
+        },
+        {
+          "term": "an",
+          "contribution": 0.0014166200298629786
+        },
+        {
+          "term": "and",
+          "contribution": 0.0026844109592873856
+        },
+        {
+          "term": "are",
+          "contribution": 0.0015568936804661103
+        },
+        {
+          "term": "as",
+          "contribution": 0.0014326921616073472
+        },
+        {
+          "term": "be",
+          "contribution": 0.003034322255048306
+        },
+        {
+          "term": "end",
+          "contribution": 0.00500833951703436
+        },
+        {
+          "term": "finite",
+          "contribution": 0.00749015749206432
+        },
+        {
+          "term": "following",
+          "contribution": 0.0033001157424030533
+        },
+        {
+          "term": "for",
+          "contribution": 0.002448072089726444
+        },
+        {
+          "term": "from",
+          "contribution": 0.002906687945529016
+        },
+        {
+          "term": "high",
+          "contribution": 0.006566938162747607
+        },
+        {
+          "term": "if",
+          "contribution": 0.0027118546946163285
+        },
+        {
+          "term": "in",
+          "contribution": 0.004181414769876974
+        },
+        {
+          "term": "is",
+          "contribution": 0.005725508008214399
+        },
+        {
+          "term": "it",
+          "contribution": 0.002842185234732363
+        },
+        {
+          "term": "logic",
+          "contribution": 0.0013543164928935792
+        },
+        {
+          "term": "machine",
+          "contribution": 0.00749015749206432
+        },
+        {
+          "term": "more",
+          "contribution": 0.008867577657044833
+        },
+        {
+          "term": "must",
+          "contribution": 0.001186663808198551
+        },
+        {
+          "term": "of",
+          "contribution": 0.0014544828171708375
+        },
+        {
+          "term": "one",
+          "contribution": 0.0037101911258141363
+        },
+        {
+          "term": "or",
+          "contribution": 0.003257855549567508
+        },
+        {
+          "term": "previous",
+          "contribution": 0.01074505663700886
+        },
+        {
+          "term": "should",
+          "contribution": 0.002098793677190747
+        },
+        {
+          "term": "state",
+          "contribution": 0.007404928586490239
+        },
+        {
+          "term": "that",
+          "contribution": 0.004594778589026779
+        },
+        {
+          "term": "the",
+          "contribution": 0.008407946069236606
+        },
+        {
+          "term": "to",
+          "contribution": 0.005594050405120106
+        },
+        {
+          "term": "when",
+          "contribution": 0.0013543164928935792
+        },
+        {
+          "term": "would",
+          "contribution": 0.004820945230169706
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN020",
+      "score": 0.13672141854904918,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.006549842767337295
+        },
+        {
+          "term": "an",
+          "contribution": 0.0013840283027114816
+        },
+        {
+          "term": "and",
+          "contribution": 0.002115938772178625
+        },
+        {
+          "term": "as",
+          "contribution": 0.0008267034810062528
+        },
+        {
+          "term": "avoid",
+          "contribution": 0.005167912674383645
+        },
+        {
+          "term": "be",
+          "contribution": 0.002964512566535138
+        },
+        {
+          "term": "bit",
+          "contribution": 0.013393350433956383
+        },
+        {
+          "term": "end",
+          "contribution": 0.0020505073975728427
+        },
+        {
+          "term": "for",
+          "contribution": 0.0019296488988838087
+        },
+        {
+          "term": "from",
+          "contribution": 0.002839814699042172
+        },
+        {
+          "term": "in",
+          "contribution": 0.0020943802685506143
+        },
+        {
+          "term": "is",
+          "contribution": 0.00535122426452324
+        },
+        {
+          "term": "like",
+          "contribution": 0.0032241910275342656
+        },
+        {
+          "term": "logic",
+          "contribution": 0.0027767959816287126
+        },
+        {
+          "term": "machine",
+          "contribution": 0.007317833817291266
+        },
+        {
+          "term": "named",
+          "contribution": 0.0077727584430948215
+        },
+        {
+          "term": "of",
+          "contribution": 0.0014210199928958213
+        },
+        {
+          "term": "on",
+          "contribution": 0.004777807521366444
+        },
+        {
+          "term": "or",
+          "contribution": 0.003182903101534732
+        },
+        {
+          "term": "s",
+          "contribution": 0.009637929754205127
+        },
+        {
+          "term": "should",
+          "contribution": 0.003471810818917769
+        },
+        {
+          "term": "signal",
+          "contribution": 0.013230869375330688
+        },
+        {
+          "term": "signals",
+          "contribution": 0.0020321231701445576
+        },
+        {
+          "term": "state",
+          "contribution": 0.004272851072337993
+        },
+        {
+          "term": "that",
+          "contribution": 0.0021390649437397396
+        },
+        {
+          "term": "the",
+          "contribution": 0.005386623582477038
+        },
+        {
+          "term": "to",
+          "contribution": 0.00510842402323858
+        },
+        {
+          "term": "type",
+          "contribution": 0.008902801018515176
+        },
+        {
+          "term": "when",
+          "contribution": 0.003157444864266156
+        },
+        {
+          "term": "with",
+          "contribution": 0.0022403015138487896
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN027",
+      "score": 0.13472111172707793,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.006193786208798508
+        },
+        {
+          "term": "all",
+          "contribution": 0.002188329333680074
+        },
+        {
+          "term": "an",
+          "contribution": 0.001351920585128616
+        },
+        {
+          "term": "and",
+          "contribution": 0.002912987422195945
+        },
+        {
+          "term": "are",
+          "contribution": 0.0014857876996715717
+        },
+        {
+          "term": "as",
+          "contribution": 0.000807524999004896
+        },
+        {
+          "term": "be",
+          "contribution": 0.0023362644761560558
+        },
+        {
+          "term": "bit",
+          "contribution": 0.010554992813585264
+        },
+        {
+          "term": "clock",
+          "contribution": 0.007789771385494305
+        },
+        {
+          "term": "edge",
+          "contribution": 0.01025431163595096
+        },
+        {
+          "term": "for",
+          "contribution": 0.0018848834690453667
+        },
+        {
+          "term": "if",
+          "contribution": 0.0010845265878633827
+        },
+        {
+          "term": "in",
+          "contribution": 0.00253570803673524
+        },
+        {
+          "term": "is",
+          "contribution": 0.0037236776387050215
+        },
+        {
+          "term": "logic",
+          "contribution": 0.003372600795583504
+        },
+        {
+          "term": "must",
+          "contribution": 0.003161575065997304
+        },
+        {
+          "term": "of",
+          "contribution": 0.003622041031097716
+        },
+        {
+          "term": "on",
+          "contribution": 0.004666968390215162
+        },
+        {
+          "term": "one",
+          "contribution": 0.00354074039051587
+        },
+        {
+          "term": "or",
+          "contribution": 0.0018362631344831844
+        },
+        {
+          "term": "s",
+          "contribution": 0.009414341894025345
+        },
+        {
+          "term": "sequential",
+          "contribution": 0.014871023937798922
+        },
+        {
+          "term": "state",
+          "contribution": 0.004173726296323299
+        },
+        {
+          "term": "that",
+          "contribution": 0.002089441324793183
+        },
+        {
+          "term": "the",
+          "contribution": 0.006495585733895248
+        },
+        {
+          "term": "to",
+          "contribution": 0.004013085307874678
+        },
+        {
+          "term": "unless",
+          "contribution": 0.004600764466865856
+        },
+        {
+          "term": "when",
+          "contribution": 0.0012924625565961523
+        },
+        {
+          "term": "with",
+          "contribution": 0.0012924625565961523
+        },
+        {
+          "term": "you",
+          "contribution": 0.0061255329585492724
+        },
+        {
+          "term": "zero",
+          "contribution": 0.005048023593851877
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN038",
+      "score": 0.13163412065836128,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.00991571277151734
+        },
+        {
+          "term": "all",
+          "contribution": 0.004495225895645071
+        },
+        {
+          "term": "an",
+          "contribution": 0.0027770904176045086
+        },
+        {
+          "term": "and",
+          "contribution": 0.003108071015043398
+        },
+        {
+          "term": "as",
+          "contribution": 0.0009797157799702695
+        },
+        {
+          "term": "be",
+          "contribution": 0.0028344325888295953
+        },
+        {
+          "term": "data",
+          "contribution": 0.013563099266825217
+        },
+        {
+          "term": "end",
+          "contribution": 0.006341013023958207
+        },
+        {
+          "term": "for",
+          "contribution": 0.0022868023656288723
+        },
+        {
+          "term": "from",
+          "contribution": 0.003365428278415698
+        },
+        {
+          "term": "if",
+          "contribution": 0.0031398459852748756
+        },
+        {
+          "term": "in",
+          "contribution": 0.0014659230130699755
+        },
+        {
+          "term": "input",
+          "contribution": 0.020364198279507913
+        },
+        {
+          "term": "logic",
+          "contribution": 0.006342045398168465
+        },
+        {
+          "term": "must",
+          "contribution": 0.0013739458833985792
+        },
+        {
+          "term": "of",
+          "contribution": 0.0016840327187188251
+        },
+        {
+          "term": "on",
+          "contribution": 0.00798009919615691
+        },
+        {
+          "term": "or",
+          "contribution": 0.0037720179802488386
+        },
+        {
+          "term": "output",
+          "contribution": 0.019612668443785175
+        },
+        {
+          "term": "should",
+          "contribution": 0.002430030235148714
+        },
+        {
+          "term": "state",
+          "contribution": 0.0050637014567025355
+        },
+        {
+          "term": "the",
+          "contribution": 0.0026751180389529474
+        },
+        {
+          "term": "type",
+          "contribution": 0.0060639026257893495
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN024",
+      "score": 0.13051220609992722,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.0021031572404244694
+        },
+        {
+          "term": "after",
+          "contribution": 0.009279076674403572
+        },
+        {
+          "term": "all",
+          "contribution": 0.004022500152494277
+        },
+        {
+          "term": "an",
+          "contribution": 0.002485046777988784
+        },
+        {
+          "term": "and",
+          "contribution": 0.002781220882378153
+        },
+        {
+          "term": "are",
+          "contribution": 0.0016130411034025883
+        },
+        {
+          "term": "as",
+          "contribution": 0.0020920336530865845
+        },
+        {
+          "term": "avoid",
+          "contribution": 0.009279076674403572
+        },
+        {
+          "term": "be",
+          "contribution": 0.003574703159640332
+        },
+        {
+          "term": "for",
+          "contribution": 0.0033740884811977244
+        },
+        {
+          "term": "if",
+          "contribution": 0.0011774131420951262
+        },
+        {
+          "term": "in",
+          "contribution": 0.0034229667380562016
+        },
+        {
+          "term": "indicate",
+          "contribution": 0.009279076674403572
+        },
+        {
+          "term": "is",
+          "contribution": 0.005377823425676619
+        },
+        {
+          "term": "module",
+          "contribution": 0.0028537966292104277
+        },
+        {
+          "term": "must",
+          "contribution": 0.002580158508603685
+        },
+        {
+          "term": "named",
+          "contribution": 0.0066501670760710585
+        },
+        {
+          "term": "of",
+          "contribution": 0.0031624763394766664
+        },
+        {
+          "term": "one",
+          "contribution": 0.0038439945273758204
+        },
+        {
+          "term": "or",
+          "contribution": 0.0019935337418925895
+        },
+        {
+          "term": "ports",
+          "contribution": 0.012736312343796867
+        },
+        {
+          "term": "signal",
+          "contribution": 0.005025800775916187
+        },
+        {
+          "term": "signals",
+          "contribution": 0.0021549882811470905
+        },
+        {
+          "term": "that",
+          "contribution": 0.0038407281382433693
+        },
+        {
+          "term": "the",
+          "contribution": 0.00903081530546102
+        },
+        {
+          "term": "there",
+          "contribution": 0.005426212119969069
+        },
+        {
+          "term": "to",
+          "contribution": 0.004954032721161633
+        },
+        {
+          "term": "unless",
+          "contribution": 0.004994806588969042
+        },
+        {
+          "term": "when",
+          "contribution": 0.001403158222981133
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN007",
+      "score": 0.12761076356740403,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.007668987223337838
+        },
+        {
+          "term": "also",
+          "contribution": 0.006512800438740966
+        },
+        {
+          "term": "an",
+          "contribution": 0.001575056502297115
+        },
+        {
+          "term": "and",
+          "contribution": 0.003711133003968099
+        },
+        {
+          "term": "are",
+          "contribution": 0.0036327367488098207
+        },
+        {
+          "term": "as",
+          "contribution": 0.001974390917434668
+        },
+        {
+          "term": "be",
+          "contribution": 0.004194876878454559
+        },
+        {
+          "term": "condition",
+          "contribution": 0.01987273879916453
+        },
+        {
+          "term": "end",
+          "contribution": 0.009324142205882997
+        },
+        {
+          "term": "following",
+          "contribution": 0.003669204620033334
+        },
+        {
+          "term": "for",
+          "contribution": 0.0021959854718166076
+        },
+        {
+          "term": "if",
+          "contribution": 0.003527468614923062
+        },
+        {
+          "term": "is",
+          "contribution": 0.004338274556817063
+        },
+        {
+          "term": "must",
+          "contribution": 0.003148433117425987
+        },
+        {
+          "term": "of",
+          "contribution": 0.0016171539088614595
+        },
+        {
+          "term": "on",
+          "contribution": 0.010267347177846716
+        },
+        {
+          "term": "one",
+          "contribution": 0.0024363760991404316
+        },
+        {
+          "term": "otherwise",
+          "contribution": 0.007301392353190952
+        },
+        {
+          "term": "should",
+          "contribution": 0.003951001720390281
+        },
+        {
+          "term": "that",
+          "contribution": 0.002434305817209456
+        },
+        {
+          "term": "the",
+          "contribution": 0.009157926307100052
+        },
+        {
+          "term": "these",
+          "contribution": 0.004543288825136685
+        },
+        {
+          "term": "to",
+          "contribution": 0.0022278766268519394
+        },
+        {
+          "term": "we",
+          "contribution": 0.008327865632569416
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN028",
+      "score": 0.12638087596198347,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.005671971725351881
+        },
+        {
+          "term": "an",
+          "contribution": 0.002975475536155152
+        },
+        {
+          "term": "and",
+          "contribution": 0.003055002717043648
+        },
+        {
+          "term": "are",
+          "contribution": 0.002638301727437337
+        },
+        {
+          "term": "as",
+          "contribution": 0.001433915895450197
+        },
+        {
+          "term": "be",
+          "contribution": 0.001447105802938082
+        },
+        {
+          "term": "bit",
+          "contribution": 0.011069574649783755
+        },
+        {
+          "term": "clk",
+          "contribution": 0.005592354296998927
+        },
+        {
+          "term": "end",
+          "contribution": 0.007137572468068126
+        },
+        {
+          "term": "for",
+          "contribution": 0.0019767761698412556
+        },
+        {
+          "term": "if",
+          "contribution": 0.003756360033786397
+        },
+        {
+          "term": "in",
+          "contribution": 0.002659330034461951
+        },
+        {
+          "term": "is",
+          "contribution": 0.004440551094615789
+        },
+        {
+          "term": "it",
+          "contribution": 0.0022950157660273085
+        },
+        {
+          "term": "logic",
+          "contribution": 0.0022950157660273085
+        },
+        {
+          "term": "of",
+          "contribution": 0.0024647569562495086
+        },
+        {
+          "term": "or",
+          "contribution": 0.003260638246505453
+        },
+        {
+          "term": "reset",
+          "contribution": 0.009295544137432353
+        },
+        {
+          "term": "s",
+          "contribution": 0.005831338414263144
+        },
+        {
+          "term": "sequential",
+          "contribution": 0.0052941271484421015
+        },
+        {
+          "term": "should",
+          "contribution": 0.002100586361565495
+        },
+        {
+          "term": "signals",
+          "contribution": 0.0020817531413345005
+        },
+        {
+          "term": "state",
+          "contribution": 0.012894854723437724
+        },
+        {
+          "term": "that",
+          "contribution": 0.0052291028782780425
+        },
+        {
+          "term": "the",
+          "contribution": 0.006455796201125505
+        },
+        {
+          "term": "to",
+          "contribution": 0.005907975263359079
+        },
+        {
+          "term": "with",
+          "contribution": 0.0022950157660273085
+        },
+        {
+          "term": "would",
+          "contribution": 0.004825063039976152
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN033",
+      "score": 0.12329812815736396,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.006926301589344655
+        },
+        {
+          "term": "all",
+          "contribution": 0.0038986633410118547
+        },
+        {
+          "term": "an",
+          "contribution": 0.0014225237358551743
+        },
+        {
+          "term": "and",
+          "contribution": 0.0012844669530635614
+        },
+        {
+          "term": "are",
+          "contribution": 0.0032809326165497217
+        },
+        {
+          "term": "as",
+          "contribution": 0.002372150911504423
+        },
+        {
+          "term": "avoid",
+          "contribution": 0.008993410738966248
+        },
+        {
+          "term": "be",
+          "contribution": 0.003046967668851409
+        },
+        {
+          "term": "end",
+          "contribution": 0.002107540313936814
+        },
+        {
+          "term": "for",
+          "contribution": 0.0019833202508585143
+        },
+        {
+          "term": "if",
+          "contribution": 0.002394863449483995
+        },
+        {
+          "term": "in",
+          "contribution": 0.003745371253560844
+        },
+        {
+          "term": "is",
+          "contribution": 0.005500063486602936
+        },
+        {
+          "term": "it",
+          "contribution": 0.0023026133733527626
+        },
+        {
+          "term": "logic",
+          "contribution": 0.003245266195259986
+        },
+        {
+          "term": "more",
+          "contribution": 0.005259160589356306
+        },
+        {
+          "term": "of",
+          "contribution": 0.003485288662523832
+        },
+        {
+          "term": "on",
+          "contribution": 0.002900337169480087
+        },
+        {
+          "term": "or",
+          "contribution": 0.0019321607517572084
+        },
+        {
+          "term": "should",
+          "contribution": 0.0035683759404585382
+        },
+        {
+          "term": "specified",
+          "contribution": 0.008806514233994254
+        },
+        {
+          "term": "state",
+          "contribution": 0.007435788323290706
+        },
+        {
+          "term": "that",
+          "contribution": 0.004613927140732259
+        },
+        {
+          "term": "the",
+          "contribution": 0.006054163303952227
+        },
+        {
+          "term": "these",
+          "contribution": 0.00410330434697215
+        },
+        {
+          "term": "though",
+          "contribution": 0.010789836220748424
+        },
+        {
+          "term": "three",
+          "contribution": 0.006594305608756077
+        },
+        {
+          "term": "to",
+          "contribution": 0.005250509987138994
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN032",
+      "score": 0.12329493165372186,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.005289481929590244
+        },
+        {
+          "term": "an",
+          "contribution": 0.0014146020490315601
+        },
+        {
+          "term": "and",
+          "contribution": 0.002162680717500601
+        },
+        {
+          "term": "are",
+          "contribution": 0.0015546758792650069
+        },
+        {
+          "term": "as",
+          "contribution": 0.0020163368758574136
+        },
+        {
+          "term": "avoid",
+          "contribution": 0.0052820739605375314
+        },
+        {
+          "term": "be",
+          "contribution": 0.003767535589385189
+        },
+        {
+          "term": "end",
+          "contribution": 0.002095803937302569
+        },
+        {
+          "term": "following",
+          "contribution": 0.0032954147144850197
+        },
+        {
+          "term": "for",
+          "contribution": 0.001972275625379005
+        },
+        {
+          "term": "from",
+          "contribution": 0.004914439874052205
+        },
+        {
+          "term": "if",
+          "contribution": 0.002707991646885839
+        },
+        {
+          "term": "in",
+          "contribution": 0.001264299998467501
+        },
+        {
+          "term": "input",
+          "contribution": 0.014125100134991289
+        },
+        {
+          "term": "is",
+          "contribution": 0.0038963250323938185
+        },
+        {
+          "term": "it",
+          "contribution": 0.002838136530632375
+        },
+        {
+          "term": "logic",
+          "contribution": 0.0044663740170401076
+        },
+        {
+          "term": "more",
+          "contribution": 0.005229873610099732
+        },
+        {
+          "term": "of",
+          "contribution": 0.002459145421448816
+        },
+        {
+          "term": "or",
+          "contribution": 0.003253214721461193
+        },
+        {
+          "term": "output",
+          "contribution": 0.00806015604084672
+        },
+        {
+          "term": "should",
+          "contribution": 0.004398279897462181
+        },
+        {
+          "term": "signal",
+          "contribution": 0.00820152111186215
+        },
+        {
+          "term": "that",
+          "contribution": 0.00458823330876686
+        },
+        {
+          "term": "the",
+          "contribution": 0.007104833236544197
+        },
+        {
+          "term": "these",
+          "contribution": 0.006908809267585674
+        },
+        {
+          "term": "to",
+          "contribution": 0.00558608165820876
+        },
+        {
+          "term": "type",
+          "contribution": 0.0030888476029414915
+        },
+        {
+          "term": "with",
+          "contribution": 0.0013523872636968146
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN015",
+      "score": 0.12139653110106532,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.00668990356752867
+        },
+        {
+          "term": "all",
+          "contribution": 0.0028960263141110383
+        },
+        {
+          "term": "and",
+          "contribution": 0.0033902882755460053
+        },
+        {
+          "term": "are",
+          "contribution": 0.003329210779431403
+        },
+        {
+          "term": "as",
+          "contribution": 0.0018094246788701363
+        },
+        {
+          "term": "be",
+          "contribution": 0.00182606871231472
+        },
+        {
+          "term": "end",
+          "contribution": 0.002650680430264221
+        },
+        {
+          "term": "for",
+          "contribution": 0.0030918030917643983
+        },
+        {
+          "term": "from",
+          "contribution": 0.003671013943786739
+        },
+        {
+          "term": "if",
+          "contribution": 0.0014352581617701743
+        },
+        {
+          "term": "in",
+          "contribution": 0.002707394666290846
+        },
+        {
+          "term": "input",
+          "contribution": 0.020313747904142872
+        },
+        {
+          "term": "interface",
+          "contribution": 0.009459726365474187
+        },
+        {
+          "term": "is",
+          "contribution": 0.002348170819977632
+        },
+        {
+          "term": "logic",
+          "contribution": 0.001710439793635238
+        },
+        {
+          "term": "module",
+          "contribution": 0.0034787575895560683
+        },
+        {
+          "term": "named",
+          "contribution": 0.004787832968407588
+        },
+        {
+          "term": "of",
+          "contribution": 0.0018369452802958486
+        },
+        {
+          "term": "or",
+          "contribution": 0.0041145225677566444
+        },
+        {
+          "term": "output",
+          "contribution": 0.010194130043407738
+        },
+        {
+          "term": "ports",
+          "contribution": 0.007397971189938774
+        },
+        {
+          "term": "signals",
+          "contribution": 0.002626915233451294
+        },
+        {
+          "term": "that",
+          "contribution": 0.0027651583174713923
+        },
+        {
+          "term": "the",
+          "contribution": 0.006963260767638568
+        },
+        {
+          "term": "to",
+          "contribution": 0.004284801562524883
+        },
+        {
+          "term": "type",
+          "contribution": 0.00390663828207301
+        },
+        {
+          "term": "when",
+          "contribution": 0.001710439793635238
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN014",
+      "score": 0.1166799086795588,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.006046453464855242
+        },
+        {
+          "term": "and",
+          "contribution": 0.002472179410341633
+        },
+        {
+          "term": "are",
+          "contribution": 0.001777163715093167
+        },
+        {
+          "term": "as",
+          "contribution": 0.0016353901081702005
+        },
+        {
+          "term": "be",
+          "contribution": 0.0034636195645402685
+        },
+        {
+          "term": "beginning",
+          "contribution": 0.014032198010170483
+        },
+        {
+          "term": "e",
+          "contribution": 0.005503014780652246
+        },
+        {
+          "term": "end",
+          "contribution": 0.007057611133139732
+        },
+        {
+          "term": "for",
+          "contribution": 0.004100458650739884
+        },
+        {
+          "term": "if",
+          "contribution": 0.001297211775565679
+        },
+        {
+          "term": "in",
+          "contribution": 0.003032982650180855
+        },
+        {
+          "term": "is",
+          "contribution": 0.0050644764856860765
+        },
+        {
+          "term": "it",
+          "contribution": 0.0026174799329338164
+        },
+        {
+          "term": "like",
+          "contribution": 0.003767017636843776
+        },
+        {
+          "term": "module",
+          "contribution": 0.004431332389607934
+        },
+        {
+          "term": "must",
+          "contribution": 0.0022934585242052443
+        },
+        {
+          "term": "of",
+          "contribution": 0.0034842498362274363
+        },
+        {
+          "term": "one",
+          "contribution": 0.0025013245882600215
+        },
+        {
+          "term": "signal",
+          "contribution": 0.005537162543102371
+        },
+        {
+          "term": "signals",
+          "contribution": 0.004019959038992777
+        },
+        {
+          "term": "that",
+          "contribution": 0.005963824760485926
+        },
+        {
+          "term": "the",
+          "contribution": 0.008961474860902395
+        },
+        {
+          "term": "to",
+          "contribution": 0.005968481156258555
+        },
+        {
+          "term": "type",
+          "contribution": 0.0035308889490170154
+        },
+        {
+          "term": "with",
+          "contribution": 0.0026174799329338164
+        },
+        {
+          "term": "would",
+          "contribution": 0.005503014780652246
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN017",
+      "score": 0.11487206656333208,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.0070893135864808065
+        },
+        {
+          "term": "all",
+          "contribution": 0.00508876032463414
+        },
+        {
+          "term": "an",
+          "contribution": 0.0014980223188586965
+        },
+        {
+          "term": "and",
+          "contribution": 0.002838663470253449
+        },
+        {
+          "term": "are",
+          "contribution": 0.001646356420397274
+        },
+        {
+          "term": "as",
+          "contribution": 0.0015150179927565378
+        },
+        {
+          "term": "be",
+          "contribution": 0.004268471583345321
+        },
+        {
+          "term": "bit",
+          "contribution": 0.006907650139561699
+        },
+        {
+          "term": "e",
+          "contribution": 0.0050979679805093015
+        },
+        {
+          "term": "for",
+          "contribution": 0.0036339286290032456
+        },
+        {
+          "term": "from",
+          "contribution": 0.0030737130102425287
+        },
+        {
+          "term": "indicate",
+          "contribution": 0.009470724227695085
+        },
+        {
+          "term": "is",
+          "contribution": 0.004691708089326583
+        },
+        {
+          "term": "module",
+          "contribution": 0.005500217697486031
+        },
+        {
+          "term": "must",
+          "contribution": 0.001254852276679461
+        },
+        {
+          "term": "need",
+          "contribution": 0.006944289736826858
+        },
+        {
+          "term": "of",
+          "contribution": 0.004530988891660536
+        },
+        {
+          "term": "on",
+          "contribution": 0.003054268763736793
+        },
+        {
+          "term": "should",
+          "contribution": 0.0057913741186702535
+        },
+        {
+          "term": "the",
+          "contribution": 0.008301869742316883
+        },
+        {
+          "term": "to",
+          "contribution": 0.007384216686166727
+        },
+        {
+          "term": "type",
+          "contribution": 0.005538283645285963
+        },
+        {
+          "term": "when",
+          "contribution": 0.002424821560472104
+        },
+        {
+          "term": "which",
+          "contribution": 0.004321081847635331
+        },
+        {
+          "term": "with",
+          "contribution": 0.003005503823330481
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN012",
+      "score": 0.11408268904029156,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.00668769209757774
+        },
+        {
+          "term": "after",
+          "contribution": 0.01822348829321065
+        },
+        {
+          "term": "and",
+          "contribution": 0.0032362702063409156
+        },
+        {
+          "term": "be",
+          "contribution": 0.003913708758796137
+        },
+        {
+          "term": "clk",
+          "contribution": 0.0054175745854904665
+        },
+        {
+          "term": "end",
+          "contribution": 0.004270541772554658
+        },
+        {
+          "term": "for",
+          "contribution": 0.002373587346448841
+        },
+        {
+          "term": "is",
+          "contribution": 0.0030522337456481796
+        },
+        {
+          "term": "it",
+          "contribution": 0.001313110224208463
+        },
+        {
+          "term": "must",
+          "contribution": 0.003543077701640391
+        },
+        {
+          "term": "needs",
+          "contribution": 0.008503131850408166
+        },
+        {
+          "term": "of",
+          "contribution": 0.002959523699587799
+        },
+        {
+          "term": "one",
+          "contribution": 0.0035973053024444548
+        },
+        {
+          "term": "or",
+          "contribution": 0.0018655982596332706
+        },
+        {
+          "term": "s",
+          "contribution": 0.009564740217926054
+        },
+        {
+          "term": "should",
+          "contribution": 0.0020349360363580878
+        },
+        {
+          "term": "the",
+          "contribution": 0.007611881604568639
+        },
+        {
+          "term": "there",
+          "contribution": 0.007826066978048813
+        },
+        {
+          "term": "to",
+          "contribution": 0.00328945617460049
+        },
+        {
+          "term": "we",
+          "contribution": 0.0072622628723566255
+        },
+        {
+          "term": "when",
+          "contribution": 0.001313110224208463
+        },
+        {
+          "term": "you",
+          "contribution": 0.006223391088234263
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN011",
+      "score": 0.11401886055207862,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.006213703205270406
+        },
+        {
+          "term": "after",
+          "contribution": 0.01742054431811095
+        },
+        {
+          "term": "and",
+          "contribution": 0.003309832481152356
+        },
+        {
+          "term": "are",
+          "contribution": 0.0014430127884240333
+        },
+        {
+          "term": "as",
+          "contribution": 0.001645893040310228
+        },
+        {
+          "term": "be",
+          "contribution": 0.003741267082558935
+        },
+        {
+          "term": "bit",
+          "contribution": 0.010251121082166761
+        },
+        {
+          "term": "create",
+          "contribution": 0.009192443030519287
+        },
+        {
+          "term": "data",
+          "contribution": 0.01085745990846294
+        },
+        {
+          "term": "end",
+          "contribution": 0.003293636623031761
+        },
+        {
+          "term": "for",
+          "contribution": 0.0010811929747336156
+        },
+        {
+          "term": "in",
+          "contribution": 0.0011734928743189859
+        },
+        {
+          "term": "is",
+          "contribution": 0.0017232698370540137
+        },
+        {
+          "term": "it",
+          "contribution": 0.0012552533569498048
+        },
+        {
+          "term": "logic",
+          "contribution": 0.002995404007466132
+        },
+        {
+          "term": "must",
+          "contribution": 0.003240100027872117
+        },
+        {
+          "term": "of",
+          "contribution": 0.002282519680837068
+        },
+        {
+          "term": "one",
+          "contribution": 0.004846595890259628
+        },
+        {
+          "term": "the",
+          "contribution": 0.00597847258212605
+        },
+        {
+          "term": "there",
+          "contribution": 0.007481243131612555
+        },
+        {
+          "term": "to",
+          "contribution": 0.0031445196523357598
+        },
+        {
+          "term": "type",
+          "contribution": 0.0048542429980859515
+        },
+        {
+          "term": "when",
+          "contribution": 0.002125328682207968
+        },
+        {
+          "term": "would",
+          "contribution": 0.004468311296211316
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN004",
+      "score": 0.11291940620765467,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.006315300932654605
+        },
+        {
+          "term": "and",
+          "contribution": 0.0038525182354226147
+        },
+        {
+          "term": "are",
+          "contribution": 0.0014666069021187244
+        },
+        {
+          "term": "avoid",
+          "contribution": 0.008436708690970424
+        },
+        {
+          "term": "be",
+          "contribution": 0.002858357008150993
+        },
+        {
+          "term": "following",
+          "contribution": 0.003108736702014208
+        },
+        {
+          "term": "for",
+          "contribution": 0.002867435961907387
+        },
+        {
+          "term": "if",
+          "contribution": 0.0010705258763706938
+        },
+        {
+          "term": "in",
+          "contribution": 0.0020193830803495938
+        },
+        {
+          "term": "is",
+          "contribution": 0.005159603488058395
+        },
+        {
+          "term": "like",
+          "contribution": 0.005263548782118579
+        },
+        {
+          "term": "must",
+          "contribution": 0.0023459279923470594
+        },
+        {
+          "term": "of",
+          "contribution": 0.0032695454486753924
+        },
+        {
+          "term": "on",
+          "contribution": 0.004606720095052912
+        },
+        {
+          "term": "or",
+          "contribution": 0.00306892724599604
+        },
+        {
+          "term": "otherwise",
+          "contribution": 0.006186110815472697
+        },
+        {
+          "term": "s",
+          "contribution": 0.005488481698126207
+        },
+        {
+          "term": "should",
+          "contribution": 0.001977081243061858
+        },
+        {
+          "term": "signals",
+          "contribution": 0.0033174769565404282
+        },
+        {
+          "term": "that",
+          "contribution": 0.003492061290209702
+        },
+        {
+          "term": "the",
+          "contribution": 0.006411730876989012
+        },
+        {
+          "term": "there",
+          "contribution": 0.0029138711640708955
+        },
+        {
+          "term": "these",
+          "contribution": 0.0038493052803430486
+        },
+        {
+          "term": "to",
+          "contribution": 0.004925497625566505
+        },
+        {
+          "term": "unless",
+          "contribution": 0.004541370832198674
+        },
+        {
+          "term": "we",
+          "contribution": 0.011946492918010032
+        },
+        {
+          "term": "with",
+          "contribution": 0.002160079064857985
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN045",
+      "score": 0.10508224238856358,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.004772756812403775
+        },
+        {
+          "term": "an",
+          "contribution": 0.001395768536400061
+        },
+        {
+          "term": "and",
+          "contribution": 0.003288696420591897
+        },
+        {
+          "term": "are",
+          "contribution": 0.0032192239755323517
+        },
+        {
+          "term": "as",
+          "contribution": 0.0008337161208772445
+        },
+        {
+          "term": "be",
+          "contribution": 0.0037173759496752896
+        },
+        {
+          "term": "create",
+          "contribution": 0.005771451324437864
+        },
+        {
+          "term": "e",
+          "contribution": 0.00474998484147487
+        },
+        {
+          "term": "end",
+          "contribution": 0.0020679011430479195
+        },
+        {
+          "term": "flag",
+          "contribution": 0.020619680844588578
+        },
+        {
+          "term": "following",
+          "contribution": 0.005505337011935297
+        },
+        {
+          "term": "for",
+          "contribution": 0.0024120384617248554
+        },
+        {
+          "term": "from",
+          "contribution": 0.0028639038655235947
+        },
+        {
+          "term": "if",
+          "contribution": 0.0011197019298918465
+        },
+        {
+          "term": "in",
+          "contribution": 0.003988433924079084
+        },
+        {
+          "term": "is",
+          "contribution": 0.004371455919324919
+        },
+        {
+          "term": "it",
+          "contribution": 0.0013343820567688668
+        },
+        {
+          "term": "like",
+          "contribution": 0.0032515407255467375
+        },
+        {
+          "term": "module",
+          "contribution": 0.005293657913190954
+        },
+        {
+          "term": "must",
+          "contribution": 0.0011691970830939183
+        },
+        {
+          "term": "of",
+          "contribution": 0.0034197364394051
+        },
+        {
+          "term": "or",
+          "contribution": 0.0018958201656639096
+        },
+        {
+          "term": "that",
+          "contribution": 0.0036524738469698287
+        },
+        {
+          "term": "the",
+          "contribution": 0.00885629653872188
+        },
+        {
+          "term": "to",
+          "contribution": 0.005511710537692934
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN025",
+      "score": 0.10497252280199644,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.004416071989045684
+        },
+        {
+          "term": "an",
+          "contribution": 0.001468493558506355
+        },
+        {
+          "term": "and",
+          "contribution": 0.0013259753768215226
+        },
+        {
+          "term": "are",
+          "contribution": 0.0033869581869579338
+        },
+        {
+          "term": "as",
+          "contribution": 0.002093152428276583
+        },
+        {
+          "term": "be",
+          "contribution": 0.0044153756189459804
+        },
+        {
+          "term": "create",
+          "contribution": 0.006072166603661526
+        },
+        {
+          "term": "e",
+          "contribution": 0.008461465286991864
+        },
+        {
+          "term": "for",
+          "contribution": 0.0028855903286875988
+        },
+        {
+          "term": "if",
+          "contribution": 0.0011780427976505285
+        },
+        {
+          "term": "in",
+          "contribution": 0.0022221972826740174
+        },
+        {
+          "term": "is",
+          "contribution": 0.004599225939982896
+        },
+        {
+          "term": "it",
+          "contribution": 0.0033501391809907235
+        },
+        {
+          "term": "logic",
+          "contribution": 0.0023770238916023087
+        },
+        {
+          "term": "must",
+          "contribution": 0.0012301168427081646
+        },
+        {
+          "term": "named",
+          "contribution": 0.003929796252006597
+        },
+        {
+          "term": "of",
+          "contribution": 0.0025528304679752483
+        },
+        {
+          "term": "or",
+          "contribution": 0.0033771510978471827
+        },
+        {
+          "term": "s",
+          "contribution": 0.00603971046121209
+        },
+        {
+          "term": "should",
+          "contribution": 0.004565839348495887
+        },
+        {
+          "term": "signal",
+          "contribution": 0.008513971071206008
+        },
+        {
+          "term": "that",
+          "contribution": 0.0022696089992918235
+        },
+        {
+          "term": "the",
+          "contribution": 0.007055685011293378
+        },
+        {
+          "term": "to",
+          "contribution": 0.006119085785763125
+        },
+        {
+          "term": "type",
+          "contribution": 0.0032065221531615198
+        },
+        {
+          "term": "when",
+          "contribution": 0.0023770238916023087
+        },
+        {
+          "term": "zero",
+          "contribution": 0.005483302948637581
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN035",
+      "score": 0.10444201153522555,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.005747889101440439
+        },
+        {
+          "term": "accidentally",
+          "contribution": 0.006887190577407263
+        },
+        {
+          "term": "all",
+          "contribution": 0.002108463223129311
+        },
+        {
+          "term": "an",
+          "contribution": 0.0022054602818376394
+        },
+        {
+          "term": "and",
+          "contribution": 0.003283567440485755
+        },
+        {
+          "term": "are",
+          "contribution": 0.0014315618192930555
+        },
+        {
+          "term": "as",
+          "contribution": 0.0007780532554924276
+        },
+        {
+          "term": "be",
+          "contribution": 0.0013294764291548018
+        },
+        {
+          "term": "clk",
+          "contribution": 0.005137774450387415
+        },
+        {
+          "term": "end",
+          "contribution": 0.004049982157533532
+        },
+        {
+          "term": "every",
+          "contribution": 0.008063972702158459
+        },
+        {
+          "term": "for",
+          "contribution": 0.0018160920356915372
+        },
+        {
+          "term": "if",
+          "contribution": 0.0017692461675935175
+        },
+        {
+          "term": "in",
+          "contribution": 0.0019711292181828675
+        },
+        {
+          "term": "input",
+          "contribution": 0.01049359459497606
+        },
+        {
+          "term": "is",
+          "contribution": 0.0035877768648264873
+        },
+        {
+          "term": "it",
+          "contribution": 0.0012452923451297454
+        },
+        {
+          "term": "more",
+          "contribution": 0.004815722350749171
+        },
+        {
+          "term": "named",
+          "contribution": 0.0034858004166554626
+        },
+        {
+          "term": "of",
+          "contribution": 0.00373368559304534
+        },
+        {
+          "term": "or",
+          "contribution": 0.0017692461675935171
+        },
+        {
+          "term": "s",
+          "contribution": 0.005357332516010583
+        },
+        {
+          "term": "should",
+          "contribution": 0.004049982157533532
+        },
+        {
+          "term": "signal",
+          "contribution": 0.004460360301419633
+        },
+        {
+          "term": "that",
+          "contribution": 0.0034086172692038576
+        },
+        {
+          "term": "the",
+          "contribution": 0.006258520334126184
+        },
+        {
+          "term": "to",
+          "contribution": 0.0018424661959088905
+        },
+        {
+          "term": "when",
+          "contribution": 0.0012452923451297454
+        },
+        {
+          "term": "with",
+          "contribution": 0.0021084632231293107
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN016",
+      "score": 0.10234904830272512,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.0050069450567683
+        },
+        {
+          "term": "all",
+          "contribution": 0.002370164149078658
+        },
+        {
+          "term": "also",
+          "contribution": 0.006054643220910101
+        },
+        {
+          "term": "and",
+          "contribution": 0.0022385925235784087
+        },
+        {
+          "term": "are",
+          "contribution": 0.0027246907238674986
+        },
+        {
+          "term": "as",
+          "contribution": 0.0008746246612284359
+        },
+        {
+          "term": "be",
+          "contribution": 0.00389977907254861
+        },
+        {
+          "term": "create",
+          "contribution": 0.006054643220910101
+        },
+        {
+          "term": "for",
+          "contribution": 0.002530391664055011
+        },
+        {
+          "term": "in",
+          "contribution": 0.0027464075853214985
+        },
+        {
+          "term": "is",
+          "contribution": 0.00458595324808113
+        },
+        {
+          "term": "it",
+          "contribution": 0.0013998571277748072
+        },
+        {
+          "term": "module",
+          "contribution": 0.003528885666507092
+        },
+        {
+          "term": "more",
+          "contribution": 0.00541344631599603
+        },
+        {
+          "term": "of",
+          "contribution": 0.003155036240909461
+        },
+        {
+          "term": "one",
+          "contribution": 0.0022649838838144564
+        },
+        {
+          "term": "or",
+          "contribution": 0.0033674051348063666
+        },
+        {
+          "term": "s",
+          "contribution": 0.006022280742130308
+        },
+        {
+          "term": "should",
+          "contribution": 0.002169368315427457
+        },
+        {
+          "term": "that",
+          "contribution": 0.003831692372327379
+        },
+        {
+          "term": "the",
+          "contribution": 0.007635503986717982
+        },
+        {
+          "term": "there",
+          "contribution": 0.0031972686002440342
+        },
+        {
+          "term": "to",
+          "contribution": 0.006377990780482841
+        },
+        {
+          "term": "type",
+          "contribution": 0.0031972686002440342
+        },
+        {
+          "term": "unless",
+          "contribution": 0.00498305571738712
+        },
+        {
+          "term": "when",
+          "contribution": 0.0013998571277748072
+        },
+        {
+          "term": "with",
+          "contribution": 0.0013998571277748072
+        },
+        {
+          "term": "you",
+          "contribution": 0.0039184554360583825
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN003",
+      "score": 0.10178503621034835,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.003401260736414291
+        },
+        {
+          "term": "active",
+          "contribution": 0.00886294866453905
+        },
+        {
+          "term": "all",
+          "contribution": 0.0038421077447286867
+        },
+        {
+          "term": "and",
+          "contribution": 0.0038980616596140526
+        },
+        {
+          "term": "are",
+          "contribution": 0.0026086367988911387
+        },
+        {
+          "term": "bit",
+          "contribution": 0.015425860200190314
+        },
+        {
+          "term": "end",
+          "contribution": 0.0035166116275587318
+        },
+        {
+          "term": "finite",
+          "contribution": 0.012550054450371611
+        },
+        {
+          "term": "for",
+          "contribution": 0.001954549400544808
+        },
+        {
+          "term": "in",
+          "contribution": 0.0029898761336051042
+        },
+        {
+          "term": "logic",
+          "contribution": 0.004127167360385263
+        },
+        {
+          "term": "of",
+          "contribution": 0.0024370433561595336
+        },
+        {
+          "term": "on",
+          "contribution": 0.0048394611228016774
+        },
+        {
+          "term": "s",
+          "contribution": 0.005765771145899248
+        },
+        {
+          "term": "sequential",
+          "contribution": 0.012491297073235035
+        },
+        {
+          "term": "signals",
+          "contribution": 0.005746406982190771
+        },
+        {
+          "term": "state",
+          "contribution": 0.0073279217532190325
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN009",
+      "score": 0.09917903400447545,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.006294503897742302
+        },
+        {
+          "term": "and",
+          "contribution": 0.0024497132748699186
+        },
+        {
+          "term": "are",
+          "contribution": 0.0033903866027979756
+        },
+        {
+          "term": "as",
+          "contribution": 0.0013074320811234106
+        },
+        {
+          "term": "bit",
+          "contribution": 0.012510189589396144
+        },
+        {
+          "term": "clk",
+          "contribution": 0.0030115870726880275
+        },
+        {
+          "term": "data",
+          "contribution": 0.010690136795943276
+        },
+        {
+          "term": "for",
+          "contribution": 0.0025402839156952613
+        },
+        {
+          "term": "if",
+          "contribution": 0.001755914498685752
+        },
+        {
+          "term": "in",
+          "contribution": 0.0011554083055610896
+        },
+        {
+          "term": "is",
+          "contribution": 0.002872784351983203
+        },
+        {
+          "term": "it",
+          "contribution": 0.001235908786446543
+        },
+        {
+          "term": "more",
+          "contribution": 0.004779434796700522
+        },
+        {
+          "term": "must",
+          "contribution": 0.0018335327065337856
+        },
+        {
+          "term": "of",
+          "contribution": 0.0022473440227545214
+        },
+        {
+          "term": "on",
+          "contribution": 0.002635776594848886
+        },
+        {
+          "term": "one",
+          "contribution": 0.003385809621200562
+        },
+        {
+          "term": "or",
+          "contribution": 0.0017559144986857517
+        },
+        {
+          "term": "that",
+          "contribution": 0.003382932569302471
+        },
+        {
+          "term": "the",
+          "contribution": 0.007164357708164252
+        },
+        {
+          "term": "there",
+          "contribution": 0.0028228111835616686
+        },
+        {
+          "term": "to",
+          "contribution": 0.0038374863298353988
+        },
+        {
+          "term": "were",
+          "contribution": 0.009805617799257293
+        },
+        {
+          "term": "which",
+          "contribution": 0.006313767000697428
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN008",
+      "score": 0.09521975687159705,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.005699977675793542
+        },
+        {
+          "term": "all",
+          "contribution": 0.002306347645119531
+        },
+        {
+          "term": "an",
+          "contribution": 0.0014248307189926115
+        },
+        {
+          "term": "and",
+          "contribution": 0.0021783185764345588
+        },
+        {
+          "term": "as",
+          "contribution": 0.0008510754533907712
+        },
+        {
+          "term": "be",
+          "contribution": 0.003051909099953879
+        },
+        {
+          "term": "beginning",
+          "contribution": 0.012364231117651121
+        },
+        {
+          "term": "end",
+          "contribution": 0.006218693259986791
+        },
+        {
+          "term": "for",
+          "contribution": 0.0011732805810563325
+        },
+        {
+          "term": "if",
+          "contribution": 0.0011430159544504436
+        },
+        {
+          "term": "in",
+          "contribution": 0.0012734418680307006
+        },
+        {
+          "term": "is",
+          "contribution": 0.0018700445553983883
+        },
+        {
+          "term": "it",
+          "contribution": 0.0013621660725069349
+        },
+        {
+          "term": "like",
+          "contribution": 0.005619967128105598
+        },
+        {
+          "term": "module",
+          "contribution": 0.0016362577715126362
+        },
+        {
+          "term": "must",
+          "contribution": 0.00202084172639723
+        },
+        {
+          "term": "of",
+          "contribution": 0.004309610129955066
+        },
+        {
+          "term": "on",
+          "contribution": 0.004918661643363793
+        },
+        {
+          "term": "one",
+          "contribution": 0.002203999351141902
+        },
+        {
+          "term": "or",
+          "contribution": 0.005050030163170412
+        },
+        {
+          "term": "should",
+          "contribution": 0.004430082872368279
+        },
+        {
+          "term": "that",
+          "contribution": 0.0022021265286190734
+        },
+        {
+          "term": "the",
+          "contribution": 0.00742991857585615
+        },
+        {
+          "term": "to",
+          "contribution": 0.003412345373169441
+        },
+        {
+          "term": "when",
+          "contribution": 0.002306347645119531
+        },
+        {
+          "term": "with",
+          "contribution": 0.002306347645119531
+        },
+        {
+          "term": "you",
+          "contribution": 0.006455887738932806
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN036",
+      "score": 0.09354261055952753,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.006580076444995875
+        },
+        {
+          "term": "all",
+          "contribution": 0.003611304555479512
+        },
+        {
+          "term": "and",
+          "contribution": 0.002496913675963189
+        },
+        {
+          "term": "are",
+          "contribution": 0.00245193070609536
+        },
+        {
+          "term": "as",
+          "contribution": 0.001332623322590031
+        },
+        {
+          "term": "be",
+          "contribution": 0.002822384817681139
+        },
+        {
+          "term": "data",
+          "contribution": 0.0064354189253938805
+        },
+        {
+          "term": "end",
+          "contribution": 0.0019521998364191646
+        },
+        {
+          "term": "for",
+          "contribution": 0.0025892294069662612
+        },
+        {
+          "term": "from",
+          "contribution": 0.004577703356433509
+        },
+        {
+          "term": "if",
+          "contribution": 0.0017897469759285657
+        },
+        {
+          "term": "in",
+          "contribution": 0.0024714735624543007
+        },
+        {
+          "term": "is",
+          "contribution": 0.004512773694305782
+        },
+        {
+          "term": "it",
+          "contribution": 0.002132894645511684
+        },
+        {
+          "term": "logic",
+          "contribution": 0.00264366793678558
+        },
+        {
+          "term": "more",
+          "contribution": 0.004871523630817394
+        },
+        {
+          "term": "of",
+          "contribution": 0.003530287604407431
+        },
+        {
+          "term": "or",
+          "contribution": 0.0017897469759285657
+        },
+        {
+          "term": "s",
+          "contribution": 0.005419409602348003
+        },
+        {
+          "term": "should",
+          "contribution": 0.0033053616489226952
+        },
+        {
+          "term": "that",
+          "contribution": 0.003448113982890982
+        },
+        {
+          "term": "the",
+          "contribution": 0.0066180113679997436
+        },
+        {
+          "term": "there",
+          "contribution": 0.0028772003324639022
+        },
+        {
+          "term": "to",
+          "contribution": 0.005490632784125336
+        },
+        {
+          "term": "when",
+          "contribution": 0.002132894645511684
+        },
+        {
+          "term": "with",
+          "contribution": 0.002132894645511684
+        },
+        {
+          "term": "you",
+          "contribution": 0.00352619147559628
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN039",
+      "score": 0.09141540437776219,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.004774820053592142
+        },
+        {
+          "term": "an",
+          "contribution": 0.001396371920826907
+        },
+        {
+          "term": "and",
+          "contribution": 0.003008766851263971
+        },
+        {
+          "term": "are",
+          "contribution": 0.0015346406045988305
+        },
+        {
+          "term": "as",
+          "contribution": 0.0008340765325863701
+        },
+        {
+          "term": "be",
+          "contribution": 0.0014252046146673288
+        },
+        {
+          "term": "end",
+          "contribution": 0.0035027745693221256
+        },
+        {
+          "term": "for",
+          "contribution": 0.001149846109295624
+        },
+        {
+          "term": "if",
+          "contribution": 0.001896639720148934
+        },
+        {
+          "term": "input",
+          "contribution": 0.01124917983744609
+        },
+        {
+          "term": "is",
+          "contribution": 0.005398949783316364
+        },
+        {
+          "term": "logic",
+          "contribution": 0.00475906088740225
+        },
+        {
+          "term": "module",
+          "contribution": 0.0027150902572880883
+        },
+        {
+          "term": "of",
+          "contribution": 0.0014336935257219397
+        },
+        {
+          "term": "or",
+          "contribution": 0.0032112901947081714
+        },
+        {
+          "term": "otherwise",
+          "contribution": 0.006473075251628587
+        },
+        {
+          "term": "output",
+          "contribution": 0.013471159731183409
+        },
+        {
+          "term": "should",
+          "contribution": 0.0020687950873613443
+        },
+        {
+          "term": "signals",
+          "contribution": 0.0020502468980528885
+        },
+        {
+          "term": "that",
+          "contribution": 0.002158142444350015
+        },
+        {
+          "term": "the",
+          "contribution": 0.004779483432449735
+        },
+        {
+          "term": "these",
+          "contribution": 0.004027868799865311
+        },
+        {
+          "term": "to",
+          "contribution": 0.003344189032242594
+        },
+        {
+          "term": "unless",
+          "contribution": 0.004752038238443176
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN006",
+      "score": 0.08995410837704203,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.006251027739076711
+        },
+        {
+          "term": "all",
+          "contribution": 0.0022085533639565123
+        },
+        {
+          "term": "an",
+          "contribution": 0.0013644147204601579
+        },
+        {
+          "term": "and",
+          "contribution": 0.004068776421256756
+        },
+        {
+          "term": "are",
+          "contribution": 0.0025389063733319353
+        },
+        {
+          "term": "as",
+          "contribution": 0.0008149879570603874
+        },
+        {
+          "term": "be",
+          "contribution": 0.0036338707564674273
+        },
+        {
+          "term": "clk",
+          "contribution": 0.006670438764343786
+        },
+        {
+          "term": "end",
+          "contribution": 0.0066760069737425405
+        },
+        {
+          "term": "for",
+          "contribution": 0.002681075377466006
+        },
+        {
+          "term": "if",
+          "contribution": 0.0018532334509048193
+        },
+        {
+          "term": "is",
+          "contribution": 0.0017907504977895995
+        },
+        {
+          "term": "it",
+          "contribution": 0.0013044071946693469
+        },
+        {
+          "term": "module",
+          "contribution": 0.0026529530271763697
+        },
+        {
+          "term": "must",
+          "contribution": 0.0023985729241991784
+        },
+        {
+          "term": "of",
+          "contribution": 0.0023718997261979124
+        },
+        {
+          "term": "on",
+          "contribution": 0.00776628566230201
+        },
+        {
+          "term": "one",
+          "contribution": 0.002110544865785029
+        },
+        {
+          "term": "or",
+          "contribution": 0.0031377969923188725
+        },
+        {
+          "term": "should",
+          "contribution": 0.004242237483615794
+        },
+        {
+          "term": "the",
+          "contribution": 0.007349335175058593
+        },
+        {
+          "term": "to",
+          "contribution": 0.005036030637526645
+        },
+        {
+          "term": "unless",
+          "contribution": 0.004643283661047741
+        },
+        {
+          "term": "with",
+          "contribution": 0.002737444968160187
+        },
+        {
+          "term": "you",
+          "contribution": 0.0036512736631277177
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN042",
+      "score": 0.08795173284385152,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.004437139727745337
+        },
+        {
+          "term": "an",
+          "contribution": 0.002197059987278204
+        },
+        {
+          "term": "and",
+          "contribution": 0.0024589111040400707
+        },
+        {
+          "term": "as",
+          "contribution": 0.0007750897577668563
+        },
+        {
+          "term": "be",
+          "contribution": 0.0031604384062335717
+        },
+        {
+          "term": "bit",
+          "contribution": 0.012557161040263425
+        },
+        {
+          "term": "end",
+          "contribution": 0.0071286809398396515
+        },
+        {
+          "term": "finite",
+          "contribution": 0.00686095821674603
+        },
+        {
+          "term": "for",
+          "contribution": 0.0022424255213579214
+        },
+        {
+          "term": "if",
+          "contribution": 0.002484049470169595
+        },
+        {
+          "term": "in",
+          "contribution": 0.001963621458381522
+        },
+        {
+          "term": "is",
+          "contribution": 0.0028835706672566226
+        },
+        {
+          "term": "it",
+          "contribution": 0.0012405491980425607
+        },
+        {
+          "term": "logic",
+          "contribution": 0.0026034317917094873
+        },
+        {
+          "term": "must",
+          "contribution": 0.0025938540581633344
+        },
+        {
+          "term": "of",
+          "contribution": 0.0031792628474737903
+        },
+        {
+          "term": "or",
+          "contribution": 0.002984184354662553
+        },
+        {
+          "term": "state",
+          "contribution": 0.0067828888356118834
+        },
+        {
+          "term": "that",
+          "contribution": 0.0020055163274173616
+        },
+        {
+          "term": "the",
+          "contribution": 0.006234682491864492
+        },
+        {
+          "term": "to",
+          "contribution": 0.003851894768597071
+        },
+        {
+          "term": "when",
+          "contribution": 0.0012405491980425607
+        },
+        {
+          "term": "with",
+          "contribution": 0.0012405491980425607
+        },
+        {
+          "term": "zero",
+          "contribution": 0.004845263477145065
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN005",
+      "score": 0.08686062920869611,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.006526583841645132
+        },
+        {
+          "term": "all",
+          "contribution": 0.003581946525404966
+        },
+        {
+          "term": "and",
+          "contribution": 0.0032946121569261146
+        },
+        {
+          "term": "are",
+          "contribution": 0.002431997783157297
+        },
+        {
+          "term": "as",
+          "contribution": 0.0018629092332183353
+        },
+        {
+          "term": "be",
+          "contribution": 0.002258570803502597
+        },
+        {
+          "term": "create",
+          "contribution": 0.005404238639665068
+        },
+        {
+          "term": "end",
+          "contribution": 0.0019363294658567716
+        },
+        {
+          "term": "following",
+          "contribution": 0.005155056039076411
+        },
+        {
+          "term": "for",
+          "contribution": 0.003004550417267462
+        },
+        {
+          "term": "from",
+          "contribution": 0.0026816859504322746
+        },
+        {
+          "term": "in",
+          "contribution": 0.0019777593738524945
+        },
+        {
+          "term": "is",
+          "contribution": 0.005053253274808529
+        },
+        {
+          "term": "it",
+          "contribution": 0.0012494810517991216
+        },
+        {
+          "term": "like",
+          "contribution": 0.003044659140247671
+        },
+        {
+          "term": "module",
+          "contribution": 0.00254124214610014
+        },
+        {
+          "term": "of",
+          "contribution": 0.0028161145323610972
+        },
+        {
+          "term": "or",
+          "contribution": 0.0042361432179345146
+        },
+        {
+          "term": "should",
+          "contribution": 0.0019363294658567716
+        },
+        {
+          "term": "that",
+          "contribution": 0.004239104237691944
+        },
+        {
+          "term": "the",
+          "contribution": 0.006815279476060589
+        },
+        {
+          "term": "there",
+          "contribution": 0.002853810188377937
+        },
+        {
+          "term": "to",
+          "contribution": 0.004823972823505052
+        },
+        {
+          "term": "when",
+          "contribution": 0.0012494810517991216
+        },
+        {
+          "term": "which",
+          "contribution": 0.0037699630521319475
+        },
+        {
+          "term": "with",
+          "contribution": 0.0021155553200167573
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN031",
+      "score": 0.08453596210332129,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.0017775399021523598
+        },
+        {
+          "term": "all",
+          "contribution": 0.002007931868176538
+        },
+        {
+          "term": "and",
+          "contribution": 0.0011200847517534235
+        },
+        {
+          "term": "are",
+          "contribution": 0.002308276132480217
+        },
+        {
+          "term": "as",
+          "contribution": 0.0007409557395661217
+        },
+        {
+          "term": "be",
+          "contribution": 0.0012660871011672156
+        },
+        {
+          "term": "end",
+          "contribution": 0.0031117059647961273
+        },
+        {
+          "term": "following",
+          "contribution": 0.004892805782557107
+        },
+        {
+          "term": "for",
+          "contribution": 0.0017295009151710476
+        },
+        {
+          "term": "from",
+          "contribution": 0.002545262054537812
+        },
+        {
+          "term": "if",
+          "contribution": 0.0009951223813252663
+        },
+        {
+          "term": "in",
+          "contribution": 0.0018771459374136536
+        },
+        {
+          "term": "input",
+          "contribution": 0.00999326085835421
+        },
+        {
+          "term": "is",
+          "contribution": 0.0027565816925566775
+        },
+        {
+          "term": "it",
+          "contribution": 0.0011859169074199972
+        },
+        {
+          "term": "logic",
+          "contribution": 0.0024887797952508877
+        },
+        {
+          "term": "more",
+          "contribution": 0.007764957693811105
+        },
+        {
+          "term": "of",
+          "contribution": 0.002672851927085567
+        },
+        {
+          "term": "one",
+          "contribution": 0.0019188263070240121
+        },
+        {
+          "term": "or",
+          "contribution": 0.0028527644745058624
+        },
+        {
+          "term": "output",
+          "contribution": 0.007068001586434983
+        },
+        {
+          "term": "s",
+          "contribution": 0.005101895337472675
+        },
+        {
+          "term": "signals",
+          "contribution": 0.001821346300116189
+        },
+        {
+          "term": "that",
+          "contribution": 0.0019171958069409115
+        },
+        {
+          "term": "the",
+          "contribution": 0.006230273003743867
+        },
+        {
+          "term": "there",
+          "contribution": 0.002708629913268143
+        },
+        {
+          "term": "to",
+          "contribution": 0.003682261968239315
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN010",
+      "score": 0.07923196164481379,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.006528853575315579
+        },
+        {
+          "term": "all",
+          "contribution": 0.002503496831139404
+        },
+        {
+          "term": "also",
+          "contribution": 0.0063952448707488545
+        },
+        {
+          "term": "an",
+          "contribution": 0.002618666887909823
+        },
+        {
+          "term": "and",
+          "contribution": 0.0013965257840988267
+        },
+        {
+          "term": "as",
+          "contribution": 0.0015641739605972162
+        },
+        {
+          "term": "bit",
+          "contribution": 0.007131774361015429
+        },
+        {
+          "term": "for",
+          "contribution": 0.0033233120772837403
+        },
+        {
+          "term": "if",
+          "contribution": 0.001240722241490251
+        },
+        {
+          "term": "in",
+          "contribution": 0.002900905698680118
+        },
+        {
+          "term": "is",
+          "contribution": 0.005979897306740132
+        },
+        {
+          "term": "it",
+          "contribution": 0.001478605557676011
+        },
+        {
+          "term": "logic",
+          "contribution": 0.0038583293997355495
+        },
+        {
+          "term": "module",
+          "contribution": 0.003007244291711173
+        },
+        {
+          "term": "of",
+          "contribution": 0.004143694508888627
+        },
+        {
+          "term": "on",
+          "contribution": 0.0031533669512466764
+        },
+        {
+          "term": "that",
+          "contribution": 0.0023903667765924085
+        },
+        {
+          "term": "the",
+          "contribution": 0.006582337626475195
+        },
+        {
+          "term": "to",
+          "contribution": 0.004591057752016202
+        },
+        {
+          "term": "when",
+          "contribution": 0.002503496831139404
+        },
+        {
+          "term": "which",
+          "contribution": 0.004461282796637152
+        },
+        {
+          "term": "with",
+          "contribution": 0.001478605557676011
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN001",
+      "score": 0.06021023340896335,
+      "matched": [
+        {
+          "term": "a",
+          "contribution": 0.001989895157012087
+        },
+        {
+          "term": "and",
+          "contribution": 0.0035005776802292062
+        },
+        {
+          "term": "are",
+          "contribution": 0.0015261734206209088
+        },
+        {
+          "term": "as",
+          "contribution": 0.0008294746216034909
+        },
+        {
+          "term": "be",
+          "contribution": 0.0014173412298185185
+        },
+        {
+          "term": "end",
+          "contribution": 0.0034834484569914873
+        },
+        {
+          "term": "for",
+          "contribution": 0.0029838974193245275
+        },
+        {
+          "term": "in",
+          "contribution": 0.002101400708553081
+        },
+        {
+          "term": "is",
+          "contribution": 0.0018225816451300397
+        },
+        {
+          "term": "like",
+          "contribution": 0.005477328817835222
+        },
+        {
+          "term": "logic",
+          "contribution": 0.0013275934384574686
+        },
+        {
+          "term": "of",
+          "contribution": 0.0024140609819141884
+        },
+        {
+          "term": "patterns",
+          "contribution": 0.010533037707211746
+        },
+        {
+          "term": "the",
+          "contribution": 0.005910073986435655
+        },
+        {
+          "term": "to",
+          "contribution": 0.006487051168779948
+        },
+        {
+          "term": "which",
+          "contribution": 0.008406296969045773
+        }
+      ]
+    },
+    {
+      "chunk_id": "GEN002",
+      "score": 0.038195503151631525,
+      "matched": [
+        {
+          "term": "and",
+          "contribution": 0.0022883780777173015
+        },
+        {
+          "term": "be",
+          "contribution": 0.002586666734152198
+        },
+        {
+          "term": "in",
+          "contribution": 0.0022650626549180243
+        },
+        {
+          "term": "module",
+          "contribution": 0.004798838160191216
+        },
+        {
+          "term": "must",
+          "contribution": 0.0021229447130699497
+        },
+        {
+          "term": "of",
+          "contribution": 0.0026020736333498017
+        },
+        {
+          "term": "on",
+          "contribution": 0.005167176921754909
+        },
+        {
+          "term": "signal",
+          "contribution": 0.012230918744434278
+        },
+        {
+          "term": "the",
+          "contribution": 0.00413344351204385
+        }
+      ]
+    }
+  ],
+  "selected_ids": [
+    "GEN019",
+    "GEN044",
+    "GEN021"
+  ],
+  "no_hit": false,
+  "oov_terms": [
+    "asserted",
+    "assume",
+    "behaves",
+    "complete",
+    "consecutive",
+    "containing",
+    "decoding",
+    "disc",
+    "discard",
+    "discarded",
+    "err",
+    "exactly",
+    "flags",
+    "frame",
+    "frames",
+    "framing",
+    "fsm",
+    "hdlc",
+    "implement",
+    "inserts",
+    "involves",
+    "look",
+    "moore",
+    "occurs",
+    "packets",
+    "receiver",
+    "recognize",
+    "seeing",
+    "sender",
+    "sequences",
+    "stream",
+    "topmodule",
+    "triggered"
+  ],
+  "selected_chunks": [
+    {
+      "id": "GEN019",
+      "text": "* If the signal is active low `_n` will be the first suffix\n* If the signal is a module input/output the letters will come last.\n* It is not mandatory to propagate `_d` and `_q` to module boundaries.\n\nExample:\n\n&#x1f44d;\n```systemverilog {.good}\nmodule simple (\n  input        clk_i,\n  input        rst_ni,              // Active low reset\n\n  // writer interface\n  input [15:0] data_i,\n  input        valid_i,\n  output       ready_o,\n\n  // bi-directional bus\n  inout [7:0]  driver_io,         // Bi directional signal\n\n  // Differential pair output\n  output       lvds_po,           // Positive part of the differential signal\n  output       lvds_no            // Negative part of the differential signal\n);\n\n  logic valid_d, valid_q, valid_q2, valid_q3;\n  assign valid_d = valid_i; // next state assignment\n\n  always_ff @(posedge clk_i or negedge rst_ni) begin\n    if (!rst_ni) begin\n      valid_q  <= '0;\n      valid_q2 <= '0;\n      valid_q3 <= '0;\n    end else begin\n      valid_q  <= valid_d;\n      valid_q2 <= valid_q;\n      valid_q3 <= valid_q2;\n    end\n  end\n\n  assign ready_o = valid_q3; // three clock cycles delay\n\nendmodule // simple\n```\n\n### Enumerations\n\n***Name enumeration types `snake_case_e`.  Name enumeration values `ALL_CAPS` or\n`UpperCamelCase`.***\n\nAlways name `enum` types using `typedef`. The storage type of any enumerated\ntype must be specified. For synthesizable enums, the storage type must be a\n4-state data type (`logic` rather than `bit`).\n\nAnonymous `enum` types are not allowed as they make it harder to use the type in\nother places throughout the project and across projects.\n\nEnumeration type names should contain only lower-case alphanumeric characters\nand underscores. You must suffix enumeration type names with `_e`.\n\nEnumeration value names (constants) should typically be `ALL_CAPS`, for example,\n`READY_TO_SEND`, to reflect their constant nature, especially for truly unchangeable\nvalues like defined opcode assignments.  There are times when `UpperCamelCase`\n",
+      "char_start": 36235,
+      "char_end": 38237,
+      "start_line": 1162,
+      "end_line": 1224,
+      "sha256": "036070dc52ea7dc4bde64e24077c40e28888b92fde158dc1d5cb38b60347925e",
+      "source_id": "lowrisc-full"
+    },
+    {
+      "id": "GEN044",
+      "text": "No logic except for reset should be performed in this process. The state\nvariable should latch the value of the \"next state\" variable.\n\n*Other Guidelines*\n\nWhen possible, try to choose state names that differ near the beginning of their\nname, to make them more readable when viewing waveform traces.\n\n*Example*\n\n&#x1f44d;\n```systemverilog {.good}\n// Define the states\ntypedef enum {\n  StIdle, StFrameStart, StDynInstrRead, StBandCorr, StAccStoreWrite, StBandEnd\n} alcor_state_e;\n\nalcor_state_e alcor_state_d, alcor_state_q;\n\n// Combinational decode of the state\nalways_comb begin\n  alcor_state_d = alcor_state_q;\n  foo = 1'b0;\n  bar = 1'b0;\n  bum = 1'b0;\n  unique case (alcor_state_q)\n    // StIdle: waiting for frame_start\n    StIdle:\n      if (frame_start) begin\n        foo = 1'b1;\n        alcor_state_d = StFrameStart;\n      end\n    // StFrameStart: Reset accumulators\n    StFrameStart: begin\n      // ... etc ...\n    end\n    // may be empty or used to catch parasitic states\n    default: alcor_state_d = StIdle;\n  endcase\nend\n\n// Register the state\nalways_ff @(posedge clk or negedge rst_n) begin\n  if (!rst_n) begin\n    alcor_state_q <= StIdle;\n  end else begin\n    alcor_state_q <= alcor_state_d;\n  end\nend\n```\n\n### Active-Low Signals\n\n***The `_n` suffix indicates an active-low signal.***\n\nIf active-low signals are used, they must have the `_n` suffix in their\nname. Otherwise, all signals are assumed to be active-high.\n\n### Differential Pairs\n\n***Use the `_p` and `_n` suffixes to indicate a differential pair.***\n\nFor example, `in_p` and `in_n` comprise a differential pair set.\n\n### Delays\n\n***Signals delayed by a single clock cycle should end in a `_q` suffix.***\n\nIf one signal is only a delayed version of another signal, the `_q` suffix\nshould be used to indicate this relationship.\n\nIf another signal is then delayed by another clock cycle, the next signal should\nbe identified with the `_q2` suffix, and then `_q3` and so on.\n\nExample:\n\n```systemverilog\nalways_ff @(posedge clk) begin\n  data_valid_q <= data_valid_d;\n",
+      "char_start": 86613,
+      "char_end": 88650,
+      "start_line": 2886,
+      "end_line": 2964,
+      "sha256": "039fa421ec54bb98cbcfc4e694db0c4b8ef8a5f58006ab94404d1b0b2051c12a",
+      "source_id": "lowrisc-full"
+    },
+    {
+      "id": "GEN021",
+      "text": "Use common prefixes to identify groups of signals that operate together. For\nexample, all elements of an AXI-S interface would share a prefix: `foo_valid`,\n`foo_ready`, and `foo_data`.\n\nAdditionally, prefixes should be used to clearly label which signal is in which\nclock group for any module with multiple clocks. See the section on [clock\ndomains](#clocks) for more details.\n\nExamples:\n\n-   Signals associated with controlling a blockram might share a `bram_` prefix.\n-   Signals that are synchronous with `clk_dram` rather than `clk` should share\n    a `dram_` prefix.\n\nCode example:\n\n&#x1f44d;\n```systemverilog {.good}\nmodule fifo_controller (\n  input         clk_i,\n  input         rst_ni,\n\n  // writer interface\n  input [15:0]  wr_data_i,\n  input         wr_valid_i,\n  output        wr_ready_o,\n\n  // reader interface\n  output [15:0] rd_data_o,\n  output        rd_valid_o,\n  output [7:0]  rd_fullness_o,\n  input         rd_ack_i,\n\n  // memory interface:\n  output [7:0]  mem_addr_o,\n  output [15:0] mem_wdata_o,\n  output        mem_we_o,\n  input  [15:0] mem_rdata_i\n);\n```\n\nThis naming convention makes it easier to map port names onto similar signal\nnames using simple and consistent rules. See the section on [Hierarchical\nConsistency](#hierarchical-consistency) for more information.\n\n#### Hierarchical consistency\n\n***The same signal should have the same name at any level of the hierarchy.***\n\nA signal that connects to a port of an instance should have the same name as\nthat port. By proceeding in this manner, signals that are directly connected\nshould maintain the same name at any level of hierarchy.\n\nExceptions to this convention are expected, such as:\n\n*   When connecting a port to an element of an array of signals.\n\n*   When mapping a generic port name to something more specific to the design.\n    For example, two generic blocks, one with a `host_bus` port and one with a\n    `device_bus` port might be connected by a `foo_bar_bus` signal.\n\nIn each exceptional case, care should be taken to make the mapping of port names\n",
+      "char_start": 40244,
+      "char_end": 42288,
+      "start_line": 1295,
+      "end_line": 1356,
+      "sha256": "d6969a9bd7f017d1960c6c0acd8a1ec750e6883d080bb99122a7bfbb09b11c4b",
+      "source_id": "lowrisc-full"
+    }
+  ],
+  "context_sha256": "06dd08bbeb0ca149aa00a803d207e9f51f3253d586d1a9c09f14aa15a366d3d4",
+  "A_lock_sha256": "26c135ff0b3153f3bda3e2ae57ccbb1c594118327593bb6d46a558e655fb8b9c"
+}

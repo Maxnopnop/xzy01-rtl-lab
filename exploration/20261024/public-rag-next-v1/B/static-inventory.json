@@ -1,0 +1,947 @@
+[
+  {
+    "id": "Prob145_circuit8",
+    "modules": [
+      "stimulus_gen",
+      "stimulus_gen",
+      "tb",
+      "RefModule"
+    ],
+    "includes": [],
+    "readmem": false,
+    "test_helper_name_occurrences": 1,
+    "evidence": [
+      {
+        "line": 95,
+        "text": "\tRefModule good1 ("
+      },
+      {
+        "line": 101,
+        "text": "\tTopModule top_module1 ("
+      },
+      {
+        "line": 109,
+        "text": "\ttask wait_for_end_of_timestep;"
+      },
+      {
+        "line": 129,
+        "text": "\tassign tb_match = ( { p_ref, q_ref } === ( { p_ref, q_ref } ^ { p_dut, q_dut } ^ { p_ref, q_ref } ) );"
+      },
+      {
+        "line": 132,
+        "text": "\talways @(posedge clk, negedge clk) begin"
+      }
+    ],
+    "stimulus": "`timescale 1 ps/1 ps\n`define OK 12\n`define INCORRECT 13\n\n\nmodule stimulus_gen (\n\tinput clk,\n\toutput logic clock=0,\n\toutput logic a,\n\toutput reg[511:0] wavedrom_title,\n\toutput reg wavedrom_enable\t\n);\n\n\talways begin\n\t\trepeat(3) @(posedge clk);\n\t\tclock = ~clock;\n\tend\n\n\n// Add two ports to module stimulus_gen:\n//    output [511:0] wavedrom_title\n//    output reg wavedrom_enable\n\n\ttask wavedrom_start(input[511:0] title = \"\");\n\tendtask\n\t\n\ttask wavedrom_stop;\n\t\t#1;\n\tendtask\t\n\n\n\n\tinitial begin\n\t\ta <= 0;\n\t\t@(negedge clock) {a} <= 0;\n\t\t@(negedge clk) wavedrom_start(\"Unknown circuit\");\n\t\t\t@(posedge clk) {a} <= 0;\n\t\t\trepeat(14) @(posedge clk,negedge clk) a <= ~a;\n\t\t\trepeat(5) @(posedge clk, negedge clk);\n\t\t\trepeat(8) @(posedge clk,negedge clk) a <= ~a;\n\t\twavedrom_stop();\n\n\t\trepeat(200) @(posedge clk, negedge clk)\n\t\t\ta <= $urandom;\n\t\t$finish;\n\tend\n\t\nendmodule",
+    "reference_text": "\nmodule RefModule (\n  input clock,\n  input a,\n  output reg p,\n  output reg q\n);\n\n  always @(negedge clock)\n    q <= a;\n\n  always @(*)\n    if (clock)\n      p = a;\n\nendmodule\n\n",
+    "prompt_interfaces": [
+      "\n - input  clock",
+      " - input  a",
+      " - output p",
+      " - output q"
+    ],
+    "file_authorship": "No individual file author attribution established; upstream repository authorship only, snapshot commit author not substituted",
+    "reference_independence": "SAME_REPOSITORY_CORRELATED_NO_INDEPENDENT_ORACLE",
+    "simulation": "NOT_RUN",
+    "static_inventory_not_proof": true
+  },
+  {
+    "id": "Prob088_ece241_2014_q5b",
+    "modules": [
+      "stimulus_gen",
+      "stimulus_gen",
+      "tb",
+      "RefModule"
+    ],
+    "includes": [],
+    "readmem": false,
+    "test_helper_name_occurrences": 1,
+    "evidence": [
+      {
+        "line": 119,
+        "text": "\tRefModule good1 ("
+      },
+      {
+        "line": 125,
+        "text": "\tTopModule top_module1 ("
+      },
+      {
+        "line": 133,
+        "text": "\ttask wait_for_end_of_timestep;"
+      },
+      {
+        "line": 151,
+        "text": "\tassign tb_match = ( { z_ref } === ( { z_ref } ^ { z_dut } ^ { z_ref } ) );"
+      },
+      {
+        "line": 154,
+        "text": "\talways @(posedge clk, negedge clk) begin"
+      }
+    ],
+    "stimulus": "`timescale 1 ps/1 ps\n`define OK 12\n`define INCORRECT 13\n\n\nmodule stimulus_gen (\n\tinput clk,\n\toutput logic x,\n\toutput logic areset,\n\toutput reg[511:0] wavedrom_title,\n\toutput reg wavedrom_enable,\n\tinput tb_match\n);\n\treg reset;\n\tassign areset = reset;\n\n// Add two ports to module stimulus_gen:\n//    output [511:0] wavedrom_title\n//    output reg wavedrom_enable\n\n\ttask wavedrom_start(input[511:0] title = \"\");\n\tendtask\n\t\n\ttask wavedrom_stop;\n\t\t#1;\n\tendtask\t\n\n\n\ttask reset_test(input async=0);\n\t\tbit arfail, srfail, datafail;\n\t\n\t\t@(posedge clk);\n\t\t@(posedge clk) reset <= 0;\n\t\trepeat(3) @(posedge clk);\n\t\n\t\t@(negedge clk) begin datafail = !tb_match ; reset <= 1; end\n\t\t@(posedge clk) arfail = !tb_match;\n\t\t@(posedge clk) begin\n\t\t\tsrfail = !tb_match;\n\t\t\treset <= 0;\n\t\tend\n\t\tif (srfail)\n\t\t\t$display(\"Hint: Your reset doesn't seem to be working.\");\n\t\telse if (arfail && (async || !datafail))\n\t\t\t$display(\"Hint: Your reset should be %0s, but doesn't appear to be.\", async ? \"asynchronous\" : \"synchronous\");\n\t\t// Don't warn about synchronous reset if the half-cycle before is already wrong. It's more likely\n\t\t// a functionality error than the reset being implemented asynchronously.\n\t\n\tendtask\n\n\n\tinitial begin\n\t\tx <= 0;\n\t\treset <= 1;\n\t\t@(posedge clk) reset <= 0; x <= 1;\n\t\t@(posedge clk) x <= 0;\n\t\treset_test(1);\n\t\t\n\t\t@(negedge clk) wavedrom_start();\n\t\t\t@(posedge clk) {reset,x} <= 2'h2;\n\t\t\t@(posedge clk) {reset,x} <= 2'h0;\n\t\t\t@(posedge clk) {reset,x} <= 2'h0;\n\t\t\t@(posedge clk) {reset,x} <= 2'h1;\n\t\t\t@(posedge clk) {reset,x} <= 2'h0;\n\t\t\t@(posedge clk) {reset,x} <= 2'h1;\n\t\t\t@(posedge clk) {reset,x} <= 2'h1;\n\t\t\t@(posedge clk) {reset,x} <= 2'h0;\n\t\t\t@(posedge clk) {reset,x} <= 2'h0;\n\t\t@(negedge clk) wavedrom_stop();\n\t\trepeat(400) @(posedge clk, negedge clk)\n\t\t\t{reset,x} <= {($random&31) == 0, ($random&1)==0 };\n\n\t\t$finish;\n\tend\n\t\nendmodule",
+    "reference_text": "\nmodule RefModule (\n  input clk,\n  input areset,\n  input x,\n  output z\n);\n\n  parameter A=0,B=1;\n  reg state;\n  always @(posedge clk, posedge areset) begin\n    if (areset)\n      state <= A;\n    else begin\n      case (state)\n        A: state <= x ? B : A;\n        B: state <= B;\n      endcase\n    end\n  end\n\n  assign z = (state == A && x==1) | (state == B && x==0);\n\nendmodule\n\n",
+    "prompt_interfaces": [
+      "\n - input  clk",
+      " - input  areset",
+      " - input  x",
+      " - output z"
+    ],
+    "file_authorship": "No individual file author attribution established; upstream repository authorship only, snapshot commit author not substituted",
+    "reference_independence": "SAME_REPOSITORY_CORRELATED_NO_INDEPENDENT_ORACLE",
+    "simulation": "NOT_RUN",
+    "static_inventory_not_proof": true
+  },
+  {
+    "id": "Prob122_kmap4",
+    "modules": [
+      "stimulus_gen",
+      "stimulus_gen",
+      "tb",
+      "RefModule"
+    ],
+    "includes": [],
+    "readmem": false,
+    "test_helper_name_occurrences": 1,
+    "evidence": [
+      {
+        "line": 88,
+        "text": "\tRefModule good1 ("
+      },
+      {
+        "line": 95,
+        "text": "\tTopModule top_module1 ("
+      },
+      {
+        "line": 104,
+        "text": "\ttask wait_for_end_of_timestep;"
+      },
+      {
+        "line": 122,
+        "text": "\tassign tb_match = ( { out_ref } === ( { out_ref } ^ { out_dut } ^ { out_ref } ) );"
+      },
+      {
+        "line": 125,
+        "text": "\talways @(posedge clk, negedge clk) begin"
+      }
+    ],
+    "stimulus": "`timescale 1 ps/1 ps\n`define OK 12\n`define INCORRECT 13\n\n\nmodule stimulus_gen (\n\tinput clk,\n\toutput reg a, b, c, d,\n\toutput reg[511:0] wavedrom_title,\n\toutput reg wavedrom_enable\n);\n\n\n// Add two ports to module stimulus_gen:\n//    output [511:0] wavedrom_title\n//    output reg wavedrom_enable\n\n\ttask wavedrom_start(input[511:0] title = \"\");\n\tendtask\n\t\n\ttask wavedrom_stop;\n\t\t#1;\n\tendtask\t\n\n\n\n\tinitial begin\n\t\tint count; count = 0;\n\t\t{a,b,c,d} <= 4'b0;\n\t\twavedrom_start();\n\t\trepeat(16) @(posedge clk)\n\t\t\t{a,b,c,d} <= count++;\t\t\n\t\t@(negedge clk) wavedrom_stop();\n\t\t\n\t\trepeat(200) @(posedge clk, negedge clk)\n\t\t\t{d,c,b,a} <= $urandom;\n\t\t\t\n\t\t#1 $finish;\n\tend\n\t\nendmodule",
+    "reference_text": "\nmodule RefModule (\n  input a,\n  input b,\n  input c,\n  input d,\n  output reg out\n);\n\n  always @(*) begin\n    case({a,b,c,d})\n      4'h0: out = 0;\n      4'h1: out = 1;\n      4'h3: out = 0;\n      4'h2: out = 1;\n      4'h4: out = 1;\n      4'h5: out = 0;\n      4'h7: out = 1;\n      4'h6: out = 0;\n      4'hc: out = 0;\n      4'hd: out = 1;\n      4'hf: out = 0;\n      4'he: out = 1;\n      4'h8: out = 1;\n      4'h9: out = 0;\n      4'hb: out = 1;\n      4'ha: out = 0;\n    endcase\n  end\n\nendmodule\n\n",
+    "prompt_interfaces": [
+      "\n - input  a",
+      " - input  b",
+      " - input  c",
+      " - input  d",
+      " - output out"
+    ],
+    "file_authorship": "No individual file author attribution established; upstream repository authorship only, snapshot commit author not substituted",
+    "reference_independence": "SAME_REPOSITORY_CORRELATED_NO_INDEPENDENT_ORACLE",
+    "simulation": "NOT_RUN",
+    "static_inventory_not_proof": true
+  },
+  {
+    "id": "Prob001_zero",
+    "modules": [
+      "stimulus_gen",
+      "stimulus_gen",
+      "tb",
+      "RefModule"
+    ],
+    "includes": [],
+    "readmem": false,
+    "test_helper_name_occurrences": 1,
+    "evidence": [
+      {
+        "line": 72,
+        "text": "\tRefModule good1 ("
+      },
+      {
+        "line": 75,
+        "text": "\tTopModule top_module1 ("
+      },
+      {
+        "line": 80,
+        "text": "\ttask wait_for_end_of_timestep;"
+      },
+      {
+        "line": 98,
+        "text": "\tassign tb_match = ( { zero_ref } === ( { zero_ref } ^ { zero_dut } ^ { zero_ref } ) );"
+      },
+      {
+        "line": 101,
+        "text": "\talways @(posedge clk, negedge clk) begin"
+      }
+    ],
+    "stimulus": "`timescale 1 ps/1 ps\n`define OK 12\n`define INCORRECT 13\n\nmodule stimulus_gen (\n\tinput clk,\n\toutput reg[511:0] wavedrom_title,\n\toutput reg wavedrom_enable\n);\n\n\n// Add two ports to module stimulus_gen:\n//    output [511:0] wavedrom_title\n//    output reg wavedrom_enable\n\n\ttask wavedrom_start(input[511:0] title = \"\");\n\tendtask\n\t\n\ttask wavedrom_stop;\n\t\t#1;\n\tendtask\t\n\n\n\n\tinitial begin\n\t\twavedrom_start(\"Output should 0\");\n\t\trepeat(20) @(posedge clk, negedge clk);\n\t\twavedrom_stop();\n\t\t\n\t\t#1 $finish;\n\tend\n\t\nendmodule",
+    "reference_text": "\nmodule RefModule (\n  output zero\n);\n\n  assign zero = 1'b0;\n\nendmodule\n\n",
+    "prompt_interfaces": [
+      "\n - output zero"
+    ],
+    "file_authorship": "No individual file author attribution established; upstream repository authorship only, snapshot commit author not substituted",
+    "reference_independence": "SAME_REPOSITORY_CORRELATED_NO_INDEPENDENT_ORACLE",
+    "simulation": "NOT_RUN",
+    "static_inventory_not_proof": true
+  },
+  {
+    "id": "Prob155_lemmings4",
+    "modules": [
+      "stimulus_gen",
+      "stimulus_gen",
+      "tb",
+      "RefModule"
+    ],
+    "includes": [],
+    "readmem": false,
+    "test_helper_name_occurrences": 1,
+    "evidence": [
+      {
+        "line": 222,
+        "text": "\tRefModule good1 ("
+      },
+      {
+        "line": 234,
+        "text": "\tTopModule top_module1 ("
+      },
+      {
+        "line": 248,
+        "text": "\ttask wait_for_end_of_timestep;"
+      },
+      {
+        "line": 272,
+        "text": "\tassign tb_match = ( { walk_left_ref, walk_right_ref, aaah_ref, digging_ref } === ( { walk_left_ref, walk_right_ref, aaah_ref, digging_ref } ^ { walk_left_dut, walk_right_dut, aaah_dut, digging_dut } ^ { walk_left_ref, walk_right_ref, aaah_ref, digging_ref } ) );"
+      },
+      {
+        "line": 275,
+        "text": "\talways @(posedge clk, negedge clk) begin"
+      }
+    ],
+    "stimulus": "`timescale 1 ps/1 ps\n`define OK 12\n`define INCORRECT 13\n\n\nmodule stimulus_gen (\n\tinput clk,\n\toutput logic areset,\n\toutput logic bump_left,\n\toutput logic bump_right,\n\toutput logic dig,\n\toutput logic ground,\n\toutput reg[511:0] wavedrom_title,\n\toutput reg wavedrom_enable,\n\tinput tb_match\n);\n\n\treg reset;\n\tassign areset = reset;\n\n\ttask reset_test(input async=0);\n\t\tbit arfail, srfail, datafail;\n\t\n\t\t@(posedge clk);\n\t\t@(posedge clk) reset <= 0;\n\t\trepeat(3) @(posedge clk);\n\t\n\t\t@(negedge clk) begin datafail = !tb_match ; reset <= 1; end\n\t\t@(posedge clk) arfail = !tb_match;\n\t\t@(posedge clk) begin\n\t\t\tsrfail = !tb_match;\n\t\t\treset <= 0;\n\t\tend\n\t\tif (srfail)\n\t\t\t$display(\"Hint: Your reset doesn't seem to be working.\");\n\t\telse if (arfail && (async || !datafail))\n\t\t\t$display(\"Hint: Your reset should be %0s, but doesn't appear to be.\", async ? \"asynchronous\" : \"synchronous\");\n\t\t// Don't warn about synchronous reset if the half-cycle before is already wrong. It's more likely\n\t\t// a functionality error than the reset being implemented asynchronously.\n\t\n\tendtask\n\n\n// Add two ports to module stimulus_gen:\n//    output [511:0] wavedrom_title\n//    output reg wavedrom_enable\n\n\ttask wavedrom_start(input[511:0] title = \"\");\n\tendtask\n\t\n\ttask wavedrom_stop;\n\t\t#1;\n\tendtask\t\n\n\n\n\tinitial begin\n\t\treset <= 1'b1;\n\t\t@(posedge clk);\n\t\treset <= 0;\n\t\t{bump_left, bump_right, ground, dig} <= 2;\n\t\trepeat(2) @(posedge clk);\n\t\t{bump_left, bump_right, ground, dig} <= 3;\n\t\t@(posedge clk);\n\t\t{bump_left, bump_right, ground, dig} <= 2;\n\t\t@(posedge clk);\n\t\t{bump_left, bump_right, ground, dig} <= 10;\n\t\t@(posedge clk);\n\t\t{bump_left, bump_right, ground, dig} <= 2;\n\t\t@(posedge clk);\n\t\t{bump_left, bump_right, ground, dig} <= 0;\n\t\trepeat(3) @(posedge clk);\n\t\t{bump_left, bump_right, ground, dig} <= 3;\n\t\t@(posedge clk);\n\t\t{bump_left, bump_right, ground, dig} <= 2;\n\t\trepeat(4) @(posedge clk);\n\t\t\n\t\t{bump_left, bump_right, ground, dig} <= 0;\t\t// Fall\n\t\trepeat(20) @(posedge clk);\n\t\t{bump_left, bump_right, ground, dig} <= 2;\t\t// Survive\n\t\trepeat(1) @(posedge clk);\n\n\t\t{bump_left, bump_right, ground, dig} <= 0;\t\t// Fall\n\t\trepeat(21) @(posedge clk);\n\t\t{bump_left, bump_right, ground, dig} <= 2;\t\t// Splat after falling left\n\t\trepeat(20) @(posedge clk) begin\n\t\t\t{dig, bump_right, bump_left} <= $random & $random;\t// See if it's handled correctly.\n\t\t\tground <= |($random & 7);\n\t\tend\n\t\t\t\n\n\t\treset <= 1;\n\t\t{bump_left, bump_right, ground, dig} <= 2;\t\t// Normal\n\t\t@(posedge clk)\n\t\treset <= 0;\t\t// Resurrect.\n\t\tbump_left <= 1;\n\t\trepeat(5) @(posedge clk);\n\t\t{bump_left, bump_right, ground, dig} <= 0;\t\t// Fall\n\t\trepeat(21) @(posedge clk);\n\t\t{bump_left, bump_right, ground, dig} <= 2;\t\t// Splat after falling right\n\t\trepeat(20) @(posedge clk) begin\n\t\t\t{dig, bump_right, bump_left} <= $random & $random;\t// See if it's handled correctly.\n\t\t\tground <= |($random & 7);\n\t\tend\n\n\t\treset <= 1;\n\t\t@(posedge clk)\n\t\treset <= 0;\t\t// Resurrect.\n\t\t{bump_left, bump_right, ground, dig} <= 2;\t\t// Normal\n\t\twavedrom_start(\"Splat?\");\n\t\t@(posedge clk);\n\t\t{bump_left, bump_right, ground, dig} <= 0;\t\t// Fall\n\t\trepeat(24) @(posedge clk);\n\t\t{bump_left, bump_right, ground, dig} <= 2;\t\t// Splat? (24-cycles)\n\t\trepeat(2) @(posedge clk);\n\t\twavedrom_stop();\n\t\t\n\t\treset <= 1;\n\t\t@(posedge clk)\n\t\treset <= 0;\t\t// Resurrect.\n\t\t{bump_left, bump_right, ground, dig} <= 2;\t\t// Normal\n\t\t@(posedge clk);\n\t\t@(posedge clk);\n\t\t{bump_left, bump_right, ground, dig} <= 0;\t\t// Fall\n\t\trepeat(35) @(posedge clk);\n\t\t{bump_left, bump_right, ground, dig} <= 2;\t\t// Splat? (Test for 5-bit non-saturating counter)\n\t\trepeat(2) @(posedge clk);\n\t\trepeat(20) @(posedge clk) begin\n\t\t\t{dig, bump_right, bump_left} <= $random & $random;\t// See if it's handled correctly.\n\t\t\tground <= |($random & 7);\n\t\tend\t\t\n\n\t\treset <= 1;\n\t\t{bump_left, bump_right, ground, dig} <= 2;\t\t// Normal\n\t\t@(posedge clk);\n\t\treset <= 0;\t\t// Resurrect.\n\t\t@(posedge clk);\n\t\t{bump_left, bump_right, ground, dig} <= 0;\t\t// Fall\n\t\trepeat(67) @(posedge clk);\n\t\t{bump_left, bump_right, ground, dig} <= 2;\t\t// Splat? (Test for 6-bit non-saturating counter)\n\t\trepeat(20) @(posedge clk) begin\n\t\t\t{dig, bump_right, bump_left} <= $random & $random;\t// See if it's handled correctly.\n\t\t\tground <= |($random & 7);\n\t\tend\n\t\t\n\t\treset <= 1;\n\t\t{bump_left, bump_right, ground, dig} <= 2;\t\t// Normal\n\t\t@(posedge clk)\n\t\treset <= 0;\t\t// Resurrect.\n\t\t\n\t\t\n\t\trepeat(400) @(posedge clk, negedge clk) begin\n\t\t\t{dig, bump_right, bump_left} <= $random & $random;\n\t\t\tground <= |($random & 7);\n\t\t\treset <= !($random & 31);\n\t\tend\n\n\t\t#1 $finish;\n\tend\n\t\nendmodule",
+    "reference_text": "\nmodule RefModule (\n  input clk,\n  input areset,\n  input bump_left,\n  input bump_right,\n  input ground,\n  input dig,\n  output walk_left,\n  output walk_right,\n  output aaah,\n  output digging\n);\n\n  parameter WL=0, WR=1, FALLL=2, FALLR=3, DIGL=4, DIGR=5, DEAD=6;\n  reg [2:0] state;\n  reg [2:0] next;\n\n  reg [4:0] fall_counter;\n\n  always_comb begin\n    case (state)\n      WL: if (!ground) next = FALLL;\n        else if (dig) next = DIGL;\n        else if (bump_left) next = WR;\n        else next = WL;\n      WR:\n        if (!ground) next = FALLR;\n        else if (dig) next = DIGR;\n        else if (bump_right) next = WL;\n        else next = WR;\n      FALLL: next = ground ? (fall_counter >= 20 ? DEAD : WL) : FALLL;\n      FALLR: next = ground ? (fall_counter >= 20 ? DEAD : WR) : FALLR;\n      DIGL: next = ground ? DIGL : FALLL;\n      DIGR: next = ground ? DIGR : FALLR;\n      DEAD: next = DEAD;\n    endcase\n  end\n\n  always @(posedge clk, posedge areset) begin\n    if (areset) state <= WL;\n      else state <= next;\n  end\n\n  always @(posedge clk) begin\n    if (state == FALLL || state == FALLR) begin\n      if (fall_counter < 20)\n        fall_counter <= fall_counter + 1'b1;\n    end\n    else\n      fall_counter <= 0;\n  end\n\n  assign walk_left = (state==WL);\n  assign walk_right = (state==WR);\n  assign aaah = (state == FALLL) || (state == FALLR);\n  assign digging = (state == DIGL) || (state == DIGR);\n\nendmodule\n\n",
+    "prompt_interfaces": [
+      "\n - input  clk",
+      " - input  areset",
+      " - input  bump_left",
+      " - input  bump_right",
+      " - input  ground",
+      " - input  dig",
+      " - output walk_left",
+      " - output walk_right",
+      " - output aaah",
+      " - output digging"
+    ],
+    "file_authorship": "No individual file author attribution established; upstream repository authorship only, snapshot commit author not substituted",
+    "reference_independence": "SAME_REPOSITORY_CORRELATED_NO_INDEPENDENT_ORACLE",
+    "simulation": "NOT_RUN",
+    "static_inventory_not_proof": true
+  },
+  {
+    "id": "Prob019_m2014_q4f",
+    "modules": [
+      "stimulus_gen",
+      "tb",
+      "RefModule"
+    ],
+    "includes": [],
+    "readmem": false,
+    "test_helper_name_occurrences": 1,
+    "evidence": [
+      {
+        "line": 62,
+        "text": "\tRefModule good1 ("
+      },
+      {
+        "line": 67,
+        "text": "\tTopModule top_module1 ("
+      },
+      {
+        "line": 74,
+        "text": "\ttask wait_for_end_of_timestep;"
+      },
+      {
+        "line": 92,
+        "text": "\tassign tb_match = ( { out_ref } === ( { out_ref } ^ { out_dut } ^ { out_ref } ) );"
+      },
+      {
+        "line": 95,
+        "text": "\talways @(posedge clk, negedge clk) begin"
+      }
+    ],
+    "stimulus": "`timescale 1 ps/1 ps\n`define OK 12\n`define INCORRECT 13\n\n\nmodule stimulus_gen (\n\tinput clk,\n\toutput logic in1, in2\n);\n\n\tinitial begin\n\t\trepeat(100) @(posedge clk, negedge clk) begin\n\t\t\t{in1, in2} <= $random;\n\t\tend\n\t\t\n\t\t#1 $finish;\n\tend\n\t\nendmodule",
+    "reference_text": "\nmodule RefModule (\n  input in1,\n  input in2,\n  output logic out\n);\n\n  assign out = in1 & ~in2;\n\nendmodule\n\n",
+    "prompt_interfaces": [
+      "\n - input  in1",
+      " - input  in2",
+      " - output out"
+    ],
+    "file_authorship": "No individual file author attribution established; upstream repository authorship only, snapshot commit author not substituted",
+    "reference_independence": "SAME_REPOSITORY_CORRELATED_NO_INDEPENDENT_ORACLE",
+    "simulation": "NOT_RUN",
+    "static_inventory_not_proof": true
+  },
+  {
+    "id": "Prob151_review2015_fsm",
+    "modules": [
+      "stimulus_gen",
+      "tb",
+      "RefModule"
+    ],
+    "includes": [],
+    "readmem": false,
+    "test_helper_name_occurrences": 1,
+    "evidence": [
+      {
+        "line": 14,
+        "text": "\talways @(posedge clk, negedge clk)"
+      },
+      {
+        "line": 134,
+        "text": "\tRefModule good1 ("
+      },
+      {
+        "line": 144,
+        "text": "\tTopModule top_module1 ("
+      },
+      {
+        "line": 156,
+        "text": "\ttask wait_for_end_of_timestep;"
+      },
+      {
+        "line": 178,
+        "text": "\tassign tb_match = ( { shift_ena_ref, counting_ref, done_ref } === ( { shift_ena_ref, counting_ref, done_ref } ^ { shift_ena_dut, counting_dut, done_dut } ^ { shift_ena_ref, counting_ref, done_ref } ) );"
+      },
+      {
+        "line": 181,
+        "text": "\talways @(posedge clk, negedge clk) begin"
+      }
+    ],
+    "stimulus": "`timescale 1 ps/1 ps\n`define OK 12\n`define INCORRECT 13\n\n\nmodule stimulus_gen (\n\tinput clk,\n\toutput reg reset,\n\toutput reg data, done_counting, ack,\n\tinput tb_match\n);\n\tbit failed = 0;\n\t\n\talways @(posedge clk, negedge clk)\n\t\tif (!tb_match) \n\t\t\tfailed <= 1;\n\t\n\tinitial begin\n\n\t\t@(posedge clk);\n\t\tfailed <= 0;\n\t\treset <= 1;\n\t\tdata <= 0;\n\t\tdone_counting <= 1'bx;\n\t\tack <= 1'bx;\n\t\t@(posedge clk) \n\t\t\tdata <= 1;\n\t\t\treset <= 0;\n\t\t@(posedge clk) data <= 0;\n\t\t@(posedge clk) data <= 0;\n\t\t@(posedge clk) data <= 1;\n\t\t@(posedge clk) data <= 1;\n\t\t@(posedge clk) data <= 0;\n\t\t@(posedge clk) data <= 1;\n\t\t@(posedge clk);\n\t\t\tdata <= 1'bx;\n\t\trepeat(4) @(posedge clk);\n\t\t\tdone_counting <= 1'b0;\n\t\trepeat(4) @(posedge clk);\n\t\t\tdone_counting <= 1'b1;\n\t\t@(posedge clk);\n\t\t\tdone_counting <= 1'bx;\n\t\t\tack <= 1'b0;\n\t\trepeat(3) @(posedge clk);\n\t\t\tack <= 1'b1;\n\t\t@(posedge clk);\n\t\t\tack <= 1'b0;\n\t\t\tdata <= 1'b1;\n\t\t@(posedge clk);\n\t\t\tack <= 1'bx;\n\t\t\tdata <= 1'b1;\n\t\t@(posedge clk);\n\t\t\tdata <= 1'b0;\n\t\t@(posedge clk);\n\t\t\tdata <= 1'b1;\n\t\t@(posedge clk);\n\t\t\tdata <= 1'bx;\n\t\trepeat(4) @(posedge clk);\n\t\t\tdone_counting <= 1'b0;\n\t\trepeat(4) @(posedge clk);\n\t\t\tdone_counting <= 1'b1;\n\t\t@(posedge clk);\n\n\t\tif (failed)\n\t\t\t$display(\"Hint: Your FSM didn't pass the sample timing diagram posted with the problem statement. Perhaps try debugging that?\");\n\t\t\n\t\t\n\t\n\t\trepeat(5000) @(posedge clk, negedge clk) begin\n\t\t\treset <= !($random & 255);\n\t\t\tdata <= $random;\n\t\t\tdone_counting <= !($random & 31);\n\t\t\tack <= !($random & 31);\n\t\tend\n\n\t\t#1 $finish;\n\tend\n\t\nendmodule",
+    "reference_text": "\nmodule RefModule (\n  input clk,\n  input reset,\n  input data,\n  output reg shift_ena,\n  output reg counting,\n  input done_counting,\n  output reg done,\n  input ack\n);\n\n  typedef enum logic[3:0] {\n    S, S1, S11, S110, B0, B1, B2, B3, Count, Wait\n  } States;\n\n  States state, next;\n\n  always_comb begin\n    case (state)\n      S: next = States'(data ? S1: S);\n      S1: next = States'(data ? S11: S);\n      S11: next = States'(data ? S11 : S110);\n      S110: next = States'(data ? B0 : S);\n      B0: next = B1;\n      B1: next = B2;\n      B2: next = B3;\n      B3: next = Count;\n      Count: next = States'(done_counting ? Wait : Count);\n      Wait: next = States'(ack ? S : Wait);\n      default: next = States'(4'bx);\n    endcase\n  end\n\n  always @(posedge clk) begin\n    if (reset) state <= S;\n    else state <= next;\n  end\n\n  always_comb begin\n    shift_ena = 0; counting = 0; done = 0;\n    if (state == B0 || state == B1 || state == B2 || state == B3)\n      shift_ena = 1;\n    if (state == Count)\n      counting = 1;\n    if (state == Wait)\n      done = 1;\n\n    if (|state === 1'bx) begin\n      {shift_ena, counting, done} = 'x;\n    end\n\n  end\n\nendmodule\n\n",
+    "prompt_interfaces": [
+      "\n - input  clk",
+      " - input  reset",
+      " - input  data",
+      " - input  done_counting",
+      " - input  ack",
+      " - output shift_ena",
+      " - output counting",
+      " - output done"
+    ],
+    "file_authorship": "No individual file author attribution established; upstream repository authorship only, snapshot commit author not substituted",
+    "reference_independence": "SAME_REPOSITORY_CORRELATED_NO_INDEPENDENT_ORACLE",
+    "simulation": "NOT_RUN",
+    "static_inventory_not_proof": true
+  },
+  {
+    "id": "Prob094_gatesv",
+    "modules": [
+      "stimulus_gen",
+      "stimulus_gen",
+      "tb",
+      "RefModule"
+    ],
+    "includes": [],
+    "readmem": false,
+    "test_helper_name_occurrences": 1,
+    "evidence": [
+      {
+        "line": 96,
+        "text": "\tRefModule good1 ("
+      },
+      {
+        "line": 102,
+        "text": "\tTopModule top_module1 ("
+      },
+      {
+        "line": 110,
+        "text": "\ttask wait_for_end_of_timestep;"
+      },
+      {
+        "line": 132,
+        "text": "\tassign tb_match = ( { out_both_ref, out_any_ref, out_different_ref } === ( { out_both_ref, out_any_ref, out_different_ref } ^ { out_both_dut, out_any_dut, out_different_dut } ^ { out_both_ref, out_any_ref, out_different_ref } ) );"
+      },
+      {
+        "line": 135,
+        "text": "\talways @(posedge clk, negedge clk) begin"
+      }
+    ],
+    "stimulus": "`timescale 1 ps/1 ps\n`define OK 12\n`define INCORRECT 13\n\n\nmodule stimulus_gen (\n\tinput clk,\n\tinput tb_match,\n\toutput logic [3:0] in,\n\toutput reg[511:0] wavedrom_title,\n\toutput reg wavedrom_enable\t\n);\n\n\n// Add two ports to module stimulus_gen:\n//    output [511:0] wavedrom_title\n//    output reg wavedrom_enable\n\n\ttask wavedrom_start(input[511:0] title = \"\");\n\tendtask\n\t\n\ttask wavedrom_stop;\n\t\t#1;\n\tendtask\t\n\n\n\n\tinitial begin\n\t\tin <= 4'h3;\n\t\t@(negedge clk);\n\t\twavedrom_start();\n\t\t\t@(posedge clk) in <= 3;\n\t\t\t@(posedge clk) in <= 6;\n\t\t\t@(posedge clk) in <= 12;\n\t\t\t@(posedge clk) in <= 9;\n\t\t\t@(posedge clk) in <= 5;\n\t\t@(negedge clk);\n\t\twavedrom_stop();\n\t\tin <= $random;\n\t\trepeat(100) begin\n\t\t\t@(negedge clk) in <= $random;\n\t\t\t@(posedge clk) in <= $random;\n\t\tend\n\t\t#1 $finish;\n\tend\n\t\t\nendmodule",
+    "reference_text": "\nmodule RefModule (\n  input  [3:0] in,\n  output [3:0] out_both,\n  output [3:0] out_any,\n  output [3:0] out_different\n);\n\n  assign out_both[2:0] = in[2:0] & in[3:1];\n  assign out_any[3:1]  = in[2:0] | in[3:1];\n  assign out_different = in^{in[0], in[3:1]};\n\n  // we don't care about out_both[3] or out_any[0]\n  assign out_both[3] = 1'bx;\n  assign out_any[0]  = 1'bx;\n\nendmodule\n\n",
+    "prompt_interfaces": [
+      "\n - input  in            (4 bits)",
+      " - output out_both      (4 bits)",
+      " - output out_any       (4 bits)",
+      " - output out_different (4 bits)"
+    ],
+    "file_authorship": "No individual file author attribution established; upstream repository authorship only, snapshot commit author not substituted",
+    "reference_independence": "SAME_REPOSITORY_CORRELATED_NO_INDEPENDENT_ORACLE",
+    "simulation": "NOT_RUN",
+    "static_inventory_not_proof": true
+  },
+  {
+    "id": "Prob143_fsm_onehot",
+    "modules": [
+      "stimulus_gen",
+      "stimulus_gen",
+      "tb",
+      "RefModule"
+    ],
+    "includes": [],
+    "readmem": false,
+    "test_helper_name_occurrences": 1,
+    "evidence": [
+      {
+        "line": 116,
+        "text": "\tRefModule good1 ("
+      },
+      {
+        "line": 123,
+        "text": "\tTopModule top_module1 ("
+      },
+      {
+        "line": 132,
+        "text": "\ttask wait_for_end_of_timestep;"
+      },
+      {
+        "line": 154,
+        "text": "\tassign tb_match = ( { next_state_ref, out1_ref, out2_ref } === ( { next_state_ref, out1_ref, out2_ref } ^ { next_state_dut, out1_dut, out2_dut } ^ { next_state_ref, out1_ref, out2_ref } ) );"
+      },
+      {
+        "line": 157,
+        "text": "\talways @(posedge clk, negedge clk) begin"
+      }
+    ],
+    "stimulus": "`timescale 1 ps/1 ps\n`define OK 12\n`define INCORRECT 13\n\n\nmodule stimulus_gen (\n\tinput clk,\n\toutput logic in,\n\toutput logic [9:0] state,\n\tinput tb_match,\n\tinput [9:0] next_state_ref,\n\tinput [9:0] next_state_dut,\n\toutput reg[511:0] wavedrom_title,\n\toutput reg wavedrom_enable\t\n);\n\n\n// Add two ports to module stimulus_gen:\n//    output [511:0] wavedrom_title\n//    output reg wavedrom_enable\n\n\ttask wavedrom_start(input[511:0] title = \"\");\n\tendtask\n\t\n\ttask wavedrom_stop;\n\t\t#1;\n\tendtask\t\n\n\treg [9:0] state_error = 10'h0;\n\t\n\tinitial begin\n\t\trepeat(2) @(posedge clk);\n\t\tforever @(posedge clk, negedge clk)\n\t\t\tstate_error <= state_error | (next_state_ref^next_state_dut);\n\tend\n\t\t\n\tinitial begin\n\t\tstate <= 0;\n\t\t\n\t\t@(negedge clk) wavedrom_start();\n\t\tfor (int i=0;i<10;i++) begin\n\t\t\t@(negedge clk, posedge clk);\n\t\t\tstate <= 1<< i;\n\t\t\tin <= 0;\n\t\tend\n\t\tfor (int i=0;i<10;i++) begin\n\t\t\t@(negedge clk, posedge clk);\n\t\t\tstate <= 1<< i;\n\t\t\tin <= 1;\n\t\tend\t\t\t\n\t\t@(negedge clk) wavedrom_stop();\n\t\t\n\t\t// Test the one-hot cases first.\n\t\trepeat(200) @(posedge clk, negedge clk) begin\n\t\t\tstate <= 1<< ($unsigned($random) % 10);\n\t\t\tin <= $random;\n\t\tend\n\t\t\n\t\tfor (int i=0;i<$bits(state_error);i++)\n\t\t\t$display(\"Hint: next_state[%0d] is %s.\", i, (state_error[i] === 1'b0) ? \"correct\": \"incorrect\");\n\n\t\t#1 $finish;\n\tend\n\t\nendmodule",
+    "reference_text": "\nmodule RefModule (\n  input in,\n  input [9:0] state,\n  output [9:0] next_state,\n  output out1,\n  output out2\n);\n\n  assign out1 = state[8] | state[9];\n  assign out2 = state[7] | state[9];\n\n  assign next_state[0] = !in && (|state[4:0] | state[7] | state[8] | state[9]);\n  assign next_state[1] = in && (state[0] | state[8] | state[9]);\n  assign next_state[2] = in && state[1];\n  assign next_state[3] = in && state[2];\n  assign next_state[4] = in && state[3];\n  assign next_state[5] = in && state[4];\n  assign next_state[6] = in && state[5];\n  assign next_state[7] = in && (state[6] | state[7]);\n  assign next_state[8] = !in && state[5];\n  assign next_state[9] = !in && state[6];\n\nendmodule\n\n",
+    "prompt_interfaces": [
+      "\n - input  in",
+      " - input  state (10 bits)",
+      " - output next_state (10 bits)",
+      " - output out1",
+      " - output out2"
+    ],
+    "file_authorship": "No individual file author attribution established; upstream repository authorship only, snapshot commit author not substituted",
+    "reference_independence": "SAME_REPOSITORY_CORRELATED_NO_INDEPENDENT_ORACLE",
+    "simulation": "NOT_RUN",
+    "static_inventory_not_proof": true
+  },
+  {
+    "id": "Prob059_wire4",
+    "modules": [
+      "stimulus_gen",
+      "stimulus_gen",
+      "tb",
+      "RefModule"
+    ],
+    "includes": [],
+    "readmem": false,
+    "test_helper_name_occurrences": 1,
+    "evidence": [
+      {
+        "line": 27,
+        "text": "\talways @(posedge clk, negedge clk)"
+      },
+      {
+        "line": 95,
+        "text": "\tRefModule good1 ("
+      },
+      {
+        "line": 104,
+        "text": "\tTopModule top_module1 ("
+      },
+      {
+        "line": 115,
+        "text": "\ttask wait_for_end_of_timestep;"
+      },
+      {
+        "line": 139,
+        "text": "\tassign tb_match = ( { w_ref, x_ref, y_ref, z_ref } === ( { w_ref, x_ref, y_ref, z_ref } ^ { w_dut, x_dut, y_dut, z_dut } ^ { w_ref, x_ref, y_ref, z_ref } ) );"
+      },
+      {
+        "line": 142,
+        "text": "\talways @(posedge clk, negedge clk) begin"
+      }
+    ],
+    "stimulus": "`timescale 1 ps/1 ps\n`define OK 12\n`define INCORRECT 13\n\n\nmodule stimulus_gen (\n\tinput clk,\n\toutput logic a, b, c,\n\toutput reg[511:0] wavedrom_title,\n\toutput reg wavedrom_enable\n);\n\n\n// Add two ports to module stimulus_gen:\n//    output [511:0] wavedrom_title\n//    output reg wavedrom_enable\n\n\ttask wavedrom_start(input[511:0] title = \"\");\n\tendtask\n\t\n\ttask wavedrom_stop;\n\t\t#1;\n\tendtask\t\n\n\n\n\talways @(posedge clk, negedge clk)\n\t\t{a,b,c} <= $random;\n\t\n\tinitial begin\n\t\t@(negedge clk) wavedrom_start();\n\t\t\trepeat(8) @(posedge clk);\n\t\t@(negedge clk) wavedrom_stop();\n\t\trepeat(100) @(negedge clk);\n\t\t$finish;\n\tend\n\t\nendmodule",
+    "reference_text": "\nmodule RefModule (\n  input a,\n  input b,\n  input c,\n  output w,\n  output x,\n  output y,\n  output z\n);\n\n  assign {w,x,y,z} = {a,b,b,c};\n\nendmodule\n\n",
+    "prompt_interfaces": [
+      "\n - input  a",
+      " - input  b",
+      " - input  c",
+      " - output w",
+      " - output x",
+      " - output y",
+      " - output z"
+    ],
+    "file_authorship": "No individual file author attribution established; upstream repository authorship only, snapshot commit author not substituted",
+    "reference_independence": "SAME_REPOSITORY_CORRELATED_NO_INDEPENDENT_ORACLE",
+    "simulation": "NOT_RUN",
+    "static_inventory_not_proof": true
+  },
+  {
+    "id": "Prob006_vectorr",
+    "modules": [
+      "stimulus_gen",
+      "stimulus_gen",
+      "tb",
+      "RefModule"
+    ],
+    "includes": [],
+    "readmem": false,
+    "test_helper_name_occurrences": 1,
+    "evidence": [
+      {
+        "line": 87,
+        "text": "\tRefModule good1 ("
+      },
+      {
+        "line": 91,
+        "text": "\tTopModule top_module1 ("
+      },
+      {
+        "line": 97,
+        "text": "\ttask wait_for_end_of_timestep;"
+      },
+      {
+        "line": 115,
+        "text": "\tassign tb_match = ( { out_ref } === ( { out_ref } ^ { out_dut } ^ { out_ref } ) );"
+      },
+      {
+        "line": 118,
+        "text": "\talways @(posedge clk, negedge clk) begin"
+      }
+    ],
+    "stimulus": "`timescale 1 ps/1 ps\n`define OK 12\n`define INCORRECT 13\n\n\nmodule stimulus_gen (\n\tinput clk,\n\toutput logic [7:0] in,\n\toutput reg[511:0] wavedrom_title,\n\toutput reg wavedrom_enable\n);\n\n\n// Add two ports to module stimulus_gen:\n//    output [511:0] wavedrom_title\n//    output reg wavedrom_enable\n\n\ttask wavedrom_start(input[511:0] title = \"\");\n\tendtask\n\t\n\ttask wavedrom_stop;\n\t\t#1;\n\tendtask\t\n\n\t\n\n\t\n\tinitial begin\n\t\tin <= 0;\n\t\t@(negedge clk) wavedrom_start();\n\t\t\t@(posedge clk) in <= 8'h1;\n\t\t\t@(posedge clk) in <= 8'h2;\n\t\t\t@(posedge clk) in <= 8'h4;\n\t\t\t@(posedge clk) in <= 8'h8;\n\t\t\t@(posedge clk) in <= 8'h80;\n\t\t\t@(posedge clk) in <= 8'hc0;\n\t\t\t@(posedge clk) in <= 8'he0;\n\t\t\t@(posedge clk) in <= 8'hf0;\n\t\t@(negedge clk) wavedrom_stop();\n\t\n\t\trepeat(200) @(posedge clk, negedge clk)\n\t\t\tin <= $random;\n\t\t$finish;\n\tend\n\t\nendmodule",
+    "reference_text": "\nmodule RefModule (\n  input [7:0] in,\n  output [7:0] out\n);\n\n  assign {out[0],out[1],out[2],out[3],out[4],out[5],out[6],out[7]} = in;\n\nendmodule\n\n",
+    "prompt_interfaces": [
+      "\n - input  in  (8 bits)",
+      " - output out (8 bits)"
+    ],
+    "file_authorship": "No individual file author attribution established; upstream repository authorship only, snapshot commit author not substituted",
+    "reference_independence": "SAME_REPOSITORY_CORRELATED_NO_INDEPENDENT_ORACLE",
+    "simulation": "NOT_RUN",
+    "static_inventory_not_proof": true
+  },
+  {
+    "id": "Prob052_gates100",
+    "modules": [
+      "stimulus_gen",
+      "stimulus_gen",
+      "tb",
+      "RefModule"
+    ],
+    "includes": [],
+    "readmem": false,
+    "test_helper_name_occurrences": 1,
+    "evidence": [
+      {
+        "line": 115,
+        "text": "\tRefModule good1 ("
+      },
+      {
+        "line": 121,
+        "text": "\tTopModule top_module1 ("
+      },
+      {
+        "line": 129,
+        "text": "\ttask wait_for_end_of_timestep;"
+      },
+      {
+        "line": 151,
+        "text": "\tassign tb_match = ( { out_and_ref, out_or_ref, out_xor_ref } === ( { out_and_ref, out_or_ref, out_xor_ref } ^ { out_and_dut, out_or_dut, out_xor_dut } ^ { out_and_ref, out_or_ref, out_xor_ref } ) );"
+      },
+      {
+        "line": 154,
+        "text": "\talways @(posedge clk, negedge clk) begin"
+      }
+    ],
+    "stimulus": "`timescale 1 ps/1 ps\n`define OK 12\n`define INCORRECT 13\n\n\nmodule stimulus_gen (\n\tinput clk,\n\tinput tb_match,\n\toutput logic [99:0] in,\n\toutput reg[511:0] wavedrom_title,\n\toutput reg wavedrom_enable\t\n);\n\n\n// Add two ports to module stimulus_gen:\n//    output [511:0] wavedrom_title\n//    output reg wavedrom_enable\n\n\ttask wavedrom_start(input[511:0] title = \"\");\n\tendtask\n\t\n\ttask wavedrom_stop;\n\t\t#1;\n\tendtask\t\n\n\n\t\n\tinitial begin\n\t\treg [3:0] count; count = 0;\n\t\tin <= 100'h0;\n\t\t// AND gate uses huge numbers and creates a sparse waveform.\n\t\t@(negedge clk) wavedrom_start(\"Test AND gate\");\n\t\t\t@(posedge clk,negedge clk) in <= 100'h0;\t\t// Test OR gate\n\t\t\t@(posedge clk,negedge clk); in <= ~100'h0;\t\t// Test AND gate\n\t\t\t@(posedge clk,negedge clk); in <= 100'h3ffff;\t\n\t\t\t@(posedge clk,negedge clk); in <= ~100'h3ffff;\t\n\t\t\t@(posedge clk,negedge clk); in <= 100'h80;\t\t\n\t\t\t@(posedge clk,negedge clk); in <= ~100'h80;\t\t\n\t\twavedrom_stop();\n\n\t\t@(negedge clk) wavedrom_start(\"Test OR and XOR gates\");\n\t\t\t@(posedge clk) in <= 100'h0;\t\t// Test OR gate\n\t\t\t@(posedge clk); in <= 100'h7;\t\t// Test AND gate\n\t\t\trepeat(10) @(posedge clk, negedge clk) begin\n\t\t\t\tin <= count;\t\t\n\t\t\t\tcount <= count + 1;\n\t\t\tend\n\t\t\t@(posedge clk) in <= 100'h0;\n\t\t@(negedge clk) wavedrom_stop();\n\t\t\n\t\tin <= $random;\n\t\trepeat(100) begin\n\t\t\t@(negedge clk) in <= $random;\n\t\t\t@(posedge clk) in <= $random;\n\t\tend\n\t\tfor (int i=0;i<100;i++) begin\n\t\t\t@(negedge clk) in <= 100'h1<<i;\n\t\t\t@(posedge clk) in <= ~(100'h1<<i);\n\t\tend\n\t\t@(posedge clk) in <= 100'h0;\t\t// Test OR gate\n\t\t@(posedge clk); in <= ~100'h0;\t\t// Test AND gate\n\t\t@(posedge clk);\n\t\t#1 $finish;\n\tend\n\t\t\nendmodule",
+    "reference_text": "\nmodule RefModule (\n  input [99:0] in,\n  output out_and,\n  output out_or,\n  output out_xor\n);\n\n  assign out_and = &in;\n  assign out_or = |in;\n  assign out_xor = ^in;\n\nendmodule\n\n",
+    "prompt_interfaces": [
+      "\n - input  in (100 bits)",
+      " - output out_and",
+      " - output out_or",
+      " - output out_xor"
+    ],
+    "file_authorship": "No individual file author attribution established; upstream repository authorship only, snapshot commit author not substituted",
+    "reference_independence": "SAME_REPOSITORY_CORRELATED_NO_INDEPENDENT_ORACLE",
+    "simulation": "NOT_RUN",
+    "static_inventory_not_proof": true
+  },
+  {
+    "id": "Prob111_fsm2s",
+    "modules": [
+      "stimulus_gen",
+      "stimulus_gen",
+      "tb",
+      "RefModule"
+    ],
+    "includes": [],
+    "readmem": false,
+    "test_helper_name_occurrences": 1,
+    "evidence": [
+      {
+        "line": 120,
+        "text": "\tRefModule good1 ("
+      },
+      {
+        "line": 127,
+        "text": "\tTopModule top_module1 ("
+      },
+      {
+        "line": 136,
+        "text": "\ttask wait_for_end_of_timestep;"
+      },
+      {
+        "line": 154,
+        "text": "\tassign tb_match = ( { out_ref } === ( { out_ref } ^ { out_dut } ^ { out_ref } ) );"
+      },
+      {
+        "line": 157,
+        "text": "\talways @(posedge clk, negedge clk) begin"
+      }
+    ],
+    "stimulus": "`timescale 1 ps/1 ps\n`define OK 12\n`define INCORRECT 13\n\n\nmodule stimulus_gen (\n\tinput clk,\n\toutput logic j, k,\n\toutput logic reset,\n\toutput reg[511:0] wavedrom_title,\n\toutput reg wavedrom_enable,\n\tinput tb_match\n);\n\n\ttask reset_test(input async=0);\n\t\tbit arfail, srfail, datafail;\n\t\n\t\t@(posedge clk);\n\t\t@(posedge clk) reset <= 0;\n\t\trepeat(3) @(posedge clk);\n\t\n\t\t@(negedge clk) begin datafail = !tb_match ; reset <= 1; end\n\t\t@(posedge clk) arfail = !tb_match;\n\t\t@(posedge clk) begin\n\t\t\tsrfail = !tb_match;\n\t\t\treset <= 0;\n\t\tend\n\t\tif (srfail)\n\t\t\t$display(\"Hint: Your reset doesn't seem to be working.\");\n\t\telse if (arfail && (async || !datafail))\n\t\t\t$display(\"Hint: Your reset should be %0s, but doesn't appear to be.\", async ? \"asynchronous\" : \"synchronous\");\n\t\t// Don't warn about synchronous reset if the half-cycle before is already wrong. It's more likely\n\t\t// a functionality error than the reset being implemented asynchronously.\n\t\n\tendtask\n\n\n// Add two ports to module stimulus_gen:\n//    output [511:0] wavedrom_title\n//    output reg wavedrom_enable\n\n\ttask wavedrom_start(input[511:0] title = \"\");\n\tendtask\n\t\n\ttask wavedrom_stop;\n\t\t#1;\n\tendtask\t\n\n\n\t\n\treg [0:11][1:0] d = 24'b000101010010101111111111;\n\t\n\tinitial begin\n\t\treset <= 1;\n\t\tj <= 0;\n\t\tk <= 0;\n\t\t@(posedge clk);\n\t\treset <= 0;\n\t\tj <= 1;\n\t\t@(posedge clk);\n\t\tj <= 0;\n\t\twavedrom_start(\"Reset and transitions\");\n\t\treset_test();\n\t\tfor (int i=0;i<12;i++)\n\t\t\t@(posedge clk) {k, j} <= d[i];\n\t\twavedrom_stop();\n\t\trepeat(200) @(posedge clk, negedge clk) begin\n\t\t\t{j,k} <= $random;\n\t\t\treset <= !($random & 7);\n\t\tend\n\n\t\t#1 $finish;\n\tend\n\t\nendmodule",
+    "reference_text": "\nmodule RefModule (\n  input clk,\n  input j,\n  input k,\n  input reset,\n  output out\n);\n\n  parameter A=0, B=1;\n  reg state;\n  reg next;\n\n    always_comb begin\n    case (state)\n      A: next = j ? B : A;\n      B: next = k ? A : B;\n    endcase\n    end\n\n    always @(posedge clk) begin\n    if (reset) state <= A;\n        else state <= next;\n  end\n\n  assign out = (state==B);\n\nendmodule\n\n",
+    "prompt_interfaces": [
+      "\n - input  clk",
+      " - input  reset",
+      " - input  j",
+      " - input  k",
+      " - output out"
+    ],
+    "file_authorship": "No individual file author attribution established; upstream repository authorship only, snapshot commit author not substituted",
+    "reference_independence": "SAME_REPOSITORY_CORRELATED_NO_INDEPENDENT_ORACLE",
+    "simulation": "NOT_RUN",
+    "static_inventory_not_proof": true
+  },
+  {
+    "id": "Prob114_bugs_case",
+    "modules": [
+      "stimulus_gen",
+      "stimulus_gen",
+      "tb",
+      "RefModule"
+    ],
+    "includes": [],
+    "readmem": false,
+    "test_helper_name_occurrences": 1,
+    "evidence": [
+      {
+        "line": 106,
+        "text": "\tRefModule good1 ("
+      },
+      {
+        "line": 111,
+        "text": "\tTopModule top_module1 ("
+      },
+      {
+        "line": 118,
+        "text": "\ttask wait_for_end_of_timestep;"
+      },
+      {
+        "line": 138,
+        "text": "\tassign tb_match = ( { out_ref, valid_ref } === ( { out_ref, valid_ref } ^ { out_dut, valid_dut } ^ { out_ref, valid_ref } ) );"
+      },
+      {
+        "line": 141,
+        "text": "\talways @(posedge clk, negedge clk) begin"
+      }
+    ],
+    "stimulus": "`timescale 1 ps/1 ps\n`define OK 12\n`define INCORRECT 13\n\n\n\nmodule stimulus_gen (\n\tinput clk,\n\toutput logic [7:0] code,\n\toutput reg[511:0] wavedrom_title,\n\toutput reg wavedrom_enable,\n\tinput tb_match\n);\n\n\n// Add two ports to module stimulus_gen:\n//    output [511:0] wavedrom_title\n//    output reg wavedrom_enable\n\n\ttask wavedrom_start(input[511:0] title = \"\");\n\tendtask\n\t\n\ttask wavedrom_stop;\n\t\t#1;\n\tendtask\t\n\n\n\t\n\tinitial begin\n\t\tcode <= 8'h45;\n\t\t@(negedge clk) wavedrom_start(\"Decode scancodes\");\n\t\t\t@(posedge clk) code <= 8'h45;\n\t\t\t@(posedge clk) code <= 8'h03;\n\t\t\t@(posedge clk) code <= 8'h46;\n\t\t\t@(posedge clk) code <= 8'h16;\n\t\t\t@(posedge clk) code <= 8'd26;\n\t\t\t@(posedge clk) code <= 8'h1e;\n\t\t\t@(posedge clk) code <= 8'h25;\n\t\t\t@(posedge clk) code <= 8'h26;\n\t\t\t@(posedge clk) code <= 8'h2e;\n\t\t\t@(posedge clk) code <= $random;\n\t\t\t@(posedge clk) code <= 8'h36;\n\t\t\t@(posedge clk) code <= $random;\n\t\t\t@(posedge clk) code <= 8'h3d;\n\t\t\t@(posedge clk) code <= 8'h3e;\n\t\t\t@(posedge clk) code <= 8'h45;\n\t\t\t@(posedge clk) code <= 8'h46;\n\t\t\t@(posedge clk) code <= $random;\n\t\t\t@(posedge clk) code <= $random;\n\t\t\t@(posedge clk) code <= $random;\n\t\t\t@(posedge clk) code <= $random;\n\t\twavedrom_stop();\n\t\t\n\t\trepeat(1000) @(posedge clk, negedge clk) begin\n\t\t\tcode <= $urandom;\n\t\tend\n\t\t\t\n\t\t$finish;\n\tend\n\t\nendmodule",
+    "reference_text": "\nmodule RefModule (\n  input [7:0] code,\n  output reg [3:0] out,\n  output reg valid\n);\n\n  // uhh.. make a case statement: maps scancode to 0-9, but accidentally\n  // infer a latch? and have one of the entries be wrong? (duplicate\n  // case, using different base!)\n\n  always @(*) begin\n    out = 0;\n    valid = 1;\n    case (code)\n      8'h45: out = 0;\n      8'h16: out = 1;\n      8'h1e: out = 2;\n      8'h26: out = 3;\n      8'h25: out = 4;\n      8'h2e: out = 5;\n      8'h36: out = 6;\n      8'h3d: out = 7;\n      8'h3e: out = 8;\n      8'h46: out = 9;\n      default: valid = 0;\n    endcase\n  end\n\nendmodule\n\n",
+    "prompt_interfaces": [
+      "\n - input  code (8 bits)",
+      " - output out  (4 bits)",
+      " - output valid"
+    ],
+    "file_authorship": "No individual file author attribution established; upstream repository authorship only, snapshot commit author not substituted",
+    "reference_independence": "SAME_REPOSITORY_CORRELATED_NO_INDEPENDENT_ORACLE",
+    "simulation": "NOT_RUN",
+    "static_inventory_not_proof": true
+  },
+  {
+    "id": "Prob084_ece241_2013_q12",
+    "modules": [
+      "stimulus_gen",
+      "stimulus_gen",
+      "tb",
+      "RefModule"
+    ],
+    "includes": [],
+    "readmem": false,
+    "test_helper_name_occurrences": 1,
+    "evidence": [
+      {
+        "line": 107,
+        "text": "\tRefModule good1 ("
+      },
+      {
+        "line": 116,
+        "text": "\tTopModule top_module1 ("
+      },
+      {
+        "line": 127,
+        "text": "\ttask wait_for_end_of_timestep;"
+      },
+      {
+        "line": 145,
+        "text": "\tassign tb_match = ( { Z_ref } === ( { Z_ref } ^ { Z_dut } ^ { Z_ref } ) );"
+      },
+      {
+        "line": 148,
+        "text": "\talways @(posedge clk, negedge clk) begin"
+      }
+    ],
+    "stimulus": "`timescale 1 ps/1 ps\n`define OK 12\n`define INCORRECT 13\n\n\nmodule stimulus_gen (\n\tinput clk,\n\toutput logic S, enable,\n\toutput logic A, B, C,\n\toutput reg[511:0] wavedrom_title,\n\toutput reg wavedrom_enable\n);\n\n\n// Add two ports to module stimulus_gen:\n//    output [511:0] wavedrom_title\n//    output reg wavedrom_enable\n\n\ttask wavedrom_start(input[511:0] title = \"\");\n\tendtask\n\t\n\ttask wavedrom_stop;\n\t\t#1;\n\tendtask\t\n\n\n\n\tinitial begin\n\t\tenable <= 0;\n\t\t{A,B,C} <= 0;\n\t\tS <= 1'bx;\n\t\t@(negedge clk) wavedrom_start(\"A 3-input AND gate\");\n\t\t\t@(posedge clk);\n\t\t\t@(posedge clk) enable <= 1; S <= 1;\n\t\t\t@(posedge clk) S <= 0;\n\t\t\t@(posedge clk) S <= 0;\n\t\t\t@(posedge clk) S <= 0;\n\t\t\t@(posedge clk) S <= 0;\n\t\t\t@(posedge clk) S <= 0;\n\t\t\t@(posedge clk) S <= 0;\n\t\t\t@(posedge clk) S <= 0;\n\t\t\t@(posedge clk) enable <= 0; S <= 1'bx;\n\t\t\t{A,B,C} <= 5;\n\t\t\t@(posedge clk) {A,B,C} <= 6;\n\t\t\t@(posedge clk) {A,B,C} <= 7;\n\t\t\t@(posedge clk) {A,B,C} <= 0;\n\t\t\t@(posedge clk) {A,B,C} <= 1;\n\t\t@(negedge clk) wavedrom_stop();\n\n\t\trepeat(500) @(posedge clk, negedge clk) begin\n\t\t\t{A,B,C,S} <= $random;\n\t\t\tenable <= ($random&3) == 0;\n\t\tend\n\t\t\n\t\t$finish;\n\tend\n\t\nendmodule",
+    "reference_text": "\nmodule RefModule (\n  input clk,\n  input enable,\n  input S,\n  input A,\n  input B,\n  input C,\n  output reg Z\n);\n\n  reg [7:0] q;\n  always @(posedge clk) begin\n    if (enable)\n      q <= {q[6:0], S};\n  end\n\n  assign Z = q[ {A, B, C} ];\n\nendmodule\n\n",
+    "prompt_interfaces": [
+      "\n - input  clk",
+      " - input  enable",
+      " - input  S",
+      " - input  A",
+      " - input  B",
+      " - input  C",
+      " - output Z"
+    ],
+    "file_authorship": "No individual file author attribution established; upstream repository authorship only, snapshot commit author not substituted",
+    "reference_independence": "SAME_REPOSITORY_CORRELATED_NO_INDEPENDENT_ORACLE",
+    "simulation": "NOT_RUN",
+    "static_inventory_not_proof": true
+  },
+  {
+    "id": "Prob087_gates",
+    "modules": [
+      "stimulus_gen",
+      "stimulus_gen",
+      "tb",
+      "RefModule"
+    ],
+    "includes": [],
+    "readmem": false,
+    "test_helper_name_occurrences": 1,
+    "evidence": [
+      {
+        "line": 108,
+        "text": "\tRefModule good1 ("
+      },
+      {
+        "line": 119,
+        "text": "\tTopModule top_module1 ("
+      },
+      {
+        "line": 132,
+        "text": "\ttask wait_for_end_of_timestep;"
+      },
+      {
+        "line": 162,
+        "text": "\tassign tb_match = ( { out_and_ref, out_or_ref, out_xor_ref, out_nand_ref, out_nor_ref, out_xnor_ref, out_anotb_ref } === ( { out_and_ref, out_or_ref, out_xor_ref, out_nand_ref, out_nor_ref, out_xnor_ref, out_anotb_ref } ^ { out_and_dut, out_or_dut, out_xor_dut, out_nand_dut, out_nor_dut, out_xnor_dut, out_anotb_dut } ^ { out_and_ref, out_or_ref, out_xor_ref, out_nand_ref, out_nor_ref, out_xnor_ref, out_anotb_ref } ) );"
+      },
+      {
+        "line": 165,
+        "text": "\talways @(posedge clk, negedge clk) begin"
+      }
+    ],
+    "stimulus": "`timescale 1 ps/1 ps\n`define OK 12\n`define INCORRECT 13\n\n\nmodule stimulus_gen (\n\tinput clk,\n\toutput logic a,b,\n\toutput reg[511:0] wavedrom_title,\n\toutput reg wavedrom_enable\n);\n\n// Add two ports to module stimulus_gen:\n//    output [511:0] wavedrom_title\n//    output reg wavedrom_enable\n\n\ttask wavedrom_start(input[511:0] title = \"\");\n\tendtask\n\t\n\ttask wavedrom_stop;\n\t\t#1;\n\tendtask\t\n\n\n\n\t\n\tinitial begin\n\t\t@(negedge clk) {a,b} <= 0;\n\t\twavedrom_start();\n\t\t\t@(posedge clk) {a,b} <= 0;\n\t\t\t@(posedge clk) {a,b} <= 1;\n\t\t\t@(posedge clk) {a,b} <= 2;\n\t\t\t@(posedge clk) {a,b} <= 3;\n\t\t\t@(negedge clk);\n\t\twavedrom_stop();\n\t\trepeat(200) @(posedge clk, negedge clk)\n\t\t{a,b} <= $random;\n\t\t$finish;\n\tend\n\t\nendmodule",
+    "reference_text": "\nmodule RefModule (\n  input a,\n  input b,\n  output out_and,\n  output out_or,\n  output out_xor,\n  output out_nand,\n  output out_nor,\n  output out_xnor,\n  output out_anotb\n);\n\n  assign out_and = a&b;\n  assign out_or = a|b;\n  assign out_xor = a^b;\n  assign out_nand = ~(a&b);\n  assign out_nor = ~(a|b);\n  assign out_xnor = a^~b;\n  assign out_anotb = a & ~b;\n\nendmodule\n\n",
+    "prompt_interfaces": [
+      "\n - input  a",
+      " - input  b",
+      " - output out_and",
+      " - output out_or",
+      " - output out_xor",
+      " - output out_nand",
+      " - output out_nor",
+      " - output out_xnor",
+      " - output out_anotb"
+    ],
+    "file_authorship": "No individual file author attribution established; upstream repository authorship only, snapshot commit author not substituted",
+    "reference_independence": "SAME_REPOSITORY_CORRELATED_NO_INDEPENDENT_ORACLE",
+    "simulation": "NOT_RUN",
+    "static_inventory_not_proof": true
+  },
+  {
+    "id": "Prob050_kmap1",
+    "modules": [
+      "stimulus_gen",
+      "stimulus_gen",
+      "tb",
+      "RefModule"
+    ],
+    "includes": [],
+    "readmem": false,
+    "test_helper_name_occurrences": 1,
+    "evidence": [
+      {
+        "line": 86,
+        "text": "\tRefModule good1 ("
+      },
+      {
+        "line": 92,
+        "text": "\tTopModule top_module1 ("
+      },
+      {
+        "line": 100,
+        "text": "\ttask wait_for_end_of_timestep;"
+      },
+      {
+        "line": 118,
+        "text": "\tassign tb_match = ( { out_ref } === ( { out_ref } ^ { out_dut } ^ { out_ref } ) );"
+      },
+      {
+        "line": 121,
+        "text": "\talways @(posedge clk, negedge clk) begin"
+      }
+    ],
+    "stimulus": "`timescale 1 ps/1 ps\n`define OK 12\n`define INCORRECT 13\n\n\nmodule stimulus_gen (\n\tinput clk,\n\toutput reg a, b, c,\n\toutput reg[511:0] wavedrom_title,\n\toutput reg wavedrom_enable\n);\n\n\n// Add two ports to module stimulus_gen:\n//    output [511:0] wavedrom_title\n//    output reg wavedrom_enable\n\n\ttask wavedrom_start(input[511:0] title = \"\");\n\tendtask\n\t\n\ttask wavedrom_stop;\n\t\t#1;\n\tendtask\t\n\n\n\n\tinitial begin\n\t\tint count; count = 0;\n\t\t{a,b,c} <= 1'b0;\n\t\twavedrom_start();\n\t\trepeat(10) @(posedge clk)\n\t\t\t{a,b,c} <= count++;\t\t\n\t\twavedrom_stop();\n\t\t\n\t\trepeat(200) @(posedge clk, negedge clk)\n\t\t\t{c,b,a} <= $urandom;\n\t\t\t\n\t\t#1 $finish;\n\tend\n\t\nendmodule",
+    "reference_text": "\nmodule RefModule (\n  input a,\n  input b,\n  input c,\n  output out\n);\n\n  assign out = (a | b | c);\n\nendmodule\n\n",
+    "prompt_interfaces": [
+      "\n - input  a",
+      " - input  b",
+      " - input  c",
+      " - output out"
+    ],
+    "file_authorship": "No individual file author attribution established; upstream repository authorship only, snapshot commit author not substituted",
+    "reference_independence": "SAME_REPOSITORY_CORRELATED_NO_INDEPENDENT_ORACLE",
+    "simulation": "NOT_RUN",
+    "static_inventory_not_proof": true
+  },
+  {
+    "id": "Prob101_circuit4",
+    "modules": [
+      "stimulus_gen",
+      "stimulus_gen",
+      "tb",
+      "RefModule"
+    ],
+    "includes": [],
+    "readmem": false,
+    "test_helper_name_occurrences": 1,
+    "evidence": [
+      {
+        "line": 86,
+        "text": "\tRefModule good1 ("
+      },
+      {
+        "line": 93,
+        "text": "\tTopModule top_module1 ("
+      },
+      {
+        "line": 102,
+        "text": "\ttask wait_for_end_of_timestep;"
+      },
+      {
+        "line": 120,
+        "text": "\tassign tb_match = ( { q_ref } === ( { q_ref } ^ { q_dut } ^ { q_ref } ) );"
+      },
+      {
+        "line": 123,
+        "text": "\talways @(posedge clk, negedge clk) begin"
+      }
+    ],
+    "stimulus": "`timescale 1 ps/1 ps\n`define OK 12\n`define INCORRECT 13\n\n\nmodule stimulus_gen (\n\tinput clk,\n\toutput logic a,b,c,d,\n\toutput reg[511:0] wavedrom_title,\n\toutput reg wavedrom_enable\t\n);\n\n\n// Add two ports to module stimulus_gen:\n//    output [511:0] wavedrom_title\n//    output reg wavedrom_enable\n\n\ttask wavedrom_start(input[511:0] title = \"\");\n\tendtask\n\t\n\ttask wavedrom_stop;\n\t\t#1;\n\tendtask\t\n\n\n\n\tinitial begin\n\t\t{a,b,c,d} <= 0;\n\t\t@(negedge clk) wavedrom_start(\"Unknown circuit\");\n\t\t\t@(posedge clk) {a,b,c,d} <= 0;\n\t\t\trepeat(18) @(posedge clk, negedge clk) {a,b,c,d} <= {a,b,c,d} + 1;\n\t\twavedrom_stop();\n\t\t\n\t\trepeat(100) @(posedge clk, negedge clk)\n\t\t\t{a,b,c,d} <= $urandom;\n\t\t$finish;\n\tend\n\t\nendmodule",
+    "reference_text": "\nmodule RefModule (\n  input a,\n  input b,\n  input c,\n  input d,\n  output q\n);\n\n  assign q = c | b;\n\nendmodule\n\n",
+    "prompt_interfaces": [
+      "\n - input  a",
+      " - input  b",
+      " - input  c",
+      " - input  d",
+      " - output q"
+    ],
+    "file_authorship": "No individual file author attribution established; upstream repository authorship only, snapshot commit author not substituted",
+    "reference_independence": "SAME_REPOSITORY_CORRELATED_NO_INDEPENDENT_ORACLE",
+    "simulation": "NOT_RUN",
+    "static_inventory_not_proof": true
+  },
+  {
+    "id": "Prob106_always_nolatches",
+    "modules": [
+      "stimulus_gen",
+      "stimulus_gen",
+      "tb",
+      "RefModule"
+    ],
+    "includes": [],
+    "readmem": false,
+    "test_helper_name_occurrences": 1,
+    "evidence": [
+      {
+        "line": 99,
+        "text": "\tRefModule good1 ("
+      },
+      {
+        "line": 106,
+        "text": "\tTopModule top_module1 ("
+      },
+      {
+        "line": 115,
+        "text": "\ttask wait_for_end_of_timestep;"
+      },
+      {
+        "line": 139,
+        "text": "\tassign tb_match = ( { left_ref, down_ref, right_ref, up_ref } === ( { left_ref, down_ref, right_ref, up_ref } ^ { left_dut, down_dut, right_dut, up_dut } ^ { left_ref, down_ref, right_ref, up_ref } ) );"
+      },
+      {
+        "line": 142,
+        "text": "\talways @(posedge clk, negedge clk) begin"
+      }
+    ],
+    "stimulus": "`timescale 1 ps/1 ps\n`define OK 12\n`define INCORRECT 13\n\n\nmodule stimulus_gen (\n\tinput clk,\n\toutput logic [15:0] scancode, \n\toutput reg[511:0] wavedrom_title,\n\toutput reg wavedrom_enable\t\n);\n\n\n// Add two ports to module stimulus_gen:\n//    output [511:0] wavedrom_title\n//    output reg wavedrom_enable\n\n\ttask wavedrom_start(input[511:0] title = \"\");\n\tendtask\n\t\n\ttask wavedrom_stop;\n\t\t#1;\n\tendtask\t\n\n\n\n\tinitial begin\n\t\t@(negedge clk) wavedrom_start(\"Recognize arrow keys\");\n\t\t\t@(posedge clk) scancode <= 16'h0;\n\t\t\t@(posedge clk) scancode <= 16'h1;\n\t\t\t@(posedge clk) scancode <= 16'he075;\n\t\t\t@(posedge clk) scancode <= 16'he06b;\n\t\t\t@(posedge clk) scancode <= 16'he06c;\n\t\t\t@(posedge clk) scancode <= 16'he072;\n\t\t\t@(posedge clk) scancode <= 16'he074;\n\t\t\t@(posedge clk) scancode <= 16'he076;\n\t\t\t@(posedge clk) scancode <= 16'hffff;\n\t\t@(negedge clk) wavedrom_stop();\n\n\t\trepeat(30000) @(posedge clk, negedge clk) begin\n\t\t\tscancode <= $urandom;\n\t\tend\n\t\t$finish;\n\tend\n\t\nendmodule",
+    "reference_text": "\nmodule RefModule (\n  input [15:0] scancode,\n  output reg left,\n  output reg down,\n  output reg right,\n  output reg up\n);\n\n  always @(*) begin\n    {up, left, down, right} = 0;\n    case (scancode)\n      16'he06b: left = 1;\n      16'he072: down = 1;\n      16'he074: right = 1;\n      16'he075: up = 1;\n    endcase\n  end\n\nendmodule\n\n",
+    "prompt_interfaces": [
+      "\n - input  scancode (16 bits)",
+      " - output left",
+      " - output down",
+      " - output right",
+      " - output up"
+    ],
+    "file_authorship": "No individual file author attribution established; upstream repository authorship only, snapshot commit author not substituted",
+    "reference_independence": "SAME_REPOSITORY_CORRELATED_NO_INDEPENDENT_ORACLE",
+    "simulation": "NOT_RUN",
+    "static_inventory_not_proof": true
+  },
+  {
+    "id": "Prob154_fsm_ps2data",
+    "modules": [
+      "stimulus_gen",
+      "tb",
+      "RefModule"
+    ],
+    "includes": [],
+    "readmem": false,
+    "test_helper_name_occurrences": 1,
+    "evidence": [
+      {
+        "line": 81,
+        "text": "\tRefModule good1 ("
+      },
+      {
+        "line": 88,
+        "text": "\tTopModule top_module1 ("
+      },
+      {
+        "line": 97,
+        "text": "\ttask wait_for_end_of_timestep;"
+      },
+      {
+        "line": 117,
+        "text": "\tassign tb_match = ( { out_bytes_ref, done_ref } === ( { out_bytes_ref, done_ref } ^ { out_bytes_dut, done_dut } ^ { out_bytes_ref, done_ref } ) );"
+      },
+      {
+        "line": 120,
+        "text": "\talways @(posedge clk, negedge clk) begin"
+      }
+    ],
+    "stimulus": "`timescale 1 ps/1 ps\n`define OK 12\n`define INCORRECT 13\n\n\nmodule stimulus_gen (\n\tinput clk,\n\toutput logic [7:0] in,\n\toutput logic reset\n);\n\n\tinitial begin\n\t\trepeat(200) @(negedge clk) begin\n\t\t\tin <= $random;\n\t\t\treset <= !($random & 31);\n\t\tend\n\t\treset <= 1'b0;\n\t\tin <= '0;\n\t\trepeat(10) @(posedge clk);\n\t\t\n\t\trepeat(200) begin\n\t\t\tin <= $random;\n\t\t\tin[3] <= 1'b1;\n\t\t\t@(posedge clk);\n\t\t\tin <= $random;\n\t\t\t@(posedge clk);\n\t\t\tin <= $random;\n\t\t\t@(posedge clk);\n\t\tend\n\n\t\t#1 $finish;\n\tend\n\t\nendmodule",
+    "reference_text": "\nmodule RefModule (\n  input clk,\n  input [7:0] in,\n  input reset,\n  output [23:0] out_bytes,\n  output done\n);\n\n  parameter BYTE1=0, BYTE2=1, BYTE3=2, DONE=3;\n  reg [1:0] state;\n  reg [1:0] next;\n\n  wire in3 = in[3];\n\n  always_comb begin\n    case (state)\n      BYTE1: next = in3 ? BYTE2 : BYTE1;\n      BYTE2: next = BYTE3;\n      BYTE3: next = DONE;\n      DONE: next = in3 ? BYTE2 : BYTE1;\n    endcase\n  end\n\n  always @(posedge clk) begin\n    if (reset) state <= BYTE1;\n      else state <= next;\n  end\n\n  assign done = (state==DONE);\n\n  reg [23:0] out_bytes_r;\n  always @(posedge clk)\n    out_bytes_r <= {out_bytes_r[15:0], in};\n\n  // Implementations may vary: Allow user to do anything while the output\n  // doesn't have to be valid.\n\n  assign out_bytes = done ? out_bytes_r : 'x;\n\nendmodule\n\n",
+    "prompt_interfaces": [
+      "\n - input  clk",
+      " - input  reset",
+      " - input  in (8 bits)",
+      " - output out_bytes (24 bits)",
+      " - output done"
+    ],
+    "file_authorship": "No individual file author attribution established; upstream repository authorship only, snapshot commit author not substituted",
+    "reference_independence": "SAME_REPOSITORY_CORRELATED_NO_INDEPENDENT_ORACLE",
+    "simulation": "NOT_RUN",
+    "static_inventory_not_proof": true
+  }
+]

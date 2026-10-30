@@ -1,0 +1,35 @@
+{
+  "status": "ACCEPTED_BOUNDED_DEVELOPMENT_CALIBRATION",
+  "packet_sha256": "d060a32dba45329046e7a71cf5b3c687fccc874bbaede47415bad3d3c9de268a",
+  "bindings": {
+    "prior-lock.json": 20065,
+    "packet-lock.json": 160,
+    "calibration-v1/source-lock.json": 7,
+    "calibration-v1/evidence-lock.json": 136
+  },
+  "fixtures": {
+    "PASS": 7,
+    "FUNCTION_FAIL": 11,
+    "INPUT_PROTOCOL_FAIL": 1,
+    "TRACE_INVALID": 3
+  },
+  "native_configurations": {
+    "PASS": 3,
+    "FUNCTION_FAIL": 7
+  },
+  "actual_compile_receipts": 10,
+  "actual_simulation_receipts": 10,
+  "raw_sample_events": 800,
+  "original_trace_counts_and_status_independently_recomputed": true,
+  "new_model_calls": 0,
+  "default_regression": "24 tests, 3 failures, 1 error, 2 skips; retained exit1",
+  "unit_tests": "3 tests reused fixtures, not independent tasks",
+  "production_integration": "NOT_DONE",
+  "limitations": [
+    "Same-author synthetic development, not external reference or model efficacy",
+    "Native only initial synchronous reset; intermediate reset only hand traces",
+    "Bounded windows; no unbounded liveness or inter-sample glitch proof",
+    "IR relation integration not validated; R7 candidates influenced by new method must be development"
+  ],
+  "audit_method": "Independent read-only hash/file sets, separate temporal FIFO/stall recomputation and raw sample mapping, no target script import, reference/compiler/model rerun"
+}

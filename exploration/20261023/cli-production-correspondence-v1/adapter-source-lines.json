@@ -1,0 +1,272 @@
+{
+  "path": "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\codex_network_adapter.py",
+  "sha256": "22729077b80160101aee2f86fa6994875ba4f32cd49f5350be5f23bf938ebbaf",
+  "lines": [
+    {
+      "line": 50,
+      "text": ""
+    },
+    {
+      "line": 51,
+      "text": "def generate_text(args, folder, prompt):"
+    },
+    {
+      "line": 52,
+      "text": "    \"\"\"One guarded model turn; the caller owns the stage's response schema.\"\"\""
+    },
+    {
+      "line": 53,
+      "text": "    exe = find_codex(args.codex_executable)"
+    },
+    {
+      "line": 54,
+      "text": "    env = model_network_env()"
+    },
+    {
+      "line": 55,
+      "text": "    for name in ('APPDATA', 'LOCALAPPDATA', 'CODEX_HOME'):"
+    },
+    {
+      "line": 56,
+      "text": "        if os.environ.get(name):"
+    },
+    {
+      "line": 57,
+      "text": "            env[name] = os.environ[name]"
+    },
+    {
+      "line": 58,
+      "text": "    # API-key environment variables are deliberately absent; Codex manages auth."
+    },
+    {
+      "line": 59,
+      "text": "    for label, command in [('codex_version', [exe, '--version']),"
+    },
+    {
+      "line": 60,
+      "text": "                           ('codex_auth', [exe, 'login', 'status'])]:"
+    },
+    {
+      "line": 61,
+      "text": "        result = lab.run_process(command, folder, 15, env)"
+    },
+    {
+      "line": 62,
+      "text": "        lab.save_process(folder, label, result)"
+    },
+    {
+      "line": 63,
+      "text": "        if result['returncode'] != 0 or result['timeout']:"
+    },
+    {
+      "line": 64,
+      "text": "            raise lab.LabError('ENV_ERROR', 'codex_auth', 'Codex version/login check failed')"
+    },
+    {
+      "line": 65,
+      "text": "        if label == 'codex_auth' and 'Logged in using ChatGPT' not in result['stdout'] + result['stderr']:"
+    },
+    {
+      "line": 66,
+      "text": "            raise lab.LabError('ENV_ERROR', 'codex_auth', 'This mode requires existing ChatGPT login, not API-key auth')"
+    },
+    {
+      "line": 67,
+      "text": "    lab.write_text(folder / 'codex_prompt.txt', prompt)"
+    },
+    {
+      "line": 68,
+      "text": "    working = folder / 'generation_workspace'"
+    },
+    {
+      "line": 69,
+      "text": "    working.mkdir()"
+    },
+    {
+      "line": 70,
+      "text": "    output = folder / 'model_output.raw.txt'"
+    },
+    {
+      "line": 71,
+      "text": "    command = [exe, 'exec', '--ignore-user-config', '--ephemeral', '--skip-git-repo-check',"
+    },
+    {
+      "line": 72,
+      "text": "               '--sandbox', 'read-only', '--model', args.model, '--json', '--color', 'never',"
+    },
+    {
+      "line": 73,
+      "text": "               '-c', 'model_provider=\"openai\"', '-c', 'forced_login_method=\"chatgpt\"',"
+    },
+    {
+      "line": 74,
+      "text": "               '-c', f'model_reasoning_effort=\"{args.codex_reasoning}\"',"
+    },
+    {
+      "line": 75,
+      "text": "               '-c', 'approval_policy=\"never\"', '-c', 'project_doc_max_bytes=0',"
+    },
+    {
+      "line": 76,
+      "text": "               '-c', 'web_search=\"disabled\"']"
+    },
+    {
+      "line": 77,
+      "text": "    for feature in ('shell_tool', 'multi_agent', 'apps', 'plugins', 'remote_plugin',"
+    },
+    {
+      "line": 78,
+      "text": "                    'hooks', 'memories', 'image_generation', 'computer_use', 'browser_use',"
+    },
+    {
+      "line": 79,
+      "text": "                    'in_app_browser', 'skill_search'):"
+    },
+    {
+      "line": 80,
+      "text": "        command.extend(['--disable', feature])"
+    },
+    {
+      "line": 81,
+      "text": "    command.extend(['--output-last-message', str(output), prompt])"
+    },
+    {
+      "line": 82,
+      "text": "    lab.write_json(folder / 'codex_request.json', {"
+    },
+    {
+      "line": 83,
+      "text": "        'transport': 'codex_exec_chatgpt_login',"
+    },
+    {
+      "line": 84,
+      "text": "        'network_adapter': 'configured_proxy_v1',"
+    },
+    {
+      "line": 85,
+      "text": "        'proxy_env_names': sorted(k for k in env if k.endswith('_PROXY')),"
+    },
+    {
+      "line": 86,
+      "text": "        'adapter_sha256': lab.digest(Path(__file__).read_bytes()), 'requested_model': args.model,"
+    },
+    {
+      "line": 87,
+      "text": "        'reasoning_effort': args.codex_reasoning, 'prompt': prompt,"
+    },
+    {
+      "line": 88,
+      "text": "        'temperature': None, 'seed': None, 'max_output_tokens': None,"
+    },
+    {
+      "line": 89,
+      "text": "        'sampling_note': 'CLI defaults; no temperature/seed/token limit sent',"
+    },
+    {
+      "line": 90,
+      "text": "        'codex_executable_sha256': lab.digest(Path(exe).read_bytes()),"
+    },
+    {
+      "line": 91,
+      "text": "        'cli_auth': 'ChatGPT (confirmed by login status)',"
+    },
+    {
+      "line": 92,
+      "text": "        'server_model_snapshot': 'Not exposed by exec JSONL; requested model is recorded without claiming a snapshot'})"
+    },
+    {
+      "line": 93,
+      "text": "    result = lab.run_process(command, working, args.api_timeout, env)"
+    },
+    {
+      "line": 94,
+      "text": "    lab.save_process(folder, 'codex', result)"
+    },
+    {
+      "line": 95,
+      "text": "    if result['timeout']:"
+    },
+    {
+      "line": 96,
+      "text": "        raise lab.LabError('API_ERROR', 'codex_timeout', 'Codex wall timeout; process tree cleaned up')"
+    },
+    {
+      "line": 97,
+      "text": "    if result['returncode'] != 0 or result['output_limit']:"
+    },
+    {
+      "line": 98,
+      "text": "        raise lab.LabError('API_ERROR', 'codex', 'Codex failed; inspect codex stderr/events')"
+    },
+    {
+      "line": 99,
+      "text": "    try:"
+    },
+    {
+      "line": 100,
+      "text": "        events = [json.loads(line) for line in result['stdout'].splitlines() if line.strip()]"
+    },
+    {
+      "line": 101,
+      "text": "    except ValueError:"
+    },
+    {
+      "line": 102,
+      "text": "        raise lab.LabError('API_ERROR', 'codex', 'Invalid Codex JSONL event stream') from None"
+    },
+    {
+      "line": 103,
+      "text": "    completed = [e for e in events if e.get('type') == 'turn.completed']"
+    },
+    {
+      "line": 104,
+      "text": "    if not completed or any(e.get('type') in ('error', 'turn.failed') for e in events):"
+    },
+    {
+      "line": 105,
+      "text": "        raise lab.LabError('API_ERROR', 'codex', 'No clean completed model turn')"
+    },
+    {
+      "line": 106,
+      "text": "    item_types = {e.get('item', {}).get('type') for e in events if e.get('type', '').startswith('item.')}"
+    },
+    {
+      "line": 107,
+      "text": "    if item_types - {'agent_message', 'reasoning'}:"
+    },
+    {
+      "line": 108,
+      "text": "        raise lab.LabError('RTL_REJECTED', 'codex_tools', 'Generation used tools; invalid for this direct-generation test')"
+    },
+    {
+      "line": 109,
+      "text": "    if not output.is_file():"
+    },
+    {
+      "line": 110,
+      "text": "        raise lab.LabError('API_ERROR', 'codex', 'Codex did not save a final answer')"
+    },
+    {
+      "line": 111,
+      "text": "    raw = output.read_text(encoding='utf-8')"
+    },
+    {
+      "line": 112,
+      "text": "    if not raw.strip():"
+    },
+    {
+      "line": 113,
+      "text": "        raise lab.LabError('API_ERROR', 'codex', 'Empty Codex answer')"
+    },
+    {
+      "line": 114,
+      "text": "    return raw, {'response_model': None, 'model_identity_basis': 'Explicit --model; exec does not expose backend snapshot',"
+    },
+    {
+      "line": 115,
+      "text": "                 'usage': completed[-1].get('usage'), 'generation_seconds': result['elapsed_seconds'],"
+    }
+  ],
+  "executed": false,
+  "eligibility": "Unfrozen contextual source; not approved 240-slot executor"
+}

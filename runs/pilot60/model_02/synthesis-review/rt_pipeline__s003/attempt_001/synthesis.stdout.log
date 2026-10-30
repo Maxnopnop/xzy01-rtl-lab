@@ -1,0 +1,677 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2025  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
+
+-- Executing script file `synthesis.ys' --
+
+1. Executing Verilog-2005 frontend: dut.sv
+Parsing SystemVerilog input from `dut.sv' to AST representation.
+Generating RTLIL representation for module `\multi_pipe_4bit'.
+Warning: Replacing memory \partial_product with list of registers. See dut.sv:19
+Warning: Replacing memory \sum_reg with list of registers. See dut.sv:28
+Successfully finished Verilog frontend.
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Analyzing design hierarchy..
+Top module:  \multi_pipe_4bit
+
+2.2. Analyzing design hierarchy..
+Top module:  \multi_pipe_4bit
+Removed 0 unused modules.
+
+3. Executing PROC pass (convert processes to netlists).
+
+3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$dut.sv:0$14 in module multi_pipe_4bit.
+Marked 1 switch rules as full_case in process $proc$dut.sv:0$12 in module multi_pipe_4bit.
+Marked 1 switch rules as full_case in process $proc$dut.sv:0$10 in module multi_pipe_4bit.
+Marked 1 switch rules as full_case in process $proc$dut.sv:0$8 in module multi_pipe_4bit.
+Marked 1 switch rules as full_case in process $proc$dut.sv:40$3 in module multi_pipe_4bit.
+Marked 1 switch rules as full_case in process $proc$dut.sv:26$1 in module multi_pipe_4bit.
+Removed a total of 0 dead cases.
+
+3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 5 redundant assignments.
+Promoted 4 assignments to connections.
+
+3.4. Executing PROC_INIT pass (extract init attributes).
+
+3.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst_n in `\multi_pipe_4bit.$proc$dut.sv:40$3'.
+Found async reset \rst_n in `\multi_pipe_4bit.$proc$dut.sv:26$1'.
+
+3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~4 debug messages>
+
+3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\multi_pipe_4bit.$proc$dut.sv:0$14'.
+     1/1: $1\partial_product[3][7:0]
+Creating decoders for process `\multi_pipe_4bit.$proc$dut.sv:0$12'.
+     1/1: $1\partial_product[2][7:0]
+Creating decoders for process `\multi_pipe_4bit.$proc$dut.sv:0$10'.
+     1/1: $1\partial_product[1][7:0]
+Creating decoders for process `\multi_pipe_4bit.$proc$dut.sv:0$8'.
+     1/1: $1\partial_product[0][7:0]
+Creating decoders for process `\multi_pipe_4bit.$proc$dut.sv:40$3'.
+     1/1: $0\mul_out[7:0]
+Creating decoders for process `\multi_pipe_4bit.$proc$dut.sv:26$1'.
+     1/4: $0\sum_reg[3][7:0]
+     2/4: $0\sum_reg[2][7:0]
+     3/4: $0\sum_reg[1][7:0]
+     4/4: $0\sum_reg[0][7:0]
+
+3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\multi_pipe_4bit.\partial_product[3]' from process `\multi_pipe_4bit.$proc$dut.sv:0$14'.
+No latch inferred for signal `\multi_pipe_4bit.\partial_product[2]' from process `\multi_pipe_4bit.$proc$dut.sv:0$12'.
+No latch inferred for signal `\multi_pipe_4bit.\partial_product[1]' from process `\multi_pipe_4bit.$proc$dut.sv:0$10'.
+No latch inferred for signal `\multi_pipe_4bit.\partial_product[0]' from process `\multi_pipe_4bit.$proc$dut.sv:0$8'.
+
+3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\multi_pipe_4bit.\mul_out' using process `\multi_pipe_4bit.$proc$dut.sv:40$3'.
+  created $adff cell `$procdff$32' with positive edge clock and positive level reset.
+Creating register for signal `\multi_pipe_4bit.\sum_reg[0]' using process `\multi_pipe_4bit.$proc$dut.sv:26$1'.
+  created $adff cell `$procdff$37' with positive edge clock and positive level reset.
+Creating register for signal `\multi_pipe_4bit.\sum_reg[1]' using process `\multi_pipe_4bit.$proc$dut.sv:26$1'.
+  created $adff cell `$procdff$42' with positive edge clock and positive level reset.
+Creating register for signal `\multi_pipe_4bit.\sum_reg[2]' using process `\multi_pipe_4bit.$proc$dut.sv:26$1'.
+  created $adff cell `$procdff$47' with positive edge clock and positive level reset.
+Creating register for signal `\multi_pipe_4bit.\sum_reg[3]' using process `\multi_pipe_4bit.$proc$dut.sv:26$1'.
+  created $adff cell `$procdff$52' with positive edge clock and positive level reset.
+
+3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 1 empty switch in `\multi_pipe_4bit.$proc$dut.sv:0$14'.
+Removing empty process `multi_pipe_4bit.$proc$dut.sv:0$14'.
+Found and cleaned up 1 empty switch in `\multi_pipe_4bit.$proc$dut.sv:0$12'.
+Removing empty process `multi_pipe_4bit.$proc$dut.sv:0$12'.
+Found and cleaned up 1 empty switch in `\multi_pipe_4bit.$proc$dut.sv:0$10'.
+Removing empty process `multi_pipe_4bit.$proc$dut.sv:0$10'.
+Found and cleaned up 1 empty switch in `\multi_pipe_4bit.$proc$dut.sv:0$8'.
+Removing empty process `multi_pipe_4bit.$proc$dut.sv:0$8'.
+Removing empty process `multi_pipe_4bit.$proc$dut.sv:40$3'.
+Removing empty process `multi_pipe_4bit.$proc$dut.sv:26$1'.
+Cleaned up 4 empty switches.
+
+3.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module multi_pipe_4bit.
+<suppressed ~14 debug messages>
+
+4. Executing CHECK pass (checking for obvious problems).
+Checking module multi_pipe_4bit...
+Found and reported 0 problems.
+
+5. Executing SYNTH pass.
+
+5.1. Executing HIERARCHY pass (managing design hierarchy).
+
+5.1.1. Analyzing design hierarchy..
+Top module:  \multi_pipe_4bit
+
+5.1.2. Analyzing design hierarchy..
+Top module:  \multi_pipe_4bit
+Removed 0 unused modules.
+
+5.2. Executing PROC pass (convert processes to netlists).
+
+5.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+5.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+5.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+5.2.4. Executing PROC_INIT pass (extract init attributes).
+
+5.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+5.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+5.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+5.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+5.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+5.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+5.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+5.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module multi_pipe_4bit.
+
+5.3. Executing OPT_EXPR pass (perform const folding).
+Optimizing module multi_pipe_4bit.
+
+5.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \multi_pipe_4bit..
+Removed 7 unused cells and 37 unused wires.
+<suppressed ~8 debug messages>
+
+5.5. Executing CHECK pass (checking for obvious problems).
+Checking module multi_pipe_4bit...
+Found and reported 0 problems.
+
+5.6. Executing OPT pass (performing simple optimizations).
+
+5.6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module multi_pipe_4bit.
+
+5.6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\multi_pipe_4bit'.
+Removed a total of 0 cells.
+
+5.6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \multi_pipe_4bit..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~4 debug messages>
+
+5.6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \multi_pipe_4bit.
+Performed a total of 0 changes.
+
+5.6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\multi_pipe_4bit'.
+Removed a total of 0 cells.
+
+5.6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \multi_pipe_4bit..
+
+5.6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module multi_pipe_4bit.
+
+5.6.9. Finished OPT passes. (There is nothing left to do.)
+
+5.7. Executing FSM pass (extract and optimize FSM).
+
+5.7.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+5.7.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+5.7.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+5.7.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \multi_pipe_4bit..
+
+5.7.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+5.7.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+5.7.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+5.7.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+5.8. Executing OPT pass (performing simple optimizations).
+
+5.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module multi_pipe_4bit.
+
+5.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\multi_pipe_4bit'.
+Removed a total of 0 cells.
+
+5.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \multi_pipe_4bit..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~4 debug messages>
+
+5.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \multi_pipe_4bit.
+Performed a total of 0 changes.
+
+5.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\multi_pipe_4bit'.
+Removed a total of 0 cells.
+
+5.8.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \multi_pipe_4bit..
+
+5.8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module multi_pipe_4bit.
+
+5.8.9. Finished OPT passes. (There is nothing left to do.)
+
+5.9. Executing WREDUCE pass (reducing word size of cells).
+Removed top 1 bits (of 8) from mux cell multi_pipe_4bit.$procmux$17 ($mux).
+Removed top 2 bits (of 8) from mux cell multi_pipe_4bit.$procmux$20 ($mux).
+Removed top 3 bits (of 8) from mux cell multi_pipe_4bit.$procmux$23 ($mux).
+Removed top 4 bits (of 8) from mux cell multi_pipe_4bit.$procmux$26 ($mux).
+Removed top 4 bits (of 8) from FF cell multi_pipe_4bit.$procdff$37 ($adff).
+Removed top 3 bits (of 8) from FF cell multi_pipe_4bit.$procdff$42 ($adff).
+Removed top 2 bits (of 8) from FF cell multi_pipe_4bit.$procdff$47 ($adff).
+Removed top 1 bits (of 8) from FF cell multi_pipe_4bit.$procdff$52 ($adff).
+Removed top 4 bits (of 8) from port A of cell multi_pipe_4bit.$add$dut.sv:44$5 ($add).
+Removed top 3 bits (of 8) from port B of cell multi_pipe_4bit.$add$dut.sv:44$5 ($add).
+Removed top 2 bits (of 8) from port Y of cell multi_pipe_4bit.$add$dut.sv:44$5 ($add).
+Removed top 2 bits (of 8) from port A of cell multi_pipe_4bit.$add$dut.sv:44$6 ($add).
+Removed top 2 bits (of 8) from port B of cell multi_pipe_4bit.$add$dut.sv:44$6 ($add).
+Removed top 1 bits (of 8) from port Y of cell multi_pipe_4bit.$add$dut.sv:44$6 ($add).
+Removed top 1 bits (of 8) from port A of cell multi_pipe_4bit.$add$dut.sv:44$7 ($add).
+Removed top 1 bits (of 8) from port B of cell multi_pipe_4bit.$add$dut.sv:44$7 ($add).
+Removed top 2 bits (of 8) from wire multi_pipe_4bit.$add$dut.sv:44$5_Y.
+Removed top 1 bits (of 8) from wire multi_pipe_4bit.$add$dut.sv:44$6_Y.
+Removed top 4 bits (of 8) from wire multi_pipe_4bit.partial_product[0].
+Removed top 3 bits (of 8) from wire multi_pipe_4bit.partial_product[1].
+Removed top 1 bits (of 8) from wire multi_pipe_4bit.partial_product[3].
+Removed top 4 bits (of 8) from wire multi_pipe_4bit.sum_reg[0].
+Removed top 3 bits (of 8) from wire multi_pipe_4bit.sum_reg[1].
+Removed top 2 bits (of 8) from wire multi_pipe_4bit.sum_reg[2].
+
+5.10. Executing PEEPOPT pass (run peephole optimizers).
+
+5.11. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \multi_pipe_4bit..
+Removed 0 unused cells and 8 unused wires.
+<suppressed ~1 debug messages>
+
+5.12. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module multi_pipe_4bit:
+  creating $macc model for $add$dut.sv:44$5 ($add).
+  creating $macc model for $add$dut.sv:44$6 ($add).
+  creating $macc model for $add$dut.sv:44$7 ($add).
+  merging $macc model for $add$dut.sv:44$6 into $add$dut.sv:44$7.
+  merging $macc model for $add$dut.sv:44$5 into $add$dut.sv:44$7.
+  creating $macc cell for $add$dut.sv:44$7: $auto$alumacc.cc:365:replace_macc$61
+  created 0 $alu and 1 $macc cells.
+
+5.13. Executing SHARE pass (SAT-based resource sharing).
+
+5.14. Executing OPT pass (performing simple optimizations).
+
+5.14.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module multi_pipe_4bit.
+
+5.14.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\multi_pipe_4bit'.
+Removed a total of 0 cells.
+
+5.14.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \multi_pipe_4bit..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~4 debug messages>
+
+5.14.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \multi_pipe_4bit.
+Performed a total of 0 changes.
+
+5.14.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\multi_pipe_4bit'.
+Removed a total of 0 cells.
+
+5.14.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.14.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \multi_pipe_4bit..
+Removed 2 unused cells and 2 unused wires.
+<suppressed ~3 debug messages>
+
+5.14.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module multi_pipe_4bit.
+
+5.14.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.14.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \multi_pipe_4bit..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~4 debug messages>
+
+5.14.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \multi_pipe_4bit.
+Performed a total of 0 changes.
+
+5.14.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\multi_pipe_4bit'.
+Removed a total of 0 cells.
+
+5.14.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.14.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \multi_pipe_4bit..
+
+5.14.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module multi_pipe_4bit.
+
+5.14.16. Finished OPT passes. (There is nothing left to do.)
+
+5.15. Executing MEMORY pass.
+
+5.15.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+5.15.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+5.15.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+5.15.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+5.15.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+5.15.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \multi_pipe_4bit..
+
+5.15.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+5.15.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+5.15.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \multi_pipe_4bit..
+
+5.15.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+5.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \multi_pipe_4bit..
+
+5.17. Executing OPT pass (performing simple optimizations).
+
+5.17.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module multi_pipe_4bit.
+
+5.17.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\multi_pipe_4bit'.
+Removed a total of 0 cells.
+
+5.17.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.17.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \multi_pipe_4bit..
+
+5.17.5. Finished fast OPT passes.
+
+5.18. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+5.19. Executing OPT pass (performing simple optimizations).
+
+5.19.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module multi_pipe_4bit.
+
+5.19.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\multi_pipe_4bit'.
+Removed a total of 0 cells.
+
+5.19.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \multi_pipe_4bit..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~4 debug messages>
+
+5.19.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \multi_pipe_4bit.
+    Consolidated identical input bits for $mux cell $procmux$17:
+      Old ports: A=7'0000000, B={ \mul_a 3'000 }, Y=\partial_product[3]
+      New ports: A=4'0000, B=\mul_a, Y=\partial_product[3] [6:3]
+      New connections: \partial_product[3] [2:0] = 3'000
+    Consolidated identical input bits for $mux cell $procmux$20:
+      Old ports: A=6'000000, B={ \mul_a 2'00 }, Y=\partial_product[2] [5:0]
+      New ports: A=4'0000, B=\mul_a, Y=\partial_product[2] [5:2]
+      New connections: \partial_product[2] [1:0] = 2'00
+    Consolidated identical input bits for $mux cell $procmux$23:
+      Old ports: A=5'00000, B={ \mul_a 1'0 }, Y=\partial_product[1]
+      New ports: A=4'0000, B=\mul_a, Y=\partial_product[1] [4:1]
+      New connections: \partial_product[1] [0] = 1'0
+  Optimizing cells in module \multi_pipe_4bit.
+Performed a total of 3 changes.
+
+5.19.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\multi_pipe_4bit'.
+Removed a total of 0 cells.
+
+5.19.6. Executing OPT_SHARE pass.
+
+5.19.7. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.19.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \multi_pipe_4bit..
+
+5.19.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module multi_pipe_4bit.
+
+5.19.10. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.19.11. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \multi_pipe_4bit..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~4 debug messages>
+
+5.19.12. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \multi_pipe_4bit.
+Performed a total of 0 changes.
+
+5.19.13. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\multi_pipe_4bit'.
+Removed a total of 0 cells.
+
+5.19.14. Executing OPT_SHARE pass.
+
+5.19.15. Executing OPT_DFF pass (perform DFF optimizations).
+Setting constant 0-bit at position 0 on $procdff$42 ($adff) from module multi_pipe_4bit.
+Setting constant 0-bit at position 0 on $procdff$47 ($adff) from module multi_pipe_4bit.
+Setting constant 0-bit at position 1 on $procdff$47 ($adff) from module multi_pipe_4bit.
+Setting constant 0-bit at position 0 on $procdff$52 ($adff) from module multi_pipe_4bit.
+Setting constant 0-bit at position 1 on $procdff$52 ($adff) from module multi_pipe_4bit.
+Setting constant 0-bit at position 2 on $procdff$52 ($adff) from module multi_pipe_4bit.
+
+5.19.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \multi_pipe_4bit..
+
+5.19.17. Executing OPT_EXPR pass (perform const folding).
+Optimizing module multi_pipe_4bit.
+
+5.19.18. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.19.19. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \multi_pipe_4bit..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~4 debug messages>
+
+5.19.20. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \multi_pipe_4bit.
+Performed a total of 0 changes.
+
+5.19.21. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\multi_pipe_4bit'.
+Removed a total of 0 cells.
+
+5.19.22. Executing OPT_SHARE pass.
+
+5.19.23. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.19.24. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \multi_pipe_4bit..
+
+5.19.25. Executing OPT_EXPR pass (perform const folding).
+Optimizing module multi_pipe_4bit.
+
+5.19.26. Finished OPT passes. (There is nothing left to do.)
+
+5.20. Executing TECHMAP pass (map to technology primitives).
+
+5.20.1. Executing Verilog-2005 frontend: /usr/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/usr/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+5.20.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $adff.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper maccmap for cells of type $macc_v2.
+  add \sum_reg[0] (4 bits, unsigned)
+  add { \sum_reg[3] [6:3] 3'000 } (7 bits, unsigned)
+  add { \sum_reg[2] [5:2] 2'00 } (6 bits, unsigned)
+  add { \sum_reg[1] [4:1] 1'0 } (5 bits, unsigned)
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000000111 for cells of type $fa.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000001000 for cells of type $fa.
+Using template $paramod$a1bc51c02ce12ac21eb18988e83292af48ed7d72\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $or.
+Using extmapper simplemap for cells of type $xor.
+Using extmapper simplemap for cells of type $and.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001000 for cells of type $lcu.
+Using extmapper simplemap for cells of type $pos.
+Using extmapper simplemap for cells of type $not.
+No more expansions possible.
+<suppressed ~288 debug messages>
+
+5.21. Executing OPT pass (performing simple optimizations).
+
+5.21.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module multi_pipe_4bit.
+<suppressed ~78 debug messages>
+
+5.21.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\multi_pipe_4bit'.
+Removed a total of 0 cells.
+
+5.21.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.21.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \multi_pipe_4bit..
+Removed 13 unused cells and 59 unused wires.
+<suppressed ~14 debug messages>
+
+5.21.5. Finished fast OPT passes.
+
+5.22. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `multi_pipe_4bit'. Setting top module to multi_pipe_4bit.
+
+5.22.1. Analyzing design hierarchy..
+Top module:  \multi_pipe_4bit
+
+5.22.2. Analyzing design hierarchy..
+Top module:  \multi_pipe_4bit
+Removed 0 unused modules.
+
+5.23. Printing statistics.
+
+=== multi_pipe_4bit ===
+
+   Number of wires:                 33
+   Number of wire bits:            178
+   Number of public wires:          13
+   Number of public wire bits:      65
+   Number of ports:                  5
+   Number of port bits:             18
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 93
+     $_AND_                         23
+     $_DFF_PN0_                     24
+     $_MUX_                         16
+     $_OR_                           8
+     $_XOR_                         22
+
+5.24. Executing CHECK pass (checking for obvious problems).
+Checking module multi_pipe_4bit...
+Found and reported 0 problems.
+
+6. Executing CHECK pass (checking for obvious problems).
+Checking module multi_pipe_4bit...
+Found and reported 0 problems.
+{
+   "creator": "Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)",
+   "invocation": "stat -json ",
+   "modules": {
+      "\\multi_pipe_4bit": {
+         "num_wires":         33,
+         "num_wire_bits":     178,
+         "num_pub_wires":     13,
+         "num_pub_wire_bits": 65,
+         "num_ports":         5,
+         "num_port_bits":     18,
+         "num_memories":      0,
+         "num_memory_bits":   0,
+         "num_processes":     0,
+         "num_cells":         93,
+         "num_cells_by_type": {
+            "$_AND_": 23,
+            "$_DFF_PN0_": 24,
+            "$_MUX_": 16,
+            "$_OR_": 8,
+            "$_XOR_": 22
+         }
+      }
+   },
+      "design": {
+         "num_wires":         33,
+         "num_wire_bits":     178,
+         "num_pub_wires":     13,
+         "num_pub_wire_bits": 65,
+         "num_ports":         5,
+         "num_port_bits":     18,
+         "num_memories":      0,
+         "num_memory_bits":   0,
+         "num_processes":     0,
+         "num_cells":         93,
+         "num_cells_by_type": {
+            "$_AND_": 23,
+            "$_DFF_PN0_": 24,
+            "$_MUX_": 16,
+            "$_OR_": 8,
+            "$_XOR_": 22
+         }
+      }
+}
+
+7. Executing JSON backend.

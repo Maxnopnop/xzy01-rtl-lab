@@ -1,0 +1,53 @@
+{
+  "module": "tagged_join",
+  "inputs": [
+    [
+      "av",
+      1
+    ],
+    [
+      "atag",
+      1
+    ],
+    [
+      "adata",
+      2
+    ],
+    [
+      "bv",
+      1
+    ],
+    [
+      "btag",
+      1
+    ],
+    [
+      "bdata",
+      2
+    ],
+    [
+      "flush",
+      1
+    ]
+  ],
+  "outputs": [
+    [
+      "pending_a",
+      1
+    ],
+    [
+      "pending_b",
+      1
+    ],
+    [
+      "joined",
+      1
+    ],
+    [
+      "result",
+      2
+    ]
+  ],
+  "seed": 41003,
+  "spec": "Two-channel tagged rendezvous with replacement before comparison. Async active-low rst_n clears cached-valid flags, cached tags/data, joined pulse and result. Each rising edge clears joined. flush=1 has priority: clear both caches/flags and result, ignore new samples. Otherwise independently replace channel A cache when av=1 and B cache when bv=1, setting its valid flag; no sample holds that cache. Then compare the UPDATED caches, including both newly sampled values on the same edge. If both valid and tags equal, joined=1, result=updated_A_data XOR updated_B_data, and clear both valid flags; keep the cached tag/data values until replaced or flush. Otherwise keep flags/caches and the old result. Thus incompatible tags can wait indefinitely, a newer sample supersedes an old matching sample BEFORE comparison, and consecutive matching pairs may join on consecutive edges. Invalid input tags/data have no effect. pending_a/pending_b report registered valid flags, all outputs hold between edges; reset dominates flush/samples. All binary inputs are defined."
+}

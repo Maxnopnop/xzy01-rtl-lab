@@ -1,0 +1,9 @@
+read_verilog -sv dut.sv
+hierarchy -check -top TopModule
+proc
+check -assert
+synth -noabc -top TopModule
+check -assert
+tee -o stat.json stat -json
+write_json netlist.json
+write_verilog -noattr netlist.v

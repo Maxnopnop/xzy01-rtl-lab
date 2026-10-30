@@ -1,0 +1,34 @@
+{
+  "config": {
+    "schema": 1,
+    "name": "dev10-two-model-pilot-v1",
+    "suite": "dev10",
+    "models": [
+      "gpt-5.6-sol",
+      "gpt-5.6-terra"
+    ],
+    "samples_per_task": 3,
+    "workers": 2,
+    "mode": "codex",
+    "reasoning_effort": "low",
+    "api_timeout": 180,
+    "synthesis_flow": "separate_yosys_review_of_identical_retained_rtl",
+    "repair_budget": 0,
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260930,
+    "note": "Two requested model IDs using the same Codex CLI channel. No claim of cross-vendor diversity, backend snapshot identity, or controlled temperature/seed."
+  },
+  "runs": [
+    {
+      "model": "gpt-5.6-sol",
+      "directory": "model_01"
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "directory": "model_02"
+    }
+  ],
+  "planned": 60,
+  "pilot_source_sha256": "b851fd4d3f28b4f813a6dd7dc766ee40a4da3da8382f8d5bb649ae70f6a68b62",
+  "note": "Generation in Windows; synthesis review in WSL. Both consume exactly the same saved RTL bytes."
+}

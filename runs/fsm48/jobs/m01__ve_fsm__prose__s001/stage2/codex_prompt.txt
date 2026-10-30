@@ -1,0 +1,86 @@
+Implement the given digital circuit in synthesizable SystemVerilog.
+Return only one complete module in a single ```systemverilog code block.
+Use exactly the specified module name and ports. Do not provide a testbench.
+No includes, preprocessor directives, strings, hierarchical references, extra
+modules, simulation system tasks, file IO, or attributes. Only $signed,
+$unsigned and $clog2 system functions are permitted. Do not use delays.
+The independent evaluator will supply all input stimuli and check outputs.
+
+I would like you to implement a module named TopModule with the following
+interface. All input and output ports are one bit unless otherwise
+specified.
+
+ - input  clk
+ - input  areset
+ - input  in
+ - output out
+
+The module should implement a Moore state machine with the following
+state transition table with one input, one output, and four states.
+Implement this state machine. Include a positive edge triggered
+asynchronous reset that resets the FSM to state A. Assume all sequential
+logic is triggered on the positive edge of the clock.
+
+  state | next state in=0, next state in=1 | output
+  A     | A, B                             | 0
+  B     | C, B                             | 0
+  C     | A, D                             | 0
+  D     | C, B                             | 1
+
+Common implementation convention:
+Use reg/localparam state encodings and case/if assignments for Icarus compatibility. Avoid enum-valued ternary assignments. Preserve the specified reset, overlap and cycle timing.
+
+Public specification examples (same in every condition):
+{
+  "clock_edge": "posedge",
+  "output_kind": "moore",
+  "reset": {
+    "kind": "async",
+    "active": 1,
+    "output": 0
+  },
+  "trace_convention": "Each trace starts after reset. List output after each rising edge; reset is then inactive.",
+  "examples": [
+    {
+      "bits": "1101",
+      "outputs": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "bits": "10101",
+      "outputs": [
+        0,
+        0,
+        1,
+        0,
+        1
+      ]
+    }
+  ]
+}
+
+Previous-stage design artifact:
+Implement `TopModule` as a four-state Moore FSM using a state register, combinational next-state logic, and combinational output decoding.
+
+Use `reg` and `localparam` declarations to encode states A, B, C, and D. Two state bits are sufficient. The state register updates on each positive clock edge. It also has an active-high asynchronous reset: whenever `areset` is asserted, immediately set the current state to A without waiting for a clock edge. Otherwise, each rising edge loads the computed next state.
+
+Implement the transition logic with a `case` statement based on the current state:
+
+- In A, remain in A when `in` is 0; transition to B when `in` is 1.
+- In B, transition to C when `in` is 0; remain in B when `in` is 1.
+- In C, transition to A when `in` is 0; transition to D when `in` is 1.
+- In D, transition to C when `in` is 0; transition to B when `in` is 1.
+
+Provide a safe default for illegal or unknown state encodings that sends the FSM to A. Assign a default value to the next-state signal before the `case` statement so the combinational logic is fully specified and does not infer latches.
+
+Because this is a Moore machine, derive `out` solely from the current registered state, not directly from `in`. Assert `out` only while the current state is D; drive it low in A, B, C, and any invalid state. Resetting to A therefore makes the output 0.
+
+Output timing follows the registered state transitions. The input is sampled at each rising clock edge, the state changes according to the transition table, and `out` then reflects the newly entered state during the following clock cycle. Thus, a rising edge that moves the FSM into D causes `out` to become 1 immediately after that edge. A rising edge that moves it out of D causes `out` to return to 0. This preserves the example traces and permits overlapping input patterns naturally through the specified transitions.
+
+Use the artifact to implement the specification. Resolve any contradictions in favor of the specification. Return only RTL.
+
+Do not invoke tools, read files, run tests, or delegate. Reply directly.

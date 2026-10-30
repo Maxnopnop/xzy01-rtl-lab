@@ -1,0 +1,81 @@
+{
+  "job_id": "m02__rt_sequence__prose__s001",
+  "task": "rt_sequence",
+  "sample": 1,
+  "arm": "prose",
+  "mode": "codex",
+  "requested_model": "gpt-5.6-terra",
+  "directory": "jobs/m02__rt_sequence__prose__s001",
+  "ir_diagnosis": {
+    "status": "NO_TABLE"
+  },
+  "ir_rtl": {
+    "status": "NOT_APPLICABLE"
+  },
+  "rtl_sha256": "c8f486e29beeeeac2d640716ca809b491f4ebd07c4a59bc285eebfcfeea670b3",
+  "backend": "icarus",
+  "compile_seconds": 0.109,
+  "status": "FUNCTION_FAIL",
+  "message": "Independent testbench found 81 mismatches",
+  "stage": "simulate",
+  "receipt_nonce": "1cac73e6a3704273997dfb1f6e338cb1",
+  "simulate_seconds": 0.063,
+  "spec_diagnostic": {
+    "checks": 1840,
+    "stimulus_count": 920,
+    "tb_sha256": "580cafa73384203b27323016bac3290fdd3a1937aa48c3836adbeb6b7f6009c3",
+    "vectors_sha256": "6d6be24bc3bcd13c908a31f787058ca934d49d3fb247d38de24224a06b55595c",
+    "backend": "icarus",
+    "compile_seconds": 0.125,
+    "status": "FUNCTION_FAIL",
+    "message": "Independent testbench found 81 mismatches",
+    "stage": "simulate",
+    "receipt_nonce": "136f187afc0c44f7aec78e50307f7bf5",
+    "simulate_seconds": 0.047,
+    "mismatches": [
+      {
+        "cycle": 17,
+        "phase": "post",
+        "reset": 1,
+        "input": 1,
+        "expected": 1,
+        "observed": "0"
+      },
+      {
+        "cycle": 18,
+        "phase": "pre",
+        "reset": 1,
+        "input": 0,
+        "expected": 1,
+        "observed": "0"
+      },
+      {
+        "cycle": 32,
+        "phase": "post",
+        "reset": 1,
+        "input": 1,
+        "expected": 1,
+        "observed": "0"
+      },
+      {
+        "cycle": 43,
+        "phase": "post",
+        "reset": 1,
+        "input": 1,
+        "expected": 1,
+        "observed": "0"
+      },
+      {
+        "cycle": 44,
+        "phase": "pre",
+        "reset": 1,
+        "input": 0,
+        "expected": 1,
+        "observed": "0"
+      }
+    ]
+  },
+  "diagnostic_consistent": true,
+  "localization": "NO_TABLE_DIAGNOSIS",
+  "elapsed_seconds": 27.172
+}

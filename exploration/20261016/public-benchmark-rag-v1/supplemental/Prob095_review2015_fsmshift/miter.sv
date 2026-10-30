@@ -1,0 +1,1 @@
+module miter(input clk,input reset,output mismatch); wire g,d; RefModule gold(.clk(clk),.reset(reset),.shift_ena(g)); TopModule candidate(.clk(clk),.reset(reset),.shift_ena(d)); assign mismatch=g^d; endmodule

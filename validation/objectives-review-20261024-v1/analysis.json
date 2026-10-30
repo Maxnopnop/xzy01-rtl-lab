@@ -1,0 +1,778 @@
+{
+  "utc": "2026-10-24T01:14:46.494634+00:00",
+  "scope": "POST_HOC_OFFLINE_DESCRIPTIVE_ANALYSIS",
+  "generation_calls": 0,
+  "network_requests": 0,
+  "eda_executions": 0,
+  "locks": {
+    "source": {
+      "files": 6,
+      "all_match": true
+    },
+    "input": {
+      "files": 287,
+      "all_match": true
+    },
+    "A": {
+      "files": 30,
+      "all_match": true
+    }
+  },
+  "frozen_request_groups_equal_except_model": 80,
+  "result_count": 240,
+  "counts": {
+    "REFERENCE_PASS": 194,
+    "SERVICE_ERROR": 1,
+    "SERVICE_PROTOCOL_ERROR": 1,
+    "COMPILE_ERROR": 6,
+    "REFERENCE_FAIL": 26,
+    "RTL_REJECTED": 12
+  },
+  "pair_counts": {
+    "both_pass": 91,
+    "service_unpaired": 2,
+    "help": 5,
+    "worse": 5,
+    "both_nonpass": 17
+  },
+  "changed_task_count": 5,
+  "changed_tasks": {
+    "Prob089_ece241_2014_q5a": {
+      "help": 2,
+      "both_pass": 3,
+      "worse": 1
+    },
+    "Prob109_fsm1": {
+      "worse": 2,
+      "both_pass": 3,
+      "help": 1
+    },
+    "Prob127_lemmings1": {
+      "both_pass": 5,
+      "help": 1
+    },
+    "Prob146_fsm_serialdata": {
+      "both_nonpass": 3,
+      "both_pass": 2,
+      "help": 1
+    },
+    "Prob150_review2015_fsmonehot": {
+      "both_nonpass": 2,
+      "both_pass": 2,
+      "worse": 2
+    }
+  },
+  "strata": {
+    "all20": {
+      "tasks": 20,
+      "arms": {
+        "gpt-5.6-luna/no_rag": {
+          "planned": 40,
+          "nonservice": 40,
+          "passed": 29,
+          "service_failures": 0,
+          "statuses": {
+            "REFERENCE_PASS": 29,
+            "COMPILE_ERROR": 3,
+            "RTL_REJECTED": 2,
+            "REFERENCE_FAIL": 6
+          },
+          "reported_usage_records": 40,
+          "token_fields": {
+            "prompt_tokens": {
+              "records": 40,
+              "sum": 12898,
+              "mean": 322.45,
+              "missing_nonservice": 0
+            },
+            "completion_tokens": {
+              "records": 40,
+              "sum": 18295,
+              "mean": 457.375,
+              "missing_nonservice": 0
+            }
+          }
+        },
+        "gpt-5.6-luna/rag": {
+          "planned": 40,
+          "nonservice": 40,
+          "passed": 31,
+          "service_failures": 0,
+          "statuses": {
+            "REFERENCE_PASS": 31,
+            "COMPILE_ERROR": 1,
+            "RTL_REJECTED": 2,
+            "REFERENCE_FAIL": 6
+          },
+          "reported_usage_records": 40,
+          "token_fields": {
+            "prompt_tokens": {
+              "records": 40,
+              "sum": 28604,
+              "mean": 715.1,
+              "missing_nonservice": 0
+            },
+            "completion_tokens": {
+              "records": 40,
+              "sum": 22878,
+              "mean": 571.95,
+              "missing_nonservice": 0
+            }
+          }
+        },
+        "gpt-5.6-sol/no_rag": {
+          "planned": 40,
+          "nonservice": 39,
+          "passed": 35,
+          "service_failures": 1,
+          "statuses": {
+            "REFERENCE_PASS": 35,
+            "SERVICE_PROTOCOL_ERROR": 1,
+            "RTL_REJECTED": 2,
+            "REFERENCE_FAIL": 2
+          },
+          "reported_usage_records": 39,
+          "token_fields": {
+            "prompt_tokens": {
+              "records": 39,
+              "sum": 12580,
+              "mean": 322.56410256410254,
+              "missing_nonservice": 0
+            },
+            "completion_tokens": {
+              "records": 39,
+              "sum": 11942,
+              "mean": 306.20512820512823,
+              "missing_nonservice": 0
+            }
+          }
+        },
+        "gpt-5.6-sol/rag": {
+          "planned": 40,
+          "nonservice": 39,
+          "passed": 34,
+          "service_failures": 1,
+          "statuses": {
+            "REFERENCE_PASS": 34,
+            "SERVICE_ERROR": 1,
+            "COMPILE_ERROR": 1,
+            "RTL_REJECTED": 2,
+            "REFERENCE_FAIL": 2
+          },
+          "reported_usage_records": 39,
+          "token_fields": {
+            "prompt_tokens": {
+              "records": 39,
+              "sum": 27977,
+              "mean": 717.3589743589744,
+              "missing_nonservice": 0
+            },
+            "completion_tokens": {
+              "records": 39,
+              "sum": 12490,
+              "mean": 320.2564102564103,
+              "missing_nonservice": 0
+            }
+          }
+        },
+        "gpt-5.6-terra/no_rag": {
+          "planned": 40,
+          "nonservice": 40,
+          "passed": 33,
+          "service_failures": 0,
+          "statuses": {
+            "REFERENCE_PASS": 33,
+            "REFERENCE_FAIL": 5,
+            "RTL_REJECTED": 2
+          },
+          "reported_usage_records": 40,
+          "token_fields": {
+            "prompt_tokens": {
+              "records": 40,
+              "sum": 12898,
+              "mean": 322.45,
+              "missing_nonservice": 0
+            },
+            "completion_tokens": {
+              "records": 40,
+              "sum": 11585,
+              "mean": 289.625,
+              "missing_nonservice": 0
+            }
+          }
+        },
+        "gpt-5.6-terra/rag": {
+          "planned": 40,
+          "nonservice": 40,
+          "passed": 32,
+          "service_failures": 0,
+          "statuses": {
+            "REFERENCE_PASS": 32,
+            "COMPILE_ERROR": 1,
+            "RTL_REJECTED": 2,
+            "REFERENCE_FAIL": 5
+          },
+          "reported_usage_records": 40,
+          "token_fields": {
+            "prompt_tokens": {
+              "records": 40,
+              "sum": 28604,
+              "mean": 715.1,
+              "missing_nonservice": 0
+            },
+            "completion_tokens": {
+              "records": 40,
+              "sum": 13575,
+              "mean": 339.375,
+              "missing_nonservice": 0
+            }
+          }
+        }
+      }
+    },
+    "confirmed_clear2": {
+      "tasks": 2,
+      "arms": {
+        "gpt-5.6-luna/no_rag": {
+          "planned": 4,
+          "nonservice": 4,
+          "passed": 4,
+          "service_failures": 0,
+          "statuses": {
+            "REFERENCE_PASS": 4
+          },
+          "reported_usage_records": 4,
+          "token_fields": {
+            "prompt_tokens": {
+              "records": 4,
+              "sum": 806,
+              "mean": 201.5,
+              "missing_nonservice": 0
+            },
+            "completion_tokens": {
+              "records": 4,
+              "sum": 695,
+              "mean": 173.75,
+              "missing_nonservice": 0
+            }
+          }
+        },
+        "gpt-5.6-luna/rag": {
+          "planned": 4,
+          "nonservice": 4,
+          "passed": 4,
+          "service_failures": 0,
+          "statuses": {
+            "REFERENCE_PASS": 4
+          },
+          "reported_usage_records": 4,
+          "token_fields": {
+            "prompt_tokens": {
+              "records": 4,
+              "sum": 2466,
+              "mean": 616.5,
+              "missing_nonservice": 0
+            },
+            "completion_tokens": {
+              "records": 4,
+              "sum": 769,
+              "mean": 192.25,
+              "missing_nonservice": 0
+            }
+          }
+        },
+        "gpt-5.6-sol/no_rag": {
+          "planned": 4,
+          "nonservice": 4,
+          "passed": 4,
+          "service_failures": 0,
+          "statuses": {
+            "REFERENCE_PASS": 4
+          },
+          "reported_usage_records": 4,
+          "token_fields": {
+            "prompt_tokens": {
+              "records": 4,
+              "sum": 806,
+              "mean": 201.5,
+              "missing_nonservice": 0
+            },
+            "completion_tokens": {
+              "records": 4,
+              "sum": 348,
+              "mean": 87.0,
+              "missing_nonservice": 0
+            }
+          }
+        },
+        "gpt-5.6-sol/rag": {
+          "planned": 4,
+          "nonservice": 4,
+          "passed": 4,
+          "service_failures": 0,
+          "statuses": {
+            "REFERENCE_PASS": 4
+          },
+          "reported_usage_records": 4,
+          "token_fields": {
+            "prompt_tokens": {
+              "records": 4,
+              "sum": 2466,
+              "mean": 616.5,
+              "missing_nonservice": 0
+            },
+            "completion_tokens": {
+              "records": 4,
+              "sum": 342,
+              "mean": 85.5,
+              "missing_nonservice": 0
+            }
+          }
+        },
+        "gpt-5.6-terra/no_rag": {
+          "planned": 4,
+          "nonservice": 4,
+          "passed": 4,
+          "service_failures": 0,
+          "statuses": {
+            "REFERENCE_PASS": 4
+          },
+          "reported_usage_records": 4,
+          "token_fields": {
+            "prompt_tokens": {
+              "records": 4,
+              "sum": 806,
+              "mean": 201.5,
+              "missing_nonservice": 0
+            },
+            "completion_tokens": {
+              "records": 4,
+              "sum": 356,
+              "mean": 89.0,
+              "missing_nonservice": 0
+            }
+          }
+        },
+        "gpt-5.6-terra/rag": {
+          "planned": 4,
+          "nonservice": 4,
+          "passed": 4,
+          "service_failures": 0,
+          "statuses": {
+            "REFERENCE_PASS": 4
+          },
+          "reported_usage_records": 4,
+          "token_fields": {
+            "prompt_tokens": {
+              "records": 4,
+              "sum": 2466,
+              "mean": 616.5,
+              "missing_nonservice": 0
+            },
+            "completion_tokens": {
+              "records": 4,
+              "sum": 366,
+              "mean": 91.5,
+              "missing_nonservice": 0
+            }
+          }
+        }
+      }
+    },
+    "other_static7_not_confirmed": {
+      "tasks": 7,
+      "arms": {
+        "gpt-5.6-luna/no_rag": {
+          "planned": 14,
+          "nonservice": 14,
+          "passed": 13,
+          "service_failures": 0,
+          "statuses": {
+            "REFERENCE_PASS": 13,
+            "COMPILE_ERROR": 1
+          },
+          "reported_usage_records": 14,
+          "token_fields": {
+            "prompt_tokens": {
+              "records": 14,
+              "sum": 4022,
+              "mean": 287.2857142857143,
+              "missing_nonservice": 0
+            },
+            "completion_tokens": {
+              "records": 14,
+              "sum": 4544,
+              "mean": 324.57142857142856,
+              "missing_nonservice": 0
+            }
+          }
+        },
+        "gpt-5.6-luna/rag": {
+          "planned": 14,
+          "nonservice": 14,
+          "passed": 14,
+          "service_failures": 0,
+          "statuses": {
+            "REFERENCE_PASS": 14
+          },
+          "reported_usage_records": 14,
+          "token_fields": {
+            "prompt_tokens": {
+              "records": 14,
+              "sum": 9622,
+              "mean": 687.2857142857143,
+              "missing_nonservice": 0
+            },
+            "completion_tokens": {
+              "records": 14,
+              "sum": 5208,
+              "mean": 372.0,
+              "missing_nonservice": 0
+            }
+          }
+        },
+        "gpt-5.6-sol/no_rag": {
+          "planned": 14,
+          "nonservice": 13,
+          "passed": 13,
+          "service_failures": 1,
+          "statuses": {
+            "REFERENCE_PASS": 13,
+            "SERVICE_PROTOCOL_ERROR": 1
+          },
+          "reported_usage_records": 13,
+          "token_fields": {
+            "prompt_tokens": {
+              "records": 13,
+              "sum": 3704,
+              "mean": 284.9230769230769,
+              "missing_nonservice": 0
+            },
+            "completion_tokens": {
+              "records": 13,
+              "sum": 2297,
+              "mean": 176.69230769230768,
+              "missing_nonservice": 0
+            }
+          }
+        },
+        "gpt-5.6-sol/rag": {
+          "planned": 14,
+          "nonservice": 14,
+          "passed": 14,
+          "service_failures": 0,
+          "statuses": {
+            "REFERENCE_PASS": 14
+          },
+          "reported_usage_records": 14,
+          "token_fields": {
+            "prompt_tokens": {
+              "records": 14,
+              "sum": 9622,
+              "mean": 687.2857142857143,
+              "missing_nonservice": 0
+            },
+            "completion_tokens": {
+              "records": 14,
+              "sum": 2222,
+              "mean": 158.71428571428572,
+              "missing_nonservice": 0
+            }
+          }
+        },
+        "gpt-5.6-terra/no_rag": {
+          "planned": 14,
+          "nonservice": 14,
+          "passed": 14,
+          "service_failures": 0,
+          "statuses": {
+            "REFERENCE_PASS": 14
+          },
+          "reported_usage_records": 14,
+          "token_fields": {
+            "prompt_tokens": {
+              "records": 14,
+              "sum": 4022,
+              "mean": 287.2857142857143,
+              "missing_nonservice": 0
+            },
+            "completion_tokens": {
+              "records": 14,
+              "sum": 2357,
+              "mean": 168.35714285714286,
+              "missing_nonservice": 0
+            }
+          }
+        },
+        "gpt-5.6-terra/rag": {
+          "planned": 14,
+          "nonservice": 14,
+          "passed": 14,
+          "service_failures": 0,
+          "statuses": {
+            "REFERENCE_PASS": 14
+          },
+          "reported_usage_records": 14,
+          "token_fields": {
+            "prompt_tokens": {
+              "records": 14,
+              "sum": 9622,
+              "mean": 687.2857142857143,
+              "missing_nonservice": 0
+            },
+            "completion_tokens": {
+              "records": 14,
+              "sum": 2781,
+              "mean": 198.64285714285714,
+              "missing_nonservice": 0
+            }
+          }
+        }
+      }
+    }
+  },
+  "service_failures": [
+    {
+      "slot": "Prob033_ece241_2014_q1c__rag__gpt-5.6-sol__s001",
+      "status": "SERVICE_ERROR",
+      "usage": null
+    },
+    {
+      "slot": "Prob074_ece241_2014_q4__no_rag__gpt-5.6-sol__s001",
+      "status": "SERVICE_PROTOCOL_ERROR",
+      "usage": {
+        "prompt_tokens": 365,
+        "completion_tokens": 117,
+        "total_tokens": 482,
+        "cost": 0.0038,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.0038,
+          "upstream_inference_prompt_cost": 0.00146,
+          "upstream_inference_completions_cost": 0.00234
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 117,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      }
+    }
+  ],
+  "retrieval": {
+    "replayed": 20,
+    "all_match": true,
+    "corpus_chunks": 18,
+    "unique_retrieved_chunks": 9,
+    "chunk_task_counts": {
+      "LR018": 19,
+      "LR015": 18,
+      "LR003": 9,
+      "LR008": 2,
+      "LR016": 1,
+      "LR010": 4,
+      "LR002": 2,
+      "LR006": 4,
+      "LR011": 1
+    },
+    "unique_ordered_top3": 14,
+    "tasks": [
+      {
+        "task": "Prob005_notgate",
+        "selected_ids": [
+          "LR018",
+          "LR015",
+          "LR003"
+        ],
+        "replay_match": true
+      },
+      {
+        "task": "Prob023_vector100r",
+        "selected_ids": [
+          "LR018",
+          "LR015",
+          "LR003"
+        ],
+        "replay_match": true
+      },
+      {
+        "task": "Prob029_m2014_q4g",
+        "selected_ids": [
+          "LR018",
+          "LR015",
+          "LR003"
+        ],
+        "replay_match": true
+      },
+      {
+        "task": "Prob032_vector0",
+        "selected_ids": [
+          "LR018",
+          "LR015",
+          "LR008"
+        ],
+        "replay_match": true
+      },
+      {
+        "task": "Prob033_ece241_2014_q1c",
+        "selected_ids": [
+          "LR018",
+          "LR015",
+          "LR003"
+        ],
+        "replay_match": true
+      },
+      {
+        "task": "Prob042_vector4",
+        "selected_ids": [
+          "LR018",
+          "LR015",
+          "LR016"
+        ],
+        "replay_match": true
+      },
+      {
+        "task": "Prob043_vector5",
+        "selected_ids": [
+          "LR015",
+          "LR003",
+          "LR018"
+        ],
+        "replay_match": true
+      },
+      {
+        "task": "Prob044_vectorgates",
+        "selected_ids": [
+          "LR018",
+          "LR015",
+          "LR003"
+        ],
+        "replay_match": true
+      },
+      {
+        "task": "Prob064_vector3",
+        "selected_ids": [
+          "LR018",
+          "LR015",
+          "LR003"
+        ],
+        "replay_match": true
+      },
+      {
+        "task": "Prob065_7420",
+        "selected_ids": [
+          "LR018",
+          "LR015",
+          "LR010"
+        ],
+        "replay_match": true
+      },
+      {
+        "task": "Prob071_always_casez",
+        "selected_ids": [
+          "LR015",
+          "LR018",
+          "LR002"
+        ],
+        "replay_match": true
+      },
+      {
+        "task": "Prob074_ece241_2014_q4",
+        "selected_ids": [
+          "LR010",
+          "LR015",
+          "LR018"
+        ],
+        "replay_match": true
+      },
+      {
+        "task": "Prob089_ece241_2014_q5a",
+        "selected_ids": [
+          "LR018",
+          "LR006",
+          "LR015"
+        ],
+        "replay_match": true
+      },
+      {
+        "task": "Prob109_fsm1",
+        "selected_ids": [
+          "LR006",
+          "LR018",
+          "LR015"
+        ],
+        "replay_match": true
+      },
+      {
+        "task": "Prob127_lemmings1",
+        "selected_ids": [
+          "LR018",
+          "LR015",
+          "LR003"
+        ],
+        "replay_match": true
+      },
+      {
+        "task": "Prob131_mt2015_q4",
+        "selected_ids": [
+          "LR018",
+          "LR011",
+          "LR015"
+        ],
+        "replay_match": true
+      },
+      {
+        "task": "Prob132_always_if2",
+        "selected_ids": [
+          "LR008",
+          "LR002",
+          "LR003"
+        ],
+        "replay_match": true
+      },
+      {
+        "task": "Prob146_fsm_serialdata",
+        "selected_ids": [
+          "LR006",
+          "LR015",
+          "LR018"
+        ],
+        "replay_match": true
+      },
+      {
+        "task": "Prob149_ece241_2013_q4",
+        "selected_ids": [
+          "LR015",
+          "LR018",
+          "LR010"
+        ],
+        "replay_match": true
+      },
+      {
+        "task": "Prob150_review2015_fsmonehot",
+        "selected_ids": [
+          "LR006",
+          "LR018",
+          "LR010"
+        ],
+        "replay_match": true
+      }
+    ]
+  },
+  "limitations": [
+    "No new independent functional oracle or formal/synthesis evidence.",
+    "Task strata unchanged; other_static7 is NOT confirmed clear.",
+    "Sample index pairs are independent generations, not identical random seeds or repairs.",
+    "Post-hoc analysis, descriptive only; no causal or significance claim.",
+    "Token totals use raw fields once; reasoning is not added again; currency cost not inferred.",
+    "Prompt equality covers stored controllable requests, not unobservable provider internals."
+  ],
+  "all_read_evidence_unchanged": true,
+  "read_evidence_files": 585
+}

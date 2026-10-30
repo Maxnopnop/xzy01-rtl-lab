@@ -1,0 +1,91 @@
+{
+  "decision": "CLI_ENTRY_RECHECK_BLOCKED_OPENROUTER_SELECTED_FOR_FUTURE_PREPARATION",
+  "new_model_calls": 0,
+  "new_formal_reservations": 0,
+  "new_cli_launches": 1,
+  "new_local_mock_posts": 1,
+  "cli_receipt": {
+    "tag": "probe-gpt-5.6-luna",
+    "model": "gpt-5.6-luna",
+    "mode": "400",
+    "exit_code": 1,
+    "posts": 1,
+    "denied_external": [
+      {
+        "method": "GET",
+        "path": "/blocked-chatgpt/plugins/featured?platform=codex"
+      }
+    ],
+    "stop_reason": "DENIED_EXTERNAL_ATTEMPT",
+    "seconds": 0.875,
+    "cache_error": false
+  },
+  "cli_binary_same_as_previous_audit": true,
+  "cli_input_roles": [
+    "developer",
+    "developer",
+    "developer",
+    "user",
+    "user"
+  ],
+  "frozen_message_roles": [
+    "system",
+    "user"
+  ],
+  "cli_visible_messages_equal_frozen": false,
+  "last_user_original_body_equal": true,
+  "cli_top_level_fields": [
+    "model",
+    "input",
+    "tool_choice",
+    "parallel_tool_calls",
+    "reasoning",
+    "store",
+    "stream",
+    "include",
+    "prompt_cache_key",
+    "text",
+    "client_metadata"
+  ],
+  "cli_reasoning": {
+    "effort": "medium",
+    "context": "all_turns"
+  },
+  "cli_three_model_equality": "NOT_EXECUTED_STOPPED_AT_FIRST_GATE",
+  "cli_zero_retry_matrix": "NOT_EXECUTED_EARLY_STOP_NOT_PROVEN",
+  "api_locks": {
+    "source": {
+      "count": 6,
+      "all_match": true
+    },
+    "input": {
+      "count": 287,
+      "all_match": true
+    }
+  },
+  "historical_api_gate_checks": {
+    "count": 10,
+    "passed": true,
+    "rerun_this_turn": false
+  },
+  "historical_api_mock_matrix_cases": 27,
+  "api_completed_slots": 240,
+  "api_completed_counts": {
+    "REFERENCE_PASS": 194,
+    "SERVICE_ERROR": 1,
+    "SERVICE_PROTOCOL_ERROR": 1,
+    "COMPILE_ERROR": 6,
+    "REFERENCE_FAIL": 26,
+    "RTL_REJECTED": 12
+  },
+  "historical_final_wire_verified": true,
+  "limits": [
+    "Only local custom-provider CLI path probed. Logged-in production path not proven.",
+    "Proxy denied observed background GET; not an OS-wide firewall audit.",
+    "Early stop means one observed POST does not certify zero retries.",
+    "API historic successful calls do not certify current balance, account access or model availability.",
+    "API client invariants cannot establish unobservable gateway/provider internals.",
+    "No permission inferred to repeat finished slots, failures, create new prompts, or launch a new model batch."
+  ],
+  "read_evidence_unchanged": true
+}

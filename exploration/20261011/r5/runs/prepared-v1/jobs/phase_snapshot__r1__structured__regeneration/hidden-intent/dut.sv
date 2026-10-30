@@ -1,0 +1,33 @@
+module phase_snapshot (
+    input  wire       clk,
+    input  wire       rst_n,
+    input  wire       capture,
+    input  wire       clear_sample,
+    input  wire [1:0] data,
+    input  wire       publish,
+    output reg  [1:0] sampled,
+    output reg  [1:0] visible,
+    output reg        published
+);
+
+always @(negedge clk or negedge rst_n) begin
+    if (!rst_n)
+        sampled <= 2'b00;
+    else if (clear_sample)
+        sampled <= 2'b00;
+    else if (capture)
+        sampled <= data;
+end
+
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+        visible   <= 2'b00;
+        published <= 1'b0;
+    end else begin
+        published <= publish;
+        if (publish)
+            visible <= sampled;
+    end
+end
+
+endmodule

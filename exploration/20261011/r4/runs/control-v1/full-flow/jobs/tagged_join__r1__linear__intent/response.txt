@@ -1,0 +1,21 @@
+Clock edge rising; reset async_low.
+Register va has width 9 and reset 0.
+Register vb has width 1 and reset 0.
+Register ta has width 1 and reset 0.
+Register tb has width 1 and reset 0.
+Register pulse has width 1 and reset 0.
+Register da has width 2 and reset 0.
+Register db has width 2 and reset 0.
+Register res has width 2 and reset 0.
+On the clock edge, set va to 0 if flush or ((av or va) and (bv or vb) and (atag if av else ta) == (btag if bv else tb)) else (1 if av else va).
+On the clock edge, set vb to 0 if flush or ((av or va) and (bv or vb) and (atag if av else ta) == (btag if bv else tb)) else (1 if bv else vb).
+On the clock edge, set ta to 0 if flush else (atag if av else ta).
+On the clock edge, set tb to 0 if flush else (btag if bv else tb).
+On the clock edge, set da to 0 if flush else (adata if av else da).
+On the clock edge, set db to 0 if flush else (bdata if bv else db).
+On the clock edge, set pulse to 1 if not flush and ((av or va) and (bv or vb) and (atag if av else ta) == (btag if bv else tb)) else 0.
+On the clock edge, set res to 0 if flush else ((adata if av else da) ^ (bdata if bv else db) if ((av or va) and (bv or vb) and (atag if av else ta) == (btag if bv else tb)) else res).
+Continuously output pending_a as va.
+Continuously output pending_b as vb.
+Continuously output joined as pulse.
+Continuously output result as res.

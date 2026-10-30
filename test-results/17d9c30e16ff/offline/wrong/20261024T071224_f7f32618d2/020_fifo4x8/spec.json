@@ -1,0 +1,13 @@
+{
+  "id": "fifo4x8",
+  "module": "fifo4x8",
+  "category": "sequential",
+  "origin": "local_handwritten_v2",
+  "spec": "Implement module fifo4x8(input wire clk, rst, wr_en, rd_en, input wire [7:0] wdata, output wire full, empty, output reg [2:0] count, output wire [7:0] rdata). All state changes only on rising clk. rst is active-high synchronous and has priority. State before the first reset edge is unspecified. FIFO depth 4, width 8. On reset empty=1, full=0, count=0. rdata is combinational oldest stored byte, or 0 when empty. At an edge accept write iff wr_en and pre-edge count<4; accept read iff rd_en and pre-edge count>0. Decisions use PRE-edge state independently: full+both requests only reads; empty+both requests only writes (no bypass). Accepted read removes oldest; accepted write appends wdata. Maintain count and order across pointer wrap.",
+  "checks": 2077,
+  "tb_sha256": "e7976f5bb44c5a15ad21c11c44306f2cfdce31eaf4c63d1882eec3a7b2517b10",
+  "assets": {
+    "fifo4x8_vectors.hex": "38d442e097263b3a6bd0d4c7295bce94c27c7ed1ee44708e4a7ae42f0419583c"
+  },
+  "vectors": 1039
+}

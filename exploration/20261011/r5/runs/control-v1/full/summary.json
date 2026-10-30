@@ -1,0 +1,429 @@
+{
+  "planned_unique_calls": 48,
+  "started": 48,
+  "statuses": {
+    "PASS": 41,
+    "EXTRACTION_ERROR": 2,
+    "FUNCTION_FAIL": 4,
+    "COMPILE_FAIL": 1
+  },
+  "role_statuses": {
+    "intent": {
+      "EXTRACTION_ERROR": 1,
+      "PASS": 5
+    },
+    "first_rtl": {
+      "EXTRACTION_ERROR": 1,
+      "PASS": 5
+    },
+    "direct_first": {
+      "PASS": 6
+    },
+    "direct_second": {
+      "PASS": 5,
+      "COMPILE_FAIL": 1
+    },
+    "branch": {
+      "PASS": 20,
+      "FUNCTION_FAIL": 4
+    }
+  },
+  "strategies": {
+    "structured_regeneration": {
+      "denominator": 6,
+      "passes": 4,
+      "statuses": {
+        "FUNCTION_FAIL": 2,
+        "PASS": 4
+      },
+      "opportunities": 18,
+      "allocated_calls": 12,
+      "shared_full_usage": {
+        "input_tokens": 1800,
+        "output_tokens": 360,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 54
+      },
+      "shared_half_usage": {
+        "input_tokens": 1200.0,
+        "output_tokens": 240.0,
+        "cached_input_tokens": 0.0,
+        "cache_write_input_tokens": 0.0,
+        "reasoning_output_tokens": 36.0
+      }
+    },
+    "structured_feedback": {
+      "denominator": 6,
+      "passes": 6,
+      "statuses": {
+        "PASS": 6
+      },
+      "opportunities": 18,
+      "allocated_calls": 12,
+      "shared_full_usage": {
+        "input_tokens": 1800,
+        "output_tokens": 360,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 54
+      },
+      "shared_half_usage": {
+        "input_tokens": 1200.0,
+        "output_tokens": 240.0,
+        "cached_input_tokens": 0.0,
+        "cache_write_input_tokens": 0.0,
+        "reasoning_output_tokens": 36.0
+      }
+    },
+    "direct_regeneration": {
+      "denominator": 6,
+      "passes": 6,
+      "statuses": {
+        "PASS": 6
+      },
+      "opportunities": 18,
+      "allocated_calls": 12,
+      "shared_full_usage": {
+        "input_tokens": 1800,
+        "output_tokens": 360,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 54
+      },
+      "shared_half_usage": {
+        "input_tokens": 1200.0,
+        "output_tokens": 240.0,
+        "cached_input_tokens": 0.0,
+        "cache_write_input_tokens": 0.0,
+        "reasoning_output_tokens": 36.0
+      }
+    },
+    "direct_feedback": {
+      "denominator": 6,
+      "passes": 4,
+      "statuses": {
+        "PASS": 4,
+        "FUNCTION_FAIL": 2
+      },
+      "opportunities": 18,
+      "allocated_calls": 12,
+      "shared_full_usage": {
+        "input_tokens": 1800,
+        "output_tokens": 360,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 54
+      },
+      "shared_half_usage": {
+        "input_tokens": 1200.0,
+        "output_tokens": 240.0,
+        "cached_input_tokens": 0.0,
+        "cache_write_input_tokens": 0.0,
+        "reasoning_output_tokens": 36.0
+      }
+    }
+  },
+  "comparisons": [
+    {
+      "case": "phase_snapshot__r1",
+      "representation": "structured",
+      "regeneration": "FUNCTION_FAIL",
+      "feedback": "PASS",
+      "effect": "help"
+    },
+    {
+      "case": "phase_snapshot__r2",
+      "representation": "structured",
+      "regeneration": "PASS",
+      "feedback": "PASS",
+      "effect": "no_change"
+    },
+    {
+      "case": "escape_frame__r1",
+      "representation": "structured",
+      "regeneration": "PASS",
+      "feedback": "PASS",
+      "effect": "no_change"
+    },
+    {
+      "case": "escape_frame__r2",
+      "representation": "structured",
+      "regeneration": "PASS",
+      "feedback": "PASS",
+      "effect": "no_change"
+    },
+    {
+      "case": "masked_ring_alloc__r1",
+      "representation": "structured",
+      "regeneration": "PASS",
+      "feedback": "PASS",
+      "effect": "no_change"
+    },
+    {
+      "case": "masked_ring_alloc__r2",
+      "representation": "structured",
+      "regeneration": "FUNCTION_FAIL",
+      "feedback": "PASS",
+      "effect": "help"
+    },
+    {
+      "case": "phase_snapshot__r1",
+      "representation": "direct",
+      "regeneration": "PASS",
+      "feedback": "PASS",
+      "effect": "no_change"
+    },
+    {
+      "case": "phase_snapshot__r2",
+      "representation": "direct",
+      "regeneration": "PASS",
+      "feedback": "PASS",
+      "effect": "no_change"
+    },
+    {
+      "case": "escape_frame__r1",
+      "representation": "direct",
+      "regeneration": "PASS",
+      "feedback": "FUNCTION_FAIL",
+      "effect": "harm"
+    },
+    {
+      "case": "escape_frame__r2",
+      "representation": "direct",
+      "regeneration": "PASS",
+      "feedback": "PASS",
+      "effect": "no_change"
+    },
+    {
+      "case": "masked_ring_alloc__r1",
+      "representation": "direct",
+      "regeneration": "PASS",
+      "feedback": "PASS",
+      "effect": "no_change"
+    },
+    {
+      "case": "masked_ring_alloc__r2",
+      "representation": "direct",
+      "regeneration": "PASS",
+      "feedback": "FUNCTION_FAIL",
+      "effect": "harm"
+    }
+  ],
+  "representation_pairs": [
+    {
+      "case": "phase_snapshot__r1",
+      "arm": "regeneration",
+      "structured": "FUNCTION_FAIL",
+      "direct": "PASS"
+    },
+    {
+      "case": "phase_snapshot__r1",
+      "arm": "feedback",
+      "structured": "PASS",
+      "direct": "PASS"
+    },
+    {
+      "case": "phase_snapshot__r2",
+      "arm": "regeneration",
+      "structured": "PASS",
+      "direct": "PASS"
+    },
+    {
+      "case": "phase_snapshot__r2",
+      "arm": "feedback",
+      "structured": "PASS",
+      "direct": "PASS"
+    },
+    {
+      "case": "escape_frame__r1",
+      "arm": "regeneration",
+      "structured": "PASS",
+      "direct": "PASS"
+    },
+    {
+      "case": "escape_frame__r1",
+      "arm": "feedback",
+      "structured": "PASS",
+      "direct": "FUNCTION_FAIL"
+    },
+    {
+      "case": "escape_frame__r2",
+      "arm": "regeneration",
+      "structured": "PASS",
+      "direct": "PASS"
+    },
+    {
+      "case": "escape_frame__r2",
+      "arm": "feedback",
+      "structured": "PASS",
+      "direct": "PASS"
+    },
+    {
+      "case": "masked_ring_alloc__r1",
+      "arm": "regeneration",
+      "structured": "PASS",
+      "direct": "PASS"
+    },
+    {
+      "case": "masked_ring_alloc__r1",
+      "arm": "feedback",
+      "structured": "PASS",
+      "direct": "PASS"
+    },
+    {
+      "case": "masked_ring_alloc__r2",
+      "arm": "regeneration",
+      "structured": "FUNCTION_FAIL",
+      "direct": "PASS"
+    },
+    {
+      "case": "masked_ring_alloc__r2",
+      "arm": "feedback",
+      "structured": "PASS",
+      "direct": "FUNCTION_FAIL"
+    }
+  ],
+  "effects": {
+    "help": 2,
+    "no_change": 8,
+    "harm": 2
+  },
+  "actual_unique_usage": {
+    "input_tokens": 4800,
+    "output_tokens": 960,
+    "cached_input_tokens": 0,
+    "cache_write_input_tokens": 0,
+    "reasoning_output_tokens": 144
+  },
+  "cost": "UNKNOWN",
+  "observations": [
+    {
+      "id": "phase_snapshot__r1__structured__first",
+      "intent_spec": "EXTRACTION_ERROR",
+      "rtl_spec": "EXTRACTION_ERROR",
+      "rtl_intent": "NOT_ASSESSABLE",
+      "category": "NOT_ASSESSABLE"
+    },
+    {
+      "id": "phase_snapshot__r1__structured__feedback",
+      "intent_spec": "EXTRACTION_ERROR",
+      "rtl_spec": "PASS",
+      "rtl_intent": "NOT_ASSESSABLE",
+      "category": "NOT_ASSESSABLE"
+    },
+    {
+      "id": "phase_snapshot__r1__structured__regeneration",
+      "intent_spec": "EXTRACTION_ERROR",
+      "rtl_spec": "FUNCTION_FAIL",
+      "rtl_intent": "NOT_ASSESSABLE",
+      "category": "NOT_ASSESSABLE"
+    },
+    {
+      "id": "phase_snapshot__r2__structured__first",
+      "intent_spec": "PASS",
+      "rtl_spec": "PASS",
+      "rtl_intent": "PASS",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "phase_snapshot__r2__structured__regeneration",
+      "intent_spec": "PASS",
+      "rtl_spec": "PASS",
+      "rtl_intent": "PASS",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "phase_snapshot__r2__structured__feedback",
+      "intent_spec": "PASS",
+      "rtl_spec": "PASS",
+      "rtl_intent": "PASS",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "escape_frame__r1__structured__first",
+      "intent_spec": "PASS",
+      "rtl_spec": "PASS",
+      "rtl_intent": "PASS",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "escape_frame__r1__structured__regeneration",
+      "intent_spec": "PASS",
+      "rtl_spec": "PASS",
+      "rtl_intent": "PASS",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "escape_frame__r1__structured__feedback",
+      "intent_spec": "PASS",
+      "rtl_spec": "PASS",
+      "rtl_intent": "PASS",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "escape_frame__r2__structured__first",
+      "intent_spec": "PASS",
+      "rtl_spec": "PASS",
+      "rtl_intent": "PASS",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "escape_frame__r2__structured__feedback",
+      "intent_spec": "PASS",
+      "rtl_spec": "PASS",
+      "rtl_intent": "PASS",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "escape_frame__r2__structured__regeneration",
+      "intent_spec": "PASS",
+      "rtl_spec": "PASS",
+      "rtl_intent": "PASS",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "masked_ring_alloc__r1__structured__first",
+      "intent_spec": "PASS",
+      "rtl_spec": "PASS",
+      "rtl_intent": "PASS",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "masked_ring_alloc__r1__structured__feedback",
+      "intent_spec": "PASS",
+      "rtl_spec": "PASS",
+      "rtl_intent": "PASS",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "masked_ring_alloc__r1__structured__regeneration",
+      "intent_spec": "PASS",
+      "rtl_spec": "PASS",
+      "rtl_intent": "PASS",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "masked_ring_alloc__r2__structured__first",
+      "intent_spec": "PASS",
+      "rtl_spec": "PASS",
+      "rtl_intent": "PASS",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "masked_ring_alloc__r2__structured__regeneration",
+      "intent_spec": "PASS",
+      "rtl_spec": "FUNCTION_FAIL",
+      "rtl_intent": "FUNCTION_FAIL",
+      "category": "OBSERVABLE_DIVERGENCE"
+    },
+    {
+      "id": "masked_ring_alloc__r2__structured__feedback",
+      "intent_spec": "PASS",
+      "rtl_spec": "PASS",
+      "rtl_intent": "PASS",
+      "category": "ALL_MATCH"
+    }
+  ],
+  "label": "OFFLINE fixtures never model evidence; reservation not confirmed provider usage"
+}

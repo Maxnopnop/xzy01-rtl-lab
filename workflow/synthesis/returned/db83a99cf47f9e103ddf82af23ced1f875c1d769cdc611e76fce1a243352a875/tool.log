@@ -1,0 +1,249 @@
+Info: [VCS_SAVE_RESTORE_INFO] ASLR (Address Space Layout Randomization) is detected on the machine. To enable $save functionality, ASLR will be switched off and simv re-executed.
+Please use '-no_save' simv switch to avoid this.
+
+                           Design Compiler Graphical 
+                                 DC Ultra (TM)
+                                  DFTMAX (TM)
+                              Power Compiler (TM)
+                                 DesignWare (R)
+                                 DC Expert (TM)
+                               Design Vision (TM)
+                               HDL Compiler (TM)
+                               VHDL Compiler (TM)
+                                  DFT Compiler
+                               Design Compiler(R)
+
+               Version X-2025.06-SP2 for linux64 - Aug 27, 2025 
+
+                    Copyright (c) 1988 - 2025 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+   or distribution of this software is strictly prohibited.  Licensed Products
+     communicate with Synopsys servers for the purpose of providing software
+    updates, detecting software piracy and verifying that customers are using
+    Licensed Products in conformity with the applicable License Key for such
+  Licensed Products. Synopsys will use information gathered in connection with
+    this process to deliver software updates and pursue software pirates and
+                                   infringers.
+
+ Inclusivity & Diversity - Visit SolvNetPlus to read the "Synopsys Statement on
+            Inclusivity and Diversity" (Refer to article 000036315 at
+                        https://solvnetplus.synopsys.com)
+Initializing...
+Current time:       Thu Oct 15 11:00:14 2026
+Hostname:           ecelvd702.ece.local
+CPU Model:          Intel(R) Xeon(R) Gold 6242R CPU @ 3.10GHz
+CPU Details:        Cores = 24 : Sockets = 47 : Cache Size = 36608 KB : Freq = 3.09 GHz
+OS:                 Linux 3.10.0-1160.119.1.el7.x86_64
+RAM:                 46 GB (Free  27 GB)
+Swap:                 4 GB (Free   4 GB)
+Work Filesystem:    /dfs/usrhome mounted to 10.132.122.221:6789,10.132.122.222:6789,10.132.122.223:6789:/dfs/usrhome
+Tmp Filesystem:     / mounted to /dev/mapper/centos_vg-root
+Work Disk:          136819 GB (Free 60314 GB)
+Tmp Disk:            43 GB (Free  25 GB)
+
+CPU Load: 2%, Ram Free: 27 GB, Swap Free: 4 GB, Work Disk Free: 60314 GB, Tmp Disk Free: 25 GB
+# One manually selected design; libraries stay on the school host.
+if {[catch {
+file mkdir reports outputs WORK
+set_app_var target_library [list "/staff/ee/dept/public/course_PDK/nangate/freepdk-45nm/lib/NangateOpenCellLibrary_PDKv1_3_v2010_12/Front_End/Liberty/NLDM/NangateOpenCellLibrary_typical.db"]
+set_app_var link_library [concat [list "*"] $target_library]
+define_design_lib WORK -path ./WORK
+if {![analyze -format sverilog dut.sv]} {error "RTL analyze failed"}
+if {![elaborate sequence_detector]} {error "RTL elaboration failed"}
+current_design sequence_detector
+if {![link]} {error "Library/design linking failed"}
+source constraints.sdc
+redirect reports/check_design.rpt {check_design}
+if {![check_design]} {error "check_design failed"}
+if {![compile]} {error "compile failed"}
+report_area > reports/area.rpt
+report_timing -max_paths 10 > reports/timing.rpt
+report_constraint -all_violators > reports/constraints.rpt
+write -format verilog -hierarchy -output outputs/netlist.v
+write_sdc outputs/constraints.sdc
+write -format ddc -hierarchy -output outputs/design.ddc
+foreach artifact {outputs/netlist.v outputs/constraints.sdc reports/area.rpt reports/timing.rpt} {
+  if {![file exists $artifact] || [file size $artifact] == 0} {error "Missing output: $artifact"}
+}
+set receipt [open receipt.txt w]
+puts $receipt "XZY01_SYNTH_V1 737a9322e3db40bfb390140ed5c6487e COMPLETE"
+close $receipt
+} detail]} {puts stderr "XZY01_SYNTH_ERROR: $detail"; exit 2}
+Running PRESTO HDLC
+Compiling source file ./dut.sv
+Presto compilation completed successfully.
+Loading db file '/staff/ee/dept/public/course_PDK/nangate/freepdk-45nm/lib/NangateOpenCellLibrary_PDKv1_3_v2010_12/Front_End/Liberty/NLDM/NangateOpenCellLibrary_typical.db'
+Loading db file '/usr/eelocal/synopsys/syn-vx2025.06-sp2/libraries/syn/gtech.db'
+Loading db file '/usr/eelocal/synopsys/syn-vx2025.06-sp2/libraries/syn/standard.sldb'
+  Loading link library 'NangateOpenCellLibrary'
+  Loading link library 'gtech'
+Running PRESTO HDLC
+
+Statistics for case statements in always block in file
+	'./dut.sv'
+===========================================================
+|    Line    |  full/ parallel  |      block location     |
+===========================================================
+|     19     |    auto/auto     | always block at line 17 |
+===========================================================
+
+Inferred memory devices in process in routine 'sequence_detector' in file
+	 ./dut.sv'.
+==================================================================================
+|    Register Name    |   Type    | Width | Bus | MB |  Set  | Reset | ST | Line |
+==================================================================================
+|      state_reg      | Flip-flop |   3   |  Y  | N  | None  | Async | N  |  54  |
+==================================================================================
+Presto compilation completed successfully. (sequence_detector)
+Module: sequence_detector, Ports: 4, Input: 3, Output: 1, Inout: 0
+Module: sequence_detector, Registers: 3, Async set/reset: 3, Sync set/reset: 0
+Information: Module sequence_detector report end. (ELAB-965)
+Elaborated 1 design.
+Current design is now 'sequence_detector'.
+Current design is 'sequence_detector'.
+
+  Linking design 'sequence_detector'
+  Using the following designs and libraries:
+  --------------------------------------------------------------------------
+  sequence_detector           /dfs/usrhome/smaap/xzy01-synthesis/session-20261015T025958Z-32ce78fe/sequence_detector.db
+  NangateOpenCellLibrary (library) /staff/ee/dept/public/course_PDK/nangate/freepdk-45nm/lib/NangateOpenCellLibrary_PDKv1_3_v2010_12/Front_End/Liberty/NLDM/NangateOpenCellLibrary_typical.db
+
+Information: Summary of messages issued during linking: (LINK-1806)
+No messages were issued during linking.
+CPU Load: 3%, Ram Free: 27 GB, Swap Free: 4 GB, Work Disk Free: 60314 GB, Tmp Disk Free: 25 GB
+Information: Evaluating DesignWare library utilization. (UISN-27)
+
+============================================================================
+| DesignWare Building Block Library  |         Version         | Available |
+============================================================================
+| Basic DW Building Blocks           | X-2025.06-DWBB_202506.2 |     *     |
+| Licensed DW Building Blocks        |                         |           |
+============================================================================
+
+====================================================================================================
+| Flow Information                                                                                 |
+----------------------------------------------------------------------------------------------------
+| Flow         | Design Compiler                                                                   |
+====================================================================================================
+| Design Information                                      | Value                                  |
+====================================================================================================
+| Number of Scenarios                                     | 0                                      |
+| Leaf Cell Count                                         | 35                                     |
+| Number of User Hierarchies                              | 0                                      |
+| Sequential Cell Count                                   | 3                                      |
+| Macro Count                                             | 0                                      |
+| Pad Count                                               | 0                                      |
+| Number of Power Domains                                 | 0                                      |
+| Number of Path Groups                                   | 2                                      |
+| Number of VT Class                                      | 0                                      |
+| Number of Clocks                                        | 1                                      |
+| Number of Dont Touch Cells                              | 13                                     |
+| Number of Dont Touch Nets                               | 0                                      |
+| Number of Size Only Cells                               | 0                                      |
+| Design with Target Library Subset (with clock_path)     | false  (false )                        |
+| Design with UPF Data                                    | false                                  |
+====================================================================================================
+
+
+  Beginning Pass 1 Mapping
+  ------------------------
+  Processing 'sequence_detector'
+
+  Updating timing information
+Information: Updating design information... (UID-85)
+
+  Beginning Mapping Optimizations  (Medium effort)
+  -------------------------------
+
+                                  TOTAL                                      
+   ELAPSED            WORST NEG   SETUP    DESIGN                            
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
+  --------- --------- --------- --------- --------- -------------------------
+    0:00:00      31.9      0.00       0.0       0.0                          
+    0:00:00      31.9      0.00       0.0       0.0                          
+    0:00:00      31.9      0.00       0.0       0.0                          
+    0:00:00      31.9      0.00       0.0       0.0                          
+    0:00:00      31.9      0.00       0.0       0.0                          
+    0:00:00      25.3      0.00       0.0       0.0                          
+    0:00:00      25.3      0.00       0.0       0.0                          
+    0:00:00      25.3      0.00       0.0       0.0                          
+    0:00:00      25.3      0.00       0.0       0.0                          
+    0:00:00      25.3      0.00       0.0       0.0                          
+    0:00:00      25.3      0.00       0.0       0.0                          
+    0:00:00      25.3      0.00       0.0       0.0                          
+    0:00:00      25.3      0.00       0.0       0.0                          
+
+
+
+  Beginning Delay Optimization Phase
+  ----------------------------------
+
+                                  TOTAL                                      
+   ELAPSED            WORST NEG   SETUP    DESIGN                            
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
+  --------- --------- --------- --------- --------- -------------------------
+    0:00:00      25.3      0.00       0.0       0.0                          
+    0:00:00      25.3      0.00       0.0       0.0                          
+    0:00:00      25.3      0.00       0.0       0.0                          
+    0:00:00      25.3      0.00       0.0       0.0                          
+    0:00:00      25.3      0.00       0.0       0.0                          
+
+
+  Beginning Area-Recovery Phase  (cleanup)
+  -----------------------------
+
+                                  TOTAL                                      
+   ELAPSED            WORST NEG   SETUP    DESIGN                            
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
+  --------- --------- --------- --------- --------- -------------------------
+    0:00:00      25.3      0.00       0.0       0.0                          
+    0:00:00      25.3      0.00       0.0       0.0                          
+    0:00:00      25.3      0.00       0.0       0.0                          
+    0:00:00      25.3      0.00       0.0       0.0                          
+    0:00:00      25.3      0.00       0.0       0.0                          
+    0:00:00      25.3      0.00       0.0       0.0                          
+    0:00:00      25.3      0.00       0.0       0.0                          
+    0:00:00      25.3      0.00       0.0       0.0                          
+    0:00:00      25.3      0.00       0.0       0.0                          
+    0:00:00      25.3      0.00       0.0       0.0                          
+    0:00:00      25.3      0.00       0.0       0.0                          
+Loading db file '/staff/ee/dept/public/course_PDK/nangate/freepdk-45nm/lib/NangateOpenCellLibrary_PDKv1_3_v2010_12/Front_End/Liberty/NLDM/NangateOpenCellLibrary_typical.db'
+
+
+Note: Symbol # after min delay cost means estimated hold TNS across all active scenarios 
+
+
+  Optimization Complete
+  ---------------------
+CPU Load: 3%, Ram Free: 27 GB, Swap Free: 4 GB, Work Disk Free: 60314 GB, Tmp Disk Free: 25 GB
+Information: Total number of MV cells in the design.
+----------------------------------------------------------------------------------------------------
+ MV Cells                                           Total Number                                   
+----------------------------------------------------------------------------------------------------
+ Level Shifter:                                     0                                             
+ Enable Level Shifter:                              0                                             
+ Isolation Cell:                                    0                                             
+ Retention Cell:                                    0                                             
+ Retention Clamp Cell:                              0                                             
+ Switch Cell:                                       0                                             
+ Always-On Cell:                                    0                                             
+ Repeater Cell:                                     0                                             
+
+----------------------------------------------------------------------------------------------------
+Unmapped MV Cells 
+----------------------------------------------------------------------------------------------------
+0 Isolation Cells are unmapped 
+0 Retention Clamp Cells are unmapped 
+----------------------------------------------------------------------------------------------------
+Writing verilog file '/dfs/usrhome/smaap/xzy01-synthesis/session-20261015T025958Z-32ce78fe/outputs/netlist.v'.
+Writing ddc file 'outputs/design.ddc'.
+exit
+
+Memory usage for this session 148 Mbytes.
+Memory usage for this session including child processes 148 Mbytes.
+CPU usage for this session 4 seconds ( 0.00 hours ).
+Elapsed time for this session 11 seconds ( 0.00 hours ).
+
+Thank you...

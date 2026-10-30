@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -eu
+cd -- "$(dirname -- "$0")"
+printf "%s  %s\n" "b96cab36aefde18a42c8f5731917f37f6c3164df09b4ef1832f119b0ed3a8efd" console-manifest.json | sha256sum -c -
+python3 - <<'PY'
+import hashlib,json
+from pathlib import Path
+m=json.loads(Path("console-manifest.json").read_text())
+for n,h in m["inputs"].items():
+ if Path(n).name!=n or hashlib.sha256(Path(n).read_bytes()).hexdigest()!=h: raise SystemExit("STOP: package hash mismatch")
+PY
+exec python3 console_school_runner_v3.py ship "$1"

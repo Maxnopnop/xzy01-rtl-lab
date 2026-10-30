@@ -1,0 +1,22 @@
+{
+  "kind": "REFERENCE_ALIAS_ORIGINAL_HARNESS_SMOKE_ONLY",
+  "selected": [
+    "Prob018_mux256to1",
+    "Prob095_review2015_fsmshift"
+  ],
+  "compile_cap": 2,
+  "simulation_cap": 2,
+  "compile_timeout": 15,
+  "simulation_timeout": 10,
+  "no_retries": true,
+  "model_calls": 0,
+  "independence": false,
+  "limits": "TopModule aliases same RefModule; tautological golden agreement, only harness/tool/receipt observation. No functional reference independence or mutation sensitivity claim.",
+  "iverilog_sha256": "803b8844af2cc8ed70b5f08b07ffa749901280e81339617ca3e72cbbb852bd2b",
+  "vvp_sha256": "e2f442f4d5aa76e55c85c3ff77e4446fbfdb9946b7cfe8a2dff87f275da17b62",
+  "wrappers": {
+    "Prob018_mux256to1": "module TopModule(input [255:0] in,input [7:0] sel,output out); RefModule reference_alias(.in(in),.sel(sel),.out(out)); endmodule\n",
+    "Prob095_review2015_fsmshift": "module TopModule(input clk,input reset,output shift_ena); RefModule reference_alias(.clk(clk),.reset(reset),.shift_ena(shift_ena)); endmodule\n"
+  },
+  "selection_sha256": "bf9f22934c7c85c43b152cf4c71e1078bc71c8d6d79141fdb3551d1ab79c3198"
+}

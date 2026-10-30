@@ -1,0 +1,70 @@
+{
+  "creator": "Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)",
+  "modules": {
+    "right_shifter": {
+      "attributes": {
+        "top": "00000000000000000000000000000001",
+        "src": "dut.sv:1.1-15.10"
+      },
+      "ports": {
+        "clk": {
+          "direction": "input",
+          "bits": [ 2 ]
+        },
+        "q": {
+          "direction": "output",
+          "bits": [ "0", "0", "0", "0", "0", "0", "0", 3 ]
+        },
+        "d": {
+          "direction": "input",
+          "bits": [ 4 ]
+        }
+      },
+      "cells": {
+        "$auto$ff.cc:266:slice$89": {
+          "hide_name": 1,
+          "type": "$_DFF_P_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "dut.sv:9.5-13.14"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 4 ],
+            "Q": [ 3 ]
+          }
+        }
+      },
+      "netnames": {
+        "clk": {
+          "hide_name": 0,
+          "bits": [ 2 ],
+          "attributes": {
+            "src": "dut.sv:3.12-3.15"
+          }
+        },
+        "d": {
+          "hide_name": 0,
+          "bits": [ 4 ],
+          "attributes": {
+            "src": "dut.sv:4.11-4.12"
+          }
+        },
+        "q": {
+          "hide_name": 0,
+          "bits": [ "0", "0", "0", "0", "0", "0", "0", 3 ],
+          "attributes": {
+            "init": "0xxxxxxx",
+            "src": "dut.sv:5.19-5.20"
+          }
+        }
+      }
+    }
+  }
+}

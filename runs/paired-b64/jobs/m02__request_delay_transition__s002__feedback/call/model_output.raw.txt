@@ -1,0 +1,54 @@
+```systemverilog
+module request_delay(
+    input clk,
+    input rst_n,
+    input din,
+    output q
+);
+
+    localparam S_IDLE     = 2'b00;
+    localparam S_REQUEST  = 2'b01;
+    localparam S_PULSE    = 2'b10;
+    localparam S_COOLDOWN = 2'b11;
+
+    reg [1:0] state;
+    reg [1:0] next_state;
+
+    always @(*) begin
+        next_state = state;
+        case (state)
+            S_IDLE: begin
+                if (din)
+                    next_state = S_REQUEST;
+                else
+                    next_state = S_IDLE;
+            end
+            S_REQUEST: begin
+                next_state = S_PULSE;
+            end
+            S_PULSE: begin
+                next_state = S_COOLDOWN;
+            end
+            S_COOLDOWN: begin
+                if (din)
+                    next_state = S_COOLDOWN;
+                else
+                    next_state = S_IDLE;
+            end
+            default: begin
+                next_state = S_IDLE;
+            end
+        endcase
+    end
+
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n)
+            state <= S_IDLE;
+        else
+            state <= next_state;
+    end
+
+    assign q = (state == S_PULSE);
+
+endmodule
+```

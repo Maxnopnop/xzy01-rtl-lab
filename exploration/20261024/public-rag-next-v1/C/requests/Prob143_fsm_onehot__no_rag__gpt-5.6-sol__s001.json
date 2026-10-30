@@ -1,0 +1,21 @@
+{
+  "model": "openai/gpt-5.6-sol",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs."
+    },
+    {
+      "role": "user",
+      "content": "\nI would like you to implement a module named TopModule with the following\ninterface. All input and output ports are one bit unless otherwise\nspecified.\n\n - input  in\n - input  state (10 bits)\n - output next_state (10 bits)\n - output out1\n - output out2\n\nGiven the follow state machine with 1 input and 2 outputs (the outputs\nare given as \"(out1, out2)\"):\n\n  S0 (0, 0) --0--> S0\n  S0 (0, 0) --1--> S1\n  S1 (0, 0) --0--> S0\n  S1 (0, 0) --1--> S2\n  S2 (0, 0) --0--> S0\n  S2 (0, 0) --1--> S3\n  S3 (0, 0) --0--> S0\n  S3 (0, 0) --1--> S4\n  S4 (0, 0) --0--> S0\n  S4 (0, 0) --1--> S5\n  S5 (0, 0) --0--> S8\n  S5 (0, 0) --1--> S6\n  S6 (0, 0) --0--> S9\n  S6 (0, 0) --1--> S7\n  S7 (0, 1) --0--> S0\n  S7 (0, 1) --1--> S7\n  S8 (1, 0) --0--> S0\n  S8 (1, 0) --1--> S1\n  S9 (1, 1) --0--> S0\n  S9 (1, 1) --1--> S1\n\nSuppose this state machine uses one-hot encoding, where state[0] through\nstate[9] correspond to the states S0 though S9, respectively. The outputs\nare zero unless otherwise specified. The next_state[0] through next_state[9] \ncorrespond to the transition to next states S0 though S9. For example, The \nnext_state[1] is set to 1 when the next state is S1 , otherwise, it is set to 0.\n\nHere, the input state[9:0] can be a combinational of multiple states, and \nthe TopModule is expected to response.\nFor example: \nWhen the state[9:0] = 10'b0000010100, state[4] == 1, and state[2] == 1, the \nstates includes S4, and S2 states.\n\nThe module should implement the state transition logic and output logic\nportions of the state machine (but not the state flip-flops). You are\ngiven the current state in state[9:0] and must implement next_state[9:0] \nand the two outputs.\n\n"
+    }
+  ],
+  "stream": false,
+  "provider": {
+    "only": [
+      "openai"
+    ],
+    "allow_fallbacks": false,
+    "require_parameters": true
+  }
+}

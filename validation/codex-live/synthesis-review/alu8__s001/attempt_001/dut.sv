@@ -1,0 +1,20 @@
+module alu8 (
+    input  wire [7:0] a,
+    input  wire [7:0] b,
+    input  wire [2:0] op,
+    output reg  [7:0] y
+);
+    always @* begin
+        case (op)
+            3'd0: y = a + b;
+            3'd1: y = a - b;
+            3'd2: y = a & b;
+            3'd3: y = a | b;
+            3'd4: y = a ^ b;
+            3'd5: y = a << 1;
+            3'd6: y = a >> 1;
+            3'd7: y = {7'b0, (a < b)};
+            default: y = 8'b0;
+        endcase
+    end
+endmodule

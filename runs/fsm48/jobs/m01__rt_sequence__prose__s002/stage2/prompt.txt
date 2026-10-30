@@ -1,0 +1,117 @@
+Implement the given digital circuit in synthesizable SystemVerilog.
+Return only one complete module in a single ```systemverilog code block.
+Use exactly the specified module name and ports. Do not provide a testbench.
+No includes, preprocessor directives, strings, hierarchical references, extra
+modules, simulation system tasks, file IO, or attributes. Only $signed,
+$unsigned and $clog2 system functions are permitted. Do not use delays.
+The independent evaluator will supply all input stimuli and check outputs.
+
+Please act as a professional Verilog designer.
+
+Implement a module of a sequence detector to detect a specific 4-bit binary sequence 1001.
+
+Module name:
+    sequence_detector
+
+Input ports:
+    clk: Clock signal to synchronize the detector.
+    rst_n: Active-low reset signal to initialize the state machine.
+    data_in: 1-bit binary input signal to feed the bitstream for sequence detection.
+
+Output ports:
+    sequence_detected: 1-bit output signal that is set high when the specific sequence is detected.
+    
+Internal logic:
+    State Machine: The sequence detector uses a finite state machine (FSM) with the following states:
+    IDLE: Waiting for the start of the sequence.
+    S1: The first bit of the desired sequence is detected.
+    S2: The second bit of the desired sequence is detected.
+    S3: The third bit of the desired sequence is detected.
+    S4: The fourth and final bit of the desired sequence is detected, and the output sequence_detected is set high.
+
+Implementation:
+    -FSM Design: The FSM transitions through states based on the bitstream data_in. On each clock cycle, the detector checks for a match of the specific sequence.
+
+    -Sequence Detection: The module checks the input data_in and transitions between states. Once the complete sequence is detected, sequence_detected is asserted.
+
+    -Reset Behavior: When rst_n is low, the state machine returns to the IDLE state, resetting the detection process.
+
+Development-subset clarification (part of the fixed specification): Use asynchronous active-low reset, overlapping detections, and a Moore output high after the edge consuming the final 1; matching the archived reference.
+
+Common implementation convention:
+Use reg/localparam state encodings and case/if assignments for Icarus compatibility. Avoid enum-valued ternary assignments. Preserve the specified reset, overlap and cycle timing.
+
+Public specification examples (same in every condition):
+{
+  "clock_edge": "posedge",
+  "output_kind": "moore",
+  "reset": {
+    "kind": "async",
+    "active": 0,
+    "output": 0
+  },
+  "trace_convention": "Each trace starts after reset. List output after each rising edge; reset is then inactive.",
+  "examples": [
+    {
+      "bits": "1001",
+      "outputs": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "bits": "1011",
+      "outputs": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "bits": "1001001",
+      "outputs": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1
+      ]
+    }
+  ]
+}
+
+Previous-stage design artifact:
+Implement `sequence_detector` as a five-state Moore finite-state machine clocked on the rising edge of `clk`. Use `reg` and `localparam` declarations for the state and encodings, with separate combinational next-state/output logic and sequential state storage.
+
+The states represent the longest prefix of `1001` matched so far:
+
+- `IDLE`: No relevant prefix has been matched.
+- `S1`: The suffix `1` has been matched.
+- `S2`: The suffix `10` has been matched.
+- `S3`: The suffix `100` has been matched.
+- `S4`: The complete sequence `1001` has just been matched.
+
+Use these transitions:
+
+- From `IDLE`, input `1` advances to `S1`; input `0` remains in `IDLE`.
+- From `S1`, input `0` advances to `S2`; input `1` remains in `S1`, because the new `1` can start another candidate sequence.
+- From `S2`, input `0` advances to `S3`; input `1` returns to `S1`, since the suffix `1` is a valid new prefix.
+- From `S3`, input `1` advances to `S4`; input `0` returns to `IDLE`.
+- From `S4`, input `0` advances to `S2`; input `1` advances to `S1`. This preserves overlap: the final `1` of the detected sequence is also treated as the first bit of a possible subsequent sequence.
+
+Include a default transition to `IDLE` so an invalid or unknown state recovers safely.
+
+Store the current state in an edge-triggered sequential block sensitive to both `posedge clk` and `negedge rst_n`. When `rst_n` is low, asynchronously set the state to `IDLE`. Otherwise, load the computed next state on each rising clock edge.
+
+Generate `sequence_detected` as a Moore output based only on the current state. Set it high in `S4` and low in every other state, including during reset. Because the state changes to `S4` on the rising edge that consumes the final `1`, the output becomes high immediately after that edge. It remains high for one clock interval and normally becomes low after the next rising edge as the FSM leaves `S4`.
+
+This timing produces outputs `0, 0, 0, 1` for input bits `1001`. With overlapping detection enabled, `1001001` produces `0, 0, 0, 1, 0, 0, 1`.
+
+Use the artifact to implement the specification. Resolve any contradictions in favor of the specification. Return only RTL.
+
+Do not invoke tools, read files, run tests, or delegate. Reply directly.

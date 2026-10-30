@@ -1,0 +1,91 @@
+{
+  "icarus_evaluations": 4,
+  "model_calls": 0,
+  "results": [
+    {
+      "label": "correct_mid",
+      "backend": "icarus",
+      "compile_seconds": 0.094,
+      "status": "PASS",
+      "message": "Independent testbench completed all 7 checks",
+      "stage": "simulate",
+      "receipt_nonce": "8416da330e244541944235a10ab64f79",
+      "simulate_seconds": 0.046,
+      "mismatches": [],
+      "dut_sha256": "f394141bd0754dcd0d8d0511ebc625949d062d619ecc761ac48d937f633bc06e",
+      "tb_sha256": "fe49855a31146187ee1dbf56d8578d2db7ab0268ef677f33f6de80ab169f4796",
+      "events_sha256": "e1b90db7eca3ce9d461f7956548436e7c955dbc5c0780e357a0c5a8919120c6b"
+    },
+    {
+      "label": "sync_mid",
+      "backend": "icarus",
+      "compile_seconds": 0.078,
+      "status": "FUNCTION_FAIL",
+      "message": "Independent testbench found 2 mismatches",
+      "stage": "simulate",
+      "receipt_nonce": "1a475cd1c35e43309957dec944e08a91",
+      "simulate_seconds": 0.031,
+      "mismatches": [
+        {
+          "event": 5,
+          "clk": 0,
+          "reset": 0,
+          "input": 1,
+          "expected": 0,
+          "observed": "1",
+          "category": "targeted_mid_reset"
+        },
+        {
+          "event": 6,
+          "clk": 0,
+          "reset": 1,
+          "input": 1,
+          "expected": 0,
+          "observed": "1",
+          "category": "setup"
+        }
+      ],
+      "dut_sha256": "7dd2731f2363b1f38765a5bde5afa6950d235b87535fb7460447785f68a8e97c",
+      "tb_sha256": "fe49855a31146187ee1dbf56d8578d2db7ab0268ef677f33f6de80ab169f4796",
+      "events_sha256": "e1b90db7eca3ce9d461f7956548436e7c955dbc5c0780e357a0c5a8919120c6b"
+    },
+    {
+      "label": "correct_hold",
+      "backend": "icarus",
+      "compile_seconds": 0.109,
+      "status": "PASS",
+      "message": "Independent testbench completed all 4 checks",
+      "stage": "simulate",
+      "receipt_nonce": "a5143d7ac89d4904879eb43f543fc683",
+      "simulate_seconds": 0.047,
+      "mismatches": [],
+      "dut_sha256": "f394141bd0754dcd0d8d0511ebc625949d062d619ecc761ac48d937f633bc06e",
+      "tb_sha256": "fc72371013e0ccd19db48294fe03d6f40f97b50e333c3502ac2408766b7bda3f",
+      "events_sha256": "b751b72e489690160cc0f643fd77e229d206d0c7b56a4b4fa7f2d5d14d0fd4aa"
+    },
+    {
+      "label": "leak_hold",
+      "backend": "icarus",
+      "compile_seconds": 0.093,
+      "status": "FUNCTION_FAIL",
+      "message": "Independent testbench found 1 mismatches",
+      "stage": "simulate",
+      "receipt_nonce": "cbc406b56721453ea978ac51548cdca9",
+      "simulate_seconds": 0.047,
+      "mismatches": [
+        {
+          "event": 3,
+          "clk": 0,
+          "reset": 1,
+          "input": 1,
+          "expected": 0,
+          "observed": "1",
+          "category": "targeted_hold"
+        }
+      ],
+      "dut_sha256": "1fc53db29a0dbd939695f837315c677037704eb3749fca6a3faf1c2ce5b3575f",
+      "tb_sha256": "fc72371013e0ccd19db48294fe03d6f40f97b50e333c3502ac2408766b7bda3f",
+      "events_sha256": "b751b72e489690160cc0f643fd77e229d206d0c7b56a4b4fa7f2d5d14d0fd4aa"
+    }
+  ]
+}

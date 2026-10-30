@@ -1,0 +1,79 @@
+{
+  "schema": 1,
+  "study": "fsm48-v1",
+  "mode": "offline",
+  "planned": 6,
+  "completed": 1,
+  "pending": 5,
+  "max_calls": 0,
+  "model_call_reservations": 0,
+  "model_turns_started": 0,
+  "real_generations": 0,
+  "usage": {},
+  "groups": [
+    {
+      "model": "fixture-model",
+      "arm": "prose",
+      "planned": 2,
+      "completed": 1,
+      "passes": 0,
+      "counts": {
+        "INTERRUPTED": 1
+      },
+      "usage": {},
+      "localizations": {
+        "INCONCLUSIVE": 1
+      },
+      "ir_counts": {
+        "NOT_RUN": 1
+      },
+      "public_check_counts": {
+        "NOT_APPLICABLE": 1
+      }
+    },
+    {
+      "model": "fixture-model",
+      "arm": "table",
+      "planned": 2,
+      "completed": 0,
+      "passes": 0,
+      "counts": {},
+      "usage": {},
+      "localizations": {},
+      "ir_counts": {},
+      "public_check_counts": {}
+    },
+    {
+      "model": "fixture-model",
+      "arm": "checked_table",
+      "planned": 2,
+      "completed": 0,
+      "passes": 0,
+      "counts": {},
+      "usage": {},
+      "localizations": {},
+      "ir_counts": {},
+      "public_check_counts": {}
+    }
+  ],
+  "results": [
+    {
+      "job_id": "m01__ve_fsm__prose__s001",
+      "task": "ve_fsm",
+      "arm": "prose",
+      "sample": 1,
+      "requested_model": "fixture-model",
+      "mode": "offline",
+      "status": "INTERRUPTED",
+      "localization": "INCONCLUSIVE",
+      "directory": "jobs/m01__ve_fsm__prose__s001",
+      "message": "Unknown prior outcome; reservation retained, no repeat model calls"
+    }
+  ],
+  "limitations": [
+    "Two reused development tasks, two repetitions: feasibility only, no population efficacy claim.",
+    "Equal model turns, not equal tokens/compute/cost; CLI defaults and internal retries are not controlled.",
+    "IR equivalence is finite-graph exact; RTL agreement is fixed-vector simulation.",
+    "ve_fsm already contains a state table; it is a translation control, not NL understanding evidence."
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "model": "openai/gpt-4o-mini",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs."
+    },
+    {
+      "role": "user",
+      "content": "\nI would like you to implement a module named TopModule with the following\ninterface. All input and output ports are one bit unless otherwise\nspecified.\n\n - input  clk\n - input  aresetn\n - input  x\n - output z\n\nThe module should implement a Mealy-type finite state machine that\nrecognizes the sequence \"101\" on an input signal named x. Your FSM should\nhave an output signal, z, that is asserted to logic-1 when the \"101\"\nsequence is detected. Your FSM should also have a negative edge triggered\nasynchronous reset. You may only have 3 states in your state machine.\nYour FSM should recognize overlapping sequences. Assume all sequential\nlogic is triggered on the positive edge of the clock.\n\n"
+    }
+  ],
+  "stream": false,
+  "provider": {
+    "only": [
+      "openai"
+    ],
+    "allow_fallbacks": false,
+    "require_parameters": true
+  }
+}

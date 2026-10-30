@@ -1,0 +1,61 @@
+module request_delay (
+    input  clk,
+    input  rst_n,
+    input  din,
+    output q
+);
+
+    localparam [1:0] S_IDLE     = 2'b00;
+    localparam [1:0] S_ACCEPT   = 2'b01;
+    localparam [1:0] S_ASSERT   = 2'b10;
+    localparam [1:0] S_COOLDOWN = 2'b11;
+
+    reg [1:0] state;
+    reg [1:0] next_state;
+    reg q_reg;
+
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n)
+            state <= S_IDLE;
+        else
+            state <= next_state;
+    end
+
+    always @(*) begin
+        next_state = S_IDLE;
+        case (state)
+            S_IDLE: begin
+                if (din)
+                    next_state = S_ACCEPT;
+                else
+                    next_state = S_IDLE;
+            end
+            S_ACCEPT: begin
+                next_state = S_ASSERT;
+            end
+            S_ASSERT: begin
+                next_state = S_COOLDOWN;
+            end
+            S_COOLDOWN: begin
+                if (din)
+                    next_state = S_COOLDOWN;
+                else
+                    next_state = S_IDLE;
+            end
+            default: begin
+                next_state = S_IDLE;
+            end
+        endcase
+    end
+
+    always @(*) begin
+        q_reg = 1'b0;
+        case (state)
+            S_ASSERT: q_reg = 1'b1;
+            default:  q_reg = 1'b0;
+        endcase
+    end
+
+    assign q = q_reg;
+
+endmodule

@@ -1,0 +1,34 @@
+Implement the given digital circuit in synthesizable SystemVerilog.
+Return only one complete module in a single ```systemverilog code block.
+Use exactly the specified module name and ports. Do not provide a testbench.
+No includes, preprocessor directives, strings, hierarchical references, extra
+modules, simulation system tasks, file IO, or attributes. Only $signed,
+$unsigned and $clog2 system functions are permitted. Do not use delays.
+The independent evaluator will supply all input stimuli and check outputs.
+Module: retrigger_window
+Interface: input clk, rst_n; input trigger, input tick, input enable, input [1:0] length; output active, output [1:0] remaining, output expired
+Specification: Retriggerable timer counting enabled tick edges. Async active-low rst_n clears active, remaining and expired. At every rising edge first clear the expired pulse. trigger has highest priority regardless of enable/tick and loads remaining=max(length,1), active=1, cancelling any old expiration. length is sampled only on trigger. Otherwise, if active and enable and tick, remaining=1 expires: active=0, remaining=0, expired=1; else decrement remaining. Without enabled tick retain timer state. An inactive timer ignores tick. Consecutive trigger edges restart the full interval. length=0 is defined to mean 1, not illegal. All outputs hold between edges; reset dominates all events.
+Public input concatenation, MSB first: trigger,tick,enable,length
+Public expected output concatenation, MSB first: active,remaining,expired
+Public event examples [clk,rst_n,packed_input,packed_expected_output], check after settling:
+[[0,0,0,0],[1,0,0,0],[0,1,0,0],[0,1,19,0],[1,1,19,14],[1,1,12,14],[1,1,19,14],[0,1,19,14],[0,1,8,14],[1,1,8,14],[1,1,23,14],[1,1,8,14],[0,1,8,14],[0,1,8,14],[1,1,8,14],[1,1,23,14],[1,1,8,14],[0,1,8,14],[0,1,12,14],[1,1,12,12],[1,1,19,12],[1,1,12,12],[0,1,12,12],[0,1,12,12],[1,1,12,10],[1,1,19,10],[1,1,12,10],[0,1,12,10],[0,0,12,0],[0,0,19,0],[0,1,12,0],[0,1,12,0],[0,1,12,0],[1,1,12,0],[1,1,19,0],[1,1,12,0],[0,1,12,0],[0,0,0,0],[1,0,0,0],[0,1,0,0],[0,1,19,0],[1,1,19,14],[1,1,12,14],[1,1,19,14],[0,1,19,14],[0,1,12,14],[1,1,12,12],[1,1,19,12],[1,1,12,12],[0,1,12,12],[0,1,12,12],[1,1,12,10],[1,1,19,10],[1,1,12,10],[0,1,12,10],[0,1,12,10],[1,1,12,1],[1,1,19,1],[1,1,12,1],[0,1,12,1],[0,0,0,0],[1,0,0,0],[0,1,0,0],[0,1,19,0],[1,1,19,14],[1,1,12,14],[1,1,19,14],[0,1,19,14],[0,1,31,14],[1,1,31,14],[1,1,0,14],[1,1,31,14],[0,1,31,14],[0,1,12,14],[1,1,12,12],[1,1,19,12],[1,1,12,12],[0,1,12,12],[0,1,12,12],[1,1,12,10],[1,1,19,10],[1,1,12,10],[0,1,12,10],[0,1,12,10],[1,1,12,1],[1,1,19,1],[1,1,12,1],[0,1,12,1],[0,0,12,0],[0,0,19,0],[0,1,12,0],[0,1,12,0],[0,0,0,0],[1,0,0,0],[0,1,0,0],[0,1,16,0],[1,1,16,10],[1,1,15,10],[1,1,16,10],[0,1,16,10],[0,1,12,10],[1,1,12,1],[1,1,19,1],[1,1,12,1],[0,1,12,1],[0,1,4,1],[1,1,4,0],[1,1,27,0],[1,1,4,0],[0,1,4,0],[0,1,12,0],[1,1,12,0],[1,1,19,0],[1,1,12,0],[0,1,12,0],[0,0,0,0],[1,0,0,0],[0,1,0,0],[0,1,18,0],[1,1,18,12],[1,1,13,12],[1,1,18,12],[0,1,18,12],[0,1,4,12],[1,1,4,12],[1,1,27,12],[1,1,4,12],[0,1,4,12],[0,1,4,12],[1,1,4,12],[1,1,27,12],[1,1,4,12],[0,1,4,12],[0,1,12,12],[1,1,12,10],[1,1,19,10],[1,1,12,10],[0,1,12,10],[0,1,12,10],[1,1,12,1],[1,1,19,1],[1,1,12,1],[0,1,12,1],[0,0,12,0],[0,0,19,0],[0,1,12,0],[0,1,12,0]]
+
+Shared first candidate (untrusted; may contain errors):
+module retrigger_window(input clk,rst_n,trigger,tick,enable,input [1:0] length,output reg active,output reg [1:0] remaining,output reg expired);
+always @(posedge clk or negedge rst_n) begin
+ if(!rst_n) begin active<=0;remaining<=0;expired<=0;end
+ else begin
+  expired<=0;
+  if(trigger) begin active<=1;remaining<=(length==0)?2'd1:length;end
+  else if(active && enable && tick) begin
+   if(remaining==1) begin active<=0;remaining<=0;expired<=1;end
+   else remaining<=remaining-1'b1;
+  end
+ end
+end
+endmodule
+
+Implement the specification. You may correct the candidate while producing RTL. Return only the specified module. No further repair turn.
+Public execution results:
+{"status":"PASS","mismatches":[],"scope":"MOCK_PUBLIC"}
+Do not invoke tools, read files, run tests, or delegate. Reply directly.

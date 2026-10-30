@@ -1,0 +1,48 @@
+{
+  "status": "ACCEPTED_FINITE_DEVELOPMENT_EXECUTION_PLAN",
+  "plan_sha256": "c2aeef0482f72c1deded6bf45d6aae6012a889dc4f71801a633e4aa04e942c10",
+  "source_bindings": 24,
+  "prior_bindings": 20354,
+  "denominator": 12,
+  "scheduled_pairs": 11,
+  "expected_axes": {
+    "ir_spec": {
+      "PASS": 10,
+      "SPEC_AMBIGUOUS": 1,
+      "INPUT_PROTOCOL_FAIL": 1
+    },
+    "rtl_spec": {
+      "PASS": 7,
+      "FUNCTION_FAIL": 2,
+      "SPEC_AMBIGUOUS": 1,
+      "INPUT_PROTOCOL_FAIL": 1,
+      "TRACE_INVALID": 1
+    },
+    "intent": {
+      "PASS": 6,
+      "FUNCTION_FAIL": 2,
+      "NOT_EVALUABLE": 4
+    }
+  },
+  "independent_review": "Hash/set/source snapshot/AST checks plus direct source, RTL/TB and hand derivation review; no target code import or tools executed",
+  "stream_adapter": "Exact locked original event computation with added yield after last-clock update; runtime equivalence to original batch run NOT_VERIFIED, finite same-mapping phase and hand-reference calibration only",
+  "sampling": "PRE after low setup settle; POST after rising edge NBA settle; cursor advances after POST",
+  "reset_alignment": "Retain already delivered transactions, cancel pending/unaccepted; unequal accepted/cancelled offer sets NOT_EVALUABLE",
+  "limitations": [
+    "Same-author synthetic development fixtures, no model efficacy or natural-stage attribution",
+    "Restricted early-valid/common-ready and combinational witnesses",
+    "Finite sync reset, no physical reset-release timing",
+    "Tool exe hashes only; transitive dependencies and version strings incompletely frozen",
+    "Raw sampler, ledger and independent hand derivation still await actual execution"
+  ],
+  "execution_release": {
+    "one_run": "run-v1",
+    "ir": 11,
+    "compile": 11,
+    "sim": 11,
+    "retries": 0,
+    "model_calls": 0,
+    "new_external_task_release": false
+  },
+  "new_executions_during_review": 0
+}

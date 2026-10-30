@@ -1,0 +1,24 @@
+{
+  "model": "openai/gpt-5.6-luna",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs."
+    },
+    {
+      "role": "user",
+      "content": "\nI would like you to implement a module named TopModule with the following\ninterface. All input and output ports are one bit unless otherwise\nspecified.\n\n - input  in     (8 bits)\n - output parity\n\nParity checking is often used as a simple method of detecting errors when\ntransmitting data through an imperfect channel. The module should compute\na parity bit for an 8-bit byte (which will add a 9th bit to the byte). We\nwill use \"even\" parity, where the parity bit is just the XOR of all 8\ndata bits.\n\n"
+    }
+  ],
+  "stream": false,
+  "provider": {
+    "only": [
+      "openai"
+    ],
+    "allow_fallbacks": false,
+    "require_parameters": true
+  },
+  "reasoning": {
+    "effort": "medium"
+  }
+}

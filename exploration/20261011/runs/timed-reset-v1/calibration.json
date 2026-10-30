@@ -1,0 +1,452 @@
+[
+  {
+    "label": "correct_rt_sequence",
+    "task": "rt_sequence",
+    "expected": "PASS",
+    "backend": "icarus",
+    "compile_seconds": 0.063,
+    "status": "PASS",
+    "message": "Independent testbench completed all 90972 checks",
+    "stage": "simulate",
+    "receipt_nonce": "e4246b14c9ea467e87da97284db7cd1a",
+    "simulate_seconds": 0.109,
+    "mismatches": [],
+    "dut_sha256": "04c38ed966f714894145d8f5dc499ad6f8044855397834b5f18121a7bc4ddfdf",
+    "tb_sha256": "4d7bf00e509d6cbfdd92830c89e66d1338c7353ca2433d85531ab7a4c412783a",
+    "events_sha256": "3f401d9f7bcb0126fd725b64e769f0c644642c7bab20a95f06ec5a0e250f9049"
+  },
+  {
+    "label": "correct_sticky_alarm",
+    "task": "sticky_alarm",
+    "expected": "PASS",
+    "backend": "icarus",
+    "compile_seconds": 0.078,
+    "status": "PASS",
+    "message": "Independent testbench completed all 90972 checks",
+    "stage": "simulate",
+    "receipt_nonce": "d7fabbf724574a90b68b87551d3174e6",
+    "simulate_seconds": 0.109,
+    "mismatches": [],
+    "dut_sha256": "1a898f7834090256e71df0f6da87f567319fbdd87abbecd7f05206cf51e6a50f",
+    "tb_sha256": "122a735b1b4f34b677fb6ae934096bc6509f856eeb720efeb8851853eeab598b",
+    "events_sha256": "1cbd2de98b739cebd4e76ccc3c654a55e3ed8c5b4cf7a1f4e87c6c806ba589aa"
+  },
+  {
+    "label": "correct_event_parity",
+    "task": "event_parity",
+    "expected": "PASS",
+    "backend": "icarus",
+    "compile_seconds": 0.062,
+    "status": "PASS",
+    "message": "Independent testbench completed all 90972 checks",
+    "stage": "simulate",
+    "receipt_nonce": "dac45785d8fa41ef8640c0b977839d1f",
+    "simulate_seconds": 0.125,
+    "mismatches": [],
+    "dut_sha256": "f394141bd0754dcd0d8d0511ebc625949d062d619ecc761ac48d937f633bc06e",
+    "tb_sha256": "feff3e451fcc7add4ad76327babaff85325c9b411692b7a781cced1c78ffa030",
+    "events_sha256": "619266699103cfe132e2fc7feec2a2f1c817e308e95d87dd8e6f633684083231"
+  },
+  {
+    "label": "correct_request_delay",
+    "task": "request_delay",
+    "expected": "PASS",
+    "backend": "icarus",
+    "compile_seconds": 0.094,
+    "status": "PASS",
+    "message": "Independent testbench completed all 90972 checks",
+    "stage": "simulate",
+    "receipt_nonce": "b90334167b724f3c9359861778c9d0cd",
+    "simulate_seconds": 0.109,
+    "mismatches": [],
+    "dut_sha256": "d4e682514700f2c4700facd60c59dbe0f9ce654dd589090d7ebc14426ca33995",
+    "tb_sha256": "4bcb4ba008d7ce358d4507cbcc19bb38498038f9b21d2ef3b3830a1b3ce33ca6",
+    "events_sha256": "d431060744833bb7394a1e66d8bea2224964c4561f83a995bf99efdd023e4c24"
+  },
+  {
+    "label": "correct_debounce3",
+    "task": "debounce3",
+    "expected": "PASS",
+    "backend": "icarus",
+    "compile_seconds": 0.062,
+    "status": "PASS",
+    "message": "Independent testbench completed all 90972 checks",
+    "stage": "simulate",
+    "receipt_nonce": "e930cf8c89b94c05ada1154aa158eae3",
+    "simulate_seconds": 0.125,
+    "mismatches": [],
+    "dut_sha256": "cf1169c4e48d0682a552bfe3e76aacdeffa3d21b643211d649b6dc124999e850",
+    "tb_sha256": "b49061809f5f1ec1fda9cb9fa427fd780c00db3ac34dd8bd9a287cd955ca0f2d",
+    "events_sha256": "fa0d28e6b84150433fb20c6964a5a605ca8fc7e88b3634592767b9db190c7e12"
+  },
+  {
+    "label": "sync_reset",
+    "task": "event_parity",
+    "expected": "FUNCTION_FAIL",
+    "backend": "icarus",
+    "compile_seconds": 0.062,
+    "status": "FUNCTION_FAIL",
+    "message": "Independent testbench found 34261 mismatches",
+    "stage": "simulate",
+    "receipt_nonce": "2cb62b40939340c8840ef3e99c25f06d",
+    "simulate_seconds": 0.11,
+    "mismatches": [
+      {
+        "event": 0,
+        "clk": 0,
+        "reset": 0,
+        "input": 0,
+        "expected": 0,
+        "observed": "x",
+        "category": "episode_reset"
+      },
+      {
+        "event": 1,
+        "clk": 0,
+        "reset": 1,
+        "input": 0,
+        "expected": 0,
+        "observed": "x",
+        "category": "initial_release"
+      },
+      {
+        "event": 2,
+        "clk": 0,
+        "reset": 1,
+        "input": 0,
+        "expected": 0,
+        "observed": "x",
+        "category": "prepare_reset_phase"
+      },
+      {
+        "event": 3,
+        "clk": 0,
+        "reset": 0,
+        "input": 0,
+        "expected": 0,
+        "observed": "x",
+        "category": "reset_assert_pulse"
+      },
+      {
+        "event": 4,
+        "clk": 0,
+        "reset": 0,
+        "input": 1,
+        "expected": 0,
+        "observed": "x",
+        "category": "reset_input_flip"
+      },
+      {
+        "event": 5,
+        "clk": 0,
+        "reset": 1,
+        "input": 0,
+        "expected": 0,
+        "observed": "x",
+        "category": "reset_release_pulse"
+      },
+      {
+        "event": 6,
+        "clk": 0,
+        "reset": 1,
+        "input": 0,
+        "expected": 0,
+        "observed": "x",
+        "category": "post_reset_negedge"
+      },
+      {
+        "event": 7,
+        "clk": 0,
+        "reset": 1,
+        "input": 1,
+        "expected": 0,
+        "observed": "x",
+        "category": "input_low"
+      }
+    ],
+    "dut_sha256": "7dd2731f2363b1f38765a5bde5afa6950d235b87535fb7460447785f68a8e97c",
+    "tb_sha256": "feff3e451fcc7add4ad76327babaff85325c9b411692b7a781cced1c78ffa030",
+    "events_sha256": "619266699103cfe132e2fc7feec2a2f1c817e308e95d87dd8e6f633684083231"
+  },
+  {
+    "label": "reset_priority",
+    "task": "event_parity",
+    "expected": "FUNCTION_FAIL",
+    "backend": "icarus",
+    "compile_seconds": 0.047,
+    "status": "FUNCTION_FAIL",
+    "message": "Independent testbench found 16758 mismatches",
+    "stage": "simulate",
+    "receipt_nonce": "50339ba774f749048820fbc54b422f48",
+    "simulate_seconds": 0.109,
+    "mismatches": [
+      {
+        "event": 94,
+        "clk": 0,
+        "reset": 0,
+        "input": 1,
+        "expected": 0,
+        "observed": "1",
+        "category": "reset_assert_pulse"
+      },
+      {
+        "event": 95,
+        "clk": 0,
+        "reset": 0,
+        "input": 0,
+        "expected": 0,
+        "observed": "1",
+        "category": "reset_input_flip"
+      },
+      {
+        "event": 96,
+        "clk": 0,
+        "reset": 1,
+        "input": 1,
+        "expected": 0,
+        "observed": "1",
+        "category": "reset_release_pulse"
+      },
+      {
+        "event": 97,
+        "clk": 0,
+        "reset": 1,
+        "input": 1,
+        "expected": 0,
+        "observed": "1",
+        "category": "post_reset_negedge"
+      },
+      {
+        "event": 98,
+        "clk": 0,
+        "reset": 1,
+        "input": 1,
+        "expected": 0,
+        "observed": "1",
+        "category": "input_low"
+      },
+      {
+        "event": 99,
+        "clk": 0,
+        "reset": 1,
+        "input": 0,
+        "expected": 0,
+        "observed": "1",
+        "category": "hold_low_flip"
+      },
+      {
+        "event": 100,
+        "clk": 0,
+        "reset": 1,
+        "input": 1,
+        "expected": 0,
+        "observed": "1",
+        "category": "hold_low_restore"
+      },
+      {
+        "event": 101,
+        "clk": 1,
+        "reset": 1,
+        "input": 1,
+        "expected": 1,
+        "observed": "0",
+        "category": "posedge"
+      }
+    ],
+    "dut_sha256": "3938f399ac9ceda3a707cf8108a1a13d2c02e6ebb25a7a5ff239e89e24a608f5",
+    "tb_sha256": "feff3e451fcc7add4ad76327babaff85325c9b411692b7a781cced1c78ffa030",
+    "events_sha256": "619266699103cfe132e2fc7feec2a2f1c817e308e95d87dd8e6f633684083231"
+  },
+  {
+    "label": "input_leak",
+    "task": "event_parity",
+    "expected": "FUNCTION_FAIL",
+    "backend": "icarus",
+    "compile_seconds": 0.047,
+    "status": "FUNCTION_FAIL",
+    "message": "Independent testbench found 44730 mismatches",
+    "stage": "simulate",
+    "receipt_nonce": "1a32b754959d468f8c19f9a5dd0072f0",
+    "simulate_seconds": 0.109,
+    "mismatches": [
+      {
+        "event": 4,
+        "clk": 0,
+        "reset": 0,
+        "input": 1,
+        "expected": 0,
+        "observed": "1",
+        "category": "reset_input_flip"
+      },
+      {
+        "event": 7,
+        "clk": 0,
+        "reset": 1,
+        "input": 1,
+        "expected": 0,
+        "observed": "1",
+        "category": "input_low"
+      },
+      {
+        "event": 9,
+        "clk": 0,
+        "reset": 1,
+        "input": 1,
+        "expected": 0,
+        "observed": "1",
+        "category": "hold_low_restore"
+      },
+      {
+        "event": 10,
+        "clk": 1,
+        "reset": 1,
+        "input": 1,
+        "expected": 1,
+        "observed": "0",
+        "category": "posedge"
+      },
+      {
+        "event": 12,
+        "clk": 1,
+        "reset": 1,
+        "input": 1,
+        "expected": 1,
+        "observed": "0",
+        "category": "hold_high_restore"
+      },
+      {
+        "event": 13,
+        "clk": 0,
+        "reset": 1,
+        "input": 1,
+        "expected": 1,
+        "observed": "0",
+        "category": "negedge_hold"
+      },
+      {
+        "event": 15,
+        "clk": 0,
+        "reset": 1,
+        "input": 1,
+        "expected": 1,
+        "observed": "0",
+        "category": "hold_low_flip"
+      },
+      {
+        "event": 18,
+        "clk": 1,
+        "reset": 1,
+        "input": 1,
+        "expected": 1,
+        "observed": "0",
+        "category": "hold_high_flip"
+      }
+    ],
+    "dut_sha256": "1fc53db29a0dbd939695f837315c677037704eb3749fca6a3faf1c2ce5b3575f",
+    "tb_sha256": "feff3e451fcc7add4ad76327babaff85325c9b411692b7a781cced1c78ffa030",
+    "events_sha256": "619266699103cfe132e2fc7feec2a2f1c817e308e95d87dd8e6f633684083231"
+  },
+  {
+    "label": "wrong_edge",
+    "task": "event_parity",
+    "expected": "FUNCTION_FAIL",
+    "backend": "icarus",
+    "compile_seconds": 0.093,
+    "status": "FUNCTION_FAIL",
+    "message": "Independent testbench found 33876 mismatches",
+    "stage": "simulate",
+    "receipt_nonce": "dc044b5b4d3a4007b25e8936b755d626",
+    "simulate_seconds": 0.11,
+    "mismatches": [
+      {
+        "event": 10,
+        "clk": 1,
+        "reset": 1,
+        "input": 1,
+        "expected": 1,
+        "observed": "0",
+        "category": "posedge"
+      },
+      {
+        "event": 11,
+        "clk": 1,
+        "reset": 1,
+        "input": 0,
+        "expected": 1,
+        "observed": "0",
+        "category": "hold_high_flip"
+      },
+      {
+        "event": 12,
+        "clk": 1,
+        "reset": 1,
+        "input": 1,
+        "expected": 1,
+        "observed": "0",
+        "category": "hold_high_restore"
+      },
+      {
+        "event": 31,
+        "clk": 1,
+        "reset": 1,
+        "input": 1,
+        "expected": 0,
+        "observed": "1",
+        "category": "posedge"
+      },
+      {
+        "event": 32,
+        "clk": 1,
+        "reset": 1,
+        "input": 0,
+        "expected": 0,
+        "observed": "1",
+        "category": "hold_high_flip"
+      },
+      {
+        "event": 33,
+        "clk": 1,
+        "reset": 1,
+        "input": 1,
+        "expected": 0,
+        "observed": "1",
+        "category": "hold_high_restore"
+      },
+      {
+        "event": 38,
+        "clk": 1,
+        "reset": 1,
+        "input": 1,
+        "expected": 1,
+        "observed": "0",
+        "category": "posedge"
+      },
+      {
+        "event": 39,
+        "clk": 1,
+        "reset": 1,
+        "input": 0,
+        "expected": 1,
+        "observed": "0",
+        "category": "hold_high_flip"
+      }
+    ],
+    "dut_sha256": "f9a44b2ef951dc75e8cecebd4bd08e2d91186ab1edd702b1703b647c09900a0b",
+    "tb_sha256": "feff3e451fcc7add4ad76327babaff85325c9b411692b7a781cced1c78ffa030",
+    "events_sha256": "619266699103cfe132e2fc7feec2a2f1c817e308e95d87dd8e6f633684083231"
+  },
+  {
+    "label": "syntax_error",
+    "task": "event_parity",
+    "expected": "COMPILE_FAIL",
+    "backend": "icarus",
+    "compile_seconds": 0.047,
+    "status": "COMPILE_FAIL",
+    "stage": "compile",
+    "message": "See compile.stderr.log",
+    "mismatches": [],
+    "dut_sha256": "adbc03bab4e4b1b5953009ea9edd62f0a80d51071ab65aec563058a08b5732b3",
+    "tb_sha256": "feff3e451fcc7add4ad76327babaff85325c9b411692b7a781cced1c78ffa030",
+    "events_sha256": "619266699103cfe132e2fc7feec2a2f1c817e308e95d87dd8e6f633684083231"
+  }
+]

@@ -1,0 +1,59 @@
+{
+  "raw": "{\"timing\":{\"edge\":\"rising\",\"reset\":\"sync_low\"},\"registers\":{\"balance\":{\"width\":3,\"reset\":0},\"accept\":{\"width\":1,\"reset\":0},\"reject\":{\"width\":1,\"reset\":0}},\"next\":{\"balance\":\"(5 if balance + refund > 5 else balance + refund) - cost if (submit and cost != 0 and (5 if balance + refund > 5 else balance + refund) >= cost) else (5 if balance + refund > 5 else balance + refund)\",\"accept\":\"1 if (submit and cost != 0 and (5 if balance + refund > 5 else balance + refund) >= cost) else 0\",\"reject\":\"1 if submit and not (submit and cost != 0 and (5 if balance + refund > 5 else balance + refund) >= cost) else 0\"},\"outputs\":{\"credit\":\"balance\",\"accepted\":\"accept\",\"rejected\":\"reject\",\"can_pay\":\"1 if rst_n and cost != 0 and (5 if balance + refund > 5 else balance + refund) >= cost else 0\"}}",
+  "result": {
+    "status": "FUNCTION_FAIL",
+    "stage": "intent",
+    "checks": 4720,
+    "errors": 812,
+    "mismatches": [
+      {
+        "event": 18,
+        "expected": 0,
+        "observed": 4,
+        "category": "mid_reset"
+      },
+      {
+        "event": 19,
+        "expected": 0,
+        "observed": 4,
+        "category": "mid_release"
+      },
+      {
+        "event": 20,
+        "expected": 0,
+        "observed": 4,
+        "category": "pre"
+      },
+      {
+        "event": 30,
+        "expected": 0,
+        "observed": 4,
+        "category": "reset"
+      },
+      {
+        "event": 48,
+        "expected": 0,
+        "observed": 24,
+        "category": "mid_reset"
+      },
+      {
+        "event": 49,
+        "expected": 0,
+        "observed": 24,
+        "category": "mid_release"
+      },
+      {
+        "event": 50,
+        "expected": 0,
+        "observed": 24,
+        "category": "pre"
+      },
+      {
+        "event": 51,
+        "expected": 24,
+        "observed": 40,
+        "category": "edge"
+      }
+    ]
+  }
+}

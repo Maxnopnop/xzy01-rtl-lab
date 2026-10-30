@@ -1,0 +1,36 @@
+```sv
+module epoch_commit(input clk,rst_n,write,slot,input [1:0] data,input commit,abort_tx,read_slot,output [1:0] visible,output reg [1:0] dirty,output reg committed);
+reg [1:0] l0,l1,s0,s1;reg [1:0] t0,t1,mask;
+assign visible=!rst_n?0:read_slot?l1:l0;
+always @(posedge clk or negedge rst_n) begin
+ if(!rst_n) begin l0<=0;l1<=0;s0<=0;s1<=0;dirty<=0;committed<=0;end
+ else begin
+ committed<=0;
+ if(abort_tx) begin s0<=l0;s1<=l1;dirty<=0;end
+ else begin
+ t0=s0;t1=s1;mask=dirty;
+ if(write) begin if(slot) t1=data;else t0=data;mask=mask|(slot?2'b10:2'b01);end
+ s0<=t0;s1<=t1;
+ if(commit) begin if(mask[0]) l0<=t0;if(mask[1]) l1<=t1;dirty<=0;committed<=1;end
+ else dirty<=mask;
+ end end end
+endmodule
+```
+```sv
+module epoch_commit(input clk,rst_n,write,slot,input [1:0] data,input commit,abort_tx,read_slot,output [1:0] visible,output reg [1:0] dirty,output reg committed);
+reg [1:0] l0,l1,s0,s1;reg [1:0] t0,t1,mask;
+assign visible=!rst_n?0:read_slot?l1:l0;
+always @(posedge clk or negedge rst_n) begin
+ if(!rst_n) begin l0<=0;l1<=0;s0<=0;s1<=0;dirty<=0;committed<=0;end
+ else begin
+ committed<=0;
+ if(abort_tx) begin s0<=l0;s1<=l1;dirty<=0;end
+ else begin
+ t0=s0;t1=s1;mask=dirty;
+ if(write) begin if(slot) t1=data;else t0=data;mask=mask|(slot?2'b10:2'b01);end
+ s0<=t0;s1<=t1;
+ if(commit) begin if(mask[0]) l0<=t0;if(mask[1]) l1<=t1;dirty<=0;committed<=1;end
+ else dirty<=mask;
+ end end end
+endmodule
+```

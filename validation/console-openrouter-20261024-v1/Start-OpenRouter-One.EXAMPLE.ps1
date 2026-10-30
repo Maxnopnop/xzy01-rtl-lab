@@ -1,0 +1,4 @@
+$ErrorActionPreference = 'Stop'
+# Key is read with getpass in Python; never stored here.
+& 'C:\Users\A\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' 'E:\Codex\2026-09-25\xzy01-using-llm-for-digital-chip-2\outputs\rtl-batch\console_cli.py' 'run-next' '--manifest' 'E:\Codex\2026-09-25\xzy01-using-llm-for-digital-chip-2\outputs\rtl-batch\validation\console-openrouter-20261024-v1\example-unreleased-packet\console-package.json' '--release' 'E:\Codex\2026-09-25\xzy01-using-llm-for-digital-chip-2\outputs\rtl-batch\validation\console-openrouter-20261024-v1\example-unreleased-packet\release.example.json' '--manifest-sha' 'c2a17ee13ff322afeef350b3c8a6781e7655e98853283ebf83e123efa0a1ce9c' '--release-sha' 'b61307770484bcd98eeccf0daa82b2f8452b36532544a83687e4744c2be73190'
+exit $LASTEXITCODE

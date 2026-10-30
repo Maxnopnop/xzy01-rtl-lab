@@ -1,0 +1,34 @@
+{
+  "id": "rt_comparator",
+  "module": "comparator_3bit",
+  "checks": 64,
+  "spec": "Please act as a professional Verilog designer.\n\nImplement a module of a 3-bit comparator for comparing binary numbers.\n\nModule name:  \n    comparator_3bit               \nInput ports:\n    A [2:0]: First 3-bit input operand (the first binary number to compare).\n    B [2:0]: Second 3-bit input operand (the second binary number to compare).\nOutput ports:\n    A_greater: 1-bit output indicating if A is greater than B.\n    A_equal: 1-bit output indicating if A is equal to B.\n    A_less: 1-bit output indicating if A is less than B.\n\nImplementation:\nComparison Logic: The module compares the two 3-bit binary numbers A and B using combinational logic.\n- The outputs A_greater, A_equal, and A_less are determined based on the comparison of A and B.\n- A_greater is set to 1 if A > B, A_equal is set to 1 if A == B, and A_less is set to 1 if A < B.\n\nOutput Encoding: The outputs are mutually exclusive, meaning only one of the three outputs will be high (1) at any given time, based on the comparison results.\n\nGive me the complete code.",
+  "category": "combinational",
+  "split": "development",
+  "family": "comparator",
+  "benchmark": "RTLLM",
+  "suite_version": "dev10-v1",
+  "synthesis_eligible": true,
+  "origin": {
+    "repository": "https://github.com/hkust-zhiyao/RTLLM",
+    "commit": "51ed553d0ffd32797a1a0a13e051656bf302c81f",
+    "path": "Arithmetic/Comparator/comparator_3bit",
+    "license": "MIT",
+    "files": {
+      "upstream/RTLLM/comparator_3bit/design_description.txt": "e27a26ad0d4202d5c0dd43df6c36d0c718790a4bb0742672fa34d75a1a6b773d",
+      "upstream/RTLLM/comparator_3bit/verified_comparator_3bit.v": "f20a0ea6b8e785eca0c3ee8500004f9619afe3edfa2d707e0a8a706438d4f407",
+      "upstream/RTLLM/comparator_3bit/testbench.v": "a46023a6a223269a2c8fa3c791fe52dd712eba526f1fcce3b62bf2739c7f7125"
+    }
+  },
+  "adaptations": [
+    "Independent deterministic vector oracle replaces upstream TB; upstream TB archived.",
+    "Reference module renamed; timescale directive removed."
+  ],
+  "mutation": "Signed instead of unsigned comparison",
+  "reference_sha256": "5e7404689a5f3f9b7670c01fbb179c00d8ad95b0cdb5bd8302ad64b3e2851e95",
+  "mutant_sha256": "98629f3ca0b2922f84a1ef6a770139873a4f49db730cd7c4843f8cf5ddbd608c",
+  "tb_sha256": "a688ad671c672323681232728acc4fbc58f67d35967868816392063da9e699fd",
+  "assets": {
+    "rt_comparator.hex": "c8377b8892d8abdbf46a15da64da75932e91ca16493d92c9a2d64a7d1426e146"
+  }
+}

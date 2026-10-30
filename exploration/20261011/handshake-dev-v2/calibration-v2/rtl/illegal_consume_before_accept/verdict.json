@@ -1,0 +1,96 @@
+{
+  "status": "FUNCTION_FAIL",
+  "counts": {
+    "UNEXPECTED_TRANSACTION": 2,
+    "MISSING_TRANSACTION": 2
+  },
+  "errors": [
+    {
+      "category": "UNEXPECTED_TRANSACTION",
+      "cycle": 3,
+      "epoch": 0,
+      "consumer": 0,
+      "observed": [
+        81,
+        1
+      ]
+    },
+    {
+      "category": "UNEXPECTED_TRANSACTION",
+      "cycle": 3,
+      "epoch": 0,
+      "consumer": 1,
+      "observed": [
+        81,
+        1
+      ]
+    },
+    {
+      "category": "MISSING_TRANSACTION",
+      "cycle": 79,
+      "epoch": 0,
+      "consumer": 0,
+      "remaining": 1,
+      "first_expected": [
+        81,
+        1
+      ],
+      "source_cycle": 7
+    },
+    {
+      "category": "MISSING_TRANSACTION",
+      "cycle": 79,
+      "epoch": 0,
+      "consumer": 1,
+      "remaining": 1,
+      "first_expected": [
+        81,
+        1
+      ],
+      "source_cycle": 7
+    }
+  ],
+  "cycles": 80,
+  "accepted": [
+    {
+      "epoch": 0,
+      "cycle": 7,
+      "beat": [
+        81,
+        1
+      ]
+    }
+  ],
+  "delivered": [
+    [
+      {
+        "epoch": 0,
+        "cycle": 3,
+        "beat": [
+          81,
+          1
+        ]
+      }
+    ],
+    [
+      {
+        "epoch": 0,
+        "cycle": 3,
+        "beat": [
+          81,
+          1
+        ]
+      }
+    ]
+  ],
+  "aborted": [],
+  "pending": [
+    1,
+    1
+  ],
+  "source_accepted_per_epoch": [
+    1
+  ],
+  "assessment": "finite_contract",
+  "latency": "Variable; bounded by declared trace/drain, not exact reference cycles"
+}

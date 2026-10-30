@@ -1,0 +1,891 @@
+
+===== PDF PAGE 1 =====
+ 
+                                                                                                                                                                                                                i)  
+The Hong Kong University of Science and Technology 
+Department of Electronic and Computer Engineering 
+Using LLM for Digital Chip Design 
+Final Year Project Proposal 
+Academic Year 2026–2027 
+Project code: XZY01    Group ID: XZY01a-26 
+Supervisor: Professor Xie Zhiyao 
+Communication tutor: Shaneli Bharwaney 
+Report date: 23 September 2026 
+Author Student ID 
+WU, Yuzhen 21040948 
+LI, Aojie 21040106 
+MA, Shenhan 21041382 
+ 
+Main objective 
+Develop and evaluate an LLM-assisted RTL design workflow that compares model-generated Verilog, investigates 
+targeted improvements to generation quality, and demonstrates the resulting method through a reproducible 
+research prototype. 
+Objective statements 
+1. Establish a validated generation, simulation and synthesis workflow, and complete an initial comparison of at least 
+two LLMs on a shared pilot set by 31 October 2026. 
+2. Construct a versioned evaluation suite from VerilogEval and RTLLM, with disjoint development and final 
+evaluation sets, and quantify the RTL generation quality of at least two LLMs under a common protocol. 
+3. Develop and evaluate one focused improvement to RTL generation, using a baseline, a proposed method and at 
+least one ablation or matched-budget control to determine its benefits and limitations. 
+4. Integrate the evaluated method into a demonstration prototype and deliver an independently checked 
+experiment package, a final report and presentation materials. 
+  
+
+===== PDF PAGE 2 =====
+ 
+ii)    
+Table of Contents 
+1 Introduction ..................................................................................................................................................................................... 1 
+1.1 Background and Engineering Problem ................................................................................................................................. 1 
+1.2 Objectives ............................................................................................................................................................................. 1 
+1.2.1 Objective Statements ............................................................................................................................................... 1 
+1.2.2 Scope and Expected Contribution ............................................................................................................................ 2 
+1.2.3 Initial Planning Targets ............................................................................................................................................. 2 
+1.3 Literature Review of Existing Solutions ................................................................................................................................ 2 
+2 Methodology .................................................................................................................................................................................... 4 
+2.1 Overview .............................................................................................................................................................................. 4 
+2.1.1 System Description ................................................................................................................................................... 4 
+2.1.2 System Block Diagram .............................................................................................................................................. 4 
+2.1.3 Components and Experimental Specifications ......................................................................................................... 5 
+2.1.4 ECE Knowledge ......................................................................................................................................................... 6 
+2.2 Objective Statement Execution ............................................................................................................................................ 6 
+2.2.1 Validated Workflow and October Pilot..................................................................................................................... 6 
+2.2.2 Benchmark Audit and Model Comparison ............................................................................................................... 7 
+2.2.3 Focused Method Development ................................................................................................................................ 8 
+2.2.4 Prototype and Reproducible Research Outputs ....................................................................................................... 9 
+2.2.5 Research Outputs and Completion Criteria ............................................................................................................ 10 
+2.3 Evaluation Protocol ............................................................................................................................................................ 10 
+3 Project Planning ............................................................................................................................................................................. 11 
+3.1 Project Schedule ................................................................................................................................................................. 11 
+3.1.1 Responsibilities and Coordination .......................................................................................................................... 11 
+3.1.2 Dependencies and Milestones ............................................................................................................................... 11 
+3.1.3 Weekly Project Schedule ........................................................................................................................................ 13 
+3.2 Budget ................................................................................................................................................................................ 15 
+References ........................................................................................................................................................................................ 15 
+Appendix A Meeting Records ............................................................................................................................................................ 17 
+ 
+
+===== PDF PAGE 3 =====
+ 
+ 
+1 
+1 Introduction 
+1.1 Background and Engineering Problem 
+Digital circuit design translates behavioural requirements into register-transfer level (RTL) descriptions that can be 
+simulated and synthesized into hardware. Even a short specification requires precise decisions about interfaces, 
+operand widths, signed arithmetic, clocking, reset priority and cycle latency. Large language models (LLMs) offer a 
+way to generate an initial Verilog implementation from natural language. RTLCoder demonstrates how domain-
+specific data and training can improve this capability [1]. For students and engineers, such assistance could reduce 
+repetitive coding and make alternative implementations easier to explore, provided that the generated circuit is 
+evaluated against its intended behaviour. 
+The engineering problem is that plausible code is not sufficient evidence of a correct or useful design. Generated RTL 
+can compile but produce incorrect outputs, mishandle boundary cases or fail synthesis. A benchmark failure may 
+also arise from an incomplete description or an inconsistent testbench, as investigated by RTL-BenchMT [2]. Beyond 
+correctness, Dr. RTL shows that tool-guided RTL changes can be studied for timing and area improvement under 
+functional equivalence constraints [3]. These works motivate a workflow in which generation, verification and 
+analysis are connected, and in which claims are supported by recorded experiments rather than selected successful 
+examples. 
+This project will first establish that workflow and compare the quality of Verilog generated by different LLMs. It will 
+then use the observed failures to select a focused research problem, such as specification handling, relevant 
+knowledge retrieval or feedback-based repair. The intended contribution is a carefully evaluated improvement and 
+an explanation of where it works, supported by a usable research prototype. The initial scope covers small 
+combinational, single-clock sequential and control modules. More demanding designs and RTL optimization will be 
+considered after the team has established reliable simulation and synthesis. Early exploration will therefore lead to a 
+defined investigation rather than an open-ended collection of features. 
+1.2 Objectives 
+The project combines an exploratory opening phase with measurable engineering deliverables. By the end of 
+October, pilot experiments and a supervisor discussion will establish the principal improvement direction, model 
+access, evaluation scope and revised task ownership. The core commitment is to build and evaluate the workflow 
+and one focused method; a specific accuracy gain will not be assumed before the baseline is measured. The study 
+aims for research-quality evidence and a presentation-ready demonstration, with publication considered if the 
+findings warrant it. 
+Main objective 
+Develop and evaluate an LLM-assisted RTL design workflow that compares model-generated Verilog, investigates 
+targeted improvements to generation quality, and demonstrates the resulting method through a reproducible 
+research prototype. 
+1.2.1 Objective Statements 
+Objective 1: Establish a validated generation, simulation and synthesis workflow, and complete an initial comparison 
+of at least four LLMs on a shared pilot set by 31 October 2026. 
+Objective 2: Construct a versioned evaluation suite from VerilogEval and RTLLM, with disjoint development and final 
+evaluation sets, and quantify the RTL generation quality of at least four LLMs under a common protocol. 
+Objective 3: Develop and evaluate one focused improvement to RTL generation, using a baseline, a proposed 
+method and at least one ablation or matched-budget control to determine its benefits and limitations. 
+Objective 4: Integrate the evaluated method into a demonstration prototype and deliver an independently checked 
+experiment package, a final report and presentation materials. 
+
+===== PDF PAGE 4 =====
+ 
+ 
+2 
+1.2.2 Scope and Expected Contribution 
+The expected research contribution is a targeted improvement to LLM-assisted RTL generation, supported by a 
+controlled comparison and an analysis of failure mechanisms. Structured specification prompting, retrieval-
+augmented generation (RAG) and EDA feedback are candidate approaches. They will be explored sufficiently to 
+identify a defensible question, but the project will not attempt to develop every approach to equal depth. Existing 
+methods will form the starting point; any claim of novelty will identify the specific difference from the closest prior 
+work. 
+The supporting engineering contribution will be a reproducible pipeline and a small research interface that displays 
+the specification, generated RTL, tool outcomes and repair history. Benchmark-related contributions may include 
+audited task descriptions, additional boundary tests or a carefully reviewed robustness subset. Merely comparing 
+model scores will establish a baseline, but will not by itself be presented as a new generation method. 
+Full model training, a production software service, a complete processor and chip fabrication are outside the initial 
+commitment. A digital-design or EDA question-answering feature remains optional. RTL optimization is a possible 
+research extension: it will proceed only when an appropriate synthesis flow, constraints, reference design and 
+correctness check are available. These boundaries preserve time for an in-depth investigation without preventing a 
+stronger direction from emerging. 
+1.2.3 Initial Planning Targets 
+The initial planning scale is a 10-task development set and a separate 40-task final evaluation set, provisionally 
+balanced between VerilogEval and RTLLM. At least two accessible LLMs and three samples per task are planned for 
+the main model comparison. These are workload estimates to be reviewed by 31 October, not claims about a 
+completed dataset. If compatibility or cost requires a change, the revised target, selection rule and reason will be 
+recorded before final evaluation. A benchmark subset will always be identified as a subset. 
+Project completion will be assessed through validated tool behaviour, a fixed evaluation protocol, completed 
+comparisons, a tested prototype and reproducible records. The scientific aim is to improve useful generation quality 
+at a stated resource budget. A negative result will require a credible investigation of its causes and limits; it will not 
+be concealed by changing the test set or redefining success after seeing the results. 
+1.3 Literature Review of Existing Solutions 
+Domain-specific generation with RTLCoder 
+RTLCoder develops a fully open-source approach to RTL generation through automated instruction-code data 
+construction and a training method that uses code-quality feedback [1]. It also investigates efficient deployment of a 
+relatively small model. Its central lesson for this project is that generation quality depends on the interaction 
+between data, model behaviour and evaluation. The reported comparisons concern the models and benchmark 
+settings of that study; they do not establish a ranking of current services. We will examine its data and evaluation 
+assumptions and consider an available open model where resources permit. Reproducing its full training pipeline is 
+not necessary for the proposed inference-time investigation. 
+Benchmark maintenance with RTL-BenchMT 
+RTL-BenchMT studies flaws in RTL generation benchmarks and sensitivity to rewritten descriptions [2]. Its agent-
+assisted processes inspect failures, propose revisions and review descriptions, with human oversight of accepted 
+changes. This is relevant because a low pass rate can reflect errors in generated code, ambiguity in a specification, or 
+disagreement between a specification and a test. We will therefore inspect the benchmark and runner before 
+attributing every failure to a model. Semantic-preserving rewrites may be used as a robustness experiment, but 
+degraded performance on a rewrite alone will not be treated as proof of training-data memorization. Our 
+contribution would need to go beyond simply repeating the paper’s maintenance procedure. 
+Tool-guided optimization with Dr. RTL 
+
+===== PDF PAGE 5 =====
+ 
+ 
+3 
+Dr. RTL investigates RTL timing optimization using detailed EDA feedback, functional equivalence checks and 
+reusable optimization knowledge [3]. Its evaluation emphasizes realistic starting designs and a commercial synthesis 
+workflow. This extends the research question from whether generated RTL is correct to whether a functionally 
+preserved implementation can be improved. It also raises the entry requirements: an optimization experiment needs 
+consistent constraints, meaningful reports and a trustworthy equivalence procedure. We will use these 
+requirements to assess the feasibility of an optimization extension, rather than assume that shorter code or fewer 
+generic cells necessarily implies a better physical design. 
+How these works shape the proposed study 
+Together, the three recommended papers provide complementary views of model capability, evaluation validity and 
+tool-guided improvement. The project will connect these views through a common experimental workflow. Its initial 
+emphasis is on generation quality and error analysis; the precise method contribution will be selected from observed 
+problems and positioned against the closest prior solution. The literature review will continue as that direction 
+becomes more specific. 
+VerilogEval and RTLLM as evaluation foundations 
+VerilogEval provides executable evaluation of generated Verilog [4]. Its subsequent specification-to-RTL formulation 
+is more closely aligned with this project than code completion alone [5], [6]. The selected task form, release and 
+evaluation scripts must therefore be recorded. RTLLM considers syntax, functionality and design quality [7], 
+supporting the distinction between generating legal code, satisfying functional tests and obtaining useful synthesized 
+hardware. Its repository reports expanded coverage in v2.0 and description/testbench corrections in v2.1 [8]. We 
+will start from a documented current snapshot and will not mix scores obtained with incompatible releases. 
+The benchmarks provide a practical basis for comparison, but neither removes the need to validate the local tool 
+setup or inspect selected tasks. Public tasks may have been present in model training or other evaluation material. 
+Results will therefore be described as benchmark performance, with selected supplementary cases used to probe 
+specific weaknesses. Any portability changes needed for the ECE server will be checked against the reference RTL 
+and kept separate from changes intended to improve task quality. Scores on revised cases will not silently replace 
+scores on the original version. 
+Prompting and retrieval as candidate interventions 
+Prompting can make interface and temporal requirements explicit or guide a model through a structured design 
+check. RAG supplies retrieved external material to condition generation; the original RAG work motivates this use of 
+external knowledge [9], but does not establish its effectiveness for RTL. For this project, candidate sources include 
+reviewed Verilog rules, general design patterns and tool documentation. The value of retrieval will depend on 
+whether those sources address errors that occur in the pilot. Irrelevant passages, incorrect versions and examples 
+too close to test answers can invalidate the intended comparison. A retrieval method will consequently be evaluated 
+with recorded sources and a no-retrieval or matched-context control. 
+Proposed research questions 
+RQ1: How do selected LLMs differ in functional pass rate, compilation and synthesis acceptance, failure categories 
+and resource use on the same documented RTL tasks? 
+RQ2: Can an intervention motivated by the observed failures improve functional generation quality over a fair 
+baseline, and which component accounts for the change? 
+RQ3: How stable are the findings across circuit classes, repeated samples and selected specification variants, and 
+what practical limits remain? 
+Optional RQ4: Once correctness and tooling are established, can a bounded RTL rewriting process improve a defined 
+synthesis metric while preserving the required behaviour? 
+
+===== PDF PAGE 6 =====
+ 
+ 
+4 
+2 Methodology 
+2.1 Overview 
+2.1.1 System Description 
+The proposed system will combine a versioned task repository, a model adapter, configurable prompting and 
+retrieval, an EDA runner, an independent scoring stage and an experiment store. Each task will supply the functional 
+description, required module interface and relevant clock, reset and latency constraints. The model adapter will 
+produce a candidate Verilog module and retain the exact prompt, raw response and access settings. A common 
+extraction policy will process every model output without manually fixing its logic. This arrangement supports both a 
+cross-model baseline and a later comparison of generation methods. 
+Compilation and self-checking simulation will establish the first level of evidence. The EDA runner will then perform 
+synthesis screening, and collect area or timing information when a suitable library and constraint set have been 
+validated. ECE server resources will be the primary execution environment. Cadence Xcelium and Genus are 
+candidate simulation and synthesis tools; their availability and supported versions will be checked during setup [10]. 
+An open-source path using Icarus Verilog and Yosys can support learning and fallback experiments [11], [12]. 
+Different tool flows will be reported separately and will not be treated as interchangeable measurements. 
+For an investigated repair method, compiler messages or dedicated diagnostic tests may inform a limited number of 
+revisions. Final scoring tests and their outcomes will remain outside the generation and repair loop. All candidates 
+will be retained, including failures. A local demonstration interface will show the input, generated code, recorded 
+checks and any repair history. The interface will expose the evidence needed to interpret an output, while the 
+experiment store supports batch analysis and replay. This design prioritizes a reliable research workflow over a large 
+application feature set. 
+2.1.2 System Block Diagram 
+ 
+Figure 1. Proposed generation and evaluation workflow. Original diagram. Final scoring does not return feedback to 
+generation. 
+ 
+ 
+ 
+ 
+
+
+===== PDF PAGE 7 =====
+ 
+ 
+5 
+2.1.3 Components and Experimental Specifications 
+Table 1. Initial component specifications 
+Component Initial specification and validation 
+Task repository Versioned VerilogEval and RTLLM cases; explicit interfaces; circuit and source labels; separate 
+development and evaluation manifests. 
+Model adapter At least two accessible LLMs; recorded model identifier, endpoint, request settings, raw response, 
+latency and available usage data. 
+Prompt and retrieval 
+module 
+Identical task facts across conditions; versioned templates; optional source -traceable retrieval 
+excluding evaluation solutions. 
+EDA runner Compilation, self-checking simulation and synthesis screening; per-run directories; timeouts; 
+deterministic result parsing. 
+Independent evaluator Same scoring tests within each comparison; initial and terminal candidate outcomes; explicit 
+unsupported-tool and infrastructure statuses. 
+Experiment store and 
+demo 
+Saved prompts, code, logs, versions and results; batch summaries; simple local view of 
+requirements, RTL and verification history. 
+Compute environment ECE server as primary resource; confirm simulator, synthesis licences and libraries. API access or 
+an available local model 
+Each benchmark task will use a common machine-readable format containing the task ID, task name, natural-
+language specification, required module name, exact module interface, clock and reset conventions, reference 
+testbench, expected output format, difficulty level and circuit type. Additional metadata will identify the reference 
+implementation, testbench top module, result-parsing convention, original source task and repository revision. 
+Testbench and reference-implementation fields will point to versioned files to avoid maintaining inconsistent copies. 
+The specification will define relevant boundary behaviour, including arithmetic overflow, reset priority, enable 
+conditions, output latency and simultaneous operations where applicable. The testbench must evaluate behaviour 
+required by the specification rather than introduce unstated requirements. Generation inputs will remain separate 
+from reference implementations, scoring tests and expected outputs. 
+Before inclusion in the frozen suite, each task must pass an interface and specification consistency check. Its 
+reference implementation must pass the selected evaluation flow, and at least one deliberately incorrect 
+implementation targeting a relevant requirement must be rejected. This fault check provides evidence that the test 
+detects a known error; it does not establish exhaustive coverage. Unresolved contradictions will be corrected with a 
+recorded justification or excluded before final evaluation. 
+The pilot will establish tool timeouts, output limits, supported HDL constructs and practical runtime. The initial 
+design scope excludes multi-clock interactions and physical implementation. A synthesis run will record the top 
+module, library, timing constraints and tool settings. If only generic synthesis is available, acceptance and generic cell 
+statistics will be reported without claims about silicon area, sign-off timing or power. 
+2.1.4 ECE Knowledge 
+ELEC 2350 Introduction to Computer Organization and Design provides a foundation for arithmetic, datapaths and 
+control. We will apply this knowledge to specify operand widths, signedness and cycle-level behaviour, and develop 
+reference implementations that help identify data-representation and update-order errors in generated RTL. 
+
+===== PDF PAGE 8 =====
+ 
+ 
+6 
+ELEC 3310 Digital Fundamentals and System Design supports sequential logic, RTL modelling and simulation. We will 
+apply its principles to state machines, reset behaviour and testbench construction. Correct assignment semantics, 
+waveform inspection and boundary tests will help distinguish circuit errors from testbench races or sampling 
+mistakes. 
+ELEC 4320 FPGA-based Design: From Theory to Practice connects Verilog development with synthesis, 
+implementation and simulation. We will apply this knowledge to assess RTL synthesizability, interpret tool reports 
+and understand how coding choices affect hardware resources and timing. FPGA implementation may support a 
+later demonstration if feasible. 
+COMP 4611 Design and Analysis of Computer Architectures provides methods for evaluating architectural choices 
+and performance trade-offs. We will use these methods to reason about latency, throughput and pipelining, 
+interpret experimental results, and assess whether proposed RTL changes offer meaningful benefits under consistent 
+design constraints. 
+ 
+2.2 Objective Statement Execution 
+Each task has one proposed responsible member. All members will participate in the opening learning and 
+exploration phase, with a rotating meeting coordinator. The named responsibilities provide accountability for 
+outputs, not exclusive technical roles. They will be reviewed at the October scope decision and subsequently 
+adjusted in the task register and schedule together. 
+2.2.1 Validated Workflow and October Pilot 
+Objective 1: Establish a validated generation, simulation and synthesis workflow, and complete an initial comparison 
+of at least two LLMs on a shared pilot set by 31 October 2026. 
+O1.1 Consolidate literature and requirements  
+WU, Yuzhen 
+Prepare a comparison of the three recommended papers, their assumptions and the evidence required for their 
+claims. Relate these findings to RTL generation, benchmark evaluation and the available EDA flow. The team has 
+completed an initial reading of the three papers and foundational study of digital circuits and Verilog. Simulation, 
+synthesis and benchmark exploration are in progress; no validated performance result is claimed. The output will be 
+a shared scope note, a terminology list and specific questions for the pilot. 
+O1.2 Validate simulation and synthesis  
+LI, Aojie 
+Confirm ECE server access, tool versions, licences and usable library files. Run a small set of manually checked 
+modules covering combinational logic, a counter and a state machine. Validate the runner with a correct design, a 
+syntax error, a wrong reset condition, a functional mismatch and a non-terminating simulation. Acceptance requires 
+the expected status for every injected case, with commands and logs saved. Establish synthesis screening on 
+compatible cases and identify unsupported constructs separately from design failures. 
+O1.3 Run the pilot and select a direction  
+MA, Shenhan 
+Connect at least two accessible LLMs and generate RTL for the same development tasks. Start with a few working 
+cases and expand toward the 10-task pilot. Record parsing failures, compile outcomes, functional mismatches and 
+costs. Review representative failures jointly rather than rank models on a few examples. By 31 October, prepare a 
+
+===== PDF PAGE 9 =====
+ 
+ 
+7 
+decision note naming the principal research problem, closest related method, baseline, feasibility evidence, revised 
+task scale and proposed responsibilities. Discuss it with the supervisor at an agreed meeting time. 
+October decision criteria 
+A candidate direction should address a recurring or consequential failure, admit a testable intervention, be 
+distinguishable from existing work and fit the available verification and computing resources. Specification-aware 
+prompting, targeted retrieval and tool-feedback repair are the initial candidates. If the pilot is too easy, the 
+development tasks can be broadened before the final split is frozen. Optimization will be selected only if the 
+necessary synthesis and correctness checks are already credible. A direction will not be selected solely because it has 
+the highest pilot score. 
+2.2.2 Benchmark Audit and Model Comparison 
+Objective 2: Construct a versioned evaluation suite from VerilogEval and RTLLM, with disjoint development and final 
+evaluation sets, and quantify the RTL generation quality of at least two LLMs under a common protocol. 
+O2.1 Audit tasks and freeze the evaluation suite  
+MA, Shenhan 
+Inspect selected VerilogEval and RTLLM tasks, recording source version, licence, circuit class, required interface and 
+test assumptions. The planning target is 10 development tasks and 40 distinct final evaluation tasks, with 
+approximately 20 final tasks from each benchmark. Select cases before viewing final model outputs, based on 
+coverage and tool compatibility rather than apparent model difficulty. Check reference designs against the local test 
+flow. For supplementary boundary tests, introduce a known relevant fault and verify that the test rejects it. Keep 
+related task variants in the same split. 
+Retain original files and document each portability or specification revision. Cases with unresolved contradictions 
+will be flagged and handled according to a predeclared inclusion rule. If a defect is discovered after evaluation, 
+publish the original result and a separately versioned corrected rerun for all compared conditions. Any new task or 
+test contribution will include its rationale and review evidence. Complete the main manifest and scoring rules before 
+final experiments begin. 
+O2.2 Implement common generation and model baselines  
+WU, Yuzhen 
+Use at least two LLMs with stable, identifiable access routes. Prefer a small, informative selection over a broad 
+leaderboard; include an open model if server resources make it practical. Keep task facts, requested interfaces, 
+output rules and generation budgets consistent. Record any model-specific parameter limitations. The baseline will 
+compare first-candidate outputs without hand correction. Save provider, endpoint, model identifier, execution date, 
+prompt, raw response and code for each run. If a service cannot verify the requested model, label the result as 
+endpoint-specific rather than attribute it confidently to that model. 
+O2.3 Quantify quality and analyze failures  
+LI, Aojie 
+Run three samples per task and model under recorded settings, subject to the October scale decision. Report 
+compilation, functional and synthesis pass rates separately by benchmark and circuit class, with failure counts and 
+confidence intervals. Inspect representative cases involving reset, width, signedness, latency and state transitions. 
+Compare latency and available token or billing data alongside quality. Repeated model outputs are measurements 
+on the same task, not additional independent design problems. The result will be a baseline report and an error 
+taxonomy that guide the method investigation. 
+Benchmark correctness and separation 
+
+===== PDF PAGE 10 =====
+ 
+ 
+8 
+Final evaluation tasks are held out from prompt tuning and retrieval selection. Public availability prevents a 
+guarantee that a model has never seen them, so this limitation will be stated. Reference RTL, scoring testbenches, 
+expected outputs and benchmark answer pairs will not be supplied to generation or retrieval. Learning exercises and 
+development cases will remain separate from the final task set. 
+2.2.3 Focused Method Development 
+Objective 3: Develop and evaluate one focused improvement to RTL generation, using a baseline, a proposed 
+method and at least one ablation or matched-budget control to determine its benefits and limitations. 
+O3.1 Design the intervention and comparison  
+WU, Yuzhen 
+Turn the October findings into a specific hypothesis and mechanism. For example, if failures repeatedly involve reset 
+priority or output latency, test whether a structured specification checklist reduces these errors. All conditions must 
+receive the same design facts: adding missing requirements only to the proposed method would confound the 
+comparison. Define the primary outcome, baseline, expected affected error classes and meaningful improvement 
+criterion on development data before final testing. Position the selected intervention against the closest published 
+approach and identify the actual proposed difference. 
+O3.2 Implement targeted retrieval or feedback  
+MA, Shenhan 
+Implement the selected method as a configurable component. For retrieval, index reviewed language rules, generic 
+design notes or versioned tool documentation, preserving source identifiers. Form queries from the specification or 
+permitted diagnostics; tune passage selection on development tasks. Exclude exact and near-duplicate task 
+solutions. Compare with the same prompt without retrieval, and use a fixed-context control if the claim concerns 
+retrieval selection rather than simply additional information. Record retrieved passages to explain both 
+improvements and regressions. 
+For repair, supply the original requirements, current RTL and a bounded compiler or diagnostic-test summary. Start 
+with a maximum of two repairs per run and a fixed stopping policy. Diagnostic tests may guide repairs; final scoring 
+tests may not. Preserve every candidate and score the terminal output without choosing the best one using hidden 
+results. If the claim concerns the benefit of feedback, include fresh generation with an equivalent call budget. 
+Retrieval and repair will not both become mandatory full studies unless the chosen question requires their 
+interaction. 
+WU, Yuzhen will lead implementation of the selected generation intervention. MA, Shenhan will provide permitted 
+compiler or diagnostic feedback if repair is included, while LI, Aojie will maintain the task definitions and separation 
+between development material and final evaluation resources. 
+ 
+O3.3 Evaluate mechanisms and assess optimization  
+LI, Aojie 
+Run the baseline, proposed method and an ablation or matched-budget control on the same frozen tasks and model. 
+Report absolute pass-rate differences in percentage points and the number of tasks helped or harmed. Separate 
+first-generation improvements from repair gains and inspect changes in error categories. If resources permit, repeat 
+the main finding on a second model. Freeze the core method before any final-result inspection; subsequent 
+modifications will require a separately labelled evaluation. 
+Assess a limited optimization extension on already correct designs only after the core study is secure. Fix the 
+synthesis library, constraints, top module and pipeline latency, and use an appropriate equivalence check where 
+
+===== PDF PAGE 11 =====
+ 
+ 
+9 
+available. Analyze timing and area together. If only simulation supports correctness, describe the result as 
+simulation-checked rather than equivalence-proven. Power evaluation requires justified activity and tool support; it 
+is not part of the core commitment. The extension will be stopped if it threatens completion of the main controlled 
+study. 
+MA, Shenhan will lead execution of the controlled evaluation and calculation of method effects. LI, Aojie will support 
+analysis by circuit type and task requirements, while WU, Yuzhen will interpret changes associated with prompting, 
+retrieval or repair. Conclusions will be reviewed jointly, using the same frozen candidates, scoring rules and 
+experiment records. 
+ 
+2.2.4 Prototype and Reproducible Research Outputs 
+Objective 4: Integrate the evaluated method into a demonstration prototype and deliver an independently checked 
+experiment package, a final report and presentation materials. 
+O4.1 Integrate the demonstration prototype  
+WU, Yuzhen 
+Build a simple local interface or guided command-line demonstration using the same pipeline as the experiments. A 
+user will enter or select a specification, inspect the generated Verilog, view compilation and simulation outcomes, 
+and inspect synthesis summaries or repair history where supported. Clearly identify unverified outputs, timeouts and 
+failed checks. Acceptance requires one successful example, one diagnosed failure and, where repair is studied, one 
+recorded repair trajectory. Saved runs will support a reliable presentation if live model access is interrupted. 
+O4.2 Check reproducibility and assemble results  
+LI, Aojie 
+Package the task manifest, source versions, configuration, prompts, permitted corpus, generated outputs and 
+evaluation scripts. A member other than the principal implementer will replay the saved candidates and recompute 
+the summary metrics in a clean environment. Document dependencies on ECE licences or restricted libraries without 
+redistributing restricted material. Acceptance requires matching task statuses and aggregate metrics for the 
+replayed dataset. Fresh model generation may differ even with identical settings; evaluation replay and regeneration 
+will therefore be reported as separate reproducibility claims. 
+O4.3 Prepare the report and presentation  
+MA, Shenhan 
+Develop the report around the engineering problem, method rationale, controlled evidence and limitations. 
+Maintain figures showing model comparison, method effects, failure distribution and representative tool results. 
+Prepare a concise demonstration and presentation slides that explain the contribution without relying on a live 
+service. Complete a report draft before the final correction period, then incorporate review comments and submit 
+the required report, self-assessment and poster. Each member will contribute technical evidence and take part in 
+presentation preparation. 
+
+===== PDF PAGE 12 =====
+ 
+ 
+10 
+2.2.5 Research Outputs and Completion Criteria 
+Table 2. Core deliverables and acceptance evidence 
+Deliverable Completion evidence 
+Validated workflow Expected outcomes for known passing and injected failing cases; documented server and 
+tool setup. 
+Benchmark and model study Frozen task manifest; at least two model configurations; complete outcome tables, costs 
+where measurable, and failure analysis. 
+Focused method contribution Defined hypothesis; implemented intervention; fair baseline and ablation/control; 
+quantified results and limitations. 
+Prototype and research package Demonstration cases pass their expected checks; replayed metrics match; report, poster 
+and presentation materials prepared. 
+ 
+A meaningful contribution requires both a sound comparison and an interpretable finding. A favourable score alone 
+is insufficient if task leakage, unequal budgets or inconsistent tools explain the difference. Conversely, a well-
+supported limitation can be valuable when the underlying mechanism and practical implications are established. 
+2.3 Evaluation Protocol 
+Table 3. Quantitative measures and reporting rules 
+Measure Definition and interpretation 
+Functional pass rate Passing candidates / scheduled candidates, using all required tests for each task. Primary 
+measure for first-generation quality; report task count, sample count and benchmark version.  
+Compilation success Candidates that compile / scheduled candidates. Parsing failures and invalid module interfaces 
+remain visible failures. Compilation is not functional correctness. 
+Synthesis success 
+Candidates accepted by the fixed synthesis flow / scheduled candidates in the predeclared 
+synthesis-compatible subset. Also report the number that are both functionally passing and 
+synthesizable. 
+Repair outcome Terminal-candidate functional pass rate under the fixed repair limit; fraction of initially failing 
+runs repaired; regressions and calls used. Keep separate from first-generation scores. 
+Resources Wall-clock time, model calls, reported tokens and measured expenditure. Report unavailable 
+billing data as unavailable; do not equate provider token counts with identical compute.  
+Design quality extension Mapped area and timing under identical libraries and constraints, for designs passing the stated 
+correctness checks. Generic cell counts are reported only as structural statistics.  
+ 
+Model comparison and method comparison answer different questions. The former changes the model while 
+holding the task protocol fixed; the latter fixes the model while changing the intervention. Model selection and 
+prompt tuning use development data. A baseline may be reused only when task, model version, settings and 
+evaluation conditions match the method experiment. Otherwise it must be rerun. Defaults that differ across services 
+will be documented rather than silently described as identical. 
+
+===== PDF PAGE 13 =====
+ 
+ 
+11 
+For N tasks and R samples per task, the sample-averaged first-generation pass rate is the number of passing first 
+candidates divided by N × R. Report this as a pass@1 estimate under the stated sampling settings, not as pass@R. 
+The planning scenario of two models, 40 evaluation tasks and three samples gives 240 initial generations. Two 
+additional method conditions on one model add 240 generations. A repair study on one 120-run condition permits at 
+most 240 additional repair calls; a matched-budget regeneration control, pilot and reruns require separate 
+allowance. 
+Uncertainty will be estimated by resampling whole tasks with their repeated samples grouped together. Paired 
+differences will use the same resampled tasks across methods, with benchmark membership preserved. Report 
+separate benchmark scores and a clearly labelled pooled subset score. Missing, malformed and timed-out outputs 
+count as failures in the primary end-to-end measure. Infrastructure failures will also be reported separately, with a 
+bounded technical retry policy fixed in advance. No favourable sample or task will be selected retrospectively. 
+3 Project Planning 
+3.1 Project Schedule 
+The academic-year project builds on preparatory work started in July 2026 and runs through the May 2027 
+presentations. Each member expects to contribute approximately 8–10 hours per week, giving a normal team 
+capacity of 24–30 hours. Additional effort may be available during technical milestones, but the plan does not 
+depend on sustained overtime. Shared learning and exploration continue through October, followed by a focused 
+method study, final evaluation and communication of results. 
+3.1.1 Responsibilities and Coordination 
+The team has discussed progress and direction every two weeks since August and plans to meet weekly from 
+October. A rotating coordinator will maintain the agenda, action register and experiment status. Supervisor meetings 
+will be arranged according to progress and availability, with particular attention to the October scope decision and 
+major research findings. Every task has one proposed responsible member; responsibilities can be reassigned by 
+agreement, with the task register and Gantt chart updated together. 
+Table 4. Proposed task responsibility summary 
+Member Tasks coordinated Main responsibility 
+WU, Yuzhen O1.1, O2.2, O3.1, O4.1 Research framing, generation baselines, implementation and 
+demonstration integration. 
+LI, Aojie O1.2, O2.3, O3.3, O4.2 EDA validation, quantitative evaluation, controlled analysis and 
+reproduction. 
+MA, Shenhan O1.3, O2.1, O3.2, O4.3 Pilot coordination, benchmark audit, selected method method 
+design and research communication. 
+ 
+3.1.2 Dependencies and Milestones 
+Reliable tool outcomes are needed before model failures can be interpreted. The audited development set supports 
+early experiments; the final set and scoring procedure must be frozen before final evaluation. The method freeze 
+depends on a clear hypothesis, a baseline and a feasible control. Prototype integration can proceed alongside 
+method development, but the demonstration must use the evaluated workflow. 
+31 October 2026: validated pilot workflow, initial model comparison and a written direction decision, with 
+supervisor discussion arranged. 
+Late November 2026: audited evaluation manifest, model access and common baseline protocol established. 
+
+===== PDF PAGE 14 =====
+ 
+ 
+12 
+January 2027: working method prototype and development evidence for the progress report; core settings frozen 
+before final experiments. 
+March 2027: controlled evaluation, error analysis, reproducibility checks and a complete report draft. 
+April–May 2027: report and poster submission, final demonstration, presentation preparation and scheduled events. 
+The weekly schedule on the following two landscape pages covers all objective tasks. Shaded objective rows 
+summarize their constituent activities; optional optimization is included only within O3.3 after the core feasibility 
+check. July–September preparatory activity is summarized in Appendix A.
+
+===== PDF PAGE 15 =====
+ 
+13 
+3.1.3 Weekly Project Schedule 
+Table 5. Weekly schedule, part 1 of 2 
+ID Objective or task Lead W1 
+21Sep 
+W2 
+28Sep 
+W3 
+05Oct 
+W4 
+12Oct 
+W5 
+19Oct 
+W6 
+26Oct 
+W7 
+02Nov 
+W8 
+09Nov 
+W9 
+16Nov 
+W10 
+23Nov 
+W11 
+30Nov 
+W12 
+07Dec 
+W13 
+14Dec 
+W14 
+21Dec 
+W15 
+28Dec 
+W16 
+04Jan 
+W17 
+11Jan 
+O1 Validated workflow and October pilot                   
+O1.1 Consolidate literature and requirements WU                  
+O1.2 Validate simulation and synthesis LI                  
+O1.3 Run pilot and select direction MA                  
+O2 Benchmark audit and model comparison                   
+O2.1 Audit tasks and freeze suite MA                  
+O2.2 Implement common model baselines WU                  
+O2.3 Quantify quality and analyze failures LI                  
+O3 Focused method development                   
+O3.1 Design intervention and comparison WU                  
+O3.2 Implement retrieval or feedback MA                  
+O3.3 Evaluate method and assess optimization LI                  
+O4 Prototype and reproducible outputs                   
+O4.1 Integrate demonstration prototype WU                  
+O4.2 Check reproduction and assemble results LI                  
+O4.3 Prepare report and presentation MA                  
+ Reports and presentations ALL  P    M1    M2       PR 
+ 
+Week headers show Monday dates. WU = WU, Yuzhen; LI = LI, Aojie; MA = MA, Shenhan. Shading indicates planned activity. Objective bars cover their associated task 
+periods. Task leads are provisional and all members collaborate. 
+Milestones [13]: P = proposal, 30 Sep; M1 = monthly report, 30 Oct; M2 = monthly report, 23 Nov; PR = progress report and midterm poster, 13 Jan. The direction decision 
+is due by 31 Oct (W6).
+
+===== PDF PAGE 16 =====
+ 
+14 
+3.1.3 Weekly Project Schedule continued 
+Table 5. Weekly schedule, part 2 of 2 
+ID Objective or task Lead W18 
+18Jan 
+W19 
+25Jan 
+W20 
+01Feb 
+W21 
+08Feb 
+W22 
+15Feb 
+W23 
+22Feb 
+W24 
+01Mar 
+W25 
+08Mar 
+W26 
+15Mar 
+W27 
+22Mar 
+W28 
+29Mar 
+W29 
+05Apr 
+W30 
+12Apr 
+W31 
+19Apr 
+W32 
+26Apr 
+W33 
+03May 
+W34 
+10May 
+O1 Validated workflow and October pilot                   
+O1.1 Consolidate literature and requirements WU                  
+O1.2 Validate simulation and synthesis LI                  
+O1.3 Run pilot and select direction MA                  
+O2 Benchmark audit and model comparison                   
+O2.1 Audit tasks and freeze suite MA                  
+O2.2 Implement common model baselines WU                  
+O2.3 Quantify quality and analyze failures LI                  
+O3 Focused method development                   
+O3.1 Design intervention and comparison WU                  
+O3.2 Implement retrieval or feedback MA                  
+O3.3 Evaluate method and assess optimization LI                  
+O4 Prototype and reproducible outputs                   
+O4.1 Integrate demonstration prototype WU                  
+O4.2 Check reproduction and assemble results LI                  
+O4.3 Prepare report and presentation Ma                  
+ Reports and presentations ALL  MP    M3       F   I O 
+ 
+Week headers show Monday dates. WU = WU, Yuzhen; LI = LI, Aojie; MA = MA, Shenhan. Shading indicates planned activity. Objective bars cover their associated task 
+periods. Task leads are provisional and all members collaborate. 
+Milestones [13]: MP = Midterm Progress Day, 27 Jan (TBC); M3 = monthly report, 26 Feb; F = final report, self-assessment and poster, 16 Apr; I = Industry Day, 7 May (TBC); 
+O = oral presentation, 11–12 May (TBC).
+
+===== PDF PAGE 17 =====
+ 
+15 
+3.2 Budget 
+The project will use existing personal computers and ECE server resources. The budget below is a provisional 
+planning allowance in HKD, not a quotation or a confirmed funding allocation. A personal assistant subscription 
+supports reading and discussion; automated model experiments require a separate, metered access allowance. The 
+team will record actual expenditure and discuss additional needs with the supervisor before committing to them. 
+Table 6. Initial expenditure allowance 
+Item Basis HKD 
+Assistant subscription Planning allowance of 120 per month for ten months; replace with actual 
+subscription charges. 1,200 
+Model API calls and optional 
+embeddings 
+Initial pooled allowance for pilot and controlled experiments; refine from 
+measured usage. 500 
+ECE compute and available 
+EDA tools 
+Assumed covered by existing university provision; confirm permitted tools and 
+quotas. 0 
+Local computer, storage and 
+software Use existing equipment and available software; no new GPU purchase planned.  0 
+Total planning allowance Subscription plus experiment allowance and contingency. 1700 
+ 
+The experimental estimate will use measured input/output usage, published or agreed service rates, repair calls and 
+technical retries. If a gateway is used, record the endpoint and billed usage, and check whether the actual model can 
+be identified. API credentials will stay outside the research package. Restricted server material or design libraries will 
+not be sent to external services without permission. If access is unreliable or expensive, reduce optional models and 
+extensions before weakening the main comparison. 
+ 
+References 
+[1] S. Liu, W. Fang, Y. Lu, J. Wang, Q. Zhang, H. Zhang, and Z. Xie, “RTLCoder: Fully Open-Source and Efficient LLM-
+Assisted RTL Code Generation Technique,” IEEE Transactions on Computer-Aided Design of Integrated Circuits and 
+Systems, vol. 44, no. 4, 2025, doi: 10.1109/TCAD.2024.3483089. 
+[2] J. Wang, S. Liu, H. Zhou, and Z. Xie, “RTL-BenchMT: Dynamic Maintenance of RTL Generation Benchmark Through 
+Agent-Assisted Analysis and Revision,” in Proc. 63rd ACM/IEEE Design Automation Conf. (DAC), 2026, doi: 
+10.1145/3770743.3804053. Version consulted: arXiv:2605.15537v1. https://arxiv.org/abs/2605.15537v1 
+[3] W. Fang et al., “Dr. RTL: Autonomous Agentic RTL Optimization through Tool-Grounded Self-Improvement,” 
+arXiv:2604.14989v2, 2026. https://arxiv.org/abs/2604.14989v2 
+[4] M. Liu, N. Pinckney, B. Khailany, and H. Ren, “VerilogEval: Evaluating Large Language Models for Verilog Code 
+Generation,” in Proc. IEEE/ACM International Conference on Computer-Aided Design (ICCAD), 2023. 
+https://arxiv.org/abs/2309.07544 
+[5] N. Pinckney, C. Batten, M. Liu, H. Ren, and B. Khailany, “Revisiting VerilogEval: A Year of Improvements in Large-
+Language Models for Hardware Code Generation,” arXiv:2408.11053v2, 2025. https://arxiv.org/abs/2408.11053 
+[6] NVIDIA, “VerilogEval,” software repository and documentation. Accessed: Sep. 23, 2026. [Online]. Available: 
+https://github.com/NVlabs/verilog-eval 
+[7] Y. Lu, S. Liu, Q. Zhang, and Z. Xie, “RTLLM: An Open-Source Benchmark for Design RTL Generation with Large 
+Language Model,” in Proc. Asia and South Pacific Design Automation Conf. (ASP-DAC), 2024, pp. 722–727. 
+https://arxiv.org/abs/2308.05345 
+
+===== PDF PAGE 18 =====
+ 
+16 
+[8] HKUST Zhiyao Xie Research Group, “RTLLM,” software repository, v2.1 release notes. Accessed: Sep. 23, 2026. 
+[Online]. Available: https://github.com/hkust-zhiyao/RTLLM 
+[9] P. Lewis et al., “Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks,” in Advances in Neural 
+Information Processing Systems, vol. 33, 2020, pp. 9459–9474. https://arxiv.org/abs/2005.11401 
+[10] Cadence Design Systems, “Cadence RTL-to-GDSII Flow,” training course and tool overview. Accessed: Sep. 23, 
+2026. [Online]. Available: https://login.cadence.com/content/cadence-www/global/zh_CN/home/training/all-
+courses/86136.html 
+[11] Icarus Verilog contributors, “Icarus Verilog Usage,” documentation. Accessed: Sep. 23, 2026. [Online]. Available: 
+https://steveicarus.github.io/iverilog/usage/index.html 
+[12] YosysHQ, “Introduction,” Yosys documentation. Accessed: Sep. 23, 2026. [Online]. Available: 
+https://yosyshq.readthedocs.io/projects/yosys/en/latest/introduction.html 
+[13] Department of Electronic and Computer Engineering, HKUST, “Schedule / Deadlines,” ELEC/CPEG Final Year 
+Project, 2026–2027 schedule entries. Accessed: Sep. 23, 2026. [Online]. Available: 
+https://course.ece.ust.hk/fyp26/?page_id=67 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+===== PDF PAGE 19 =====
+ 
+17 
+Appendix 
+Appendix A—Meeting Minutes 
+Date:Jul 8th 
+Time: 15:00 
+Location: Zoom 
+Attendees: WU, Yuzhen; LI, Aojie; MA, Shenhan 
+Absent: None 
+Minutes taken by: WU, Yuzhen 
+● WU, Yuzhen suggested that the project should prioritize a focused methodological contribution supported 
+by a practical research prototype. The group agreed that the prototype should demonstrate the proposed 
+method and its evaluation results, while keeping interface development manageable. 
+● LI, Aojie proposed comparing the RTL generation quality of different LLMs using a common benchmark and 
+evaluation procedure. The group agreed to examine functional pass rates, compilation and synthesis 
+outcomes, and representative failures before selecting an improvement direction. 
+● MA, Shenhan suggested continuing collaborative exploration during the initial stage so that all three 
+members could develop a shared understanding of the benchmarks and EDA workflow. More specific 
+technical responsibilities would be assigned once the research direction became clearer. 
+● The group discussed structured prompting, retrieval-augmented generation and tool-feedback repair as 
+possible directions. The choice would be guided by the problems observed in preliminary experiments, the 
+potential research contribution and the available resources. 
+● The group agreed to complete the initial scope decision by 31 October 2026. The decision would identify the 
+main research question, planned experiments and proposed task allocation. 
+● The members anticipated possible delays in tool setup and model access. If these difficulties limited 
+progress, the group would begin with a smaller set of representative circuits and fewer models, then expand 
+the experiments after validating the workflow. 
+● Previous action items were reviewed. Confirmed completion evidence, outstanding work and reasons for 
+any delays: 
+Table 1. Action Items from Previous Meeting 
+
+===== PDF PAGE 20 =====
+ 
+18 
+Action Item to be completed By when By whom Status 
+Read RTLCoder, Dr. RTL and RTL-
+BenchMT and discuss their 
+research questions. 
+Aug 1st 
+ 
+All three 
+members 
+Initial reading reported completed; reading notes 
+to be reviewed as completion evidence. 
+Study the digital-circuit and 
+Verilog concepts required for the 
+project. 
+Aug 15th All three 
+members 
+Initial study reported completed; further practice 
+continues. 
+Investigate VerilogEval and RTLLM 
+and prepare initial benchmark 
+tasks. 
+Aug 29th All three 
+members 
+In progress. Initial task records are available; 
+specification, interface and testbench checks 
+remain outstanding. 
+Develop and test the initial LLM 
+generation and evaluation 
+workflow. 
+Sep 12th All three 
+members 
+Partially completed. A Python prototype is 
+available; reference-module, testbench and 
+result-parsing issues require further validation. 
+Explore available simulation and 
+synthesis tools. 
+Sep 23rd All three 
+members 
+In progress. Local simulation has been attempted; 
+server access and synthesis feasibility remain to 
+be confirmed. 
+Table 2. Action Items for Next Meeting 
+
+===== PDF PAGE 21 =====
+ 
+19 
+Action Item to be completed By when By whom 
+Check initial task specifications, interfaces, reference implementations and 
+testbenches, and record necessary corrections. 
+Oct 4th LI, Aojie 
+Implement model-generation records, including model name, prompt, temperature, 
+task ID, raw output, extracted Verilog and available cost and latency. 
+Oct 11th WU, 
+Yuzhen 
+Validate compilation, simulation and result classification using known correct designs 
+and deliberately faulty candidates. 
+Oct 18th MA, 
+Shenhan 
+Confirm available simulation and synthesis tools and document their versions and 
+access requirements. 
+Oct 25th MA, 
+Shenhan 
+Review pilot findings and prepare the proposed research direction for supervisor 
+discussion. 
+Oct 31st All three 
+members 
+Next Meeting: Date Oct 3rd / Time 15:00 / Location Library Study Room LG4-16 
+ 
+ 
+ 
+ 
+ 

@@ -1,0 +1,8 @@
+read_verilog -sv reference.sv dut.sv miter.sv
+hierarchy -top miter
+proc
+flatten
+opt
+async2sync
+opt
+sat -seq 32 -set-init-zero -set-at 1 rst_n 0 -set-at 2 rst_n 1 -set-at 3 rst_n 1 -set-at 4 rst_n 1 -set-at 5 rst_n 1 -set-at 6 rst_n 1 -set-at 7 rst_n 1 -set-at 8 rst_n 1 -set-at 9 rst_n 1 -set-at 10 rst_n 1 -set-at 11 rst_n 1 -set-at 12 rst_n 1 -set-at 13 rst_n 1 -set-at 14 rst_n 1 -set-at 15 rst_n 1 -set-at 16 rst_n 1 -set-at 17 rst_n 1 -set-at 18 rst_n 1 -set-at 19 rst_n 1 -set-at 20 rst_n 1 -set-at 21 rst_n 1 -set-at 22 rst_n 1 -set-at 23 rst_n 1 -set-at 24 rst_n 1 -set-at 25 rst_n 1 -set-at 26 rst_n 1 -set-at 27 rst_n 1 -set-at 28 rst_n 1 -set-at 29 rst_n 1 -set-at 30 rst_n 1 -set-at 31 rst_n 1 -set-at 32 rst_n 1 -prove mismatch 0 -show din -show rst_n -show mismatch -dump_json trace.json

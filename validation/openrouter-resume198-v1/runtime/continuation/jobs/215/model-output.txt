@@ -1,0 +1,24 @@
+```systemverilog
+module TopModule (
+    input  logic        a,
+    input  logic        b,
+    input  logic        c,
+    input  logic        d,
+    input  logic        e,
+    output logic [24:0] out
+);
+
+    logic [4:0] signals;
+
+    assign signals = {a, b, c, d, e};
+
+    always_comb begin
+        for (int i = 0; i < 5; i++) begin
+            for (int j = 0; j < 5; j++) begin
+                out[24 - (i * 5 + j)] = ~(signals[4 - i] ^ signals[4 - j]);
+            end
+        end
+    end
+
+endmodule
+```

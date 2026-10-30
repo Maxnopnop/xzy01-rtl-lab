@@ -1,0 +1,1 @@
+module bad(input [999:0] a,output [1999:0] q); assign q=a*a; endmodule

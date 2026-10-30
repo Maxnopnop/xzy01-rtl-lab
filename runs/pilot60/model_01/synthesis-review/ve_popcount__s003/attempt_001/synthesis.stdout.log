@@ -1,0 +1,1294 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2025  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
+
+-- Executing script file `synthesis.ys' --
+
+1. Executing Verilog-2005 frontend: dut.sv
+Parsing SystemVerilog input from `dut.sv' to AST representation.
+Generating RTLIL representation for module `\TopModule'.
+Successfully finished Verilog frontend.
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Analyzing design hierarchy..
+Top module:  \TopModule
+
+2.2. Analyzing design hierarchy..
+Top module:  \TopModule
+Removed 0 unused modules.
+
+3. Executing PROC pass (convert processes to netlists).
+
+3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 2 assignments to connections.
+
+3.4. Executing PROC_INIT pass (extract init attributes).
+
+3.5. Executing PROC_ARST pass (detect async resets in processes).
+
+3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\TopModule.$proc$dut.sv:0$2'.
+
+3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\TopModule.\out' from process `\TopModule.$proc$dut.sv:0$2'.
+No latch inferred for signal `\TopModule.\i' from process `\TopModule.$proc$dut.sv:0$2'.
+
+3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `TopModule.$proc$dut.sv:0$2'.
+Cleaned up 0 empty switches.
+
+3.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module TopModule.
+
+4. Executing CHECK pass (checking for obvious problems).
+Checking module TopModule...
+Found and reported 0 problems.
+
+5. Executing SYNTH pass.
+
+5.1. Executing HIERARCHY pass (managing design hierarchy).
+
+5.1.1. Analyzing design hierarchy..
+Top module:  \TopModule
+
+5.1.2. Analyzing design hierarchy..
+Top module:  \TopModule
+Removed 0 unused modules.
+
+5.2. Executing PROC pass (convert processes to netlists).
+
+5.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+5.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+5.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+5.2.4. Executing PROC_INIT pass (extract init attributes).
+
+5.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+5.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+5.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+5.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+5.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+5.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+5.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+5.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module TopModule.
+
+5.3. Executing OPT_EXPR pass (perform const folding).
+Optimizing module TopModule.
+<suppressed ~1 debug messages>
+
+5.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \TopModule..
+Removed 0 unused cells and 4 unused wires.
+<suppressed ~2 debug messages>
+
+5.5. Executing CHECK pass (checking for obvious problems).
+Checking module TopModule...
+Found and reported 0 problems.
+
+5.6. Executing OPT pass (performing simple optimizations).
+
+5.6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module TopModule.
+
+5.6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\TopModule'.
+Removed a total of 0 cells.
+
+5.6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \TopModule..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+5.6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \TopModule.
+Performed a total of 0 changes.
+
+5.6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\TopModule'.
+Removed a total of 0 cells.
+
+5.6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \TopModule..
+
+5.6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module TopModule.
+
+5.6.9. Finished OPT passes. (There is nothing left to do.)
+
+5.7. Executing FSM pass (extract and optimize FSM).
+
+5.7.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+5.7.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+5.7.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+5.7.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \TopModule..
+
+5.7.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+5.7.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+5.7.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+5.7.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+5.8. Executing OPT pass (performing simple optimizations).
+
+5.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module TopModule.
+
+5.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\TopModule'.
+Removed a total of 0 cells.
+
+5.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \TopModule..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+5.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \TopModule.
+Performed a total of 0 changes.
+
+5.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\TopModule'.
+Removed a total of 0 cells.
+
+5.8.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \TopModule..
+
+5.8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module TopModule.
+
+5.8.9. Finished OPT passes. (There is nothing left to do.)
+
+5.9. Executing WREDUCE pass (reducing word size of cells).
+Removed top 7 bits (of 8) from port A of cell TopModule.$add$dut.sv:9$4 ($add).
+Removed top 6 bits (of 8) from port Y of cell TopModule.$add$dut.sv:9$4 ($add).
+Removed top 6 bits (of 8) from port A of cell TopModule.$add$dut.sv:9$5 ($add).
+Removed top 5 bits (of 8) from port Y of cell TopModule.$add$dut.sv:9$5 ($add).
+Removed top 5 bits (of 8) from port A of cell TopModule.$add$dut.sv:9$6 ($add).
+Removed top 4 bits (of 8) from port Y of cell TopModule.$add$dut.sv:9$6 ($add).
+Removed top 4 bits (of 8) from port A of cell TopModule.$add$dut.sv:9$7 ($add).
+Removed top 3 bits (of 8) from port Y of cell TopModule.$add$dut.sv:9$7 ($add).
+Removed top 3 bits (of 8) from port A of cell TopModule.$add$dut.sv:9$8 ($add).
+Removed top 2 bits (of 8) from port Y of cell TopModule.$add$dut.sv:9$8 ($add).
+Removed top 2 bits (of 8) from port A of cell TopModule.$add$dut.sv:9$9 ($add).
+Removed top 1 bits (of 8) from port Y of cell TopModule.$add$dut.sv:9$9 ($add).
+Removed top 1 bits (of 8) from port A of cell TopModule.$add$dut.sv:9$10 ($add).
+Removed top 6 bits (of 8) from wire TopModule.$add$dut.sv:9$4_Y.
+Removed top 5 bits (of 8) from wire TopModule.$add$dut.sv:9$5_Y.
+Removed top 4 bits (of 8) from wire TopModule.$add$dut.sv:9$6_Y.
+Removed top 3 bits (of 8) from wire TopModule.$add$dut.sv:9$7_Y.
+Removed top 2 bits (of 8) from wire TopModule.$add$dut.sv:9$8_Y.
+Removed top 1 bits (of 8) from wire TopModule.$add$dut.sv:9$9_Y.
+
+5.10. Executing PEEPOPT pass (run peephole optimizers).
+
+5.11. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \TopModule..
+Removed 0 unused cells and 6 unused wires.
+<suppressed ~1 debug messages>
+
+5.12. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module TopModule:
+  creating $macc model for $add$dut.sv:9$10 ($add).
+  creating $macc model for $add$dut.sv:9$100 ($add).
+  creating $macc model for $add$dut.sv:9$101 ($add).
+  creating $macc model for $add$dut.sv:9$102 ($add).
+  creating $macc model for $add$dut.sv:9$103 ($add).
+  creating $macc model for $add$dut.sv:9$104 ($add).
+  creating $macc model for $add$dut.sv:9$105 ($add).
+  creating $macc model for $add$dut.sv:9$106 ($add).
+  creating $macc model for $add$dut.sv:9$107 ($add).
+  creating $macc model for $add$dut.sv:9$108 ($add).
+  creating $macc model for $add$dut.sv:9$109 ($add).
+  creating $macc model for $add$dut.sv:9$11 ($add).
+  creating $macc model for $add$dut.sv:9$110 ($add).
+  creating $macc model for $add$dut.sv:9$111 ($add).
+  creating $macc model for $add$dut.sv:9$112 ($add).
+  creating $macc model for $add$dut.sv:9$113 ($add).
+  creating $macc model for $add$dut.sv:9$114 ($add).
+  creating $macc model for $add$dut.sv:9$115 ($add).
+  creating $macc model for $add$dut.sv:9$116 ($add).
+  creating $macc model for $add$dut.sv:9$117 ($add).
+  creating $macc model for $add$dut.sv:9$118 ($add).
+  creating $macc model for $add$dut.sv:9$119 ($add).
+  creating $macc model for $add$dut.sv:9$12 ($add).
+  creating $macc model for $add$dut.sv:9$120 ($add).
+  creating $macc model for $add$dut.sv:9$121 ($add).
+  creating $macc model for $add$dut.sv:9$122 ($add).
+  creating $macc model for $add$dut.sv:9$123 ($add).
+  creating $macc model for $add$dut.sv:9$124 ($add).
+  creating $macc model for $add$dut.sv:9$125 ($add).
+  creating $macc model for $add$dut.sv:9$126 ($add).
+  creating $macc model for $add$dut.sv:9$127 ($add).
+  creating $macc model for $add$dut.sv:9$128 ($add).
+  creating $macc model for $add$dut.sv:9$129 ($add).
+  creating $macc model for $add$dut.sv:9$13 ($add).
+  creating $macc model for $add$dut.sv:9$130 ($add).
+  creating $macc model for $add$dut.sv:9$131 ($add).
+  creating $macc model for $add$dut.sv:9$132 ($add).
+  creating $macc model for $add$dut.sv:9$133 ($add).
+  creating $macc model for $add$dut.sv:9$134 ($add).
+  creating $macc model for $add$dut.sv:9$135 ($add).
+  creating $macc model for $add$dut.sv:9$136 ($add).
+  creating $macc model for $add$dut.sv:9$137 ($add).
+  creating $macc model for $add$dut.sv:9$138 ($add).
+  creating $macc model for $add$dut.sv:9$139 ($add).
+  creating $macc model for $add$dut.sv:9$14 ($add).
+  creating $macc model for $add$dut.sv:9$140 ($add).
+  creating $macc model for $add$dut.sv:9$141 ($add).
+  creating $macc model for $add$dut.sv:9$142 ($add).
+  creating $macc model for $add$dut.sv:9$143 ($add).
+  creating $macc model for $add$dut.sv:9$144 ($add).
+  creating $macc model for $add$dut.sv:9$145 ($add).
+  creating $macc model for $add$dut.sv:9$146 ($add).
+  creating $macc model for $add$dut.sv:9$147 ($add).
+  creating $macc model for $add$dut.sv:9$148 ($add).
+  creating $macc model for $add$dut.sv:9$149 ($add).
+  creating $macc model for $add$dut.sv:9$15 ($add).
+  creating $macc model for $add$dut.sv:9$150 ($add).
+  creating $macc model for $add$dut.sv:9$151 ($add).
+  creating $macc model for $add$dut.sv:9$152 ($add).
+  creating $macc model for $add$dut.sv:9$153 ($add).
+  creating $macc model for $add$dut.sv:9$154 ($add).
+  creating $macc model for $add$dut.sv:9$155 ($add).
+  creating $macc model for $add$dut.sv:9$156 ($add).
+  creating $macc model for $add$dut.sv:9$157 ($add).
+  creating $macc model for $add$dut.sv:9$158 ($add).
+  creating $macc model for $add$dut.sv:9$159 ($add).
+  creating $macc model for $add$dut.sv:9$16 ($add).
+  creating $macc model for $add$dut.sv:9$160 ($add).
+  creating $macc model for $add$dut.sv:9$161 ($add).
+  creating $macc model for $add$dut.sv:9$162 ($add).
+  creating $macc model for $add$dut.sv:9$163 ($add).
+  creating $macc model for $add$dut.sv:9$164 ($add).
+  creating $macc model for $add$dut.sv:9$165 ($add).
+  creating $macc model for $add$dut.sv:9$166 ($add).
+  creating $macc model for $add$dut.sv:9$167 ($add).
+  creating $macc model for $add$dut.sv:9$168 ($add).
+  creating $macc model for $add$dut.sv:9$169 ($add).
+  creating $macc model for $add$dut.sv:9$17 ($add).
+  creating $macc model for $add$dut.sv:9$170 ($add).
+  creating $macc model for $add$dut.sv:9$171 ($add).
+  creating $macc model for $add$dut.sv:9$172 ($add).
+  creating $macc model for $add$dut.sv:9$173 ($add).
+  creating $macc model for $add$dut.sv:9$174 ($add).
+  creating $macc model for $add$dut.sv:9$175 ($add).
+  creating $macc model for $add$dut.sv:9$176 ($add).
+  creating $macc model for $add$dut.sv:9$177 ($add).
+  creating $macc model for $add$dut.sv:9$178 ($add).
+  creating $macc model for $add$dut.sv:9$179 ($add).
+  creating $macc model for $add$dut.sv:9$18 ($add).
+  creating $macc model for $add$dut.sv:9$180 ($add).
+  creating $macc model for $add$dut.sv:9$181 ($add).
+  creating $macc model for $add$dut.sv:9$182 ($add).
+  creating $macc model for $add$dut.sv:9$183 ($add).
+  creating $macc model for $add$dut.sv:9$184 ($add).
+  creating $macc model for $add$dut.sv:9$185 ($add).
+  creating $macc model for $add$dut.sv:9$186 ($add).
+  creating $macc model for $add$dut.sv:9$187 ($add).
+  creating $macc model for $add$dut.sv:9$188 ($add).
+  creating $macc model for $add$dut.sv:9$189 ($add).
+  creating $macc model for $add$dut.sv:9$19 ($add).
+  creating $macc model for $add$dut.sv:9$190 ($add).
+  creating $macc model for $add$dut.sv:9$191 ($add).
+  creating $macc model for $add$dut.sv:9$192 ($add).
+  creating $macc model for $add$dut.sv:9$193 ($add).
+  creating $macc model for $add$dut.sv:9$194 ($add).
+  creating $macc model for $add$dut.sv:9$195 ($add).
+  creating $macc model for $add$dut.sv:9$196 ($add).
+  creating $macc model for $add$dut.sv:9$197 ($add).
+  creating $macc model for $add$dut.sv:9$198 ($add).
+  creating $macc model for $add$dut.sv:9$199 ($add).
+  creating $macc model for $add$dut.sv:9$20 ($add).
+  creating $macc model for $add$dut.sv:9$200 ($add).
+  creating $macc model for $add$dut.sv:9$201 ($add).
+  creating $macc model for $add$dut.sv:9$202 ($add).
+  creating $macc model for $add$dut.sv:9$203 ($add).
+  creating $macc model for $add$dut.sv:9$204 ($add).
+  creating $macc model for $add$dut.sv:9$205 ($add).
+  creating $macc model for $add$dut.sv:9$206 ($add).
+  creating $macc model for $add$dut.sv:9$207 ($add).
+  creating $macc model for $add$dut.sv:9$208 ($add).
+  creating $macc model for $add$dut.sv:9$209 ($add).
+  creating $macc model for $add$dut.sv:9$21 ($add).
+  creating $macc model for $add$dut.sv:9$210 ($add).
+  creating $macc model for $add$dut.sv:9$211 ($add).
+  creating $macc model for $add$dut.sv:9$212 ($add).
+  creating $macc model for $add$dut.sv:9$213 ($add).
+  creating $macc model for $add$dut.sv:9$214 ($add).
+  creating $macc model for $add$dut.sv:9$215 ($add).
+  creating $macc model for $add$dut.sv:9$216 ($add).
+  creating $macc model for $add$dut.sv:9$217 ($add).
+  creating $macc model for $add$dut.sv:9$218 ($add).
+  creating $macc model for $add$dut.sv:9$219 ($add).
+  creating $macc model for $add$dut.sv:9$22 ($add).
+  creating $macc model for $add$dut.sv:9$220 ($add).
+  creating $macc model for $add$dut.sv:9$221 ($add).
+  creating $macc model for $add$dut.sv:9$222 ($add).
+  creating $macc model for $add$dut.sv:9$223 ($add).
+  creating $macc model for $add$dut.sv:9$224 ($add).
+  creating $macc model for $add$dut.sv:9$225 ($add).
+  creating $macc model for $add$dut.sv:9$226 ($add).
+  creating $macc model for $add$dut.sv:9$227 ($add).
+  creating $macc model for $add$dut.sv:9$228 ($add).
+  creating $macc model for $add$dut.sv:9$229 ($add).
+  creating $macc model for $add$dut.sv:9$23 ($add).
+  creating $macc model for $add$dut.sv:9$230 ($add).
+  creating $macc model for $add$dut.sv:9$231 ($add).
+  creating $macc model for $add$dut.sv:9$232 ($add).
+  creating $macc model for $add$dut.sv:9$233 ($add).
+  creating $macc model for $add$dut.sv:9$234 ($add).
+  creating $macc model for $add$dut.sv:9$235 ($add).
+  creating $macc model for $add$dut.sv:9$236 ($add).
+  creating $macc model for $add$dut.sv:9$237 ($add).
+  creating $macc model for $add$dut.sv:9$238 ($add).
+  creating $macc model for $add$dut.sv:9$239 ($add).
+  creating $macc model for $add$dut.sv:9$24 ($add).
+  creating $macc model for $add$dut.sv:9$240 ($add).
+  creating $macc model for $add$dut.sv:9$241 ($add).
+  creating $macc model for $add$dut.sv:9$242 ($add).
+  creating $macc model for $add$dut.sv:9$243 ($add).
+  creating $macc model for $add$dut.sv:9$244 ($add).
+  creating $macc model for $add$dut.sv:9$245 ($add).
+  creating $macc model for $add$dut.sv:9$246 ($add).
+  creating $macc model for $add$dut.sv:9$247 ($add).
+  creating $macc model for $add$dut.sv:9$248 ($add).
+  creating $macc model for $add$dut.sv:9$249 ($add).
+  creating $macc model for $add$dut.sv:9$25 ($add).
+  creating $macc model for $add$dut.sv:9$250 ($add).
+  creating $macc model for $add$dut.sv:9$251 ($add).
+  creating $macc model for $add$dut.sv:9$252 ($add).
+  creating $macc model for $add$dut.sv:9$253 ($add).
+  creating $macc model for $add$dut.sv:9$254 ($add).
+  creating $macc model for $add$dut.sv:9$255 ($add).
+  creating $macc model for $add$dut.sv:9$256 ($add).
+  creating $macc model for $add$dut.sv:9$257 ($add).
+  creating $macc model for $add$dut.sv:9$26 ($add).
+  creating $macc model for $add$dut.sv:9$27 ($add).
+  creating $macc model for $add$dut.sv:9$28 ($add).
+  creating $macc model for $add$dut.sv:9$29 ($add).
+  creating $macc model for $add$dut.sv:9$30 ($add).
+  creating $macc model for $add$dut.sv:9$31 ($add).
+  creating $macc model for $add$dut.sv:9$32 ($add).
+  creating $macc model for $add$dut.sv:9$33 ($add).
+  creating $macc model for $add$dut.sv:9$34 ($add).
+  creating $macc model for $add$dut.sv:9$35 ($add).
+  creating $macc model for $add$dut.sv:9$36 ($add).
+  creating $macc model for $add$dut.sv:9$37 ($add).
+  creating $macc model for $add$dut.sv:9$38 ($add).
+  creating $macc model for $add$dut.sv:9$39 ($add).
+  creating $macc model for $add$dut.sv:9$4 ($add).
+  creating $macc model for $add$dut.sv:9$40 ($add).
+  creating $macc model for $add$dut.sv:9$41 ($add).
+  creating $macc model for $add$dut.sv:9$42 ($add).
+  creating $macc model for $add$dut.sv:9$43 ($add).
+  creating $macc model for $add$dut.sv:9$44 ($add).
+  creating $macc model for $add$dut.sv:9$45 ($add).
+  creating $macc model for $add$dut.sv:9$46 ($add).
+  creating $macc model for $add$dut.sv:9$47 ($add).
+  creating $macc model for $add$dut.sv:9$48 ($add).
+  creating $macc model for $add$dut.sv:9$49 ($add).
+  creating $macc model for $add$dut.sv:9$5 ($add).
+  creating $macc model for $add$dut.sv:9$50 ($add).
+  creating $macc model for $add$dut.sv:9$51 ($add).
+  creating $macc model for $add$dut.sv:9$52 ($add).
+  creating $macc model for $add$dut.sv:9$53 ($add).
+  creating $macc model for $add$dut.sv:9$54 ($add).
+  creating $macc model for $add$dut.sv:9$55 ($add).
+  creating $macc model for $add$dut.sv:9$56 ($add).
+  creating $macc model for $add$dut.sv:9$57 ($add).
+  creating $macc model for $add$dut.sv:9$58 ($add).
+  creating $macc model for $add$dut.sv:9$59 ($add).
+  creating $macc model for $add$dut.sv:9$6 ($add).
+  creating $macc model for $add$dut.sv:9$60 ($add).
+  creating $macc model for $add$dut.sv:9$61 ($add).
+  creating $macc model for $add$dut.sv:9$62 ($add).
+  creating $macc model for $add$dut.sv:9$63 ($add).
+  creating $macc model for $add$dut.sv:9$64 ($add).
+  creating $macc model for $add$dut.sv:9$65 ($add).
+  creating $macc model for $add$dut.sv:9$66 ($add).
+  creating $macc model for $add$dut.sv:9$67 ($add).
+  creating $macc model for $add$dut.sv:9$68 ($add).
+  creating $macc model for $add$dut.sv:9$69 ($add).
+  creating $macc model for $add$dut.sv:9$7 ($add).
+  creating $macc model for $add$dut.sv:9$70 ($add).
+  creating $macc model for $add$dut.sv:9$71 ($add).
+  creating $macc model for $add$dut.sv:9$72 ($add).
+  creating $macc model for $add$dut.sv:9$73 ($add).
+  creating $macc model for $add$dut.sv:9$74 ($add).
+  creating $macc model for $add$dut.sv:9$75 ($add).
+  creating $macc model for $add$dut.sv:9$76 ($add).
+  creating $macc model for $add$dut.sv:9$77 ($add).
+  creating $macc model for $add$dut.sv:9$78 ($add).
+  creating $macc model for $add$dut.sv:9$79 ($add).
+  creating $macc model for $add$dut.sv:9$8 ($add).
+  creating $macc model for $add$dut.sv:9$80 ($add).
+  creating $macc model for $add$dut.sv:9$81 ($add).
+  creating $macc model for $add$dut.sv:9$82 ($add).
+  creating $macc model for $add$dut.sv:9$83 ($add).
+  creating $macc model for $add$dut.sv:9$84 ($add).
+  creating $macc model for $add$dut.sv:9$85 ($add).
+  creating $macc model for $add$dut.sv:9$86 ($add).
+  creating $macc model for $add$dut.sv:9$87 ($add).
+  creating $macc model for $add$dut.sv:9$88 ($add).
+  creating $macc model for $add$dut.sv:9$89 ($add).
+  creating $macc model for $add$dut.sv:9$9 ($add).
+  creating $macc model for $add$dut.sv:9$90 ($add).
+  creating $macc model for $add$dut.sv:9$91 ($add).
+  creating $macc model for $add$dut.sv:9$92 ($add).
+  creating $macc model for $add$dut.sv:9$93 ($add).
+  creating $macc model for $add$dut.sv:9$94 ($add).
+  creating $macc model for $add$dut.sv:9$95 ($add).
+  creating $macc model for $add$dut.sv:9$96 ($add).
+  creating $macc model for $add$dut.sv:9$97 ($add).
+  creating $macc model for $add$dut.sv:9$98 ($add).
+  creating $macc model for $add$dut.sv:9$99 ($add).
+  merging $macc model for $add$dut.sv:9$98 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$97 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$96 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$95 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$94 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$93 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$92 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$91 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$90 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$89 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$88 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$87 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$86 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$85 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$84 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$83 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$82 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$81 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$80 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$79 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$78 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$77 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$76 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$75 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$74 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$73 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$72 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$71 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$70 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$69 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$68 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$67 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$66 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$65 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$64 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$63 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$62 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$61 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$60 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$59 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$58 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$57 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$56 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$55 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$54 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$53 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$52 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$51 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$50 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$49 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$48 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$47 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$46 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$45 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$44 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$43 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$42 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$41 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$40 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$39 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$38 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$37 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$36 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$35 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$34 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$33 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$32 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$31 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$30 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$29 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$28 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$27 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$26 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$25 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$24 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$23 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$22 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$21 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$20 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$19 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$18 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$17 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$16 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$15 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$14 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$13 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$12 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$11 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$10 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$9 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$8 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$7 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$6 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$5 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$4 into $add$dut.sv:9$99.
+  merging $macc model for $add$dut.sv:9$256 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$255 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$254 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$253 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$252 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$251 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$250 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$249 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$248 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$247 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$246 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$245 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$244 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$243 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$242 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$241 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$240 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$239 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$238 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$237 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$236 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$235 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$234 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$233 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$232 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$231 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$230 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$229 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$228 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$227 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$226 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$225 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$224 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$223 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$222 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$221 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$220 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$219 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$218 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$217 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$216 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$215 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$214 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$213 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$212 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$211 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$210 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$209 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$208 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$207 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$206 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$205 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$204 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$203 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$202 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$201 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$200 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$199 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$198 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$197 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$196 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$195 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$194 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$193 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$192 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$191 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$190 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$189 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$188 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$187 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$186 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$185 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$184 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$183 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$182 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$181 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$180 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$179 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$178 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$177 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$176 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$175 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$174 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$173 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$172 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$171 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$170 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$169 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$168 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$167 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$166 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$165 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$164 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$163 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$162 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$161 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$160 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$159 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$158 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$157 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$156 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$155 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$154 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$153 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$152 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$151 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$150 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$149 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$148 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$147 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$146 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$145 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$144 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$143 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$142 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$141 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$140 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$139 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$138 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$137 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$136 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$135 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$134 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$133 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$132 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$131 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$130 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$129 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$128 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$127 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$126 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$125 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$124 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$123 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$122 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$121 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$120 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$119 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$118 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$117 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$116 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$115 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$114 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$113 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$112 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$111 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$110 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$109 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$108 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$107 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$106 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$105 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$104 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$103 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$102 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$101 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$100 into $add$dut.sv:9$257.
+  merging $macc model for $add$dut.sv:9$99 into $add$dut.sv:9$257.
+  creating $macc cell for $add$dut.sv:9$257: $auto$alumacc.cc:365:replace_macc$264
+  created 0 $alu and 1 $macc cells.
+
+5.13. Executing SHARE pass (SAT-based resource sharing).
+
+5.14. Executing OPT pass (performing simple optimizations).
+
+5.14.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module TopModule.
+
+5.14.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\TopModule'.
+Removed a total of 0 cells.
+
+5.14.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \TopModule..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+5.14.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \TopModule.
+Performed a total of 0 changes.
+
+5.14.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\TopModule'.
+Removed a total of 0 cells.
+
+5.14.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.14.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \TopModule..
+Removed 253 unused cells and 253 unused wires.
+<suppressed ~254 debug messages>
+
+5.14.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module TopModule.
+
+5.14.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.14.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \TopModule..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+5.14.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \TopModule.
+Performed a total of 0 changes.
+
+5.14.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\TopModule'.
+Removed a total of 0 cells.
+
+5.14.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.14.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \TopModule..
+
+5.14.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module TopModule.
+
+5.14.16. Finished OPT passes. (There is nothing left to do.)
+
+5.15. Executing MEMORY pass.
+
+5.15.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+5.15.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+5.15.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+5.15.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+5.15.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+5.15.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \TopModule..
+
+5.15.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+5.15.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+5.15.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \TopModule..
+
+5.15.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+5.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \TopModule..
+
+5.17. Executing OPT pass (performing simple optimizations).
+
+5.17.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module TopModule.
+
+5.17.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\TopModule'.
+Removed a total of 0 cells.
+
+5.17.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.17.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \TopModule..
+
+5.17.5. Finished fast OPT passes.
+
+5.18. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+5.19. Executing OPT pass (performing simple optimizations).
+
+5.19.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module TopModule.
+
+5.19.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\TopModule'.
+Removed a total of 0 cells.
+
+5.19.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \TopModule..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+5.19.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \TopModule.
+Performed a total of 0 changes.
+
+5.19.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\TopModule'.
+Removed a total of 0 cells.
+
+5.19.6. Executing OPT_SHARE pass.
+
+5.19.7. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.19.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \TopModule..
+
+5.19.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module TopModule.
+
+5.19.10. Finished OPT passes. (There is nothing left to do.)
+
+5.20. Executing TECHMAP pass (map to technology primitives).
+
+5.20.1. Executing Verilog-2005 frontend: /usr/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/usr/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+5.20.2. Continuing TECHMAP pass.
+Using extmapper maccmap for cells of type $macc_v2.
+  add \in [0] (1 bits, unsigned)
+  add \in [254] (1 bits, unsigned)
+  add \in [253] (1 bits, unsigned)
+  add \in [252] (1 bits, unsigned)
+  add \in [251] (1 bits, unsigned)
+  add \in [250] (1 bits, unsigned)
+  add \in [249] (1 bits, unsigned)
+  add \in [248] (1 bits, unsigned)
+  add \in [247] (1 bits, unsigned)
+  add \in [246] (1 bits, unsigned)
+  add \in [245] (1 bits, unsigned)
+  add \in [244] (1 bits, unsigned)
+  add \in [243] (1 bits, unsigned)
+  add \in [242] (1 bits, unsigned)
+  add \in [241] (1 bits, unsigned)
+  add \in [240] (1 bits, unsigned)
+  add \in [239] (1 bits, unsigned)
+  add \in [238] (1 bits, unsigned)
+  add \in [237] (1 bits, unsigned)
+  add \in [236] (1 bits, unsigned)
+  add \in [235] (1 bits, unsigned)
+  add \in [234] (1 bits, unsigned)
+  add \in [233] (1 bits, unsigned)
+  add \in [232] (1 bits, unsigned)
+  add \in [231] (1 bits, unsigned)
+  add \in [230] (1 bits, unsigned)
+  add \in [229] (1 bits, unsigned)
+  add \in [228] (1 bits, unsigned)
+  add \in [227] (1 bits, unsigned)
+  add \in [226] (1 bits, unsigned)
+  add \in [225] (1 bits, unsigned)
+  add \in [224] (1 bits, unsigned)
+  add \in [223] (1 bits, unsigned)
+  add \in [222] (1 bits, unsigned)
+  add \in [221] (1 bits, unsigned)
+  add \in [220] (1 bits, unsigned)
+  add \in [219] (1 bits, unsigned)
+  add \in [218] (1 bits, unsigned)
+  add \in [217] (1 bits, unsigned)
+  add \in [216] (1 bits, unsigned)
+  add \in [215] (1 bits, unsigned)
+  add \in [214] (1 bits, unsigned)
+  add \in [213] (1 bits, unsigned)
+  add \in [212] (1 bits, unsigned)
+  add \in [211] (1 bits, unsigned)
+  add \in [210] (1 bits, unsigned)
+  add \in [209] (1 bits, unsigned)
+  add \in [208] (1 bits, unsigned)
+  add \in [207] (1 bits, unsigned)
+  add \in [206] (1 bits, unsigned)
+  add \in [205] (1 bits, unsigned)
+  add \in [204] (1 bits, unsigned)
+  add \in [203] (1 bits, unsigned)
+  add \in [202] (1 bits, unsigned)
+  add \in [201] (1 bits, unsigned)
+  add \in [200] (1 bits, unsigned)
+  add \in [199] (1 bits, unsigned)
+  add \in [198] (1 bits, unsigned)
+  add \in [197] (1 bits, unsigned)
+  add \in [196] (1 bits, unsigned)
+  add \in [195] (1 bits, unsigned)
+  add \in [194] (1 bits, unsigned)
+  add \in [193] (1 bits, unsigned)
+  add \in [192] (1 bits, unsigned)
+  add \in [191] (1 bits, unsigned)
+  add \in [190] (1 bits, unsigned)
+  add \in [189] (1 bits, unsigned)
+  add \in [188] (1 bits, unsigned)
+  add \in [187] (1 bits, unsigned)
+  add \in [186] (1 bits, unsigned)
+  add \in [185] (1 bits, unsigned)
+  add \in [184] (1 bits, unsigned)
+  add \in [183] (1 bits, unsigned)
+  add \in [182] (1 bits, unsigned)
+  add \in [181] (1 bits, unsigned)
+  add \in [180] (1 bits, unsigned)
+  add \in [179] (1 bits, unsigned)
+  add \in [178] (1 bits, unsigned)
+  add \in [177] (1 bits, unsigned)
+  add \in [176] (1 bits, unsigned)
+  add \in [175] (1 bits, unsigned)
+  add \in [174] (1 bits, unsigned)
+  add \in [173] (1 bits, unsigned)
+  add \in [172] (1 bits, unsigned)
+  add \in [171] (1 bits, unsigned)
+  add \in [170] (1 bits, unsigned)
+  add \in [169] (1 bits, unsigned)
+  add \in [168] (1 bits, unsigned)
+  add \in [167] (1 bits, unsigned)
+  add \in [166] (1 bits, unsigned)
+  add \in [165] (1 bits, unsigned)
+  add \in [164] (1 bits, unsigned)
+  add \in [163] (1 bits, unsigned)
+  add \in [162] (1 bits, unsigned)
+  add \in [161] (1 bits, unsigned)
+  add \in [160] (1 bits, unsigned)
+  add \in [159] (1 bits, unsigned)
+  add \in [158] (1 bits, unsigned)
+  add \in [157] (1 bits, unsigned)
+  add \in [156] (1 bits, unsigned)
+  add \in [155] (1 bits, unsigned)
+  add \in [154] (1 bits, unsigned)
+  add \in [153] (1 bits, unsigned)
+  add \in [152] (1 bits, unsigned)
+  add \in [151] (1 bits, unsigned)
+  add \in [150] (1 bits, unsigned)
+  add \in [149] (1 bits, unsigned)
+  add \in [148] (1 bits, unsigned)
+  add \in [147] (1 bits, unsigned)
+  add \in [146] (1 bits, unsigned)
+  add \in [145] (1 bits, unsigned)
+  add \in [144] (1 bits, unsigned)
+  add \in [143] (1 bits, unsigned)
+  add \in [142] (1 bits, unsigned)
+  add \in [141] (1 bits, unsigned)
+  add \in [140] (1 bits, unsigned)
+  add \in [139] (1 bits, unsigned)
+  add \in [138] (1 bits, unsigned)
+  add \in [137] (1 bits, unsigned)
+  add \in [136] (1 bits, unsigned)
+  add \in [135] (1 bits, unsigned)
+  add \in [134] (1 bits, unsigned)
+  add \in [133] (1 bits, unsigned)
+  add \in [132] (1 bits, unsigned)
+  add \in [131] (1 bits, unsigned)
+  add \in [130] (1 bits, unsigned)
+  add \in [129] (1 bits, unsigned)
+  add \in [128] (1 bits, unsigned)
+  add \in [127] (1 bits, unsigned)
+  add \in [126] (1 bits, unsigned)
+  add \in [125] (1 bits, unsigned)
+  add \in [124] (1 bits, unsigned)
+  add \in [123] (1 bits, unsigned)
+  add \in [122] (1 bits, unsigned)
+  add \in [121] (1 bits, unsigned)
+  add \in [120] (1 bits, unsigned)
+  add \in [119] (1 bits, unsigned)
+  add \in [118] (1 bits, unsigned)
+  add \in [117] (1 bits, unsigned)
+  add \in [116] (1 bits, unsigned)
+  add \in [115] (1 bits, unsigned)
+  add \in [114] (1 bits, unsigned)
+  add \in [113] (1 bits, unsigned)
+  add \in [112] (1 bits, unsigned)
+  add \in [111] (1 bits, unsigned)
+  add \in [110] (1 bits, unsigned)
+  add \in [109] (1 bits, unsigned)
+  add \in [108] (1 bits, unsigned)
+  add \in [107] (1 bits, unsigned)
+  add \in [106] (1 bits, unsigned)
+  add \in [105] (1 bits, unsigned)
+  add \in [104] (1 bits, unsigned)
+  add \in [103] (1 bits, unsigned)
+  add \in [102] (1 bits, unsigned)
+  add \in [101] (1 bits, unsigned)
+  add \in [100] (1 bits, unsigned)
+  add \in [99] (1 bits, unsigned)
+  add \in [98] (1 bits, unsigned)
+  add \in [97] (1 bits, unsigned)
+  add \in [96] (1 bits, unsigned)
+  add \in [95] (1 bits, unsigned)
+  add \in [94] (1 bits, unsigned)
+  add \in [93] (1 bits, unsigned)
+  add \in [92] (1 bits, unsigned)
+  add \in [91] (1 bits, unsigned)
+  add \in [90] (1 bits, unsigned)
+  add \in [89] (1 bits, unsigned)
+  add \in [88] (1 bits, unsigned)
+  add \in [87] (1 bits, unsigned)
+  add \in [86] (1 bits, unsigned)
+  add \in [85] (1 bits, unsigned)
+  add \in [84] (1 bits, unsigned)
+  add \in [83] (1 bits, unsigned)
+  add \in [82] (1 bits, unsigned)
+  add \in [81] (1 bits, unsigned)
+  add \in [80] (1 bits, unsigned)
+  add \in [79] (1 bits, unsigned)
+  add \in [78] (1 bits, unsigned)
+  add \in [77] (1 bits, unsigned)
+  add \in [76] (1 bits, unsigned)
+  add \in [75] (1 bits, unsigned)
+  add \in [74] (1 bits, unsigned)
+  add \in [73] (1 bits, unsigned)
+  add \in [72] (1 bits, unsigned)
+  add \in [71] (1 bits, unsigned)
+  add \in [70] (1 bits, unsigned)
+  add \in [69] (1 bits, unsigned)
+  add \in [68] (1 bits, unsigned)
+  add \in [67] (1 bits, unsigned)
+  add \in [66] (1 bits, unsigned)
+  add \in [65] (1 bits, unsigned)
+  add \in [64] (1 bits, unsigned)
+  add \in [63] (1 bits, unsigned)
+  add \in [62] (1 bits, unsigned)
+  add \in [61] (1 bits, unsigned)
+  add \in [60] (1 bits, unsigned)
+  add \in [59] (1 bits, unsigned)
+  add \in [58] (1 bits, unsigned)
+  add \in [57] (1 bits, unsigned)
+  add \in [56] (1 bits, unsigned)
+  add \in [55] (1 bits, unsigned)
+  add \in [54] (1 bits, unsigned)
+  add \in [53] (1 bits, unsigned)
+  add \in [52] (1 bits, unsigned)
+  add \in [51] (1 bits, unsigned)
+  add \in [50] (1 bits, unsigned)
+  add \in [49] (1 bits, unsigned)
+  add \in [48] (1 bits, unsigned)
+  add \in [47] (1 bits, unsigned)
+  add \in [46] (1 bits, unsigned)
+  add \in [45] (1 bits, unsigned)
+  add \in [44] (1 bits, unsigned)
+  add \in [43] (1 bits, unsigned)
+  add \in [42] (1 bits, unsigned)
+  add \in [41] (1 bits, unsigned)
+  add \in [40] (1 bits, unsigned)
+  add \in [39] (1 bits, unsigned)
+  add \in [38] (1 bits, unsigned)
+  add \in [37] (1 bits, unsigned)
+  add \in [36] (1 bits, unsigned)
+  add \in [35] (1 bits, unsigned)
+  add \in [34] (1 bits, unsigned)
+  add \in [33] (1 bits, unsigned)
+  add \in [32] (1 bits, unsigned)
+  add \in [31] (1 bits, unsigned)
+  add \in [30] (1 bits, unsigned)
+  add \in [29] (1 bits, unsigned)
+  add \in [28] (1 bits, unsigned)
+  add \in [27] (1 bits, unsigned)
+  add \in [26] (1 bits, unsigned)
+  add \in [25] (1 bits, unsigned)
+  add \in [24] (1 bits, unsigned)
+  add \in [23] (1 bits, unsigned)
+  add \in [22] (1 bits, unsigned)
+  add \in [21] (1 bits, unsigned)
+  add \in [20] (1 bits, unsigned)
+  add \in [19] (1 bits, unsigned)
+  add \in [18] (1 bits, unsigned)
+  add \in [17] (1 bits, unsigned)
+  add \in [16] (1 bits, unsigned)
+  add \in [15] (1 bits, unsigned)
+  add \in [14] (1 bits, unsigned)
+  add \in [13] (1 bits, unsigned)
+  add \in [12] (1 bits, unsigned)
+  add \in [11] (1 bits, unsigned)
+  add \in [10] (1 bits, unsigned)
+  add \in [9] (1 bits, unsigned)
+  add \in [8] (1 bits, unsigned)
+  add \in [7] (1 bits, unsigned)
+  add \in [6] (1 bits, unsigned)
+  add \in [5] (1 bits, unsigned)
+  add \in [4] (1 bits, unsigned)
+  add \in [3] (1 bits, unsigned)
+  add \in [2] (1 bits, unsigned)
+  add \in [1] (1 bits, unsigned)
+  packed 127 (127) bits / 127 words into adder tree
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000000001 for cells of type $fa.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000000010 for cells of type $fa.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000000011 for cells of type $fa.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000000100 for cells of type $fa.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000000101 for cells of type $fa.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000000110 for cells of type $fa.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000000111 for cells of type $fa.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000001000 for cells of type $fa.
+Using template $paramod$a1bc51c02ce12ac21eb18988e83292af48ed7d72\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $or.
+Using extmapper simplemap for cells of type $xor.
+Using extmapper simplemap for cells of type $and.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001000 for cells of type $lcu.
+Using extmapper simplemap for cells of type $pos.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $not.
+No more expansions possible.
+<suppressed ~1089 debug messages>
+
+5.21. Executing OPT pass (performing simple optimizations).
+
+5.21.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module TopModule.
+<suppressed ~550 debug messages>
+
+5.21.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\TopModule'.
+Removed a total of 0 cells.
+
+5.21.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.21.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \TopModule..
+Removed 17 unused cells and 1292 unused wires.
+<suppressed ~18 debug messages>
+
+5.21.5. Finished fast OPT passes.
+
+5.22. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `TopModule'. Setting top module to TopModule.
+
+5.22.1. Analyzing design hierarchy..
+Top module:  \TopModule
+
+5.22.2. Analyzing design hierarchy..
+Top module:  \TopModule
+Removed 0 unused modules.
+
+5.23. Printing statistics.
+
+=== TopModule ===
+
+   Number of wires:                649
+   Number of wire bits:           2127
+   Number of public wires:           3
+   Number of public wire bits:     295
+   Number of ports:                  2
+   Number of port bits:            263
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               1297
+     $_AND_                        526
+     $_OR_                         247
+     $_XOR_                        524
+
+5.24. Executing CHECK pass (checking for obvious problems).
+Checking module TopModule...
+Found and reported 0 problems.
+
+6. Executing CHECK pass (checking for obvious problems).
+Checking module TopModule...
+Found and reported 0 problems.
+{
+   "creator": "Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)",
+   "invocation": "stat -json ",
+   "modules": {
+      "\\TopModule": {
+         "num_wires":         649,
+         "num_wire_bits":     2127,
+         "num_pub_wires":     3,
+         "num_pub_wire_bits": 295,
+         "num_ports":         2,
+         "num_port_bits":     263,
+         "num_memories":      0,
+         "num_memory_bits":   0,
+         "num_processes":     0,
+         "num_cells":         1297,
+         "num_cells_by_type": {
+            "$_AND_": 526,
+            "$_OR_": 247,
+            "$_XOR_": 524
+         }
+      }
+   },
+      "design": {
+         "num_wires":         649,
+         "num_wire_bits":     2127,
+         "num_pub_wires":     3,
+         "num_pub_wire_bits": 295,
+         "num_ports":         2,
+         "num_port_bits":     263,
+         "num_memories":      0,
+         "num_memory_bits":   0,
+         "num_processes":     0,
+         "num_cells":         1297,
+         "num_cells_by_type": {
+            "$_AND_": 526,
+            "$_OR_": 247,
+            "$_XOR_": 524
+         }
+      }
+}
+
+7. Executing JSON backend.

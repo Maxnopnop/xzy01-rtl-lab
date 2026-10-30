@@ -1,0 +1,39 @@
+[
+  {
+    "step": "old task text search",
+    "error": "rg literal r2* path invalid on Windows",
+    "resolution": "Use discovered concrete paths; no old execution"
+  },
+  {
+    "step": "dev10 manifest lookup",
+    "error": "guessed benchmarks/dev10/manifest.json absent",
+    "resolution": "Discover actual suite/split files before deduplication"
+  },
+  {
+    "step": "cells source fetch",
+    "error": "four original candidate src paths returned 404 at pinned revision",
+    "resolution": "Retain failures; inspect official pinned README/tree for path evidence, no candidate replacement or 403 retry"
+  },
+  {
+    "operation": "read guessed benchmarks/dev10/tasks/split-lock.json",
+    "status": "PATH_NOT_FOUND",
+    "resolution": "Use discovered benchmarks/dev10/split-lock.json; no source mutation"
+  },
+  {
+    "operation": "prepare_packet v1",
+    "status": "FAILED_EXIT1",
+    "source_sha256": "d98d2f9ff847dfb1492287e20fffbb6651a8da4051463ac6480d839a1ffdb5e8",
+    "exception": "FileNotFoundError: r6/engineering-v2/cli_adapter.py",
+    "resolution": "Preserve v1 and partial identical candidate/inventory files. New v2 uses actual frozen r6 root adapter/stream files; resume permits only byte-identical already-written metadata. No reference/model rerun."
+  },
+  {
+    "operation": "stage classification source lookup r6/runner_body.py",
+    "status": "PATH_NOT_FOUND",
+    "resolution": "Use frozen R6 PROTOCOL and engineering-v2/runner.py; no retry or source modification"
+  },
+  {
+    "operation": "source test lookup",
+    "status": "3HTTP404 retained",
+    "resolution": "Original pinned GitHub tree located legacy tb/test_axis_frame_join_4.py, test_axis_stat_counter.py, test_axis_tap.py; fetched distinct verified paths once. Original failures remain in source-access."
+  }
+]

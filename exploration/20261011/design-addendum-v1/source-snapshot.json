@@ -1,0 +1,2535 @@
+{
+  "fsm_ir.py": {
+    "sha256": "ccdfb042eba75880b42fe18aacaea31641bb52d84825400f7d71c17d08420f26",
+    "lines": [
+      {
+        "line": 1,
+        "text": "\"\"\"Bounded, data-only Moore FSM interpreter. No generated code is executed.\"\"\""
+      },
+      {
+        "line": 2,
+        "text": "from collections import deque"
+      },
+      {
+        "line": 3,
+        "text": "import json"
+      },
+      {
+        "line": 4,
+        "text": "import re"
+      },
+      {
+        "line": 5,
+        "text": ""
+      },
+      {
+        "line": 6,
+        "text": ""
+      },
+      {
+        "line": 7,
+        "text": "SCHEMA_TEXT = '''Return only JSON (no RTL) with exactly these fields:"
+      },
+      {
+        "line": 8,
+        "text": "{\"schema\":1,\"clock_edge\":\"posedge\",\"output_kind\":\"moore\","
+      },
+      {
+        "line": 9,
+        "text": " \"reset\":{\"kind\":\"async\",\"active\":0,\"state\":\"S0\"},"
+      },
+      {
+        "line": 10,
+        "text": " \"states\":[{\"name\":\"S0\",\"output\":0}],"
+      },
+      {
+        "line": 11,
+        "text": " \"transitions\":[{\"from\":\"S0\",\"input\":0,\"to\":\"S0\"},"
+      },
+      {
+        "line": 12,
+        "text": "                {\"from\":\"S0\",\"input\":1,\"to\":\"S0\"}]}"
+      },
+      {
+        "line": 13,
+        "text": "This is a schema illustration, NOT the solution. Set reset polarity, reset state,"
+      },
+      {
+        "line": 14,
+        "text": "states, outputs and transitions from the specification. reset.kind can be async"
+      },
+      {
+        "line": 15,
+        "text": "or sync. List every state and exactly one transition per state/input bit."
+      },
+      {
+        "line": 16,
+        "text": "Use 1..32 states, identifier names, literal 0/1 outputs and inputs."
+      },
+      {
+        "line": 17,
+        "text": "The output is the output of the state reached after the active edge."
+      },
+      {
+        "line": 18,
+        "text": "Do not include conditions, expressions, extra keys, or prose.'''"
+      },
+      {
+        "line": 19,
+        "text": ""
+      },
+      {
+        "line": 20,
+        "text": ""
+      },
+      {
+        "line": 21,
+        "text": "def _object(pairs):"
+      },
+      {
+        "line": 22,
+        "text": "    obj = {}"
+      },
+      {
+        "line": 23,
+        "text": "    for key, value in pairs:"
+      },
+      {
+        "line": 24,
+        "text": "        if key in obj:"
+      },
+      {
+        "line": 25,
+        "text": "            raise ValueError('Duplicate JSON key: ' + key)"
+      },
+      {
+        "line": 26,
+        "text": "        obj[key] = value"
+      },
+      {
+        "line": 27,
+        "text": "    return obj"
+      },
+      {
+        "line": 28,
+        "text": ""
+      },
+      {
+        "line": 29,
+        "text": ""
+      },
+      {
+        "line": 30,
+        "text": "def _keys(value, keys, label):"
+      },
+      {
+        "line": 31,
+        "text": "    if not isinstance(value, dict) or set(value) != set(keys.split()):"
+      },
+      {
+        "line": 32,
+        "text": "        raise ValueError('Invalid fields in ' + label)"
+      },
+      {
+        "line": 33,
+        "text": ""
+      },
+      {
+        "line": 34,
+        "text": ""
+      },
+      {
+        "line": 35,
+        "text": "def _bit(value):"
+      },
+      {
+        "line": 36,
+        "text": "    return type(value) is int and value in (0, 1)"
+      },
+      {
+        "line": 37,
+        "text": ""
+      },
+      {
+        "line": 38,
+        "text": ""
+      },
+      {
+        "line": 39,
+        "text": "def parse(raw):"
+      },
+      {
+        "line": 40,
+        "text": "    if len(raw.encode('utf-8')) > 32768:"
+      },
+      {
+        "line": 41,
+        "text": "        raise ValueError('IR exceeds 32 KiB')"
+      },
+      {
+        "line": 42,
+        "text": "    raw = raw.strip()"
+      },
+      {
+        "line": 43,
+        "text": "    if raw.startswith('```'):"
+      },
+      {
+        "line": 44,
+        "text": "        match = re.fullmatch(r'```(?:json)?\\s*\\n(.*?)\\n```', raw, re.S)"
+      },
+      {
+        "line": 45,
+        "text": "        if not match:"
+      },
+      {
+        "line": 46,
+        "text": "            raise ValueError('Expected one JSON block')"
+      },
+      {
+        "line": 47,
+        "text": "        raw = match[1]"
+      },
+      {
+        "line": 48,
+        "text": "    try:"
+      },
+      {
+        "line": 49,
+        "text": "        obj = json.loads(raw, object_pairs_hook=_object)"
+      },
+      {
+        "line": 50,
+        "text": "    except (ValueError, RecursionError) as exc:"
+      },
+      {
+        "line": 51,
+        "text": "        raise ValueError('Invalid JSON: ' + str(exc)[:200]) from None"
+      },
+      {
+        "line": 52,
+        "text": "    _keys(obj, 'schema clock_edge output_kind reset states transitions', 'IR')"
+      },
+      {
+        "line": 53,
+        "text": "    if type(obj['schema']) is not int or obj['schema'] != 1:"
+      },
+      {
+        "line": 54,
+        "text": "        raise ValueError('Unsupported schema')"
+      },
+      {
+        "line": 55,
+        "text": "    if obj['clock_edge'] != 'posedge' or obj['output_kind'] != 'moore':"
+      },
+      {
+        "line": 56,
+        "text": "        raise ValueError('Interpreter supports only posedge, Moore, single-bit FSMs')"
+      },
+      {
+        "line": 57,
+        "text": "    reset = obj['reset']"
+      },
+      {
+        "line": 58,
+        "text": "    _keys(reset, 'kind active state', 'reset')"
+      },
+      {
+        "line": 59,
+        "text": "    if reset['kind'] not in ('async', 'sync') or not _bit(reset['active']):"
+      },
+      {
+        "line": 60,
+        "text": "        raise ValueError('Invalid reset metadata')"
+      },
+      {
+        "line": 61,
+        "text": "    states = obj['states']"
+      },
+      {
+        "line": 62,
+        "text": "    if not isinstance(states, list) or not 1 <= len(states) <= 32:"
+      },
+      {
+        "line": 63,
+        "text": "        raise ValueError('Expected 1..32 states')"
+      },
+      {
+        "line": 64,
+        "text": "    outputs = {}"
+      },
+      {
+        "line": 65,
+        "text": "    for state in states:"
+      },
+      {
+        "line": 66,
+        "text": "        _keys(state, 'name output', 'state')"
+      },
+      {
+        "line": 67,
+        "text": "        name = state['name']"
+      },
+      {
+        "line": 68,
+        "text": "        if not isinstance(name, str) or not re.fullmatch(r'[A-Za-z_][A-Za-z_0-9]{0,31}', name):"
+      },
+      {
+        "line": 69,
+        "text": "            raise ValueError('Invalid state name')"
+      },
+      {
+        "line": 70,
+        "text": "        if name in outputs or not _bit(state['output']):"
+      },
+      {
+        "line": 71,
+        "text": "            raise ValueError('Duplicate state or invalid Moore output')"
+      },
+      {
+        "line": 72,
+        "text": "        outputs[name] = state['output']"
+      },
+      {
+        "line": 73,
+        "text": "    if not isinstance(reset['state'], str) or reset['state'] not in outputs:"
+      },
+      {
+        "line": 74,
+        "text": "        raise ValueError('Missing reset state')"
+      },
+      {
+        "line": 75,
+        "text": "    transitions = obj['transitions']"
+      },
+      {
+        "line": 76,
+        "text": "    if not isinstance(transitions, list) or len(transitions) != 2 * len(states):"
+      },
+      {
+        "line": 77,
+        "text": "        raise ValueError('Expected two transitions per state')"
+      },
+      {
+        "line": 78,
+        "text": "    edges = {}"
+      },
+      {
+        "line": 79,
+        "text": "    for edge in transitions:"
+      },
+      {
+        "line": 80,
+        "text": "        _keys(edge, 'from input to', 'transition')"
+      },
+      {
+        "line": 81,
+        "text": "        if not all(isinstance(edge[k], str) and edge[k] in outputs for k in ('from', 'to')) or not _bit(edge['input']):"
+      },
+      {
+        "line": 82,
+        "text": "            raise ValueError('Invalid transition endpoint/input')"
+      },
+      {
+        "line": 83,
+        "text": "        key = (edge['from'], edge['input'])"
+      },
+      {
+        "line": 84,
+        "text": "        if key in edges:"
+      },
+      {
+        "line": 85,
+        "text": "            raise ValueError('Duplicate transition')"
+      },
+      {
+        "line": 86,
+        "text": "        edges[key] = edge['to']"
+      },
+      {
+        "line": 87,
+        "text": "    return dict(data=obj, outputs=outputs, edges=edges, reset=reset)"
+      },
+      {
+        "line": 88,
+        "text": ""
+      },
+      {
+        "line": 89,
+        "text": ""
+      },
+      {
+        "line": 90,
+        "text": "def trace(ir, bits):"
+      },
+      {
+        "line": 91,
+        "text": "    state = ir['reset']['state']"
+      },
+      {
+        "line": 92,
+        "text": "    outputs = []"
+      },
+      {
+        "line": 93,
+        "text": "    for bit in bits:"
+      },
+      {
+        "line": 94,
+        "text": "        state = ir['edges'][state, int(bit)]"
+      },
+      {
+        "line": 95,
+        "text": "        outputs.append(ir['outputs'][state])"
+      },
+      {
+        "line": 96,
+        "text": "    return outputs"
+      },
+      {
+        "line": 97,
+        "text": ""
+      },
+      {
+        "line": 98,
+        "text": ""
+      },
+      {
+        "line": 99,
+        "text": "def product_check(candidate, reference):"
+      },
+      {
+        "line": 100,
+        "text": "    \"\"\"Exact abstract Moore equivalence from reset; state names are irrelevant."
+      },
+      {
+        "line": 101,
+        "text": ""
+      },
+      {
+        "line": 102,
+        "text": "    Reset metadata is checked separately as part of the declared contract."
+      },
+      {
+        "line": 103,
+        "text": "    This proves neither arbitrary RTL equivalence nor analog reset behavior."
+      },
+      {
+        "line": 104,
+        "text": "    \"\"\""
+      },
+      {
+        "line": 105,
+        "text": "    metadata = [k for k in ('kind', 'active') if candidate['reset'][k] != reference['reset'][k]]"
+      },
+      {
+        "line": 106,
+        "text": "    start = (candidate['reset']['state'], reference['reset']['state'])"
+      },
+      {
+        "line": 107,
+        "text": "    queue = deque([(start, '')]); seen = {start}"
+      },
+      {
+        "line": 108,
+        "text": "    mismatch = None"
+      },
+      {
+        "line": 109,
+        "text": "    while queue:"
+      },
+      {
+        "line": 110,
+        "text": "        (a, b), path = queue.popleft()"
+      },
+      {
+        "line": 111,
+        "text": "        if candidate['outputs'][a] != reference['outputs'][b]:"
+      },
+      {
+        "line": 112,
+        "text": "            mismatch = dict(bits=path, expected=reference['outputs'][b], observed=candidate['outputs'][a])"
+      },
+      {
+        "line": 113,
+        "text": "            break"
+      },
+      {
+        "line": 114,
+        "text": "        for bit in (0, 1):"
+      },
+      {
+        "line": 115,
+        "text": "            pair = (candidate['edges'][a, bit], reference['edges'][b, bit])"
+      },
+      {
+        "line": 116,
+        "text": "            if pair not in seen:"
+      },
+      {
+        "line": 117,
+        "text": "                seen.add(pair); queue.append((pair, path + str(bit)))"
+      },
+      {
+        "line": 118,
+        "text": "    return dict(status='IR_SPEC_MISMATCH' if metadata or mismatch else 'IR_EQUIVALENT',"
+      },
+      {
+        "line": 119,
+        "text": "                reset_contract_errors=metadata, shortest_counterexample=mismatch,"
+      },
+      {
+        "line": 120,
+        "text": "                visited_pairs=len(seen), scope='Complete finite abstract Moore graph from reset; not an RTL proof')"
+      },
+      {
+        "line": 121,
+        "text": ""
+      },
+      {
+        "line": 122,
+        "text": ""
+      },
+      {
+        "line": 123,
+        "text": "def timed_vectors(ir, inputs):"
+      },
+      {
+        "line": 124,
+        "text": "    \"\"\"Evaluate before/after rising edges, with reset changes while clock=0.\"\"\""
+      },
+      {
+        "line": 125,
+        "text": "    state = None"
+      },
+      {
+        "line": 126,
+        "text": "    rows = []"
+      },
+      {
+        "line": 127,
+        "text": "    for reset, bit in inputs:"
+      },
+      {
+        "line": 128,
+        "text": "        active = reset == ir['reset']['active']"
+      },
+      {
+        "line": 129,
+        "text": "        if active and ir['reset']['kind'] == 'async':"
+      },
+      {
+        "line": 130,
+        "text": "            state = ir['reset']['state']"
+      },
+      {
+        "line": 131,
+        "text": "        pre = ir['outputs'][state] if state is not None else None"
+      },
+      {
+        "line": 132,
+        "text": "        if active:"
+      },
+      {
+        "line": 133,
+        "text": "            state = ir['reset']['state']"
+      },
+      {
+        "line": 134,
+        "text": "        elif state is not None:"
+      },
+      {
+        "line": 135,
+        "text": "            state = ir['edges'][state, bit]"
+      },
+      {
+        "line": 136,
+        "text": "        post = ir['outputs'][state] if state is not None else None"
+      },
+      {
+        "line": 137,
+        "text": "        rows.append((reset, bit, pre, post))"
+      },
+      {
+        "line": 138,
+        "text": "    return rows"
+      },
+      {
+        "line": 139,
+        "text": ""
+      },
+      {
+        "line": 140,
+        "text": ""
+      },
+      {
+        "line": 141,
+        "text": "def localize(ir_status, rtl_status, agreement_status):"
+      },
+      {
+        "line": 142,
+        "text": "    if rtl_status not in ('PASS', 'FUNCTION_FAIL'):"
+      },
+      {
+        "line": 143,
+        "text": "        return 'TOOLCHAIN_' + rtl_status"
+      },
+      {
+        "line": 144,
+        "text": "    if ir_status == 'NO_TABLE':"
+      },
+      {
+        "line": 145,
+        "text": "        return 'NO_TABLE_DIAGNOSIS'"
+      },
+      {
+        "line": 146,
+        "text": "    if ir_status == 'IR_INVALID':"
+      },
+      {
+        "line": 147,
+        "text": "        return 'IR_FORMAT_ERROR'"
+      },
+      {
+        "line": 148,
+        "text": "    if agreement_status not in ('PASS', 'FUNCTION_FAIL'):"
+      },
+      {
+        "line": 149,
+        "text": "        return 'INCONCLUSIVE'"
+      },
+      {
+        "line": 150,
+        "text": "    equivalent = ir_status == 'IR_EQUIVALENT'"
+      },
+      {
+        "line": 151,
+        "text": "    agrees = agreement_status == 'PASS'"
+      },
+      {
+        "line": 152,
+        "text": "    if equivalent and agrees:"
+      },
+      {
+        "line": 153,
+        "text": "        return 'ALL_PASS' if rtl_status == 'PASS' else 'CHECKER_INCONSISTENCY'"
+      },
+      {
+        "line": 154,
+        "text": "    if equivalent:"
+      },
+      {
+        "line": 155,
+        "text": "        return 'IR_TO_RTL_ERROR' if rtl_status == 'FUNCTION_FAIL' else 'CHECKER_INCONSISTENCY'"
+      },
+      {
+        "line": 156,
+        "text": "    if agrees:"
+      },
+      {
+        "line": 157,
+        "text": "        return 'SPEC_TO_IR_ERROR' if rtl_status == 'FUNCTION_FAIL' else 'IR_ERROR_NOT_EXPOSED_BY_RTL_TESTS'"
+      },
+      {
+        "line": 158,
+        "text": "    return 'RTL_CORRECTS_IR_ON_TESTS' if rtl_status == 'PASS' else 'BOTH_DIVERGE'"
+      }
+    ]
+  },
+  "exploration/20261011/r6/engineering-v2/runner.py": {
+    "sha256": "69f7518d6d9ebc160ef855a6f8be808a909657d9b849e60c791c409d03c81dab",
+    "lines": [
+      {
+        "line": 1,
+        "text": "\"\"\"Versioned new release candidate; frozen root runner and v1 plan unchanged.\"\"\""
+      },
+      {
+        "line": 2,
+        "text": "import importlib.util,sys"
+      },
+      {
+        "line": 3,
+        "text": "from pathlib import Path"
+      },
+      {
+        "line": 4,
+        "text": "BASE=Path(__file__).resolve().parent.parent;sys.path.insert(0,str(BASE))"
+      },
+      {
+        "line": 5,
+        "text": "spec=importlib.util.spec_from_file_location('r6_frozen_core',BASE/'runner.py')"
+      },
+      {
+        "line": 6,
+        "text": "core=importlib.util.module_from_spec(spec);spec.loader.exec_module(core)"
+      },
+      {
+        "line": 7,
+        "text": "core.RUN=BASE/'runs/prepared-v2'"
+      },
+      {
+        "line": 8,
+        "text": "original_hashes=core.hashes"
+      },
+      {
+        "line": 9,
+        "text": "def hashes():"
+      },
+      {
+        "line": 10,
+        "text": "    d=original_hashes()"
+      },
+      {
+        "line": 11,
+        "text": "    for p in sorted((BASE/'engineering-v2').glob('*.py')):"
+      },
+      {
+        "line": 12,
+        "text": "        d[str(p.relative_to(core.ROOT))]=core.lab.digest(p.read_bytes())"
+      },
+      {
+        "line": 13,
+        "text": "    return d"
+      },
+      {
+        "line": 14,
+        "text": "core.hashes=hashes"
+      },
+      {
+        "line": 15,
+        "text": "original_prepare=core.prepare"
+      },
+      {
+        "line": 16,
+        "text": "def prepare():"
+      },
+      {
+        "line": 17,
+        "text": "    assert core.batch.read(BASE/'runs/recovery-job-binding-v2/summary.json')['status']=='PASS'"
+      },
+      {
+        "line": 18,
+        "text": "    original_prepare()"
+      },
+      {
+        "line": 19,
+        "text": "core.prepare=prepare"
+      },
+      {
+        "line": 20,
+        "text": "if __name__=='__main__':core.main()"
+      }
+    ]
+  },
+  "exploration/20261011/r6/runner.py": {
+    "sha256": "8f56f6cf48b15e8cf459e74beff95728e1c117942e400c5f6290f0d31c541700",
+    "lines": [
+      {
+        "line": 1,
+        "text": "\"\"\"R6 prepare-gated 48 unique calls; model-produced intents only in real campaign.\"\"\""
+      },
+      {
+        "line": 2,
+        "text": "import sys,json,time,argparse"
+      },
+      {
+        "line": 3,
+        "text": "from pathlib import Path"
+      },
+      {
+        "line": 4,
+        "text": "from types import SimpleNamespace"
+      },
+      {
+        "line": 5,
+        "text": "from collections import Counter"
+      },
+      {
+        "line": 6,
+        "text": "BASE=Path(__file__).resolve().parent;ROOT=BASE.parents[2];V3=BASE.parent/'r3-runner-v3'"
+      },
+      {
+        "line": 7,
+        "text": "sys.path[:0]=[str(BASE),str(ROOT),str(V3)]"
+      },
+      {
+        "line": 8,
+        "text": "import tasks,intent,prompts,judge,batch,rtl_lab as lab,cli_adapter as adapter"
+      },
+      {
+        "line": 9,
+        "text": "from stage_categories import classify"
+      },
+      {
+        "line": 10,
+        "text": "RUN=BASE/'runs/prepared-v1';ASSETS=BASE/'assets'"
+      },
+      {
+        "line": 11,
+        "text": "FUNCTIONAL={'PASS','FUNCTION_FAIL','COMPILE_FAIL','RTL_REJECTED','EXTRACTION_ERROR','IR_INVALID','UNSUPPORTED','INPUT_LIMIT'}"
+      },
+      {
+        "line": 12,
+        "text": "MAX_INPUT=256*1024"
+      },
+      {
+        "line": 13,
+        "text": "def hashes():"
+      },
+      {
+        "line": 14,
+        "text": "    paths=sorted(BASE.glob('*.py'))+[BASE/'PROTOCOL.md']+sorted((BASE/'references').glob('*.sv'))+sorted(ASSETS.glob('*.json'))"
+      },
+      {
+        "line": 15,
+        "text": "    paths+=[ROOT/n for n in ('rtl_lab.py','backends.py','batch.py','fsm_study.py','codex_adapter.py')]"
+      },
+      {
+        "line": 16,
+        "text": "    return {str(p.relative_to(ROOT)):lab.digest(p.read_bytes()) for p in paths}"
+      },
+      {
+        "line": 17,
+        "text": "def generate(run,job,p,prompt,call=None):"
+      },
+      {
+        "line": 18,
+        "text": "    folder=run/'jobs'/job['id'];folder.mkdir(parents=True,exist_ok=True);g=folder/'generation.json'"
+      },
+      {
+        "line": 19,
+        "text": "    if g.exists():return batch.read(g)"
+      },
+      {
+        "line": 20,
+        "text": "    if (folder/'started.json').exists():result=dict(status='UNKNOWN_INTERRUPTED',usage=None,model_called=True,reservation_unknown=True)"
+      },
+      {
+        "line": 21,
+        "text": "    elif len(prompt.encode())>p['input_byte_limit']:"
+      },
+      {
+        "line": 22,
+        "text": "        (folder/'response.txt').write_bytes(b'');(folder/'exact-prompt.txt').write_bytes(prompt.encode())"
+      },
+      {
+        "line": 23,
+        "text": "        result=dict(status='INPUT_LIMIT',usage=None,response_sha256=lab.digest(b''),prompt_sha256=lab.digest(prompt.encode()),prompt_bytes=len(prompt.encode()),model_called=False)"
+      },
+      {
+        "line": 24,
+        "text": "    else:"
+      },
+      {
+        "line": 25,
+        "text": "        if len(list((run/'jobs').glob('*/started.json')))>=p['max_calls']:return dict(status='BUDGET_STOP',usage=None)"
+      },
+      {
+        "line": 26,
+        "text": "        batch.atomic(folder/'started.json',dict(utc=lab.utc(),reserved_calls=1));c=folder/'call';c.mkdir();(c/'exact-prompt.txt').write_bytes(prompt.encode());start=time.monotonic()"
+      },
+      {
+        "line": 27,
+        "text": "        args=SimpleNamespace(codex_executable=None,model=p['model'],codex_reasoning=p['reasoning'],api_timeout=p['api_timeout'])"
+      },
+      {
+        "line": 28,
+        "text": "        try:"
+      },
+      {
+        "line": 29,
+        "text": "            response,meta=(call or adapter.generate_text)(args,c,prompt);(folder/'response.txt').write_bytes(response.encode())"
+      },
+      {
+        "line": 30,
+        "text": "            result=dict(status='GENERATED' if meta.get('tools_used') is False else 'RTL_REJECTED',**meta)"
+      },
+      {
+        "line": 31,
+        "text": "        except lab.LabError as e:"
+      },
+      {
+        "line": 32,
+        "text": "            result=dict(status=e.status,stage=e.stage,message=e.message,usage=None)"
+      },
+      {
+        "line": 33,
+        "text": "            if e.status in FUNCTIONAL:"
+      },
+      {
+        "line": 34,
+        "text": "                output=c/'model_output.raw.txt';(folder/'response.txt').write_bytes(output.read_bytes() if output.exists() else b'')"
+      },
+      {
+        "line": 35,
+        "text": "        except Exception as e:result=dict(status='ENV_ERROR',message=str(e),usage=None)"
+      },
+      {
+        "line": 36,
+        "text": "        result.update(elapsed_seconds=time.monotonic()-start,prompt_bytes=len(prompt.encode()),prompt_sha256=lab.digest(prompt.encode()),model_called=True)"
+      },
+      {
+        "line": 37,
+        "text": "        if (folder/'response.txt').exists():result['response_sha256']=lab.digest((folder/'response.txt').read_bytes());result['response_bytes']=(folder/'response.txt').stat().st_size"
+      },
+      {
+        "line": 38,
+        "text": "    batch.atomic(g,result);return result"
+      },
+      {
+        "line": 39,
+        "text": "# Assembled after frozen v3 adapter bindings and reviewed R4 generate reservation logic."
+      },
+      {
+        "line": 40,
+        "text": "def plan():"
+      },
+      {
+        "line": 41,
+        "text": "    jobs=[];cases=[]"
+      },
+      {
+        "line": 42,
+        "text": "    for i,task in enumerate(tasks.TASKS):"
+      },
+      {
+        "line": 43,
+        "text": "        for repeat in (1,2):"
+      },
+      {
+        "line": 44,
+        "text": "            case=f'{task}__r{repeat}';cases.append(dict(id=case,task=task,repeat=repeat))"
+      },
+      {
+        "line": 45,
+        "text": "            s=case+'__structured';d=case+'__direct'"
+      },
+      {
+        "line": 46,
+        "text": "            firsts=[dict(id=s+'__intent',role='intent',representation='structured',prompt=prompts.intention(task)),dict(id=d+'__first',role='direct_first',representation='direct',prompt=prompts.direct(task))]"
+      },
+      {
+        "line": 47,
+        "text": "            if (i+repeat)%2:firsts.reverse()"
+      },
+      {
+        "line": 48,
+        "text": "            stages=[dict(id=s+'__first',role='first_rtl',representation='structured',intent_id=s+'__intent'),dict(id=d+'__second',role='direct_second',representation='direct',first_id=d+'__first')]"
+      },
+      {
+        "line": 49,
+        "text": "            if (i+repeat)%2:stages.reverse()"
+      },
+      {
+        "line": 50,
+        "text": "            for j in firsts+stages:jobs.append(dict(case=case,task=task,arm='shared',**j))"
+      },
+      {
+        "line": 51,
+        "text": "            for rep,prefix,parent in [('structured',s,s+'__first'),('direct',d,d+'__second')]:"
+      },
+      {
+        "line": 52,
+        "text": "                for arm in (['feedback','regeneration'] if (i+repeat)%2 else ['regeneration','feedback']):jobs.append(dict(id=prefix+'__'+arm,case=case,task=task,arm=arm,representation=rep,role='branch',first_id=parent,**({'intent_id':s+'__intent'} if rep=='structured' else {})))"
+      },
+      {
+        "line": 53,
+        "text": "    return dict(kind='R6_PREPARATION_NOT_RELEASE',created_utc=lab.utc(),model='gpt-5.6-sol',reasoning='low',api_timeout=180,max_calls=48,workers=1,retries=0,output_byte_limit=2*1024*1024,wall_budget_seconds=10800,disk_budget_bytes=750*1024*1024,input_byte_limit=MAX_INPUT,cases=cases,jobs=jobs,source_hashes=hashes())"
+      },
+      {
+        "line": 54,
+        "text": "def prepare():"
+      },
+      {
+        "line": 55,
+        "text": "    for name in ('calibration-v1','process-v3','recovery-boundaries-v1'):assert batch.read(BASE/'runs'/name/'summary.json')['status']=='PASS'"
+      },
+      {
+        "line": 56,
+        "text": "    assert batch.read(BASE/'runs/control-v2/control-audit.json')['status']=='PASS'"
+      },
+      {
+        "line": 57,
+        "text": "    assert not RUN.exists();RUN.mkdir(parents=True);p=plan()"
+      },
+      {
+        "line": 58,
+        "text": "    for j in p['jobs']:"
+      },
+      {
+        "line": 59,
+        "text": "        if 'prompt' in j:"
+      },
+      {
+        "line": 60,
+        "text": "            folder=RUN/'prompts'/j['id'];folder.mkdir(parents=True);(folder/'prompt.txt').write_bytes(j['prompt'].encode());j['prompt_sha256']=lab.digest(j['prompt'].encode())"
+      },
+      {
+        "line": 61,
+        "text": "    batch.atomic(RUN/'plan.json',p);batch.atomic(RUN/'plan-lock.json',dict(sha256=lab.digest((RUN/'plan.json').read_bytes())))"
+      },
+      {
+        "line": 62,
+        "text": "    batch.atomic(RUN/'preparation-lock.json',{str(x.relative_to(RUN)):lab.digest(x.read_bytes()) for x in RUN.rglob('*') if x.is_file()})"
+      },
+      {
+        "line": 63,
+        "text": "def verify():"
+      },
+      {
+        "line": 64,
+        "text": "    p=batch.read(RUN/'plan.json');assert lab.digest((RUN/'plan.json').read_bytes())==batch.read(RUN/'plan-lock.json')['sha256'];assert p['source_hashes']==hashes()"
+      },
+      {
+        "line": 65,
+        "text": "    for rel,h in batch.read(RUN/'preparation-lock.json').items():assert lab.digest((RUN/rel).read_bytes())==h"
+      },
+      {
+        "line": 66,
+        "text": "    assert len(p['jobs'])==48 and len(p['cases'])==6;return p"
+      },
+      {
+        "line": 67,
+        "text": "def raw(run,jid):"
+      },
+      {
+        "line": 68,
+        "text": "    folder=run/'jobs'/jid;data=(folder/'response.txt').read_bytes();g=batch.read(folder/'generation.json');assert lab.digest(data)==g['response_sha256'];return data.decode()"
+      },
+      {
+        "line": 69,
+        "text": "def public_feedback(task,rtl,rows,folder):return judge.public_feedback(task,rtl,rows,folder)"
+      },
+      {
+        "line": 70,
+        "text": "def campaign(run,p,call=None,feedback=None,check_sources=True):"
+      },
+      {
+        "line": 71,
+        "text": "    for reservation in (run/'jobs').glob('*/started.json'):"
+      },
+      {
+        "line": 72,
+        "text": "        g=reservation.parent/'generation.json'"
+      },
+      {
+        "line": 73,
+        "text": "        if not g.exists():batch.atomic(g,dict(status='UNKNOWN_INTERRUPTED',usage=None,model_called=True,reservation_unknown=True))"
+      },
+      {
+        "line": 74,
+        "text": "        if batch.read(g)['status'] not in FUNCTIONAL|{'GENERATED'}:return dict(status='STOPPED_INFRASTRUCTURE',reason='Prior unknown/failed reservation')"
+      },
+      {
+        "line": 75,
+        "text": "    if not (run/'dispatch-start.json').exists():batch.atomic(run/'dispatch-start.json',dict(epoch=time.time()))"
+      },
+      {
+        "line": 76,
+        "text": "    for j in p['jobs']:"
+      },
+      {
+        "line": 77,
+        "text": "        if check_sources and p['source_hashes']!=hashes():return dict(status='SOURCE_CHANGED')"
+      },
+      {
+        "line": 78,
+        "text": "        if time.time()-batch.read(run/'dispatch-start.json')['epoch']>p['wall_budget_seconds'] or sum(x.stat().st_size for x in run.rglob('*') if x.is_file())>p['disk_budget_bytes']:return dict(status='BUDGET_STOP')"
+      },
+      {
+        "line": 79,
+        "text": "        if 'prompt' in j:prompt=j['prompt']"
+      },
+      {
+        "line": 80,
+        "text": "        elif j['role']=='first_rtl':prompt=prompts.first(j['task'],'structured',raw(run,j['intent_id']))"
+      },
+      {
+        "line": 81,
+        "text": "        elif j['role']=='direct_second':prompt=prompts.second(j['task'],raw(run,j['first_id']))"
+      },
+      {
+        "line": 82,
+        "text": "        else:"
+      },
+      {
+        "line": 83,
+        "text": "            candidate=raw(run,j['first_id']);parent=run/'jobs'/j['first_id'];ff=parent/'public-feedback.json'"
+      },
+      {
+        "line": 84,
+        "text": "            if not ff.exists():batch.atomic(ff,(feedback or public_feedback)(j['task'],candidate,batch.read(ASSETS/(j['task']+'-public.json')),parent/'public'))"
+      },
+      {
+        "line": 85,
+        "text": "            fb=batch.read(ff)"
+      },
+      {
+        "line": 86,
+        "text": "            if fb['status'] not in FUNCTIONAL:return dict(status='STOPPED_INFRASTRUCTURE',reason='Public checker infrastructure')"
+      },
+      {
+        "line": 87,
+        "text": "            prompt=prompts.branch(j['task'],j['representation'],None,candidate,fb if j['arm']=='feedback' else None)"
+      },
+      {
+        "line": 88,
+        "text": "        gen=generate(run,j,p,prompt,call)"
+      },
+      {
+        "line": 89,
+        "text": "        if gen['status'] not in FUNCTIONAL|{'GENERATED'}:return dict(status='BUDGET_STOP' if gen['status']=='BUDGET_STOP' else 'STOPPED_INFRASTRUCTURE',reason=gen['status'])"
+      },
+      {
+        "line": 90,
+        "text": "        if len(list((run/'jobs').glob('*/started.json')))==4 and gen.get('model_called'):batch.atomic(run/'gate.json',dict(passed=True,criterion='Four reserved real returns without infrastructure error; no format/functional filtering'))"
+      },
+      {
+        "line": 91,
+        "text": "    return dict(status='GENERATION_COMPLETE')"
+      },
+      {
+        "line": 92,
+        "text": "def score(run,p):"
+      },
+      {
+        "line": 93,
+        "text": "    results=[]"
+      },
+      {
+        "line": 94,
+        "text": "    for j in p['jobs']:"
+      },
+      {
+        "line": 95,
+        "text": "        row={k:v for k,v in j.items() if k!='prompt'};folder=run/'jobs'/j['id'];gf=folder/'generation.json'"
+      },
+      {
+        "line": 96,
+        "text": "        if not gf.exists():row.update(status='PENDING',generation=None,judge=None)"
+      },
+      {
+        "line": 97,
+        "text": "        else:"
+      },
+      {
+        "line": 98,
+        "text": "            gen=batch.read(gf);row['generation']=gen"
+      },
+      {
+        "line": 99,
+        "text": "            if gen['status']!='GENERATED':row.update(status=gen['status'],judge=None)"
+      },
+      {
+        "line": 100,
+        "text": "            else:"
+      },
+      {
+        "line": 101,
+        "text": "                jf=folder/'hidden-judge.json'"
+      },
+      {
+        "line": 102,
+        "text": "                if not jf.exists():"
+      },
+      {
+        "line": 103,
+        "text": "                    rows=batch.read(ASSETS/(j['task']+'-private.json'))"
+      },
+      {
+        "line": 104,
+        "text": "                    if j['role']=='intent':checks=dict(intent_spec=intent.check(raw(run,j['id']),'structured',j['task'],rows)[0])"
+      },
+      {
+        "line": 105,
+        "text": "                    else:"
+      },
+      {
+        "line": 106,
+        "text": "                        checks=dict(rtl_spec=judge.simulate(folder/'hidden-spec',j['task'],raw(run,j['id']),rows))"
+      },
+      {
+        "line": 107,
+        "text": "                        if j['representation']=='structured':"
+      },
+      {
+        "line": 108,
+        "text": "                            ir,values=intent.check(raw(run,j['intent_id']),'structured',j['task'],rows);checks['intent_spec']=ir"
+      },
+      {
+        "line": 109,
+        "text": "                            checks['rtl_intent']=judge.simulate(folder/'hidden-intent',j['task'],raw(run,j['id']),[dict(r,expected=v) for r,v in zip(rows,values)]) if values is not None else dict(status='NOT_ASSESSABLE',stage='alignment')"
+      },
+      {
+        "line": 110,
+        "text": "                    batch.atomic(jf,checks)"
+      },
+      {
+        "line": 111,
+        "text": "                row['judge']=batch.read(jf);row['status']=row['judge']['intent_spec' if j['role']=='intent' else 'rtl_spec']['status']"
+      },
+      {
+        "line": 112,
+        "text": "        results.append(row)"
+      },
+      {
+        "line": 113,
+        "text": "    summary=summarize(results,p);batch.atomic(run/'results.json',results);batch.atomic(run/'summary.json',summary);return summary"
+      },
+      {
+        "line": 114,
+        "text": "def summarize(results,p):"
+      },
+      {
+        "line": 115,
+        "text": "    strategies={};comparisons=[];keys=('input_tokens','output_tokens','cached_input_tokens','cache_write_input_tokens','reasoning_output_tokens')"
+      },
+      {
+        "line": 116,
+        "text": "    def usage(rows):return {k:sum((r['generation'].get('usage') or {})[k] for r in rows) if rows and all(isinstance(((r.get('generation') or {}).get('usage') or {}).get(k),(int,float)) for r in rows) else None for k in keys}"
+      },
+      {
+        "line": 117,
+        "text": "    for rep in ('structured','direct'):"
+      },
+      {
+        "line": 118,
+        "text": "        shared=[r for r in results if r['representation']==rep and r['arm']=='shared'];su=usage(shared)"
+      },
+      {
+        "line": 119,
+        "text": "        for arm in ('regeneration','feedback'):"
+      },
+      {
+        "line": 120,
+        "text": "            branches=[r for r in results if r['representation']==rep and r['arm']==arm];bu=usage(branches)"
+      },
+      {
+        "line": 121,
+        "text": "            strategies[rep+'_'+arm]=dict(denominator=6,passes=sum(r['status']=='PASS' for r in branches),statuses=dict(Counter(r['status'] for r in branches)),opportunities=18,allocated_calls=12,shared_full_usage={k:su[k]+bu[k] if su[k] is not None and bu[k] is not None else None for k in keys},shared_half_usage={k:su[k]/2+bu[k] if su[k] is not None and bu[k] is not None else None for k in keys})"
+      },
+      {
+        "line": 122,
+        "text": "        for case in p['cases']:"
+      },
+      {
+        "line": 123,
+        "text": "            arms={r['arm']:r for r in results if r['case']==case['id'] and r['representation']==rep and r['role']=='branch'};a=arms['regeneration']['status'];b=arms['feedback']['status']"
+      },
+      {
+        "line": 124,
+        "text": "            effect='inconclusive' if a not in FUNCTIONAL or b not in FUNCTIONAL else 'help' if a!='PASS' and b=='PASS' else 'harm' if a=='PASS' and b!='PASS' else 'no_change'"
+      },
+      {
+        "line": 125,
+        "text": "            comparisons.append(dict(case=case['id'],representation=rep,regeneration=a,feedback=b,effect=effect))"
+      },
+      {
+        "line": 126,
+        "text": "    pairs=[]"
+      },
+      {
+        "line": 127,
+        "text": "    for case in p['cases']:"
+      },
+      {
+        "line": 128,
+        "text": "        for arm in ('regeneration','feedback'):"
+      },
+      {
+        "line": 129,
+        "text": "            pair={r['representation']:r['status'] for r in results if r['case']==case['id'] and r['arm']==arm};pairs.append(dict(case=case['id'],arm=arm,**pair))"
+      },
+      {
+        "line": 130,
+        "text": "    observations=[]"
+      },
+      {
+        "line": 131,
+        "text": "    for r in results:"
+      },
+      {
+        "line": 132,
+        "text": "        c=r.get('judge') or {}"
+      },
+      {
+        "line": 133,
+        "text": "        if 'rtl_intent' in c:"
+      },
+      {
+        "line": 134,
+        "text": "            a,b,d=(c[k]['status'] for k in ('intent_spec','rtl_spec','rtl_intent'));observations.append(dict(id=r['id'],intent_spec=a,rtl_spec=b,rtl_intent=d,category=classify(a,b,d)))"
+      },
+      {
+        "line": 135,
+        "text": "    return dict(planned_unique_calls=48,started=sum(bool((r.get('generation') or {}).get('model_called')) for r in results),statuses=dict(Counter(r['status'] for r in results)),role_statuses={role:dict(Counter(r['status'] for r in results if r['role']==role)) for role in ('intent','first_rtl','direct_first','direct_second','branch')},strategies=strategies,comparisons=comparisons,representation_pairs=pairs,effects=dict(Counter(c['effect'] for c in comparisons)),actual_unique_usage=usage([r for r in results if (r.get('generation') or {}).get('model_called')]),cost='UNKNOWN',observations=observations,label='OFFLINE fixtures never model evidence; reservation not confirmed provider usage')"
+      },
+      {
+        "line": 136,
+        "text": "def seal(run):"
+      },
+      {
+        "line": 137,
+        "text": "    assert not (run/'evidence-lock.json').exists();batch.atomic(run/'evidence-lock.json',{str(p.relative_to(run)):lab.digest(p.read_bytes()) for p in run.rglob('*') if p.is_file() and p.name not in ('run.lock','evidence-lock.json')})"
+      },
+      {
+        "line": 138,
+        "text": "def main():"
+      },
+      {
+        "line": 139,
+        "text": "    parser=argparse.ArgumentParser();parser.add_argument('command',choices=['prepare','verify','run']);parser.add_argument('--execute-approved-plan-sha');args=parser.parse_args()"
+      },
+      {
+        "line": 140,
+        "text": "    if args.command=='prepare':prepare();print('PREPARED; 0 model calls');return"
+      },
+      {
+        "line": 141,
+        "text": "    p=verify()"
+      },
+      {
+        "line": 142,
+        "text": "    if args.command=='verify':print('LOCKS_PASS; 0 model calls');return"
+      },
+      {
+        "line": 143,
+        "text": "    assert args.execute_approved_plan_sha==batch.read(RUN/'plan-lock.json')['sha256'],'New exact R6 plan release required';assert not (RUN/'evidence-lock.json').exists()"
+      },
+      {
+        "line": 144,
+        "text": "    assert not (RUN/'dispatch-start.json').exists(), 'No automatic resumption; recover offline into a new output'"
+      },
+      {
+        "line": 145,
+        "text": "    with batch.lock(RUN):"
+      },
+      {
+        "line": 146,
+        "text": "        batch.atomic(RUN/'dispatch.json',campaign(RUN,p))"
+      },
+      {
+        "line": 147,
+        "text": "        if p['source_hashes']==hashes():score(RUN,p)"
+      },
+      {
+        "line": 148,
+        "text": "        else:batch.atomic(RUN/'scoring-blocked.json',dict(status='SOURCE_CHANGED'))"
+      },
+      {
+        "line": 149,
+        "text": "        seal(RUN)"
+      },
+      {
+        "line": 150,
+        "text": "if __name__=='__main__':main()"
+      }
+    ]
+  },
+  "exploration/20261011/r6/intent.py": {
+    "sha256": "c38c058f97f3fba37dab70cd5aae3c99a3a1bdb2c9fdd16bdc3f438c90f1db6e",
+    "lines": [
+      {
+        "line": 1,
+        "text": "\"\"\"Bounded two-serialization temporal contract interpreter; never eval/exec model text.\"\"\""
+      },
+      {
+        "line": 2,
+        "text": "import ast,json,re"
+      },
+      {
+        "line": 3,
+        "text": "import tasks"
+      },
+      {
+        "line": 4,
+        "text": "MAX_BYTES=16384"
+      },
+      {
+        "line": 5,
+        "text": "OPS={ast.Add:lambda a,b:a+b,ast.Sub:lambda a,b:a-b,ast.BitAnd:lambda a,b:a&b,ast.BitOr:lambda a,b:a|b,ast.BitXor:lambda a,b:a^b,ast.LShift:lambda a,b:a<<b,ast.RShift:lambda a,b:a>>b}"
+      },
+      {
+        "line": 6,
+        "text": "CMP={ast.Eq:lambda a,b:a==b,ast.NotEq:lambda a,b:a!=b,ast.Lt:lambda a,b:a<b,ast.LtE:lambda a,b:a<=b,ast.Gt:lambda a,b:a>b,ast.GtE:lambda a,b:a>=b}"
+      },
+      {
+        "line": 7,
+        "text": "class Invalid(Exception):"
+      },
+      {
+        "line": 8,
+        "text": "    def __init__(self,status,message):self.status=status;self.message=message"
+      },
+      {
+        "line": 9,
+        "text": "def expression(text,names):"
+      },
+      {
+        "line": 10,
+        "text": "    if not isinstance(text,str) or len(text)>4096:raise Invalid('UNSUPPORTED','Expression size/type')"
+      },
+      {
+        "line": 11,
+        "text": "    try:tree=ast.parse(text,mode='eval').body"
+      },
+      {
+        "line": 12,
+        "text": "    except SyntaxError:raise Invalid('IR_INVALID','Expression syntax') from None"
+      },
+      {
+        "line": 13,
+        "text": "    if sum(1 for _ in ast.walk(tree))>512:raise Invalid('UNSUPPORTED','Expression nodes')"
+      },
+      {
+        "line": 14,
+        "text": "    def validate(n):"
+      },
+      {
+        "line": 15,
+        "text": "        if isinstance(n,ast.Constant) and type(n.value)==int and 0<=n.value<=65535:return"
+      },
+      {
+        "line": 16,
+        "text": "        if isinstance(n,ast.Name) and n.id in names:return"
+      },
+      {
+        "line": 17,
+        "text": "        if isinstance(n,ast.BinOp) and type(n.op) in OPS:"
+      },
+      {
+        "line": 18,
+        "text": "            if isinstance(n.op,(ast.LShift,ast.RShift)) and not (isinstance(n.right,ast.Constant) and type(n.right.value)==int and 0<=n.right.value<=7):raise Invalid(\"UNSUPPORTED\",\"Shift must be constant0..7\")"
+      },
+      {
+        "line": 19,
+        "text": "            validate(n.left);validate(n.right);return"
+      },
+      {
+        "line": 20,
+        "text": "        if isinstance(n,ast.Compare) and len(n.ops)==1 and type(n.ops[0]) in CMP:validate(n.left);validate(n.comparators[0]);return"
+      },
+      {
+        "line": 21,
+        "text": "        if isinstance(n,ast.BoolOp) and isinstance(n.op,(ast.And,ast.Or)):"
+      },
+      {
+        "line": 22,
+        "text": "            for v in n.values:validate(v)"
+      },
+      {
+        "line": 23,
+        "text": "            return"
+      },
+      {
+        "line": 24,
+        "text": "        if isinstance(n,ast.UnaryOp) and isinstance(n.op,ast.Not):validate(n.operand);return"
+      },
+      {
+        "line": 25,
+        "text": "        if isinstance(n,ast.IfExp):validate(n.test);validate(n.body);validate(n.orelse);return"
+      },
+      {
+        "line": 26,
+        "text": "        raise Invalid('UNSUPPORTED','Unsupported operator, reference or literal')"
+      },
+      {
+        "line": 27,
+        "text": "    validate(tree);return tree"
+      },
+      {
+        "line": 28,
+        "text": "def evaluate(n,env):"
+      },
+      {
+        "line": 29,
+        "text": "    if isinstance(n,ast.Constant):return n.value"
+      },
+      {
+        "line": 30,
+        "text": "    if isinstance(n,ast.Name):return env[n.id]"
+      },
+      {
+        "line": 31,
+        "text": "    if isinstance(n,ast.BinOp):return OPS[type(n.op)](evaluate(n.left,env),evaluate(n.right,env))"
+      },
+      {
+        "line": 32,
+        "text": "    if isinstance(n,ast.Compare):return int(CMP[type(n.ops[0])](evaluate(n.left,env),evaluate(n.comparators[0],env)))"
+      },
+      {
+        "line": 33,
+        "text": "    if isinstance(n,ast.BoolOp):"
+      },
+      {
+        "line": 34,
+        "text": "        v=[bool(evaluate(x,env)) for x in n.values];return int(all(v) if isinstance(n.op,ast.And) else any(v))"
+      },
+      {
+        "line": 35,
+        "text": "    if isinstance(n,ast.UnaryOp):return int(not evaluate(n.operand,env))"
+      },
+      {
+        "line": 36,
+        "text": "    if isinstance(n,ast.IfExp):return evaluate(n.body if evaluate(n.test,env) else n.orelse,env)"
+      },
+      {
+        "line": 37,
+        "text": "    raise AssertionError('Unvalidated expression')"
+      },
+      {
+        "line": 38,
+        "text": "def parse(raw,representation,task):"
+      },
+      {
+        "line": 39,
+        "text": "    if representation!='structured':raise Invalid('UNSUPPORTED','Only S has IR')"
+      },
+      {
+        "line": 40,
+        "text": "    if len(raw.encode())>MAX_BYTES or '```' in raw:raise Invalid('EXTRACTION_ERROR','Intent bytes/fences')"
+      },
+      {
+        "line": 41,
+        "text": "    def unique(pairs):"
+      },
+      {
+        "line": 42,
+        "text": "        d={}"
+      },
+      {
+        "line": 43,
+        "text": "        for k,v in pairs:"
+      },
+      {
+        "line": 44,
+        "text": "            if k in d:raise Invalid('IR_INVALID','Duplicate key')"
+      },
+      {
+        "line": 45,
+        "text": "            d[k]=v"
+      },
+      {
+        "line": 46,
+        "text": "        return d"
+      },
+      {
+        "line": 47,
+        "text": "    try:p=json.loads(raw,object_pairs_hook=unique)"
+      },
+      {
+        "line": 48,
+        "text": "    except (ValueError,TypeError):raise Invalid('EXTRACTION_ERROR','Invalid JSON') from None"
+      },
+      {
+        "line": 49,
+        "text": "    keys={'timing','registers','next_rising','next_falling','outputs'}"
+      },
+      {
+        "line": 50,
+        "text": "    if not isinstance(p,dict) or set(p)!=keys or any(not isinstance(v,dict) for v in p.values()):raise Invalid('IR_INVALID','Dictionary sections')"
+      },
+      {
+        "line": 51,
+        "text": "    if set(p['timing'])!={'reset'}:raise Invalid('IR_INVALID','Timing keys')"
+      },
+      {
+        "line": 52,
+        "text": "    if p['timing']['reset'] not in ('async_low','sync_low','none'):raise Invalid('UNSUPPORTED','Reset domain')"
+      },
+      {
+        "line": 53,
+        "text": "    regs=p['registers'];inputs={n for n,w in tasks.TASKS[task]['inputs']}|{'rst_n'}"
+      },
+      {
+        "line": 54,
+        "text": "    if not 1<=len(regs)<=16:raise Invalid('UNSUPPORTED','Register count')"
+      },
+      {
+        "line": 55,
+        "text": "    for n,r in regs.items():"
+      },
+      {
+        "line": 56,
+        "text": "        if not re.fullmatch('[A-Za-z][A-Za-z0-9_]*',n) or n in inputs:raise Invalid('IR_INVALID','Register name')"
+      },
+      {
+        "line": 57,
+        "text": "        if not isinstance(r,dict) or set(r)!={'width','reset'}:raise Invalid('IR_INVALID','Register fields')"
+      },
+      {
+        "line": 58,
+        "text": "        if type(r['width'])!=int or not 1<=r['width']<=8:raise Invalid('UNSUPPORTED','Register width')"
+      },
+      {
+        "line": 59,
+        "text": "        if type(r['reset'])!=int or not 0<=r['reset']<(1<<r['width']):raise Invalid('IR_INVALID','Reset range')"
+      },
+      {
+        "line": 60,
+        "text": "    a=set(p['next_rising']);b=set(p['next_falling'])"
+      },
+      {
+        "line": 61,
+        "text": "    if a&b or a|b!=set(regs):raise Invalid('IR_INVALID','Disjoint complete edge banks')"
+      },
+      {
+        "line": 62,
+        "text": "    if set(p['outputs'])!={n for n,w in tasks.TASKS[task]['outputs']}:raise Invalid('IR_INVALID','Output keys')"
+      },
+      {
+        "line": 63,
+        "text": "    p['trees']={k:{n:expression(e,inputs|set(regs)) for n,e in p[k].items()} for k in ('next_rising','next_falling','outputs')}"
+      },
+      {
+        "line": 64,
+        "text": "    return p"
+      },
+      {
+        "line": 65,
+        "text": "def run(p,task,rows):"
+      },
+      {
+        "line": 66,
+        "text": "    state={n:r['reset'] for n,r in p['registers'].items()};last=0;answers=[]"
+      },
+      {
+        "line": 67,
+        "text": "    for row in rows:"
+      },
+      {
+        "line": 68,
+        "text": "        edge=row['clk']!=last;bank='next_rising' if row['clk'] else 'next_falling';reset=not row['rst_n']"
+      },
+      {
+        "line": 69,
+        "text": "        if reset and p['timing']['reset']=='async_low':state={n:r['reset'] for n,r in p['registers'].items()}"
+      },
+      {
+        "line": 70,
+        "text": "        elif edge:"
+      },
+      {
+        "line": 71,
+        "text": "            env=state|tasks.unpack(task,row['input'])|{'rst_n':row['rst_n']}"
+      },
+      {
+        "line": 72,
+        "text": "            for n,t in p['trees'][bank].items():state[n]=p['registers'][n]['reset'] if reset and p['timing']['reset']=='sync_low' else evaluate(t,env)&((1<<p['registers'][n]['width'])-1)"
+      },
+      {
+        "line": 73,
+        "text": "        env=state|tasks.unpack(task,row['input'])|{'rst_n':row['rst_n']};value=0"
+      },
+      {
+        "line": 74,
+        "text": "        for n,w in tasks.TASKS[task]['outputs']:value=(value<<w)|(evaluate(p['trees']['outputs'][n],env)&((1<<w)-1))"
+      },
+      {
+        "line": 75,
+        "text": "        answers.append(value);last=row['clk']"
+      },
+      {
+        "line": 76,
+        "text": "    return answers"
+      },
+      {
+        "line": 77,
+        "text": "def check(raw,representation,task,rows):"
+      },
+      {
+        "line": 78,
+        "text": "    try:p=parse(raw,representation,task);answers=run(p,task,rows)"
+      },
+      {
+        "line": 79,
+        "text": "    except Invalid as e:return dict(status=e.status,stage='intent',message=e.message,mismatches=[]),None"
+      },
+      {
+        "line": 80,
+        "text": "    mismatch=[dict(event=i,expected=r['expected'],observed=a,category=r['category']) for i,(r,a) in enumerate(zip(rows,answers)) if r['expected']!=a]"
+      },
+      {
+        "line": 81,
+        "text": "    return dict(status='FUNCTION_FAIL' if mismatch else 'PASS',stage='intent',checks=len(rows),errors=len(mismatch),mismatches=mismatch[:8]),answers"
+      }
+    ]
+  },
+  "exploration/20261011/r6/tasks.py": {
+    "sha256": "64b95dbcf5ad3d01c0007a5f7e32cab53b622587beae59b5f1b7d7b422ad299d",
+    "lines": [
+      {
+        "line": 1,
+        "text": "\"\"\"R6 original development tasks. Binary events, fixed small domains.\"\"\""
+      },
+      {
+        "line": 2,
+        "text": "import random"
+      },
+      {
+        "line": 3,
+        "text": "TASKS={"
+      },
+      {
+        "line": 4,
+        "text": "'ordered_retire':dict(module='ordered_retire',inputs=[('flush',1),('issue',1),('issue_tag',2),('finish',1),('finish_tag',2)],outputs=[('count',2),('retired',1),('retired_tag',2)],spec='Two-slot ordered retirement queue with distinct 2-bit tags. Async active-low reset clears all state and outputs. Only rising edges act. flush has priority: clear queue and retired_tag and retired pulse. Otherwise retired is one iff the OLD head exists and was already finished; retire that head and update retired_tag, else retired=0 and hold retired_tag. finish marks any OLD queued matching tag finished; unknown tags ignored, and a just-issued tag cannot finish on that same edge. issue appends unfinished issue_tag iff OLD count<2 and issue_tag differs from all OLD queued tags; otherwise ignored. A full OLD queue rejects issue even when retiring; an OLD duplicate rejects issue even if that tag retires. Accepted issue appends after survivors. count reflects occupied slots. Completion can occur out of order; retirement stays in order, at most one per edge. Falling edges and stable clock input/reset-release changes hold all outputs; reset assertion immediately clears at either clock level.'),"
+      },
+      {
+        "line": 5,
+        "text": "'restoring_divide':dict(module='restoring_divide',inputs=[('abort',1),('start',1),('advance',1),('numerator',4),('denominator',4)],outputs=[('busy',1),('done',1),('quotient',4),('remainder',4)],spec='Unsigned 4-bit restoring divider, rising edges only, async active-low reset zeroes all state/output. abort highest priority: busy=done=quotient=remainder=0 and discard work. Otherwise done is a one-edge pulse (default 0 each rising edge). When OLD busy=0, start accepts current numerator/denominator regardless advance: for denominator=0 finish immediately with busy=0,done=1,quotient=15,remainder=numerator; otherwise busy=1, load work, four accepted advance edges required, hold previous quotient/remainder. When OLD busy=1, start and operand changes ignored. advance=0 pauses all work and holds busy/quotient/remainder, done still clears. Each advance shifts next numerator MSB into partial remainder, shifts quotient, conditionally subtracts latched denominator and sets quotient low bit iff trial>=denominator. On the fourth advance publish new quotient/remainder, busy=0,done=1. A start simultaneous with that fourth advance is ignored (OLD busy). No implicit extra advance at acceptance. Falling/stable clock changes hold all output; reset assertion clears immediately, release alone does not act.'),"
+      },
+      {
+        "line": 6,
+        "text": "'tagged_join':dict(module='tagged_join',inputs=[('clear',1),('a_valid',1),('a_tag',2),('a_data',2),('b_valid',1),('b_tag',2),('b_data',2),('take',1)],outputs=[('a_full',1),('b_full',1),('out_valid',1),('out_tag',2),('out_data',4)],spec='Join two tagged streams with one holding slot per input and one output register. Async low reset clears all state. Rising edges only. clear highest priority clears every slot and output field. Otherwise decisions use OLD slots: capture A iff a_valid and OLD a_full=0; capture B iff b_valid and OLD b_full=0, retaining captured tag/data. If both OLD input slots full and tags unequal, discard the slot with smaller unsigned tag, even when output blocked. If both full and tags equal, move them to output only if OLD out_valid=0 or take=1; clear both input full flags and set out_valid=1,out_tag=old tag,out_data={old a_data,old b_data}. This replacement wins over take. If no move and take=1 clear out_valid but hold out_tag/out_data; ignored take on empty has same field-hold behavior. Input capture cannot replace a full OLD slot on its discard/move edge; newly captured slots are not compared until a later edge. Output blocked equal slots hold; unequal drop does not change output. All falling/stable clock changes hold all outputs; asynchronous reset immediate and release alone no update.')}"
+      },
+      {
+        "line": 7,
+        "text": "def unpack(task,value):"
+      },
+      {
+        "line": 8,
+        "text": "    x={}"
+      },
+      {
+        "line": 9,
+        "text": "    for n,w in reversed(TASKS[task]['inputs']):x[n]=value&((1<<w)-1);value>>=w"
+      },
+      {
+        "line": 10,
+        "text": "    return x"
+      },
+      {
+        "line": 11,
+        "text": "def pack_input(task,**x):"
+      },
+      {
+        "line": 12,
+        "text": "    value=0"
+      },
+      {
+        "line": 13,
+        "text": "    for n,w in TASKS[task]['inputs']:value=(value<<w)|x.get(n,0)"
+      },
+      {
+        "line": 14,
+        "text": "    return value"
+      },
+      {
+        "line": 15,
+        "text": "def initial(task):"
+      },
+      {
+        "line": 16,
+        "text": "    if task=='ordered_retire':return dict(q=[],retired=0,retired_tag=0)"
+      },
+      {
+        "line": 17,
+        "text": "    if task=='restoring_divide':return dict(busy=0,done=0,quotient=0,remainder=0,num=0,den=0,part=0,qwork=0,left=0)"
+      },
+      {
+        "line": 18,
+        "text": "    return dict(a_full=0,b_full=0,out_valid=0,out_tag=0,out_data=0,at=0,ad=0,bt=0,bd=0)"
+      },
+      {
+        "line": 19,
+        "text": "def step(task,state,x,edge):"
+      },
+      {
+        "line": 20,
+        "text": "    s={k:(list(v) if isinstance(v,list) else v) for k,v in state.items()}"
+      },
+      {
+        "line": 21,
+        "text": "    if not edge:return s"
+      },
+      {
+        "line": 22,
+        "text": "    if task=='ordered_retire':"
+      },
+      {
+        "line": 23,
+        "text": "        if x['flush']:return initial(task)"
+      },
+      {
+        "line": 24,
+        "text": "        q=s['q'];old=list(q);ret=bool(old and old[0][1]);s['retired']=int(ret)"
+      },
+      {
+        "line": 25,
+        "text": "        if ret:s['retired_tag']=old[0][0]"
+      },
+      {
+        "line": 26,
+        "text": "        q=[(tag,ready or (x['finish'] and tag==x['finish_tag'])) for tag,ready in old[int(ret):]]"
+      },
+      {
+        "line": 27,
+        "text": "        if x['issue'] and len(old)<2 and all(tag!=x['issue_tag'] for tag,ready in old):q.append((x['issue_tag'],False))"
+      },
+      {
+        "line": 28,
+        "text": "        s['q']=q"
+      },
+      {
+        "line": 29,
+        "text": "    elif task=='restoring_divide':"
+      },
+      {
+        "line": 30,
+        "text": "        if x['abort']:return initial(task)"
+      },
+      {
+        "line": 31,
+        "text": "        s['done']=0"
+      },
+      {
+        "line": 32,
+        "text": "        if not state['busy'] and x['start']:"
+      },
+      {
+        "line": 33,
+        "text": "            if not x['denominator']:s.update(busy=0,done=1,quotient=15,remainder=x['numerator'])"
+      },
+      {
+        "line": 34,
+        "text": "            else:s.update(busy=1,num=x['numerator'],den=x['denominator'],part=0,qwork=0,left=4)"
+      },
+      {
+        "line": 35,
+        "text": "        elif state['busy'] and x['advance']:"
+      },
+      {
+        "line": 36,
+        "text": "            trial=2*state['part']+(state['num']>>3);bit=int(trial>=state['den'])"
+      },
+      {
+        "line": 37,
+        "text": "            s.update(part=trial-bit*state['den'],qwork=(2*state['qwork']+bit)&15,num=(2*state['num'])&15,left=state['left']-1)"
+      },
+      {
+        "line": 38,
+        "text": "            if state['left']==1:s.update(busy=0,done=1,quotient=s['qwork'],remainder=s['part'])"
+      },
+      {
+        "line": 39,
+        "text": "    else:"
+      },
+      {
+        "line": 40,
+        "text": "        if x['clear']:return initial(task)"
+      },
+      {
+        "line": 41,
+        "text": "        if not state['a_full'] and x['a_valid']:s.update(a_full=1,at=x['a_tag'],ad=x['a_data'])"
+      },
+      {
+        "line": 42,
+        "text": "        if not state['b_full'] and x['b_valid']:s.update(b_full=1,bt=x['b_tag'],bd=x['b_data'])"
+      },
+      {
+        "line": 43,
+        "text": "        if state['a_full'] and state['b_full']:"
+      },
+      {
+        "line": 44,
+        "text": "            if state['at']<state['bt']:s['a_full']=0"
+      },
+      {
+        "line": 45,
+        "text": "            elif state['bt']<state['at']:s['b_full']=0"
+      },
+      {
+        "line": 46,
+        "text": "            elif not state['out_valid'] or x['take']:s.update(a_full=0,b_full=0,out_valid=1,out_tag=state['at'],out_data=4*state['ad']+state['bd']);return s"
+      },
+      {
+        "line": 47,
+        "text": "        if x['take']:s['out_valid']=0"
+      },
+      {
+        "line": 48,
+        "text": "    return s"
+      },
+      {
+        "line": 49,
+        "text": "def output(task,s):"
+      },
+      {
+        "line": 50,
+        "text": "    d=s|({'count':len(s['q'])} if task=='ordered_retire' else {})"
+      },
+      {
+        "line": 51,
+        "text": "    value=0"
+      },
+      {
+        "line": 52,
+        "text": "    for n,w in TASKS[task]['outputs']:value=(value<<w)|d[n]"
+      },
+      {
+        "line": 53,
+        "text": "    return value"
+      },
+      {
+        "line": 54,
+        "text": "def vectors(task,seqs,private=False):"
+      },
+      {
+        "line": 55,
+        "text": "    rows=[];s=initial(task);last=0"
+      },
+      {
+        "line": 56,
+        "text": "    def event(clk,rst,x,cat):"
+      },
+      {
+        "line": 57,
+        "text": "        nonlocal s,last"
+      },
+      {
+        "line": 58,
+        "text": "        if not rst:s=initial(task)"
+      },
+      {
+        "line": 59,
+        "text": "        else:s=step(task,s,unpack(task,x),clk==1 and last==0)"
+      },
+      {
+        "line": 60,
+        "text": "        rows.append(dict(clk=clk,rst_n=rst,input=x,expected=output(task,s),category=cat));last=clk"
+      },
+      {
+        "line": 61,
+        "text": "    for seq_index,seq in enumerate(seqs):"
+      },
+      {
+        "line": 62,
+        "text": "        event(0,0,0,'reset_low');event(0,1,0,'release_low')"
+      },
+      {
+        "line": 63,
+        "text": "        for i,x in enumerate(seq):"
+      },
+      {
+        "line": 64,
+        "text": "            event(0,1,x,'low_hold');event(1,1,x,'rising');event(1,1,x^1,'high_hold');event(0,1,x,'falling')"
+      },
+      {
+        "line": 65,
+        "text": "            if private and i in [2,7]:"
+      },
+      {
+        "line": 66,
+        "text": "                # Separate reset-interrupted paths, not the sole normal path."
+      },
+      {
+        "line": 67,
+        "text": "                if i==7:event(1,1,x,'reset_before_high')"
+      },
+      {
+        "line": 68,
+        "text": "                event(last,0,x,'mid_reset');event(last,1,x,'stable_release')"
+      },
+      {
+        "line": 69,
+        "text": "        event(0,0,0,'end_reset')"
+      },
+      {
+        "line": 70,
+        "text": "    return rows"
+      },
+      {
+        "line": 71,
+        "text": "def datasets(task):"
+      },
+      {
+        "line": 72,
+        "text": "    if task=='ordered_retire':"
+      },
+      {
+        "line": 73,
+        "text": "        seq=[dict(issue=1,issue_tag=1),dict(issue=1,issue_tag=2),dict(finish=1,finish_tag=2),dict(finish=1,finish_tag=1),dict(issue=1,issue_tag=3),{},{}]"
+      },
+      {
+        "line": 74,
+        "text": "    elif task=='restoring_divide':"
+      },
+      {
+        "line": 75,
+        "text": "        seq=[dict(start=1,numerator=13,denominator=3),dict(advance=1),{},dict(advance=1),dict(advance=1),dict(start=1,advance=1,numerator=8,denominator=2),{}]"
+      },
+      {
+        "line": 76,
+        "text": "    else:seq=[dict(a_valid=1,a_tag=1,a_data=2),dict(b_valid=1,b_tag=1,b_data=3),{},dict(a_valid=1,a_tag=0,a_data=1,b_valid=1,b_tag=2,b_data=2),{},dict(a_valid=1,a_tag=2,a_data=1),{},dict(take=1)]"
+      },
+      {
+        "line": 77,
+        "text": "    public=vectors(task,[[pack_input(task,**x) for x in seq]])"
+      },
+      {
+        "line": 78,
+        "text": "    rng=random.Random(61011+list(TASKS).index(task));width=sum(w for n,w in TASKS[task]['inputs'])"
+      },
+      {
+        "line": 79,
+        "text": "    sequences=[[rng.randrange(1<<width) for _ in range(28)] for _ in range(12)]"
+      },
+      {
+        "line": 80,
+        "text": "    # Directed complete normal arithmetic paths, plus separate reset paths."
+      },
+      {
+        "line": 81,
+        "text": "    if task=='restoring_divide':"
+      },
+      {
+        "line": 82,
+        "text": "        sequences += [[pack_input(task,start=1,numerator=n,denominator=d)]+[pack_input(task,advance=1)]*4+[0] for n in range(16) for d in range(16)]"
+      },
+      {
+        "line": 83,
+        "text": "    elif task=='ordered_retire':"
+      },
+      {
+        "line": 84,
+        "text": "        sequences += [[pack_input(task,issue=1,issue_tag=a),pack_input(task,issue=1,issue_tag=b),pack_input(task,finish=1,finish_tag=b),pack_input(task,finish=1,finish_tag=a),0,0,0] for a in range(4) for b in range(4)]"
+      },
+      {
+        "line": 85,
+        "text": "        sequences += [[pack_input(task,issue=1,issue_tag=1,finish=1,finish_tag=1),0,pack_input(task,issue=1,issue_tag=1,finish=1,finish_tag=1),pack_input(task,issue=1,issue_tag=1),0],"
+      },
+      {
+        "line": 86,
+        "text": "                      [pack_input(task,issue=1,issue_tag=1),pack_input(task,flush=1,issue=1,issue_tag=2,finish=1,finish_tag=1),0]]"
+      },
+      {
+        "line": 87,
+        "text": "    else:"
+      },
+      {
+        "line": 88,
+        "text": "        sequences += [[pack_input(task,a_valid=1,a_tag=a,a_data=2,b_valid=1,b_tag=b,b_data=1),0,pack_input(task,take=1),0] for a in range(4) for b in range(4)]"
+      },
+      {
+        "line": 89,
+        "text": "        sequences += [[pack_input(task,a_valid=1,a_tag=1,a_data=2,b_valid=1,b_tag=1,b_data=3),0,"
+      },
+      {
+        "line": 90,
+        "text": "                       pack_input(task,a_valid=1,a_tag=2,a_data=1,b_valid=1,b_tag=2,b_data=2),0,"
+      },
+      {
+        "line": 91,
+        "text": "                       pack_input(task,take=1),pack_input(task,clear=1,take=1,a_valid=1,b_valid=1),0]]"
+      },
+      {
+        "line": 92,
+        "text": "    if task=='restoring_divide':"
+      },
+      {
+        "line": 93,
+        "text": "        sequences += [[pack_input(task,start=1,numerator=15,denominator=2),pack_input(task,start=1,numerator=3,denominator=0),0,"
+      },
+      {
+        "line": 94,
+        "text": "                       pack_input(task,advance=1),pack_input(task,abort=1,start=1,advance=1,numerator=15,denominator=1),0],"
+      },
+      {
+        "line": 95,
+        "text": "                      [pack_input(task,start=1,numerator=13,denominator=3),pack_input(task,advance=1),0,pack_input(task,advance=1),pack_input(task,advance=1),pack_input(task,start=1,advance=1,numerator=8,denominator=2),0]]"
+      },
+      {
+        "line": 96,
+        "text": "    return public,vectors(task,sequences)+vectors(task,sequences[:12],True)"
+      }
+    ]
+  },
+  "exploration/20261011/r6/judge.py": {
+    "sha256": "7a8bfc9630555dbdc6900f486fbeeee9f4acde4857bfd4450acd2c231985dafa",
+    "lines": [
+      {
+        "line": 1,
+        "text": "\"\"\"Bounded binary-event simulator; generated RTL is never Python code.\"\"\""
+      },
+      {
+        "line": 2,
+        "text": "import sys,re"
+      },
+      {
+        "line": 3,
+        "text": "from pathlib import Path"
+      },
+      {
+        "line": 4,
+        "text": "from types import SimpleNamespace"
+      },
+      {
+        "line": 5,
+        "text": "BASE=Path(__file__).resolve().parent;ROOT=BASE.parents[2];sys.path.insert(0,str(ROOT))"
+      },
+      {
+        "line": 6,
+        "text": "import batch,rtl_lab as lab,backends"
+      },
+      {
+        "line": 7,
+        "text": "from tasks import TASKS"
+      },
+      {
+        "line": 8,
+        "text": ""
+      },
+      {
+        "line": 9,
+        "text": "def simulate(folder,task,raw,rows,tools=None):"
+      },
+      {
+        "line": 10,
+        "text": "    folder.mkdir(parents=True,exist_ok=True);spec=TASKS[task]"
+      },
+      {
+        "line": 11,
+        "text": "    try:dut=lab.extract_rtl(raw,spec['module'])"
+      },
+      {
+        "line": 12,
+        "text": "    except lab.LabError as exc:return dict(status=exc.status,stage=exc.stage,message=exc.message,mismatches=[])"
+      },
+      {
+        "line": 13,
+        "text": "    (folder/'dut.sv').write_bytes(dut.encode());iw=sum(w for n,w in spec['inputs']);ow=sum(w for n,w in spec['outputs']);width=iw+ow+2"
+      },
+      {
+        "line": 14,
+        "text": "    words=[f'{(((e[\"clk\"]*2+e[\"rst_n\"])<<iw)|e[\"input\"])<<ow|e[\"expected\"]:x}' for e in rows]"
+      },
+      {
+        "line": 15,
+        "text": "    (folder/'vectors.hex').write_bytes(('\\n'.join(words)+'\\n').encode())"
+      },
+      {
+        "line": 16,
+        "text": "    declarations=' '.join('reg '+(f'[{w-1}:0] ' if w>1 else '')+n+'=0;' for n,w in spec['inputs'])"
+      },
+      {
+        "line": 17,
+        "text": "    declarations+=' '.join('wire '+(f'[{w-1}:0] ' if w>1 else '')+n+';' for n,w in spec['outputs'])"
+      },
+      {
+        "line": 18,
+        "text": "    names=[n for n,w in spec['inputs']];outputs=[n for n,w in spec['outputs']]"
+      },
+      {
+        "line": 19,
+        "text": "    ports=', '.join('.'+n+'('+n+')' for n in ['clk','rst_n']+names+outputs)"
+      },
+      {
+        "line": 20,
+        "text": "    tb=f'''module tb;reg clk=0,rst_n=1;{declarations}"
+      },
+      {
+        "line": 21,
+        "text": "reg [{width-1}:0] vectors[0:{len(rows)-1}];integer i,checks=0,errors=0,fd;reg [255:0] nonce;"
+      },
+      {
+        "line": 22,
+        "text": "{spec['module']} D({ports});"
+      },
+      {
+        "line": 23,
+        "text": "initial begin if(!$value$plusargs(\"nonce=%s\",nonce)) $finish;$readmemh(\"vectors.hex\",vectors);"
+      },
+      {
+        "line": 24,
+        "text": "for(i=0;i<{len(rows)};i=i+1) begin {{clk,rst_n,{','.join(names)}}}=vectors[i][{width-1}:{ow}];#2;checks=checks+1;"
+      },
+      {
+        "line": 25,
+        "text": "if({{{','.join(outputs)}}} !== vectors[i][{ow-1}:0]) begin errors=errors+1;if(errors<=8)$display(\"MISMATCH event=%0d expected=%0d observed=%0b\",i,vectors[i][{ow-1}:0],{{{','.join(outputs)}}});end end"
+      },
+      {
+        "line": 26,
+        "text": "fd=$fopen(\"verdict.txt\",\"w\");$fdisplay(fd,\"RTL_LAB_V1 %0s checks=%0d errors=%0d\",nonce,checks,errors);$fclose(fd);$finish;end endmodule"
+      },
+      {
+        "line": 27,
+        "text": "'''"
+      },
+      {
+        "line": 28,
+        "text": "    (folder/'testbench.sv').write_bytes(tb.encode());args=SimpleNamespace(iverilog=None,vvp=None,compile_timeout=15,sim_timeout=10)"
+      },
+      {
+        "line": 29,
+        "text": "    if tools is None:tools=lab.inspect_tools(args,folder)"
+      },
+      {
+        "line": 30,
+        "text": "    result=backends.IcarusBackend().evaluate(folder,dict(checks=len(rows)),tools,args)"
+      },
+      {
+        "line": 31,
+        "text": "    log=(folder/'simulate.stdout.log').read_text() if (folder/'simulate.stdout.log').exists() else ''"
+      },
+      {
+        "line": 32,
+        "text": "    result['mismatches']=[dict(event=int(i),expected=int(e),observed=o,category=rows[int(i)]['category']) for i,e,o in re.findall(r'MISMATCH event=(\\d+) expected=(\\d+) observed=([01xz]+)',log)]"
+      },
+      {
+        "line": 33,
+        "text": "    result.update(checks=len(rows),rtl_sha256=lab.digest((folder/'dut.sv').read_bytes()),tb_sha256=lab.digest(tb.encode()),vectors_sha256=lab.digest((folder/'vectors.hex').read_bytes()))"
+      },
+      {
+        "line": 34,
+        "text": "    return result"
+      },
+      {
+        "line": 35,
+        "text": ""
+      },
+      {
+        "line": 36,
+        "text": "def public_feedback(task,raw,rows,folder,tools=None):"
+      },
+      {
+        "line": 37,
+        "text": "    # Only this explicitly passed public row set is accessible to the checker."
+      },
+      {
+        "line": 38,
+        "text": "    result=simulate(folder,task,raw,rows,tools)"
+      },
+      {
+        "line": 39,
+        "text": "    return dict(status=result['status'],mismatches=result.get('mismatches',[]),scope='Disclosed examples and event checks only; no hidden stimuli/reference RTL',message=result.get('message'))"
+      }
+    ]
+  },
+  "exploration/20261011/handshake-dev-v2/INTENT_COMPARISON_DESIGN.md": {
+    "sha256": "d96e942137cfd0530c4d285f7cbfccf9e64a0a98e5b60f9adbb64dcc74aa3212",
+    "lines": [
+      {
+        "line": 1,
+        "text": "# 事务域 IR／RTL 意图比较：DESIGN_ONLY / NOT_VERIFIED"
+      },
+      {
+        "line": 2,
+        "text": ""
+      },
+      {
+        "line": 3,
+        "text": "## 现有表达域"
+      },
+      {
+        "line": 4,
+        "text": ""
+      },
+      {
+        "line": 5,
+        "text": "本地 fsm_ir.py 的 SCHEMA_TEXT/parse/trace/product_check/timed_vectors 已查读并纳入prior锁：schema1、posedge、Moore、1bit输入及1bit状态输出、1..32状态、sync/async reset元数据；每状态恰两条0/1输入转移。其product_check证明有限抽象Moore图从reset的关系，timed_vectors按边沿前/后值；没有8bit载荷、last、source/consumer ready、双消费者、队列、事务身份或取消事件。不能把该解释器输出冒充本广播任务的 IR 握手轨迹，不能更改域来强凑题。本设计没有新增IR解释器或RTL_intent生产判题；6例仅手工语义草案，不是端到端集成测试。"
+      },
+      {
+        "line": 6,
+        "text": ""
+      },
+      {
+        "line": 7,
+        "text": "## 输入实验与事务身份"
+      },
+      {
+        "line": 8,
+        "text": ""
+      },
+      {
+        "line": 9,
+        "text": "外部计划固定输入offer序列、每笔offer_id（epoch,ordinal）、载荷、last、驱动策略、reset日程及每消费者ready日程；来源哈希不由DUT决定。相同驱动策略指“上一笔握手后才推进下一笔，未握手保持valid与payload”，不保证在不同ready实现上有逐拍相同s_valid/data；如果强制相同波形，可能对某实现违反source稳定，应标 INPUT_PROTOCOL_FAIL / INCONCLUSIVE。"
+      },
+      {
+        "line": 10,
+        "text": ""
+      },
+      {
+        "line": 11,
+        "text": "每个执行对象单独产生 pre-edge 采样：reset transition/epoch、offer_id、source接受(cycle,payload,last)、每consumer交付(cycle,payload,last)、stall承诺及取消pending/unaccepted账。offer_id来自独立驱动器记录，不从输出载荷猜身份；重复载荷也按接受次序绑定，consumer ordinal在各epoch单独递增。输出只可关联该实现已经接受的输入，source_cycle<=sink_cycle（允许等号），先用该实现本身的时间因果/背压判据；无效payload不比较。不能事后配对一个提前输出到将来输入来消掉错误。"
+      },
+      {
+        "line": 12,
+        "text": ""
+      },
+      {
+        "line": 13,
+        "text": "## 三路关系和对齐条件"
+      },
+      {
+        "line": 14,
+        "text": ""
+      },
+      {
+        "line": 15,
+        "text": "1. IR_spec：仅在预冻结且表达域适配的IR执行器、独立公开规格判据可用时，对IR本身执行该事务契约和bounded完成义务。旧schema在本任务为 UNSUPPORTED_DOMAIN，不能给PASS/FAIL。"
+      },
+      {
+        "line": 16,
+        "text": "2. RTL_spec：独立激励和规格事务判据。当前v2仅人工有限开发验证；真实生产轨迹的解析/driver_id接入、参考独立性、IR执行器仍未完成。"
+      },
+      {
+        "line": 17,
+        "text": "3. RTL_intent：先核对域、采样相位/reset定义、驱动策略及完整轨迹，再核对同epoch实际接受offer_id集合、取消集合及最终公平完成边界。相同可比接受集合时，对每consumer比较(offer_id,payload,last)有序交付关系以及各自合法时序义务；允许空闲/stuttering和不同握手cycle，不要求微架构信号一致。任何一方因果/背压破坏不能因最终序列相等而PASS。"
+      },
+      {
+        "line": 18,
+        "text": ""
+      },
+      {
+        "line": 19,
+        "text": "若固定时间reset发生时两实现因为ready不同接受集合或部分已交付/取消集合不同，则对每实现分别做spec检查，可都合法；RTL_intent需标 ALIGNMENT_NOT_EVALUABLE（附具体集合），不能判实现错误。可另行预声明输入停止且两边完全drain后共同reset的driver策略，取得相同episode输入集合；不能看到结果后移动reset或补题。按事务数触发reset亦需定义外部协调器、共同结束条件，不能在两边任意选各自reset导致比较不同问题。无reset时最终完成相同offer集合才允许时间消去；若到窗末任一未接受/未完成则是有限spec义务失败或适用性不足，不能无限延长直到PASS。"
+      },
+      {
+        "line": 20,
+        "text": ""
+      },
+      {
+        "line": 21,
+        "text": "IR_invalid、工具错误、未知控制、source违规、域不足或无法对齐都独立保留，不能归入FUNCTION_FAIL收益。即使两方同样错并有相同序列，只有两方因果/背压义务都成立才能称“事务行为一致”；不能把共同提前消费归入意图通过。"
+      },
+      {
+        "line": 22,
+        "text": ""
+      },
+      {
+        "line": 23,
+        "text": "## 有限语义例（完整分母6）"
+      },
+      {
+        "line": 24,
+        "text": ""
+      },
+      {
+        "line": 25,
+        "text": "| 例 | IR_spec / RTL_spec / RTL_intent | 可见解释 |"
+      },
+      {
+        "line": 26,
+        "text": "|---|---|---|"
+      },
+      {
+        "line": 27,
+        "text": "| 同offer接受cycle2/4、交付5/8，均合法 | PASS / PASS / PASS | stuttering允许；非逐拍等式 |"
+      },
+      {
+        "line": 28,
+        "text": "| IR合法时序但payload错，RTL正确 | FAIL / PASS / FAIL | RTL在此见证纠正了IR |"
+      },
+      {
+        "line": 29,
+        "text": "| IR正确，RTL合法时序但payload错 | PASS / FAIL / FAIL | 此见证IR到RTL不一致 |"
+      },
+      {
+        "line": 30,
+        "text": "| 两边合法时序、同样错误payload | FAIL / FAIL / PASS | 此见证一致但共同偏离规格 |"
+      },
+      {
+        "line": 31,
+        "text": "| reset前IR已接受offer1，RTL还未接受，分别合法取消 | PASS / PASS / ALIGNMENT_NOT_EVALUABLE | 可比性缺失，不应强判实现错误 |"
+      },
+      {
+        "line": 32,
+        "text": "| 用旧FSM schema表示广播 | UNSUPPORTED_DOMAIN / 有限RTL PASS / NOT_EVALUABLE | 无可信IR轨迹，不能给三路定位 |"
+      },
+      {
+        "line": 33,
+        "text": ""
+      },
+      {
+        "line": 34,
+        "text": "见 semantic-examples.json 的明确手工数据。例中IR是“假设已有适配执行器”的抽象事件账，不是现有FSM IR运行。未实现三路分类算法，未验证独立参考；DESIGN_ONLY范围不因6例被放大。"
+      },
+      {
+        "line": 35,
+        "text": ""
+      },
+      {
+        "line": 36,
+        "text": "## 研究边界及反馈公平"
+      },
+      {
+        "line": 37,
+        "text": ""
+      },
+      {
+        "line": 38,
+        "text": "S三路结果只能陈述可见关系，不能推模型内部认知根因；D无IR不能猜理解阶段。外部保留任务必须真正未参与方法调整，R7受开发影响的源仍属development。未来保持S/D×F/R；F只收双方一致的公开RTL反馈，不额外提供私有意图事实，R以固定父直接RTL无条件重生成，调用机会匹配不等于实际token匹配。新IR域若未来授权需要另行冻结/验证与生产校准，本次0模型/0外部保留任务/0生产接入，无自然错误定位效用估计。"
+      }
+    ]
+  },
+  "exploration/20261011/handshake-dev-v2/RESULTS.md": {
+    "sha256": "7d6e6c86679aa9980dd12c73d9fc7cc0d115af194a80b94435dbbdb0ddd7322e",
+    "lines": [
+      {
+        "line": 1,
+        "text": "# development-v2 有限离线交付（待总控独立审核）"
+      },
+      {
+        "line": 2,
+        "text": ""
+      },
+      {
+        "line": 3,
+        "text": "## 实际完成与负结果"
+      },
+      {
+        "line": 4,
+        "text": ""
+      },
+      {
+        "line": 5,
+        "text": "一次校准，8手推=4PASS/4FUNCTION_FAIL；8 Icarus配置=5PASS/3FUNCTION_FAIL；实际8编译、8仿真退出0，640拍raw与normalized。0模型、0来源检索、0候选扩充、0生产接入、0旧评分重判。checker.py与v1逐字同SHA。人工RTL确实由Icarus执行；同作者开发不等于历史真实模型或独立作者参考。"
+      },
+      {
+        "line": 6,
+        "text": ""
+      },
+      {
+        "line": 7,
+        "text": "校准整体 **exit1 / all_expected=false**：shared_reset_stale的FUNCTION_FAIL符合预期，但预声明DATA_OR_ORDER_FAIL未出现，实际为1次UNEXPECTED_TRANSACTION。cycle10旧[17,0]交付consumer1，此时新episode第1输入[161,0]到cycle11才接受，故没有输入可匹配，应为意外事务。这是原预期错误类别过窄，未发现checker漏检；预声明、源码、原verdict/receipt/summary全保留，不改期望、不补run、不重试。native状态8/8匹配、类别条件7/8匹配；手推8/8匹配；合计状态16/16但完整预声明条件15/16，不能称“全校准PASS”。没有使用允许的修复额度。"
+      },
+      {
+        "line": 8,
+        "text": ""
+      },
+      {
+        "line": 9,
+        "text": "## 有区分力的见证"
+      },
+      {
+        "line": 10,
+        "text": ""
+      },
+      {
+        "line": 11,
+        "text": "合法shared reset：source cycle3接受[17,0]，consumer0 cycle4收，consumer1一直背压；cycle8 reset取消pending[0,1]及unaccepted2，原已交付保留。cycle8/9原信号保存但不计握手；下一epoch只交付[a1,a2,a3]。合法queue reset：source3/4接受两笔，consumer0在4/5收到两笔，reset取消pending[0,2]及unaccepted1；新epoch不泄露旧数据。两实现reset前接受集合不同，但按同一规格都PASS，不能以跨实现最终flat不相同判其错误。"
+      },
+      {
+        "line": 12,
+        "text": ""
+      },
+      {
+        "line": 13,
+        "text": "共享缓冲残留cycle10为UNEXPECTED_TRANSACTION；独立queue未清空cycle10/11旧输出对应新接受载荷，产生DATA_OR_ORDER_FAIL。两故障均检出。FAULT只改变同步reset清空逻辑，原人工错误与原始轨迹不改。"
+      },
+      {
+        "line": 14,
+        "text": ""
+      },
+      {
+        "line": 15,
+        "text": "双消费者独立深度2环形队列与one-slot共享pending结构不同；连续8笔、消费者ready不同日程下PASS。它独立读写指针/count，生产广播仍需两个队列都有容量。有限见证不证明所有队列边界或任意背压组合。"
+      },
+      {
+        "line": 16,
+        "text": ""
+      },
+      {
+        "line": 17,
+        "text": "同拍传播scene2 PASS。提前valid scene3在3..6拍source ready=0且两个consumer ready=0，均保持[81,1]；第7拍输入输出同时握手，PASS。该组合DUT只在固定共同ready场景合法，不是任意独立消费者ready下的通用实现，不能跨场景推广。"
+      },
+      {
+        "line": 18,
+        "text": ""
+      },
+      {
+        "line": 19,
+        "text": "提前消费故障：consumer0/1在cycle3收[81,1]，source到cycle7才收；最终各方flat序列都[[81,1]]。checker检出2次UNEXPECTED_TRANSACTION和最终2个MISSING_TRANSACTION（早输出不抵扣未来接受），阻止时间消去掩盖因果错误。在线账与另写索引计数审计同结果。同拍输入先入账再输出仍允许，未把提前valid当提前消费。"
+      },
+      {
+        "line": 20,
+        "text": ""
+      },
+      {
+        "line": 21,
+        "text": "## 设计、保全与尚未证明部分"
+      },
+      {
+        "line": 22,
+        "text": ""
+      },
+      {
+        "line": 23,
+        "text": "INTENT_COMPARISON_DESIGN.md与6个明确DESIGN_ONLY语义例完成。旧fsm_ir.py仅1bit Moore，不能表示本事务域。比较设计处理同外部驱动策略但不同接受时间、offer_id身份、reset接受/取消集合不一致、允许stuttering以及NOT_EVALUABLE。没有新IR执行器/三路分类算法/生产集成，不能称IR／RTL意图比较已验证。S可见关系不证明内部认知因果；D无IR不推理解阶段，私有意图诊断不额外反馈给F。"
+      },
+      {
+        "line": 24,
+        "text": ""
+      },
+      {
+        "line": 25,
+        "text": "旧证据20231绑定均核验，包括旧prior20065、v1完整包与封存、R7旧封存、旧IR及默认测试源。v1 packet SHA仍d060a32dba45329046e7a71cf5b3c687fccc874bbaede47415bad3d3c9de268a；R7包SHA仍b2f63e5db433bc0a099574b65ecfffec30c787141741b11b3cb0126414cf506e。开发影响的R7材料仍是development，未新判候选/分数。"
+      },
+      {
+        "line": 26,
+        "text": ""
+      },
+      {
+        "line": 27,
+        "text": "默认回归原负回执保持：24tests/3failures/1error/2skips/exit1。v2没有改生产runner/FSM/旧checker，未重复原默认回归，未改变代理环境或隔离重试；原失败不能称根因已证明是代理。新增校准本身exit1负结果另记。新审计只读取原轨迹/receipt，不import checker、执行编译仿真或调用模型；作者仍相同，不冒充外部独立审核。"
+      },
+      {
+        "line": 28,
+        "text": ""
+      },
+      {
+        "line": 29,
+        "text": "有界80拍/公平尾、单时钟同步reset；不覆盖异步释放、采样间glitch、无界合法延迟/活性、完整AXI、自然LLM错误定位效用。最终旧绑定/原raw/源码/run/精确新包seal见seal-verification.json；总控审查完成前不自动扩批、外部保留任务或生产接入。"
+      }
+    ]
+  },
+  "exploration/20261011/handshake-dev-v2/semantic-examples.json": {
+    "sha256": "8f276c051d4f3016fa67c408335d9b5a81a16f1a696f4551bf83c5e0a8e5d42a",
+    "lines": [
+      {
+        "line": 1,
+        "text": "{"
+      },
+      {
+        "line": 2,
+        "text": " \"status\":\"DESIGN_ONLY_NOT_EXECUTED_IR_OR_CLASSIFIER\", \"denominator\":6,"
+      },
+      {
+        "line": 3,
+        "text": " \"examples\":["
+      },
+      {
+        "line": 4,
+        "text": "  {\"name\":\"legal_stuttering\",\"offer_id\":[0,0],\"spec_payload\":[81,1],\"IR\":{\"accept\":2,\"deliver\":[5,5],\"payload\":[81,1]},\"RTL\":{\"accept\":4,\"deliver\":[8,8],\"payload\":[81,1]},\"proposed\":[\"PASS\",\"PASS\",\"PASS\"]},"
+      },
+      {
+        "line": 5,
+        "text": "  {\"name\":\"rtl_corrects_ir\",\"offer_id\":[0,0],\"spec_payload\":[81,1],\"IR\":{\"accept\":2,\"deliver\":[5,5],\"payload\":[80,1]},\"RTL\":{\"accept\":4,\"deliver\":[8,8],\"payload\":[81,1]},\"proposed\":[\"FAIL\",\"PASS\",\"FAIL\"]},"
+      },
+      {
+        "line": 6,
+        "text": "  {\"name\":\"rtl_diverges\",\"offer_id\":[0,0],\"spec_payload\":[81,1],\"IR\":{\"accept\":2,\"deliver\":[5,5],\"payload\":[81,1]},\"RTL\":{\"accept\":4,\"deliver\":[8,8],\"payload\":[80,1]},\"proposed\":[\"PASS\",\"FAIL\",\"FAIL\"]},"
+      },
+      {
+        "line": 7,
+        "text": "  {\"name\":\"both_wrong_agree\",\"offer_id\":[0,0],\"spec_payload\":[81,1],\"IR\":{\"accept\":2,\"deliver\":[5,5],\"payload\":[80,1]},\"RTL\":{\"accept\":4,\"deliver\":[8,8],\"payload\":[80,1]},\"proposed\":[\"FAIL\",\"FAIL\",\"PASS\"]},"
+      },
+      {
+        "line": 8,
+        "text": "  {\"name\":\"reset_alignment_gap\",\"reset_cycle\":3,\"IR\":{\"accepted_ids\":[[0,0]],\"delivered_ids\":[[],[]],\"cancelled_pending_ids\":[[0,0]]},\"RTL\":{\"accepted_ids\":[],\"delivered_ids\":[[],[]],\"cancelled_unaccepted_ids\":[[0,0]]},\"proposed\":[\"PASS\",\"PASS\",\"ALIGNMENT_NOT_EVALUABLE\"]},"
+      },
+      {
+        "line": 9,
+        "text": "  {\"name\":\"legacy_ir_domain_gap\",\"ir_schema\":\"fsm_ir.py/schema1/1bit_Moore\",\"required\":\"8bit_last_ready_two_consumers\",\"proposed\":[\"UNSUPPORTED_DOMAIN\",\"BOUNDED_RTL_PASS\",\"NOT_EVALUABLE\"]}"
+      },
+      {
+        "line": 10,
+        "text": " ]"
+      },
+      {
+        "line": 11,
+        "text": "}"
+      }
+    ]
+  }
+}

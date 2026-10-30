@@ -1,0 +1,93 @@
+{
+  "creator": "Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)",
+  "modules": {
+    "TopModule": {
+      "attributes": {
+        "top": "00000000000000000000000000000001",
+        "src": "dut.sv:1.1-9.10"
+      },
+      "ports": {
+        "in1": {
+          "direction": "input",
+          "bits": [ 2 ]
+        },
+        "in2": {
+          "direction": "input",
+          "bits": [ 3 ]
+        },
+        "out": {
+          "direction": "output",
+          "bits": [ 4 ]
+        }
+      },
+      "cells": {
+        "$auto$simplemap.cc:38:simplemap_not$80": {
+          "hide_name": 1,
+          "type": "$_NOT_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "dut.sv:7.22-7.26"
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 3 ],
+            "Y": [ 5 ]
+          }
+        },
+        "$auto$simplemap.cc:83:simplemap_bitop$81": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "dut.sv:7.16-7.26"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 2 ],
+            "B": [ 5 ],
+            "Y": [ 4 ]
+          }
+        }
+      },
+      "netnames": {
+        "$not$dut.sv:7$1_Y": {
+          "hide_name": 1,
+          "bits": [ 5 ],
+          "attributes": {
+            "src": "dut.sv:7.22-7.26"
+          }
+        },
+        "in1": {
+          "hide_name": 0,
+          "bits": [ 2 ],
+          "attributes": {
+            "src": "dut.sv:2.10-2.13"
+          }
+        },
+        "in2": {
+          "hide_name": 0,
+          "bits": [ 3 ],
+          "attributes": {
+            "src": "dut.sv:3.10-3.13"
+          }
+        },
+        "out": {
+          "hide_name": 0,
+          "bits": [ 4 ],
+          "attributes": {
+            "src": "dut.sv:4.10-4.13"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "status": "GENERATED",
+  "usage": {
+    "input_tokens": 11047,
+    "cached_input_tokens": 7424,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 784,
+    "reasoning_output_tokens": 366
+  },
+  "source": "READ_ONLY_SAVED_EVIDENCE",
+  "reserved_calls": 1,
+  "response": "{\"timing\":{\"reset\":\"async_low\"},\"registers\":{\"af\":{\"width\":1,\"reset\":0},\"at\":{\"width\":2,\"reset\":0},\"ad\":{\"width\":2,\"reset\":0},\"bf\":{\"width\":1,\"reset\":0},\"bt\":{\"width\":2,\"reset\":0},\"bd\":{\"width\":2,\"reset\":0},\"ov\":{\"width\":1,\"reset\":0},\"ot\":{\"width\":2,\"reset\":0},\"od\":{\"width\":4,\"reset\":0}},\"next_rising\":{\"af\":\"0 if clear else (a_valid if not af else (0 if bf and ((at < bt) or ((at == bt) and ((not ov) or take))) else 1))\",\"at\":\"0 if clear else (a_tag if a_valid and (not af) else at)\",\"ad\":\"0 if clear else (a_data if a_valid and (not af) else ad)\",\"bf\":\"0 if clear else (b_valid if not bf else (0 if af and ((bt < at) or ((at == bt) and ((not ov) or take))) else 1))\",\"bt\":\"0 if clear else (b_tag if b_valid and (not bf) else bt)\",\"bd\":\"0 if clear else (b_data if b_valid and (not bf) else bd)\",\"ov\":\"0 if clear else (1 if af and bf and (at == bt) and ((not ov) or take) else (0 if take else ov))\",\"ot\":\"0 if clear else (at if af and bf and (at == bt) and ((not ov) or take) else ot)\",\"od\":\"0 if clear else (((ad << 2) | bd) if af and bf and (at == bt) and ((not ov) or take) else od)\"},\"next_falling\":{},\"outputs\":{\"a_full\":\"af\",\"b_full\":\"bf\",\"out_valid\":\"ov\",\"out_tag\":\"ot\",\"out_data\":\"od\"}}",
+  "response_sha256": "0312287d0dbf92b0175c00f8e6c693673f0eefb8a3644c81316c0ef2fec2ebf3",
+  "thread_id": "01a12a0f-c9e5-7a50-a77a-3925f36dddc0",
+  "exit": {
+    "utc": "2026-10-11T08:24:20.267412+00:00",
+    "pid": 43696,
+    "identity": "134361806400105443",
+    "nonce": "b070b1def4ca409ab9fd974009ba30b5",
+    "request_sha256": "dfdb48b3d9b389e781352bcfdba744fb8c746301f8340370920b9bdfe90eaf9a",
+    "returncode": 0,
+    "reason": null,
+    "elapsed_seconds": 20.235000000000582,
+    "streams_closed": true,
+    "reader_errors": [],
+    "counts": {
+      "stdout": 1666,
+      "stderr": 0
+    },
+    "descendant_cleanup": "UNVERIFIED",
+    "sha256": {
+      "stdout": "93dbdc5ebd96d02c7cb952cab998254bf75d6f7417995612f7504f8b3773525c",
+      "stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "reconstructed_without_summary": true
+}

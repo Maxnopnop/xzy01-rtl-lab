@@ -1,0 +1,15 @@
+{
+  "model": "gpt-5.6-sol",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs."
+    },
+    {
+      "role": "user",
+      "content": "\nI would like you to implement a module named TopModule with the following\ninterface. All input and output ports are one bit unless otherwise\nspecified.\n\n - input  clk\n - input  reset\n - output shift_ena\n\nThis module is a part of the FSM for controlling a shift register, we\nwant the ability to enable the shift register for exactly 4 clock cycles\nwhenever the proper bit pattern is detected. Whenever the FSM is reset,\nassert shift_ena for 4 cycles, then 0 forever (until reset). Reset should\nbe active high synchronous.\n\nAssume all sequential logic is triggered on the positive edge of the\nclock.\n\n\n\n<generic_reference_context>\nThese are generic style excerpts, not new task requirements. The original specification above takes precedence.\nSource: lowRISC contributors; CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/); unmodified selected prose.\nhttps://github.com/lowRISC/style-guides/blob/9c15ff5dce23eef969e00ab3715153967419eadd/VerilogCodingStyle.md\n[LR008; Sequential Logic (Registers); lines 1897-1901]\nKeep work in sequential blocks simple. If a sequential block becomes\nsufficiently complicated, consider splitting the combinational logic into a\nseparate combinational (`always_comb`) block. Ideally, sequential blocks should\ncontain only a register instantiation, with perhaps a load enable or an\nincrement.\n\n[LR018; Case Statements; lines 2245-2252]\n`casex` should not be used. `casex` implements a symmetric wildcard operator\nsuch that an `X` in the case expression may match one or more case items.\n`casez` only treats high-impedance states (`Z` or `?`) as a wildcard, and\nperforms exact matches for undriven `X` inputs. While this does not completely\nfix the problems with symmetric wildcard matching, it is harder to accidentally\nproduce a `Z` input than an `X` input, so this form is preferred.\n`case inside` does not treat either `X` or `Z` in the case expression as a\nwildcard, so this form is preferred over `casez`.\n\n[LR003; Sequential Logic (Latches); lines 1802-1803]\nIf you must use a latch, use `always_latch` over `always`, and use non-blocking\nassignments (`<=`). Never use blocking assignments (`=`).\n</generic_reference_context>\n"
+    }
+  ],
+  "stream": false,
+  "max_completion_tokens": 8192
+}

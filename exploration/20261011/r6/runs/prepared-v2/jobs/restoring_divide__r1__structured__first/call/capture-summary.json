@@ -1,0 +1,37 @@
+{
+  "status": "GENERATED",
+  "usage": {
+    "input_tokens": 11517,
+    "cached_input_tokens": 7424,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 942,
+    "reasoning_output_tokens": 170
+  },
+  "source": "READ_ONLY_SAVED_EVIDENCE",
+  "reserved_calls": 1,
+  "response": "```verilog\nmodule restoring_divide (\n    input  wire       clk,\n    input  wire       rst_n,\n    input  wire       abort,\n    input  wire       start,\n    input  wire       advance,\n    input  wire [3:0] numerator,\n    input  wire [3:0] denominator,\n    output reg        busy,\n    output reg        done,\n    output reg  [3:0] quotient,\n    output reg  [3:0] remainder\n);\n\n    reg [3:0] divisor_r;\n    reg [3:0] dividend_r;\n    reg [4:0] partial_r;\n    reg [3:0] quotient_work_r;\n    reg [1:0] count_r;\n\n    wire [4:0] trial_w;\n    wire       subtract_w;\n    wire [4:0] partial_next_w;\n    wire [3:0] quotient_next_w;\n\n    assign trial_w         = {partial_r[3:0], dividend_r[3]};\n    assign subtract_w      = (trial_w >= {1'b0, divisor_r});\n    assign partial_next_w  = subtract_w\n                           ? trial_w - {1'b0, divisor_r}\n                           : trial_w;\n    assign quotient_next_w = {quotient_work_r[2:0], subtract_w};\n\n    always @(posedge clk or negedge rst_n) begin\n        if (!rst_n) begin\n            busy            <= 1'b0;\n            done            <= 1'b0;\n            quotient        <= 4'b0000;\n            remainder       <= 4'b0000;\n            divisor_r       <= 4'b0000;\n            dividend_r      <= 4'b0000;\n            partial_r       <= 5'b00000;\n            quotient_work_r <= 4'b0000;\n            count_r         <= 2'b00;\n        end else if (abort) begin\n            busy            <= 1'b0;\n            done            <= 1'b0;\n            quotient        <= 4'b0000;\n            remainder       <= 4'b0000;\n            divisor_r       <= 4'b0000;\n            dividend_r      <= 4'b0000;\n            partial_r       <= 5'b00000;\n            quotient_work_r <= 4'b0000;\n            count_r         <= 2'b00;\n        end else begin\n            done <= 1'b0;\n\n            if (!busy) begin\n                if (start) begin\n                    divisor_r       <= denominator;\n                    dividend_r      <= numerator;\n                    partial_r       <= 5'b00000;\n                    quotient_work_r <= 4'b0000;\n                    count_r         <= 2'b00;\n\n                    if (denominator == 4'b0000) begin\n                        busy      <= 1'b0;\n                        done      <= 1'b1;\n                        quotient  <= 4'b1111;\n                        remainder <= numerator;\n                    end else begin\n                        busy <= 1'b1;\n                    end\n                end\n            end else if (advance) begin\n                dividend_r      <= {dividend_r[2:0], 1'b0};\n                partial_r       <= partial_next_w;\n                quotient_work_r <= quotient_next_w;\n\n                if (count_r == 2'd3) begin\n                    busy      <= 1'b0;\n                    done      <= 1'b1;\n                    quotient  <= quotient_next_w;\n                    remainder <= partial_next_w[3:0];\n                    count_r   <= 2'b00;\n                end else begin\n                    count_r <= count_r + 2'd1;\n                end\n            end\n        end\n    end\n\nendmodule\n```",
+  "response_sha256": "b8eb5d0e1f903bb01bb9943e7a81ba0ffedf8acf2b8be44f4f28daf450265531",
+  "thread_id": "01a12a0b-052f-7150-89a8-fc9f21673a4e",
+  "exit": {
+    "utc": "2026-10-11T08:19:05.639294+00:00",
+    "pid": 49016,
+    "identity": "134361803275037374",
+    "nonce": "49c3626785bd4da29efd5d2a0c62bb10",
+    "request_sha256": "d875596848fc266a7d75acc20b0064fdd32d4fee95f614157169a38a766bdbf3",
+    "returncode": 0,
+    "reason": null,
+    "elapsed_seconds": 18.110000000000582,
+    "streams_closed": true,
+    "reader_errors": [],
+    "counts": {
+      "stdout": 3524,
+      "stderr": 0
+    },
+    "descendant_cleanup": "UNVERIFIED",
+    "sha256": {
+      "stdout": "449eb332dc584859cf03b1ff8c82f5695f50c3a231133bc231913a1e754df7cf",
+      "stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "reconstructed_without_summary": true
+}

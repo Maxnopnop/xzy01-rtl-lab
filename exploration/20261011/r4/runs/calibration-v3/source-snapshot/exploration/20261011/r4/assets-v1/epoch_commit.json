@@ -1,0 +1,45 @@
+{
+  "module": "epoch_commit",
+  "inputs": [
+    [
+      "write",
+      1
+    ],
+    [
+      "slot",
+      1
+    ],
+    [
+      "data",
+      2
+    ],
+    [
+      "commit",
+      1
+    ],
+    [
+      "abort_tx",
+      1
+    ],
+    [
+      "read_slot",
+      1
+    ]
+  ],
+  "outputs": [
+    [
+      "visible",
+      2
+    ],
+    [
+      "dirty",
+      2
+    ],
+    [
+      "committed",
+      1
+    ]
+  ],
+  "seed": 41001,
+  "spec": "Two-bank atomic staged transaction. Async active-low rst_n clears live and staged 2-bit bank values, both dirty bits and committed pulse. Every rising clk edge clears committed. abort_tx dominates commit and write: discard all staging, copy live values into staged banks, clear dirty, ignore write/commit. Otherwise first apply a write to staged[slot], marking that bank dirty; then if commit=1 atomically replace every dirty live bank with its staged value, including a write on this SAME edge, clear dirty and pulse committed even if no bank was dirty. Non-dirty live banks are unchanged. Staged banks persist after a commit and equal the corresponding new live values. Without commit/abort, staging never changes visible live values. visible is a combinational read of live[read_slot], forced zero during reset; dirty and committed are registered and hold between edges. Changes in write/slot/data/commit/abort while clk is stable must not mutate state. Inputs are unconstrained binary; repeated commits, abort with write+commit and repeated writes to one bank are defined."
+}

@@ -1,0 +1,399 @@
+{
+  "query": "\nI would like you to implement a module named TopModule with the following\ninterface. All input and output ports are one bit unless otherwise\nspecified.\n\n - input  clk\n - input  reset\n - input  s (3 bits)\n - output fr2\n - output fr1\n - output fr0\n - output dfr\n\nA large reservior of water serves several users. In order to keep the\nlevel of water succificently high, three sensors are placed vertically at\n5-inch intervals. When the water level is above the highest sensor s[2],\nthe input flow rate should be zero. When the level is below the lowest\nsensor s[0], the flow rate should be at maximum (both Nominal flow valve\nand Supplemental flow valve opened). The flow rate when the level is\nbetween the upper and lower sensors is determined by two factors: the\nwater level and the level previous to the last sensor change. Each water\nlevel has a nominal flow rate associated with it as show in the table\nbelow. If the sensor change indicates that the previous level was lower\nthan the current level, the flow rate should be increased by opening the\nSupplemental flow valve (controlled by dfr).\n\n  Water Level           | Sensors Asserted | Nominal Flow Rate Inputs to be Asserted\n  Above s[2]            | s[0], s[1], s[2] | None\n  Between s[2] and s[1] | s[0], s[1]       | fr0\n  Between s[1] and s[0] | s[0]             | fr0, fr1\n  Below s[0]            | None             | fr0, fr1, fr2\n\nAlso include an active-high synchronous reset that resets the state\nmachine to a state equivalent to if the water level had been low for a\nlong time (no sensors asserted, and all four outputs asserted).\n\n",
+  "query_sha256": "93563fc3ecec7a35eec28f4a4ed1e09393cf21ab8ae3c57cd0de1219bf1f0e8d",
+  "query_terms": [
+    "above",
+    "active",
+    "all",
+    "also",
+    "asserted",
+    "associated",
+    "been",
+    "below",
+    "between",
+    "bit",
+    "bits",
+    "both",
+    "change",
+    "clk",
+    "controlled",
+    "current",
+    "determined",
+    "dfr",
+    "equivalent",
+    "factors",
+    "flow",
+    "following",
+    "four",
+    "fr0",
+    "fr1",
+    "fr2",
+    "had",
+    "has",
+    "high",
+    "highest",
+    "i",
+    "if",
+    "implement",
+    "inch",
+    "include",
+    "increased",
+    "indicates",
+    "input",
+    "inputs",
+    "interface",
+    "intervals",
+    "keep",
+    "large",
+    "last",
+    "level",
+    "like",
+    "long",
+    "low",
+    "lower",
+    "lowest",
+    "machine",
+    "maximum",
+    "module",
+    "named",
+    "no",
+    "nominal",
+    "none",
+    "one",
+    "opened",
+    "opening",
+    "order",
+    "otherwise",
+    "output",
+    "outputs",
+    "placed",
+    "ports",
+    "previous",
+    "rate",
+    "reservior",
+    "reset",
+    "resets",
+    "s",
+    "sensor",
+    "sensors",
+    "serves",
+    "several",
+    "show",
+    "specified",
+    "state",
+    "succificently",
+    "supplemental",
+    "synchronous",
+    "table",
+    "than",
+    "three",
+    "time",
+    "topmodule",
+    "two",
+    "unless",
+    "upper",
+    "users",
+    "valve",
+    "vertically",
+    "was",
+    "water",
+    "would",
+    "you",
+    "zero"
+  ],
+  "rankings": [
+    {
+      "chunk_id": "LR015",
+      "score": 10.583383326679087,
+      "matched": [
+        {
+          "term": "all",
+          "tf": 1,
+          "df": 3,
+          "contribution": 1.361275165744766
+        },
+        {
+          "term": "if",
+          "tf": 2,
+          "df": 5,
+          "contribution": 1.4608146330330636
+        },
+        {
+          "term": "no",
+          "tf": 1,
+          "df": 1,
+          "contribution": 2.043087479721028
+        },
+        {
+          "term": "order",
+          "tf": 1,
+          "df": 1,
+          "contribution": 2.043087479721028
+        },
+        {
+          "term": "specified",
+          "tf": 1,
+          "df": 1,
+          "contribution": 2.043087479721028
+        },
+        {
+          "term": "than",
+          "tf": 1,
+          "df": 2,
+          "contribution": 1.6320310887381742
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR018",
+      "score": 7.799845547312677,
+      "matched": [
+        {
+          "term": "high",
+          "tf": 1,
+          "df": 1,
+          "contribution": 1.4478732306989897
+        },
+        {
+          "term": "input",
+          "tf": 2,
+          "df": 1,
+          "contribution": 2.2996556405251556
+        },
+        {
+          "term": "inputs",
+          "tf": 1,
+          "df": 1,
+          "contribution": 1.4478732306989897
+        },
+        {
+          "term": "one",
+          "tf": 1,
+          "df": 1,
+          "contribution": 1.4478732306989897
+        },
+        {
+          "term": "than",
+          "tf": 1,
+          "df": 2,
+          "contribution": 1.1565702146905528
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR010",
+      "score": 6.391947200025895,
+      "matched": [
+        {
+          "term": "state",
+          "tf": 2,
+          "df": 2,
+          "contribution": 3.227349244177168
+        },
+        {
+          "term": "three",
+          "tf": 1,
+          "df": 1,
+          "contribution": 3.164597955848727
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR006",
+      "score": 6.132472310619519,
+      "matched": [
+        {
+          "term": "reset",
+          "tf": 1,
+          "df": 1,
+          "contribution": 2.642417804238559
+        },
+        {
+          "term": "state",
+          "tf": 4,
+          "df": 2,
+          "contribution": 3.4900545063809605
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR002",
+      "score": 4.847378060351743,
+      "matched": [
+        {
+          "term": "all",
+          "tf": 1,
+          "df": 3,
+          "contribution": 1.9382821572553182
+        },
+        {
+          "term": "zero",
+          "tf": 1,
+          "df": 1,
+          "contribution": 2.909095903096425
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR003",
+      "score": 4.418692918927001,
+      "matched": [
+        {
+          "term": "if",
+          "tf": 1,
+          "df": 5,
+          "contribution": 1.4496690483456294
+        },
+        {
+          "term": "you",
+          "tf": 1,
+          "df": 1,
+          "contribution": 2.969023870581372
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR008",
+      "score": 3.223432385384224,
+      "matched": [
+        {
+          "term": "if",
+          "tf": 1,
+          "df": 5,
+          "contribution": 1.0575322259916538
+        },
+        {
+          "term": "keep",
+          "tf": 1,
+          "df": 1,
+          "contribution": 2.1659001593925704
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR016",
+      "score": 1.9342038337614573,
+      "matched": [
+        {
+          "term": "if",
+          "tf": 3,
+          "df": 5,
+          "contribution": 1.9342038337614573
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR005",
+      "score": 1.9334550942573623,
+      "matched": [
+        {
+          "term": "s",
+          "tf": 1,
+          "df": 1,
+          "contribution": 1.9334550942573623
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR009",
+      "score": 1.39230549538227,
+      "matched": [
+        {
+          "term": "if",
+          "tf": 1,
+          "df": 5,
+          "contribution": 1.39230549538227
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR014",
+      "score": 1.3237451152255943,
+      "matched": [
+        {
+          "term": "all",
+          "tf": 1,
+          "df": 3,
+          "contribution": 1.3237451152255943
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR001",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR004",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR007",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR011",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR012",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR013",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR017",
+      "score": 0.0,
+      "matched": []
+    }
+  ],
+  "selected_ids": [
+    "LR015",
+    "LR018",
+    "LR010"
+  ],
+  "no_hit": false,
+  "selected_chunks": [
+    {
+      "id": "LR015",
+      "section": "Case Statements",
+      "start_line": 2189,
+      "end_line": 2192,
+      "text": "  - a `default:` statement is **always** included in order to avoid accidental\n  inference of latches, even if all cases are covered. In simulation, a case\n  expression that evaluates to `X` will not match any case and will behave as a\n  latch, leading to different behavior than synthesis if no default is specified.",
+      "sha256": "671cab8965910cd22aa4aa60fb141c20ee77102e6da34dd8c28e743cf5ec15e0",
+      "characters": 317,
+      "use": "General synthesizable language/style guidance, not task requirements or a solution"
+    },
+    {
+      "id": "LR018",
+      "section": "Case Statements",
+      "start_line": 2245,
+      "end_line": 2252,
+      "text": "`casex` should not be used. `casex` implements a symmetric wildcard operator\nsuch that an `X` in the case expression may match one or more case items.\n`casez` only treats high-impedance states (`Z` or `?`) as a wildcard, and\nperforms exact matches for undriven `X` inputs. While this does not completely\nfix the problems with symmetric wildcard matching, it is harder to accidentally\nproduce a `Z` input than an `X` input, so this form is preferred.\n`case inside` does not treat either `X` or `Z` in the case expression as a\nwildcard, so this form is preferred over `casez`.",
+      "sha256": "38b511f542f8fcb62c5ad046b40e95a8c569d5e5b69bdce9dbe2cc6e393640e9",
+      "characters": 574,
+      "use": "General synthesizable language/style guidance, not task requirements or a solution"
+    },
+    {
+      "id": "LR010",
+      "section": "Combinational Logic",
+      "start_line": 2152,
+      "end_line": 2153,
+      "text": "Do not use three-state logic (`Z` state) to accomplish on-chip logic such as\nmuxing.",
+      "sha256": "f1044589bb7940ec2cb3d3cd0e6488dcce2a40da913569935f328601dce6cf4f",
+      "characters": 84,
+      "use": "General synthesizable language/style guidance, not task requirements or a solution"
+    }
+  ],
+  "elapsed_seconds": 0.0004493000014917925,
+  "a_lock_sha256": "c0609d940a0e586e2b7b5fc81ca6d58bd1eeee5e1d4cecbe40415317f341ead1",
+  "task_source_sha256": "93563fc3ecec7a35eec28f4a4ed1e09393cf21ab8ae3c57cd0de1219bf1f0e8d",
+  "context_sha256": "82b7991ce12ce8b637af4e49b765e77033ede667c283e3fdd2d28520b96a51a5"
+}

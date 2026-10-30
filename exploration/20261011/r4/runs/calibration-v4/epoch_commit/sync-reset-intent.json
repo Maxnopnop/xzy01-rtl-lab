@@ -1,0 +1,59 @@
+{
+  "raw": "{\"timing\":{\"edge\":\"rising\",\"reset\":\"sync_low\"},\"registers\":{\"l0\":{\"width\":2,\"reset\":0},\"l1\":{\"width\":2,\"reset\":0},\"s0\":{\"width\":2,\"reset\":0},\"s1\":{\"width\":2,\"reset\":0},\"mask\":{\"width\":2,\"reset\":0},\"pulse\":{\"width\":1,\"reset\":0}},\"next\":{\"l0\":\"(data if write and slot == 0 else s0) if commit and ((mask | (2 if slot else 1) if write else mask) & 1) and not abort_tx else l0\",\"l1\":\"(data if write and slot == 1 else s1) if commit and ((mask | (2 if slot else 1) if write else mask) & 2) and not abort_tx else l1\",\"s0\":\"l0 if abort_tx else (data if write and slot == 0 else s0)\",\"s1\":\"l1 if abort_tx else (data if write and slot == 1 else s1)\",\"mask\":\"0 if abort_tx or commit else (mask | (2 if slot else 1) if write else mask)\",\"pulse\":\"1 if commit and not abort_tx else 0\"},\"outputs\":{\"visible\":\"(l1 if read_slot else l0) if rst_n else 0\",\"dirty\":\"mask\",\"committed\":\"pulse\"}}",
+  "result": {
+    "status": "FUNCTION_FAIL",
+    "stage": "intent",
+    "checks": 6625,
+    "errors": 569,
+    "mismatches": [
+      {
+        "event": 18,
+        "expected": 0,
+        "observed": 1,
+        "category": "mid_reset"
+      },
+      {
+        "event": 19,
+        "expected": 0,
+        "observed": 25,
+        "category": "mid_release"
+      },
+      {
+        "event": 20,
+        "expected": 0,
+        "observed": 17,
+        "category": "pre"
+      },
+      {
+        "event": 21,
+        "expected": 0,
+        "observed": 16,
+        "category": "edge"
+      },
+      {
+        "event": 22,
+        "expected": 0,
+        "observed": 24,
+        "category": "high_change"
+      },
+      {
+        "event": 23,
+        "expected": 0,
+        "observed": 16,
+        "category": "restore"
+      },
+      {
+        "event": 24,
+        "expected": 0,
+        "observed": 16,
+        "category": "fall"
+      },
+      {
+        "event": 25,
+        "expected": 0,
+        "observed": 24,
+        "category": "pre"
+      }
+    ]
+  }
+}

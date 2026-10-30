@@ -1,0 +1,62 @@
+[
+  {
+    "field": "Binary/model identity",
+    "production_evidence": "Historical successful CLI args use npm launcher; current fixed native0.147/hash is already bound",
+    "local_evidence": "Same npm native binary with bundled catalog",
+    "gap": "Shared binary alone does not prove same provider/auth/request branches; no substitution of model IDs"
+  },
+  {
+    "field": "Authentication/provider",
+    "production_evidence": "builtin openai, existing ChatGPT login; historical network adapter explicitly forces chatgpt",
+    "local_evidence": "custom offline_audit, requires_openai_auth=false, new empty home",
+    "gap": "Different auth/provider routing; cannot prove matching headers, preprocessing or backend"
+  },
+  {
+    "field": "Endpoint/transport",
+    "production_evidence": "Historic wss and https chatgpt backend codex/responses, retries observed",
+    "local_evidence": "http loopback/v1/responses, supports_websockets=false",
+    "gap": "WebSocket and fallback paths not exercised by custom HTTP mock"
+  },
+  {
+    "field": "Base instructions/roles",
+    "production_evidence": "No full production body captured; old source generate concatenates extra instructions; not eligible for frozen protocol",
+    "local_evidence": "Frozen system exact text appears as developer; source user exact; additional developer/user items",
+    "gap": "Role/extra-message differences from frozen system/user; cannot silently approve"
+  },
+  {
+    "field": "Skills/permissions/environment",
+    "production_evidence": "Actual full production content UNKNOWN; smoke output OK not evidence",
+    "local_evidence": "Visible in full local body and hash-bound",
+    "gap": "Same cwd/config may reduce variation but equality is not yet demonstrated"
+  },
+  {
+    "field": "Tools",
+    "production_evidence": "No full production tool schema observed",
+    "local_evidence": "input additional_tools contains definitions; tool_choice/parallel flags present",
+    "gap": "Top-level tools absence is not tool absence; all nested tools need compare"
+  },
+  {
+    "field": "Reasoning/other generation fields",
+    "production_evidence": "Historical successful smoke explicitly low; new frozen revision omits reasoning",
+    "local_evidence": "Luna local body medium/context all_turns; catalog default Sol low versus Luna/Terra medium",
+    "gap": "Do not discard reasoning/text/tool_choice/etc as metadata; no supported identical production construction proved"
+  },
+  {
+    "field": "Retry layers",
+    "production_evidence": "Scheduler can avoid relaunch; inner builtin retry config override rejected historically; actual reconnect logged",
+    "local_evidence": "Custom provider request/stream retry0 specified but prior captures early-stopped",
+    "gap": "Outer no-retry cannot establish inner no-retry; no builtin supported equivalent verified"
+  },
+  {
+    "field": "Discovery isolation",
+    "production_evidence": "Normal login can discover additional services/plugins; no proposed approved new source",
+    "local_evidence": "Local GET featured and github CONNECT were denied",
+    "gap": "Explicit denial is safe isolation evidence, not a full production-equivalence bridge"
+  },
+  {
+    "field": "Budget",
+    "production_evidence": "Accepted240 opportunities/usage, not8192; unknown consumes opportunity and stops",
+    "local_evidence": "No formal reservations or usage from local mocks",
+    "gap": "Budget no longer blocks; no release until prompt/retry production gates proven"
+  }
+]

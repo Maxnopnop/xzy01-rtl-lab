@@ -1,0 +1,21 @@
+{
+  "model": "openai/gpt-4o-mini",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs."
+    },
+    {
+      "role": "user",
+      "content": "\nI would like you to implement a module named TopModule with the following\ninterface. All input and output ports are one bit unless otherwise\nspecified.\n\n - input  clk\n - input  resetn\n - input  x\n - input  y\n - output f\n - output g\n\nConsider a finite state machine that is used to control some type of\nmotor. The FSM has inputs x and y, which come from the motor, and\nproduces outputs f and g, which control the motor. There is also a clock\ninput called clk and a reset input (synchronous, active low) called\nresetn. The FSM has to work as follows. As long as the reset input is\nasserted, the FSM stays in a beginning state, called state A. When the\nreset signal is de-asserted, then after the next clock edge the FSM has\nto set the output f to 1 for one clock cycle. Then, the FSM has to\nmonitor the x input. When x has produced the values 1, 0, 1 in three\nsuccessive clock cycles, then g should be set to 1 on the following clock\ncycle. While maintaining g = 1 the FSM has to monitor the y input. If y\nhas the value 1 within at most two clock cycles, then the FSM should\nmaintain g = 1 permanently (that is, until reset). But if y does not\nbecome 1 within two clock cycles, then the FSM should set g = 0\npermanently (until reset). Assume all sequential logic is triggered on\nthe positive edge of the clock.\n\n"
+    }
+  ],
+  "stream": false,
+  "provider": {
+    "only": [
+      "openai"
+    ],
+    "allow_fallbacks": false,
+    "require_parameters": true
+  }
+}

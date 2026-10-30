@@ -1,0 +1,2101 @@
+{
+  "date": "2026-10-16",
+  "scope": "Existing evidence only; zero model/tool reruns",
+  "runs": {
+    "r1b-v2": {
+      "selection_sha256": "5864e2e6d6f8765364295527fc76345d04aba4a118db16b372ed9834c72c242a",
+      "n": 24,
+      "categories": {
+        "two_stage_prose": 1,
+        "two_stage_table": 1,
+        "one_call_candidate_IR_control": 12,
+        "one_call_candidate_IR_feedback": 7,
+        "two_stage_checked_table": 3
+      },
+      "all_provenance_checks_pass": true,
+      "validation_statuses": {
+        "COUNTEREXAMPLE_FOUND": 14,
+        "NO_COUNTEREXAMPLE_WITHIN_BOUND": 34
+      },
+      "witness_statuses": {
+        "FUNCTION_FAIL": 14
+      },
+      "rows": [
+        {
+          "result": "evidence\\fsm48\\jobs\\m02__rt_sequence__prose__s001\\result.json",
+          "category": "two_stage_prose",
+          "original_status": "FUNCTION_FAIL",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "stage1_response_hash": true,
+            "stage1_generation_success": true,
+            "stage2_response_hash": true,
+            "stage2_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "stage1",
+              "sha256": "4988311cd8bc6ce555a20c1e9bc0f4cc52b6e54810a66cc04a0cd53aa53a9b18",
+              "other_model_prompt": "evidence\\fsm48\\jobs\\m01__rt_sequence__prose__s001\\stage1\\prompt.txt",
+              "same_bytes": true
+            },
+            {
+              "stage": "stage2",
+              "sha256": "55aef0d8b0eaa6d8ca8fb667f17abb1d6d9975d45391b2fddd1a641b257a3fba",
+              "other_model_prompt": "evidence\\fsm48\\jobs\\m01__rt_sequence__prose__s001\\stage2\\prompt.txt",
+              "same_bytes": false
+            }
+          ],
+          "contains_candidate_ir": false,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\fsm48\\jobs\\m02__rt_sequence__table__s001\\result.json",
+          "category": "two_stage_table",
+          "original_status": "FUNCTION_FAIL",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "stage1_response_hash": true,
+            "stage1_generation_success": true,
+            "stage2_response_hash": true,
+            "stage2_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "stage1",
+              "sha256": "3ab3f0b8946f6f8e36d1fe4cf53d036cd5aaba83eed63b224dc4717458249d7c",
+              "other_model_prompt": "evidence\\fsm48\\jobs\\m01__rt_sequence__table__s001\\stage1\\prompt.txt",
+              "same_bytes": true
+            },
+            {
+              "stage": "stage2",
+              "sha256": "89750bc9be8fe34f5d8bd9778b1370c1fac75d8daaf0e3baef8850170b60c06e",
+              "other_model_prompt": "evidence\\fsm48\\jobs\\m01__rt_sequence__table__s001\\stage2\\prompt.txt",
+              "same_bytes": false
+            }
+          ],
+          "contains_candidate_ir": false,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-a32\\jobs\\m02__real_overlap__s001__control\\result.json",
+          "category": "one_call_candidate_IR_control",
+          "original_status": "FUNCTION_FAIL",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "34949e5a6c46e39077036b0b78f41bbe25b83ac6865c005f3600b6990400a9b4",
+              "other_model_prompt": "evidence\\paired-a32\\jobs\\m01__real_overlap__s001__control\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-a32\\jobs\\m02__real_overlap__s002__control\\result.json",
+          "category": "one_call_candidate_IR_control",
+          "original_status": "FUNCTION_FAIL",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "34949e5a6c46e39077036b0b78f41bbe25b83ac6865c005f3600b6990400a9b4",
+              "other_model_prompt": "evidence\\paired-a32\\jobs\\m01__real_overlap__s002__control\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m02__request_delay_state_output__s001__control\\result.json",
+          "category": "one_call_candidate_IR_control",
+          "original_status": "FUNCTION_FAIL",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "294c48671f040b4d119a9b0d6296926ba030263f6cd85a4454fa9083dff4f33f",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m01__request_delay_state_output__s001__control\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m02__request_delay_state_output__s002__control\\result.json",
+          "category": "one_call_candidate_IR_control",
+          "original_status": "FUNCTION_FAIL",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "294c48671f040b4d119a9b0d6296926ba030263f6cd85a4454fa9083dff4f33f",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m01__request_delay_state_output__s002__control\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m02__request_delay_transition__s002__control\\result.json",
+          "category": "one_call_candidate_IR_control",
+          "original_status": "FUNCTION_FAIL",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "35bf5f97a8395c76c76e9c0595fbe1e8aaa59eaf00415d061857c8bf3dabafdb",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m01__request_delay_transition__s002__control\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m01__debounce3_state_output__s001__control\\result.json",
+          "category": "one_call_candidate_IR_control",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "0033919e6dd9fe63bc4c26031545c0d734de09872d45ecd562736c436105a470",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m02__debounce3_state_output__s001__control\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m02__debounce3_state_output__s001__control\\result.json",
+          "category": "one_call_candidate_IR_control",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "0033919e6dd9fe63bc4c26031545c0d734de09872d45ecd562736c436105a470",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m01__debounce3_state_output__s001__control\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m01__event_parity_state_output__s002__control\\result.json",
+          "category": "one_call_candidate_IR_control",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "2f045195bc35db8592873bf335b1b774a25f4e7c692dd69f8f7e971adff70dff",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m02__event_parity_state_output__s002__control\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m02__event_parity_state_output__s001__control\\result.json",
+          "category": "one_call_candidate_IR_control",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "2f045195bc35db8592873bf335b1b774a25f4e7c692dd69f8f7e971adff70dff",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m01__event_parity_state_output__s001__control\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m01__request_delay_state_output__s001__control\\result.json",
+          "category": "one_call_candidate_IR_control",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "294c48671f040b4d119a9b0d6296926ba030263f6cd85a4454fa9083dff4f33f",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m02__request_delay_state_output__s001__control\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m02__request_delay_state_output__s001__feedback\\result.json",
+          "category": "one_call_candidate_IR_feedback",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "aee09f8267f5b1aac6f43234abdf33e6828f11eeafe595ec16f8fcbabce2d2bc",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m01__request_delay_state_output__s001__feedback\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\fsm48\\jobs\\m01__rt_sequence__checked_table__s001\\result.json",
+          "category": "two_stage_checked_table",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "stage1_response_hash": true,
+            "stage1_generation_success": true,
+            "stage2_response_hash": true,
+            "stage2_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "stage1",
+              "sha256": "3ab3f0b8946f6f8e36d1fe4cf53d036cd5aaba83eed63b224dc4717458249d7c",
+              "other_model_prompt": "evidence\\fsm48\\jobs\\m02__rt_sequence__checked_table__s001\\stage1\\prompt.txt",
+              "same_bytes": true
+            },
+            {
+              "stage": "stage2",
+              "sha256": "b483b0810f28bb3b9e7ca446e3a2914a0f66183d7469e812b3f01cf1e1f6406a",
+              "other_model_prompt": "evidence\\fsm48\\jobs\\m02__rt_sequence__checked_table__s001\\stage2\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": false,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\fsm48\\jobs\\m02__rt_sequence__checked_table__s001\\result.json",
+          "category": "two_stage_checked_table",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "stage1_response_hash": true,
+            "stage1_generation_success": true,
+            "stage2_response_hash": true,
+            "stage2_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "stage1",
+              "sha256": "3ab3f0b8946f6f8e36d1fe4cf53d036cd5aaba83eed63b224dc4717458249d7c",
+              "other_model_prompt": "evidence\\fsm48\\jobs\\m01__rt_sequence__checked_table__s001\\stage1\\prompt.txt",
+              "same_bytes": true
+            },
+            {
+              "stage": "stage2",
+              "sha256": "b483b0810f28bb3b9e7ca446e3a2914a0f66183d7469e812b3f01cf1e1f6406a",
+              "other_model_prompt": "evidence\\fsm48\\jobs\\m01__rt_sequence__checked_table__s001\\stage2\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": false,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m01__sticky_alarm_state_output__s001__control\\result.json",
+          "category": "one_call_candidate_IR_control",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "e70964f429e2c9b074b9f62727fea34e8bef9ced2af55ae3de42b73b258af4f4",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m02__sticky_alarm_state_output__s001__control\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m02__sticky_alarm_state_output__s001__control\\result.json",
+          "category": "one_call_candidate_IR_control",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "e70964f429e2c9b074b9f62727fea34e8bef9ced2af55ae3de42b73b258af4f4",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m01__sticky_alarm_state_output__s001__control\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m01__debounce3_state_output__s001__feedback\\result.json",
+          "category": "one_call_candidate_IR_feedback",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "0e9c83470325d3033110558e98ed2b943372aef85c08c07d70afd3140866718f",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m02__debounce3_state_output__s001__feedback\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m02__debounce3_state_output__s001__feedback\\result.json",
+          "category": "one_call_candidate_IR_feedback",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "0e9c83470325d3033110558e98ed2b943372aef85c08c07d70afd3140866718f",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m01__debounce3_state_output__s001__feedback\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m01__event_parity_state_output__s002__feedback\\result.json",
+          "category": "one_call_candidate_IR_feedback",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "dae19703598169918d103afea8dce0d0397e622a113e83da5c0b32eda635b65f",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m02__event_parity_state_output__s002__feedback\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m02__event_parity_state_output__s001__feedback\\result.json",
+          "category": "one_call_candidate_IR_feedback",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "dae19703598169918d103afea8dce0d0397e622a113e83da5c0b32eda635b65f",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m01__event_parity_state_output__s001__feedback\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m01__request_delay_state_output__s001__feedback\\result.json",
+          "category": "one_call_candidate_IR_feedback",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "aee09f8267f5b1aac6f43234abdf33e6828f11eeafe595ec16f8fcbabce2d2bc",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m02__request_delay_state_output__s001__feedback\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m02__request_delay_state_output__s002__feedback\\result.json",
+          "category": "one_call_candidate_IR_feedback",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "aee09f8267f5b1aac6f43234abdf33e6828f11eeafe595ec16f8fcbabce2d2bc",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m01__request_delay_state_output__s002__feedback\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\fsm48\\jobs\\m01__rt_sequence__checked_table__s002\\result.json",
+          "category": "two_stage_checked_table",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "stage1_response_hash": true,
+            "stage1_generation_success": true,
+            "stage2_response_hash": true,
+            "stage2_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "stage1",
+              "sha256": "3ab3f0b8946f6f8e36d1fe4cf53d036cd5aaba83eed63b224dc4717458249d7c",
+              "other_model_prompt": "evidence\\fsm48\\jobs\\m02__rt_sequence__checked_table__s002\\stage1\\prompt.txt",
+              "same_bytes": true
+            },
+            {
+              "stage": "stage2",
+              "sha256": "b483b0810f28bb3b9e7ca446e3a2914a0f66183d7469e812b3f01cf1e1f6406a",
+              "other_model_prompt": "evidence\\fsm48\\jobs\\m02__rt_sequence__checked_table__s002\\stage2\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": false,
+          "strict_spec_only_direct_baseline": false
+        }
+      ]
+    },
+    "timed-reset-v1": {
+      "selection_sha256": "2611d168fe1befc7c814ea94553c1646a101610cbf00bf5f9280f8b0a8cc6246",
+      "n": 64,
+      "categories": {
+        "one_call_candidate_IR_control": 26,
+        "one_call_candidate_IR_feedback": 28,
+        "two_stage_checked_table": 4,
+        "two_stage_prose": 3,
+        "two_stage_table": 3
+      },
+      "all_provenance_checks_pass": true,
+      "validation_statuses": {
+        "PASS": 64
+      },
+      "witness_statuses": {},
+      "rows": [
+        {
+          "result": "evidence\\paired-b64\\jobs\\m01__debounce3_state_output__s001__control\\result.json",
+          "category": "one_call_candidate_IR_control",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "0033919e6dd9fe63bc4c26031545c0d734de09872d45ecd562736c436105a470",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m02__debounce3_state_output__s001__control\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m02__debounce3_state_output__s001__control\\result.json",
+          "category": "one_call_candidate_IR_control",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "0033919e6dd9fe63bc4c26031545c0d734de09872d45ecd562736c436105a470",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m01__debounce3_state_output__s001__control\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m01__event_parity_state_output__s002__control\\result.json",
+          "category": "one_call_candidate_IR_control",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "2f045195bc35db8592873bf335b1b774a25f4e7c692dd69f8f7e971adff70dff",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m02__event_parity_state_output__s002__control\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m02__event_parity_state_output__s001__control\\result.json",
+          "category": "one_call_candidate_IR_control",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "2f045195bc35db8592873bf335b1b774a25f4e7c692dd69f8f7e971adff70dff",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m01__event_parity_state_output__s001__control\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m01__request_delay_state_output__s001__control\\result.json",
+          "category": "one_call_candidate_IR_control",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "294c48671f040b4d119a9b0d6296926ba030263f6cd85a4454fa9083dff4f33f",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m02__request_delay_state_output__s001__control\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m02__request_delay_state_output__s001__feedback\\result.json",
+          "category": "one_call_candidate_IR_feedback",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "aee09f8267f5b1aac6f43234abdf33e6828f11eeafe595ec16f8fcbabce2d2bc",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m01__request_delay_state_output__s001__feedback\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\fsm48\\jobs\\m01__rt_sequence__checked_table__s001\\result.json",
+          "category": "two_stage_checked_table",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "stage1_response_hash": true,
+            "stage1_generation_success": true,
+            "stage2_response_hash": true,
+            "stage2_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "stage1",
+              "sha256": "3ab3f0b8946f6f8e36d1fe4cf53d036cd5aaba83eed63b224dc4717458249d7c",
+              "other_model_prompt": "evidence\\fsm48\\jobs\\m02__rt_sequence__checked_table__s001\\stage1\\prompt.txt",
+              "same_bytes": true
+            },
+            {
+              "stage": "stage2",
+              "sha256": "b483b0810f28bb3b9e7ca446e3a2914a0f66183d7469e812b3f01cf1e1f6406a",
+              "other_model_prompt": "evidence\\fsm48\\jobs\\m02__rt_sequence__checked_table__s001\\stage2\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": false,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\fsm48\\jobs\\m02__rt_sequence__checked_table__s001\\result.json",
+          "category": "two_stage_checked_table",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "stage1_response_hash": true,
+            "stage1_generation_success": true,
+            "stage2_response_hash": true,
+            "stage2_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "stage1",
+              "sha256": "3ab3f0b8946f6f8e36d1fe4cf53d036cd5aaba83eed63b224dc4717458249d7c",
+              "other_model_prompt": "evidence\\fsm48\\jobs\\m01__rt_sequence__checked_table__s001\\stage1\\prompt.txt",
+              "same_bytes": true
+            },
+            {
+              "stage": "stage2",
+              "sha256": "b483b0810f28bb3b9e7ca446e3a2914a0f66183d7469e812b3f01cf1e1f6406a",
+              "other_model_prompt": "evidence\\fsm48\\jobs\\m01__rt_sequence__checked_table__s001\\stage2\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": false,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m01__sticky_alarm_state_output__s001__control\\result.json",
+          "category": "one_call_candidate_IR_control",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "e70964f429e2c9b074b9f62727fea34e8bef9ced2af55ae3de42b73b258af4f4",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m02__sticky_alarm_state_output__s001__control\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m02__sticky_alarm_state_output__s001__control\\result.json",
+          "category": "one_call_candidate_IR_control",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "e70964f429e2c9b074b9f62727fea34e8bef9ced2af55ae3de42b73b258af4f4",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m01__sticky_alarm_state_output__s001__control\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m01__debounce3_state_output__s001__feedback\\result.json",
+          "category": "one_call_candidate_IR_feedback",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "0e9c83470325d3033110558e98ed2b943372aef85c08c07d70afd3140866718f",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m02__debounce3_state_output__s001__feedback\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m02__debounce3_state_output__s001__feedback\\result.json",
+          "category": "one_call_candidate_IR_feedback",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "0e9c83470325d3033110558e98ed2b943372aef85c08c07d70afd3140866718f",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m01__debounce3_state_output__s001__feedback\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m02__event_parity_state_output__s001__feedback\\result.json",
+          "category": "one_call_candidate_IR_feedback",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "dae19703598169918d103afea8dce0d0397e622a113e83da5c0b32eda635b65f",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m01__event_parity_state_output__s001__feedback\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m01__request_delay_state_output__s001__feedback\\result.json",
+          "category": "one_call_candidate_IR_feedback",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "aee09f8267f5b1aac6f43234abdf33e6828f11eeafe595ec16f8fcbabce2d2bc",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m02__request_delay_state_output__s001__feedback\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m02__request_delay_state_output__s002__feedback\\result.json",
+          "category": "one_call_candidate_IR_feedback",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "aee09f8267f5b1aac6f43234abdf33e6828f11eeafe595ec16f8fcbabce2d2bc",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m01__request_delay_state_output__s002__feedback\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\fsm48\\jobs\\m01__rt_sequence__checked_table__s002\\result.json",
+          "category": "two_stage_checked_table",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "stage1_response_hash": true,
+            "stage1_generation_success": true,
+            "stage2_response_hash": true,
+            "stage2_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "stage1",
+              "sha256": "3ab3f0b8946f6f8e36d1fe4cf53d036cd5aaba83eed63b224dc4717458249d7c",
+              "other_model_prompt": "evidence\\fsm48\\jobs\\m02__rt_sequence__checked_table__s002\\stage1\\prompt.txt",
+              "same_bytes": true
+            },
+            {
+              "stage": "stage2",
+              "sha256": "b483b0810f28bb3b9e7ca446e3a2914a0f66183d7469e812b3f01cf1e1f6406a",
+              "other_model_prompt": "evidence\\fsm48\\jobs\\m02__rt_sequence__checked_table__s002\\stage2\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": false,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\fsm48\\jobs\\m02__rt_sequence__checked_table__s002\\result.json",
+          "category": "two_stage_checked_table",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "stage1_response_hash": true,
+            "stage1_generation_success": true,
+            "stage2_response_hash": true,
+            "stage2_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "stage1",
+              "sha256": "3ab3f0b8946f6f8e36d1fe4cf53d036cd5aaba83eed63b224dc4717458249d7c",
+              "other_model_prompt": "evidence\\fsm48\\jobs\\m01__rt_sequence__checked_table__s002\\stage1\\prompt.txt",
+              "same_bytes": true
+            },
+            {
+              "stage": "stage2",
+              "sha256": "b483b0810f28bb3b9e7ca446e3a2914a0f66183d7469e812b3f01cf1e1f6406a",
+              "other_model_prompt": "evidence\\fsm48\\jobs\\m01__rt_sequence__checked_table__s002\\stage2\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": false,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m01__sticky_alarm_state_output__s001__feedback\\result.json",
+          "category": "one_call_candidate_IR_feedback",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "0fc5738839519a57e2b29d3fc7499bf08d170b4f1f35980f16aa98acc4bdcb68",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m02__sticky_alarm_state_output__s001__feedback\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m02__sticky_alarm_state_output__s001__feedback\\result.json",
+          "category": "one_call_candidate_IR_feedback",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "0fc5738839519a57e2b29d3fc7499bf08d170b4f1f35980f16aa98acc4bdcb68",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m01__sticky_alarm_state_output__s001__feedback\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m01__debounce3_state_output__s002__control\\result.json",
+          "category": "one_call_candidate_IR_control",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "0033919e6dd9fe63bc4c26031545c0d734de09872d45ecd562736c436105a470",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m02__debounce3_state_output__s002__control\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m02__debounce3_state_output__s002__control\\result.json",
+          "category": "one_call_candidate_IR_control",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "0033919e6dd9fe63bc4c26031545c0d734de09872d45ecd562736c436105a470",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m01__debounce3_state_output__s002__control\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m02__event_parity_state_output__s002__control\\result.json",
+          "category": "one_call_candidate_IR_control",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "2f045195bc35db8592873bf335b1b774a25f4e7c692dd69f8f7e971adff70dff",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m01__event_parity_state_output__s002__control\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m01__request_delay_state_output__s002__control\\result.json",
+          "category": "one_call_candidate_IR_control",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "294c48671f040b4d119a9b0d6296926ba030263f6cd85a4454fa9083dff4f33f",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m02__request_delay_state_output__s002__control\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m02__request_delay_transition__s001__control\\result.json",
+          "category": "one_call_candidate_IR_control",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "35bf5f97a8395c76c76e9c0595fbe1e8aaa59eaf00415d061857c8bf3dabafdb",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m01__request_delay_transition__s001__control\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\fsm48\\jobs\\m01__rt_sequence__prose__s001\\result.json",
+          "category": "two_stage_prose",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "stage1_response_hash": true,
+            "stage1_generation_success": true,
+            "stage2_response_hash": true,
+            "stage2_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "stage1",
+              "sha256": "4988311cd8bc6ce555a20c1e9bc0f4cc52b6e54810a66cc04a0cd53aa53a9b18",
+              "other_model_prompt": "evidence\\fsm48\\jobs\\m02__rt_sequence__prose__s001\\stage1\\prompt.txt",
+              "same_bytes": true
+            },
+            {
+              "stage": "stage2",
+              "sha256": "28bef84f6b9170b5d5da9681bf5c22d962ca24227c2738a1baa9cb654e719710",
+              "other_model_prompt": "evidence\\fsm48\\jobs\\m02__rt_sequence__prose__s001\\stage2\\prompt.txt",
+              "same_bytes": false
+            }
+          ],
+          "contains_candidate_ir": false,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\fsm48\\jobs\\m02__rt_sequence__prose__s002\\result.json",
+          "category": "two_stage_prose",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "stage1_response_hash": true,
+            "stage1_generation_success": true,
+            "stage2_response_hash": true,
+            "stage2_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "stage1",
+              "sha256": "4988311cd8bc6ce555a20c1e9bc0f4cc52b6e54810a66cc04a0cd53aa53a9b18",
+              "other_model_prompt": "evidence\\fsm48\\jobs\\m01__rt_sequence__prose__s002\\stage1\\prompt.txt",
+              "same_bytes": true
+            },
+            {
+              "stage": "stage2",
+              "sha256": "099e2d34371ff17c88fd49baf87812e975b9e993f3ecc20aadad191f812711c4",
+              "other_model_prompt": "evidence\\fsm48\\jobs\\m01__rt_sequence__prose__s002\\stage2\\prompt.txt",
+              "same_bytes": false
+            }
+          ],
+          "contains_candidate_ir": false,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m01__sticky_alarm_state_output__s002__control\\result.json",
+          "category": "one_call_candidate_IR_control",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "e70964f429e2c9b074b9f62727fea34e8bef9ced2af55ae3de42b73b258af4f4",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m02__sticky_alarm_state_output__s002__control\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m02__sticky_alarm_state_output__s002__feedback\\result.json",
+          "category": "one_call_candidate_IR_feedback",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "0fc5738839519a57e2b29d3fc7499bf08d170b4f1f35980f16aa98acc4bdcb68",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m01__sticky_alarm_state_output__s002__feedback\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m01__debounce3_state_output__s002__feedback\\result.json",
+          "category": "one_call_candidate_IR_feedback",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "0e9c83470325d3033110558e98ed2b943372aef85c08c07d70afd3140866718f",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m02__debounce3_state_output__s002__feedback\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m02__debounce3_state_output__s002__feedback\\result.json",
+          "category": "one_call_candidate_IR_feedback",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "0e9c83470325d3033110558e98ed2b943372aef85c08c07d70afd3140866718f",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m01__debounce3_state_output__s002__feedback\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m02__event_parity_state_output__s002__feedback\\result.json",
+          "category": "one_call_candidate_IR_feedback",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "dae19703598169918d103afea8dce0d0397e622a113e83da5c0b32eda635b65f",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m01__event_parity_state_output__s002__feedback\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m01__request_delay_transition__s001__control\\result.json",
+          "category": "one_call_candidate_IR_control",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "35bf5f97a8395c76c76e9c0595fbe1e8aaa59eaf00415d061857c8bf3dabafdb",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m02__request_delay_transition__s001__control\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m02__request_delay_transition__s001__feedback\\result.json",
+          "category": "one_call_candidate_IR_feedback",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "87f5f971af79a2187cb3a52aae9a473b70cf40fa742c731ad6548f1326210d02",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m01__request_delay_transition__s001__feedback\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\fsm48\\jobs\\m01__rt_sequence__prose__s002\\result.json",
+          "category": "two_stage_prose",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "stage1_response_hash": true,
+            "stage1_generation_success": true,
+            "stage2_response_hash": true,
+            "stage2_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "stage1",
+              "sha256": "4988311cd8bc6ce555a20c1e9bc0f4cc52b6e54810a66cc04a0cd53aa53a9b18",
+              "other_model_prompt": "evidence\\fsm48\\jobs\\m02__rt_sequence__prose__s002\\stage1\\prompt.txt",
+              "same_bytes": true
+            },
+            {
+              "stage": "stage2",
+              "sha256": "4bf5f74df036e5ff0cd174ea6a67bd292322088980d109c81f264da0239c0181",
+              "other_model_prompt": "evidence\\fsm48\\jobs\\m02__rt_sequence__prose__s002\\stage2\\prompt.txt",
+              "same_bytes": false
+            }
+          ],
+          "contains_candidate_ir": false,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\fsm48\\jobs\\m02__rt_sequence__table__s002\\result.json",
+          "category": "two_stage_table",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "stage1_response_hash": true,
+            "stage1_generation_success": true,
+            "stage2_response_hash": true,
+            "stage2_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "stage1",
+              "sha256": "3ab3f0b8946f6f8e36d1fe4cf53d036cd5aaba83eed63b224dc4717458249d7c",
+              "other_model_prompt": "evidence\\fsm48\\jobs\\m01__rt_sequence__table__s002\\stage1\\prompt.txt",
+              "same_bytes": true
+            },
+            {
+              "stage": "stage2",
+              "sha256": "4e7c2c47e879ff699aee1609d41b0582010e6ad119add4f67c4992d2722f9cb0",
+              "other_model_prompt": "evidence\\fsm48\\jobs\\m01__rt_sequence__table__s002\\stage2\\prompt.txt",
+              "same_bytes": false
+            }
+          ],
+          "contains_candidate_ir": false,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m01__sticky_alarm_state_output__s002__feedback\\result.json",
+          "category": "one_call_candidate_IR_feedback",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "0fc5738839519a57e2b29d3fc7499bf08d170b4f1f35980f16aa98acc4bdcb68",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m02__sticky_alarm_state_output__s002__feedback\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m02__sticky_alarm_transition__s001__control\\result.json",
+          "category": "one_call_candidate_IR_control",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "633c25b0c98d553e38ad61fe2891468143f35f6032b0f251c42eae781562d81b",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m01__sticky_alarm_transition__s001__control\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m01__debounce3_transition__s001__control\\result.json",
+          "category": "one_call_candidate_IR_control",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "bcdc385578ff2ea76742d5ab5542aa42100df4c9a2718956c76079b4e7df2379",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m02__debounce3_transition__s001__control\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m02__debounce3_transition__s001__control\\result.json",
+          "category": "one_call_candidate_IR_control",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "bcdc385578ff2ea76742d5ab5542aa42100df4c9a2718956c76079b4e7df2379",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m01__debounce3_transition__s001__control\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m02__event_parity_transition__s001__control\\result.json",
+          "category": "one_call_candidate_IR_control",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "c6224a72f4247c33fbbf60f1082bae427212ab0e8d2e90616db26e5a5c1268e6",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m01__event_parity_transition__s001__control\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m01__request_delay_transition__s002__control\\result.json",
+          "category": "one_call_candidate_IR_control",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "35bf5f97a8395c76c76e9c0595fbe1e8aaa59eaf00415d061857c8bf3dabafdb",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m02__request_delay_transition__s002__control\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m02__request_delay_transition__s002__feedback\\result.json",
+          "category": "one_call_candidate_IR_feedback",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "87f5f971af79a2187cb3a52aae9a473b70cf40fa742c731ad6548f1326210d02",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m01__request_delay_transition__s002__feedback\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\fsm48\\jobs\\m01__rt_sequence__table__s001\\result.json",
+          "category": "two_stage_table",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "stage1_response_hash": true,
+            "stage1_generation_success": true,
+            "stage2_response_hash": true,
+            "stage2_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "stage1",
+              "sha256": "3ab3f0b8946f6f8e36d1fe4cf53d036cd5aaba83eed63b224dc4717458249d7c",
+              "other_model_prompt": "evidence\\fsm48\\jobs\\m02__rt_sequence__table__s001\\stage1\\prompt.txt",
+              "same_bytes": true
+            },
+            {
+              "stage": "stage2",
+              "sha256": "82de12fcbc9519fc094f4383aa84bb2e817c813faa9e3a1cb75229e97fafec01",
+              "other_model_prompt": "evidence\\fsm48\\jobs\\m02__rt_sequence__table__s001\\stage2\\prompt.txt",
+              "same_bytes": false
+            }
+          ],
+          "contains_candidate_ir": false,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-a32\\jobs\\m02__real_overlap__s001__feedback\\result.json",
+          "category": "one_call_candidate_IR_feedback",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "7b5911451d10337c80f643bfef5f87fb5faf6a977c982ba2b50ee053625d51a2",
+              "other_model_prompt": "evidence\\paired-a32\\jobs\\m01__real_overlap__s001__feedback\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m01__sticky_alarm_transition__s002__feedback\\result.json",
+          "category": "one_call_candidate_IR_feedback",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "58a6395fb6f2bd7f7e8f9ca2509a8700e043ca835106d44577cf46ec56ea1007",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m02__sticky_alarm_transition__s002__feedback\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m02__sticky_alarm_transition__s001__feedback\\result.json",
+          "category": "one_call_candidate_IR_feedback",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "58a6395fb6f2bd7f7e8f9ca2509a8700e043ca835106d44577cf46ec56ea1007",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m01__sticky_alarm_transition__s001__feedback\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m01__debounce3_transition__s001__feedback\\result.json",
+          "category": "one_call_candidate_IR_feedback",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "c2852749ac7b8be2b1f31fe6ba75d1faebe3108a46f6286260e719e91a9d2d42",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m02__debounce3_transition__s001__feedback\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m02__debounce3_transition__s001__feedback\\result.json",
+          "category": "one_call_candidate_IR_feedback",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "c2852749ac7b8be2b1f31fe6ba75d1faebe3108a46f6286260e719e91a9d2d42",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m01__debounce3_transition__s001__feedback\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m02__event_parity_transition__s002__feedback\\result.json",
+          "category": "one_call_candidate_IR_feedback",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "e172afda2a1a898a984fc3584c971dffb8eebfc3d5b46b9c7e4045232043efc9",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m01__event_parity_transition__s002__feedback\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m01__request_delay_transition__s002__feedback\\result.json",
+          "category": "one_call_candidate_IR_feedback",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "87f5f971af79a2187cb3a52aae9a473b70cf40fa742c731ad6548f1326210d02",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m02__request_delay_transition__s002__feedback\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\fsm48\\jobs\\m01__rt_sequence__table__s002\\result.json",
+          "category": "two_stage_table",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "stage1_response_hash": true,
+            "stage1_generation_success": true,
+            "stage2_response_hash": true,
+            "stage2_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "stage1",
+              "sha256": "3ab3f0b8946f6f8e36d1fe4cf53d036cd5aaba83eed63b224dc4717458249d7c",
+              "other_model_prompt": "evidence\\fsm48\\jobs\\m02__rt_sequence__table__s002\\stage1\\prompt.txt",
+              "same_bytes": true
+            },
+            {
+              "stage": "stage2",
+              "sha256": "82de12fcbc9519fc094f4383aa84bb2e817c813faa9e3a1cb75229e97fafec01",
+              "other_model_prompt": "evidence\\fsm48\\jobs\\m02__rt_sequence__table__s002\\stage2\\prompt.txt",
+              "same_bytes": false
+            }
+          ],
+          "contains_candidate_ir": false,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-a32\\jobs\\m02__real_overlap__s002__feedback\\result.json",
+          "category": "one_call_candidate_IR_feedback",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "7b5911451d10337c80f643bfef5f87fb5faf6a977c982ba2b50ee053625d51a2",
+              "other_model_prompt": "evidence\\paired-a32\\jobs\\m01__real_overlap__s002__feedback\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m02__sticky_alarm_transition__s002__control\\result.json",
+          "category": "one_call_candidate_IR_control",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "633c25b0c98d553e38ad61fe2891468143f35f6032b0f251c42eae781562d81b",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m01__sticky_alarm_transition__s002__control\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m01__debounce3_transition__s002__control\\result.json",
+          "category": "one_call_candidate_IR_control",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "bcdc385578ff2ea76742d5ab5542aa42100df4c9a2718956c76079b4e7df2379",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m02__debounce3_transition__s002__control\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m02__debounce3_transition__s002__control\\result.json",
+          "category": "one_call_candidate_IR_control",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "bcdc385578ff2ea76742d5ab5542aa42100df4c9a2718956c76079b4e7df2379",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m01__debounce3_transition__s002__control\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-a32\\jobs\\m01__real_overlap__s001__control\\result.json",
+          "category": "one_call_candidate_IR_control",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "34949e5a6c46e39077036b0b78f41bbe25b83ac6865c005f3600b6990400a9b4",
+              "other_model_prompt": "evidence\\paired-a32\\jobs\\m02__real_overlap__s001__control\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-a32\\jobs\\m02__rt_sequence_early_output__s001__control\\result.json",
+          "category": "one_call_candidate_IR_control",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "78a6299981402be2dc8346156eebc3affe2d79aceb2782cf02dbe7e4dc680f16",
+              "other_model_prompt": "evidence\\paired-a32\\jobs\\m01__rt_sequence_early_output__s001__control\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m02__sticky_alarm_transition__s002__feedback\\result.json",
+          "category": "one_call_candidate_IR_feedback",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "58a6395fb6f2bd7f7e8f9ca2509a8700e043ca835106d44577cf46ec56ea1007",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m01__sticky_alarm_transition__s002__feedback\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m01__debounce3_transition__s002__feedback\\result.json",
+          "category": "one_call_candidate_IR_feedback",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "c2852749ac7b8be2b1f31fe6ba75d1faebe3108a46f6286260e719e91a9d2d42",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m02__debounce3_transition__s002__feedback\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-b64\\jobs\\m02__debounce3_transition__s002__feedback\\result.json",
+          "category": "one_call_candidate_IR_feedback",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "c2852749ac7b8be2b1f31fe6ba75d1faebe3108a46f6286260e719e91a9d2d42",
+              "other_model_prompt": "evidence\\paired-b64\\jobs\\m01__debounce3_transition__s002__feedback\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-a32\\jobs\\m01__real_overlap__s001__feedback\\result.json",
+          "category": "one_call_candidate_IR_feedback",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "7b5911451d10337c80f643bfef5f87fb5faf6a977c982ba2b50ee053625d51a2",
+              "other_model_prompt": "evidence\\paired-a32\\jobs\\m02__real_overlap__s001__feedback\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-a32\\jobs\\m02__rt_sequence_early_output__s002__control\\result.json",
+          "category": "one_call_candidate_IR_control",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "78a6299981402be2dc8346156eebc3affe2d79aceb2782cf02dbe7e4dc680f16",
+              "other_model_prompt": "evidence\\paired-a32\\jobs\\m01__rt_sequence_early_output__s002__control\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-a32\\jobs\\m01__real_overlap__s002__control\\result.json",
+          "category": "one_call_candidate_IR_control",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "34949e5a6c46e39077036b0b78f41bbe25b83ac6865c005f3600b6990400a9b4",
+              "other_model_prompt": "evidence\\paired-a32\\jobs\\m02__real_overlap__s002__control\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        },
+        {
+          "result": "evidence\\paired-a32\\jobs\\m02__rt_sequence_early_output__s002__feedback\\result.json",
+          "category": "one_call_candidate_IR_feedback",
+          "original_status": "PASS",
+          "checks": {
+            "result_hash": true,
+            "rtl_hash": true,
+            "call_response_hash": true,
+            "call_generation_success": true,
+            "extracted_rtl_matches": true
+          },
+          "prompts": [
+            {
+              "stage": "call",
+              "sha256": "258a05d39945c6a8edaa37637205fa212d63a01f82c4dce6fd5129b5df929915",
+              "other_model_prompt": "evidence\\paired-a32\\jobs\\m01__rt_sequence_early_output__s002__feedback\\call\\prompt.txt",
+              "same_bytes": true
+            }
+          ],
+          "contains_candidate_ir": true,
+          "strict_spec_only_direct_baseline": false
+        }
+      ]
+    }
+  }
+}

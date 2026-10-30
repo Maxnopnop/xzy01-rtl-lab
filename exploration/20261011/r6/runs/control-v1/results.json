@@ -1,0 +1,1864 @@
+[
+  {
+    "case": "ordered_retire__r1",
+    "task": "ordered_retire",
+    "arm": "shared",
+    "id": "ordered_retire__r1__direct__first",
+    "role": "direct_first",
+    "representation": "direct",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.0459999999984575,
+      "prompt_bytes": 3478,
+      "prompt_sha256": "aa2b40406e91faa71374fb1743930c456fecb5969fc79c1917a2a7889fc7ae03",
+      "model_called": true,
+      "response_sha256": "3bfad58a4f59725bdb1a88591a3ab5977a8d8af519ba49c92308644b139bd0ab",
+      "response_bytes": 908
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 3354
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "case": "ordered_retire__r1",
+    "task": "ordered_retire",
+    "arm": "shared",
+    "id": "ordered_retire__r1__structured__intent",
+    "role": "intent",
+    "representation": "structured",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.01599999999962165,
+      "prompt_bytes": 3997,
+      "prompt_sha256": "1c479bb4619ac7334f183a84b84d4fc78c6f276b571452709522adc2be09d000",
+      "model_called": true,
+      "response_sha256": "babc8f00419f4576994ae9b731be2bd47fe99b71b5281e5bfd90d87b180e9613",
+      "response_bytes": 1629
+    },
+    "judge": {
+      "intent_spec": {
+        "status": "PASS",
+        "stage": "intent",
+        "checks": 3354,
+        "errors": 0,
+        "mismatches": []
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "case": "ordered_retire__r1",
+    "task": "ordered_retire",
+    "arm": "shared",
+    "id": "ordered_retire__r1__direct__second",
+    "role": "direct_second",
+    "representation": "direct",
+    "first_id": "ordered_retire__r1__direct__first",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.0,
+      "prompt_bytes": 4471,
+      "prompt_sha256": "e0c96f927c15ab41d8e7d635dcdf3a6819b47b02303536b79e2f768462e24000",
+      "model_called": true,
+      "response_sha256": "3bfad58a4f59725bdb1a88591a3ab5977a8d8af519ba49c92308644b139bd0ab",
+      "response_bytes": 908
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 3354
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "case": "ordered_retire__r1",
+    "task": "ordered_retire",
+    "arm": "shared",
+    "id": "ordered_retire__r1__structured__first",
+    "role": "first_rtl",
+    "representation": "structured",
+    "intent_id": "ordered_retire__r1__structured__intent",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.0,
+      "prompt_bytes": 5209,
+      "prompt_sha256": "cc1df0b212e5591a2629e1ddc1699d631fcf0550ea531931ad7ffe37fb878376",
+      "model_called": true,
+      "response_sha256": "70d94fc193336e2222f4e41246f7565ba3a239323e8f7a6a428607b47ad9e6a9",
+      "response_bytes": 1847
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "EXTRACTION_ERROR",
+        "stage": "extraction",
+        "message": "Expected exactly one RTL code block",
+        "mismatches": []
+      },
+      "intent_spec": {
+        "status": "PASS",
+        "stage": "intent",
+        "checks": 3354,
+        "errors": 0,
+        "mismatches": []
+      },
+      "rtl_intent": {
+        "status": "EXTRACTION_ERROR",
+        "stage": "extraction",
+        "message": "Expected exactly one RTL code block",
+        "mismatches": []
+      }
+    },
+    "status": "EXTRACTION_ERROR"
+  },
+  {
+    "id": "ordered_retire__r1__structured__feedback",
+    "case": "ordered_retire__r1",
+    "task": "ordered_retire",
+    "arm": "feedback",
+    "representation": "structured",
+    "role": "branch",
+    "first_id": "ordered_retire__r1__structured__first",
+    "intent_id": "ordered_retire__r1__structured__intent",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.0,
+      "prompt_bytes": 5594,
+      "prompt_sha256": "9dcbe90ac7d2f772f9f1ec10cd1e168947bc35ae0b40a89981da9197a6983b1c",
+      "model_called": true,
+      "response_sha256": "3bfad58a4f59725bdb1a88591a3ab5977a8d8af519ba49c92308644b139bd0ab",
+      "response_bytes": 908
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 3354
+      },
+      "intent_spec": {
+        "status": "PASS",
+        "stage": "intent",
+        "checks": 3354,
+        "errors": 0,
+        "mismatches": []
+      },
+      "rtl_intent": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 3354
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "ordered_retire__r1__structured__regeneration",
+    "case": "ordered_retire__r1",
+    "task": "ordered_retire",
+    "arm": "regeneration",
+    "representation": "structured",
+    "role": "branch",
+    "first_id": "ordered_retire__r1__structured__first",
+    "intent_id": "ordered_retire__r1__structured__intent",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.0,
+      "prompt_bytes": 5375,
+      "prompt_sha256": "96fc34464793061f99978f15f14733ee4a999906e354d4df1bbe715bbb14419f",
+      "model_called": true,
+      "response_sha256": "3bfad58a4f59725bdb1a88591a3ab5977a8d8af519ba49c92308644b139bd0ab",
+      "response_bytes": 908
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 3354
+      },
+      "intent_spec": {
+        "status": "PASS",
+        "stage": "intent",
+        "checks": 3354,
+        "errors": 0,
+        "mismatches": []
+      },
+      "rtl_intent": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 3354
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "ordered_retire__r1__direct__feedback",
+    "case": "ordered_retire__r1",
+    "task": "ordered_retire",
+    "arm": "feedback",
+    "representation": "direct",
+    "role": "branch",
+    "first_id": "ordered_retire__r1__direct__second",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.01599999999962165,
+      "prompt_bytes": 4571,
+      "prompt_sha256": "a6bcd32af112c87df2b1e6b528f72fc05d50a9715610fa034239c2559575d137",
+      "model_called": true,
+      "response_sha256": "3bfad58a4f59725bdb1a88591a3ab5977a8d8af519ba49c92308644b139bd0ab",
+      "response_bytes": 908
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 3354
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "ordered_retire__r1__direct__regeneration",
+    "case": "ordered_retire__r1",
+    "task": "ordered_retire",
+    "arm": "regeneration",
+    "representation": "direct",
+    "role": "branch",
+    "first_id": "ordered_retire__r1__direct__second",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.0,
+      "prompt_bytes": 4436,
+      "prompt_sha256": "e6ce82b1d41298beb0e4ebd0f6d04677ec7dc941d31069a599baa570b0ae007c",
+      "model_called": true,
+      "response_sha256": "3bfad58a4f59725bdb1a88591a3ab5977a8d8af519ba49c92308644b139bd0ab",
+      "response_bytes": 908
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 3354
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "case": "ordered_retire__r2",
+    "task": "ordered_retire",
+    "arm": "shared",
+    "id": "ordered_retire__r2__structured__intent",
+    "role": "intent",
+    "representation": "structured",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.0,
+      "prompt_bytes": 3997,
+      "prompt_sha256": "1c479bb4619ac7334f183a84b84d4fc78c6f276b571452709522adc2be09d000",
+      "model_called": true,
+      "response_sha256": "babc8f00419f4576994ae9b731be2bd47fe99b71b5281e5bfd90d87b180e9613",
+      "response_bytes": 1629
+    },
+    "judge": {
+      "intent_spec": {
+        "status": "PASS",
+        "stage": "intent",
+        "checks": 3354,
+        "errors": 0,
+        "mismatches": []
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "case": "ordered_retire__r2",
+    "task": "ordered_retire",
+    "arm": "shared",
+    "id": "ordered_retire__r2__direct__first",
+    "role": "direct_first",
+    "representation": "direct",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.0,
+      "prompt_bytes": 3478,
+      "prompt_sha256": "aa2b40406e91faa71374fb1743930c456fecb5969fc79c1917a2a7889fc7ae03",
+      "model_called": true,
+      "response_sha256": "3bfad58a4f59725bdb1a88591a3ab5977a8d8af519ba49c92308644b139bd0ab",
+      "response_bytes": 908
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 3354
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "case": "ordered_retire__r2",
+    "task": "ordered_retire",
+    "arm": "shared",
+    "id": "ordered_retire__r2__structured__first",
+    "role": "first_rtl",
+    "representation": "structured",
+    "intent_id": "ordered_retire__r2__structured__intent",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.0,
+      "prompt_bytes": 5209,
+      "prompt_sha256": "cc1df0b212e5591a2629e1ddc1699d631fcf0550ea531931ad7ffe37fb878376",
+      "model_called": true,
+      "response_sha256": "3bfad58a4f59725bdb1a88591a3ab5977a8d8af519ba49c92308644b139bd0ab",
+      "response_bytes": 908
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 3354
+      },
+      "intent_spec": {
+        "status": "PASS",
+        "stage": "intent",
+        "checks": 3354,
+        "errors": 0,
+        "mismatches": []
+      },
+      "rtl_intent": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 3354
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "case": "ordered_retire__r2",
+    "task": "ordered_retire",
+    "arm": "shared",
+    "id": "ordered_retire__r2__direct__second",
+    "role": "direct_second",
+    "representation": "direct",
+    "first_id": "ordered_retire__r2__direct__first",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.0,
+      "prompt_bytes": 4471,
+      "prompt_sha256": "e0c96f927c15ab41d8e7d635dcdf3a6819b47b02303536b79e2f768462e24000",
+      "model_called": true,
+      "response_sha256": "3bfad58a4f59725bdb1a88591a3ab5977a8d8af519ba49c92308644b139bd0ab",
+      "response_bytes": 908
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 3354
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "ordered_retire__r2__structured__regeneration",
+    "case": "ordered_retire__r2",
+    "task": "ordered_retire",
+    "arm": "regeneration",
+    "representation": "structured",
+    "role": "branch",
+    "first_id": "ordered_retire__r2__structured__first",
+    "intent_id": "ordered_retire__r2__structured__intent",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.0,
+      "prompt_bytes": 4436,
+      "prompt_sha256": "e6ce82b1d41298beb0e4ebd0f6d04677ec7dc941d31069a599baa570b0ae007c",
+      "model_called": true,
+      "response_sha256": "3bfad58a4f59725bdb1a88591a3ab5977a8d8af519ba49c92308644b139bd0ab",
+      "response_bytes": 908
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 3354
+      },
+      "intent_spec": {
+        "status": "PASS",
+        "stage": "intent",
+        "checks": 3354,
+        "errors": 0,
+        "mismatches": []
+      },
+      "rtl_intent": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 3354
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "ordered_retire__r2__structured__feedback",
+    "case": "ordered_retire__r2",
+    "task": "ordered_retire",
+    "arm": "feedback",
+    "representation": "structured",
+    "role": "branch",
+    "first_id": "ordered_retire__r2__structured__first",
+    "intent_id": "ordered_retire__r2__structured__intent",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.0,
+      "prompt_bytes": 4571,
+      "prompt_sha256": "a6bcd32af112c87df2b1e6b528f72fc05d50a9715610fa034239c2559575d137",
+      "model_called": true,
+      "response_sha256": "3bfad58a4f59725bdb1a88591a3ab5977a8d8af519ba49c92308644b139bd0ab",
+      "response_bytes": 908
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 3354
+      },
+      "intent_spec": {
+        "status": "PASS",
+        "stage": "intent",
+        "checks": 3354,
+        "errors": 0,
+        "mismatches": []
+      },
+      "rtl_intent": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 3354
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "ordered_retire__r2__direct__regeneration",
+    "case": "ordered_retire__r2",
+    "task": "ordered_retire",
+    "arm": "regeneration",
+    "representation": "direct",
+    "role": "branch",
+    "first_id": "ordered_retire__r2__direct__second",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.0,
+      "prompt_bytes": 4436,
+      "prompt_sha256": "e6ce82b1d41298beb0e4ebd0f6d04677ec7dc941d31069a599baa570b0ae007c",
+      "model_called": true,
+      "response_sha256": "3bfad58a4f59725bdb1a88591a3ab5977a8d8af519ba49c92308644b139bd0ab",
+      "response_bytes": 908
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 3354
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "ordered_retire__r2__direct__feedback",
+    "case": "ordered_retire__r2",
+    "task": "ordered_retire",
+    "arm": "feedback",
+    "representation": "direct",
+    "role": "branch",
+    "first_id": "ordered_retire__r2__direct__second",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.0,
+      "prompt_bytes": 4571,
+      "prompt_sha256": "a6bcd32af112c87df2b1e6b528f72fc05d50a9715610fa034239c2559575d137",
+      "model_called": true,
+      "response_sha256": "3bfad58a4f59725bdb1a88591a3ab5977a8d8af519ba49c92308644b139bd0ab",
+      "response_bytes": 908
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 3354
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "case": "restoring_divide__r1",
+    "task": "restoring_divide",
+    "arm": "shared",
+    "id": "restoring_divide__r1__structured__intent",
+    "role": "intent",
+    "representation": "structured",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.01599999999962165,
+      "prompt_bytes": 4180,
+      "prompt_sha256": "969923cf3fccc8c8b0cca188c978b2d3f23b51b39cb94bd5097df4a12e75d963",
+      "model_called": true,
+      "response_sha256": "b5d4a767f1b440189c17dd4444806067c47b8ef29f10c961f0723ad685ebafd6",
+      "response_bytes": 1914
+    },
+    "judge": {
+      "intent_spec": {
+        "status": "PASS",
+        "stage": "intent",
+        "checks": 9790,
+        "errors": 0,
+        "mismatches": []
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "case": "restoring_divide__r1",
+    "task": "restoring_divide",
+    "arm": "shared",
+    "id": "restoring_divide__r1__direct__first",
+    "role": "direct_first",
+    "representation": "direct",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.0,
+      "prompt_bytes": 3661,
+      "prompt_sha256": "4eeb0963b90b41ea314a7763e03460e4a1b03a62d397f1820f8581f5a36419fb",
+      "model_called": true,
+      "response_sha256": "07a9c9a89f5e3e6c4dde9306f05c9a2b9d212c24eb9e5843e38165095520aaba",
+      "response_bytes": 863
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 9790
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "case": "restoring_divide__r1",
+    "task": "restoring_divide",
+    "arm": "shared",
+    "id": "restoring_divide__r1__structured__first",
+    "role": "first_rtl",
+    "representation": "structured",
+    "intent_id": "restoring_divide__r1__structured__intent",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.01599999999962165,
+      "prompt_bytes": 5677,
+      "prompt_sha256": "70f0f9c33c3d4679f86007ced3f15a3138853fe36de22983a71c5b4779c0f7fb",
+      "model_called": true,
+      "response_sha256": "07a9c9a89f5e3e6c4dde9306f05c9a2b9d212c24eb9e5843e38165095520aaba",
+      "response_bytes": 863
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 9790
+      },
+      "intent_spec": {
+        "status": "PASS",
+        "stage": "intent",
+        "checks": 9790,
+        "errors": 0,
+        "mismatches": []
+      },
+      "rtl_intent": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 9790
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "case": "restoring_divide__r1",
+    "task": "restoring_divide",
+    "arm": "shared",
+    "id": "restoring_divide__r1__direct__second",
+    "role": "direct_second",
+    "representation": "direct",
+    "first_id": "restoring_divide__r1__direct__first",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.014999999999417923,
+      "prompt_bytes": 4609,
+      "prompt_sha256": "148b2c3e3706eebc20838f1816800e8aa4202ebd631b8221a3a32d2b4222d1e7",
+      "model_called": true,
+      "response_sha256": "07a9c9a89f5e3e6c4dde9306f05c9a2b9d212c24eb9e5843e38165095520aaba",
+      "response_bytes": 863
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 9790
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "restoring_divide__r1__structured__regeneration",
+    "case": "restoring_divide__r1",
+    "task": "restoring_divide",
+    "arm": "regeneration",
+    "representation": "structured",
+    "role": "branch",
+    "first_id": "restoring_divide__r1__structured__first",
+    "intent_id": "restoring_divide__r1__structured__intent",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.0,
+      "prompt_bytes": 4574,
+      "prompt_sha256": "f07ee1e7a475034ce41e34087bbb05d4823b03f245329db93023af8100ee92a8",
+      "model_called": true,
+      "response_sha256": "07a9c9a89f5e3e6c4dde9306f05c9a2b9d212c24eb9e5843e38165095520aaba",
+      "response_bytes": 863
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 9790
+      },
+      "intent_spec": {
+        "status": "PASS",
+        "stage": "intent",
+        "checks": 9790,
+        "errors": 0,
+        "mismatches": []
+      },
+      "rtl_intent": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 9790
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "restoring_divide__r1__structured__feedback",
+    "case": "restoring_divide__r1",
+    "task": "restoring_divide",
+    "arm": "feedback",
+    "representation": "structured",
+    "role": "branch",
+    "first_id": "restoring_divide__r1__structured__first",
+    "intent_id": "restoring_divide__r1__structured__intent",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.014999999999417923,
+      "prompt_bytes": 4709,
+      "prompt_sha256": "e9e7b6c2978add084263f01c9e76b33c48d59ae0efa79e7b94f81cbf82635f41",
+      "model_called": true,
+      "response_sha256": "07a9c9a89f5e3e6c4dde9306f05c9a2b9d212c24eb9e5843e38165095520aaba",
+      "response_bytes": 863
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 9790
+      },
+      "intent_spec": {
+        "status": "PASS",
+        "stage": "intent",
+        "checks": 9790,
+        "errors": 0,
+        "mismatches": []
+      },
+      "rtl_intent": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 9790
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "restoring_divide__r1__direct__regeneration",
+    "case": "restoring_divide__r1",
+    "task": "restoring_divide",
+    "arm": "regeneration",
+    "representation": "direct",
+    "role": "branch",
+    "first_id": "restoring_divide__r1__direct__second",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.01599999999962165,
+      "prompt_bytes": 4574,
+      "prompt_sha256": "f07ee1e7a475034ce41e34087bbb05d4823b03f245329db93023af8100ee92a8",
+      "model_called": true,
+      "response_sha256": "07a9c9a89f5e3e6c4dde9306f05c9a2b9d212c24eb9e5843e38165095520aaba",
+      "response_bytes": 863
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 9790
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "restoring_divide__r1__direct__feedback",
+    "case": "restoring_divide__r1",
+    "task": "restoring_divide",
+    "arm": "feedback",
+    "representation": "direct",
+    "role": "branch",
+    "first_id": "restoring_divide__r1__direct__second",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.01599999999962165,
+      "prompt_bytes": 4709,
+      "prompt_sha256": "e9e7b6c2978add084263f01c9e76b33c48d59ae0efa79e7b94f81cbf82635f41",
+      "model_called": true,
+      "response_sha256": "07a9c9a89f5e3e6c4dde9306f05c9a2b9d212c24eb9e5843e38165095520aaba",
+      "response_bytes": 863
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 9790
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "case": "restoring_divide__r2",
+    "task": "restoring_divide",
+    "arm": "shared",
+    "id": "restoring_divide__r2__direct__first",
+    "role": "direct_first",
+    "representation": "direct",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.014999999999417923,
+      "prompt_bytes": 3661,
+      "prompt_sha256": "4eeb0963b90b41ea314a7763e03460e4a1b03a62d397f1820f8581f5a36419fb",
+      "model_called": true,
+      "response_sha256": "07a9c9a89f5e3e6c4dde9306f05c9a2b9d212c24eb9e5843e38165095520aaba",
+      "response_bytes": 863
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 9790
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "case": "restoring_divide__r2",
+    "task": "restoring_divide",
+    "arm": "shared",
+    "id": "restoring_divide__r2__structured__intent",
+    "role": "intent",
+    "representation": "structured",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.01599999999962165,
+      "prompt_bytes": 4180,
+      "prompt_sha256": "969923cf3fccc8c8b0cca188c978b2d3f23b51b39cb94bd5097df4a12e75d963",
+      "model_called": true,
+      "response_sha256": "b5d4a767f1b440189c17dd4444806067c47b8ef29f10c961f0723ad685ebafd6",
+      "response_bytes": 1914
+    },
+    "judge": {
+      "intent_spec": {
+        "status": "PASS",
+        "stage": "intent",
+        "checks": 9790,
+        "errors": 0,
+        "mismatches": []
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "case": "restoring_divide__r2",
+    "task": "restoring_divide",
+    "arm": "shared",
+    "id": "restoring_divide__r2__direct__second",
+    "role": "direct_second",
+    "representation": "direct",
+    "first_id": "restoring_divide__r2__direct__first",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.0,
+      "prompt_bytes": 4609,
+      "prompt_sha256": "148b2c3e3706eebc20838f1816800e8aa4202ebd631b8221a3a32d2b4222d1e7",
+      "model_called": true,
+      "response_sha256": "07a9c9a89f5e3e6c4dde9306f05c9a2b9d212c24eb9e5843e38165095520aaba",
+      "response_bytes": 863
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 9790
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "case": "restoring_divide__r2",
+    "task": "restoring_divide",
+    "arm": "shared",
+    "id": "restoring_divide__r2__structured__first",
+    "role": "first_rtl",
+    "representation": "structured",
+    "intent_id": "restoring_divide__r2__structured__intent",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.0,
+      "prompt_bytes": 5677,
+      "prompt_sha256": "70f0f9c33c3d4679f86007ced3f15a3138853fe36de22983a71c5b4779c0f7fb",
+      "model_called": true,
+      "response_sha256": "07a9c9a89f5e3e6c4dde9306f05c9a2b9d212c24eb9e5843e38165095520aaba",
+      "response_bytes": 863
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 9790
+      },
+      "intent_spec": {
+        "status": "PASS",
+        "stage": "intent",
+        "checks": 9790,
+        "errors": 0,
+        "mismatches": []
+      },
+      "rtl_intent": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 9790
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "restoring_divide__r2__structured__feedback",
+    "case": "restoring_divide__r2",
+    "task": "restoring_divide",
+    "arm": "feedback",
+    "representation": "structured",
+    "role": "branch",
+    "first_id": "restoring_divide__r2__structured__first",
+    "intent_id": "restoring_divide__r2__structured__intent",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.0,
+      "prompt_bytes": 4709,
+      "prompt_sha256": "e9e7b6c2978add084263f01c9e76b33c48d59ae0efa79e7b94f81cbf82635f41",
+      "model_called": true,
+      "response_sha256": "07a9c9a89f5e3e6c4dde9306f05c9a2b9d212c24eb9e5843e38165095520aaba",
+      "response_bytes": 863
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 9790
+      },
+      "intent_spec": {
+        "status": "PASS",
+        "stage": "intent",
+        "checks": 9790,
+        "errors": 0,
+        "mismatches": []
+      },
+      "rtl_intent": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 9790
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "restoring_divide__r2__structured__regeneration",
+    "case": "restoring_divide__r2",
+    "task": "restoring_divide",
+    "arm": "regeneration",
+    "representation": "structured",
+    "role": "branch",
+    "first_id": "restoring_divide__r2__structured__first",
+    "intent_id": "restoring_divide__r2__structured__intent",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.0,
+      "prompt_bytes": 4574,
+      "prompt_sha256": "f07ee1e7a475034ce41e34087bbb05d4823b03f245329db93023af8100ee92a8",
+      "model_called": true,
+      "response_sha256": "07a9c9a89f5e3e6c4dde9306f05c9a2b9d212c24eb9e5843e38165095520aaba",
+      "response_bytes": 863
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 9790
+      },
+      "intent_spec": {
+        "status": "PASS",
+        "stage": "intent",
+        "checks": 9790,
+        "errors": 0,
+        "mismatches": []
+      },
+      "rtl_intent": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 9790
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "restoring_divide__r2__direct__feedback",
+    "case": "restoring_divide__r2",
+    "task": "restoring_divide",
+    "arm": "feedback",
+    "representation": "direct",
+    "role": "branch",
+    "first_id": "restoring_divide__r2__direct__second",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.014999999999417923,
+      "prompt_bytes": 4709,
+      "prompt_sha256": "e9e7b6c2978add084263f01c9e76b33c48d59ae0efa79e7b94f81cbf82635f41",
+      "model_called": true,
+      "response_sha256": "07a9c9a89f5e3e6c4dde9306f05c9a2b9d212c24eb9e5843e38165095520aaba",
+      "response_bytes": 863
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 9790
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "restoring_divide__r2__direct__regeneration",
+    "case": "restoring_divide__r2",
+    "task": "restoring_divide",
+    "arm": "regeneration",
+    "representation": "direct",
+    "role": "branch",
+    "first_id": "restoring_divide__r2__direct__second",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.0,
+      "prompt_bytes": 4574,
+      "prompt_sha256": "f07ee1e7a475034ce41e34087bbb05d4823b03f245329db93023af8100ee92a8",
+      "model_called": true,
+      "response_sha256": "07a9c9a89f5e3e6c4dde9306f05c9a2b9d212c24eb9e5843e38165095520aaba",
+      "response_bytes": 863
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 9790
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "case": "tagged_join__r1",
+    "task": "tagged_join",
+    "arm": "shared",
+    "id": "tagged_join__r1__direct__first",
+    "role": "direct_first",
+    "representation": "direct",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.0,
+      "prompt_bytes": 3965,
+      "prompt_sha256": "1eb3d8bb0dd5ffd1feb057afc463799c88ecacee8cf20db9888ad54e0b708ee2",
+      "model_called": true,
+      "response_sha256": "46a6c48cf02cee1745617bd42579f9d7226ca0dcae90ed72c8e056007dd6dbf0",
+      "response_bytes": 749
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 3155
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "case": "tagged_join__r1",
+    "task": "tagged_join",
+    "arm": "shared",
+    "id": "tagged_join__r1__structured__intent",
+    "role": "intent",
+    "representation": "structured",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.014999999999417923,
+      "prompt_bytes": 4484,
+      "prompt_sha256": "44c796ac8a06f28a2e900b78b89a86d3613c115937eb10dcefcc2533dab20d0d",
+      "model_called": true,
+      "response_sha256": "5b6ea92d4db0ef88fa72d32cc59266b288b4777732744608fe3552808df0fd85",
+      "response_bytes": 1468
+    },
+    "judge": {
+      "intent_spec": {
+        "status": "PASS",
+        "stage": "intent",
+        "checks": 3155,
+        "errors": 0,
+        "mismatches": []
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "case": "tagged_join__r1",
+    "task": "tagged_join",
+    "arm": "shared",
+    "id": "tagged_join__r1__direct__second",
+    "role": "direct_second",
+    "representation": "direct",
+    "first_id": "tagged_join__r1__direct__first",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.0,
+      "prompt_bytes": 4799,
+      "prompt_sha256": "edbc7bc51f75e5ab7205d5aec671d4e381e2dca7a1bdd678df6f5dbd80ff4d71",
+      "model_called": true,
+      "response_sha256": "46a6c48cf02cee1745617bd42579f9d7226ca0dcae90ed72c8e056007dd6dbf0",
+      "response_bytes": 749
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 3155
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "case": "tagged_join__r1",
+    "task": "tagged_join",
+    "arm": "shared",
+    "id": "tagged_join__r1__structured__first",
+    "role": "first_rtl",
+    "representation": "structured",
+    "intent_id": "tagged_join__r1__structured__intent",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.0,
+      "prompt_bytes": 5535,
+      "prompt_sha256": "d2b7548170dfcef556a5b7c165c42ab1bb517b4639abdf24889feb0d903ce39b",
+      "model_called": true,
+      "response_sha256": "46a6c48cf02cee1745617bd42579f9d7226ca0dcae90ed72c8e056007dd6dbf0",
+      "response_bytes": 749
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 3155
+      },
+      "intent_spec": {
+        "status": "PASS",
+        "stage": "intent",
+        "checks": 3155,
+        "errors": 0,
+        "mismatches": []
+      },
+      "rtl_intent": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 3155
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "tagged_join__r1__structured__feedback",
+    "case": "tagged_join__r1",
+    "task": "tagged_join",
+    "arm": "feedback",
+    "representation": "structured",
+    "role": "branch",
+    "first_id": "tagged_join__r1__structured__first",
+    "intent_id": "tagged_join__r1__structured__intent",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.0,
+      "prompt_bytes": 4899,
+      "prompt_sha256": "cbcf3305593c2ca294815c164af4d3aed5b10f74c745f3b8d050398fdfb12bd2",
+      "model_called": true,
+      "response_sha256": "46a6c48cf02cee1745617bd42579f9d7226ca0dcae90ed72c8e056007dd6dbf0",
+      "response_bytes": 749
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 3155
+      },
+      "intent_spec": {
+        "status": "PASS",
+        "stage": "intent",
+        "checks": 3155,
+        "errors": 0,
+        "mismatches": []
+      },
+      "rtl_intent": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 3155
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "tagged_join__r1__structured__regeneration",
+    "case": "tagged_join__r1",
+    "task": "tagged_join",
+    "arm": "regeneration",
+    "representation": "structured",
+    "role": "branch",
+    "first_id": "tagged_join__r1__structured__first",
+    "intent_id": "tagged_join__r1__structured__intent",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.01599999999962165,
+      "prompt_bytes": 4764,
+      "prompt_sha256": "aad041fac5f9eac5520ded78af5a195c3229054604c37f37ab7a0c96c668dcc4",
+      "model_called": true,
+      "response_sha256": "46a6c48cf02cee1745617bd42579f9d7226ca0dcae90ed72c8e056007dd6dbf0",
+      "response_bytes": 749
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 3155
+      },
+      "intent_spec": {
+        "status": "PASS",
+        "stage": "intent",
+        "checks": 3155,
+        "errors": 0,
+        "mismatches": []
+      },
+      "rtl_intent": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 3155
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "tagged_join__r1__direct__feedback",
+    "case": "tagged_join__r1",
+    "task": "tagged_join",
+    "arm": "feedback",
+    "representation": "direct",
+    "role": "branch",
+    "first_id": "tagged_join__r1__direct__second",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.0,
+      "prompt_bytes": 4899,
+      "prompt_sha256": "cbcf3305593c2ca294815c164af4d3aed5b10f74c745f3b8d050398fdfb12bd2",
+      "model_called": true,
+      "response_sha256": "46a6c48cf02cee1745617bd42579f9d7226ca0dcae90ed72c8e056007dd6dbf0",
+      "response_bytes": 749
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 3155
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "tagged_join__r1__direct__regeneration",
+    "case": "tagged_join__r1",
+    "task": "tagged_join",
+    "arm": "regeneration",
+    "representation": "direct",
+    "role": "branch",
+    "first_id": "tagged_join__r1__direct__second",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.0,
+      "prompt_bytes": 4764,
+      "prompt_sha256": "aad041fac5f9eac5520ded78af5a195c3229054604c37f37ab7a0c96c668dcc4",
+      "model_called": true,
+      "response_sha256": "46a6c48cf02cee1745617bd42579f9d7226ca0dcae90ed72c8e056007dd6dbf0",
+      "response_bytes": 749
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 3155
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "case": "tagged_join__r2",
+    "task": "tagged_join",
+    "arm": "shared",
+    "id": "tagged_join__r2__structured__intent",
+    "role": "intent",
+    "representation": "structured",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.0,
+      "prompt_bytes": 4484,
+      "prompt_sha256": "44c796ac8a06f28a2e900b78b89a86d3613c115937eb10dcefcc2533dab20d0d",
+      "model_called": true,
+      "response_sha256": "5b6ea92d4db0ef88fa72d32cc59266b288b4777732744608fe3552808df0fd85",
+      "response_bytes": 1468
+    },
+    "judge": {
+      "intent_spec": {
+        "status": "PASS",
+        "stage": "intent",
+        "checks": 3155,
+        "errors": 0,
+        "mismatches": []
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "case": "tagged_join__r2",
+    "task": "tagged_join",
+    "arm": "shared",
+    "id": "tagged_join__r2__direct__first",
+    "role": "direct_first",
+    "representation": "direct",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.0,
+      "prompt_bytes": 3965,
+      "prompt_sha256": "1eb3d8bb0dd5ffd1feb057afc463799c88ecacee8cf20db9888ad54e0b708ee2",
+      "model_called": true,
+      "response_sha256": "46a6c48cf02cee1745617bd42579f9d7226ca0dcae90ed72c8e056007dd6dbf0",
+      "response_bytes": 749
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 3155
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "case": "tagged_join__r2",
+    "task": "tagged_join",
+    "arm": "shared",
+    "id": "tagged_join__r2__structured__first",
+    "role": "first_rtl",
+    "representation": "structured",
+    "intent_id": "tagged_join__r2__structured__intent",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.0,
+      "prompt_bytes": 5535,
+      "prompt_sha256": "d2b7548170dfcef556a5b7c165c42ab1bb517b4639abdf24889feb0d903ce39b",
+      "model_called": true,
+      "response_sha256": "46a6c48cf02cee1745617bd42579f9d7226ca0dcae90ed72c8e056007dd6dbf0",
+      "response_bytes": 749
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 3155
+      },
+      "intent_spec": {
+        "status": "PASS",
+        "stage": "intent",
+        "checks": 3155,
+        "errors": 0,
+        "mismatches": []
+      },
+      "rtl_intent": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 3155
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "case": "tagged_join__r2",
+    "task": "tagged_join",
+    "arm": "shared",
+    "id": "tagged_join__r2__direct__second",
+    "role": "direct_second",
+    "representation": "direct",
+    "first_id": "tagged_join__r2__direct__first",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.01599999999962165,
+      "prompt_bytes": 4799,
+      "prompt_sha256": "edbc7bc51f75e5ab7205d5aec671d4e381e2dca7a1bdd678df6f5dbd80ff4d71",
+      "model_called": true,
+      "response_sha256": "46a6c48cf02cee1745617bd42579f9d7226ca0dcae90ed72c8e056007dd6dbf0",
+      "response_bytes": 749
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 3155
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "tagged_join__r2__structured__regeneration",
+    "case": "tagged_join__r2",
+    "task": "tagged_join",
+    "arm": "regeneration",
+    "representation": "structured",
+    "role": "branch",
+    "first_id": "tagged_join__r2__structured__first",
+    "intent_id": "tagged_join__r2__structured__intent",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.014999999999417923,
+      "prompt_bytes": 4764,
+      "prompt_sha256": "aad041fac5f9eac5520ded78af5a195c3229054604c37f37ab7a0c96c668dcc4",
+      "model_called": true,
+      "response_sha256": "46a6c48cf02cee1745617bd42579f9d7226ca0dcae90ed72c8e056007dd6dbf0",
+      "response_bytes": 749
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 3155
+      },
+      "intent_spec": {
+        "status": "PASS",
+        "stage": "intent",
+        "checks": 3155,
+        "errors": 0,
+        "mismatches": []
+      },
+      "rtl_intent": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 3155
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "tagged_join__r2__structured__feedback",
+    "case": "tagged_join__r2",
+    "task": "tagged_join",
+    "arm": "feedback",
+    "representation": "structured",
+    "role": "branch",
+    "first_id": "tagged_join__r2__structured__first",
+    "intent_id": "tagged_join__r2__structured__intent",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.0,
+      "prompt_bytes": 4899,
+      "prompt_sha256": "cbcf3305593c2ca294815c164af4d3aed5b10f74c745f3b8d050398fdfb12bd2",
+      "model_called": true,
+      "response_sha256": "46a6c48cf02cee1745617bd42579f9d7226ca0dcae90ed72c8e056007dd6dbf0",
+      "response_bytes": 749
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 3155
+      },
+      "intent_spec": {
+        "status": "PASS",
+        "stage": "intent",
+        "checks": 3155,
+        "errors": 0,
+        "mismatches": []
+      },
+      "rtl_intent": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 3155
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "tagged_join__r2__direct__regeneration",
+    "case": "tagged_join__r2",
+    "task": "tagged_join",
+    "arm": "regeneration",
+    "representation": "direct",
+    "role": "branch",
+    "first_id": "tagged_join__r2__direct__second",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.0,
+      "prompt_bytes": 4764,
+      "prompt_sha256": "aad041fac5f9eac5520ded78af5a195c3229054604c37f37ab7a0c96c668dcc4",
+      "model_called": true,
+      "response_sha256": "46a6c48cf02cee1745617bd42579f9d7226ca0dcae90ed72c8e056007dd6dbf0",
+      "response_bytes": 749
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 3155
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "tagged_join__r2__direct__feedback",
+    "case": "tagged_join__r2",
+    "task": "tagged_join",
+    "arm": "feedback",
+    "representation": "direct",
+    "role": "branch",
+    "first_id": "tagged_join__r2__direct__second",
+    "generation": {
+      "status": "GENERATED",
+      "tools_used": false,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2,
+        "cached_input_tokens": 3,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 1
+      },
+      "elapsed_seconds": 0.0,
+      "prompt_bytes": 4899,
+      "prompt_sha256": "cbcf3305593c2ca294815c164af4d3aed5b10f74c745f3b8d050398fdfb12bd2",
+      "model_called": true,
+      "response_sha256": "46a6c48cf02cee1745617bd42579f9d7226ca0dcae90ed72c8e056007dd6dbf0",
+      "response_bytes": 749
+    },
+    "judge": {
+      "rtl_spec": {
+        "status": "PASS",
+        "stage": "simulation",
+        "checks": 3155
+      }
+    },
+    "status": "PASS"
+  }
+]

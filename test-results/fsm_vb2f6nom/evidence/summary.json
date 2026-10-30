@@ -1,0 +1,403 @@
+{
+  "schema": 1,
+  "study": "fsm48-v1",
+  "mode": "offline",
+  "planned": 6,
+  "completed": 6,
+  "pending": 0,
+  "max_calls": 0,
+  "model_call_reservations": 0,
+  "model_turns_started": 0,
+  "real_generations": 0,
+  "usage": {},
+  "groups": [
+    {
+      "model": "fixture-model",
+      "arm": "prose",
+      "planned": 2,
+      "completed": 2,
+      "passes": 2,
+      "counts": {
+        "PASS": 2
+      },
+      "usage": {},
+      "localizations": {
+        "NO_TABLE_DIAGNOSIS": 2
+      },
+      "ir_counts": {
+        "NO_TABLE": 2
+      },
+      "public_check_counts": {
+        "NOT_APPLICABLE": 2
+      }
+    },
+    {
+      "model": "fixture-model",
+      "arm": "table",
+      "planned": 2,
+      "completed": 2,
+      "passes": 2,
+      "counts": {
+        "PASS": 2
+      },
+      "usage": {},
+      "localizations": {
+        "ALL_PASS": 2
+      },
+      "ir_counts": {
+        "IR_EQUIVALENT": 2
+      },
+      "public_check_counts": {
+        "PUBLIC_CHECK_PASS": 2
+      }
+    },
+    {
+      "model": "fixture-model",
+      "arm": "checked_table",
+      "planned": 2,
+      "completed": 2,
+      "passes": 2,
+      "counts": {
+        "PASS": 2
+      },
+      "usage": {},
+      "localizations": {
+        "ALL_PASS": 2
+      },
+      "ir_counts": {
+        "IR_EQUIVALENT": 2
+      },
+      "public_check_counts": {
+        "PUBLIC_CHECK_PASS": 2
+      }
+    }
+  ],
+  "results": [
+    {
+      "job_id": "m01__ve_fsm__prose__s001",
+      "task": "ve_fsm",
+      "sample": 1,
+      "arm": "prose",
+      "mode": "offline",
+      "requested_model": "fixture-model",
+      "directory": "jobs/m01__ve_fsm__prose__s001",
+      "ir_diagnosis": {
+        "status": "NO_TABLE"
+      },
+      "ir_rtl": {
+        "status": "NOT_APPLICABLE"
+      },
+      "rtl_sha256": "6ff14fa807ced9355a7f0e062111d132779841b7e78cbf1d67aae4ecb88d4923",
+      "backend": "icarus",
+      "compile_seconds": 0.0211,
+      "status": "PASS",
+      "message": "Independent testbench completed all 1600 checks",
+      "stage": "simulate",
+      "receipt_nonce": "60001819172d4e3d80fa9c04c58ed081",
+      "simulate_seconds": 0.021,
+      "spec_diagnostic": {
+        "checks": 1600,
+        "stimulus_count": 800,
+        "tb_sha256": "71bb84a205ec18d438e4659a9eeb283d888750545078f73bd64f36a890f016dd",
+        "vectors_sha256": "bfe0cd5e3ae81fa5e58ef22bc7cb3d805a7bf111e5361544a4014ab540ce55c9",
+        "backend": "icarus",
+        "compile_seconds": 0.0218,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1600 checks",
+        "stage": "simulate",
+        "receipt_nonce": "7ea67af8c82c413cb74ec15623998961",
+        "simulate_seconds": 0.0253,
+        "mismatches": []
+      },
+      "diagnostic_consistent": true,
+      "localization": "NO_TABLE_DIAGNOSIS",
+      "elapsed_seconds": 0.433
+    },
+    {
+      "job_id": "m01__ve_fsm__table__s001",
+      "task": "ve_fsm",
+      "sample": 1,
+      "arm": "table",
+      "mode": "offline",
+      "requested_model": "fixture-model",
+      "directory": "jobs/m01__ve_fsm__table__s001",
+      "ir_diagnosis": {
+        "status": "IR_EQUIVALENT",
+        "reset_contract_errors": [],
+        "shortest_counterexample": null,
+        "visited_pairs": 4,
+        "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+      },
+      "ir_rtl": {
+        "checks": 1600,
+        "stimulus_count": 800,
+        "tb_sha256": "71bb84a205ec18d438e4659a9eeb283d888750545078f73bd64f36a890f016dd",
+        "vectors_sha256": "bfe0cd5e3ae81fa5e58ef22bc7cb3d805a7bf111e5361544a4014ab540ce55c9",
+        "backend": "icarus",
+        "compile_seconds": 0.0217,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1600 checks",
+        "stage": "simulate",
+        "receipt_nonce": "55dcc7879ac1474eb0982bfd2613a03b",
+        "simulate_seconds": 0.0219,
+        "mismatches": []
+      },
+      "public_check": {
+        "status": "PUBLIC_CHECK_PASS",
+        "errors": [],
+        "note": "Only the public examples and schema were checked; passing is not full equivalence."
+      },
+      "rtl_sha256": "6ff14fa807ced9355a7f0e062111d132779841b7e78cbf1d67aae4ecb88d4923",
+      "backend": "icarus",
+      "compile_seconds": 0.0211,
+      "status": "PASS",
+      "message": "Independent testbench completed all 1600 checks",
+      "stage": "simulate",
+      "receipt_nonce": "e67009bc99f44420874e130f1730bab7",
+      "simulate_seconds": 0.0209,
+      "spec_diagnostic": {
+        "checks": 1600,
+        "stimulus_count": 800,
+        "tb_sha256": "71bb84a205ec18d438e4659a9eeb283d888750545078f73bd64f36a890f016dd",
+        "vectors_sha256": "bfe0cd5e3ae81fa5e58ef22bc7cb3d805a7bf111e5361544a4014ab540ce55c9",
+        "backend": "icarus",
+        "compile_seconds": 0.0215,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1600 checks",
+        "stage": "simulate",
+        "receipt_nonce": "9ac65f3a2fb94a2886acbf33de438b38",
+        "simulate_seconds": 0.0415,
+        "mismatches": []
+      },
+      "diagnostic_consistent": true,
+      "localization": "ALL_PASS",
+      "elapsed_seconds": 0.566
+    },
+    {
+      "job_id": "m01__ve_fsm__checked_table__s001",
+      "task": "ve_fsm",
+      "sample": 1,
+      "arm": "checked_table",
+      "mode": "offline",
+      "requested_model": "fixture-model",
+      "directory": "jobs/m01__ve_fsm__checked_table__s001",
+      "ir_diagnosis": {
+        "status": "IR_EQUIVALENT",
+        "reset_contract_errors": [],
+        "shortest_counterexample": null,
+        "visited_pairs": 4,
+        "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+      },
+      "ir_rtl": {
+        "checks": 1600,
+        "stimulus_count": 800,
+        "tb_sha256": "71bb84a205ec18d438e4659a9eeb283d888750545078f73bd64f36a890f016dd",
+        "vectors_sha256": "bfe0cd5e3ae81fa5e58ef22bc7cb3d805a7bf111e5361544a4014ab540ce55c9",
+        "backend": "icarus",
+        "compile_seconds": 0.0217,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1600 checks",
+        "stage": "simulate",
+        "receipt_nonce": "095c06b8528c47809ea4e97a50c3dba8",
+        "simulate_seconds": 0.0215,
+        "mismatches": []
+      },
+      "public_check": {
+        "status": "PUBLIC_CHECK_PASS",
+        "errors": [],
+        "note": "Only the public examples and schema were checked; passing is not full equivalence."
+      },
+      "rtl_sha256": "6ff14fa807ced9355a7f0e062111d132779841b7e78cbf1d67aae4ecb88d4923",
+      "backend": "icarus",
+      "compile_seconds": 0.0213,
+      "status": "PASS",
+      "message": "Independent testbench completed all 1600 checks",
+      "stage": "simulate",
+      "receipt_nonce": "a6b0e0f23f8f46338844e600b54146ed",
+      "simulate_seconds": 0.021,
+      "spec_diagnostic": {
+        "checks": 1600,
+        "stimulus_count": 800,
+        "tb_sha256": "71bb84a205ec18d438e4659a9eeb283d888750545078f73bd64f36a890f016dd",
+        "vectors_sha256": "bfe0cd5e3ae81fa5e58ef22bc7cb3d805a7bf111e5361544a4014ab540ce55c9",
+        "backend": "icarus",
+        "compile_seconds": 0.0218,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1600 checks",
+        "stage": "simulate",
+        "receipt_nonce": "83c8149f5ba7403c8e09be5ba1238352",
+        "simulate_seconds": 0.0475,
+        "mismatches": []
+      },
+      "diagnostic_consistent": true,
+      "localization": "ALL_PASS",
+      "elapsed_seconds": 0.569
+    },
+    {
+      "job_id": "m01__rt_sequence__table__s001",
+      "task": "rt_sequence",
+      "sample": 1,
+      "arm": "table",
+      "mode": "offline",
+      "requested_model": "fixture-model",
+      "directory": "jobs/m01__rt_sequence__table__s001",
+      "ir_diagnosis": {
+        "status": "IR_EQUIVALENT",
+        "reset_contract_errors": [],
+        "shortest_counterexample": null,
+        "visited_pairs": 5,
+        "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+      },
+      "ir_rtl": {
+        "checks": 1840,
+        "stimulus_count": 920,
+        "tb_sha256": "3eb618da5a48b58ab282dd1b6f2b2cf9a1b7087ab5a62439effd9be3c2933908",
+        "vectors_sha256": "4199548da5d34d2654f1fae2001a9040b5d6285675f9d22316e9acbfdc2ab27c",
+        "backend": "icarus",
+        "compile_seconds": 0.0428,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1840 checks",
+        "stage": "simulate",
+        "receipt_nonce": "bd8a15d4d1a841fc896158e84b3dc6e2",
+        "simulate_seconds": 0.0422,
+        "mismatches": []
+      },
+      "public_check": {
+        "status": "PUBLIC_CHECK_PASS",
+        "errors": [],
+        "note": "Only the public examples and schema were checked; passing is not full equivalence."
+      },
+      "rtl_sha256": "6acb22c07d9e2bef30be3a8ed023a845da6a565b1b5f13938ea90d3bbb0ae010",
+      "backend": "icarus",
+      "compile_seconds": 0.0415,
+      "status": "PASS",
+      "message": "Independent testbench completed all 1840 checks",
+      "stage": "simulate",
+      "receipt_nonce": "41b8eec8f864450cbdd588cd341864c2",
+      "simulate_seconds": 0.0412,
+      "spec_diagnostic": {
+        "checks": 1840,
+        "stimulus_count": 920,
+        "tb_sha256": "3eb618da5a48b58ab282dd1b6f2b2cf9a1b7087ab5a62439effd9be3c2933908",
+        "vectors_sha256": "4199548da5d34d2654f1fae2001a9040b5d6285675f9d22316e9acbfdc2ab27c",
+        "backend": "icarus",
+        "compile_seconds": 0.0423,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1840 checks",
+        "stage": "simulate",
+        "receipt_nonce": "d668c92981f94ebaa257cf63ba5d8ad6",
+        "simulate_seconds": 0.042,
+        "mismatches": []
+      },
+      "diagnostic_consistent": true,
+      "localization": "ALL_PASS",
+      "elapsed_seconds": 0.74
+    },
+    {
+      "job_id": "m01__rt_sequence__checked_table__s001",
+      "task": "rt_sequence",
+      "sample": 1,
+      "arm": "checked_table",
+      "mode": "offline",
+      "requested_model": "fixture-model",
+      "directory": "jobs/m01__rt_sequence__checked_table__s001",
+      "ir_diagnosis": {
+        "status": "IR_EQUIVALENT",
+        "reset_contract_errors": [],
+        "shortest_counterexample": null,
+        "visited_pairs": 5,
+        "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+      },
+      "ir_rtl": {
+        "checks": 1840,
+        "stimulus_count": 920,
+        "tb_sha256": "3eb618da5a48b58ab282dd1b6f2b2cf9a1b7087ab5a62439effd9be3c2933908",
+        "vectors_sha256": "4199548da5d34d2654f1fae2001a9040b5d6285675f9d22316e9acbfdc2ab27c",
+        "backend": "icarus",
+        "compile_seconds": 0.0215,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1840 checks",
+        "stage": "simulate",
+        "receipt_nonce": "41cc185f07154841ae5b62f12f1956d1",
+        "simulate_seconds": 0.0418,
+        "mismatches": []
+      },
+      "public_check": {
+        "status": "PUBLIC_CHECK_PASS",
+        "errors": [],
+        "note": "Only the public examples and schema were checked; passing is not full equivalence."
+      },
+      "rtl_sha256": "6acb22c07d9e2bef30be3a8ed023a845da6a565b1b5f13938ea90d3bbb0ae010",
+      "backend": "icarus",
+      "compile_seconds": 0.0215,
+      "status": "PASS",
+      "message": "Independent testbench completed all 1840 checks",
+      "stage": "simulate",
+      "receipt_nonce": "c248180b58e14944923f0c3d841f9762",
+      "simulate_seconds": 0.0209,
+      "spec_diagnostic": {
+        "checks": 1840,
+        "stimulus_count": 920,
+        "tb_sha256": "3eb618da5a48b58ab282dd1b6f2b2cf9a1b7087ab5a62439effd9be3c2933908",
+        "vectors_sha256": "4199548da5d34d2654f1fae2001a9040b5d6285675f9d22316e9acbfdc2ab27c",
+        "backend": "icarus",
+        "compile_seconds": 0.0215,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1840 checks",
+        "stage": "simulate",
+        "receipt_nonce": "915b952ddd9f47ebb0ed23557857d9c7",
+        "simulate_seconds": 0.043,
+        "mismatches": []
+      },
+      "diagnostic_consistent": true,
+      "localization": "ALL_PASS",
+      "elapsed_seconds": 0.479
+    },
+    {
+      "job_id": "m01__rt_sequence__prose__s001",
+      "task": "rt_sequence",
+      "sample": 1,
+      "arm": "prose",
+      "mode": "offline",
+      "requested_model": "fixture-model",
+      "directory": "jobs/m01__rt_sequence__prose__s001",
+      "ir_diagnosis": {
+        "status": "NO_TABLE"
+      },
+      "ir_rtl": {
+        "status": "NOT_APPLICABLE"
+      },
+      "rtl_sha256": "6acb22c07d9e2bef30be3a8ed023a845da6a565b1b5f13938ea90d3bbb0ae010",
+      "backend": "icarus",
+      "compile_seconds": 0.0218,
+      "status": "PASS",
+      "message": "Independent testbench completed all 1840 checks",
+      "stage": "simulate",
+      "receipt_nonce": "bfb329fdf121412c9c9140a8deac8f09",
+      "simulate_seconds": 0.021,
+      "spec_diagnostic": {
+        "checks": 1840,
+        "stimulus_count": 920,
+        "tb_sha256": "3eb618da5a48b58ab282dd1b6f2b2cf9a1b7087ab5a62439effd9be3c2933908",
+        "vectors_sha256": "4199548da5d34d2654f1fae2001a9040b5d6285675f9d22316e9acbfdc2ab27c",
+        "backend": "icarus",
+        "compile_seconds": 0.0214,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1840 checks",
+        "stage": "simulate",
+        "receipt_nonce": "854bed59be1c494b8baafc699955dcf6",
+        "simulate_seconds": 0.0216,
+        "mismatches": []
+      },
+      "diagnostic_consistent": true,
+      "localization": "NO_TABLE_DIAGNOSIS",
+      "elapsed_seconds": 0.319
+    }
+  ],
+  "limitations": [
+    "Two reused development tasks, two repetitions: feasibility only, no population efficacy claim.",
+    "Equal model turns, not equal tokens/compute/cost; CLI defaults and internal retries are not controlled.",
+    "IR equivalence is finite-graph exact; RTL agreement is fixed-vector simulation.",
+    "ve_fsm already contains a state table; it is a translation control, not NL understanding evidence."
+  ]
+}

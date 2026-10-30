@@ -1,0 +1,37 @@
+{
+  "status": "GENERATED",
+  "usage": {
+    "input_tokens": 11047,
+    "cached_input_tokens": 7424,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 1091,
+    "reasoning_output_tokens": 510
+  },
+  "source": "READ_ONLY_SAVED_EVIDENCE",
+  "reserved_calls": 1,
+  "response": "{\"timing\":{\"reset\":\"async_low\"},\"registers\":{\"a_full_r\":{\"width\":1,\"reset\":0},\"a_tag_r\":{\"width\":2,\"reset\":0},\"a_data_r\":{\"width\":2,\"reset\":0},\"b_full_r\":{\"width\":1,\"reset\":0},\"b_tag_r\":{\"width\":2,\"reset\":0},\"b_data_r\":{\"width\":2,\"reset\":0},\"out_valid_r\":{\"width\":1,\"reset\":0},\"out_tag_r\":{\"width\":2,\"reset\":0},\"out_data_r\":{\"width\":4,\"reset\":0}},\"next_rising\":{\"a_full_r\":\"0 if clear else (0 if a_full_r and b_full_r and a_tag_r < b_tag_r else (0 if a_full_r and b_full_r and a_tag_r == b_tag_r and (out_valid_r == 0 or take) else (1 if a_valid and a_full_r == 0 else a_full_r)))\",\"a_tag_r\":\"0 if clear else (a_tag if a_valid and a_full_r == 0 else a_tag_r)\",\"a_data_r\":\"0 if clear else (a_data if a_valid and a_full_r == 0 else a_data_r)\",\"b_full_r\":\"0 if clear else (0 if a_full_r and b_full_r and b_tag_r < a_tag_r else (0 if a_full_r and b_full_r and a_tag_r == b_tag_r and (out_valid_r == 0 or take) else (1 if b_valid and b_full_r == 0 else b_full_r)))\",\"b_tag_r\":\"0 if clear else (b_tag if b_valid and b_full_r == 0 else b_tag_r)\",\"b_data_r\":\"0 if clear else (b_data if b_valid and b_full_r == 0 else b_data_r)\",\"out_valid_r\":\"0 if clear else (1 if a_full_r and b_full_r and a_tag_r == b_tag_r and (out_valid_r == 0 or take) else (0 if take else out_valid_r))\",\"out_tag_r\":\"0 if clear else (a_tag_r if a_full_r and b_full_r and a_tag_r == b_tag_r and (out_valid_r == 0 or take) else out_tag_r)\",\"out_data_r\":\"0 if clear else (((a_data_r << 2) | b_data_r) if a_full_r and b_full_r and a_tag_r == b_tag_r and (out_valid_r == 0 or take) else out_data_r)\"},\"next_falling\":{},\"outputs\":{\"a_full\":\"a_full_r\",\"b_full\":\"b_full_r\",\"out_valid\":\"out_valid_r\",\"out_tag\":\"out_tag_r\",\"out_data\":\"out_data_r\"}}",
+  "response_sha256": "aec723a435f51c04a5cd249a48c8228f5712c4f676118f81571c754ba79a8404",
+  "thread_id": "01a12a11-d757-7222-8d0e-045476b4760a",
+  "exit": {
+    "utc": "2026-10-11T08:26:37.448492+00:00",
+    "pid": 37572,
+    "identity": "134361807745206699",
+    "nonce": "2b6b93a0d7e949e09cf88d1da1065c84",
+    "request_sha256": "956bb6135b086566cb3ccb7e0a1d682f884af7763c5a0e2a0aa65641d21cf3a2",
+    "returncode": 0,
+    "reason": null,
+    "elapsed_seconds": 22.906999999999243,
+    "streams_closed": true,
+    "reader_errors": [],
+    "counts": {
+      "stdout": 2174,
+      "stderr": 0
+    },
+    "descendant_cleanup": "UNVERIFIED",
+    "sha256": {
+      "stdout": "808e0de08eb87d7262baeed76ec082af4c2d70e8083f904b0d48d23fb6821334",
+      "stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "reconstructed_without_summary": true
+}

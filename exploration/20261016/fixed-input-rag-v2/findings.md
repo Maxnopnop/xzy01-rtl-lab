@@ -1,0 +1,5 @@
+# Findings
+Baseline transport blockers carry forward. Original five development families and all fixed tests remain unchanged. CLI lacks enforced output token cap and observable full hidden wrapping; local API CSV has no enabled requested model.
+One intended source: lowRISC/style-guides VerilogCodingStyle.md, pinned commit and license to verify. General language/timing prose only; exclude all fenced code and task/FSM solutions. Source exposure related to prior OpenTitan development must be disclosed; not heldout.
+Release corpus18 (v1 corpus19 retained failed policy); retrieval IDs unchanged by removing unused bibliography, numerical BM25 scores recomputed and preserved by version. request_delay has2 positive hits; no search expansion. Proposed RAG context1410..1650 bytes, no token-equivalence claim. Corpus license CC-BY-4.0 verified.
+Offline audit:30 payloads/60slots,40 original assets,115source bindings,5 retrieval replays plus nohit/tie tests PASS. Same-author static audit only. No actual service-prompt or runtime execution verification.

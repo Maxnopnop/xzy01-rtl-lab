@@ -1,0 +1,10 @@
+[
+  {
+    "role": "system",
+    "content": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs."
+  },
+  {
+    "role": "user",
+    "content": "\nI would like you to implement a module named TopModule with the following\ninterface. All input and output ports are one bit unless otherwise\nspecified.\n\n - input  clk\n - input  a\n - input  b\n - output out_assign\n - output out_always_comb\n - output out_always_ff\n\nThe module should implement an XOR gate three ways, using an assign\nstatement (output out_assign), a combinational always block (output\nout_always_comb), and a clocked always block (output out_always_ff). Note\nthat the clocked always block produces a different circuit from the other\ntwo: There is a flip- flop so the output is delayed. Assume all\nsequential logic is triggered on the positive edge of the clock.\n\n"
+  }
+]

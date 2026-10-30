@@ -1,0 +1,224 @@
+{
+  "status": "FUNCTION_FAIL",
+  "counts": {
+    "UNEXPECTED_TRANSACTION": 2,
+    "DATA_OR_ORDER_FAIL": 3
+  },
+  "errors": [
+    {
+      "category": "UNEXPECTED_TRANSACTION",
+      "cycle": 10,
+      "epoch": 1,
+      "consumer": 1,
+      "observed": [
+        17,
+        0
+      ]
+    },
+    {
+      "category": "DATA_OR_ORDER_FAIL",
+      "cycle": 11,
+      "epoch": 1,
+      "consumer": 1,
+      "source_cycle": 11,
+      "expected": [
+        161,
+        0
+      ],
+      "observed": [
+        18,
+        0
+      ]
+    },
+    {
+      "category": "DATA_OR_ORDER_FAIL",
+      "cycle": 12,
+      "epoch": 1,
+      "consumer": 1,
+      "source_cycle": 12,
+      "expected": [
+        162,
+        0
+      ],
+      "observed": [
+        161,
+        0
+      ]
+    },
+    {
+      "category": "DATA_OR_ORDER_FAIL",
+      "cycle": 13,
+      "epoch": 1,
+      "consumer": 1,
+      "source_cycle": 13,
+      "expected": [
+        163,
+        1
+      ],
+      "observed": [
+        162,
+        0
+      ]
+    },
+    {
+      "category": "UNEXPECTED_TRANSACTION",
+      "cycle": 14,
+      "epoch": 1,
+      "consumer": 1,
+      "observed": [
+        163,
+        1
+      ]
+    }
+  ],
+  "cycles": 80,
+  "accepted": [
+    {
+      "epoch": 0,
+      "cycle": 3,
+      "beat": [
+        17,
+        0
+      ]
+    },
+    {
+      "epoch": 0,
+      "cycle": 4,
+      "beat": [
+        18,
+        0
+      ]
+    },
+    {
+      "epoch": 1,
+      "cycle": 11,
+      "beat": [
+        161,
+        0
+      ]
+    },
+    {
+      "epoch": 1,
+      "cycle": 12,
+      "beat": [
+        162,
+        0
+      ]
+    },
+    {
+      "epoch": 1,
+      "cycle": 13,
+      "beat": [
+        163,
+        1
+      ]
+    }
+  ],
+  "delivered": [
+    [
+      {
+        "epoch": 0,
+        "cycle": 4,
+        "beat": [
+          17,
+          0
+        ]
+      },
+      {
+        "epoch": 0,
+        "cycle": 5,
+        "beat": [
+          18,
+          0
+        ]
+      },
+      {
+        "epoch": 1,
+        "cycle": 12,
+        "beat": [
+          161,
+          0
+        ]
+      },
+      {
+        "epoch": 1,
+        "cycle": 13,
+        "beat": [
+          162,
+          0
+        ]
+      },
+      {
+        "epoch": 1,
+        "cycle": 14,
+        "beat": [
+          163,
+          1
+        ]
+      }
+    ],
+    [
+      {
+        "epoch": 1,
+        "cycle": 10,
+        "beat": [
+          17,
+          0
+        ]
+      },
+      {
+        "epoch": 1,
+        "cycle": 11,
+        "beat": [
+          18,
+          0
+        ]
+      },
+      {
+        "epoch": 1,
+        "cycle": 12,
+        "beat": [
+          161,
+          0
+        ]
+      },
+      {
+        "epoch": 1,
+        "cycle": 13,
+        "beat": [
+          162,
+          0
+        ]
+      },
+      {
+        "epoch": 1,
+        "cycle": 14,
+        "beat": [
+          163,
+          1
+        ]
+      }
+    ]
+  ],
+  "aborted": [
+    {
+      "epoch": 0,
+      "cycle": 8,
+      "pending": [
+        0,
+        2
+      ],
+      "unaccepted": 1
+    }
+  ],
+  "pending": [
+    0,
+    0
+  ],
+  "source_accepted_per_epoch": [
+    2,
+    3
+  ],
+  "assessment": "finite_contract",
+  "latency": "Variable; bounded by declared trace/drain, not exact reference cycles"
+}

@@ -1,0 +1,216 @@
+
+
+<generic_reference_context>
+These are generic style excerpts, not new task requirements or solutions. The original specification above takes precedence.
+Source: lowRISC contributors; CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/); unmodified contiguous excerpts.
+https://github.com/lowRISC/style-guides/blob/9c15ff5dce23eef969e00ab3715153967419eadd/VerilogCodingStyle.md
+[GEN022; lowRISC Verilog Coding Style Guide; lines 1357-1423]
+to signal names as unambiguous and consistent as possible.
+
+### Clocks
+
+***All clock signals must begin with `clk`.***
+
+The main system clock for a design must be named `clk`. It is acceptable to use
+`clk` to refer to the default clock that the majority of the logic in a module
+is synchronous with.
+
+If a module contains multiple clocks, the clocks that are not the system clock
+should be named with a unique identifier, preceded by the `clk_` prefix. For
+example: `clk_dram`, `clk_axi`, etc. Note that this prefix will be
+used to identify other signals in that clock domain.
+
+### Resets
+
+***Resets are active-low and asynchronous. The default name is `rst_n`.***
+
+Chip wide all resets are defined as active low and asynchronous. Thus they are
+defined as tied to the asynchronous reset input of the associated standard
+cell registers.
+
+The default name is `rst_n`. If they must be distinguished by their clock, the
+clock name should be included in the reset name like `rst_domain_n`.
+
+SystemVerilog allows either of the following syntax styles, but the style
+guide prefers the former.
+
+```systemverilog
+// preferred
+always_ff @(posedge clk or negedge rst_n) begin
+  if (!rst_n) begin
+    q <= 1'b0;
+  end else begin
+    q <= d;
+  end
+end
+
+// legal but not preferred
+always_ff @(posedge clk, negedge rst_n) begin
+  if (!rst_n) begin
+    q <= 1'b0;
+  end else begin
+    q <= d;
+  end
+end
+```
+
+## Language Features
+
+### Preferred SystemVerilog Constructs
+
+Use these SystemVerilog constructs instead of their Verilog-2001 equivalents:
+
+-   `always_comb` is required over `always @*`.
+-   `logic` is preferred over `reg` and `wire`.
+-   Top-level `parameter` declarations are preferred over `` `define`` globals.
+
+
+### Package Dependencies
+
+***Packages must not have cyclic dependencies.***
+
+Package files may depend on constants and types in other package files, but
+there must not be any cyclic dependencies. That is: if package A depends on a
+constant from package B, package B must not depend on anything from package A.
+
+
+[GEN023; lowRISC Verilog Coding Style Guide; lines 1424-1511]
+While cyclic dependencies are permitted by the SystemVerilog language
+specification, their use can break some tools.
+
+For example:
+
+```systemverilog
+package foo;
+
+  // Package "bar" must not depend on anything in "foo":
+  parameter int unsigned PageSizeBytes = 16 * bar::Kibi;
+
+endpackage
+```
+
+### Module Declaration
+
+***Use the Verilog-2001 full port declaration style, and use the format
+below.***
+
+Use the Verilog-2001 combined port and I/O declaration style. Do not use the
+Verilog-95 list style. The port declaration in the module statement should fully
+declare the port name, type, and direction.
+
+The opening parenthesis should be on the same line as the module declaration,
+and the first port should be declared on the following line.
+
+The closing parenthesis should be on its own line, in column zero.
+
+Indentation for module declaration follows the standard indentation
+rule of two space indentation.
+
+The clock port(s) must be declared first in the port list, followed by any and
+all reset inputs.
+
+Example without parameters:
+
+&#x1f44d;
+```systemverilog {.good}
+module foo (
+  input              clk_i,
+  input              rst_ni,
+  input [7:0]        d_i,
+  output logic [7:0] q_o
+);
+```
+
+Example with parameters:
+
+&#x1f44d;
+```systemverilog {.good}
+module foo #(
+  parameter int unsigned Width = 8,
+) (
+  input                    clk_i,
+  input                    rst_ni,
+  input [Width-1:0]        d_i,
+  output logic [Width-1:0] q_o
+);
+```
+
+Do not use Verilog-95 style:
+
+&#x1f44e;
+```systemverilog {.bad}
+// WRONG:
+module foo(a, b, c d);
+input wire [2:0] a;
+output logic b;
+...
+```
+
+### Module Instantiation
+
+***Use named ports to fully specify all instantiations.***
+
+When connecting signals to ports for an instantiation, use the named port style,
+like this:
+
+```systemverilog
+my_module i_my_instance (
+  .clk_i (clk_i),
+  .rst_ni(rst_ni),
+  .d_i   (from_here),
+  .q_o   (to_there)
+);
+```
+
+If the port and the connecting signal have the same name, you can use the
+
+
+[GEN047; lowRISC Verilog Coding Style Guide; lines 3116-3161]
+  variables, types
+* Use **UpperCamelCase** for tunable parameters, enumerated value names
+* Use **ALL\_CAPS** for constants and define macros
+* Main clock signal is named `clk`. All clock signals must start with `clk_`
+* Reset signals are **active-low** and **asynchronous**, default name is
+  `rst_n`
+* Signal names should be descriptive and be consistent throughout the
+  hierarchy
+
+### Suffixes for signals and types
+
+* Add `_i` to module inputs, `_o` to module outputs or `_io` for
+  bi-directional module signals
+* The input (next state) of a registered signal should have `_d` and
+  the output `_q` as suffix
+* Pipelined versions of signals should be named `_q2`, `_q3`, etc. to
+  reflect their latency
+* Active low signals should use `_n`. When using differential signals use
+  `_p` for active high
+* Enumerated types should be suffixed with `_e`
+* Multiple suffixes will not be separated with `_`. `n` should come first
+  `i`, `o`, or `io` last
+
+### Language features
+
+* Use **full port declaration style** for modules, any clock and reset
+  declared first
+* Use **named parameters** for instantiation, all declared ports must
+  be present, no `.*`
+* Top-level parameters is preferred over `` `define`` globals
+* Use **symbolically named constants** instead of raw numbers
+* Local constants should be declared `localparam`, globals in a separate
+  **.svh** file.
+* `logic` is preferred over `reg` and `wire`, declare all signals
+  explicitly
+* `always_comb`, `always_ff` and `always_latch` are preferred over `always`
+* Interfaces are discouraged
+* Sequential logic must use **non-blocking** assignments
+* Combinational blocks must use **blocking** assignments
+* Use of latches is discouraged, use flip-flops when possible
+* The use of `X` assignments in RTL is strongly discouraged, make use of SVAs
+  to check invalid behavior instead.
+* Prefer `assign` statements wherever practical.
+* Use `unique case` and always define a `default` case
+* Use available signed arithmetic constructs wherever signed arithmetic
+  is used
+
+</generic_reference_context>

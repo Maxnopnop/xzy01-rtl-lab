@@ -1,0 +1,1000 @@
+{
+  "utc": "2026-10-23T02:28:50.407076+00:00",
+  "a_lock_sha256": "c0609d940a0e586e2b7b5fc81ca6d58bd1eeee5e1d4cecbe40415317f341ead1",
+  "candidate_order_sha256": "be7e6ceb3a7d1222d1861a8b792b77c73477824bce68e22e95fe96ab0272081f",
+  "selected_ids": [
+    "Prob089_ece241_2014_q5a",
+    "Prob023_vector100r",
+    "Prob146_fsm_serialdata",
+    "Prob032_vector0",
+    "Prob064_vector3"
+  ],
+  "candidate_count": 20,
+  "eligible_count": 12,
+  "excluded_count": 8,
+  "selection_rule": "first5 eligible in frozen order; selected before retrieval",
+  "review_scope": "Static source and history review only; all original triples blob-verified; no execution or retrieval yet",
+  "independence": "Same-upstream reference and test correlated, not independent correctness evidence. Public model training exposure UNKNOWN. Novelty relative to recorded local history only.",
+  "rows": [
+    {
+      "rank": 1,
+      "id": "Prob149_ece241_2013_q4",
+      "eligible": false,
+      "status": "EXCLUDED",
+      "code": "SPEC_REFERENCE_CONFLICT",
+      "meaning_zh": "水位控制",
+      "reason_zh": "原文要求水位上升时打开 dfr；参考 A2→B1(水位000→001)给0110，即dfr=0，而下降C1→B2给0111。方向相反，不能改原文或参考。测试包含上升下降序列。",
+      "bindings": {
+        "prompt.txt": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob149_ece241_2013_q4_prompt.txt",
+          "sha256": "93563fc3ecec7a35eec28f4a4ed1e09393cf21ab8ae3c57cd0de1219bf1f0e8d",
+          "git_blob_sha1": "0f113f16747a2bc68335c5ee6018a88b1e840eb5",
+          "bytes": 1598,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob149_ece241_2013_q4_prompt.txt"
+        },
+        "ref.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob149_ece241_2013_q4_ref.sv",
+          "sha256": "e31ed6b179de4a33384b70182dc83a894ba4db0da08ab72945f3dd6f60788e06",
+          "git_blob_sha1": "69f06dbc8a12240e857819540f279529bb8af597",
+          "bytes": 924,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob149_ece241_2013_q4_ref.sv"
+        },
+        "test.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob149_ece241_2013_q4_test.sv",
+          "sha256": "9960ee5afb688df4d1ea88fb41b0bf3f4ca0ad84f78fce34291c65f1b0dcb09c",
+          "git_blob_sha1": "7a059b732552dc0e8249bb65962549a3c845b0d7",
+          "bytes": 5880,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob149_ece241_2013_q4_test.sv"
+        }
+      },
+      "static_dependencies": {
+        "ref.sv": {
+          "modules": [
+            "RefModule"
+          ],
+          "includes": [],
+          "readmem": false
+        },
+        "test.sv": {
+          "modules": [
+            "stimulus_gen",
+            "tb"
+          ],
+          "includes": [],
+          "readmem": false
+        }
+      }
+    },
+    {
+      "rank": 2,
+      "id": "Prob089_ece241_2014_q5a",
+      "eligible": true,
+      "status": "SELECTED_CONDITIONAL",
+      "code": "ELIGIBLE",
+      "meaning_zh": "串行二进制补码",
+      "reason_zh": "任意长度LSB先入的串行补码Moore机，posedge与高有效异步reset明确。不同于并行adder8/ve_addsub、奇偶累计或固定序列检测；串行携带“首次1已见”状态是不同完整契约。复位期间输出由参考固定为0，原文停止转换、复位初态的自然解释仍需用户确认，不增补prompt。",
+      "bindings": {
+        "prompt.txt": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob089_ece241_2014_q5a_prompt.txt",
+          "sha256": "a11b8fb0439936a0b5020c5ad496e080ccc0ddae57a3614c3c857ed337c50743",
+          "git_blob_sha1": "2c6148aaf3955c82077db057dfde229da6dd82cc",
+          "bytes": 755,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob089_ece241_2014_q5a_prompt.txt"
+        },
+        "ref.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob089_ece241_2014_q5a_ref.sv",
+          "sha256": "20bb4160d4b8b0df960e93ff9b92e91ece068747b4c5e291923ecf904b7dd140",
+          "git_blob_sha1": "ef41394e60a61dd57beff28dee25a37372fbca53",
+          "bytes": 394,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob089_ece241_2014_q5a_ref.sv"
+        },
+        "test.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob089_ece241_2014_q5a_test.sv",
+          "sha256": "6ccb85eceac601cb2e5fb737770b22d3864694ef9f4f2f8cac0ed134459edc81",
+          "git_blob_sha1": "a9324910829bff34cc5c16e74aead363c66a1917",
+          "bytes": 4017,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob089_ece241_2014_q5a_test.sv"
+        }
+      },
+      "static_dependencies": {
+        "ref.sv": {
+          "modules": [
+            "RefModule"
+          ],
+          "includes": [],
+          "readmem": false
+        },
+        "test.sv": {
+          "modules": [
+            "stimulus_gen",
+            "tb"
+          ],
+          "includes": [],
+          "readmem": false
+        }
+      }
+    },
+    {
+      "rank": 3,
+      "id": "Prob029_m2014_q4g",
+      "eligible": false,
+      "status": "EXCLUDED",
+      "code": "HISTORY_NEAR_DUPLICATE",
+      "meaning_zh": "三输入XNOR/XOR",
+      "reason_zh": "等价于3位奇偶归约取反；相对历史parity8只是宽度和输出极性变化，保守排除。",
+      "bindings": {
+        "prompt.txt": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob029_m2014_q4g_prompt.txt",
+          "sha256": "a2b500b28376a1ca341e9e49bf5a44640e4258cef6a34c4e3ab59e5e1febf9fc",
+          "git_blob_sha1": "486106bef0a581b7b6d0c9b6584208a7ed19c7c9",
+          "bytes": 436,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob029_m2014_q4g_prompt.txt"
+        },
+        "ref.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob029_m2014_q4g_ref.sv",
+          "sha256": "46c5adb0e545bcbeba7d3041aca7f51df223640e7dab8c8d6baa3a45d8181228",
+          "git_blob_sha1": "08a3505fd3cb5f397b084a77a121e5c5c3c60416",
+          "bytes": 131,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob029_m2014_q4g_ref.sv"
+        },
+        "test.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob029_m2014_q4g_test.sv",
+          "sha256": "7de0c3687b27a0e7d167da37689c3c2559c9fac00d861dc1c995929c16921738",
+          "git_blob_sha1": "aedada5ec4c5a2a630b7954cf16306ec7ba49235",
+          "bytes": 2506,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob029_m2014_q4g_test.sv"
+        }
+      },
+      "static_dependencies": {
+        "ref.sv": {
+          "modules": [
+            "RefModule"
+          ],
+          "includes": [],
+          "readmem": false
+        },
+        "test.sv": {
+          "modules": [
+            "stimulus_gen",
+            "tb"
+          ],
+          "includes": [],
+          "readmem": false
+        }
+      }
+    },
+    {
+      "rank": 4,
+      "id": "Prob131_mt2015_q4",
+      "eligible": false,
+      "status": "EXCLUDED",
+      "code": "WRAPPER_STRUCTURE_CONFLICT",
+      "meaning_zh": "组合子模块",
+      "reason_zh": "原文明确两A两B子模块实例，且未指定顶层模块名；冻结system只允许一个指定名模块。不能添TopModule要求或静默取消结构要求。",
+      "bindings": {
+        "prompt.txt": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob131_mt2015_q4_prompt.txt",
+          "sha256": "6688d1b4a6ab649dfeb5f62bde7ed3e69567f45d2e866c07801589d8aa7516a6",
+          "git_blob_sha1": "be4e7211f3704980d69f7279036a777f0715633c",
+          "bytes": 1015,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob131_mt2015_q4_prompt.txt"
+        },
+        "ref.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob131_mt2015_q4_ref.sv",
+          "sha256": "66766f4d76de82a4304bb779e84e53a7410f1f9389abe32e4758a5200bccf2bd",
+          "git_blob_sha1": "8473b2bb2120d3cea187e534f34a3f5b28d4b03d",
+          "bytes": 88,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob131_mt2015_q4_ref.sv"
+        },
+        "test.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob131_mt2015_q4_test.sv",
+          "sha256": "ee17f3cf7a46151647f84451e90feacc1ae957f2086829bc154327ab543af634",
+          "git_blob_sha1": "6596332f185d27289808e6a23be6cfe0c342ca31",
+          "bytes": 2402,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob131_mt2015_q4_test.sv"
+        }
+      },
+      "static_dependencies": {
+        "ref.sv": {
+          "modules": [
+            "RefModule"
+          ],
+          "includes": [],
+          "readmem": false
+        },
+        "test.sv": {
+          "modules": [
+            "stimulus_gen",
+            "tb"
+          ],
+          "includes": [],
+          "readmem": false
+        }
+      }
+    },
+    {
+      "rank": 5,
+      "id": "Prob023_vector100r",
+      "eligible": true,
+      "status": "SELECTED_CONDITIONAL",
+      "code": "ELIGIBLE",
+      "meaning_zh": "100位向量反序",
+      "reason_zh": "索引i接99-i的固定排列；不同于历史可变移位/循环旋转，非同函数宽度变体。接口与排列定义完整。",
+      "bindings": {
+        "prompt.txt": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob023_vector100r_prompt.txt",
+          "sha256": "bc7e2b7e746c0e5b65c6f15b193407f378c575b59ffbda537c43a19b2e3e540b",
+          "git_blob_sha1": "fa0cc29e1c3b75a9aab9d2c4542dad30fca897e6",
+          "bytes": 287,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob023_vector100r_prompt.txt"
+        },
+        "ref.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob023_vector100r_ref.sv",
+          "sha256": "368942232ed60c40af48fe467b9982458d2719db5b9af74242bc6fb7f0960263",
+          "git_blob_sha1": "a7dc80be6008062e3d86acbcc9c8d34df5ba0708",
+          "bytes": 163,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob023_vector100r_ref.sv"
+        },
+        "test.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob023_vector100r_test.sv",
+          "sha256": "cbbd405a682a8db7c97f72f642a512ca1397b9e291fa4a6029a4c7e2f8411718",
+          "git_blob_sha1": "8fa88b7b207014e85651cf087d576a0e313d1694",
+          "bytes": 2461,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob023_vector100r_test.sv"
+        }
+      },
+      "static_dependencies": {
+        "ref.sv": {
+          "modules": [
+            "RefModule"
+          ],
+          "includes": [],
+          "readmem": false
+        },
+        "test.sv": {
+          "modules": [
+            "stimulus_gen",
+            "tb"
+          ],
+          "includes": [],
+          "readmem": false
+        }
+      }
+    },
+    {
+      "rank": 6,
+      "id": "Prob146_fsm_serialdata",
+      "eligible": true,
+      "status": "SELECTED_CONDITIONAL",
+      "code": "ELIGIBLE",
+      "meaning_zh": "串行字节接收",
+      "reason_zh": "0起始+8位LSB载荷+1停止、错误停止恢复、仅done时载荷有效、同步高有效reset完整。与framed_parity的固定4位奇偶帧、escape_frame的2位转义token/XOR计数、I2C时钟总线控制均非同一完整契约；共享移位/帧状态原语披露。末句done遇stop按前文“correctly received”解释，错误帧恢复stop不交付；该语境解释须总控核对，不能把参考实现加进prompt。",
+      "bindings": {
+        "prompt.txt": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob146_fsm_serialdata_prompt.txt",
+          "sha256": "937a83f95389e73c9561b40f1305963b474e058b18f41949b3a7a54aae7b8395",
+          "git_blob_sha1": "f6d2c25b472d0b5419e697532f485de5d5507712",
+          "bytes": 1298,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob146_fsm_serialdata_prompt.txt"
+        },
+        "ref.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob146_fsm_serialdata_ref.sv",
+          "sha256": "530a38bea8b90455f64bf9cf022b417e02dbdbe7ef2a5bfa61a7c3c38f52f208",
+          "git_blob_sha1": "21ee866720ce8af25af5ec1b5b95ef540879b99a",
+          "bytes": 936,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob146_fsm_serialdata_ref.sv"
+        },
+        "test.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob146_fsm_serialdata_test.sv",
+          "sha256": "327ed68f9dcd3c6ff453b4d7a3d5c326c80fb338c099aa49ff4d82f3339b81b2",
+          "git_blob_sha1": "f4804088c26016160ad9d1acb713163f5822bdb5",
+          "bytes": 3647,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob146_fsm_serialdata_test.sv"
+        }
+      },
+      "static_dependencies": {
+        "ref.sv": {
+          "modules": [
+            "RefModule"
+          ],
+          "includes": [],
+          "readmem": false
+        },
+        "test.sv": {
+          "modules": [
+            "stimulus_gen",
+            "tb"
+          ],
+          "includes": [],
+          "readmem": false
+        }
+      }
+    },
+    {
+      "rank": 7,
+      "id": "Prob033_ece241_2014_q1c",
+      "eligible": false,
+      "status": "EXCLUDED",
+      "code": "HISTORY_NEAR_DUPLICATE",
+      "meaning_zh": "有符号加法溢出",
+      "reason_zh": "核心8位加法与历史adder8/alu8/saturating8/ve_addsub重合，仅符号溢出标志差异；保守排除。",
+      "bindings": {
+        "prompt.txt": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob033_ece241_2014_q1c_prompt.txt",
+          "sha256": "e0af17e9255b0a9cc227c1fc506c6def2c13a044e9422a1eae329c766772f68b",
+          "git_blob_sha1": "4db96747e51613925f7bd5dfc5acb918f5bd4823",
+          "bytes": 422,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob033_ece241_2014_q1c_prompt.txt"
+        },
+        "ref.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob033_ece241_2014_q1c_ref.sv",
+          "sha256": "70556fcdfe57e54f5a7fe358919e697074cbf7b5f06c305b94e5b4ca8bab61ce",
+          "git_blob_sha1": "5ba3d8b03d89522c20ec4ec4ea7ebd2c9d92067d",
+          "bytes": 205,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob033_ece241_2014_q1c_ref.sv"
+        },
+        "test.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob033_ece241_2014_q1c_test.sv",
+          "sha256": "973303d62afe9212316566269cf953817527ff7dcb5720959cb10e3e124f7a00",
+          "git_blob_sha1": "bf758e6bb298d3bbf729def5192dcfe263865d79",
+          "bytes": 3693,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob033_ece241_2014_q1c_test.sv"
+        }
+      },
+      "static_dependencies": {
+        "ref.sv": {
+          "modules": [
+            "RefModule"
+          ],
+          "includes": [],
+          "readmem": false
+        },
+        "test.sv": {
+          "modules": [
+            "stimulus_gen",
+            "tb"
+          ],
+          "includes": [],
+          "readmem": false
+        }
+      }
+    },
+    {
+      "rank": 8,
+      "id": "Prob132_always_if2",
+      "eligible": false,
+      "status": "EXCLUDED",
+      "code": "SPEC_AMBIGUITY",
+      "meaning_zh": "补全条件分支",
+      "reason_zh": "原题标题adder-subtractor与cpu/驾驶端口冲突；只说fix bug，未给未命中条件输出契约，不能从参考补足else语义。",
+      "bindings": {
+        "prompt.txt": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob132_always_if2_prompt.txt",
+          "sha256": "8a3ea8c732f21239cd4141606628d08ad4115da6ed4c16cc2b6ac41f68311cf7",
+          "git_blob_sha1": "7203a04790a9aad1409223717e8a8bd0f3e136d0",
+          "bytes": 561,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob132_always_if2_prompt.txt"
+        },
+        "ref.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob132_always_if2_ref.sv",
+          "sha256": "5d7b5e97e5f038c0c13d3f06634095f23b50b946223ee7ec398483e0a74dc36e",
+          "git_blob_sha1": "c8ee9f4c8717f41679d3e5c000f16e16194cadb2",
+          "bytes": 395,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob132_always_if2_ref.sv"
+        },
+        "test.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob132_always_if2_test.sv",
+          "sha256": "ba6be33c005273b938774d09e0c9f089539d15edc6ffd3dab09f34c0f37e6946",
+          "git_blob_sha1": "9ffee3e3b5399b316364738e24cc61ab73cb6493",
+          "bytes": 4514,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob132_always_if2_test.sv"
+        }
+      },
+      "static_dependencies": {
+        "ref.sv": {
+          "modules": [
+            "RefModule"
+          ],
+          "includes": [],
+          "readmem": false
+        },
+        "test.sv": {
+          "modules": [
+            "stimulus_gen",
+            "tb"
+          ],
+          "includes": [],
+          "readmem": false
+        }
+      }
+    },
+    {
+      "rank": 9,
+      "id": "Prob032_vector0",
+      "eligible": true,
+      "status": "SELECTED_CONDITIONAL",
+      "code": "ELIGIBLE",
+      "meaning_zh": "三位向量拆线",
+      "reason_zh": "明确outv原样输出、o0/o1/o2按位输出；与decoder3的onehot解码、mux8的选择函数不同。没有状态/复位语义缺口。",
+      "bindings": {
+        "prompt.txt": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob032_vector0_prompt.txt",
+          "sha256": "86607e1d27d54efeeb53ee5574c6884b1b51ab855b693422cf6c1bfdaba98ca0",
+          "git_blob_sha1": "c8c7e9274a00b385406b63a1b6f3632d156ca038",
+          "bytes": 434,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob032_vector0_prompt.txt"
+        },
+        "ref.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob032_vector0_ref.sv",
+          "sha256": "afae7d42f345cf72d691d2b908e2294c99dab71f447b0906d11947a4ef1749e3",
+          "git_blob_sha1": "3a2cb2c5473d79656c2bbf6b9c14d7665224bc0c",
+          "bytes": 164,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob032_vector0_ref.sv"
+        },
+        "test.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob032_vector0_test.sv",
+          "sha256": "423e28396233aab94ecf63204ef27147855729c21b8930bce7fae441cfff6f3b",
+          "git_blob_sha1": "03d6bf5904c41eeb8e188842065abc88d1a7b90a",
+          "bytes": 4368,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob032_vector0_test.sv"
+        }
+      },
+      "static_dependencies": {
+        "ref.sv": {
+          "modules": [
+            "RefModule"
+          ],
+          "includes": [],
+          "readmem": false
+        },
+        "test.sv": {
+          "modules": [
+            "stimulus_gen",
+            "tb"
+          ],
+          "includes": [],
+          "readmem": false
+        }
+      }
+    },
+    {
+      "rank": 10,
+      "id": "Prob064_vector3",
+      "eligible": true,
+      "status": "SELECTED_CONDITIONAL",
+      "code": "ELIGIBLE",
+      "meaning_zh": "向量拼接拆分",
+      "reason_zh": "六个5位输入按列举a..f顺序拼接，末尾二个1，按w/x/y/z顺序拆成32位。参考与列举顺序一致；原文没有显式拼接等式，顺序解释在审阅说明中披露，不写回原题。与历史shift/mux功能不同。",
+      "bindings": {
+        "prompt.txt": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob064_vector3_prompt.txt",
+          "sha256": "ff98e7fba9109a1736b495bc5a2b9fe1c5e8f058e97fe511ecf1cb330c5b1da9",
+          "git_blob_sha1": "afdf0f88333ef659563a429a700d46e6560cf29a",
+          "bytes": 767,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob064_vector3_prompt.txt"
+        },
+        "ref.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob064_vector3_ref.sv",
+          "sha256": "8bc8223b5ae69ce879121668936bcf71d42baf79e2b5c85f99203e19352c6cb8",
+          "git_blob_sha1": "6b83482e77130da7583591e782297c295f6012d8",
+          "bytes": 252,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob064_vector3_ref.sv"
+        },
+        "test.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob064_vector3_test.sv",
+          "sha256": "d2f4468430bdd9224cf9552ab3f9c74967d96acd6b78521002f7a3fd47ae14be",
+          "git_blob_sha1": "68cb034de91b82f53f848fa3f8e45e86a406132f",
+          "bytes": 4944,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob064_vector3_test.sv"
+        }
+      },
+      "static_dependencies": {
+        "ref.sv": {
+          "modules": [
+            "RefModule"
+          ],
+          "includes": [],
+          "readmem": false
+        },
+        "test.sv": {
+          "modules": [
+            "stimulus_gen",
+            "tb"
+          ],
+          "includes": [],
+          "readmem": false
+        }
+      }
+    },
+    {
+      "rank": 11,
+      "id": "Prob065_7420",
+      "eligible": true,
+      "status": "ELIGIBLE_NOT_SELECTED_FIXED_CAP",
+      "code": "ELIGIBLE",
+      "meaning_zh": "双四输入NAND",
+      "reason_zh": "两个独立四输入归约NAND，接口齐全。历史ALU含逐位AND但非这两组归约输出，基础门共享不是完整近重复。",
+      "bindings": {
+        "prompt.txt": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob065_7420_prompt.txt",
+          "sha256": "79ffe176455537fa154d36c00c56f14821825c78254e750ea81273e12ec95775",
+          "git_blob_sha1": "96e895a6484f797c558d2da54c5f77c91395471b",
+          "bytes": 502,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob065_7420_prompt.txt"
+        },
+        "ref.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob065_7420_ref.sv",
+          "sha256": "62ddb5fcc18bf18f0fc1f265d8de802f739f7217a96674b76b53139e0bc654fa",
+          "git_blob_sha1": "2dc06cd18079b86616cbb3f52d4c5e5cf25a9f2a",
+          "bytes": 253,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob065_7420_ref.sv"
+        },
+        "test.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob065_7420_test.sv",
+          "sha256": "128757a15762b2b9872db61d42d5e8c80db96ded86994f975220117c44efd853",
+          "git_blob_sha1": "d28324a13ebc42777088468c59d671c40bbf727c",
+          "bytes": 3856,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob065_7420_test.sv"
+        }
+      },
+      "static_dependencies": {
+        "ref.sv": {
+          "modules": [
+            "RefModule"
+          ],
+          "includes": [],
+          "readmem": false
+        },
+        "test.sv": {
+          "modules": [
+            "stimulus_gen",
+            "tb"
+          ],
+          "includes": [],
+          "readmem": false
+        }
+      }
+    },
+    {
+      "rank": 12,
+      "id": "Prob109_fsm1",
+      "eligible": false,
+      "status": "EXCLUDED",
+      "code": "HISTORY_NEAR_DUPLICATE",
+      "meaning_zh": "二状态翻转",
+      "reason_zh": "遇in=0翻转、in=1保持，reset输出1；与event_parity输入反相/初值变化同构，保守排除。原文另未明确clk边沿，不补足。",
+      "bindings": {
+        "prompt.txt": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob109_fsm1_prompt.txt",
+          "sha256": "6c20b60f97687f891524015003e088a65dd2bd450ebcf2499fd2601bde2f404e",
+          "git_blob_sha1": "0a09ca65a0d5b3e26b1209754d1fc7a3544d9d9c",
+          "bytes": 424,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob109_fsm1_prompt.txt"
+        },
+        "ref.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob109_fsm1_ref.sv",
+          "sha256": "ce88cef46ddad703f97411a5528fc3515a7fd6a008b06b485dda6cb4cd9f59b5",
+          "git_blob_sha1": "d255acb1991f414d7fe67e1d23547a1783fe3b7b",
+          "bytes": 392,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob109_fsm1_ref.sv"
+        },
+        "test.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob109_fsm1_test.sv",
+          "sha256": "9c27bd4445342e5e81068f678e491fb6853268c3cf1335aa69f2363d62029ab7",
+          "git_blob_sha1": "aa0e222a6aad8c29c8bf587521f3af886d83e8d2",
+          "bytes": 3876,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob109_fsm1_test.sv"
+        }
+      },
+      "static_dependencies": {
+        "ref.sv": {
+          "modules": [
+            "RefModule"
+          ],
+          "includes": [],
+          "readmem": false
+        },
+        "test.sv": {
+          "modules": [
+            "stimulus_gen",
+            "tb"
+          ],
+          "includes": [],
+          "readmem": false
+        }
+      }
+    },
+    {
+      "rank": 13,
+      "id": "Prob150_review2015_fsmonehot",
+      "eligible": false,
+      "status": "EXCLUDED",
+      "code": "HISTORY_NEAR_DUPLICATE",
+      "meaning_zh": "组合FSM方程",
+      "reason_zh": "包含已暴露Prob095四拍shift_ena和Prob096的1101识别子机；组合方程任务形式不同仍实质复用已读结构，保守排除。",
+      "bindings": {
+        "prompt.txt": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob150_review2015_fsmonehot_prompt.txt",
+          "sha256": "9c02d1cfaafd494a2696d041d713358e9df12ef080c8de0c352cee109417a1ad",
+          "git_blob_sha1": "c248734bc3f4f4cd31d120be1503a67c5422c704",
+          "bytes": 2267,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob150_review2015_fsmonehot_prompt.txt"
+        },
+        "ref.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob150_review2015_fsmonehot_ref.sv",
+          "sha256": "8c98048c249e46db3a8f2f1ea48633e73b96a61428e5d3b0c57b3f22adcb83d9",
+          "git_blob_sha1": "dc37298a1ff156023d5ce21cf9f56cc8fa283391",
+          "bytes": 736,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob150_review2015_fsmonehot_ref.sv"
+        },
+        "test.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob150_review2015_fsmonehot_test.sv",
+          "sha256": "1f8f30812e321bd95a85b91cbc8872fd237e0cec88061b4988bd00a0baf8d879",
+          "git_blob_sha1": "69559340ccff67bf639eaf82f828000959d23e0a",
+          "bytes": 7576,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob150_review2015_fsmonehot_test.sv"
+        }
+      },
+      "static_dependencies": {
+        "ref.sv": {
+          "modules": [
+            "RefModule"
+          ],
+          "includes": [],
+          "readmem": false
+        },
+        "test.sv": {
+          "modules": [
+            "stimulus_gen",
+            "tb"
+          ],
+          "includes": [],
+          "readmem": false
+        }
+      }
+    },
+    {
+      "rank": 14,
+      "id": "Prob044_vectorgates",
+      "eligible": true,
+      "status": "ELIGIBLE_NOT_SELECTED_FIXED_CAP",
+      "code": "ELIGIBLE",
+      "meaning_zh": "向量逻辑门",
+      "reason_zh": "同时给逐位OR、逻辑OR、按明确次序NOT拼接；与历史ALU单项OR有原语交叉，但完整多输出契约不同。",
+      "bindings": {
+        "prompt.txt": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob044_vectorgates_prompt.txt",
+          "sha256": "ca7e990ab01903f606c956d8af8fb9faf01adf063847560d23e3d99fc10968a7",
+          "git_blob_sha1": "a6b3760e503e927ed9e1e804096b57c457caf4a0",
+          "bytes": 593,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob044_vectorgates_prompt.txt"
+        },
+        "ref.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob044_vectorgates_ref.sv",
+          "sha256": "c985c4e754baf171526e86dd8f130549132e148da7db7e3348c079162d8f8353",
+          "git_blob_sha1": "470f8e83a570ab621382b2993fa4a442d7b5976b",
+          "bytes": 244,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob044_vectorgates_ref.sv"
+        },
+        "test.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob044_vectorgates_test.sv",
+          "sha256": "1ad5f4ee9503777a728ad9fc2f5fb6dd1807719070c3148bb85e96e29965a940",
+          "git_blob_sha1": "8dc8391c438f396500683252580d996addd39ac0",
+          "bytes": 4689,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob044_vectorgates_test.sv"
+        }
+      },
+      "static_dependencies": {
+        "ref.sv": {
+          "modules": [
+            "RefModule"
+          ],
+          "includes": [],
+          "readmem": false
+        },
+        "test.sv": {
+          "modules": [
+            "stimulus_gen",
+            "tb"
+          ],
+          "includes": [],
+          "readmem": false
+        }
+      }
+    },
+    {
+      "rank": 15,
+      "id": "Prob042_vector4",
+      "eligible": true,
+      "status": "ELIGIBLE_NOT_SELECTED_FIXED_CAP",
+      "code": "ELIGIBLE",
+      "meaning_zh": "符号扩展",
+      "reason_zh": "8→32位符号复制，接口和示例完整；历史signedcmp8的比较结果不同，非仅宽度变体。",
+      "bindings": {
+        "prompt.txt": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob042_vector4_prompt.txt",
+          "sha256": "8d2ef1d00ecc693bcf3b1438fb20676ed098d3dd52660618f78a0a02a225d7da",
+          "git_blob_sha1": "1dc574beb15d01cfbf727339fd462793ee20013d",
+          "bytes": 792,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob042_vector4_prompt.txt"
+        },
+        "ref.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob042_vector4_ref.sv",
+          "sha256": "5408b5220777f5a212a7678a353718e6374fa967530895182c22ca7b346f7c3a",
+          "git_blob_sha1": "282a2e8ffeea039a66ea88f130a9c8da8b8f86bd",
+          "bytes": 110,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob042_vector4_ref.sv"
+        },
+        "test.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob042_vector4_test.sv",
+          "sha256": "2f1f4163ca980459502becbafcc48212f920a7d4dcf217d2ebc4369390ad3134",
+          "git_blob_sha1": "e2589660f81d34a70d7fc3cabe0368e8b755c638",
+          "bytes": 2405,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob042_vector4_test.sv"
+        }
+      },
+      "static_dependencies": {
+        "ref.sv": {
+          "modules": [
+            "RefModule"
+          ],
+          "includes": [],
+          "readmem": false
+        },
+        "test.sv": {
+          "modules": [
+            "stimulus_gen",
+            "tb"
+          ],
+          "includes": [],
+          "readmem": false
+        }
+      }
+    },
+    {
+      "rank": 16,
+      "id": "Prob005_notgate",
+      "eligible": true,
+      "status": "ELIGIBLE_NOT_SELECTED_FIXED_CAP",
+      "code": "ELIGIBLE",
+      "meaning_zh": "NOT门",
+      "reason_zh": "完整一位反相契约；历史集合没有该完整独立任务。简单程度不作为入选/排除依据。",
+      "bindings": {
+        "prompt.txt": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob005_notgate_prompt.txt",
+          "sha256": "0dcc1f15aa03789c4b4fcaa87aaea9f1f6c6618bb65aaf12db601c9ccda49cc4",
+          "git_blob_sha1": "6e5bc33886f4123a2adeae078ff8ffc01482c355",
+          "bytes": 223,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob005_notgate_prompt.txt"
+        },
+        "ref.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob005_notgate_ref.sv",
+          "sha256": "b9c7af094411e46248398822c76728653300163f17595b16379f7e475d60cfcf",
+          "git_blob_sha1": "a3573a9629289e9c3c0e403bb3da65e2b2f17107",
+          "bytes": 81,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob005_notgate_ref.sv"
+        },
+        "test.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob005_notgate_test.sv",
+          "sha256": "8c24f1f7eaa0f30af7418607d59444a74a3f1fc81a65b586a90b389b6b3caeb7",
+          "git_blob_sha1": "fd1c22c6ba74e25d0116e9edfdd10282afe309ad",
+          "bytes": 2774,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob005_notgate_test.sv"
+        }
+      },
+      "static_dependencies": {
+        "ref.sv": {
+          "modules": [
+            "RefModule"
+          ],
+          "includes": [],
+          "readmem": false
+        },
+        "test.sv": {
+          "modules": [
+            "stimulus_gen",
+            "tb"
+          ],
+          "includes": [],
+          "readmem": false
+        }
+      }
+    },
+    {
+      "rank": 17,
+      "id": "Prob074_ece241_2014_q4",
+      "eligible": true,
+      "status": "ELIGIBLE_NOT_SELECTED_FIXED_CAP",
+      "code": "ELIGIBLE",
+      "meaning_zh": "三反馈寄存器",
+      "reason_zh": "三支XOR/AND/OR反馈及NOR输出，初态全0与posedge明确；其中一支与event_parity共享原语但完整三状态位系统不同。初始化声明可在单模块表达；可综合性平台适配未校准。",
+      "bindings": {
+        "prompt.txt": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob074_ece241_2014_q4_prompt.txt",
+          "sha256": "0657a3b595a3caa3a20be1d59d028a757ab823cc4acc059f9a7543f687bc1346",
+          "git_blob_sha1": "a2498bd00305807cf1e852bbc66e5e7a325ae77d",
+          "bytes": 911,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob074_ece241_2014_q4_prompt.txt"
+        },
+        "ref.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob074_ece241_2014_q4_ref.sv",
+          "sha256": "6d58fe4253a0a4feaba24aa013ecd96fb54be1fd7b77eb026bb5355a30714055",
+          "git_blob_sha1": "23c0b1fd5afbb48e653d3e5434033159cd4efe24",
+          "bytes": 191,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob074_ece241_2014_q4_ref.sv"
+        },
+        "test.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob074_ece241_2014_q4_test.sv",
+          "sha256": "7ae0e718f2d2188a95af4ded763e133a91a7f7e57c16c5aaa7695c6bc30fe3c2",
+          "git_blob_sha1": "f199001a8841d00a7c5009de7177108219f21668",
+          "bytes": 2925,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob074_ece241_2014_q4_test.sv"
+        }
+      },
+      "static_dependencies": {
+        "ref.sv": {
+          "modules": [
+            "RefModule"
+          ],
+          "includes": [],
+          "readmem": false
+        },
+        "test.sv": {
+          "modules": [
+            "stimulus_gen",
+            "tb"
+          ],
+          "includes": [],
+          "readmem": false
+        }
+      }
+    },
+    {
+      "rank": 18,
+      "id": "Prob043_vector5",
+      "eligible": true,
+      "status": "ELIGIBLE_NOT_SELECTED_FIXED_CAP",
+      "code": "ELIGIBLE",
+      "meaning_zh": "25项两两比较",
+      "reason_zh": "5标量的全对XNOR矩阵及位序明确；与历史signedcmp8数值大小比较/单一parity输出不同。",
+      "bindings": {
+        "prompt.txt": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob043_vector5_prompt.txt",
+          "sha256": "0ef3f6be0cd42d8fe1d4a6c8d1a4b6972862a4a0833afcf85f81f8e33b01d2ce",
+          "git_blob_sha1": "15fdcedb7486cd7c178834f1fb1535e500366dcb",
+          "bytes": 551,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob043_vector5_prompt.txt"
+        },
+        "ref.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob043_vector5_ref.sv",
+          "sha256": "fc887ea1b3d3b1a43c2ebbc6a6d321c12c4cdee70007bf9bb4690b29198f815e",
+          "git_blob_sha1": "230abbc99efe791c64fa3099a11bf6721a7e0885",
+          "bytes": 188,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob043_vector5_ref.sv"
+        },
+        "test.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob043_vector5_test.sv",
+          "sha256": "ccd9c5f5a264d758f5aa9bbbf83d8455ac09ce79d348f9ecec61365983e28510",
+          "git_blob_sha1": "fd0cebb084932382aa3c7f3221cb5f33d247d4ab",
+          "bytes": 2528,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob043_vector5_test.sv"
+        }
+      },
+      "static_dependencies": {
+        "ref.sv": {
+          "modules": [
+            "RefModule"
+          ],
+          "includes": [],
+          "readmem": false
+        },
+        "test.sv": {
+          "modules": [
+            "stimulus_gen",
+            "tb"
+          ],
+          "includes": [],
+          "readmem": false
+        }
+      }
+    },
+    {
+      "rank": 19,
+      "id": "Prob071_always_casez",
+      "eligible": false,
+      "status": "EXCLUDED",
+      "code": "HISTORY_NEAR_DUPLICATE",
+      "meaning_zh": "优先编码器",
+      "reason_zh": "与历史encoder4/leadingzero8为优先位置编码族，仅宽度/扫描方向/valid输出变化，保守排除。",
+      "bindings": {
+        "prompt.txt": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob071_always_casez_prompt.txt",
+          "sha256": "bd14f7fa05e5db09dc82db362762860b4f092f069b989eb40dcc6038877ca86d",
+          "git_blob_sha1": "bd86acf6b091af07bb974390b854d30f4556a815",
+          "bytes": 532,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob071_always_casez_prompt.txt"
+        },
+        "ref.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob071_always_casez_ref.sv",
+          "sha256": "00e69b3385011c20361f76a5f68aa225b0c1fda479444c429e0f24653f4773d5",
+          "git_blob_sha1": "684a58cdd2b268fc305a9014228d6f12ab5f0435",
+          "bytes": 406,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob071_always_casez_ref.sv"
+        },
+        "test.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob071_always_casez_test.sv",
+          "sha256": "3c7e0e7fe0d6120b4246d7ce61b3b56d76c372ed4ca343128c4a91d57e56d346",
+          "git_blob_sha1": "f2d5ed9ed147781f375f881fbf34ee7be152c187",
+          "bytes": 2981,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob071_always_casez_test.sv"
+        }
+      },
+      "static_dependencies": {
+        "ref.sv": {
+          "modules": [
+            "RefModule"
+          ],
+          "includes": [],
+          "readmem": false
+        },
+        "test.sv": {
+          "modules": [
+            "stimulus_gen",
+            "tb"
+          ],
+          "includes": [],
+          "readmem": false
+        }
+      }
+    },
+    {
+      "rank": 20,
+      "id": "Prob127_lemmings1",
+      "eligible": true,
+      "status": "ELIGIBLE_NOT_SELECTED_FIXED_CAP",
+      "code": "ELIGIBLE",
+      "meaning_zh": "Lemmings方向机",
+      "reason_zh": "两输入按当前方向响应碰撞，同时碰撞翻向，posedge异步高reset到向左。与event_parity无状态依赖选择输入、单条件翻转不同；非旧ve_fsm三状态图。",
+      "bindings": {
+        "prompt.txt": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob127_lemmings1_prompt.txt",
+          "sha256": "896214e584d27c9d50980edbff2439df33e817f89c4624d9cc1115ab1955276d",
+          "git_blob_sha1": "34da39ebf9005375d504ca67f63de56ee1820dc8",
+          "bytes": 1208,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob127_lemmings1_prompt.txt"
+        },
+        "ref.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob127_lemmings1_ref.sv",
+          "sha256": "92c8b0e80f637209925cea25d328f114857342e50f04494e2b01177cfb91181d",
+          "git_blob_sha1": "a0d2092e7051124669f7c8310761e5cf2241ebfb",
+          "bytes": 503,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob127_lemmings1_ref.sv"
+        },
+        "test.sv": {
+          "path": "B/originals/dataset_spec-to-rtl/Prob127_lemmings1_test.sv",
+          "sha256": "769944739c0fa53eb38559e291d2982890e87dc521b539cb78b0959e529a8077",
+          "git_blob_sha1": "d99af3d88a29eb7c6ef3cb6aa2d535a64e9cfc7c",
+          "bytes": 4953,
+          "url": "https://github.com/NVlabs/verilog-eval/blob/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob127_lemmings1_test.sv"
+        }
+      },
+      "static_dependencies": {
+        "ref.sv": {
+          "modules": [
+            "RefModule"
+          ],
+          "includes": [],
+          "readmem": false
+        },
+        "test.sv": {
+          "modules": [
+            "stimulus_gen",
+            "tb"
+          ],
+          "includes": [],
+          "readmem": false
+        }
+      }
+    }
+  ]
+}

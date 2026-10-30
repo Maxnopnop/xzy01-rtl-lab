@@ -1,0 +1,93 @@
+xrun(64): 23.03-s004: (c) Copyright 1995-2023 Cadence Design Systems, Inc.
+TOOL:	xrun(64)	23.03-s004: Started on Oct 15, 2026 at 11:48:00 HKT
+xrun
+	-access +r
+	+define+TETRAMAX
+	-64bit
+	-sv
+	-nospecify
+	-top tb
+	testbench.sv
+	netlist.v
+	observer.sv
+	-v /staff/ee/dept/public/course_PDK/nangate/freepdk-45nm/lib/NangateOpenCellLibrary_PDKv1_3_v2010_12/Front_End/Verilog/NangateOpenCellLibrary.v
+	+incdir+/staff/ee/dept/public/course_PDK/nangate/freepdk-45nm/lib/NangateOpenCellLibrary_PDKv1_3_v2010_12/Front_End/Verilog
+	+nonce=c62faa07394a431683dec8e659235102
+	-input run.tcl
+	-l xrun.log
+
+   User defined plus("+") options:
+	+nonce=c62faa07394a431683dec8e659235102
+
+file: testbench.sv
+	module worklib.tb:sv
+		errors: 0, warnings: 0
+file: netlist.v
+	module worklib.sequence_detector:v
+		errors: 0, warnings: 0
+file: observer.sv
+	module worklib.gate_observer:sv
+		errors: 0, warnings: 0
+file: /staff/ee/dept/public/course_PDK/nangate/freepdk-45nm/lib/NangateOpenCellLibrary_PDKv1_3_v2010_12/Front_End/Verilog/NangateOpenCellLibrary.v
+	module NangateOpenCellLibrary.AND4_X1:v
+		errors: 0, warnings: 0
+	module NangateOpenCellLibrary.AOI22_X1:v
+		errors: 0, warnings: 0
+	module NangateOpenCellLibrary.DFFR_X1:v
+		errors: 0, warnings: 0
+	module NangateOpenCellLibrary.INV_X1:v
+		errors: 0, warnings: 0
+	module NangateOpenCellLibrary.NAND3_X1:v
+		errors: 0, warnings: 0
+	module NangateOpenCellLibrary.NOR2_X1:v
+		errors: 0, warnings: 0
+	module NangateOpenCellLibrary.NOR3_X1:v
+		errors: 0, warnings: 0
+	module NangateOpenCellLibrary.OAI21_X1:v
+		errors: 0, warnings: 0
+file: /staff/ee/dept/public/course_PDK/nangate/freepdk-45nm/lib/NangateOpenCellLibrary_PDKv1_3_v2010_12/Front_End/Verilog/NangateOpenCellLibrary.v
+	primitive NangateOpenCellLibrary.seq_DFFR_X1:v
+		errors: 0, warnings: 0
+xmvlog: *W,SPDUSD: Include directory /staff/ee/dept/public/course_PDK/nangate/freepdk-45nm/lib/NangateOpenCellLibrary_PDKv1_3_v2010_12/Front_End/Verilog given but not used.
+	Total errors/warnings found outside modules and primitives:
+		errors: 0, warnings: 1
+		Caching library 'worklib' ....... Done
+	Elaborating the design hierarchy:
+		Caching library 'worklib' ....... Done
+		Caching library 'NangateOpenCellLibrary' ....... Done
+	Top level design units:
+		$unit_0x7993f092
+		tb
+	Building instance overlay tables: .................... Done
+	Generating native compiled code:
+		worklib.gate_observer:sv <0x41dba77e>
+			streams:   1, words:   502
+		worklib.tb:sv <0x5027ecb7>
+			streams:   4, words:  5032
+		NangateOpenCellLibrary.AOI22_X1:v <0x73959aa1>
+			streams:   0, words:     0
+		NangateOpenCellLibrary.OAI21_X1:v <0x042d4ae9>
+			streams:   0, words:     0
+		NangateOpenCellLibrary.DFFR_X1:v <0x7e37a755>
+			streams:   0, words:     0
+	Building instance specific data structures.
+	Loading native compiled code:     .................... Done
+	Design hierarchy summary:
+		                 Instances  Unique
+		Modules:                15      11
+		UDPs:                    3       1
+		Primitives:             43       4
+		Registers:              15      14
+		Scalar wires:            7       -
+		Initial blocks:          5       5
+		Timing checks:          27       -
+		Compilation units:       1       1
+		Simulation timescale:  1ps
+	Writing initial simulation snapshot: worklib.tb:sv
+Loading snapshot worklib.tb:sv .................... Done
+xcelium> source /usr/eelocal/cadence/xcelium2303hf/tools/xcelium/files/xmsimrc
+xcelium> run
+Simulation complete via $finish(1) at time 5520 NS + 0
+./testbench.sv:23 $fclose(fd); $finish;
+xcelium> exit
+TOOL:	xrun(64)	23.03-s004: Exiting on Oct 15, 2026 at 11:48:02 HKT  (total: 00:00:02)

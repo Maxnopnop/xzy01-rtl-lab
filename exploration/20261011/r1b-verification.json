@@ -1,0 +1,458 @@
+{
+  "status": "PASS",
+  "checked_utc": "2026-10-11T00:13:40.432744+00:00",
+  "locks": [
+    {
+      "run": "compound-v1",
+      "files": 1333,
+      "source_files": 11,
+      "plan_sha256": "262724d22a690c4d6ae34e6849eb73ca7effb6a290e9c6c564eaa09b773b9d6b"
+    },
+    {
+      "run": "delayed-v1",
+      "files": 175,
+      "source_files": 10,
+      "plan_sha256": "77c0abf126ff0855819f6146ad04d392b8769f0e201656653c26f69d165cb2c5"
+    },
+    {
+      "run": "factorial20-v1",
+      "files": 67,
+      "source_files": 12,
+      "plan_sha256": "ed08f03783ae9b78c8eff75500d3f8b67d776ce91887730c231a9101a976d483"
+    },
+    {
+      "run": "formal-v1",
+      "files": 37,
+      "source_files": 6,
+      "plan_sha256": "47703a249053dafb23677cd64dac7fe356d5f5ce565094bc209970b28f551254"
+    },
+    {
+      "run": "r1b-v1",
+      "files": 682,
+      "source_files": 11,
+      "plan_sha256": "3097ddd258f253fd20aa6d81bb058ada9687a8ccb037f3394159cfac26ee21b0"
+    },
+    {
+      "run": "r1b-v2",
+      "files": 682,
+      "source_files": 12,
+      "plan_sha256": "1deef37f2b49e22fb329fb6ed2339923e73a88d8f2b4d99b0088bd838ca05ccd"
+    }
+  ],
+  "old_four_files": 1612,
+  "selection_matches_v1": true,
+  "historical_samples": 24,
+  "source_bindings": 48,
+  "status_counts": {
+    "COUNTEREXAMPLE_FOUND": 14,
+    "NO_COUNTEREXAMPLE_WITHIN_BOUND": 34
+  },
+  "witness_counts": {
+    "FUNCTION_FAIL": 14
+  },
+  "v1_actual_copy_matches": 24,
+  "distinct_selected_rtl": 23,
+  "duplicate_clusters": [
+    {
+      "sha256": "d14bdac06eb2c744990d63b4ab77689c1a56bb8b3c920feb6053e41c95570d75",
+      "count": 2
+    }
+  ],
+  "parser_adapter_tests": [
+    {
+      "label": "timeout",
+      "observed": "TIMEOUT",
+      "kind": "SYNTHETIC_PARSER_TEST"
+    },
+    {
+      "label": "output_limit",
+      "observed": "OUTPUT_LIMIT",
+      "kind": "SYNTHETIC_PARSER_TEST"
+    },
+    {
+      "label": "unsupported",
+      "observed": "UNSUPPORTED",
+      "kind": "SYNTHETIC_PARSER_TEST"
+    },
+    {
+      "label": "syntax",
+      "observed": "SYNTAX_ERROR",
+      "kind": "SYNTHETIC_PARSER_TEST"
+    },
+    {
+      "label": "other_tool_error",
+      "observed": "TOOL_ERROR",
+      "kind": "SYNTHETIC_PARSER_TEST"
+    },
+    {
+      "label": "ambiguous_exit0",
+      "observed": "UNPARSED_TOOL_RESULT",
+      "kind": "SYNTHETIC_PARSER_TEST"
+    },
+    {
+      "label": "no_model",
+      "observed": "NO_COUNTEREXAMPLE_WITHIN_BOUND",
+      "kind": "SYNTHETIC_PARSER_TEST"
+    },
+    {
+      "label": "counterexample",
+      "observed": "COUNTEREXAMPLE_FOUND",
+      "kind": "SYNTHETIC_PARSER_TEST"
+    },
+    {
+      "label": "missing_executable",
+      "observed": "ENV_ERROR",
+      "kind": "MOCK_ERROR_ADAPTER_TEST"
+    }
+  ],
+  "details": [
+    {
+      "index": 0,
+      "task": "rt_sequence",
+      "model": "gpt-5.6-terra",
+      "original_status": "FUNCTION_FAIL",
+      "bits": "01001001",
+      "expected": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1
+      ],
+      "statuses": [
+        "COUNTEREXAMPLE_FOUND",
+        "COUNTEREXAMPLE_FOUND"
+      ]
+    },
+    {
+      "index": 1,
+      "task": "rt_sequence",
+      "model": "gpt-5.6-terra",
+      "original_status": "FUNCTION_FAIL",
+      "bits": "11001100101",
+      "expected": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "statuses": [
+        "COUNTEREXAMPLE_FOUND",
+        "COUNTEREXAMPLE_FOUND"
+      ]
+    },
+    {
+      "index": 2,
+      "task": "rt_sequence",
+      "model": "gpt-5.6-terra",
+      "original_status": "FUNCTION_FAIL",
+      "bits": "1100101",
+      "expected": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "statuses": [
+        "COUNTEREXAMPLE_FOUND",
+        "COUNTEREXAMPLE_FOUND"
+      ]
+    },
+    {
+      "index": 3,
+      "task": "rt_sequence",
+      "model": "gpt-5.6-terra",
+      "original_status": "FUNCTION_FAIL",
+      "bits": "1100101",
+      "expected": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "statuses": [
+        "COUNTEREXAMPLE_FOUND",
+        "COUNTEREXAMPLE_FOUND"
+      ]
+    },
+    {
+      "index": 4,
+      "task": "request_delay",
+      "model": "gpt-5.6-terra",
+      "original_status": "FUNCTION_FAIL",
+      "bits": "0001",
+      "expected": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "statuses": [
+        "COUNTEREXAMPLE_FOUND",
+        "COUNTEREXAMPLE_FOUND"
+      ]
+    },
+    {
+      "index": 5,
+      "task": "request_delay",
+      "model": "gpt-5.6-terra",
+      "original_status": "FUNCTION_FAIL",
+      "bits": "0001",
+      "expected": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "statuses": [
+        "COUNTEREXAMPLE_FOUND",
+        "COUNTEREXAMPLE_FOUND"
+      ]
+    },
+    {
+      "index": 6,
+      "task": "request_delay",
+      "model": "gpt-5.6-terra",
+      "original_status": "FUNCTION_FAIL",
+      "bits": "0001",
+      "expected": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "statuses": [
+        "COUNTEREXAMPLE_FOUND",
+        "COUNTEREXAMPLE_FOUND"
+      ]
+    },
+    {
+      "index": 7,
+      "task": "debounce3",
+      "model": "gpt-5.6-sol",
+      "original_status": "PASS",
+      "bits": null,
+      "expected": null,
+      "statuses": [
+        "NO_COUNTEREXAMPLE_WITHIN_BOUND",
+        "NO_COUNTEREXAMPLE_WITHIN_BOUND"
+      ]
+    },
+    {
+      "index": 8,
+      "task": "debounce3",
+      "model": "gpt-5.6-terra",
+      "original_status": "PASS",
+      "bits": null,
+      "expected": null,
+      "statuses": [
+        "NO_COUNTEREXAMPLE_WITHIN_BOUND",
+        "NO_COUNTEREXAMPLE_WITHIN_BOUND"
+      ]
+    },
+    {
+      "index": 9,
+      "task": "event_parity",
+      "model": "gpt-5.6-sol",
+      "original_status": "PASS",
+      "bits": null,
+      "expected": null,
+      "statuses": [
+        "NO_COUNTEREXAMPLE_WITHIN_BOUND",
+        "NO_COUNTEREXAMPLE_WITHIN_BOUND"
+      ]
+    },
+    {
+      "index": 10,
+      "task": "event_parity",
+      "model": "gpt-5.6-terra",
+      "original_status": "PASS",
+      "bits": null,
+      "expected": null,
+      "statuses": [
+        "NO_COUNTEREXAMPLE_WITHIN_BOUND",
+        "NO_COUNTEREXAMPLE_WITHIN_BOUND"
+      ]
+    },
+    {
+      "index": 11,
+      "task": "request_delay",
+      "model": "gpt-5.6-sol",
+      "original_status": "PASS",
+      "bits": null,
+      "expected": null,
+      "statuses": [
+        "NO_COUNTEREXAMPLE_WITHIN_BOUND",
+        "NO_COUNTEREXAMPLE_WITHIN_BOUND"
+      ]
+    },
+    {
+      "index": 12,
+      "task": "request_delay",
+      "model": "gpt-5.6-terra",
+      "original_status": "PASS",
+      "bits": null,
+      "expected": null,
+      "statuses": [
+        "NO_COUNTEREXAMPLE_WITHIN_BOUND",
+        "NO_COUNTEREXAMPLE_WITHIN_BOUND"
+      ]
+    },
+    {
+      "index": 13,
+      "task": "rt_sequence",
+      "model": "gpt-5.6-sol",
+      "original_status": "PASS",
+      "bits": null,
+      "expected": null,
+      "statuses": [
+        "NO_COUNTEREXAMPLE_WITHIN_BOUND",
+        "NO_COUNTEREXAMPLE_WITHIN_BOUND"
+      ]
+    },
+    {
+      "index": 14,
+      "task": "rt_sequence",
+      "model": "gpt-5.6-terra",
+      "original_status": "PASS",
+      "bits": null,
+      "expected": null,
+      "statuses": [
+        "NO_COUNTEREXAMPLE_WITHIN_BOUND",
+        "NO_COUNTEREXAMPLE_WITHIN_BOUND"
+      ]
+    },
+    {
+      "index": 15,
+      "task": "sticky_alarm",
+      "model": "gpt-5.6-sol",
+      "original_status": "PASS",
+      "bits": null,
+      "expected": null,
+      "statuses": [
+        "NO_COUNTEREXAMPLE_WITHIN_BOUND",
+        "NO_COUNTEREXAMPLE_WITHIN_BOUND"
+      ]
+    },
+    {
+      "index": 16,
+      "task": "sticky_alarm",
+      "model": "gpt-5.6-terra",
+      "original_status": "PASS",
+      "bits": null,
+      "expected": null,
+      "statuses": [
+        "NO_COUNTEREXAMPLE_WITHIN_BOUND",
+        "NO_COUNTEREXAMPLE_WITHIN_BOUND"
+      ]
+    },
+    {
+      "index": 17,
+      "task": "debounce3",
+      "model": "gpt-5.6-sol",
+      "original_status": "PASS",
+      "bits": null,
+      "expected": null,
+      "statuses": [
+        "NO_COUNTEREXAMPLE_WITHIN_BOUND",
+        "NO_COUNTEREXAMPLE_WITHIN_BOUND"
+      ]
+    },
+    {
+      "index": 18,
+      "task": "debounce3",
+      "model": "gpt-5.6-terra",
+      "original_status": "PASS",
+      "bits": null,
+      "expected": null,
+      "statuses": [
+        "NO_COUNTEREXAMPLE_WITHIN_BOUND",
+        "NO_COUNTEREXAMPLE_WITHIN_BOUND"
+      ]
+    },
+    {
+      "index": 19,
+      "task": "event_parity",
+      "model": "gpt-5.6-sol",
+      "original_status": "PASS",
+      "bits": null,
+      "expected": null,
+      "statuses": [
+        "NO_COUNTEREXAMPLE_WITHIN_BOUND",
+        "NO_COUNTEREXAMPLE_WITHIN_BOUND"
+      ]
+    },
+    {
+      "index": 20,
+      "task": "event_parity",
+      "model": "gpt-5.6-terra",
+      "original_status": "PASS",
+      "bits": null,
+      "expected": null,
+      "statuses": [
+        "NO_COUNTEREXAMPLE_WITHIN_BOUND",
+        "NO_COUNTEREXAMPLE_WITHIN_BOUND"
+      ]
+    },
+    {
+      "index": 21,
+      "task": "request_delay",
+      "model": "gpt-5.6-sol",
+      "original_status": "PASS",
+      "bits": null,
+      "expected": null,
+      "statuses": [
+        "NO_COUNTEREXAMPLE_WITHIN_BOUND",
+        "NO_COUNTEREXAMPLE_WITHIN_BOUND"
+      ]
+    },
+    {
+      "index": 22,
+      "task": "request_delay",
+      "model": "gpt-5.6-terra",
+      "original_status": "PASS",
+      "bits": null,
+      "expected": null,
+      "statuses": [
+        "NO_COUNTEREXAMPLE_WITHIN_BOUND",
+        "NO_COUNTEREXAMPLE_WITHIN_BOUND"
+      ]
+    },
+    {
+      "index": 23,
+      "task": "rt_sequence",
+      "model": "gpt-5.6-sol",
+      "original_status": "PASS",
+      "bits": null,
+      "expected": null,
+      "statuses": [
+        "NO_COUNTEREXAMPLE_WITHIN_BOUND",
+        "NO_COUNTEREXAMPLE_WITHIN_BOUND"
+      ]
+    }
+  ],
+  "limits": "Synthetic parser/adapter tests are separate from real Yosys/Icarus evidence; no actual timeout or unsupported historical sample occurred."
+}

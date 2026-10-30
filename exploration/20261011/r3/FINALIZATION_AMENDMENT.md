@@ -1,0 +1,15 @@
+# R3收尾字段冲突：事后工程恢复
+
+原冻结runner完成24生成、24隐藏评分、results.json后汇总失败exit1。score用row.update(judge)写入判题字段，判题stage=simulate覆盖原角色stage=first/branch；随后按stage=branch筛选两臂找不到regeneration，引发KeyError，summary及seal未完成。
+
+不修改冻结runner/协议/资产或任何原生成、判题、results.json。新增父目录r3_finalize.py按原冻结plan逐id恢复角色，另保留judge_stage；在run外写r3-corrected-results.json及r3-summary.json，再一次性封存run evidence-lock。生成/判题状态完全一致，预声明配对/成本计算未变，不重复模型或仿真。
+
+这也限定了原离线控制测试的覆盖：mock判题结果没有stage字段，未模拟真实backend字段覆盖，因而没发现冲突。原测试PASS保留，不冒称其覆盖了真实结果元数据合并。后续若做新的runner版本，应使用不同命名空间并为真实stage字段合并增加测试；当前不新增实验或重跑。
+
+## 非法首次候选格式处理的未覆盖缺陷
+
+总控另行核查指出：judge.py原样返回lab.extract_rtl的EXTRACTION_ERROR，例如响应包含多个RTL代码块或超过128KiB。runner.campaign的公开结果白名单只有PASS、FUNCTION_FAIL、COMPILE_FAIL、RTL_REJECTED；EXTRACTION_ERROR因此触发STOPPED_INFRASTRUCTURE，两分支不会继续。这违反冻结协议中所有非法首次候选仍进入两分支的广泛措辞。原score的配对valid集合也遗漏EXTRACTION_ERROR；事后finalizer加入该状态属于未发生分支的分类补全，不证明原运行器已经正确处理该分支。
+
+本轮24个输出均合法，没有发生EXTRACTION_ERROR，因此此缺陷不改变任何已报告分数、配对或分母。原RTL_REJECTED mock只覆盖一种非法输出，不能代表所有格式异常；不能声称非法格式处理已完整验收。
+
+任何后续新runner版本须先修复并测试这两项条件：角色与真实judge.stage字段的隔离，以及EXTRACTION_ERROR等格式异常的协议分类/分支保留。测试必须包含真实判题字段形状、多RTL代码块和128KiB边界，不能只用RTL_REJECTED mock替代。这里仅记录缺陷，不修改冻结源、协议、数据或结果，不建立新轮，不调用模型或仿真。

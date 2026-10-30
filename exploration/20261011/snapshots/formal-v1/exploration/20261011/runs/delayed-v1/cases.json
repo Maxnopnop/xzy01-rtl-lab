@@ -1,0 +1,1323 @@
+[
+  {
+    "task": "rt_sequence",
+    "word": "111110011001",
+    "ir": {
+      "schema": 1,
+      "clock_edge": "posedge",
+      "output_kind": "moore",
+      "reset": {
+        "kind": "async",
+        "active": 0,
+        "state": "P0"
+      },
+      "states": [
+        {
+          "name": "S0",
+          "output": 0
+        },
+        {
+          "name": "S1",
+          "output": 0
+        },
+        {
+          "name": "S2",
+          "output": 0
+        },
+        {
+          "name": "S3",
+          "output": 0
+        },
+        {
+          "name": "S4",
+          "output": 1
+        },
+        {
+          "name": "P0",
+          "output": 0
+        },
+        {
+          "name": "P1",
+          "output": 0
+        },
+        {
+          "name": "P2",
+          "output": 0
+        },
+        {
+          "name": "P3",
+          "output": 0
+        },
+        {
+          "name": "P4",
+          "output": 0
+        },
+        {
+          "name": "P5",
+          "output": 0
+        },
+        {
+          "name": "P6",
+          "output": 0
+        },
+        {
+          "name": "P7",
+          "output": 0
+        },
+        {
+          "name": "P8",
+          "output": 1
+        },
+        {
+          "name": "P9",
+          "output": 0
+        },
+        {
+          "name": "P10",
+          "output": 0
+        },
+        {
+          "name": "P11",
+          "output": 0
+        },
+        {
+          "name": "P12",
+          "output": 0
+        }
+      ],
+      "transitions": [
+        {
+          "from": "S0",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "S0",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "S1",
+          "input": 0,
+          "to": "S2"
+        },
+        {
+          "from": "S1",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "S2",
+          "input": 0,
+          "to": "S3"
+        },
+        {
+          "from": "S2",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "S3",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "S3",
+          "input": 1,
+          "to": "S4"
+        },
+        {
+          "from": "S4",
+          "input": 0,
+          "to": "S2"
+        },
+        {
+          "from": "S4",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "P0",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "P0",
+          "input": 1,
+          "to": "P1"
+        },
+        {
+          "from": "P1",
+          "input": 0,
+          "to": "S2"
+        },
+        {
+          "from": "P1",
+          "input": 1,
+          "to": "P2"
+        },
+        {
+          "from": "P2",
+          "input": 0,
+          "to": "S2"
+        },
+        {
+          "from": "P2",
+          "input": 1,
+          "to": "P3"
+        },
+        {
+          "from": "P3",
+          "input": 0,
+          "to": "S2"
+        },
+        {
+          "from": "P3",
+          "input": 1,
+          "to": "P4"
+        },
+        {
+          "from": "P4",
+          "input": 0,
+          "to": "S2"
+        },
+        {
+          "from": "P4",
+          "input": 1,
+          "to": "P5"
+        },
+        {
+          "from": "P5",
+          "input": 0,
+          "to": "P6"
+        },
+        {
+          "from": "P5",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "P6",
+          "input": 0,
+          "to": "P7"
+        },
+        {
+          "from": "P6",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "P7",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "P7",
+          "input": 1,
+          "to": "P8"
+        },
+        {
+          "from": "P8",
+          "input": 0,
+          "to": "S2"
+        },
+        {
+          "from": "P8",
+          "input": 1,
+          "to": "P9"
+        },
+        {
+          "from": "P9",
+          "input": 0,
+          "to": "P10"
+        },
+        {
+          "from": "P9",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "P10",
+          "input": 0,
+          "to": "P11"
+        },
+        {
+          "from": "P10",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "P11",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "P11",
+          "input": 1,
+          "to": "P12"
+        },
+        {
+          "from": "P12",
+          "input": 0,
+          "to": "S2"
+        },
+        {
+          "from": "P12",
+          "input": 1,
+          "to": "S1"
+        }
+      ]
+    },
+    "diagnosis": {
+      "status": "IR_SPEC_MISMATCH",
+      "reset_contract_errors": [],
+      "shortest_counterexample": {
+        "bits": "111110011001",
+        "expected": 1,
+        "observed": 0
+      },
+      "visited_pairs": 18,
+      "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+    }
+  },
+  {
+    "task": "sticky_alarm",
+    "word": "001000000111",
+    "ir": {
+      "schema": 1,
+      "clock_edge": "posedge",
+      "output_kind": "moore",
+      "reset": {
+        "kind": "async",
+        "active": 0,
+        "state": "P0"
+      },
+      "states": [
+        {
+          "name": "S0",
+          "output": 0
+        },
+        {
+          "name": "S1",
+          "output": 0
+        },
+        {
+          "name": "S2",
+          "output": 1
+        },
+        {
+          "name": "P0",
+          "output": 0
+        },
+        {
+          "name": "P1",
+          "output": 0
+        },
+        {
+          "name": "P2",
+          "output": 0
+        },
+        {
+          "name": "P3",
+          "output": 0
+        },
+        {
+          "name": "P4",
+          "output": 0
+        },
+        {
+          "name": "P5",
+          "output": 0
+        },
+        {
+          "name": "P6",
+          "output": 0
+        },
+        {
+          "name": "P7",
+          "output": 0
+        },
+        {
+          "name": "P8",
+          "output": 0
+        },
+        {
+          "name": "P9",
+          "output": 0
+        },
+        {
+          "name": "P10",
+          "output": 0
+        },
+        {
+          "name": "P11",
+          "output": 1
+        },
+        {
+          "name": "P12",
+          "output": 0
+        }
+      ],
+      "transitions": [
+        {
+          "from": "S0",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "S0",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "S1",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "S1",
+          "input": 1,
+          "to": "S2"
+        },
+        {
+          "from": "S2",
+          "input": 0,
+          "to": "S2"
+        },
+        {
+          "from": "S2",
+          "input": 1,
+          "to": "S2"
+        },
+        {
+          "from": "P0",
+          "input": 0,
+          "to": "P1"
+        },
+        {
+          "from": "P0",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "P1",
+          "input": 0,
+          "to": "P2"
+        },
+        {
+          "from": "P1",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "P2",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "P2",
+          "input": 1,
+          "to": "P3"
+        },
+        {
+          "from": "P3",
+          "input": 0,
+          "to": "P4"
+        },
+        {
+          "from": "P3",
+          "input": 1,
+          "to": "S2"
+        },
+        {
+          "from": "P4",
+          "input": 0,
+          "to": "P5"
+        },
+        {
+          "from": "P4",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "P5",
+          "input": 0,
+          "to": "P6"
+        },
+        {
+          "from": "P5",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "P6",
+          "input": 0,
+          "to": "P7"
+        },
+        {
+          "from": "P6",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "P7",
+          "input": 0,
+          "to": "P8"
+        },
+        {
+          "from": "P7",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "P8",
+          "input": 0,
+          "to": "P9"
+        },
+        {
+          "from": "P8",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "P9",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "P9",
+          "input": 1,
+          "to": "P10"
+        },
+        {
+          "from": "P10",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "P10",
+          "input": 1,
+          "to": "P11"
+        },
+        {
+          "from": "P11",
+          "input": 0,
+          "to": "S2"
+        },
+        {
+          "from": "P11",
+          "input": 1,
+          "to": "P12"
+        },
+        {
+          "from": "P12",
+          "input": 0,
+          "to": "S2"
+        },
+        {
+          "from": "P12",
+          "input": 1,
+          "to": "S2"
+        }
+      ]
+    },
+    "diagnosis": {
+      "status": "IR_SPEC_MISMATCH",
+      "reset_contract_errors": [],
+      "shortest_counterexample": {
+        "bits": "001000000111",
+        "expected": 1,
+        "observed": 0
+      },
+      "visited_pairs": 16,
+      "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+    }
+  },
+  {
+    "task": "event_parity",
+    "word": "001110101001",
+    "ir": {
+      "schema": 1,
+      "clock_edge": "posedge",
+      "output_kind": "moore",
+      "reset": {
+        "kind": "async",
+        "active": 0,
+        "state": "P0"
+      },
+      "states": [
+        {
+          "name": "S0",
+          "output": 0
+        },
+        {
+          "name": "S1",
+          "output": 1
+        },
+        {
+          "name": "P0",
+          "output": 0
+        },
+        {
+          "name": "P1",
+          "output": 0
+        },
+        {
+          "name": "P2",
+          "output": 0
+        },
+        {
+          "name": "P3",
+          "output": 1
+        },
+        {
+          "name": "P4",
+          "output": 0
+        },
+        {
+          "name": "P5",
+          "output": 1
+        },
+        {
+          "name": "P6",
+          "output": 1
+        },
+        {
+          "name": "P7",
+          "output": 0
+        },
+        {
+          "name": "P8",
+          "output": 0
+        },
+        {
+          "name": "P9",
+          "output": 1
+        },
+        {
+          "name": "P10",
+          "output": 1
+        },
+        {
+          "name": "P11",
+          "output": 1
+        },
+        {
+          "name": "P12",
+          "output": 1
+        }
+      ],
+      "transitions": [
+        {
+          "from": "S0",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "S0",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "S1",
+          "input": 0,
+          "to": "S1"
+        },
+        {
+          "from": "S1",
+          "input": 1,
+          "to": "S0"
+        },
+        {
+          "from": "P0",
+          "input": 0,
+          "to": "P1"
+        },
+        {
+          "from": "P0",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "P1",
+          "input": 0,
+          "to": "P2"
+        },
+        {
+          "from": "P1",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "P2",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "P2",
+          "input": 1,
+          "to": "P3"
+        },
+        {
+          "from": "P3",
+          "input": 0,
+          "to": "S1"
+        },
+        {
+          "from": "P3",
+          "input": 1,
+          "to": "P4"
+        },
+        {
+          "from": "P4",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "P4",
+          "input": 1,
+          "to": "P5"
+        },
+        {
+          "from": "P5",
+          "input": 0,
+          "to": "P6"
+        },
+        {
+          "from": "P5",
+          "input": 1,
+          "to": "S0"
+        },
+        {
+          "from": "P6",
+          "input": 0,
+          "to": "S1"
+        },
+        {
+          "from": "P6",
+          "input": 1,
+          "to": "P7"
+        },
+        {
+          "from": "P7",
+          "input": 0,
+          "to": "P8"
+        },
+        {
+          "from": "P7",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "P8",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "P8",
+          "input": 1,
+          "to": "P9"
+        },
+        {
+          "from": "P9",
+          "input": 0,
+          "to": "P10"
+        },
+        {
+          "from": "P9",
+          "input": 1,
+          "to": "S0"
+        },
+        {
+          "from": "P10",
+          "input": 0,
+          "to": "P11"
+        },
+        {
+          "from": "P10",
+          "input": 1,
+          "to": "S0"
+        },
+        {
+          "from": "P11",
+          "input": 0,
+          "to": "S1"
+        },
+        {
+          "from": "P11",
+          "input": 1,
+          "to": "P12"
+        },
+        {
+          "from": "P12",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "P12",
+          "input": 1,
+          "to": "S1"
+        }
+      ]
+    },
+    "diagnosis": {
+      "status": "IR_SPEC_MISMATCH",
+      "reset_contract_errors": [],
+      "shortest_counterexample": {
+        "bits": "001110101001",
+        "expected": 0,
+        "observed": 1
+      },
+      "visited_pairs": 15,
+      "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+    }
+  },
+  {
+    "task": "request_delay",
+    "word": "011111110000",
+    "ir": {
+      "schema": 1,
+      "clock_edge": "posedge",
+      "output_kind": "moore",
+      "reset": {
+        "kind": "async",
+        "active": 0,
+        "state": "P0"
+      },
+      "states": [
+        {
+          "name": "S0",
+          "output": 0
+        },
+        {
+          "name": "S1",
+          "output": 0
+        },
+        {
+          "name": "S2",
+          "output": 1
+        },
+        {
+          "name": "S3",
+          "output": 0
+        },
+        {
+          "name": "P0",
+          "output": 0
+        },
+        {
+          "name": "P1",
+          "output": 0
+        },
+        {
+          "name": "P2",
+          "output": 0
+        },
+        {
+          "name": "P3",
+          "output": 1
+        },
+        {
+          "name": "P4",
+          "output": 0
+        },
+        {
+          "name": "P5",
+          "output": 0
+        },
+        {
+          "name": "P6",
+          "output": 0
+        },
+        {
+          "name": "P7",
+          "output": 0
+        },
+        {
+          "name": "P8",
+          "output": 0
+        },
+        {
+          "name": "P9",
+          "output": 0
+        },
+        {
+          "name": "P10",
+          "output": 0
+        },
+        {
+          "name": "P11",
+          "output": 0
+        },
+        {
+          "name": "P12",
+          "output": 1
+        }
+      ],
+      "transitions": [
+        {
+          "from": "S0",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "S0",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "S1",
+          "input": 0,
+          "to": "S2"
+        },
+        {
+          "from": "S1",
+          "input": 1,
+          "to": "S2"
+        },
+        {
+          "from": "S2",
+          "input": 0,
+          "to": "S3"
+        },
+        {
+          "from": "S2",
+          "input": 1,
+          "to": "S3"
+        },
+        {
+          "from": "S3",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "S3",
+          "input": 1,
+          "to": "S3"
+        },
+        {
+          "from": "P0",
+          "input": 0,
+          "to": "P1"
+        },
+        {
+          "from": "P0",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "P1",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "P1",
+          "input": 1,
+          "to": "P2"
+        },
+        {
+          "from": "P2",
+          "input": 0,
+          "to": "S2"
+        },
+        {
+          "from": "P2",
+          "input": 1,
+          "to": "P3"
+        },
+        {
+          "from": "P3",
+          "input": 0,
+          "to": "S3"
+        },
+        {
+          "from": "P3",
+          "input": 1,
+          "to": "P4"
+        },
+        {
+          "from": "P4",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "P4",
+          "input": 1,
+          "to": "P5"
+        },
+        {
+          "from": "P5",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "P5",
+          "input": 1,
+          "to": "P6"
+        },
+        {
+          "from": "P6",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "P6",
+          "input": 1,
+          "to": "P7"
+        },
+        {
+          "from": "P7",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "P7",
+          "input": 1,
+          "to": "P8"
+        },
+        {
+          "from": "P8",
+          "input": 0,
+          "to": "P9"
+        },
+        {
+          "from": "P8",
+          "input": 1,
+          "to": "S3"
+        },
+        {
+          "from": "P9",
+          "input": 0,
+          "to": "P10"
+        },
+        {
+          "from": "P9",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "P10",
+          "input": 0,
+          "to": "P11"
+        },
+        {
+          "from": "P10",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "P11",
+          "input": 0,
+          "to": "P12"
+        },
+        {
+          "from": "P11",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "P12",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "P12",
+          "input": 1,
+          "to": "S1"
+        }
+      ]
+    },
+    "diagnosis": {
+      "status": "IR_SPEC_MISMATCH",
+      "reset_contract_errors": [],
+      "shortest_counterexample": {
+        "bits": "011111110000",
+        "expected": 0,
+        "observed": 1
+      },
+      "visited_pairs": 17,
+      "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+    }
+  },
+  {
+    "task": "debounce3",
+    "word": "000101111101",
+    "ir": {
+      "schema": 1,
+      "clock_edge": "posedge",
+      "output_kind": "moore",
+      "reset": {
+        "kind": "async",
+        "active": 0,
+        "state": "P0"
+      },
+      "states": [
+        {
+          "name": "S0",
+          "output": 0
+        },
+        {
+          "name": "S1",
+          "output": 0
+        },
+        {
+          "name": "S2",
+          "output": 0
+        },
+        {
+          "name": "S3",
+          "output": 1
+        },
+        {
+          "name": "S4",
+          "output": 1
+        },
+        {
+          "name": "P0",
+          "output": 0
+        },
+        {
+          "name": "P1",
+          "output": 0
+        },
+        {
+          "name": "P2",
+          "output": 0
+        },
+        {
+          "name": "P3",
+          "output": 0
+        },
+        {
+          "name": "P4",
+          "output": 0
+        },
+        {
+          "name": "P5",
+          "output": 0
+        },
+        {
+          "name": "P6",
+          "output": 0
+        },
+        {
+          "name": "P7",
+          "output": 0
+        },
+        {
+          "name": "P8",
+          "output": 1
+        },
+        {
+          "name": "P9",
+          "output": 1
+        },
+        {
+          "name": "P10",
+          "output": 1
+        },
+        {
+          "name": "P11",
+          "output": 1
+        },
+        {
+          "name": "P12",
+          "output": 0
+        }
+      ],
+      "transitions": [
+        {
+          "from": "S0",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "S0",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "S1",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "S1",
+          "input": 1,
+          "to": "S2"
+        },
+        {
+          "from": "S2",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "S2",
+          "input": 1,
+          "to": "S3"
+        },
+        {
+          "from": "S3",
+          "input": 0,
+          "to": "S4"
+        },
+        {
+          "from": "S3",
+          "input": 1,
+          "to": "S3"
+        },
+        {
+          "from": "S4",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "S4",
+          "input": 1,
+          "to": "S3"
+        },
+        {
+          "from": "P0",
+          "input": 0,
+          "to": "P1"
+        },
+        {
+          "from": "P0",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "P1",
+          "input": 0,
+          "to": "P2"
+        },
+        {
+          "from": "P1",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "P2",
+          "input": 0,
+          "to": "P3"
+        },
+        {
+          "from": "P2",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "P3",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "P3",
+          "input": 1,
+          "to": "P4"
+        },
+        {
+          "from": "P4",
+          "input": 0,
+          "to": "P5"
+        },
+        {
+          "from": "P4",
+          "input": 1,
+          "to": "S2"
+        },
+        {
+          "from": "P5",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "P5",
+          "input": 1,
+          "to": "P6"
+        },
+        {
+          "from": "P6",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "P6",
+          "input": 1,
+          "to": "P7"
+        },
+        {
+          "from": "P7",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "P7",
+          "input": 1,
+          "to": "P8"
+        },
+        {
+          "from": "P8",
+          "input": 0,
+          "to": "S4"
+        },
+        {
+          "from": "P8",
+          "input": 1,
+          "to": "P9"
+        },
+        {
+          "from": "P9",
+          "input": 0,
+          "to": "S4"
+        },
+        {
+          "from": "P9",
+          "input": 1,
+          "to": "P10"
+        },
+        {
+          "from": "P10",
+          "input": 0,
+          "to": "P11"
+        },
+        {
+          "from": "P10",
+          "input": 1,
+          "to": "S3"
+        },
+        {
+          "from": "P11",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "P11",
+          "input": 1,
+          "to": "P12"
+        },
+        {
+          "from": "P12",
+          "input": 0,
+          "to": "S4"
+        },
+        {
+          "from": "P12",
+          "input": 1,
+          "to": "S3"
+        }
+      ]
+    },
+    "diagnosis": {
+      "status": "IR_SPEC_MISMATCH",
+      "reset_contract_errors": [],
+      "shortest_counterexample": {
+        "bits": "000101111101",
+        "expected": 1,
+        "observed": 0
+      },
+      "visited_pairs": 18,
+      "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+    }
+  }
+]

@@ -1,0 +1,14 @@
+```verilog
+module phase_snapshot(input clk,rst_n,capture,clear_sample,input [1:0] data,input publish,output reg [1:0] sampled,visible,output reg published);
+always @(negedge clk or negedge rst_n) if(!rst_n) sampled<=0; else if(clear_sample) sampled<=0; else if(capture) sampled<=data;
+always @(posedge clk or negedge rst_n) if(!rst_n) begin visible<=0;published<=0;end else begin published<=publish;if(publish)visible<=sampled;end
+endmodule
+
+```
+```verilog
+module phase_snapshot(input clk,rst_n,capture,clear_sample,input [1:0] data,input publish,output reg [1:0] sampled,visible,output reg published);
+always @(negedge clk or negedge rst_n) if(!rst_n) sampled<=0; else if(clear_sample) sampled<=0; else if(capture) sampled<=data;
+always @(posedge clk or negedge rst_n) if(!rst_n) begin visible<=0;published<=0;end else begin published<=publish;if(publish)visible<=sampled;end
+endmodule
+
+```

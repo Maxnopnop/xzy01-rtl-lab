@@ -1,0 +1,21 @@
+{
+  "model": "openai/gpt-5.6-sol",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs."
+    },
+    {
+      "role": "user",
+      "content": "\nModule A implements the boolean function z = (x^y) & x.\n\nModule B can be described by the following simulation waveform:\n\n  time  x  y  z\n  0ns   0  0  1\n  5ns   0  0  1\n  10ns  0  0  1\n  15ns  0  0  1\n  20ns  0  0  1\n  25ns  1  0  0\n  30ns  1  0  0\n  35ns  0  1  0\n  40ns  0  1  0\n  45ns  1  1  1\n  50ns  1  1  1\n  55ns  0  0  1\n  60ns  0  1  0\n  65ns  0  1  0\n  70ns  1  1  1\n  75ns  0  1  0\n  80ns  0  1  0\n  85ns  0  1  0\n  90ns  1  0  0\n\nNow consider a top-level module with the following interface:\n\n - input  x\n - input  y\n - output z\n\nThe module is implemented with two A submodules and two B submodules. The\nfirst input of all four submodules is connect to input 'x', and the\nsecond input of all four submodules is connected to 'y'. The output of\nthe first A submodule is connected to a two-input OR, along with the\noutput of the first B submodule. The second pair of A and B submodules is\nsimilarly connected to an AND gate. The output of the OR and the AND is\nconnected to an XOR, whose output is 'z'.\n\n"
+    }
+  ],
+  "stream": false,
+  "provider": {
+    "only": [
+      "openai"
+    ],
+    "allow_fallbacks": false,
+    "require_parameters": true
+  }
+}

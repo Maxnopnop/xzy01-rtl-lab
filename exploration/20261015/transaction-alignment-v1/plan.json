@@ -1,0 +1,202 @@
+{
+  "status": "PREPARED_NOT_EXECUTED",
+  "created_date": "2026-10-15",
+  "kind": "SAME_AUTHOR_DEVELOPMENT_PHASE_A",
+  "required_release": "Coordinator approval bound to exact SHA of this plan; not yet granted",
+  "denominator": 12,
+  "cases": [
+    {
+      "id": "01_same_mapping",
+      "kind": 0,
+      "scene": 5,
+      "fault": 0,
+      "latency": 0,
+      "expected": {
+        "ir_spec": "PASS",
+        "rtl_spec": "PASS",
+        "intent": "PASS"
+      }
+    },
+    {
+      "id": "02_legal_stuttering",
+      "kind": 0,
+      "scene": 5,
+      "fault": 0,
+      "latency": 2,
+      "expected": {
+        "ir_spec": "PASS",
+        "rtl_spec": "PASS",
+        "intent": "PASS"
+      }
+    },
+    {
+      "id": "03_two_slot_buffer",
+      "kind": 1,
+      "scene": 1,
+      "fault": 0,
+      "latency": 0,
+      "expected": {
+        "ir_spec": "PASS",
+        "rtl_spec": "PASS",
+        "intent": "PASS"
+      }
+    },
+    {
+      "id": "04_early_valid_wait",
+      "kind": 3,
+      "scene": 3,
+      "fault": 0,
+      "latency": 0,
+      "expected": {
+        "ir_spec": "PASS",
+        "rtl_spec": "PASS",
+        "intent": "PASS"
+      }
+    },
+    {
+      "id": "05_same_edge_legal",
+      "kind": 2,
+      "scene": 2,
+      "fault": 0,
+      "latency": 0,
+      "expected": {
+        "ir_spec": "PASS",
+        "rtl_spec": "PASS",
+        "intent": "PASS"
+      }
+    },
+    {
+      "id": "06_early_consume_flat_equal",
+      "kind": 4,
+      "scene": 2,
+      "fault": 0,
+      "latency": 0,
+      "expected": {
+        "ir_spec": "PASS",
+        "rtl_spec": "FUNCTION_FAIL",
+        "intent": "FUNCTION_FAIL"
+      },
+      "required_rtl_category": "UNEXPECTED_TRANSACTION"
+    },
+    {
+      "id": "07_partial_delivery_reset",
+      "kind": 0,
+      "scene": 0,
+      "fault": 0,
+      "latency": 0,
+      "expected": {
+        "ir_spec": "PASS",
+        "rtl_spec": "PASS",
+        "intent": "PASS"
+      }
+    },
+    {
+      "id": "08_stale_across_epoch",
+      "kind": 0,
+      "scene": 0,
+      "fault": 1,
+      "latency": 0,
+      "expected": {
+        "ir_spec": "PASS",
+        "rtl_spec": "FUNCTION_FAIL",
+        "intent": "FUNCTION_FAIL"
+      },
+      "required_rtl_category": "UNEXPECTED_TRANSACTION"
+    },
+    {
+      "id": "09_reset_acceptance_gap",
+      "kind": 1,
+      "scene": 0,
+      "fault": 0,
+      "latency": 0,
+      "expected": {
+        "ir_spec": "PASS",
+        "rtl_spec": "PASS",
+        "intent": "NOT_EVALUABLE"
+      },
+      "reason": "Different accepted/cancelled offer sets at fixed reset"
+    },
+    {
+      "id": "10_reset_policy_missing",
+      "skip": true,
+      "expected": {
+        "ir_spec": "SPEC_AMBIGUOUS",
+        "rtl_spec": "SPEC_AMBIGUOUS",
+        "intent": "NOT_EVALUABLE"
+      },
+      "reason": "Counterfactual descriptor deliberately omits reset cancellation policy; no IR/native execution"
+    },
+    {
+      "id": "11_source_protocol_break",
+      "kind": 0,
+      "scene": 4,
+      "fault": 0,
+      "latency": 0,
+      "expected": {
+        "ir_spec": "INPUT_PROTOCOL_FAIL",
+        "rtl_spec": "INPUT_PROTOCOL_FAIL",
+        "intent": "NOT_EVALUABLE"
+      },
+      "reason": "External driver changes held payload at cycle6; not a DUT error"
+    },
+    {
+      "id": "12_missing_pre_sample",
+      "kind": 0,
+      "scene": 5,
+      "fault": 0,
+      "latency": 0,
+      "drop_rtl_cycle": 6,
+      "expected": {
+        "ir_spec": "PASS",
+        "rtl_spec": "TRACE_INVALID",
+        "intent": "NOT_EVALUABLE"
+      },
+      "reason": "Raw retained; declared adapter negative view omits pre sample6"
+    }
+  ],
+  "source_hashes": {
+    "broadcast-ir.json": "a09a91cc23095389c009f59e1800d2cc89efb14d835022c4ec9c9d49c55a504c",
+    "cases.json": "773bfed1791405e94e5cbeeb37b5760dea3d1059285ec3ea6bb47790b5ec1f09",
+    "CONTRACT.md": "622e8ac5d52e2baa8c4580ee5d78af0b53b0093f8ce7d6b15c5e67fd44b1bc0c",
+    "COVERAGE.md": "2153837b5cc5f587a22f840d5eae3d384f99f16d08f4cb40dbc69aff1749f5fd",
+    "current-ir-source.json": "436496558dd2fa10baefe44546bbea24f52ddb790573cc2f7611b861f214f893",
+    "development.v": "c6cab6ab8aa22b36da079615975bc1a0cf81a4df581dedd3c89fa1ae27c97068",
+    "execute.py": "d1f70d592bcee0b992afa3e8ff9ce2ed106be04c5c768b5143359f392b4d5032",
+    "findings.md": "a21d515ddea55c8d75acc4cbcf056a9cd0b3a06131cfaedb4accbf9c8bcfbd4c",
+    "freeze.py": "a911e9e89ec24a88a7d3ab9d88ea1d0994e268a31d45a459c5636d10333656de",
+    "ir_adapter.py": "7b2954615884109ac4f6e9150e4f62728e21502a9a2724f68bce20e5e2305ba6",
+    "ir_worker.py": "5c8d41428b8004cc79945a8fe593069d58b98489dec24ade03595cf11140b661",
+    "metadata.py": "53564b7cd6418148d689d4b86f2f0bc36a10f70d45be91bd6cc7395d1b073d2a",
+    "PRESERVATION.md": "95c8475f448fe852a4302bb56fd48e779ccf508902e8b77371b0788edfe18f93",
+    "prior-lock.json": "7ee499e62de152605efaae74bbf4eefb137fba21c6cb53a694b631220f164e8c",
+    "progress.md": "c6004eec69c75f6a9d339aa2545a33559d08da782308bf315c9c291213228c75",
+    "PROTOCOL.md": "baa249f17732b0025672f3fca31c6efebbdc8c817ba507c94f651d1c6501bb20",
+    "REFERENCE_HAND_DERIVATION.md": "4c20b2590cdc5cad84108fb33ff8b46c060823d96da3fb2757d598b5b0f79f57",
+    "SAMPLING_ALIGNMENT.md": "77c29c0001c20929be19d154282fc269a8aee2b9d970507ef6e8527f8b317715",
+    "spec_checker.py": "d62f30aa84fffa108caff0373df3e92047cbe5d37f9d70b23d07d7f3e1de734a",
+    "static-validation.json": "755187e4183799a6d8e4773044411e73f1f03d3c2caa6495cff9c416316e1db9",
+    "task_plan.md": "de3059db5918741a13a7acaf3e30f2700f529b9ed87a844bce88e67d0a8c2366",
+    "tb.v": "87546e76e6a0f516c9728cba456b938bd13112befa6ef42550e63c1923b38b9d",
+    "tools.json": "6e4c6ea69ed0026ff09cbee97eb6f6292ec7d6c73dc29dab560f13131c56e273",
+    "transaction_relation.py": "8b503e3f7866a6981a4cd6c66be4295459a36b0f8c21c2a1cc5ce6a4fead74df"
+  },
+  "limits": {
+    "ir_executions": 11,
+    "compile": 11,
+    "sim": 11,
+    "cycles_per_trace": 80,
+    "events_per_trace": 160,
+    "workers": 1,
+    "ir_seconds": 30,
+    "compile_seconds": 15,
+    "sim_seconds": 10,
+    "wall_seconds": 1800,
+    "disk_bytes": 262144000,
+    "retries": 0
+  },
+  "new_model_calls": 0,
+  "production_integration": false,
+  "external_tasks_authorized": false,
+  "old_calibration": "v2 original15/16 full conditions, exit1 preserved",
+  "old_default": "24tests/3failure/1error/2skip/exit1 preserved, not rerun"
+}

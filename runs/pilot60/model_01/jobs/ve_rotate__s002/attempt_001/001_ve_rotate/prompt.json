@@ -1,0 +1,8 @@
+{
+  "mode": "codex",
+  "request": {
+    "model": "gpt-5.6-sol",
+    "prompt": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs.\n\nI would like you to implement a module named TopModule with the following\ninterface. All input and output ports are one bit unless otherwise\nspecified.\n\n - input  clk\n - input  load\n - input  ena  (  2 bits)\n - input  data (100 bits)\n - output q    (100 bits)\n\nThe module should implement a 100-bit left/right rotator, with\nsynchronous load and left/right enable. A rotator shifts-in the\nshifted-out bit from the other end of the register, unlike a shifter that\ndiscards the shifted-out bit and shifts in a zero. If enabled, a rotator\nrotates the bits around and does not modify/discard them.\n\n  (1) load: Loads shift register with data[99:0] instead of rotating.\n      Synchronous active high.\n\n  (2) ena[1:0]: Synchronous. Chooses whether and which direction to\n      rotate:\n      (a) 2'b01 rotates right by one bit,\n      (b) 2'b10 rotates left by one bit,\n      (c) 2'b00 and 2'b11 do not rotate.\n\n  (3) q: The contents of the rotator.",
+    "note": "Exact CLI prompt and arguments are saved in codex_request.json and codex.json"
+  }
+}

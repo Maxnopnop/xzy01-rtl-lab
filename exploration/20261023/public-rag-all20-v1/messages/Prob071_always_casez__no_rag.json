@@ -1,0 +1,10 @@
+[
+  {
+    "role": "system",
+    "content": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs."
+  },
+  {
+    "role": "user",
+    "content": "\nI would like you to implement a module named TopModule with the following\ninterface. All input and output ports are one bit unless otherwise\nspecified.\n\n - input  in  (8 bits)\n - output pos (3 bits)\n\nThe module should implement a priority encoder for an 8-bit input. Given\nan 8-bit vector, the output should report the first (least significant)\nbit in the vector that is 1. Report zero if the input vector has no bits\nthat are high. For example, the input 8'b10010000 should output 3'd4,\nbecause bit[4] is first bit that is high.\n\n"
+  }
+]

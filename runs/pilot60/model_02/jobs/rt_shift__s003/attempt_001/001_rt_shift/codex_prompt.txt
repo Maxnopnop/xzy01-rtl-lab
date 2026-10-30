@@ -1,0 +1,31 @@
+Implement the given digital circuit in synthesizable SystemVerilog.
+Return only one complete module in a single ```systemverilog code block.
+Use exactly the specified module name and ports. Do not provide a testbench.
+No includes, preprocessor directives, strings, hierarchical references, extra
+modules, simulation system tasks, file IO, or attributes. Only $signed,
+$unsigned and $clog2 system functions are permitted. Do not use delays.
+The independent evaluator will supply all input stimuli and check outputs.
+
+Please act as a professional verilog designer.
+
+Implement a right shifter. The module performs an 8-bit right shift on a 1-bit input by first initializing the q register to 0. On each rising edge of the clock, the module shifts the contents of the q register to the right by one bit and inserts the new input bit d into the most significant position of the register.
+
+Module name:  
+    right_shifter    
+
+Input ports:
+    clk: Clock signal used for synchronous operation.
+    d: Input signal to be right-shifted.
+
+Output ports:
+    q: Output signal representing the result of the right shift operation.
+
+Implementation:
+The register is defined as reg [7:0] q and initialized to 0 using the initial statement. The value of q is right-shifted by 1 bit using the >> operator: q <= (q >> 1).
+The most significant bit (q[7]) of the register is assigned the value of the input signal (d): q[7] <= d.
+
+Give me the complete code.
+
+Development-subset clarification (part of the fixed specification): Output q is 8 bits. The specified initial q=0 is required; this generic synthesis check retains initialization and makes no ASIC power-up guarantee.
+
+Reply directly with the RTL. Do not invoke tools, read files, run tests, or delegate.

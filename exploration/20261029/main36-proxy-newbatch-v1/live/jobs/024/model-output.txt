@@ -1,0 +1,43 @@
+```systemverilog
+module TopModule (
+  input  logic         clk,
+  input  logic         load,
+  input  logic [511:0] data,
+  output logic [511:0] q
+);
+
+  logic [511:0] next_q;
+  logic [511:0] left_cells;
+  logic [511:0] right_cells;
+  integer i;
+
+  assign left_cells  = {1'b0, q[511:1]};
+  assign right_cells = {q[510:0], 1'b0};
+
+  always_comb begin
+    next_q = 512'b0;
+    for (i = 0; i < 512; i = i + 1) begin
+      case ({left_cells[i], q[i], right_cells[i]})
+        3'b111: next_q[i] = 1'b0;
+        3'b110: next_q[i] = 1'b1;
+        3'b101: next_q[i] = 1'b1;
+        3'b100: next_q[i] = 1'b0;
+        3'b011: next_q[i] = 1'b1;
+        3'b010: next_q[i] = 1'b1;
+        3'b001: next_q[i] = 1'b1;
+        3'b000: next_q[i] = 1'b0;
+        default: next_q[i] = 1'b0;
+      endcase
+    end
+  end
+
+  always_ff @(posedge clk) begin
+    if (load) begin
+      q <= data;
+    end else begin
+      q <= next_q;
+    end
+  end
+
+endmodule
+```

@@ -1,0 +1,18 @@
+{
+  "mode": "offline",
+  "request": {
+    "model": "",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs."
+      },
+      {
+        "role": "user",
+        "content": "Implement module shift8(input wire [7:0] a, input wire [2:0] amount, input wire right, output wire [7:0] y). Combinational logical shift. right=1: a>>amount; right=0: a<<amount. Zero fill; truncate to 8 bits."
+      }
+    ],
+    "stream": false,
+    "max_tokens": 4096
+  }
+}

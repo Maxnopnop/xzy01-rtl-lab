@@ -1,0 +1,9 @@
+{
+  "request_sha256": "8466fc63ddd19a995348bc4d2452ceac28804abb688de04bca7258f2172e6ba8",
+  "client_post_invocations": 1,
+  "http_status": 200,
+  "response_bytes": 1175,
+  "raw_body_sha256": "e280338a0c482944b78fbedb191d4eefb83d487f8cea5dc22922492490dafbf8",
+  "body": "\n         \n{\"id\":\"gen-1792817062-bIlWwCGFId2aIVTgcjpx\",\"object\":\"chat.completion\",\"created\":1792817062,\"model\":\"openai/gpt-5.6-sol\",\"provider\":\"OpenAI\",\"system_fingerprint\":null,\"service_tier\":\"default\",\"choices\":[{\"index\":0,\"logprobs\":null,\"finish_reason\":\"stop\",\"native_finish_reason\":\"completed\",\"message\":{\"role\":\"assistant\",\"content\":\"```systemverilog\\nmodule TopModule (\\n    input  logic [3:0] in,\\n    output logic [3:0] out_both,\\n    output logic [3:0] out_any,\\n    output logic [3:0] out_different\\n);\\n\\n    always_comb begin\\n        out_both      = in & {1'b0, in[3:1]};\\n        out_any       = in | {in[2:0], 1'b0};\\n        out_different = in ^ {in[0], in[3:1]};\\n    end\\n\\nendmodule\\n```\",\"refusal\":null,\"reasoning\":null}}],\"usage\":{\"prompt_tokens\":478,\"completion_tokens\":127,\"total_tokens\":605,\"cost\":0.004452,\"is_byok\":false,\"prompt_tokens_details\":{\"cached_tokens\":0,\"cache_write_tokens\":0,\"audio_tokens\":0,\"video_tokens\":0},\"cost_details\":{\"upstream_inference_cost\":0.004452,\"upstream_inference_prompt_cost\":0.001912,\"upstream_inference_completions_cost\":0.00254},\"completion_tokens_details\":{\"reasoning_tokens\":0,\"image_tokens\":0,\"audio_tokens\":0}}}",
+  "outcome": "HTTP_OK"
+}

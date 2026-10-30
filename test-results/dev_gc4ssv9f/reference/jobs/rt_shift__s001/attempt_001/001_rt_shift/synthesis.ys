@@ -1,0 +1,8 @@
+read_verilog -sv dut.sv
+hierarchy -check -top right_shifter
+proc
+check -assert
+synth -noabc -top right_shifter
+check -assert
+tee -o synthesis-stat.json stat -json
+write_json synthesis-netlist.json

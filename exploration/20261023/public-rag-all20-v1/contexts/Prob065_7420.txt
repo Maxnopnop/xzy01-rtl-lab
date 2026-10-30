@@ -1,0 +1,26 @@
+
+
+<generic_reference_context>
+These are generic style excerpts, not new task requirements or solutions. The original specification above takes precedence.
+Source: lowRISC contributors; CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/); unmodified selected prose.
+https://github.com/lowRISC/style-guides/blob/9c15ff5dce23eef969e00ab3715153967419eadd/VerilogCodingStyle.md
+[LR018; Case Statements; lines 2245-2252]
+`casex` should not be used. `casex` implements a symmetric wildcard operator
+such that an `X` in the case expression may match one or more case items.
+`casez` only treats high-impedance states (`Z` or `?`) as a wildcard, and
+performs exact matches for undriven `X` inputs. While this does not completely
+fix the problems with symmetric wildcard matching, it is harder to accidentally
+produce a `Z` input than an `X` input, so this form is preferred.
+`case inside` does not treat either `X` or `Z` in the case expression as a
+wildcard, so this form is preferred over `casez`.
+
+[LR015; Case Statements; lines 2189-2192]
+  - a `default:` statement is **always** included in order to avoid accidental
+  inference of latches, even if all cases are covered. In simulation, a case
+  expression that evaluates to `X` will not match any case and will behave as a
+  latch, leading to different behavior than synthesis if no default is specified.
+
+[LR010; Combinational Logic; lines 2152-2153]
+Do not use three-state logic (`Z` state) to accomplish on-chip logic such as
+muxing.
+</generic_reference_context>

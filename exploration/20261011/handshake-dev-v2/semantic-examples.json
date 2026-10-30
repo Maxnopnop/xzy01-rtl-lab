@@ -1,0 +1,11 @@
+{
+ "status":"DESIGN_ONLY_NOT_EXECUTED_IR_OR_CLASSIFIER", "denominator":6,
+ "examples":[
+  {"name":"legal_stuttering","offer_id":[0,0],"spec_payload":[81,1],"IR":{"accept":2,"deliver":[5,5],"payload":[81,1]},"RTL":{"accept":4,"deliver":[8,8],"payload":[81,1]},"proposed":["PASS","PASS","PASS"]},
+  {"name":"rtl_corrects_ir","offer_id":[0,0],"spec_payload":[81,1],"IR":{"accept":2,"deliver":[5,5],"payload":[80,1]},"RTL":{"accept":4,"deliver":[8,8],"payload":[81,1]},"proposed":["FAIL","PASS","FAIL"]},
+  {"name":"rtl_diverges","offer_id":[0,0],"spec_payload":[81,1],"IR":{"accept":2,"deliver":[5,5],"payload":[81,1]},"RTL":{"accept":4,"deliver":[8,8],"payload":[80,1]},"proposed":["PASS","FAIL","FAIL"]},
+  {"name":"both_wrong_agree","offer_id":[0,0],"spec_payload":[81,1],"IR":{"accept":2,"deliver":[5,5],"payload":[80,1]},"RTL":{"accept":4,"deliver":[8,8],"payload":[80,1]},"proposed":["FAIL","FAIL","PASS"]},
+  {"name":"reset_alignment_gap","reset_cycle":3,"IR":{"accepted_ids":[[0,0]],"delivered_ids":[[],[]],"cancelled_pending_ids":[[0,0]]},"RTL":{"accepted_ids":[],"delivered_ids":[[],[]],"cancelled_unaccepted_ids":[[0,0]]},"proposed":["PASS","PASS","ALIGNMENT_NOT_EVALUABLE"]},
+  {"name":"legacy_ir_domain_gap","ir_schema":"fsm_ir.py/schema1/1bit_Moore","required":"8bit_last_ready_two_consumers","proposed":["UNSUPPORTED_DOMAIN","BOUNDED_RTL_PASS","NOT_EVALUABLE"]}
+ ]
+}

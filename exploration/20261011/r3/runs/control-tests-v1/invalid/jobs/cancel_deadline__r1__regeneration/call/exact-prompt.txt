@@ -1,0 +1,19 @@
+Implement the given digital circuit in synthesizable SystemVerilog.
+Return only one complete module in a single ```systemverilog code block.
+Use exactly the specified module name and ports. Do not provide a testbench.
+No includes, preprocessor directives, strings, hierarchical references, extra
+modules, simulation system tasks, file IO, or attributes. Only $signed,
+$unsigned and $clog2 system functions are permitted. Do not use delays.
+The independent evaluator will supply all input stimuli and check outputs.
+Module: cancel_deadline
+Interface: input clk, rst_n; input req, input cancel, input finish; output busy, output accepted, output completed, output cancelled, output expired
+Specification: A single outstanding request with a three-edge completion window. Async active-low rst_n clears all state and outputs. At each rising clk edge, clear accepted/completed/cancelled/expired pulses. If idle before the edge, req=1 accepts a request, sets busy=1 and remaining=3, pulses accepted. cancel/finish have no effect while idle, even on acceptance. If busy before the edge, ignore req. Priority is cancel, then finish, then deadline. cancel terminates with cancelled=1; else finish terminates with completed=1; else remaining=1 terminates with expired=1; otherwise decrement remaining. No replacement is accepted on any terminating edge. Thus after acceptance, the next three rising edges are the response window; finish or cancel at the third edge beats expiry. busy and pulses hold between edges; async reset dominates simultaneous events.
+Public input concatenation, MSB first: req,cancel,finish
+Public expected output concatenation, MSB first: busy,accepted,completed,cancelled,expired
+Public event examples [clk,rst_n,packed_input,packed_expected_output], check after settling:
+[[0,0,0,0],[1,0,0,0],[0,1,0,0],[0,1,4,0],[1,1,4,24],[1,1,3,24],[1,1,4,24],[0,1,4,24],[0,1,0,24],[1,1,0,16],[1,1,7,16],[1,1,0,16],[0,1,0,16],[0,1,0,16],[1,1,0,16],[1,1,7,16],[1,1,0,16],[0,1,0,16],[0,1,0,16],[1,1,0,1],[1,1,7,1],[1,1,0,1],[0,1,0,1],[0,1,4,1],[1,1,4,24],[1,1,3,24],[1,1,4,24],[0,1,4,24],[0,0,4,0],[0,0,3,0],[0,1,4,0],[0,1,4,0],[0,1,3,0],[1,1,3,0],[1,1,4,0],[1,1,3,0],[0,1,3,0],[0,1,4,0],[1,1,4,24],[1,1,3,24],[1,1,4,24],[0,1,4,24],[0,1,1,24],[1,1,1,4],[1,1,6,4],[1,1,1,4],[0,1,1,4],[0,0,0,0],[1,0,0,0],[0,1,0,0],[0,1,7,0],[1,1,7,24],[1,1,0,24],[1,1,7,24],[0,1,7,24],[0,1,0,24],[1,1,0,16],[1,1,7,16],[1,1,0,16],[0,1,0,16],[0,1,0,16],[1,1,0,16],[1,1,7,16],[1,1,0,16],[0,1,0,16],[0,1,1,16],[1,1,1,4],[1,1,6,4],[1,1,1,4],[0,1,1,4],[0,1,4,4],[1,1,4,24],[1,1,3,24],[1,1,4,24],[0,1,4,24],[0,0,4,0],[0,0,3,0],[0,1,4,0],[0,1,4,0],[0,1,0,0],[1,1,0,0],[1,1,7,0],[1,1,0,0],[0,1,0,0],[0,1,0,0],[1,1,0,0],[1,1,7,0],[1,1,0,0],[0,1,0,0],[0,1,2,0],[1,1,2,0],[1,1,5,0],[1,1,2,0],[0,1,2,0],[0,0,0,0],[1,0,0,0],[0,1,0,0],[0,1,4,0],[1,1,4,24],[1,1,3,24],[1,1,4,24],[0,1,4,24],[0,1,4,24],[1,1,4,16],[1,1,3,16],[1,1,4,16],[0,1,4,16],[0,1,4,16],[1,1,4,16],[1,1,3,16],[1,1,4,16],[0,1,4,16],[0,1,4,16],[1,1,4,1],[1,1,3,1],[1,1,4,1],[0,1,4,1],[0,1,4,1],[1,1,4,24],[1,1,3,24],[1,1,4,24],[0,1,4,24],[0,0,4,0],[0,0,3,0],[0,1,4,0],[0,1,4,0]]
+
+Shared first candidate (untrusted; may contain errors):
+not valid RTL
+Implement the specification. You may correct the candidate while producing RTL. Return only the specified module. No further repair turn.
+Do not invoke tools, read files, run tests, or delegate. Reply directly.

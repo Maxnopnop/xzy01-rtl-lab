@@ -1,0 +1,223 @@
+
+
+<generic_reference_context>
+These are generic style excerpts, not new task requirements or solutions. The original specification above takes precedence.
+Source: lowRISC contributors; CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/); unmodified contiguous excerpts.
+https://github.com/lowRISC/style-guides/blob/9c15ff5dce23eef969e00ab3715153967419eadd/VerilogCodingStyle.md
+[GEN023; lowRISC Verilog Coding Style Guide; lines 1424-1511]
+While cyclic dependencies are permitted by the SystemVerilog language
+specification, their use can break some tools.
+
+For example:
+
+```systemverilog
+package foo;
+
+  // Package "bar" must not depend on anything in "foo":
+  parameter int unsigned PageSizeBytes = 16 * bar::Kibi;
+
+endpackage
+```
+
+### Module Declaration
+
+***Use the Verilog-2001 full port declaration style, and use the format
+below.***
+
+Use the Verilog-2001 combined port and I/O declaration style. Do not use the
+Verilog-95 list style. The port declaration in the module statement should fully
+declare the port name, type, and direction.
+
+The opening parenthesis should be on the same line as the module declaration,
+and the first port should be declared on the following line.
+
+The closing parenthesis should be on its own line, in column zero.
+
+Indentation for module declaration follows the standard indentation
+rule of two space indentation.
+
+The clock port(s) must be declared first in the port list, followed by any and
+all reset inputs.
+
+Example without parameters:
+
+&#x1f44d;
+```systemverilog {.good}
+module foo (
+  input              clk_i,
+  input              rst_ni,
+  input [7:0]        d_i,
+  output logic [7:0] q_o
+);
+```
+
+Example with parameters:
+
+&#x1f44d;
+```systemverilog {.good}
+module foo #(
+  parameter int unsigned Width = 8,
+) (
+  input                    clk_i,
+  input                    rst_ni,
+  input [Width-1:0]        d_i,
+  output logic [Width-1:0] q_o
+);
+```
+
+Do not use Verilog-95 style:
+
+&#x1f44e;
+```systemverilog {.bad}
+// WRONG:
+module foo(a, b, c d);
+input wire [2:0] a;
+output logic b;
+...
+```
+
+### Module Instantiation
+
+***Use named ports to fully specify all instantiations.***
+
+When connecting signals to ports for an instantiation, use the named port style,
+like this:
+
+```systemverilog
+my_module i_my_instance (
+  .clk_i (clk_i),
+  .rst_ni(rst_ni),
+  .d_i   (from_here),
+  .q_o   (to_there)
+);
+```
+
+If the port and the connecting signal have the same name, you can use the
+
+
+[GEN021; lowRISC Verilog Coding Style Guide; lines 1295-1356]
+Use common prefixes to identify groups of signals that operate together. For
+example, all elements of an AXI-S interface would share a prefix: `foo_valid`,
+`foo_ready`, and `foo_data`.
+
+Additionally, prefixes should be used to clearly label which signal is in which
+clock group for any module with multiple clocks. See the section on [clock
+domains](#clocks) for more details.
+
+Examples:
+
+-   Signals associated with controlling a blockram might share a `bram_` prefix.
+-   Signals that are synchronous with `clk_dram` rather than `clk` should share
+    a `dram_` prefix.
+
+Code example:
+
+&#x1f44d;
+```systemverilog {.good}
+module fifo_controller (
+  input         clk_i,
+  input         rst_ni,
+
+  // writer interface
+  input [15:0]  wr_data_i,
+  input         wr_valid_i,
+  output        wr_ready_o,
+
+  // reader interface
+  output [15:0] rd_data_o,
+  output        rd_valid_o,
+  output [7:0]  rd_fullness_o,
+  input         rd_ack_i,
+
+  // memory interface:
+  output [7:0]  mem_addr_o,
+  output [15:0] mem_wdata_o,
+  output        mem_we_o,
+  input  [15:0] mem_rdata_i
+);
+```
+
+This naming convention makes it easier to map port names onto similar signal
+names using simple and consistent rules. See the section on [Hierarchical
+Consistency](#hierarchical-consistency) for more information.
+
+#### Hierarchical consistency
+
+***The same signal should have the same name at any level of the hierarchy.***
+
+A signal that connects to a port of an instance should have the same name as
+that port. By proceeding in this manner, signals that are directly connected
+should maintain the same name at any level of hierarchy.
+
+Exceptions to this convention are expected, such as:
+
+*   When connecting a port to an element of an array of signals.
+
+*   When mapping a generic port name to something more specific to the design.
+    For example, two generic blocks, one with a `host_bus` port and one with a
+    `device_bus` port might be connected by a `foo_bar_bus` signal.
+
+In each exceptional case, care should be taken to make the mapping of port names
+
+
+[GEN037; lowRISC Verilog Coding Style Guide; lines 2363-2420]
+
+When assigning constant values, it is preferred to use underscore notation for
+hex or binary bit strengths of length beyond 8 for better readability. Zero
+prepending is not required unless it improves readability. Declare constants in
+the format (binary, hex, decimal) they are typically displayed in.
+
+
+&#x1f44d;
+```systemverilog {.good}
+logic [15:0] val0, val1, val2;
+logic [39:0] addr0, addr1;
+
+always_comb begin
+  val0 = 16'h0;
+  if (condition1) begin
+    val1  = 16'b0010_0011_0000_1101;
+    val2  = 16'b0010_1100_0000_0000;
+    addr1 = 40'h00_1fc0_0000;
+    addr2 = 40'h00_efc0_0000;
+  end else begin
+    val0  = 16'hffff;
+    val1  = 16'b1010_0011_0110_1001;
+    val2  = 16'b1110_1100_1111_0110;
+    addr1 = 40'h40_8000_0000;
+    addr2 = 40'h41_c000_0000;
+  end
+end
+```
+
+### Functions and Tasks
+
+The following section applies to synthesizable RTL only. See the [Coding Style
+Guide for Design Verification](DVCodingStyle.md) for DV usage.
+
+***In synthesizable RTL the use of functions is allowed, provided they are declared
+`automatic`. Tasks should not be used.***
+
+Functions must be declared in either a package or inside a module. A package is
+appropriate where the function relates to other definitions in the package and
+could be useful to multiple modules (even if it's currently only used by one). A
+module is appropriate where the function specifically relates to the internals
+of that module.
+
+Functions should aim to conceptually represent a reusable block of combinational
+logic.
+
+Storage types must be explicitly declared for all arguments and the function
+return value. All types must be 4-state data types, either `logic` or types
+derived from `logic` (such as appropriate `struct`, `enum` or `typedef` types).
+
+Do not use `output`, `inout`, or `ref` on function arguments. All functions
+should only consume inputs and produce one output. `input` is the default and is
+not required on the function arguments.
+
+
+&#x1f44e;
+```systemverilog {.bad}
+// - Doesn't have explicit storage type on `a` or `b` or return type
+
+</generic_reference_context>

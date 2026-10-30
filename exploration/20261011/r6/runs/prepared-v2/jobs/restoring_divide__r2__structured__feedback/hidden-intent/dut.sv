@@ -1,0 +1,93 @@
+module restoring_divide (
+    input  wire       clk,
+    input  wire       rst_n,
+    input  wire       abort,
+    input  wire       start,
+    input  wire       advance,
+    input  wire [3:0] numerator,
+    input  wire [3:0] denominator,
+    output reg        busy,
+    output reg        done,
+    output reg  [3:0] quotient,
+    output reg  [3:0] remainder
+);
+
+    reg [3:0] denominator_reg;
+    reg [3:0] numerator_reg;
+    reg [3:0] quotient_work;
+    reg [3:0] remainder_work;
+    reg [2:0] advance_count;
+
+    wire [4:0] trial_remainder;
+    wire       quotient_bit;
+    wire [4:0] reduced_remainder;
+    wire [3:0] shifted_quotient;
+
+    assign trial_remainder  = {remainder_work, numerator_reg[3]};
+    assign quotient_bit     =
+        trial_remainder >= {1'b0, denominator_reg};
+    assign reduced_remainder =
+        quotient_bit
+            ? trial_remainder - {1'b0, denominator_reg}
+            : trial_remainder;
+    assign shifted_quotient = {quotient_work[2:0], quotient_bit};
+
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            busy            <= 1'b0;
+            done            <= 1'b0;
+            quotient        <= 4'b0000;
+            remainder       <= 4'b0000;
+            denominator_reg <= 4'b0000;
+            numerator_reg   <= 4'b0000;
+            quotient_work   <= 4'b0000;
+            remainder_work  <= 4'b0000;
+            advance_count   <= 3'b000;
+        end else if (abort) begin
+            busy            <= 1'b0;
+            done            <= 1'b0;
+            quotient        <= 4'b0000;
+            remainder       <= 4'b0000;
+            denominator_reg <= 4'b0000;
+            numerator_reg   <= 4'b0000;
+            quotient_work   <= 4'b0000;
+            remainder_work  <= 4'b0000;
+            advance_count   <= 3'b000;
+        end else begin
+            done <= 1'b0;
+
+            if (busy) begin
+                if (advance) begin
+                    numerator_reg  <= {numerator_reg[2:0], 1'b0};
+                    quotient_work  <= shifted_quotient;
+                    remainder_work <= reduced_remainder[3:0];
+
+                    if (advance_count == 3'd3) begin
+                        busy          <= 1'b0;
+                        done          <= 1'b1;
+                        quotient      <= shifted_quotient;
+                        remainder     <= reduced_remainder[3:0];
+                        advance_count <= 3'b000;
+                    end else begin
+                        advance_count <= advance_count + 3'd1;
+                    end
+                end
+            end else if (start) begin
+                if (denominator == 4'b0000) begin
+                    busy      <= 1'b0;
+                    done      <= 1'b1;
+                    quotient  <= 4'b1111;
+                    remainder <= numerator;
+                end else begin
+                    busy            <= 1'b1;
+                    denominator_reg <= denominator;
+                    numerator_reg   <= numerator;
+                    quotient_work   <= 4'b0000;
+                    remainder_work  <= 4'b0000;
+                    advance_count   <= 3'b000;
+                end
+            end
+        end
+    end
+
+endmodule

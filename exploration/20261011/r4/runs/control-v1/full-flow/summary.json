@@ -1,0 +1,367 @@
+{
+  "planned_unique_calls": 48,
+  "started": 48,
+  "statuses": {
+    "EXTRACTION_ERROR": 2,
+    "PASS": 39,
+    "RTL_REJECTED": 2,
+    "FUNCTION_FAIL": 3,
+    "COMPILE_FAIL": 1,
+    "UNSUPPORTED": 1
+  },
+  "intent_statuses": {
+    "EXTRACTION_ERROR": 1,
+    "PASS": 9,
+    "FUNCTION_FAIL": 1,
+    "UNSUPPORTED": 1
+  },
+  "first_rtl_statuses": {
+    "PASS": 10,
+    "EXTRACTION_ERROR": 1,
+    "FUNCTION_FAIL": 1
+  },
+  "strategies": {
+    "structured_regeneration": {
+      "denominator": 6,
+      "passes": 5,
+      "statuses": {
+        "PASS": 5,
+        "FUNCTION_FAIL": 1
+      },
+      "opportunities": 18,
+      "allocated_calls": 12,
+      "shared_full_usage": {
+        "input_tokens": 1800,
+        "output_tokens": 360,
+        "cached_input_tokens": 180,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 18
+      },
+      "shared_half_usage": {
+        "input_tokens": 1200.0,
+        "output_tokens": 240.0,
+        "cached_input_tokens": 120.0,
+        "cache_write_input_tokens": 0.0,
+        "reasoning_output_tokens": 12.0
+      }
+    },
+    "structured_feedback": {
+      "denominator": 6,
+      "passes": 5,
+      "statuses": {
+        "PASS": 5,
+        "RTL_REJECTED": 1
+      },
+      "opportunities": 18,
+      "allocated_calls": 12,
+      "shared_full_usage": {
+        "input_tokens": 1800,
+        "output_tokens": 360,
+        "cached_input_tokens": 180,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 18
+      },
+      "shared_half_usage": {
+        "input_tokens": 1200.0,
+        "output_tokens": 240.0,
+        "cached_input_tokens": 120.0,
+        "cache_write_input_tokens": 0.0,
+        "reasoning_output_tokens": 12.0
+      }
+    },
+    "linear_regeneration": {
+      "denominator": 6,
+      "passes": 5,
+      "statuses": {
+        "RTL_REJECTED": 1,
+        "PASS": 5
+      },
+      "opportunities": 18,
+      "allocated_calls": 12,
+      "shared_full_usage": {
+        "input_tokens": 1800,
+        "output_tokens": 360,
+        "cached_input_tokens": 180,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 18
+      },
+      "shared_half_usage": {
+        "input_tokens": 1200.0,
+        "output_tokens": 240.0,
+        "cached_input_tokens": 120.0,
+        "cache_write_input_tokens": 0.0,
+        "reasoning_output_tokens": 12.0
+      }
+    },
+    "linear_feedback": {
+      "denominator": 6,
+      "passes": 5,
+      "statuses": {
+        "PASS": 5,
+        "COMPILE_FAIL": 1
+      },
+      "opportunities": 18,
+      "allocated_calls": 12,
+      "shared_full_usage": {
+        "input_tokens": 1800,
+        "output_tokens": 360,
+        "cached_input_tokens": 180,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 18
+      },
+      "shared_half_usage": {
+        "input_tokens": 1200.0,
+        "output_tokens": 240.0,
+        "cached_input_tokens": 120.0,
+        "cache_write_input_tokens": 0.0,
+        "reasoning_output_tokens": 12.0
+      }
+    }
+  },
+  "comparisons": [
+    {
+      "case": "epoch_commit__r1",
+      "representation": "structured",
+      "regeneration": "PASS",
+      "feedback": "PASS",
+      "effect": "no_change"
+    },
+    {
+      "case": "refund_credit__r1",
+      "representation": "structured",
+      "regeneration": "FUNCTION_FAIL",
+      "feedback": "PASS",
+      "effect": "help"
+    },
+    {
+      "case": "tagged_join__r1",
+      "representation": "structured",
+      "regeneration": "PASS",
+      "feedback": "RTL_REJECTED",
+      "effect": "harm"
+    },
+    {
+      "case": "epoch_commit__r2",
+      "representation": "structured",
+      "regeneration": "PASS",
+      "feedback": "PASS",
+      "effect": "no_change"
+    },
+    {
+      "case": "refund_credit__r2",
+      "representation": "structured",
+      "regeneration": "PASS",
+      "feedback": "PASS",
+      "effect": "no_change"
+    },
+    {
+      "case": "tagged_join__r2",
+      "representation": "structured",
+      "regeneration": "PASS",
+      "feedback": "PASS",
+      "effect": "no_change"
+    },
+    {
+      "case": "epoch_commit__r1",
+      "representation": "linear",
+      "regeneration": "RTL_REJECTED",
+      "feedback": "PASS",
+      "effect": "help"
+    },
+    {
+      "case": "refund_credit__r1",
+      "representation": "linear",
+      "regeneration": "PASS",
+      "feedback": "COMPILE_FAIL",
+      "effect": "harm"
+    },
+    {
+      "case": "tagged_join__r1",
+      "representation": "linear",
+      "regeneration": "PASS",
+      "feedback": "PASS",
+      "effect": "no_change"
+    },
+    {
+      "case": "epoch_commit__r2",
+      "representation": "linear",
+      "regeneration": "PASS",
+      "feedback": "PASS",
+      "effect": "no_change"
+    },
+    {
+      "case": "refund_credit__r2",
+      "representation": "linear",
+      "regeneration": "PASS",
+      "feedback": "PASS",
+      "effect": "no_change"
+    },
+    {
+      "case": "tagged_join__r2",
+      "representation": "linear",
+      "regeneration": "PASS",
+      "feedback": "PASS",
+      "effect": "no_change"
+    }
+  ],
+  "effects": {
+    "no_change": 8,
+    "help": 2,
+    "harm": 2
+  },
+  "actual_unique_usage": {
+    "input_tokens": 4800,
+    "output_tokens": 960,
+    "cached_input_tokens": 480,
+    "cache_write_input_tokens": 0,
+    "reasoning_output_tokens": 48
+  },
+  "cost": "UNKNOWN",
+  "observations": [
+    {
+      "id": "epoch_commit__r1__structured__first",
+      "category": "NOT_ASSESSABLE"
+    },
+    {
+      "id": "epoch_commit__r1__linear__first",
+      "category": "RTL_DIFFERENT_INTENT"
+    },
+    {
+      "id": "epoch_commit__r1__linear__feedback",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "epoch_commit__r1__linear__regeneration",
+      "category": "RTL_DIFFERENT_INTENT"
+    },
+    {
+      "id": "epoch_commit__r1__structured__feedback",
+      "category": "NOT_ASSESSABLE"
+    },
+    {
+      "id": "epoch_commit__r1__structured__regeneration",
+      "category": "NOT_ASSESSABLE"
+    },
+    {
+      "id": "refund_credit__r1__linear__first",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "refund_credit__r1__structured__first",
+      "category": "BOTH_DIVERGE"
+    },
+    {
+      "id": "refund_credit__r1__structured__regeneration",
+      "category": "BOTH_DIVERGE"
+    },
+    {
+      "id": "refund_credit__r1__structured__feedback",
+      "category": "CORRECT_RTL_DIFFERENT_INTENT"
+    },
+    {
+      "id": "refund_credit__r1__linear__regeneration",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "refund_credit__r1__linear__feedback",
+      "category": "RTL_DIFFERENT_INTENT"
+    },
+    {
+      "id": "tagged_join__r1__structured__first",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "tagged_join__r1__linear__first",
+      "category": "NOT_ASSESSABLE"
+    },
+    {
+      "id": "tagged_join__r1__linear__feedback",
+      "category": "NOT_ASSESSABLE"
+    },
+    {
+      "id": "tagged_join__r1__linear__regeneration",
+      "category": "NOT_ASSESSABLE"
+    },
+    {
+      "id": "tagged_join__r1__structured__feedback",
+      "category": "RTL_DIFFERENT_INTENT"
+    },
+    {
+      "id": "tagged_join__r1__structured__regeneration",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "epoch_commit__r2__linear__first",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "epoch_commit__r2__structured__first",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "epoch_commit__r2__structured__regeneration",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "epoch_commit__r2__structured__feedback",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "epoch_commit__r2__linear__regeneration",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "epoch_commit__r2__linear__feedback",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "refund_credit__r2__structured__first",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "refund_credit__r2__linear__first",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "refund_credit__r2__linear__feedback",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "refund_credit__r2__linear__regeneration",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "refund_credit__r2__structured__feedback",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "refund_credit__r2__structured__regeneration",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "tagged_join__r2__linear__first",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "tagged_join__r2__structured__first",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "tagged_join__r2__structured__regeneration",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "tagged_join__r2__structured__feedback",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "tagged_join__r2__linear__regeneration",
+      "category": "ALL_MATCH"
+    },
+    {
+      "id": "tagged_join__r2__linear__feedback",
+      "category": "ALL_MATCH"
+    }
+  ],
+  "label": "Model evidence only if actual real campaign; offline fixtures separately labeled"
+}

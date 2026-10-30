@@ -1,0 +1,18 @@
+{
+  "mode": "offline",
+  "request": {
+    "model": "",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs."
+      },
+      {
+        "role": "user",
+        "content": "Implement module sequence101(input wire clk, rst, din, output reg match). All state changes only on rising clk. rst is active-high synchronous and has priority. State before the first reset edge is unspecified. Registered serial 101 detector. Reset clears history and match. After each nonreset rising edge, match=1 iff the last three nonreset sampled bits are 1,0,1. Overlapping matches allowed (10101 gives two pulses). Fewer than three bits since reset cannot match."
+      }
+    ],
+    "stream": false,
+    "max_tokens": 2048
+  }
+}

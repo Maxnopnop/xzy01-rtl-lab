@@ -1,0 +1,120 @@
+PAGE 1
+ELEC 5550 Lab: Design Flow with Commercial EDA Tools
+1 Overview
+In this lab, you will be provided with a simplified default EDA flow to experience the basic
+implementation of digital design. It involves both logic synthesis and physical design (floor-
+planning, placement, clock tree synthesis, and routing). We provide you access to Synopsys
+Design Compiler for logic synthesis and Cadence Innovus for physical design. These tools
+are controlled with design flow scripts (filename in ***.tcl) in Tcl programming language. In
+addition to the design flow and tools, you will be provided with three simple designs (i.e.,
+TinyRocket, FPU, Sasc) in Verilog format, at the initial RTL stage. This lab tentatively
+accounts for around 20% of total course grade.
+This lab consists of two tasks, as summarized below.
+• Task 1 (basic, 60% grade): Finish the implementation of three given designs, directly
+using our provided simplified default EDA flow, which is already automated. Report
+the ultimate (i.e., post-routing) design quality, including timing, power, area (PPA),
+and DRC violations. Comment on the quality or problems of such chip implementation.
+• Task 2 (advanced, 40% grade): Try to revise the provided default EDA flow (in .tcl
+files) and implement three designs with revised flow again. Report what you do and
+ultimate chip results. You may target achieving better implementation results (e.g.,
+better PPA, less violations, etc.) or fixing existing problems in the default flow, if you
+notice some. Or you may just do some experiments to evaluate the impact of certain
+optimizations, and report your discoveries. Just play with it and have fun!
+You are supposed to submit materials below. Please put them in a zip file.
+1. A report in .pdf describing your implementation and results, minimum 2 pages, max-
+imum 6 pages, no required template. Follow requirements in above 2 tasks. Describe
+the area, power, timing, and DRC of both tasks and make comments on them. Describe
+the changes/improvement you have made and why you tried it. Describe any other
+discoveries or your opinions.
+2. The screenshot of each design layout after routing. Include as image files.
+3. The report file of area, power, timing, and DRC. Include as plain text files.
+For technical questions, please email our TAs and CC course instructor:
+1. TA: Wenji FANG (wfang838@connect.ust.hk)
+2. TA: Mengming LI (mengming.li@connect.ust.hk)
+3. Instructor: Zhiyao XIE (eezhiyao@ust.hk)
+1
+
+PAGE 2
+2 ECE LAB setup procedure
+Download and install Omnissa (VMware) Horizon Client at the link below:
+https://customerconnect.omnissa.com/downloads/info/slug/virtual desktop and apps/omnissa horizon clients/8
+Launch the Omnissa Horizon Client. Click the Add Server button on the top right-hand
+corner. To connect to “ECE LAB7”, typing “vdi.ece.ust.hk” when adding the server.
+Enter the account name, (not the whole email address). For example, if for ITSC account
+eeabc@ust.hk, just input “eeabc”.
+Afterward, a DUO 2FA check-up is prompted.
+2
+
+PAGE 3
+When successful, select “ECE LAB7” pool.
+3 Run EDA flow
+3.1 Build the EDA environment
+First, please copy the lab file from the course public folder and unzip it to your own folder.
+$ cp /staff/ee/dept/public/elec5550/ELEC5550_Lab.zip /your_folder
+$ cd your_folder
+$ unzip ELEC5550_Lab.zip
+The required EDA tools are available in the ECE LAB VDI environment.
+1. Synopsys Design Compiler
+source /usr/eelocal/synopsys/syn-vv2023.12/.cshrc
+2. Synopsys PrimeTime
+source /usr/eelocal/synopsys/pts-vt2022.03-sp5/.cshrc
+3. Cadence Innovus
+source /usr/eelocal/cadence/innovus201/.cshrc
+We have also provided a friendly and convenient method. Simply run ‘source setup.sh’
+provided in our folder ELEC5550/.
+Tips: If you are not familiar with any given command for Design Compiler, you can use
+the command “ help get* ” after entering dc shell prompt environment to perform a fuzzy
+search and match commands. Additionally, you can use “ man get cells” in the prompt
+environment to obtain detailed information about “get cells”. The same applies to Innovus
+(innovus). Also, you can find ‘help’ option in the GUI.
+3
+
+PAGE 4
+3.2 Detailed Information of each folder
+After setting the environments, you can see two folders: Flow/ and rtl/.
+In rtl/, we provide you with some RTL designs. Or you can put your own designs in this
+folder.
+In Flow/, there are three subfolders: dc release/, innovus release/, and tech/ .
+• dc release/: Design Compiler flow.
+• innovus release/: Place and Routing flow
+• tech/: stores the library files (no need to change). We adopt open-source tech library
+Nangate 45nm in this lab. FYI, our ECE IC Design Center (ICDC) provides TSMC
+technology libraries in 22nm, 28nm, 40nm, 65nm, etc. But you need to sign NDA before
+accessing it.
+3.3 Run the flow
+3.3.1 Logic synthesis
+$ cd Flow/dc_release
+In the ‘list design’ file, you can put the design name you need to run between ‘ START ’
+and ‘ END ’.
+4
+
+PAGE 5
+Parameter adjustment is done in the ‘dc.tcl’ file. You can try setting different parameters
+to constrain various aspects of the circuit, such as the clock or area, among others. This will
+have an impact on your synthesis results. Feel free to experiment and explore!
+To ensure that you are in the Bash environment, you can use the command “echo $0” to
+check. If you are not in Bash, please enter “bash” to switch to it. Make sure the following
+commands are executed successfully.
+$ source run_dc.sh
+This is a one-click run command. If there are no errors, you should get your DC results in a
+few minutes.
+3.3.2 Placement and Routing
+Similar to logic synthesis flow, you can run the P&R flow by the following steps.
+$ cd Flow/innovus_release
+In the ‘list design’ file, you can put the design name you need to run between ‘ START ’
+and ‘ END ’.
+Parameter adjustment is done in the ‘pnr.tcl’ file.
+Tips: We recommend running one design at a time to facilitate viewing the visual results.
+If you want to run all three designs at once, please remove the commented “exit” statement
+at the end of the pnr.tcl script.
+$ source run.sh
+This is also a one-click run command. If there are no errors, you should get your P&R results.
+5
+
+PAGE 6
+3.4 Check Results
+You will find a folder with the same name as the design in the current directory after the
+completion of synthesis(DC and P&R).
+In this folder, you can explore the “reports” and “results” directories to view outputs, such
+as netlists, area, power, and timing reports.
+6

@@ -1,0 +1,28 @@
+全部20题逐模型配对；每格=无RAG通过数 → 有RAG通过数（各原定2槽，服务失败另标记）。
+同一样本编号为预先固定的配对索引，不代表使用相同随机种子或由同一次生成修复。
+题目 | Luna | Terra | Sol | 标签
+Prob005_notgate | 2/2 → 2/2 | 2/2 → 2/2 | 2/2 → 2/2 | OTHER_STATIC_ELIGIBLE_NOT_IN_CONFIRMED_SUBSET
+Prob023_vector100r | 2/2 → 2/2 | 2/2 → 2/2 | 2/2 → 2/2 | CONFIRMED_CLEAR_SUBSET
+Prob029_m2014_q4g | 2/2 → 2/2 | 2/2 → 2/2 | 2/2 → 2/2 | HISTORY_OR_SPEC_EXCLUDED
+Prob032_vector0 | 2/2 → 2/2 | 2/2 → 2/2 | 2/2 → 2/2 | CONFIRMED_CLEAR_SUBSET
+Prob033_ece241_2014_q1c | 2/2 → 2/2 | 2/2 → 2/2 | 2/2 → 1/2 [s001:有RAG服务失败] | HISTORY_OR_SPEC_EXCLUDED
+Prob042_vector4 | 2/2 → 2/2 | 2/2 → 2/2 | 2/2 → 2/2 | OTHER_STATIC_ELIGIBLE_NOT_IN_CONFIRMED_SUBSET
+Prob043_vector5 | 2/2 → 2/2 | 2/2 → 2/2 | 2/2 → 2/2 | OTHER_STATIC_ELIGIBLE_NOT_IN_CONFIRMED_SUBSET
+Prob044_vectorgates | 2/2 → 2/2 | 2/2 → 2/2 | 2/2 → 2/2 | OTHER_STATIC_ELIGIBLE_NOT_IN_CONFIRMED_SUBSET
+Prob064_vector3 | 2/2 → 2/2 | 2/2 → 2/2 | 2/2 → 2/2 | UNSPECIFIED_CONCAT_SPLIT_ORDER
+Prob065_7420 | 2/2 → 2/2 | 2/2 → 2/2 | 2/2 → 2/2 | OTHER_STATIC_ELIGIBLE_NOT_IN_CONFIRMED_SUBSET
+Prob071_always_casez | 2/2 → 2/2 | 2/2 → 2/2 | 2/2 → 2/2 | HISTORY_OR_SPEC_EXCLUDED
+Prob074_ece241_2014_q4 | 2/2 → 2/2 | 2/2 → 2/2 | 1/2 → 2/2 [s001:无RAG服务失败] | OTHER_STATIC_ELIGIBLE_NOT_IN_CONFIRMED_SUBSET
+Prob089_ece241_2014_q5a | 0/2 → 2/2 | 2/2 → 1/2 | 2/2 → 2/2 | AMBIGUOUS_RESET_OUTPUT
+Prob109_fsm1 | 2/2 → 1/2 | 1/2 → 2/2 | 2/2 → 1/2 | HISTORY_OR_SPEC_EXCLUDED
+Prob127_lemmings1 | 1/2 → 2/2 | 2/2 → 2/2 | 2/2 → 2/2 | OTHER_STATIC_ELIGIBLE_NOT_IN_CONFIRMED_SUBSET
+Prob131_mt2015_q4 | 0/2 → 0/2 | 0/2 → 0/2 | 0/2 → 0/2 | HISTORY_OR_SPEC_EXCLUDED
+Prob132_always_if2 | 2/2 → 2/2 | 2/2 → 2/2 | 2/2 → 2/2 | HISTORY_OR_SPEC_EXCLUDED
+Prob146_fsm_serialdata | 0/2 → 0/2 | 0/2 → 1/2 | 2/2 → 2/2 | AMBIGUOUS_ERROR_RECOVERY_DONE
+Prob149_ece241_2013_q4 | 0/2 → 0/2 | 0/2 → 0/2 | 0/2 → 0/2 | HISTORY_OR_SPEC_EXCLUDED
+Prob150_review2015_fsmonehot | 0/2 → 0/2 | 2/2 → 0/2 | 2/2 → 2/2 | HISTORY_OR_SPEC_EXCLUDED
+
+总配对分类：{"both_pass": 91, "service_unpaired": 2, "help": 5, "worse": 5, "both_nonpass": 17}
+模型分类：{"gpt-5.6-luna": {"both_pass": 28, "help": 3, "worse": 1, "both_nonpass": 8}, "gpt-5.6-sol": {"both_pass": 33, "service_unpaired": 2, "worse": 1, "both_nonpass": 4}, "gpt-5.6-terra": {"both_pass": 30, "worse": 3, "help": 2, "both_nonpass": 5}}
+
+因果限制：仅两次样本/条件，无固定seed保证；有RAG/无RAG为独立调用，不能称修复同一代码。混合规格歧义、历史近重复、结构冲突，不能归因普遍RAG收益。无新增模型调用，无修改冻结内容。

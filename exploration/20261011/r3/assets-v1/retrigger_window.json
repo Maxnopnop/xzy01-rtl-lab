@@ -1,0 +1,38 @@
+{
+  "task": "retrigger_window",
+  "module": "retrigger_window",
+  "inputs": [
+    [
+      "trigger",
+      1
+    ],
+    [
+      "tick",
+      1
+    ],
+    [
+      "enable",
+      1
+    ],
+    [
+      "length",
+      2
+    ]
+  ],
+  "outputs": [
+    [
+      "active",
+      1
+    ],
+    [
+      "remaining",
+      2
+    ],
+    [
+      "expired",
+      1
+    ]
+  ],
+  "seed": 31002,
+  "spec": "Retriggerable timer counting enabled tick edges. Async active-low rst_n clears active, remaining and expired. At every rising edge first clear the expired pulse. trigger has highest priority regardless of enable/tick and loads remaining=max(length,1), active=1, cancelling any old expiration. length is sampled only on trigger. Otherwise, if active and enable and tick, remaining=1 expires: active=0, remaining=0, expired=1; else decrement remaining. Without enabled tick retain timer state. An inactive timer ignores tick. Consecutive trigger edges restart the full interval. length=0 is defined to mean 1, not illegal. All outputs hold between edges; reset dominates all events."
+}

@@ -1,0 +1,35 @@
+{
+  "id": "rt_counter12",
+  "module": "counter_12",
+  "checks": 960,
+  "spec": "Please act as a professional verilog designer.\n\nImplement a module of a counter design that requires counting from 4 'b0000 to 4' d11. The counting can be controlled by the input signal valid_count. That is, the count is paused if valid_count is 0. The counter increments on each clock cycle when the valid_count signal is active and resets to 0 when the reset signal (rst_n) is active.\n\nModule name:  \n    counter_12               \nInput ports:\n    rst_n: Reset signal (active low)\n    clk: Clock signal\n    valid_count: Signal to enable counting\nOutput ports:\n    out: 4-bit output representing the current count value\n\nImplementation:\nIf the reset signal is active (!rst_n), the counter is reset to 0 by assigning the value 4'b0000 to the output register (out). If the valid_count signal is 1, the counter increments. It checks if the current count value (out) is equal to 4'd11 (maximum count value). If it is, the counter wraps around and resets to 0 by assigning the value 4'b0000 to the output register (out). Otherwise, it increments the output register by 1. If the valid_count = 0, the counter will stop, and the output register (out) remains unchanged.\n\nGive me the complete code.\n\nDevelopment-subset clarification (part of the fixed specification): rst_n is asynchronous active-low; counting is on rising clk edges, matching the archived reference.",
+  "category": "sequential",
+  "split": "development",
+  "family": "counter",
+  "benchmark": "RTLLM",
+  "suite_version": "dev10-v1",
+  "synthesis_eligible": true,
+  "origin": {
+    "repository": "https://github.com/hkust-zhiyao/RTLLM",
+    "commit": "51ed553d0ffd32797a1a0a13e051656bf302c81f",
+    "path": "Control/Counter/counter_12",
+    "license": "MIT",
+    "files": {
+      "upstream/RTLLM/counter_12/design_description.txt": "4249cde4988e7190234109aab68ac1bd94fdd247e5a07ea17f57b0901b829a7b",
+      "upstream/RTLLM/counter_12/verified_counter_12.v": "9e42bf55ab4dbdf96c12a7a309ff98877d6ea2e89a2b5b0c337041edfd232bbb",
+      "upstream/RTLLM/counter_12/testbench.v": "d42e3a798a72ffc19a6af5d51b0e686e77e93993e7ea6b5566894c4eb58c1b33"
+    }
+  },
+  "adaptations": [
+    "Independent deterministic vector oracle replaces upstream TB; upstream TB archived.",
+    "Reference module renamed; timescale directive removed.",
+    "rst_n is asynchronous active-low; counting is on rising clk edges, matching the archived reference."
+  ],
+  "mutation": "Wrong counter wrap",
+  "reference_sha256": "3087dfa46f5af08fe53aef48ccc6432e6537ab69a7d50146738cdd51b6706c55",
+  "mutant_sha256": "d92067c407c05cb88afb16664940bb3f94dd3ed4a1ac973a0354ee9f2591dacc",
+  "tb_sha256": "1771f170f9f088c5195f095af249e7397dfa8b056270eeef5527521c020ed7dc",
+  "assets": {
+    "rt_counter12.hex": "0f4c93c20e85f4bc4fbc9263953e558f9355fa0e6474d704002447e546f66fd2"
+  }
+}

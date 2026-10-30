@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a0f2b0-fd00-7c10-9e4b-e4026602fa4a"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"```systemverilog\nmodule TopModule (\n    input  logic        clk,\n    input  logic        load,\n    input  logic [1:0]  ena,\n    input  logic [99:0] data,\n    output logic [99:0] q\n);\n\n    always_ff @(posedge clk) begin\n        if (load)\n            q <= data;\n        else begin\n            case (ena)\n                2'b01: q <= {q[0], q[99:1]};\n                2'b10: q <= {q[98:0], q[99]};\n                default: q <= q;\n            endcase\n        end\n    end\n\nendmodule\n```"}}
+{"type":"turn.completed","usage":{"input_tokens":8728,"cached_input_tokens":6656,"cache_write_input_tokens":0,"output_tokens":147,"reasoning_output_tokens":0}}

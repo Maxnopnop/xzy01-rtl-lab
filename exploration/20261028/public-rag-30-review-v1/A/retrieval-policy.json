@@ -1,0 +1,23 @@
+{
+  "algorithm": "TF-IDF cosine",
+  "tf": "1+ln(count)",
+  "idf": "ln((1+N)/(1+df))+1",
+  "normalization": "L2, document vocabulary only",
+  "tokenizer": "[a-z_][a-z0-9_]* lower-case",
+  "stopwords": [],
+  "stemming": false,
+  "query_expansion": false,
+  "synonyms": [],
+  "max_chars_per_chunk": 2048,
+  "overlap": 0,
+  "max_chunks": 60,
+  "top_k": 3,
+  "minimum_score": "strictly >0",
+  "tie_break": "ascending chunk ID",
+  "query": "complete original prompt, no hand selected terms",
+  "no_hit": "empty context; no fallback",
+  "assembly": "system exact historical baseline; user=original bytes decoded + context only for rag",
+  "fragment": "[{id}; lowRISC Verilog Coding Style Guide; lines {start_line}-{end_line}] newline {text}",
+  "fragment_separator": "two newlines",
+  "design_input": "general algorithm/document only, no question/result based tuning"
+}

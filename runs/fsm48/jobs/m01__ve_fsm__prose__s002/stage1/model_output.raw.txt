@@ -1,0 +1,16 @@
+Implement `TopModule` as a four-state Moore finite-state machine using registers for the current and next state, with `localparam` constants encoding states A, B, C, and D.
+
+Use a positive-edge-triggered state register with an active-high asynchronous reset. Its sensitivity list should respond to both the rising edge of `clk` and the rising edge of `areset`. When `areset` is asserted, immediately set the current state to A, independent of the clock. Otherwise, on each rising clock edge, load the computed next state.
+
+Implement combinational next-state logic with a `case` statement on the current state:
+
+- In A, remain in A when `in` is 0; transition to B when `in` is 1.
+- In B, transition to C when `in` is 0; remain in B when `in` is 1.
+- In C, transition to A when `in` is 0; transition to D when `in` is 1.
+- In D, transition to C when `in` is 0; transition to B when `in` is 1.
+
+Assign a safe default next state, preferably A, to handle an invalid or unknown state encoding and to avoid unintended combinational storage.
+
+Because this is a Moore machine, derive `out` solely from the current registered state. Assert `out` only while the current state is D; drive it low in A, B, C, and invalid states. Resetting to A therefore makes the output 0 immediately after the asynchronous reset updates the state.
+
+Input sampling and transitions occur on rising clock edges. After an edge, the newly registered state determines the visible output for that cycle. Thus, an input bit that causes a transition into D makes `out` become 1 after that same rising edge. An input bit that causes a transition away from D makes `out` return to 0 after that edge. The transition rules naturally preserve overlapping input-pattern recognition, as demonstrated by the supplied traces.

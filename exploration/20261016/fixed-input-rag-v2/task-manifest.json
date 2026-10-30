@@ -1,0 +1,604 @@
+{
+  "tasks": [
+    {
+      "id": "rt_sequence",
+      "module": "sequence_detector",
+      "family": "sequence1001",
+      "version": "paired-v1 frozen development bank; rt_sequence retains dev10 clarification",
+      "original_spec_pointer": "benchmarks/paired-v1/manifest.json#/tasks/0/spec",
+      "source_assets": [
+        {
+          "path": "benchmarks/paired-v1/rt_sequence/inputs.json",
+          "sha256": "558b5d7b3a10c9380f118804af16468a2c702a1efd7e3243b5c6da8a8c0e0c6a",
+          "frozen_copy": "tasks/rt_sequence/original/inputs.json"
+        },
+        {
+          "path": "benchmarks/paired-v1/rt_sequence/reference.json",
+          "sha256": "2245227dddd27687687de20001a60c6285799eb3ad13c38468e27ab33ea3fe8c",
+          "frozen_copy": "tasks/rt_sequence/original/reference.json"
+        },
+        {
+          "path": "benchmarks/paired-v1/rt_sequence/reference.sv",
+          "sha256": "15f9a819afb946867b3b229fa74f93f5d57522b2f3de276ee486e3bab21eb5b7",
+          "frozen_copy": "tasks/rt_sequence/original/reference.sv"
+        },
+        {
+          "path": "benchmarks/paired-v1/rt_sequence/rt_sequence.hex",
+          "sha256": "6f656556d2940534fe990384d84ed61cb498a683531b24ee599374d98aec4c40",
+          "frozen_copy": "tasks/rt_sequence/original/rt_sequence.hex"
+        },
+        {
+          "path": "benchmarks/paired-v1/rt_sequence/testbench.sv",
+          "sha256": "6abb900b5f8cae1ea0ab98321c1830bd58f4132c75efb676b9cc4250a5e90e4b",
+          "frozen_copy": "tasks/rt_sequence/original/testbench.sv"
+        }
+      ],
+      "original_checks": 1840,
+      "ports": {
+        "reset_port": "rst_n",
+        "input_port": "data_in",
+        "output_port": "sequence_detected",
+        "active": 0,
+        "examples": [
+          {
+            "bits": "1001",
+            "outputs": [
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "bits": "1011",
+            "outputs": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "bits": "1001001",
+            "outputs": [
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              1
+            ]
+          }
+        ]
+      },
+      "input_to_model": [
+        "prompts/system.txt",
+        "prompts/rt_sequence/user.txt"
+      ],
+      "prompt_sha256": "686960bf3d9d9657a0b8c7d90eaa3e90fd48762856925ed173ffc75ec2eb9542",
+      "procedural_reference": {
+        "path": "exploration/20261011/runs/r1b-v2/history/00_rt_sequence/14/reference.sv",
+        "sha256": "1d7e538cdc5bc0902661908cafedc49988d1a84942f44b2edc15c52b9f2f61f0",
+        "frozen_copy": "tasks/rt_sequence/r1b/reference.sv"
+      },
+      "r1b_scripts": [
+        {
+          "bound": 14,
+          "original": {
+            "path": "exploration/20261011/runs/r1b-v2/history/00_rt_sequence/14/check.ys",
+            "sha256": "8354ad91b57e12b52a1dad3e9d1e92423dc80693835d98891517f2aba3b72d64"
+          },
+          "planned": "tasks/rt_sequence/r1b/check-14.ys"
+        },
+        {
+          "bound": 32,
+          "original": {
+            "path": "exploration/20261011/runs/r1b-v2/history/00_rt_sequence/32/check.ys",
+            "sha256": "77ea3dd23a22469eaa7a1b11e4859b45961b9c01afafb808803545edad303622"
+          },
+          "planned": "tasks/rt_sequence/r1b/check-32.ys"
+        }
+      ],
+      "r1c_assets": [
+        {
+          "path": "exploration/20261011/runs/timed-reset-v1/history/06_rt_sequence/events.bin",
+          "sha256": "3f401d9f7bcb0126fd725b64e769f0c644642c7bab20a95f06ec5a0e250f9049",
+          "frozen_copy": "tasks/rt_sequence/r1c/events.bin"
+        },
+        {
+          "path": "exploration/20261011/runs/timed-reset-v1/history/06_rt_sequence/testbench.sv",
+          "sha256": "4d7bf00e509d6cbfdd92830c89e66d1338c7353ca2433d85531ab7a4c412783a",
+          "frozen_copy": "tasks/rt_sequence/r1c/testbench.sv"
+        }
+      ],
+      "r1c_event_count": 90972,
+      "r1c_categories": {
+        "episode_reset": 756,
+        "initial_release": 756,
+        "prepare_reset_phase": 756,
+        "reset_assert_pulse": 252,
+        "reset_input_flip": 756,
+        "reset_release_pulse": 252,
+        "post_reset_negedge": 756,
+        "input_low": 12168,
+        "hold_low_flip": 12168,
+        "hold_low_restore": 12168,
+        "posedge": 12168,
+        "hold_high_flip": 12168,
+        "hold_high_restore": 12168,
+        "negedge_hold": 12168,
+        "reset_assert_cross_edge": 252,
+        "reset_low": 252,
+        "reset_posedge": 252,
+        "reset_release_cross_edge": 252,
+        "reset_assert_coincident": 252,
+        "reset_release_coincident": 252
+      },
+      "ambiguity": "No additional ambiguity identified by static review; not proof of unique implementation.",
+      "heldout": false,
+      "source_origin": {
+        "repository": "https://github.com/hkust-zhiyao/RTLLM",
+        "commit": "51ed553d0ffd32797a1a0a13e051656bf302c81f",
+        "path": "Control/Finite State Machine/sequence_detector",
+        "license": "MIT",
+        "files": {
+          "upstream/RTLLM/sequence_detector/design_description.txt": "eaa043dd75258c345f8e2f21817c2454a38923e476e50523a5e41bff8ef93b13",
+          "upstream/RTLLM/sequence_detector/verified_sequence_detector.v": "573bbf1a2e9afb77960131b731cd6aae85b3508a09465c7589a131b517401f23",
+          "upstream/RTLLM/sequence_detector/testbench.v": "0d5e90177af40049a62b48bf63ae8ff113435115a7544d6727a272123583bcae"
+        }
+      },
+      "adaptation_status": "STATIC_BOUND_NOT_RUNTIME_VALIDATED",
+      "execution_status": "BLOCKED_SERVICE_AND_TRANSPORT"
+    },
+    {
+      "id": "sticky_alarm",
+      "module": "sticky_alarm",
+      "family": "sticky_alarm",
+      "version": "paired-v1 frozen development bank; rt_sequence retains dev10 clarification",
+      "original_spec_pointer": "benchmarks/paired-v1/manifest.json#/tasks/1/spec",
+      "source_assets": [
+        {
+          "path": "benchmarks/paired-v1/sticky_alarm/agreement.hex",
+          "sha256": "cba61869ef75bc2738e16b4473340a5becf2b11008d6e2d9c6062552afdca370",
+          "frozen_copy": "tasks/sticky_alarm/original/agreement.hex"
+        },
+        {
+          "path": "benchmarks/paired-v1/sticky_alarm/inputs.json",
+          "sha256": "d6bc99ee7aa9b805284d5295a7d9df58c88f0231751a3d23b55273ee0781b305",
+          "frozen_copy": "tasks/sticky_alarm/original/inputs.json"
+        },
+        {
+          "path": "benchmarks/paired-v1/sticky_alarm/reference.json",
+          "sha256": "e936a212d47d5421ca1e11def84084414b5ac5fdc639d45401aa292790ab6d8f",
+          "frozen_copy": "tasks/sticky_alarm/original/reference.json"
+        },
+        {
+          "path": "benchmarks/paired-v1/sticky_alarm/reference.sv",
+          "sha256": "134d6c6c96939cec63987c3e6720a2ed0b0e408ca44ead3b594aacc67c68648a",
+          "frozen_copy": "tasks/sticky_alarm/original/reference.sv"
+        },
+        {
+          "path": "benchmarks/paired-v1/sticky_alarm/testbench.sv",
+          "sha256": "afd042df366768a2fad95fc4b58384b3eeebdf184e6baf3be028728dd5c0b5c6",
+          "frozen_copy": "tasks/sticky_alarm/original/testbench.sv"
+        }
+      ],
+      "original_checks": 9216,
+      "ports": {
+        "reset_port": "rst_n",
+        "input_port": "din",
+        "output_port": "q",
+        "active": 0
+      },
+      "input_to_model": [
+        "prompts/system.txt",
+        "prompts/sticky_alarm/user.txt"
+      ],
+      "prompt_sha256": "6aef866e4a105053a81dfa074a2c8973530701ff4444cc516aff432942108900",
+      "procedural_reference": {
+        "path": "exploration/20261011/runs/r1b-v2/history/15_sticky_alarm/14/reference.sv",
+        "sha256": "8e7c690b16d2695ff130ac4df051c64548ef1393284dced19f3af7640d5a276c",
+        "frozen_copy": "tasks/sticky_alarm/r1b/reference.sv"
+      },
+      "r1b_scripts": [
+        {
+          "bound": 14,
+          "original": {
+            "path": "exploration/20261011/runs/r1b-v2/history/15_sticky_alarm/14/check.ys",
+            "sha256": "8354ad91b57e12b52a1dad3e9d1e92423dc80693835d98891517f2aba3b72d64"
+          },
+          "planned": "tasks/sticky_alarm/r1b/check-14.ys"
+        },
+        {
+          "bound": 32,
+          "original": {
+            "path": "exploration/20261011/runs/r1b-v2/history/15_sticky_alarm/32/check.ys",
+            "sha256": "77ea3dd23a22469eaa7a1b11e4859b45961b9c01afafb808803545edad303622"
+          },
+          "planned": "tasks/sticky_alarm/r1b/check-32.ys"
+        }
+      ],
+      "r1c_assets": [
+        {
+          "path": "exploration/20261011/runs/timed-reset-v1/history/08_sticky_alarm/events.bin",
+          "sha256": "1cbd2de98b739cebd4e76ccc3c654a55e3ed8c5b4cf7a1f4e87c6c806ba589aa",
+          "frozen_copy": "tasks/sticky_alarm/r1c/events.bin"
+        },
+        {
+          "path": "exploration/20261011/runs/timed-reset-v1/history/08_sticky_alarm/testbench.sv",
+          "sha256": "122a735b1b4f34b677fb6ae934096bc6509f856eeb720efeb8851853eeab598b",
+          "frozen_copy": "tasks/sticky_alarm/r1c/testbench.sv"
+        }
+      ],
+      "r1c_event_count": 90972,
+      "r1c_categories": {
+        "episode_reset": 756,
+        "initial_release": 756,
+        "prepare_reset_phase": 756,
+        "reset_assert_pulse": 252,
+        "reset_input_flip": 756,
+        "reset_release_pulse": 252,
+        "post_reset_negedge": 756,
+        "input_low": 12168,
+        "hold_low_flip": 12168,
+        "hold_low_restore": 12168,
+        "posedge": 12168,
+        "hold_high_flip": 12168,
+        "hold_high_restore": 12168,
+        "negedge_hold": 12168,
+        "reset_assert_cross_edge": 252,
+        "reset_low": 252,
+        "reset_posedge": 252,
+        "reset_release_cross_edge": 252,
+        "reset_assert_coincident": 252,
+        "reset_release_coincident": 252
+      },
+      "ambiguity": "No additional ambiguity identified by static review; not proof of unique implementation.",
+      "heldout": false,
+      "source_origin": {
+        "kind": "project-authored developer task"
+      },
+      "adaptation_status": "STATIC_BOUND_NOT_RUNTIME_VALIDATED",
+      "execution_status": "BLOCKED_SERVICE_AND_TRANSPORT"
+    },
+    {
+      "id": "event_parity",
+      "module": "event_parity",
+      "family": "event_parity",
+      "version": "paired-v1 frozen development bank; rt_sequence retains dev10 clarification",
+      "original_spec_pointer": "benchmarks/paired-v1/manifest.json#/tasks/2/spec",
+      "source_assets": [
+        {
+          "path": "benchmarks/paired-v1/event_parity/agreement.hex",
+          "sha256": "68acba1204d4451cc6dc7b305053d9e90f616c8cd5b020cd448b91926fc8ede3",
+          "frozen_copy": "tasks/event_parity/original/agreement.hex"
+        },
+        {
+          "path": "benchmarks/paired-v1/event_parity/inputs.json",
+          "sha256": "d6bc99ee7aa9b805284d5295a7d9df58c88f0231751a3d23b55273ee0781b305",
+          "frozen_copy": "tasks/event_parity/original/inputs.json"
+        },
+        {
+          "path": "benchmarks/paired-v1/event_parity/reference.json",
+          "sha256": "d3a6589d9e7e3551985e6e72fff5b4e9d6bd68fc3dcfc26d0b538bf8f32ce53e",
+          "frozen_copy": "tasks/event_parity/original/reference.json"
+        },
+        {
+          "path": "benchmarks/paired-v1/event_parity/reference.sv",
+          "sha256": "cf698cf12506b095d7c28cb9320dce6287cea18c2e372533937af26ddb457b51",
+          "frozen_copy": "tasks/event_parity/original/reference.sv"
+        },
+        {
+          "path": "benchmarks/paired-v1/event_parity/testbench.sv",
+          "sha256": "ac111343afe9debbc5ed26b6e474fb73303080b082052eeacdfd90f66b27e65c",
+          "frozen_copy": "tasks/event_parity/original/testbench.sv"
+        }
+      ],
+      "original_checks": 9216,
+      "ports": {
+        "reset_port": "rst_n",
+        "input_port": "din",
+        "output_port": "q",
+        "active": 0
+      },
+      "input_to_model": [
+        "prompts/system.txt",
+        "prompts/event_parity/user.txt"
+      ],
+      "prompt_sha256": "b120969908396b7e6c10f4d60df73541aa7e68169b4f7c5465268941ce0c02c7",
+      "procedural_reference": {
+        "path": "exploration/20261011/runs/r1b-v2/history/09_event_parity/14/reference.sv",
+        "sha256": "9e1ccba64dc36a2761b51f94c9c68a4c97125656fced7d5871f1027c981a6f90",
+        "frozen_copy": "tasks/event_parity/r1b/reference.sv"
+      },
+      "r1b_scripts": [
+        {
+          "bound": 14,
+          "original": {
+            "path": "exploration/20261011/runs/r1b-v2/history/09_event_parity/14/check.ys",
+            "sha256": "8354ad91b57e12b52a1dad3e9d1e92423dc80693835d98891517f2aba3b72d64"
+          },
+          "planned": "tasks/event_parity/r1b/check-14.ys"
+        },
+        {
+          "bound": 32,
+          "original": {
+            "path": "exploration/20261011/runs/r1b-v2/history/09_event_parity/32/check.ys",
+            "sha256": "77ea3dd23a22469eaa7a1b11e4859b45961b9c01afafb808803545edad303622"
+          },
+          "planned": "tasks/event_parity/r1b/check-32.ys"
+        }
+      ],
+      "r1c_assets": [
+        {
+          "path": "exploration/20261011/runs/timed-reset-v1/history/02_event_parity/events.bin",
+          "sha256": "619266699103cfe132e2fc7feec2a2f1c817e308e95d87dd8e6f633684083231",
+          "frozen_copy": "tasks/event_parity/r1c/events.bin"
+        },
+        {
+          "path": "exploration/20261011/runs/timed-reset-v1/history/02_event_parity/testbench.sv",
+          "sha256": "feff3e451fcc7add4ad76327babaff85325c9b411692b7a781cced1c78ffa030",
+          "frozen_copy": "tasks/event_parity/r1c/testbench.sv"
+        }
+      ],
+      "r1c_event_count": 90972,
+      "r1c_categories": {
+        "episode_reset": 756,
+        "initial_release": 756,
+        "prepare_reset_phase": 756,
+        "reset_assert_pulse": 252,
+        "reset_input_flip": 756,
+        "reset_release_pulse": 252,
+        "post_reset_negedge": 756,
+        "input_low": 12168,
+        "hold_low_flip": 12168,
+        "hold_low_restore": 12168,
+        "posedge": 12168,
+        "hold_high_flip": 12168,
+        "hold_high_restore": 12168,
+        "negedge_hold": 12168,
+        "reset_assert_cross_edge": 252,
+        "reset_low": 252,
+        "reset_posedge": 252,
+        "reset_release_cross_edge": 252,
+        "reset_assert_coincident": 252,
+        "reset_release_coincident": 252
+      },
+      "ambiguity": "No additional ambiguity identified by static review; not proof of unique implementation.",
+      "heldout": false,
+      "source_origin": {
+        "kind": "project-authored developer task"
+      },
+      "adaptation_status": "STATIC_BOUND_NOT_RUNTIME_VALIDATED",
+      "execution_status": "BLOCKED_SERVICE_AND_TRANSPORT"
+    },
+    {
+      "id": "request_delay",
+      "module": "request_delay",
+      "family": "request_delay",
+      "version": "paired-v1 frozen development bank; rt_sequence retains dev10 clarification",
+      "original_spec_pointer": "benchmarks/paired-v1/manifest.json#/tasks/3/spec",
+      "source_assets": [
+        {
+          "path": "benchmarks/paired-v1/request_delay/agreement.hex",
+          "sha256": "e6b00b9db43bcbabecf07ba74c906a80dd888a638726bbac52366c5a42e98a9e",
+          "frozen_copy": "tasks/request_delay/original/agreement.hex"
+        },
+        {
+          "path": "benchmarks/paired-v1/request_delay/inputs.json",
+          "sha256": "d6bc99ee7aa9b805284d5295a7d9df58c88f0231751a3d23b55273ee0781b305",
+          "frozen_copy": "tasks/request_delay/original/inputs.json"
+        },
+        {
+          "path": "benchmarks/paired-v1/request_delay/reference.json",
+          "sha256": "b8b13343689b2b378538af367899df5b32f3823191bf7b1c05b4a0a7a737f341",
+          "frozen_copy": "tasks/request_delay/original/reference.json"
+        },
+        {
+          "path": "benchmarks/paired-v1/request_delay/reference.sv",
+          "sha256": "0ab3ded2b70ebdae653c1708f2201df0ba07041cf18225f3069119d24307cafe",
+          "frozen_copy": "tasks/request_delay/original/reference.sv"
+        },
+        {
+          "path": "benchmarks/paired-v1/request_delay/testbench.sv",
+          "sha256": "a4cc1b10234e3d9f87d786e5ae2a33001cba8f70761e274a3bbf269d3fc8c788",
+          "frozen_copy": "tasks/request_delay/original/testbench.sv"
+        }
+      ],
+      "original_checks": 9216,
+      "ports": {
+        "reset_port": "rst_n",
+        "input_port": "din",
+        "output_port": "q",
+        "active": 0
+      },
+      "input_to_model": [
+        "prompts/system.txt",
+        "prompts/request_delay/user.txt"
+      ],
+      "prompt_sha256": "a0edacbc7214b8a4b09b451a7d9617a89eb6847af29ce7140eb91cc11fdce09e",
+      "procedural_reference": {
+        "path": "exploration/20261011/runs/r1b-v2/history/04_request_delay/14/reference.sv",
+        "sha256": "cae518d2c4c895ec1285e251c5542eae8d2487455c788dbda469fb4cbe3f01a8",
+        "frozen_copy": "tasks/request_delay/r1b/reference.sv"
+      },
+      "r1b_scripts": [
+        {
+          "bound": 14,
+          "original": {
+            "path": "exploration/20261011/runs/r1b-v2/history/04_request_delay/14/check.ys",
+            "sha256": "8354ad91b57e12b52a1dad3e9d1e92423dc80693835d98891517f2aba3b72d64"
+          },
+          "planned": "tasks/request_delay/r1b/check-14.ys"
+        },
+        {
+          "bound": 32,
+          "original": {
+            "path": "exploration/20261011/runs/r1b-v2/history/04_request_delay/32/check.ys",
+            "sha256": "77ea3dd23a22469eaa7a1b11e4859b45961b9c01afafb808803545edad303622"
+          },
+          "planned": "tasks/request_delay/r1b/check-32.ys"
+        }
+      ],
+      "r1c_assets": [
+        {
+          "path": "exploration/20261011/runs/timed-reset-v1/history/04_request_delay/events.bin",
+          "sha256": "d431060744833bb7394a1e66d8bea2224964c4561f83a995bf99efdd023e4c24",
+          "frozen_copy": "tasks/request_delay/r1c/events.bin"
+        },
+        {
+          "path": "exploration/20261011/runs/timed-reset-v1/history/04_request_delay/testbench.sv",
+          "sha256": "4bcb4ba008d7ce358d4507cbcc19bb38498038f9b21d2ef3b3830a1b3ce33ca6",
+          "frozen_copy": "tasks/request_delay/r1c/testbench.sv"
+        }
+      ],
+      "r1c_event_count": 90972,
+      "r1c_categories": {
+        "episode_reset": 756,
+        "initial_release": 756,
+        "prepare_reset_phase": 756,
+        "reset_assert_pulse": 252,
+        "reset_input_flip": 756,
+        "reset_release_pulse": 252,
+        "post_reset_negedge": 756,
+        "input_low": 12168,
+        "hold_low_flip": 12168,
+        "hold_low_restore": 12168,
+        "posedge": 12168,
+        "hold_high_flip": 12168,
+        "hold_high_restore": 12168,
+        "negedge_hold": 12168,
+        "reset_assert_cross_edge": 252,
+        "reset_low": 252,
+        "reset_posedge": 252,
+        "reset_release_cross_edge": 252,
+        "reset_assert_coincident": 252,
+        "reset_release_coincident": 252
+      },
+      "ambiguity": "Terminology: accepting edge output 0, following cycle wording can be read ambiguously. Frozen reference uses phase 0->1->2(q=1)->3. Do not clarify prompt or change expectations. Keep this family in denominator; flag specification ambiguity in any timing-error claim.",
+      "heldout": false,
+      "source_origin": {
+        "kind": "project-authored developer task"
+      },
+      "adaptation_status": "STATIC_BOUND_NOT_RUNTIME_VALIDATED",
+      "execution_status": "BLOCKED_SERVICE_AND_TRANSPORT"
+    },
+    {
+      "id": "debounce3",
+      "module": "debounce3",
+      "family": "debounce3",
+      "version": "paired-v1 frozen development bank; rt_sequence retains dev10 clarification",
+      "original_spec_pointer": "benchmarks/paired-v1/manifest.json#/tasks/4/spec",
+      "source_assets": [
+        {
+          "path": "benchmarks/paired-v1/debounce3/agreement.hex",
+          "sha256": "7149675d5fecdde1559c88400e4708bfb742dc2dc0f76125fe042941663de1a0",
+          "frozen_copy": "tasks/debounce3/original/agreement.hex"
+        },
+        {
+          "path": "benchmarks/paired-v1/debounce3/inputs.json",
+          "sha256": "d6bc99ee7aa9b805284d5295a7d9df58c88f0231751a3d23b55273ee0781b305",
+          "frozen_copy": "tasks/debounce3/original/inputs.json"
+        },
+        {
+          "path": "benchmarks/paired-v1/debounce3/reference.json",
+          "sha256": "f26f240ee22251d6e1f57ec5c38904e5ab7ede4afcc22a32a6525e1f1e673c9f",
+          "frozen_copy": "tasks/debounce3/original/reference.json"
+        },
+        {
+          "path": "benchmarks/paired-v1/debounce3/reference.sv",
+          "sha256": "66495e6654c39d82cd62481fa55041dee70a0b3007aa106b367f0e330791af38",
+          "frozen_copy": "tasks/debounce3/original/reference.sv"
+        },
+        {
+          "path": "benchmarks/paired-v1/debounce3/testbench.sv",
+          "sha256": "cff80605ce4e08a7469025e72d6ace782184cdf9b6d9b18a9a58fefff42eae0e",
+          "frozen_copy": "tasks/debounce3/original/testbench.sv"
+        }
+      ],
+      "original_checks": 9216,
+      "ports": {
+        "reset_port": "rst_n",
+        "input_port": "din",
+        "output_port": "q",
+        "active": 0
+      },
+      "input_to_model": [
+        "prompts/system.txt",
+        "prompts/debounce3/user.txt"
+      ],
+      "prompt_sha256": "6316ba0a5a3a6037d456f3986b47868425acee35a9caea86d1834dc1e1088c3c",
+      "procedural_reference": {
+        "path": "exploration/20261011/runs/r1b-v2/history/07_debounce3/14/reference.sv",
+        "sha256": "8cb3e42b6cb072e8a41216b21604fc772ed2defccd83edca37f142f3212f319f",
+        "frozen_copy": "tasks/debounce3/r1b/reference.sv"
+      },
+      "r1b_scripts": [
+        {
+          "bound": 14,
+          "original": {
+            "path": "exploration/20261011/runs/r1b-v2/history/07_debounce3/14/check.ys",
+            "sha256": "8354ad91b57e12b52a1dad3e9d1e92423dc80693835d98891517f2aba3b72d64"
+          },
+          "planned": "tasks/debounce3/r1b/check-14.ys"
+        },
+        {
+          "bound": 32,
+          "original": {
+            "path": "exploration/20261011/runs/r1b-v2/history/07_debounce3/32/check.ys",
+            "sha256": "77ea3dd23a22469eaa7a1b11e4859b45961b9c01afafb808803545edad303622"
+          },
+          "planned": "tasks/debounce3/r1b/check-32.ys"
+        }
+      ],
+      "r1c_assets": [
+        {
+          "path": "exploration/20261011/runs/timed-reset-v1/history/00_debounce3/events.bin",
+          "sha256": "fa0d28e6b84150433fb20c6964a5a605ca8fc7e88b3634592767b9db190c7e12",
+          "frozen_copy": "tasks/debounce3/r1c/events.bin"
+        },
+        {
+          "path": "exploration/20261011/runs/timed-reset-v1/history/00_debounce3/testbench.sv",
+          "sha256": "b49061809f5f1ec1fda9cb9fa427fd780c00db3ac34dd8bd9a287cd955ca0f2d",
+          "frozen_copy": "tasks/debounce3/r1c/testbench.sv"
+        }
+      ],
+      "r1c_event_count": 90972,
+      "r1c_categories": {
+        "episode_reset": 756,
+        "initial_release": 756,
+        "prepare_reset_phase": 756,
+        "reset_assert_pulse": 252,
+        "reset_input_flip": 756,
+        "reset_release_pulse": 252,
+        "post_reset_negedge": 756,
+        "input_low": 12168,
+        "hold_low_flip": 12168,
+        "hold_low_restore": 12168,
+        "posedge": 12168,
+        "hold_high_flip": 12168,
+        "hold_high_restore": 12168,
+        "negedge_hold": 12168,
+        "reset_assert_cross_edge": 252,
+        "reset_low": 252,
+        "reset_posedge": 252,
+        "reset_release_cross_edge": 252,
+        "reset_assert_coincident": 252,
+        "reset_release_coincident": 252
+      },
+      "ambiguity": "No additional ambiguity identified by static review; not proof of unique implementation.",
+      "heldout": false,
+      "source_origin": {
+        "kind": "project-authored developer task"
+      },
+      "adaptation_status": "STATIC_BOUND_NOT_RUNTIME_VALIDATED",
+      "execution_status": "BLOCKED_SERVICE_AND_TRANSPORT"
+    }
+  ],
+  "asset_root": "exploration/20261016/fixed-input-direct-rtl-v1",
+  "original_manifest_sha256": "dd37798286f9d8681040d91bb0c23f6647db48f8895ee0044adafb5d5fb4accd",
+  "input_versions": "Exactly the baseline pinned original bytes; no RAG data enters checkers",
+  "supported_families": 5,
+  "task_ambiguity": "request_delay wording is flagged; no selective clarification added"
+}

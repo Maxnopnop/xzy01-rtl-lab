@@ -1,0 +1,8 @@
+read_verilog -sv dut.sv
+hierarchy -check -top pulse_div4
+proc
+check -assert
+synth -noabc -top pulse_div4
+check -assert
+tee -o synthesis-stat.json stat -json
+write_json synthesis-netlist.json

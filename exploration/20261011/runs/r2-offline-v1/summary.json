@@ -1,0 +1,705 @@
+{
+  "status": "PASS",
+  "real_model_calls": 0,
+  "mock_adapter_invocations": 26,
+  "icarus_evaluations": 15,
+  "prompt_pairs": 10,
+  "checker_boundary": "No oracle/product_check during prompt creation",
+  "tests": [
+    "20-cap",
+    "no-repeat-complete",
+    "stop-first-API-error",
+    "no-retry-API-error",
+    "unknown-stops",
+    "4-service-gate",
+    "stop-fifth-failure"
+  ],
+  "judges": [
+    {
+      "task": "rt_sequence",
+      "case_kind": "REAL_RETAINED_IR",
+      "ir_diagnosis": {
+        "status": "IR_SPEC_MISMATCH",
+        "reset_contract_errors": [],
+        "shortest_counterexample": {
+          "bits": "100101",
+          "expected": 0,
+          "observed": 1
+        },
+        "visited_pairs": 9,
+        "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+      },
+      "public_check": {
+        "status": "PUBLIC_CHECK_FAIL",
+        "errors": [
+          {
+            "bits": "1001001",
+            "expected": [
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              1
+            ],
+            "observed": [
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "scope": "Only disclosed examples/reset/schema; private tests were not consulted."
+      },
+      "ir_rtl": {
+        "checks": 1840,
+        "stimulus_count": 920,
+        "tb_sha256": "580cafa73384203b27323016bac3290fdd3a1937aa48c3836adbeb6b7f6009c3",
+        "vectors_sha256": "cff8926082dec58b131ebc0f69046f5c1efdd5806ace7817e236aae5e4a3e17c",
+        "backend": "icarus",
+        "compile_seconds": 0.078,
+        "status": "FUNCTION_FAIL",
+        "message": "Independent testbench found 88 mismatches",
+        "stage": "simulate",
+        "receipt_nonce": "ed4c50d5edec46f7bd06b1ab5aad04cc",
+        "simulate_seconds": 0.046,
+        "mismatches": [
+          {
+            "cycle": 17,
+            "phase": "post",
+            "reset": 1,
+            "input": 1,
+            "expected": 0,
+            "observed": "1"
+          },
+          {
+            "cycle": 18,
+            "phase": "pre",
+            "reset": 1,
+            "input": 0,
+            "expected": 0,
+            "observed": "1"
+          },
+          {
+            "cycle": 32,
+            "phase": "post",
+            "reset": 1,
+            "input": 1,
+            "expected": 0,
+            "observed": "1"
+          },
+          {
+            "cycle": 43,
+            "phase": "post",
+            "reset": 1,
+            "input": 1,
+            "expected": 0,
+            "observed": "1"
+          },
+          {
+            "cycle": 44,
+            "phase": "pre",
+            "reset": 1,
+            "input": 0,
+            "expected": 0,
+            "observed": "1"
+          }
+        ]
+      },
+      "rtl_sha256": "823239d88ce70785029a0de4fccecc957497ec9b154b462b2f1925834cf599fd",
+      "backend": "icarus",
+      "compile_seconds": 0.094,
+      "status": "PASS",
+      "message": "Independent testbench completed all 1840 checks",
+      "stage": "simulate",
+      "receipt_nonce": "9ea0763caece4d4aac4995fce41d7b85",
+      "simulate_seconds": 0.062,
+      "spec_diagnostic": {
+        "checks": 1840,
+        "stimulus_count": 920,
+        "tb_sha256": "580cafa73384203b27323016bac3290fdd3a1937aa48c3836adbeb6b7f6009c3",
+        "vectors_sha256": "6d6be24bc3bcd13c908a31f787058ca934d49d3fb247d38de24224a06b55595c",
+        "backend": "icarus",
+        "compile_seconds": 0.094,
+        "status": "PASS",
+        "message": "Independent testbench completed all 1840 checks",
+        "stage": "simulate",
+        "receipt_nonce": "51c8a7373c5848ba86c3dee15cfa9686",
+        "simulate_seconds": 0.031,
+        "mismatches": []
+      },
+      "diagnostic_consistent": true,
+      "localization": "RTL_CORRECTS_IR_ON_TESTS"
+    },
+    {
+      "task": "sticky_alarm",
+      "case_kind": "INJECTED_FAULT",
+      "ir_diagnosis": {
+        "status": "IR_SPEC_MISMATCH",
+        "reset_contract_errors": [],
+        "shortest_counterexample": {
+          "bits": "11",
+          "expected": 1,
+          "observed": 0
+        },
+        "visited_pairs": 3,
+        "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+      },
+      "public_check": {
+        "status": "PUBLIC_CHECK_FAIL",
+        "errors": [
+          {
+            "bits": "1011000",
+            "expected": [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1,
+              1
+            ],
+            "observed": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "bits": "111",
+            "expected": [
+              0,
+              1,
+              1
+            ],
+            "observed": [
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "scope": "Only disclosed examples/reset/schema; private tests were not consulted."
+      },
+      "ir_rtl": {
+        "checks": 9216,
+        "stimulus_count": 4608,
+        "tb_sha256": "afd042df366768a2fad95fc4b58384b3eeebdf184e6baf3be028728dd5c0b5c6",
+        "vectors_sha256": "7242cd4f8cd59531bff3c74dcbd636cdaeafcae0001d6490ce126036fcf2eed7",
+        "backend": "icarus",
+        "compile_seconds": 0.078,
+        "status": "FUNCTION_FAIL",
+        "message": "Independent testbench found 3616 mismatches",
+        "stage": "simulate",
+        "receipt_nonce": "7d38381b16d244b689416de4a86a4ca5",
+        "simulate_seconds": 0.078,
+        "mismatches": [
+          {
+            "cycle": 15,
+            "phase": "post",
+            "reset": 1,
+            "input": 1,
+            "expected": 0,
+            "observed": "1"
+          },
+          {
+            "cycle": 31,
+            "phase": "post",
+            "reset": 1,
+            "input": 1,
+            "expected": 0,
+            "observed": "1"
+          },
+          {
+            "cycle": 42,
+            "phase": "post",
+            "reset": 1,
+            "input": 1,
+            "expected": 0,
+            "observed": "1"
+          },
+          {
+            "cycle": 43,
+            "phase": "pre",
+            "reset": 1,
+            "input": 0,
+            "expected": 0,
+            "observed": "1"
+          },
+          {
+            "cycle": 43,
+            "phase": "post",
+            "reset": 1,
+            "input": 0,
+            "expected": 0,
+            "observed": "1"
+          }
+        ]
+      },
+      "rtl_sha256": "a63874434ee8083edcc80defad9f6dde817b392872b64a70075cb86ead9f8817",
+      "backend": "icarus",
+      "compile_seconds": 0.078,
+      "status": "PASS",
+      "message": "Independent testbench completed all 9216 checks",
+      "stage": "simulate",
+      "receipt_nonce": "aea622960cee4fd0abd3f3dc0955f011",
+      "simulate_seconds": 0.078,
+      "spec_diagnostic": {
+        "checks": 9216,
+        "stimulus_count": 4608,
+        "tb_sha256": "afd042df366768a2fad95fc4b58384b3eeebdf184e6baf3be028728dd5c0b5c6",
+        "vectors_sha256": "cba61869ef75bc2738e16b4473340a5becf2b11008d6e2d9c6062552afdca370",
+        "backend": "icarus",
+        "compile_seconds": 0.094,
+        "status": "PASS",
+        "message": "Independent testbench completed all 9216 checks",
+        "stage": "simulate",
+        "receipt_nonce": "82334e603ccd4b22a94ad25051b4935e",
+        "simulate_seconds": 0.062,
+        "mismatches": []
+      },
+      "diagnostic_consistent": true,
+      "localization": "RTL_CORRECTS_IR_ON_TESTS"
+    },
+    {
+      "task": "event_parity",
+      "case_kind": "INJECTED_FAULT",
+      "ir_diagnosis": {
+        "status": "IR_SPEC_MISMATCH",
+        "reset_contract_errors": [],
+        "shortest_counterexample": {
+          "bits": "1",
+          "expected": 1,
+          "observed": 0
+        },
+        "visited_pairs": 2,
+        "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+      },
+      "public_check": {
+        "status": "PUBLIC_CHECK_FAIL",
+        "errors": [
+          {
+            "bits": "101101",
+            "expected": [
+              1,
+              1,
+              0,
+              1,
+              1,
+              0
+            ],
+            "observed": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "scope": "Only disclosed examples/reset/schema; private tests were not consulted."
+      },
+      "ir_rtl": {
+        "checks": 9216,
+        "stimulus_count": 4608,
+        "tb_sha256": "ac111343afe9debbc5ed26b6e474fb73303080b082052eeacdfd90f66b27e65c",
+        "vectors_sha256": "7242cd4f8cd59531bff3c74dcbd636cdaeafcae0001d6490ce126036fcf2eed7",
+        "backend": "icarus",
+        "compile_seconds": 0.078,
+        "status": "FUNCTION_FAIL",
+        "message": "Independent testbench found 3787 mismatches",
+        "stage": "simulate",
+        "receipt_nonce": "ba86f732268642eaab9166c168369629",
+        "simulate_seconds": 0.016,
+        "mismatches": [
+          {
+            "cycle": 3,
+            "phase": "post",
+            "reset": 1,
+            "input": 1,
+            "expected": 0,
+            "observed": "1"
+          },
+          {
+            "cycle": 9,
+            "phase": "post",
+            "reset": 1,
+            "input": 1,
+            "expected": 0,
+            "observed": "1"
+          },
+          {
+            "cycle": 11,
+            "phase": "post",
+            "reset": 1,
+            "input": 1,
+            "expected": 0,
+            "observed": "1"
+          },
+          {
+            "cycle": 12,
+            "phase": "pre",
+            "reset": 1,
+            "input": 0,
+            "expected": 0,
+            "observed": "1"
+          },
+          {
+            "cycle": 12,
+            "phase": "post",
+            "reset": 1,
+            "input": 0,
+            "expected": 0,
+            "observed": "1"
+          }
+        ]
+      },
+      "rtl_sha256": "3ff2ffbe61ff2d2447bbac53318ac1ba01eb8d0d1d12f299a38d1c6c5379ce01",
+      "backend": "icarus",
+      "compile_seconds": 0.094,
+      "status": "PASS",
+      "message": "Independent testbench completed all 9216 checks",
+      "stage": "simulate",
+      "receipt_nonce": "ff02784d0c3a44c180d58b13fbf0f346",
+      "simulate_seconds": 0.047,
+      "spec_diagnostic": {
+        "checks": 9216,
+        "stimulus_count": 4608,
+        "tb_sha256": "ac111343afe9debbc5ed26b6e474fb73303080b082052eeacdfd90f66b27e65c",
+        "vectors_sha256": "68acba1204d4451cc6dc7b305053d9e90f616c8cd5b020cd448b91926fc8ede3",
+        "backend": "icarus",
+        "compile_seconds": 0.062,
+        "status": "PASS",
+        "message": "Independent testbench completed all 9216 checks",
+        "stage": "simulate",
+        "receipt_nonce": "bff9a84d902241c098219fd8e2fea270",
+        "simulate_seconds": 0.032,
+        "mismatches": []
+      },
+      "diagnostic_consistent": true,
+      "localization": "RTL_CORRECTS_IR_ON_TESTS"
+    },
+    {
+      "task": "request_delay",
+      "case_kind": "INJECTED_FAULT",
+      "ir_diagnosis": {
+        "status": "IR_SPEC_MISMATCH",
+        "reset_contract_errors": [],
+        "shortest_counterexample": {
+          "bits": "10",
+          "expected": 1,
+          "observed": 0
+        },
+        "visited_pairs": 3,
+        "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+      },
+      "public_check": {
+        "status": "PUBLIC_CHECK_FAIL",
+        "errors": [
+          {
+            "bits": "11111001100",
+            "expected": [
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "observed": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "bits": "100000",
+            "expected": [
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "observed": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "bits": "10010",
+            "expected": [
+              0,
+              1,
+              0,
+              0,
+              0
+            ],
+            "observed": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "scope": "Only disclosed examples/reset/schema; private tests were not consulted."
+      },
+      "ir_rtl": {
+        "checks": 9216,
+        "stimulus_count": 4608,
+        "tb_sha256": "a4cc1b10234e3d9f87d786e5ae2a33001cba8f70761e274a3bbf269d3fc8c788",
+        "vectors_sha256": "7242cd4f8cd59531bff3c74dcbd636cdaeafcae0001d6490ce126036fcf2eed7",
+        "backend": "icarus",
+        "compile_seconds": 0.078,
+        "status": "FUNCTION_FAIL",
+        "message": "Independent testbench found 1411 mismatches",
+        "stage": "simulate",
+        "receipt_nonce": "36c1080af2c644d7b77e363ec5bc7c43",
+        "simulate_seconds": 0.047,
+        "mismatches": [
+          {
+            "cycle": 12,
+            "phase": "post",
+            "reset": 1,
+            "input": 0,
+            "expected": 0,
+            "observed": "1"
+          },
+          {
+            "cycle": 15,
+            "phase": "post",
+            "reset": 1,
+            "input": 1,
+            "expected": 0,
+            "observed": "1"
+          },
+          {
+            "cycle": 27,
+            "phase": "post",
+            "reset": 1,
+            "input": 0,
+            "expected": 0,
+            "observed": "1"
+          },
+          {
+            "cycle": 31,
+            "phase": "post",
+            "reset": 1,
+            "input": 1,
+            "expected": 0,
+            "observed": "1"
+          },
+          {
+            "cycle": 34,
+            "phase": "post",
+            "reset": 1,
+            "input": 0,
+            "expected": 0,
+            "observed": "1"
+          }
+        ]
+      },
+      "rtl_sha256": "58ccecff1063bc3225523637f0e808943185d00ae0c995621a7ac1d84ef8e8ff",
+      "backend": "icarus",
+      "compile_seconds": 0.062,
+      "status": "PASS",
+      "message": "Independent testbench completed all 9216 checks",
+      "stage": "simulate",
+      "receipt_nonce": "91f8482f0c934c43abbbb4ceb3640f6e",
+      "simulate_seconds": 0.047,
+      "spec_diagnostic": {
+        "checks": 9216,
+        "stimulus_count": 4608,
+        "tb_sha256": "a4cc1b10234e3d9f87d786e5ae2a33001cba8f70761e274a3bbf269d3fc8c788",
+        "vectors_sha256": "e6b00b9db43bcbabecf07ba74c906a80dd888a638726bbac52366c5a42e98a9e",
+        "backend": "icarus",
+        "compile_seconds": 0.094,
+        "status": "PASS",
+        "message": "Independent testbench completed all 9216 checks",
+        "stage": "simulate",
+        "receipt_nonce": "95c0a82ca9e34c72b7284ef9ef2dde56",
+        "simulate_seconds": 0.062,
+        "mismatches": []
+      },
+      "diagnostic_consistent": true,
+      "localization": "RTL_CORRECTS_IR_ON_TESTS"
+    },
+    {
+      "task": "debounce3",
+      "case_kind": "INJECTED_FAULT",
+      "ir_diagnosis": {
+        "status": "IR_SPEC_MISMATCH",
+        "reset_contract_errors": [],
+        "shortest_counterexample": {
+          "bits": "111",
+          "expected": 1,
+          "observed": 0
+        },
+        "visited_pairs": 4,
+        "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+      },
+      "public_check": {
+        "status": "PUBLIC_CHECK_FAIL",
+        "errors": [
+          {
+            "bits": "01110100111",
+            "expected": [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              1
+            ],
+            "observed": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "bits": "11110",
+            "expected": [
+              0,
+              0,
+              1,
+              1,
+              1
+            ],
+            "observed": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "scope": "Only disclosed examples/reset/schema; private tests were not consulted."
+      },
+      "ir_rtl": {
+        "checks": 9216,
+        "stimulus_count": 4608,
+        "tb_sha256": "cff80605ce4e08a7469025e72d6ace782184cdf9b6d9b18a9a58fefff42eae0e",
+        "vectors_sha256": "7242cd4f8cd59531bff3c74dcbd636cdaeafcae0001d6490ce126036fcf2eed7",
+        "backend": "icarus",
+        "compile_seconds": 0.094,
+        "status": "FUNCTION_FAIL",
+        "message": "Independent testbench found 1169 mismatches",
+        "stage": "simulate",
+        "receipt_nonce": "29e32be4808545d5a63773e5b7410a79",
+        "simulate_seconds": 0.047,
+        "mismatches": [
+          {
+            "cycle": 47,
+            "phase": "post",
+            "reset": 1,
+            "input": 1,
+            "expected": 0,
+            "observed": "1"
+          },
+          {
+            "cycle": 87,
+            "phase": "post",
+            "reset": 1,
+            "input": 1,
+            "expected": 0,
+            "observed": "1"
+          },
+          {
+            "cycle": 121,
+            "phase": "post",
+            "reset": 1,
+            "input": 1,
+            "expected": 0,
+            "observed": "1"
+          },
+          {
+            "cycle": 122,
+            "phase": "pre",
+            "reset": 1,
+            "input": 0,
+            "expected": 0,
+            "observed": "1"
+          },
+          {
+            "cycle": 122,
+            "phase": "post",
+            "reset": 1,
+            "input": 0,
+            "expected": 0,
+            "observed": "1"
+          }
+        ]
+      },
+      "rtl_sha256": "27073c98aff95d1f195917e2258a5e0eafd879979aab68f8fe1a9c56aa225518",
+      "backend": "icarus",
+      "compile_seconds": 0.094,
+      "status": "PASS",
+      "message": "Independent testbench completed all 9216 checks",
+      "stage": "simulate",
+      "receipt_nonce": "9efdac0fa2a54a32ade84bbd28d94787",
+      "simulate_seconds": 0.062,
+      "spec_diagnostic": {
+        "checks": 9216,
+        "stimulus_count": 4608,
+        "tb_sha256": "cff80605ce4e08a7469025e72d6ace782184cdf9b6d9b18a9a58fefff42eae0e",
+        "vectors_sha256": "7149675d5fecdde1559c88400e4708bfb742dc2dc0f76125fe042941663de1a0",
+        "backend": "icarus",
+        "compile_seconds": 0.078,
+        "status": "PASS",
+        "message": "Independent testbench completed all 9216 checks",
+        "stage": "simulate",
+        "receipt_nonce": "3dd5fd96611f45e58209068159031355",
+        "simulate_seconds": 0.062,
+        "mismatches": []
+      },
+      "diagnostic_consistent": true,
+      "localization": "RTL_CORRECTS_IR_ON_TESTS"
+    }
+  ],
+  "label": "ENGINEERING_OFFLINE_FIXTURES_ONLY; no generation effect estimate"
+}

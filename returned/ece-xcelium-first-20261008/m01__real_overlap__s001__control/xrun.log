@@ -1,0 +1,50 @@
+xrun(64): 23.03-s004: (c) Copyright 1995-2023 Cadence Design Systems, Inc.
+TOOL:	xrun(64)	23.03-s004: Started on Oct 08, 2026 at 14:06:27 HKT
+xrun
+	-64bit
+	-sv
+	-top tb
+	testbench.sv
+	dut.sv
+	+nonce=0a75211fcb9f44b5a635f5fff833edbf
+	-input run.tcl
+	-l xrun.log
+
+   User defined plus("+") options:
+	+nonce=0a75211fcb9f44b5a635f5fff833edbf
+
+file: testbench.sv
+	module worklib.tb:sv
+		errors: 0, warnings: 0
+file: dut.sv
+	module worklib.sequence_detector:sv
+		errors: 0, warnings: 0
+	Elaborating the design hierarchy:
+		Caching library 'worklib' ....... Done
+	Top level design units:
+		tb
+	Building instance overlay tables: .................... Done
+	Generating native compiled code:
+		worklib.sequence_detector:sv <0x54a852a4>
+			streams:   4, words:  1469
+		worklib.tb:sv <0x50ee64ca>
+			streams:   4, words:  4115
+	Building instance specific data structures.
+	Loading native compiled code:     .................... Done
+	Design hierarchy summary:
+		                 Instances  Unique
+		Modules:                 2       2
+		Registers:              14      14
+		Scalar wires:            4       -
+		Always blocks:           2       2
+		Initial blocks:          4       4
+		Cont. assignments:       1       1
+		Simulation timescale:  1ps
+	Writing initial simulation snapshot: worklib.tb:sv
+Loading snapshot worklib.tb:sv .................... Done
+xcelium> source /usr/eelocal/cadence/xcelium2303hf/tools/xcelium/files/xmsimrc
+xcelium> run
+Simulation complete via $finish(1) at time 5520 NS + 0
+./testbench.sv:23 $fclose(fd); $finish;
+xcelium> exit
+TOOL:	xrun(64)	23.03-s004: Exiting on Oct 08, 2026 at 14:06:32 HKT  (total: 00:00:05)

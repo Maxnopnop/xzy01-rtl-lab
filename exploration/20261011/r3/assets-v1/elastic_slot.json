@@ -1,0 +1,34 @@
+{
+  "task": "elastic_slot",
+  "module": "elastic_slot",
+  "inputs": [
+    [
+      "in_valid",
+      1
+    ],
+    [
+      "out_ready",
+      1
+    ],
+    [
+      "in_data",
+      2
+    ]
+  ],
+  "outputs": [
+    [
+      "in_ready",
+      1
+    ],
+    [
+      "out_valid",
+      1
+    ],
+    [
+      "out_data",
+      2
+    ]
+  ],
+  "seed": 31003,
+  "spec": "One-entry elastic ready/valid buffer, no combinational data bypass. Async active-low rst_n clears occupancy and data. While reset is low force in_ready=0, out_valid=0 and out_data=0. Otherwise in_ready = !occupied || out_ready, out_valid=occupied, out_data=stored data (zero when empty). At a rising edge use pre-edge occupied and out_ready: if in_valid && in_ready, store in_data and set occupied=1, including simultaneous consume/replace. Else if occupied && out_ready, clear occupied and stored data=0. Else retain state. Empty input acceptance is visible only after its rising edge. Under occupied && !out_ready, out_data and out_valid hold despite arbitrary changes in in_valid/in_data. in_ready may change combinationally with out_ready; it is not a Moore hold output. Producer need not hold invalid data; input data on an accepted edge is authoritative. No output consumption happens while empty."
+}

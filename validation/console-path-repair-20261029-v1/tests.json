@@ -1,0 +1,120 @@
+{
+  "tests": 18,
+  "failures": 0,
+  "errors": 0,
+  "skips": 0,
+  "guard_blocked_events": [],
+  "real_model_calls": 0,
+  "school_tool_calls": 0,
+  "release_files_created": 0,
+  "observations": [
+    {
+      "case": "all_storage_failures",
+      "diagnostic": {
+        "stage": "response_persist",
+        "error_type": "OSError",
+        "errno": 28,
+        "winerror": null,
+        "schema": "console-result-path-repair-v1",
+        "status": "UNKNOWN",
+        "send_attempted": true,
+        "slot_id": "offline-1",
+        "manifest_sha256": "ba20533104f7a95131ec72200b95906b04ff8a0d53603b0379fe9bc9eb07a068",
+        "request_sha256": "c9521843638b4f3fd7c3671cedc6caf66e03016a43d5abab024873c808c089de",
+        "recovery": "PERSIST_FAILED",
+        "storage_errors": [
+          {
+            "stage": "recovery_persist",
+            "error_type": "OSError",
+            "errno": 28,
+            "winerror": null
+          },
+          {
+            "stage": "failure_receipt_persist",
+            "error_type": "OSError",
+            "errno": 28,
+            "winerror": null
+          },
+          {
+            "stage": "failure_receipt_persist",
+            "error_type": "OSError",
+            "errno": 28,
+            "winerror": null
+          }
+        ],
+        "response_sha256": "8d26fba3c2fbd825406cf1345b11c72b8312b87b1446678699bc9eae36593b5f"
+      },
+      "mock_posts": 1,
+      "remaining_response_evidence": "UNRECOVERABLE: memory lost after exit"
+    },
+    {
+      "case": "response_fallback",
+      "status": "UNKNOWN",
+      "stage": "response_persist",
+      "recovery": "SAVED",
+      "mock_posts": 1,
+      "recovered_synthetic_record": {
+        "errno": 2,
+        "error_type": "FileNotFoundError",
+        "manifest_sha256": "ba20533104f7a95131ec72200b95906b04ff8a0d53603b0379fe9bc9eb07a068",
+        "recovery": "PERSIST_FAILED",
+        "request_sha256": "c9521843638b4f3fd7c3671cedc6caf66e03016a43d5abab024873c808c089de",
+        "response_sha256": "8d26fba3c2fbd825406cf1345b11c72b8312b87b1446678699bc9eae36593b5f",
+        "schema": "console-result-path-repair-v1",
+        "send_attempted": true,
+        "slot_id": "offline-1",
+        "stage": "response_persist",
+        "status": "UNKNOWN",
+        "storage_errors": [],
+        "transport_response": {
+          "body": "{\"model\": \"openai/gpt-4.1-mini\", \"provider\": \"OpenAI\", \"usage\": {\"completion_tokens\": 1}, \"choices\": [{\"finish_reason\": \"stop\", \"message\": {\"role\": \"assistant\", \"content\": \"module TopModule(output x); assign x=0; endmodule\"}}]}",
+          "client_post_invocations": 1,
+          "outcome": "HTTP_OK",
+          "request_sha256": "c9521843638b4f3fd7c3671cedc6caf66e03016a43d5abab024873c808c089de"
+        },
+        "winerror": null
+      }
+    },
+    {
+      "case": "short_preflight",
+      "paths_probed": 144,
+      "max_length": 203,
+      "mock_posts": 6
+    },
+    {
+      "case": "actual_windows_path_depth",
+      "probe": [
+        {
+          "name": "request.json",
+          "path_length": 252,
+          "saved": true,
+          "error": null
+        },
+        {
+          "name": "reservation.json",
+          "path_length": 256,
+          "saved": true,
+          "error": null
+        },
+        {
+          "name": "transport-response.json",
+          "path_length": 263,
+          "saved": false,
+          "error": {
+            "stage": "actual_windows_probe",
+            "error_type": "FileNotFoundError",
+            "errno": 2,
+            "winerror": null
+          }
+        },
+        {
+          "name": "result.json",
+          "path_length": 251,
+          "saved": true,
+          "error": null
+        }
+      ],
+      "model_calls": 0
+    }
+  ]
+}

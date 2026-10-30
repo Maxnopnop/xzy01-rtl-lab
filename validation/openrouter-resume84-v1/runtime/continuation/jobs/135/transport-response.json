@@ -1,0 +1,9 @@
+{
+  "request_sha256": "2b57f93f136a8f7958d318cd5725b63b9cc83fcb2876b8c8882287aa326b000d",
+  "client_post_invocations": 1,
+  "http_status": 200,
+  "response_bytes": 1223,
+  "raw_body_sha256": "c6be83792836c8dd4d37d04d9b5501c1453c559bdaca282a9f0ee82b07ae7db1",
+  "body": "\n         \n{\"id\":\"gen-1792767173-H4YlEPsgr5nfrekcA8N3\",\"object\":\"chat.completion\",\"created\":1792767173,\"model\":\"openai/gpt-5.6-terra\",\"provider\":\"OpenAI\",\"system_fingerprint\":null,\"service_tier\":\"default\",\"choices\":[{\"index\":0,\"logprobs\":null,\"finish_reason\":\"stop\",\"native_finish_reason\":\"completed\",\"message\":{\"role\":\"assistant\",\"content\":\"```systemverilog\\nmodule TopModule (\\n    input  clk,\\n    input  areset,\\n    input  in,\\n    output reg out\\n);\\n\\n    reg state;\\n\\n    always_ff @(posedge clk or posedge areset) begin\\n        if (areset)\\n            state <= 1'b1;\\n        else if (state)\\n            state <= in;\\n        else\\n            state <= ~in;\\n    end\\n\\n    always_comb begin\\n        out = ~state;\\n    end\\n\\nendmodule\\n```\",\"refusal\":null,\"reasoning\":null}}],\"usage\":{\"prompt_tokens\":229,\"completion_tokens\":107,\"total_tokens\":336,\"cost\":0.001742,\"is_byok\":false,\"prompt_tokens_details\":{\"cached_tokens\":0,\"cache_write_tokens\":0,\"audio_tokens\":0,\"video_tokens\":0},\"cost_details\":{\"upstream_inference_cost\":0.001742,\"upstream_inference_prompt_cost\":0.000458,\"upstream_inference_completions_cost\":0.001284},\"completion_tokens_details\":{\"reasoning_tokens\":0,\"image_tokens\":0,\"audio_tokens\":0}}}",
+  "outcome": "HTTP_OK"
+}

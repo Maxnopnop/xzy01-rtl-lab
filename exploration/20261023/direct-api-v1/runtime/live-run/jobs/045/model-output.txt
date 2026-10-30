@@ -1,0 +1,18 @@
+```systemverilog
+module top_module (
+    input  logic x,
+    input  logic y,
+    output logic z
+);
+    logic a;
+    logic b;
+    logic or_out;
+    logic and_out;
+
+    assign a       = (x ^ y) & x;
+    assign b       = ~(x ^ y);
+    assign or_out  = a | b;
+    assign and_out = a & b;
+    assign z       = or_out ^ and_out;
+endmodule
+```

@@ -1,0 +1,37 @@
+{
+  "module": "refund_credit",
+  "inputs": [
+    [
+      "submit",
+      1
+    ],
+    [
+      "refund",
+      2
+    ],
+    [
+      "cost",
+      2
+    ]
+  ],
+  "outputs": [
+    [
+      "credit",
+      3
+    ],
+    [
+      "accepted",
+      1
+    ],
+    [
+      "rejected",
+      1
+    ],
+    [
+      "can_pay",
+      1
+    ]
+  ],
+  "seed": 41002,
+  "spec": "Weighted credit ledger with capacity five. Async active-low rst_n clears 3-bit credit and accepted/rejected pulses. Every rising edge first form funded=min(5, old_credit + unsigned refund), regardless of submit. Clear accepted/rejected. If submit=1, cost=0 is invalid: rejected=1, keep funded. Else if funded>=cost consume cost and accepted=1; otherwise rejected=1 and keep funded. Without submit keep funded and both pulses zero; cost has no sequential effect. Thus same-edge refund can fund a purchase and saturation occurs BEFORE subtracting cost. credit and pulses hold between edges. can_pay is combinational: rst_n && cost!=0 && min(5,credit+refund)>=cost, forecasting the same rule using current credit; it may change as inputs change without a clock edge. Capacity arithmetic must not wrap at three or four bits. All binary input combinations are defined; reset dominates submit/refund."
+}

@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "task": "ve_addsub",
+  "sample": 1,
+  "mode": "offline",
+  "source_label": "OFFLINE_FIXTURE",
+  "requested_model": null,
+  "live_api_success": false,
+  "started_utc": "2026-09-30T22:21:40.407956+00:00",
+  "directory": "001_ve_addsub",
+  "expected_checks": 131072,
+  "sampling": {
+    "stream": false,
+    "max_tokens": 4096
+  },
+  "offline_source": "/mnt/e/Codex/2026-09-25/xzy01-using-llm-for-digital-chip-2/outputs/rtl-batch/benchmarks/dev10/mutants/ve_addsub.sv",
+  "rtl_sha256": "7cd5ea829e09bf760426659dc1d87d4543009c73daf81ebb1defe2c820258c7d",
+  "testbench_sha256": "5e0e9b37dad3ebc91fc40742d7315ce2cb9ba8bd5ec2c364a39eff9256538aeb",
+  "backend": "icarus",
+  "compile_seconds": 0.0422,
+  "status": "FUNCTION_FAIL",
+  "message": "Independent testbench found 131072 mismatches",
+  "stage": "simulate",
+  "receipt_nonce": "7d1ad63ecdfc425bbdc5442153a3ae05",
+  "simulate_seconds": 0.3239,
+  "simulation_status": "FUNCTION_FAIL",
+  "synthesis": {
+    "backend": "yosys",
+    "flow": "generic-synth-noabc-v1",
+    "elapsed_seconds": 0.0427,
+    "statistics_kind": "generic cells, not silicon area/timing/power",
+    "status": "SYNTH_PASS",
+    "generic_cells": 86,
+    "cell_types": {
+      "$_AND_": 25,
+      "$_MUX_": 7,
+      "$_NOT_": 16,
+      "$_OR_": 16,
+      "$_XOR_": 22
+    },
+    "latch_cells": 0,
+    "netlist_sha256": "5e0ccd100036cdbaa9cfda60486d68902bbd13d0772fd46af9d20ceeff17b461",
+    "message": "Generic synthesis and structural checks passed"
+  },
+  "synthesis_status": "SYNTH_PASS",
+  "joint_pass": false,
+  "elapsed_seconds": 0.709,
+  "finished_utc": "2026-09-30T22:21:41.116974+00:00"
+}

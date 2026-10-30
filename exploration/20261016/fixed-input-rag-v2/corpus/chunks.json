@@ -1,0 +1,192 @@
+[
+  {
+    "id": "LR001",
+    "section": "Blocking and Non-blocking Assignments",
+    "start_line": 1772,
+    "end_line": 1773,
+    "text": "***Sequential logic must use non-blocking assignments.  Combinational\nblocks must use blocking assignments.***",
+    "sha256": "8e9c04cd0facbc95fedb5fccd33911539f102e31dfa6d6db79bb4c035a7a6c5b",
+    "characters": 110,
+    "use": "General synthesizable language/style guidance, not task requirements or a solution"
+  },
+  {
+    "id": "LR002",
+    "section": "Delay Modeling",
+    "start_line": 1789,
+    "end_line": 1790,
+    "text": "Synthesizable design modules must be designed around a zero-delay simulation\nmethodology. All forms of `#delay`, including `#0`, are not permitted.",
+    "sha256": "f08d2bb9835cd2c97e28e5887e08b5b4a8a22fbf1363bff522ea521583dc5538",
+    "characters": 147,
+    "use": "General synthesizable language/style guidance, not task requirements or a solution"
+  },
+  {
+    "id": "LR003",
+    "section": "Sequential Logic (Latches)",
+    "start_line": 1802,
+    "end_line": 1803,
+    "text": "If you must use a latch, use `always_latch` over `always`, and use non-blocking\nassignments (`<=`). Never use blocking assignments (`=`).",
+    "sha256": "bebab74d9159028626ec42336b8a11d2d3850005988ffd16e22d4d44f7953c7f",
+    "characters": 137,
+    "use": "General synthesizable language/style guidance, not task requirements or a solution"
+  },
+  {
+    "id": "LR004",
+    "section": "Sequential Logic (Registers)",
+    "start_line": 1809,
+    "end_line": 1810,
+    "text": "In a sequential always block, only use non-blocking assignments (`<=`). Never\nuse blocking assignments (`=`).",
+    "sha256": "1414610b9fe4bb475988457f3276ed2661d927fe0f6147ba14ada95a275ad81c",
+    "characters": 109,
+    "use": "General synthesizable language/style guidance, not task requirements or a solution"
+  },
+  {
+    "id": "LR005",
+    "section": "Sequential Logic (Registers)",
+    "start_line": 1812,
+    "end_line": 1816,
+    "text": "Designs that mix blocking and non-blocking assignments for registers simulate\nincorrectly because some simulators process some of the blocking assignments in\nan always block as occurring in a separate simulation event as the non-blocking\nassignment. This process makes some signals jump registers, potentially leading\nto total protonic reversal. That's bad.",
+    "sha256": "63c5494b8a702190ebcfc2bb19d15d9c92ba5ec77515d55ec84b415e00af1d09",
+    "characters": 357,
+    "use": "General synthesizable language/style guidance, not task requirements or a solution"
+  },
+  {
+    "id": "LR006",
+    "section": "Sequential Logic (Registers)",
+    "start_line": 1818,
+    "end_line": 1820,
+    "text": "Sequential statements for state assignments should only contain reset values and\na next-state to state assignment, use a separate combinational-only block to\ngenerate that next-state value.",
+    "sha256": "e21796acf251a073061ee4e103ad61404d82cbafca689dc2df125e2c0df8e647",
+    "characters": 189,
+    "use": "General synthesizable language/style guidance, not task requirements or a solution"
+  },
+  {
+    "id": "LR007",
+    "section": "Sequential Logic (Registers)",
+    "start_line": 1860,
+    "end_line": 1862,
+    "text": "Exception: It is fine to set default values first, then specific values.\nHowever, it is preferred to do this work in a separate combinational block with\nexplicit blocking assignments.",
+    "sha256": "95cb4e3e557c9542e94391c30886dee9c2e07f8caa40eafb0993a9810c70456d",
+    "characters": 183,
+    "use": "General synthesizable language/style guidance, not task requirements or a solution"
+  },
+  {
+    "id": "LR008",
+    "section": "Sequential Logic (Registers)",
+    "start_line": 1897,
+    "end_line": 1901,
+    "text": "Keep work in sequential blocks simple. If a sequential block becomes\nsufficiently complicated, consider splitting the combinational logic into a\nseparate combinational (`always_comb`) block. Ideally, sequential blocks should\ncontain only a register instantiation, with perhaps a load enable or an\nincrement.",
+    "sha256": "21c198d95c6a31cf2ed9e901a11384008476b278830e4a0be73c3c5feb192946",
+    "characters": 307,
+    "use": "General synthesizable language/style guidance, not task requirements or a solution"
+  },
+  {
+    "id": "LR009",
+    "section": "Combinational Logic",
+    "start_line": 2136,
+    "end_line": 2138,
+    "text": "Use `always_comb` for SystemVerilog combinational blocks. Use `always @*` if\nonly Verilog-2001 is supported. Never explicitly declare sensitivity lists for\ncombinational logic.",
+    "sha256": "3700664a44f6ee47d26a07356aae82face9f914a3f3bde63c9763bc8bd86a4bc",
+    "characters": 176,
+    "use": "General synthesizable language/style guidance, not task requirements or a solution"
+  },
+  {
+    "id": "LR010",
+    "section": "Combinational Logic",
+    "start_line": 2152,
+    "end_line": 2153,
+    "text": "Do not use three-state logic (`Z` state) to accomplish on-chip logic such as\nmuxing.",
+    "sha256": "f1044589bb7940ec2cb3d3cd0e6488dcce2a40da913569935f328601dce6cf4f",
+    "characters": 84,
+    "use": "General synthesizable language/style guidance, not task requirements or a solution"
+  },
+  {
+    "id": "LR011",
+    "section": "Combinational Logic",
+    "start_line": 2155,
+    "end_line": 2156,
+    "text": "Do not infer a latch inside a function, as this may cause a\nsimulation/synthesis mismatch.",
+    "sha256": "11ca5a6104937992e53302ca7cbcbd7ec17dc439af10fb1c09ed6fed54644ef7",
+    "characters": 90,
+    "use": "General synthesizable language/style guidance, not task requirements or a solution"
+  },
+  {
+    "id": "LR012",
+    "section": "Case Statements",
+    "start_line": 2160,
+    "end_line": 2161,
+    "text": "***Avoid case-modifying pragmas. `unique case` is the best\npractice. Always define a default case.***",
+    "sha256": "f2a74e8f9b465d1c36a8d71a3a727eb1e722de6ffc691ee42856ef4d5b368e75",
+    "characters": 101,
+    "use": "General synthesizable language/style guidance, not task requirements or a solution"
+  },
+  {
+    "id": "LR013",
+    "section": "Case Statements",
+    "start_line": 2163,
+    "end_line": 2164,
+    "text": "Never use either the `full_case` or `parallel_case` pragmas. These pragmas can\neasily cause simulation/synthesis mismatches.",
+    "sha256": "0a62f1572faa14cbaa96e8e4533cafb19af0b63d201516b0cdcb13111eb5c942",
+    "characters": 124,
+    "use": "General synthesizable language/style guidance, not task requirements or a solution"
+  },
+  {
+    "id": "LR014",
+    "section": "Case Statements",
+    "start_line": 2181,
+    "end_line": 2185,
+    "text": "The `unique` prefix is recommended before all case statements, as it creates\nsimulation assertions that can catch certain mistakes. In some cases, `priority`\nmay be used instead of `unique`, though in such cases, cascaded ternary\nstructures should be the preferred way of representing priority encoders as\nthey are a more readable representation for priority encoders.",
+    "sha256": "a7a74ae7a66911d61bb1c149b3937aaf2f2078f0497c6710b8b5b885ddddd562",
+    "characters": 368,
+    "use": "General synthesizable language/style guidance, not task requirements or a solution"
+  },
+  {
+    "id": "LR015",
+    "section": "Case Statements",
+    "start_line": 2189,
+    "end_line": 2192,
+    "text": "  - a `default:` statement is **always** included in order to avoid accidental\n  inference of latches, even if all cases are covered. In simulation, a case\n  expression that evaluates to `X` will not match any case and will behave as a\n  latch, leading to different behavior than synthesis if no default is specified.",
+    "sha256": "671cab8965910cd22aa4aa60fb141c20ee77102e6da34dd8c28e743cf5ec15e0",
+    "characters": 317,
+    "use": "General synthesizable language/style guidance, not task requirements or a solution"
+  },
+  {
+    "id": "LR016",
+    "section": "Case Statements",
+    "start_line": 2238,
+    "end_line": 2240,
+    "text": "Use `case` if wildcard operator behavior is not needed.\nUse `case inside` if wildcard operator behavior is needed.\nUse `casez` if wildcard operator behavior is needed and Verilog-2001 compatibility is required.",
+    "sha256": "9d9505478f985c8e35f7e7b43505c037c57c12ebb1b27efdf4916f9a78d11dfd",
+    "characters": 210,
+    "use": "General synthesizable language/style guidance, not task requirements or a solution"
+  },
+  {
+    "id": "LR017",
+    "section": "Case Statements",
+    "start_line": 2242,
+    "end_line": 2243,
+    "text": "When expressing a wildcard in a case item, use the '?' character since it more\nclearly expresses the intent.",
+    "sha256": "20ca8d3774dc2c297cec8df21172fd69a8020c7aeb2684749aadb6272e135a2f",
+    "characters": 108,
+    "use": "General synthesizable language/style guidance, not task requirements or a solution"
+  },
+  {
+    "id": "LR018",
+    "section": "Case Statements",
+    "start_line": 2245,
+    "end_line": 2252,
+    "text": "`casex` should not be used. `casex` implements a symmetric wildcard operator\nsuch that an `X` in the case expression may match one or more case items.\n`casez` only treats high-impedance states (`Z` or `?`) as a wildcard, and\nperforms exact matches for undriven `X` inputs. While this does not completely\nfix the problems with symmetric wildcard matching, it is harder to accidentally\nproduce a `Z` input than an `X` input, so this form is preferred.\n`case inside` does not treat either `X` or `Z` in the case expression as a\nwildcard, so this form is preferred over `casez`.",
+    "sha256": "38b511f542f8fcb62c5ad046b40e95a8c569d5e5b69bdce9dbe2cc6e393640e9",
+    "characters": 574,
+    "use": "General synthesizable language/style guidance, not task requirements or a solution"
+  },
+  {
+    "id": "LR019",
+    "section": "Case Statements",
+    "start_line": 2256,
+    "end_line": 2259,
+    "text": "*   Don Mills, [Yet Another Latch and Gotchas Paper][yalagp]\n*   Clifford Cummings, [full\\_case parallel\\_case, the Evil Twins of Verilog Synthesis][twinevils]\n*   Clifford Cummings, [SystemVerilog's priority & unique][priuniq]\n*   Sutherland, Mills, and Spear, [Gotcha Again: More Subtleties in the Verilog and SystemVerilog Standards That Every Engineer Should Know][gotagain]",
+    "sha256": "984fed3b571656acdc03f437377027a4cda26c34a500589f2557a2d0e3db64bc",
+    "characters": 378,
+    "use": "General synthesizable language/style guidance, not task requirements or a solution"
+  }
+]

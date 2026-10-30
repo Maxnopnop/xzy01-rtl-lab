@@ -1,0 +1,35 @@
+{
+  "id": "rt_pipeline",
+  "module": "multi_pipe_4bit",
+  "checks": 1024,
+  "spec": "Please act as a professional verilog designer.\n\nImplement the design of 4bit unsigned number pipeline multiplier. It consists of two levels of registers to store intermediate values and control the multiplication process.\n\nModule name:  \n    multi_pipe_4bit \n\nInput ports:\n    clk: Clock signal used for synchronous operation.\n    rst_n: Active-low reset signal. Defined as 0 for chip reset and 1 for reset signal inactive.\n    mul_a: Input signal representing the multiplicand with a data width of \"size\" bits.\n    mul_b: Input signal representing the multiplier with a data width of \"size\" bits.\t\n\nOutput ports:\n    mul_out: Product output signal with a data width of 2*size bits.\n\nParameter:\n    size = 4\n\nImplementation:\nExtension of input signals:\nThe input signals (mul_a and mul_b) are extended by adding \"size\" number of zero bits at the most significant bit positions.\nMultiplication operation:\nThe module uses a generate block to perform multiplication for each bit position of the multiplier (mul_b) and generate the partial products.\nFor each bit position i from 0 to size-1, the partial product is calculated as follows:\nIf the corresponding bit in the multiplier is 1, the multiplicand is left-shifted by i positions.\nIf the corresponding bit in the multiplier is 0, the partial product is set to 0 ('d0).\nAdd of partial products:\nThe module uses registers to store the intermediate sum values.\nOn the positive edge of the clock signal (clk) or the falling edge of the reset signal (rst_n), the module performs add operations.\nIf the reset signal (rst_n) is low, indicating a reset condition, the registers are set to 0.\nIf the reset signal (rst_n) is high, the registers are updated with the sum of the corresponding partial products.\nFinal product calculation:\nOn the positive edge of the clock signal (clk) or the falling edge of the reset signal (rst_n), the module calculates the final product.\nIf the reset signal (rst_n) is low, indicating a reset condition, the product output (mul_out) is set to 0.\nIf the reset signal (rst_n) is high, the product output (mul_out) is updated with the sum of registers.\n\nGive me the complete code.\n\nDevelopment-subset clarification (part of the fixed specification): Evaluate only size=4. Keep parameter size=4 and the specified port widths. The output after an edge equals the product of inputs sampled one rising edge earlier (two register stages).",
+  "category": "pipeline",
+  "split": "development",
+  "family": "multiplier",
+  "benchmark": "RTLLM",
+  "suite_version": "dev10-v1",
+  "synthesis_eligible": true,
+  "origin": {
+    "repository": "https://github.com/hkust-zhiyao/RTLLM",
+    "commit": "51ed553d0ffd32797a1a0a13e051656bf302c81f",
+    "path": "Arithmetic/Multiplier/multi_pipe_4bit",
+    "license": "MIT",
+    "files": {
+      "upstream/RTLLM/multi_pipe_4bit/design_description.txt": "32fb915aec3e775111d00720102b10a6670a0c1bc3d2a185985836bb95a59a6c",
+      "upstream/RTLLM/multi_pipe_4bit/verified_multi_pipe_4bit.v": "95da22f99f6ccf56608f98758234744aaaf7934643d2b7f636f19eb78e3eb6fc",
+      "upstream/RTLLM/multi_pipe_4bit/testbench.v": "9ee2469af2d3d9632bcf360a9a911f59ca57baa2ea8721b1f2f2e0557569fb8b"
+    }
+  },
+  "adaptations": [
+    "Independent deterministic vector oracle replaces upstream TB; upstream TB archived.",
+    "Reference module renamed; timescale directive removed.",
+    "Evaluate only size=4. Keep parameter size=4 and the specified port widths. The output after an edge equals the product of inputs sampled one rising edge earlier (two register stages)."
+  ],
+  "mutation": "Drops high partial product",
+  "reference_sha256": "166a836e1dd5964767081d60e77c47e1c5eb0990087ce486c23571e99ed63134",
+  "mutant_sha256": "1a75c14572644bb2f287a9ac6d8d04f21ce3975e90192a792eb5c67fc254bab9",
+  "tb_sha256": "1b02333ec06c55a46836b4f55d8048fc31a74086fde10c33ce46d2ffddbadffb",
+  "assets": {
+    "rt_pipeline.hex": "8754b366d9c3b310243b0526850db1c32ef5936f796f69aac368be9fc293e40b"
+  }
+}

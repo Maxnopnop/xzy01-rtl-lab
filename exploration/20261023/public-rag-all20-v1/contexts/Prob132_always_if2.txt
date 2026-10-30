@@ -1,0 +1,21 @@
+
+
+<generic_reference_context>
+These are generic style excerpts, not new task requirements or solutions. The original specification above takes precedence.
+Source: lowRISC contributors; CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/); unmodified selected prose.
+https://github.com/lowRISC/style-guides/blob/9c15ff5dce23eef969e00ab3715153967419eadd/VerilogCodingStyle.md
+[LR008; Sequential Logic (Registers); lines 1897-1901]
+Keep work in sequential blocks simple. If a sequential block becomes
+sufficiently complicated, consider splitting the combinational logic into a
+separate combinational (`always_comb`) block. Ideally, sequential blocks should
+contain only a register instantiation, with perhaps a load enable or an
+increment.
+
+[LR002; Delay Modeling; lines 1789-1790]
+Synthesizable design modules must be designed around a zero-delay simulation
+methodology. All forms of `#delay`, including `#0`, are not permitted.
+
+[LR003; Sequential Logic (Latches); lines 1802-1803]
+If you must use a latch, use `always_latch` over `always`, and use non-blocking
+assignments (`<=`). Never use blocking assignments (`=`).
+</generic_reference_context>

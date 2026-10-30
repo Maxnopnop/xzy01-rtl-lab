@@ -1,0 +1,37 @@
+--- runner.py
++++ runner_v2.py
+@@ -6,7 +6,7 @@
+ BASE=Path(__file__).resolve().parent;ROOT=BASE.parents[2];V3=BASE.parent/'r3-runner-v3'
+ sys.path[:0]=[str(BASE),str(ROOT),str(V3)]
+ import tasks,intent,prompts,judge,batch,rtl_lab as lab,cli_adapter as adapter
+-RUN=BASE/'runs/prepared-v1';ASSETS=BASE/'assets-v1'
++RUN=BASE/'runs/prepared-v2';ASSETS=BASE/'assets-v1'
+ FUNCTIONAL={'PASS','FUNCTION_FAIL','COMPILE_FAIL','RTL_REJECTED','EXTRACTION_ERROR','IR_INVALID','UNSUPPORTED','INPUT_LIMIT'}
+ MAX_INPUT=256*1024
+ def hashes():
+@@ -33,6 +33,7 @@
+ def prepare():
+     assert batch.read(BASE/'runs/calibration-v4/summary.json')['status']=='PASS'
+     assert batch.read(BASE/'runs/control-v1/summary.json')['status']=='PASS'
++    assert batch.read(BASE/'runs/unknown-v2/summary.json')['status']=='PASS'
+     assert not RUN.exists();RUN.mkdir(parents=True);p=plan()
+     for j in p['jobs']:
+         if 'prompt' in j:
+@@ -52,7 +53,7 @@
+ def generate(run,job,p,prompt,call=None):
+     folder=run/'jobs'/job['id'];folder.mkdir(parents=True,exist_ok=True);g=folder/'generation.json'
+     if g.exists():return batch.read(g)
+-    if (folder/'started.json').exists():result=dict(status='UNKNOWN_INTERRUPTED',usage=None)
++    if (folder/'started.json').exists():result=dict(status='UNKNOWN_INTERRUPTED',usage=None,model_called=True,reservation_unknown=True)
+     elif len(prompt.encode())>p['input_byte_limit']:
+         (folder/'response.txt').write_bytes(b'');(folder/'exact-prompt.txt').write_bytes(prompt.encode())
+         result=dict(status='INPUT_LIMIT',usage=None,response_sha256=lab.digest(b''),prompt_sha256=lab.digest(prompt.encode()),prompt_bytes=len(prompt.encode()),model_called=False)
+@@ -79,7 +80,7 @@
+ def campaign(run,p,call=None,feedback=None,check_sources=True):
+     for reservation in (run/'jobs').glob('*/started.json'):
+         g=reservation.parent/'generation.json'
+-        if not g.exists():batch.atomic(g,dict(status='UNKNOWN_INTERRUPTED',usage=None))
++        if not g.exists():batch.atomic(g,dict(status='UNKNOWN_INTERRUPTED',usage=None,model_called=True,reservation_unknown=True))
+         if batch.read(g)['status'] not in FUNCTIONAL|{'GENERATED'}:return dict(status='STOPPED_INFRASTRUCTURE',reason='Prior unknown/failed reservation')
+     start=run/'dispatch-start.json'
+     if not start.exists():batch.atomic(start,dict(epoch=time.time()))

@@ -1,0 +1,1730 @@
+{
+  "utc": "2026-10-24T03:09:56.582105+00:00",
+  "a_lock_sha256": "c0609d940a0e586e2b7b5fc81ca6d58bd1eeee5e1d4cecbe40415317f341ead1",
+  "protocol_lock_sha256": "63353db3ad1f7e297dff22faa2bb9de775b5cd7f67f8b20fcd275a9384d10f4e",
+  "candidate_count": 20,
+  "selected_ids": [
+    "Prob001_zero",
+    "Prob019_m2014_q4f",
+    "Prob094_gatesv",
+    "Prob143_fsm_onehot",
+    "Prob114_bugs_case",
+    "Prob087_gates",
+    "Prob050_kmap1",
+    "Prob106_always_nolatches"
+  ],
+  "conditional_count": 8,
+  "independent_pass_count": 0,
+  "rows": [
+    {
+      "rank": 1,
+      "id": "Prob145_circuit8",
+      "meaning_zh": "波形推断锁存器及下降沿寄存器",
+      "eligible": false,
+      "selected": false,
+      "status": "EXCLUDED",
+      "code": "KEY_TIMING_UNRESOLVED",
+      "contract_zh": "clock/a/p/q均1位；无复位、初态X。表中115ns时clock下降且a变0，而q变1；没有区分边沿前/后输入。参考q<=a、p高电平透明，不足以唯一解释原表同时变化。",
+      "history_review_zh": "与dff历史有局部相似，决定性排除是原波形采样相位无法唯一确定。",
+      "coverage_zh": "子clock每3个posedge测试clk翻转，a在测试双边沿NBA更新；200随机步。不能以参考一致倒推出唯一契约。",
+      "language": "English prompt; SystemVerilog reference/TB, fixed TopModule candidate interface",
+      "diagram_or_table": "Any required textual table/diagram reviewed above; never supplemented",
+      "signedness": "No signed arithmetic requirement; widths as original interface; four-state unspecified domains not filled",
+      "initialization_and_validity": "See per-task contract; no new initialization/reset/output masking added",
+      "sampling_zh": "原test计分always位于测试clk双边沿，helper只定义未调用；NBA驱动与active区比较，不保证统一POST/NBA后采样。组合稳定输入阶段比较不等于全时序签核。",
+      "dependencies": {
+        "modules": [
+          "RefModule",
+          "stimulus_gen",
+          "tb"
+        ],
+        "external_include": [],
+        "readmem": false,
+        "source_files": [
+          "prompt.txt",
+          "ref.sv",
+          "test.sv"
+        ],
+        "single_topmodule": "Original TB instantiates TopModule; reference header independently present; static compatible, compile NOT_RUN"
+      },
+      "authorship": {
+        "repository": "NVlabs/verilog-eval",
+        "license": "MIT (frozen LICENSE)",
+        "snapshot_commit_author": "Nathaniel Pinckney; NOT attributed as individual file author",
+        "individual_prompt_ref_test_authors": "UNKNOWN from available files; same repository lineage, no independently authored oracle established"
+      },
+      "reference_independence": "SAME_REPOSITORY_CORRELATED",
+      "independent_correctness": "NOT_ESTABLISHED",
+      "test_evidence": [
+        {
+          "line": 95,
+          "text": "\tRefModule good1 ("
+        },
+        {
+          "line": 101,
+          "text": "\tTopModule top_module1 ("
+        },
+        {
+          "line": 109,
+          "text": "\ttask wait_for_end_of_timestep;"
+        },
+        {
+          "line": 129,
+          "text": "\tassign tb_match = ( { p_ref, q_ref } === ( { p_ref, q_ref } ^ { p_dut, q_dut } ^ { p_ref, q_ref } ) );"
+        },
+        {
+          "line": 132,
+          "text": "\talways @(posedge clk, negedge clk) begin"
+        }
+      ],
+      "bindings": {
+        "prompt.txt": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob145_circuit8_prompt.txt",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob145_circuit8_prompt.txt",
+          "sha256": "b201c97e26c73188f92ccef09d439c0ae93c77d79318e89bd4e6e83f6778b6e2",
+          "expected_git_blob": "7c891324609cf17c4d87426ca4aa95775842d6fc",
+          "actual_git_blob": "7c891324609cf17c4d87426ca4aa95775842d6fc"
+        },
+        "ref.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob145_circuit8_ref.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob145_circuit8_ref.sv",
+          "sha256": "fe08ece4bcb44739f21976e1371936460bdad7b5e97583a01e605460895ce392",
+          "expected_git_blob": "5c3d642c41505ad2b142b33e1d4954aaa7f1814d",
+          "actual_git_blob": "5c3d642c41505ad2b142b33e1d4954aaa7f1814d"
+        },
+        "test.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob145_circuit8_test.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob145_circuit8_test.sv",
+          "sha256": "d1e05230a13e86f094eb1b435876b1778ecf3d12b3da6ecc0f91044ec53f7038",
+          "expected_git_blob": "ab042f9b1dbfc64c3c5d58afbad34122cdf1427b",
+          "actual_git_blob": "ab042f9b1dbfc64c3c5d58afbad34122cdf1427b"
+        }
+      }
+    },
+    {
+      "rank": 2,
+      "id": "Prob088_ece241_2014_q5b",
+      "meaning_zh": "串行二补数Mealy FSM",
+      "eligible": false,
+      "selected": false,
+      "status": "EXCLUDED",
+      "code": "REFERENCE_STRUCTURE_CONFLICT",
+      "contract_zh": "全1位，posedge、异步高复位A，A遇1转B，z由state/x决定。原题要求one-hot，参考reg state为单比特二进制A=0/B=1，不满足两状态one-hot结构。",
+      "history_review_zh": "与旧Prob089二补数题同族；不靠实现编码差异宣称新独立题。",
+      "coverage_zh": "异步reset_test及400随机双边沿输入；TB只看z，不检查one-hot编码。",
+      "language": "English prompt; SystemVerilog reference/TB, fixed TopModule candidate interface",
+      "diagram_or_table": "Any required textual table/diagram reviewed above; never supplemented",
+      "signedness": "No signed arithmetic requirement; widths as original interface; four-state unspecified domains not filled",
+      "initialization_and_validity": "See per-task contract; no new initialization/reset/output masking added",
+      "sampling_zh": "原test计分always位于测试clk双边沿，helper只定义未调用；NBA驱动与active区比较，不保证统一POST/NBA后采样。组合稳定输入阶段比较不等于全时序签核。",
+      "dependencies": {
+        "modules": [
+          "RefModule",
+          "stimulus_gen",
+          "tb"
+        ],
+        "external_include": [],
+        "readmem": false,
+        "source_files": [
+          "prompt.txt",
+          "ref.sv",
+          "test.sv"
+        ],
+        "single_topmodule": "Original TB instantiates TopModule; reference header independently present; static compatible, compile NOT_RUN"
+      },
+      "authorship": {
+        "repository": "NVlabs/verilog-eval",
+        "license": "MIT (frozen LICENSE)",
+        "snapshot_commit_author": "Nathaniel Pinckney; NOT attributed as individual file author",
+        "individual_prompt_ref_test_authors": "UNKNOWN from available files; same repository lineage, no independently authored oracle established"
+      },
+      "reference_independence": "SAME_REPOSITORY_CORRELATED",
+      "independent_correctness": "NOT_ESTABLISHED",
+      "test_evidence": [
+        {
+          "line": 119,
+          "text": "\tRefModule good1 ("
+        },
+        {
+          "line": 125,
+          "text": "\tTopModule top_module1 ("
+        },
+        {
+          "line": 133,
+          "text": "\ttask wait_for_end_of_timestep;"
+        },
+        {
+          "line": 151,
+          "text": "\tassign tb_match = ( { z_ref } === ( { z_ref } ^ { z_dut } ^ { z_ref } ) );"
+        },
+        {
+          "line": 154,
+          "text": "\talways @(posedge clk, negedge clk) begin"
+        }
+      ],
+      "bindings": {
+        "prompt.txt": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob088_ece241_2014_q5b_prompt.txt",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob088_ece241_2014_q5b_prompt.txt",
+          "sha256": "57208b463127b6f4bb738bd56a923981f34151aebe567a6cb2c76124c58915b2",
+          "expected_git_blob": "47bdfbef490ebe96481ea2d16624c249827885f2",
+          "actual_git_blob": "47bdfbef490ebe96481ea2d16624c249827885f2"
+        },
+        "ref.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob088_ece241_2014_q5b_ref.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob088_ece241_2014_q5b_ref.sv",
+          "sha256": "bb9b731de5e52fabceb4649ec9e7808cba9decd96453c027261bf6bd2eb65aaa",
+          "expected_git_blob": "b1516aaa0954af4fee38dd0c992320c9033b6599",
+          "actual_git_blob": "b1516aaa0954af4fee38dd0c992320c9033b6599"
+        },
+        "test.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob088_ece241_2014_q5b_test.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob088_ece241_2014_q5b_test.sv",
+          "sha256": "6ccb85eceac601cb2e5fb737770b22d3864694ef9f4f2f8cac0ed134459edc81",
+          "expected_git_blob": "a9324910829bff34cc5c16e74aead363c66a1917",
+          "actual_git_blob": "a9324910829bff34cc5c16e74aead363c66a1917"
+        }
+      }
+    },
+    {
+      "rank": 3,
+      "id": "Prob122_kmap4",
+      "meaning_zh": "四输入卡诺图奇偶",
+      "eligible": false,
+      "selected": false,
+      "status": "EXCLUDED",
+      "code": "HISTORY_FUNCTIONAL_NEAR_DUPLICATE",
+      "contract_zh": "1位a,b,c,d/out；完整Gray顺序16格；组合、无时钟复位、无符号运算；函数为四位奇偶。",
+      "history_review_zh": "与历史parity8功能相同，仅宽度/表达形式改变；不是新独立奇偶测试。",
+      "coverage_zh": "16枚举+200随机，参考case无default导致X输入未覆盖定义；不修改。",
+      "language": "English prompt; SystemVerilog reference/TB, fixed TopModule candidate interface",
+      "diagram_or_table": "Any required textual table/diagram reviewed above; never supplemented",
+      "signedness": "No signed arithmetic requirement; widths as original interface; four-state unspecified domains not filled",
+      "initialization_and_validity": "See per-task contract; no new initialization/reset/output masking added",
+      "sampling_zh": "原test计分always位于测试clk双边沿，helper只定义未调用；NBA驱动与active区比较，不保证统一POST/NBA后采样。组合稳定输入阶段比较不等于全时序签核。",
+      "dependencies": {
+        "modules": [
+          "RefModule",
+          "stimulus_gen",
+          "tb"
+        ],
+        "external_include": [],
+        "readmem": false,
+        "source_files": [
+          "prompt.txt",
+          "ref.sv",
+          "test.sv"
+        ],
+        "single_topmodule": "Original TB instantiates TopModule; reference header independently present; static compatible, compile NOT_RUN"
+      },
+      "authorship": {
+        "repository": "NVlabs/verilog-eval",
+        "license": "MIT (frozen LICENSE)",
+        "snapshot_commit_author": "Nathaniel Pinckney; NOT attributed as individual file author",
+        "individual_prompt_ref_test_authors": "UNKNOWN from available files; same repository lineage, no independently authored oracle established"
+      },
+      "reference_independence": "SAME_REPOSITORY_CORRELATED",
+      "independent_correctness": "NOT_ESTABLISHED",
+      "test_evidence": [
+        {
+          "line": 88,
+          "text": "\tRefModule good1 ("
+        },
+        {
+          "line": 95,
+          "text": "\tTopModule top_module1 ("
+        },
+        {
+          "line": 104,
+          "text": "\ttask wait_for_end_of_timestep;"
+        },
+        {
+          "line": 122,
+          "text": "\tassign tb_match = ( { out_ref } === ( { out_ref } ^ { out_dut } ^ { out_ref } ) );"
+        },
+        {
+          "line": 125,
+          "text": "\talways @(posedge clk, negedge clk) begin"
+        }
+      ],
+      "bindings": {
+        "prompt.txt": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob122_kmap4_prompt.txt",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob122_kmap4_prompt.txt",
+          "sha256": "5ac6c8f14a1bea425c2eb929bf0150f219151ac09153df780e34ca11ccbac6cc",
+          "expected_git_blob": "68e3c5efbb59bcb79f5d9b30468c2dcdb65e4a97",
+          "actual_git_blob": "68e3c5efbb59bcb79f5d9b30468c2dcdb65e4a97"
+        },
+        "ref.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob122_kmap4_ref.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob122_kmap4_ref.sv",
+          "sha256": "4094b301b666c925eb833a38df14836c24f6e90f56d1903a4c3db1e4a6c6d01e",
+          "expected_git_blob": "cac6d61b2cd7927d3ccd509d9edbe9c693ecaa47",
+          "actual_git_blob": "cac6d61b2cd7927d3ccd509d9edbe9c693ecaa47"
+        },
+        "test.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob122_kmap4_test.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob122_kmap4_test.sv",
+          "sha256": "1752d6f03374c971cc2364affd4a0f4052c7956e5d14d1b146c40af886eb2b73",
+          "expected_git_blob": "c16e3bebfbd25ddb2963ecb7bd3d75d2c3ed7316",
+          "actual_git_blob": "c16e3bebfbd25ddb2963ecb7bd3d75d2c3ed7316"
+        }
+      }
+    },
+    {
+      "rank": 4,
+      "id": "Prob001_zero",
+      "meaning_zh": "常零输出",
+      "eligible": true,
+      "selected": true,
+      "status": "CONDITIONAL_NO_INDEPENDENT_ORACLE",
+      "code": "CONDITIONAL_STATIC_ELIGIBLE",
+      "contract_zh": "仅1位zero，无输入、时钟、复位、有符号算术；始终为0，组合连续有效，不涉及初始化契约。",
+      "history_review_zh": "未见相同常零任务；与NOT/门运算共有常量这一基本原语不单独判重复。",
+      "coverage_zh": "20个测试时钟双边沿观测，无输入空间；同源参考assign0，非独立oracle。",
+      "language": "English prompt; SystemVerilog reference/TB, fixed TopModule candidate interface",
+      "diagram_or_table": "Any required textual table/diagram reviewed above; never supplemented",
+      "signedness": "No signed arithmetic requirement; widths as original interface; four-state unspecified domains not filled",
+      "initialization_and_validity": "See per-task contract; no new initialization/reset/output masking added",
+      "sampling_zh": "原test计分always位于测试clk双边沿，helper只定义未调用；NBA驱动与active区比较，不保证统一POST/NBA后采样。组合稳定输入阶段比较不等于全时序签核。",
+      "dependencies": {
+        "modules": [
+          "RefModule",
+          "stimulus_gen",
+          "tb"
+        ],
+        "external_include": [],
+        "readmem": false,
+        "source_files": [
+          "prompt.txt",
+          "ref.sv",
+          "test.sv"
+        ],
+        "single_topmodule": "Original TB instantiates TopModule; reference header independently present; static compatible, compile NOT_RUN"
+      },
+      "authorship": {
+        "repository": "NVlabs/verilog-eval",
+        "license": "MIT (frozen LICENSE)",
+        "snapshot_commit_author": "Nathaniel Pinckney; NOT attributed as individual file author",
+        "individual_prompt_ref_test_authors": "UNKNOWN from available files; same repository lineage, no independently authored oracle established"
+      },
+      "reference_independence": "SAME_REPOSITORY_CORRELATED",
+      "independent_correctness": "NOT_ESTABLISHED",
+      "test_evidence": [
+        {
+          "line": 72,
+          "text": "\tRefModule good1 ("
+        },
+        {
+          "line": 75,
+          "text": "\tTopModule top_module1 ("
+        },
+        {
+          "line": 80,
+          "text": "\ttask wait_for_end_of_timestep;"
+        },
+        {
+          "line": 98,
+          "text": "\tassign tb_match = ( { zero_ref } === ( { zero_ref } ^ { zero_dut } ^ { zero_ref } ) );"
+        },
+        {
+          "line": 101,
+          "text": "\talways @(posedge clk, negedge clk) begin"
+        }
+      ],
+      "bindings": {
+        "prompt.txt": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob001_zero_prompt.txt",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob001_zero_prompt.txt",
+          "sha256": "1b79c7508ebf3f5d89aa3874b96be38eb6547a93a4400b3b984988564c85764c",
+          "expected_git_blob": "8c1146c9dec8aeceb1c9c85d1c001b184115caf6",
+          "actual_git_blob": "8c1146c9dec8aeceb1c9c85d1c001b184115caf6"
+        },
+        "ref.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob001_zero_ref.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob001_zero_ref.sv",
+          "sha256": "7f4686eac875da1029bdaa5198b47a5390dc2def846cb58cad07907bd32f40f4",
+          "expected_git_blob": "89ae9a8384e8c355d8fd45e1aa4ae4a9d14d3b8a",
+          "actual_git_blob": "89ae9a8384e8c355d8fd45e1aa4ae4a9d14d3b8a"
+        },
+        "test.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob001_zero_test.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob001_zero_test.sv",
+          "sha256": "ebf2acb39a43d4ca53aa9c39c37941a61f288c8933e6eacf87b82ecc23cbd17c",
+          "expected_git_blob": "fd4c826ec4d81c07d0083947a5387eac6edabc4e",
+          "actual_git_blob": "fd4c826ec4d81c07d0083947a5387eac6edabc4e"
+        }
+      }
+    },
+    {
+      "rank": 5,
+      "id": "Prob155_lemmings4",
+      "meaning_zh": "行走坠落挖掘死亡FSM",
+      "eligible": false,
+      "selected": false,
+      "status": "EXCLUDED",
+      "code": "HISTORY_SUBSTANTIVE_OVERLAP",
+      "contract_zh": "全1位接口，posedge、异步高复位walk_left；fall优先dig优先转向；落地且下落超过20周期死亡，初态靠reset。",
+      "history_review_zh": "旧Prob127_lemmings1同一Lemmings左右行走/碰撞状态核心，且历史计数/状态扩展已暴露；保守排除，不把加dig/dead当全新独立题。",
+      "coverage_zh": "含20/21/24/35/67周期坠落、reset及随机；参考fall_counter独立时序过程无异步复位，其精确边界未作独立验证。",
+      "language": "English prompt; SystemVerilog reference/TB, fixed TopModule candidate interface",
+      "diagram_or_table": "Any required textual table/diagram reviewed above; never supplemented",
+      "signedness": "No signed arithmetic requirement; widths as original interface; four-state unspecified domains not filled",
+      "initialization_and_validity": "See per-task contract; no new initialization/reset/output masking added",
+      "sampling_zh": "原test计分always位于测试clk双边沿，helper只定义未调用；NBA驱动与active区比较，不保证统一POST/NBA后采样。组合稳定输入阶段比较不等于全时序签核。",
+      "dependencies": {
+        "modules": [
+          "RefModule",
+          "stimulus_gen",
+          "tb"
+        ],
+        "external_include": [],
+        "readmem": false,
+        "source_files": [
+          "prompt.txt",
+          "ref.sv",
+          "test.sv"
+        ],
+        "single_topmodule": "Original TB instantiates TopModule; reference header independently present; static compatible, compile NOT_RUN"
+      },
+      "authorship": {
+        "repository": "NVlabs/verilog-eval",
+        "license": "MIT (frozen LICENSE)",
+        "snapshot_commit_author": "Nathaniel Pinckney; NOT attributed as individual file author",
+        "individual_prompt_ref_test_authors": "UNKNOWN from available files; same repository lineage, no independently authored oracle established"
+      },
+      "reference_independence": "SAME_REPOSITORY_CORRELATED",
+      "independent_correctness": "NOT_ESTABLISHED",
+      "test_evidence": [
+        {
+          "line": 222,
+          "text": "\tRefModule good1 ("
+        },
+        {
+          "line": 234,
+          "text": "\tTopModule top_module1 ("
+        },
+        {
+          "line": 248,
+          "text": "\ttask wait_for_end_of_timestep;"
+        },
+        {
+          "line": 272,
+          "text": "\tassign tb_match = ( { walk_left_ref, walk_right_ref, aaah_ref, digging_ref } === ( { walk_left_ref, walk_right_ref, aaah_ref, digging_ref } ^ { walk_left_dut, walk_right_dut, aaah_dut, digging_dut } ^ { walk_left_ref, walk_right_ref, aaah_ref, digging_ref } ) );"
+        },
+        {
+          "line": 275,
+          "text": "\talways @(posedge clk, negedge clk) begin"
+        }
+      ],
+      "bindings": {
+        "prompt.txt": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob155_lemmings4_prompt.txt",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob155_lemmings4_prompt.txt",
+          "sha256": "3b560fffdae139661d7ea2c5b8ae8264096aa939c433aac0b3ef7fa2e5fc62b9",
+          "expected_git_blob": "bbbeb0dcc9f35b9c9bdb35825f08adb4b6594b61",
+          "actual_git_blob": "bbbeb0dcc9f35b9c9bdb35825f08adb4b6594b61"
+        },
+        "ref.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob155_lemmings4_ref.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob155_lemmings4_ref.sv",
+          "sha256": "a238a1a879b4b4213bedf9bb47a23ece031df6a3d9cb836c5c42769141ae522c",
+          "expected_git_blob": "e174f28d5326d18c44b554b2b6a4eaaeb97bea73",
+          "actual_git_blob": "e174f28d5326d18c44b554b2b6a4eaaeb97bea73"
+        },
+        "test.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob155_lemmings4_test.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob155_lemmings4_test.sv",
+          "sha256": "3f22f4ca91763277dcb324821a257ebdbb98fbcdb2daf4011211de72715573e7",
+          "expected_git_blob": "083c5c314549d28703f4e45091776ff1c905242d",
+          "actual_git_blob": "083c5c314549d28703f4e45091776ff1c905242d"
+        }
+      }
+    },
+    {
+      "rank": 6,
+      "id": "Prob019_m2014_q4f",
+      "meaning_zh": "带反相输入的AND",
+      "eligible": true,
+      "selected": true,
+      "status": "CONDITIONAL_NO_INDEPENDENT_ORACLE",
+      "code": "CONDITIONAL_STATIC_ELIGIBLE",
+      "contract_zh": "in1/in2/out均1位，组合out=in1 AND NOT in2，无时钟复位或符号问题；文字完整描述bubble，无缺图。",
+      "history_review_zh": "旧Prob029是XNOR再XOR，旧Prob065是双四输入NAND；共有门原语但不是同一完整函数。与本批Prob087有共享输出，统计须标相关题组。",
+      "coverage_zh": "100双边沿随机输入，非预声明穷举；评分看已稳定旧输入阶段，无统一postsettle保证。",
+      "language": "English prompt; SystemVerilog reference/TB, fixed TopModule candidate interface",
+      "diagram_or_table": "Any required textual table/diagram reviewed above; never supplemented",
+      "signedness": "No signed arithmetic requirement; widths as original interface; four-state unspecified domains not filled",
+      "initialization_and_validity": "See per-task contract; no new initialization/reset/output masking added",
+      "sampling_zh": "原test计分always位于测试clk双边沿，helper只定义未调用；NBA驱动与active区比较，不保证统一POST/NBA后采样。组合稳定输入阶段比较不等于全时序签核。",
+      "dependencies": {
+        "modules": [
+          "RefModule",
+          "stimulus_gen",
+          "tb"
+        ],
+        "external_include": [],
+        "readmem": false,
+        "source_files": [
+          "prompt.txt",
+          "ref.sv",
+          "test.sv"
+        ],
+        "single_topmodule": "Original TB instantiates TopModule; reference header independently present; static compatible, compile NOT_RUN"
+      },
+      "authorship": {
+        "repository": "NVlabs/verilog-eval",
+        "license": "MIT (frozen LICENSE)",
+        "snapshot_commit_author": "Nathaniel Pinckney; NOT attributed as individual file author",
+        "individual_prompt_ref_test_authors": "UNKNOWN from available files; same repository lineage, no independently authored oracle established"
+      },
+      "reference_independence": "SAME_REPOSITORY_CORRELATED",
+      "independent_correctness": "NOT_ESTABLISHED",
+      "test_evidence": [
+        {
+          "line": 62,
+          "text": "\tRefModule good1 ("
+        },
+        {
+          "line": 67,
+          "text": "\tTopModule top_module1 ("
+        },
+        {
+          "line": 74,
+          "text": "\ttask wait_for_end_of_timestep;"
+        },
+        {
+          "line": 92,
+          "text": "\tassign tb_match = ( { out_ref } === ( { out_ref } ^ { out_dut } ^ { out_ref } ) );"
+        },
+        {
+          "line": 95,
+          "text": "\talways @(posedge clk, negedge clk) begin"
+        }
+      ],
+      "bindings": {
+        "prompt.txt": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob019_m2014_q4f_prompt.txt",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob019_m2014_q4f_prompt.txt",
+          "sha256": "97bd8fbb078bc6c1cddfb97a61f5a3e3ed8b33012333b295800d3cc6e1f0982e",
+          "expected_git_blob": "8e49b0e833d9ac3360ced5152bf4fd27a5514291",
+          "actual_git_blob": "8e49b0e833d9ac3360ced5152bf4fd27a5514291"
+        },
+        "ref.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob019_m2014_q4f_ref.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob019_m2014_q4f_ref.sv",
+          "sha256": "c92c3177993007c8cb6d72fa96527a70431a66dc655c3b422bb94ed9c9ca9c29",
+          "expected_git_blob": "dd455231e717dca3fee42a51e96ea9259cbe71cc",
+          "actual_git_blob": "dd455231e717dca3fee42a51e96ea9259cbe71cc"
+        },
+        "test.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob019_m2014_q4f_test.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob019_m2014_q4f_test.sv",
+          "sha256": "084d74cb95eaa0adc2c33fa13fdb43a7bace3c5714bf98854a161f21d5812ea6",
+          "expected_git_blob": "cd114078bc50d09ab601dd81aace9837301459ba",
+          "actual_git_blob": "cd114078bc50d09ab601dd81aace9837301459ba"
+        }
+      }
+    },
+    {
+      "rank": 7,
+      "id": "Prob151_review2015_fsm",
+      "meaning_zh": "1101触发四周期移位计时控制",
+      "eligible": false,
+      "selected": false,
+      "status": "EXCLUDED",
+      "code": "HISTORY_FUNCTIONAL_NEAR_DUPLICATE",
+      "contract_zh": "posedge同步高复位；检测1101后shift_ena4周期，再counting等done_counting，done等ack；完整timer控制。",
+      "history_review_zh": "旧Prob150_review2015_fsmonehot给出同一10状态图，另Prob095/096相关题已暴露；相同控制行为的组合/寄存器包装变化不成为独立新题。",
+      "coverage_zh": "5000随机双边沿及示例序列；参考enum cast依赖SystemVerilog工具支持，本轮不编译。",
+      "language": "English prompt; SystemVerilog reference/TB, fixed TopModule candidate interface",
+      "diagram_or_table": "Any required textual table/diagram reviewed above; never supplemented",
+      "signedness": "No signed arithmetic requirement; widths as original interface; four-state unspecified domains not filled",
+      "initialization_and_validity": "See per-task contract; no new initialization/reset/output masking added",
+      "sampling_zh": "原test计分always位于测试clk双边沿，helper只定义未调用；NBA驱动与active区比较，不保证统一POST/NBA后采样。组合稳定输入阶段比较不等于全时序签核。",
+      "dependencies": {
+        "modules": [
+          "RefModule",
+          "stimulus_gen",
+          "tb"
+        ],
+        "external_include": [],
+        "readmem": false,
+        "source_files": [
+          "prompt.txt",
+          "ref.sv",
+          "test.sv"
+        ],
+        "single_topmodule": "Original TB instantiates TopModule; reference header independently present; static compatible, compile NOT_RUN"
+      },
+      "authorship": {
+        "repository": "NVlabs/verilog-eval",
+        "license": "MIT (frozen LICENSE)",
+        "snapshot_commit_author": "Nathaniel Pinckney; NOT attributed as individual file author",
+        "individual_prompt_ref_test_authors": "UNKNOWN from available files; same repository lineage, no independently authored oracle established"
+      },
+      "reference_independence": "SAME_REPOSITORY_CORRELATED",
+      "independent_correctness": "NOT_ESTABLISHED",
+      "test_evidence": [
+        {
+          "line": 14,
+          "text": "\talways @(posedge clk, negedge clk)"
+        },
+        {
+          "line": 134,
+          "text": "\tRefModule good1 ("
+        },
+        {
+          "line": 144,
+          "text": "\tTopModule top_module1 ("
+        },
+        {
+          "line": 156,
+          "text": "\ttask wait_for_end_of_timestep;"
+        },
+        {
+          "line": 178,
+          "text": "\tassign tb_match = ( { shift_ena_ref, counting_ref, done_ref } === ( { shift_ena_ref, counting_ref, done_ref } ^ { shift_ena_dut, counting_dut, done_dut } ^ { shift_ena_ref, counting_ref, done_ref } ) );"
+        },
+        {
+          "line": 181,
+          "text": "\talways @(posedge clk, negedge clk) begin"
+        }
+      ],
+      "bindings": {
+        "prompt.txt": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob151_review2015_fsm_prompt.txt",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob151_review2015_fsm_prompt.txt",
+          "sha256": "95a8a19d4c40cfca26e95c2f4cdbd1f3a8fb0517e9856ffb11afa8a31a0823a1",
+          "expected_git_blob": "9ce15709cb9de8256679ced42fa41ee1e1f4d6ca",
+          "actual_git_blob": "9ce15709cb9de8256679ced42fa41ee1e1f4d6ca"
+        },
+        "ref.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob151_review2015_fsm_ref.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob151_review2015_fsm_ref.sv",
+          "sha256": "d3fc9c0014ed8345665a3b2b429e63ffd383ab7e3f9ae9096c122f78f1b2c00d",
+          "expected_git_blob": "06c547584f263ea7d24b45a255023f308642f886",
+          "actual_git_blob": "06c547584f263ea7d24b45a255023f308642f886"
+        },
+        "test.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob151_review2015_fsm_test.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob151_review2015_fsm_test.sv",
+          "sha256": "bf5adab8adf3965e03fb0650ccf785138eaa62e6b18e72379f4d25da10206d15",
+          "expected_git_blob": "2c5ef1b87d7ed102c231e6a92c253e4b05daf2b0",
+          "actual_git_blob": "2c5ef1b87d7ed102c231e6a92c253e4b05daf2b0"
+        }
+      }
+    },
+    {
+      "rank": 8,
+      "id": "Prob094_gatesv",
+      "meaning_zh": "相邻位关系与环绕差异",
+      "eligible": true,
+      "selected": true,
+      "status": "CONDITIONAL_NO_INDEPENDENT_ORACLE",
+      "code": "CONDITIONAL_STATIC_ELIGIBLE",
+      "contract_zh": "in及三output均4位；out_both[2:0]相邻AND；out_any[3:1]相邻OR；out_different含3到0环绕XOR。out_both[3]/out_any[0]原题明确不关心；组合、无时钟复位、有符号运算。",
+      "history_review_zh": "旧vectorgates直接对两输入向量做OR/NOT，无本题相邻索引与环绕关系；共享门原语，不是仅改位宽。",
+      "coverage_zh": "定向3/6/12/9/5加双边沿随机；参考将两无效边界位设X，TB屏蔽这些位，不能声称所有12位均受约束。",
+      "language": "English prompt; SystemVerilog reference/TB, fixed TopModule candidate interface",
+      "diagram_or_table": "Any required textual table/diagram reviewed above; never supplemented",
+      "signedness": "No signed arithmetic requirement; widths as original interface; four-state unspecified domains not filled",
+      "initialization_and_validity": "See per-task contract; no new initialization/reset/output masking added",
+      "sampling_zh": "原test计分always位于测试clk双边沿，helper只定义未调用；NBA驱动与active区比较，不保证统一POST/NBA后采样。组合稳定输入阶段比较不等于全时序签核。",
+      "dependencies": {
+        "modules": [
+          "RefModule",
+          "stimulus_gen",
+          "tb"
+        ],
+        "external_include": [],
+        "readmem": false,
+        "source_files": [
+          "prompt.txt",
+          "ref.sv",
+          "test.sv"
+        ],
+        "single_topmodule": "Original TB instantiates TopModule; reference header independently present; static compatible, compile NOT_RUN"
+      },
+      "authorship": {
+        "repository": "NVlabs/verilog-eval",
+        "license": "MIT (frozen LICENSE)",
+        "snapshot_commit_author": "Nathaniel Pinckney; NOT attributed as individual file author",
+        "individual_prompt_ref_test_authors": "UNKNOWN from available files; same repository lineage, no independently authored oracle established"
+      },
+      "reference_independence": "SAME_REPOSITORY_CORRELATED",
+      "independent_correctness": "NOT_ESTABLISHED",
+      "test_evidence": [
+        {
+          "line": 96,
+          "text": "\tRefModule good1 ("
+        },
+        {
+          "line": 102,
+          "text": "\tTopModule top_module1 ("
+        },
+        {
+          "line": 110,
+          "text": "\ttask wait_for_end_of_timestep;"
+        },
+        {
+          "line": 132,
+          "text": "\tassign tb_match = ( { out_both_ref, out_any_ref, out_different_ref } === ( { out_both_ref, out_any_ref, out_different_ref } ^ { out_both_dut, out_any_dut, out_different_dut } ^ { out_both_ref, out_any_ref, out_different_ref } ) );"
+        },
+        {
+          "line": 135,
+          "text": "\talways @(posedge clk, negedge clk) begin"
+        }
+      ],
+      "bindings": {
+        "prompt.txt": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob094_gatesv_prompt.txt",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob094_gatesv_prompt.txt",
+          "sha256": "6e699bd5c4e6b9fb053576134ae006118f0b94d9b997cbd46aade8e72318dd83",
+          "expected_git_blob": "fdde05a49134cb33f60cdae088ead77367b42232",
+          "actual_git_blob": "fdde05a49134cb33f60cdae088ead77367b42232"
+        },
+        "ref.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob094_gatesv_ref.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob094_gatesv_ref.sv",
+          "sha256": "5a9bf7d169021df9c52559b115ec3aa89d26f68c3beefa85ed8f0b7a2b01cb0f",
+          "expected_git_blob": "532fc4fc866c1a21b1e5adcd228d66490383bfd4",
+          "actual_git_blob": "532fc4fc866c1a21b1e5adcd228d66490383bfd4"
+        },
+        "test.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob094_gatesv_test.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob094_gatesv_test.sv",
+          "sha256": "cdd60ca258c7f1ba120a97731b86c7a34582cb596a36ee2449af9e316478e592",
+          "expected_git_blob": "6f72e58848028cdae5ee2c08cb4df041597dd1c0",
+          "actual_git_blob": "6f72e58848028cdae5ee2c08cb4df041597dd1c0"
+        }
+      }
+    },
+    {
+      "rank": 9,
+      "id": "Prob143_fsm_onehot",
+      "meaning_zh": "十状态组合转移逻辑",
+      "eligible": true,
+      "selected": true,
+      "status": "CONDITIONAL_NO_INDEPENDENT_ORACLE",
+      "code": "CONDITIONAL_STATIC_ELIGIBLE",
+      "contract_zh": "state[9:0]、next_state[9:0]及1位in/out1/out2；仅组合不含状态寄存器。完整图逐入边形成各next位，多有效state允许并存；输出按指定活跃状态并集，无时钟复位初态。",
+      "history_review_zh": "旧Prob150虽也10状态one-hot，但图为1101计时器，本题为连续1长度分支图，端口/转移/输出行为实质不同；FSM表达原语共享单列。",
+      "coverage_zh": "原TB先遍历10状态×2输入，再200随机one-hot；未覆盖题中允许的多hot组合，0态阶段in未初始化。多hot正确性待独立验证，不能以原TB通过证明。",
+      "language": "English prompt; SystemVerilog reference/TB, fixed TopModule candidate interface",
+      "diagram_or_table": "Any required textual table/diagram reviewed above; never supplemented",
+      "signedness": "No signed arithmetic requirement; widths as original interface; four-state unspecified domains not filled",
+      "initialization_and_validity": "See per-task contract; no new initialization/reset/output masking added",
+      "sampling_zh": "原test计分always位于测试clk双边沿，helper只定义未调用；NBA驱动与active区比较，不保证统一POST/NBA后采样。组合稳定输入阶段比较不等于全时序签核。",
+      "dependencies": {
+        "modules": [
+          "RefModule",
+          "stimulus_gen",
+          "tb"
+        ],
+        "external_include": [],
+        "readmem": false,
+        "source_files": [
+          "prompt.txt",
+          "ref.sv",
+          "test.sv"
+        ],
+        "single_topmodule": "Original TB instantiates TopModule; reference header independently present; static compatible, compile NOT_RUN"
+      },
+      "authorship": {
+        "repository": "NVlabs/verilog-eval",
+        "license": "MIT (frozen LICENSE)",
+        "snapshot_commit_author": "Nathaniel Pinckney; NOT attributed as individual file author",
+        "individual_prompt_ref_test_authors": "UNKNOWN from available files; same repository lineage, no independently authored oracle established"
+      },
+      "reference_independence": "SAME_REPOSITORY_CORRELATED",
+      "independent_correctness": "NOT_ESTABLISHED",
+      "test_evidence": [
+        {
+          "line": 116,
+          "text": "\tRefModule good1 ("
+        },
+        {
+          "line": 123,
+          "text": "\tTopModule top_module1 ("
+        },
+        {
+          "line": 132,
+          "text": "\ttask wait_for_end_of_timestep;"
+        },
+        {
+          "line": 154,
+          "text": "\tassign tb_match = ( { next_state_ref, out1_ref, out2_ref } === ( { next_state_ref, out1_ref, out2_ref } ^ { next_state_dut, out1_dut, out2_dut } ^ { next_state_ref, out1_ref, out2_ref } ) );"
+        },
+        {
+          "line": 157,
+          "text": "\talways @(posedge clk, negedge clk) begin"
+        }
+      ],
+      "bindings": {
+        "prompt.txt": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob143_fsm_onehot_prompt.txt",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob143_fsm_onehot_prompt.txt",
+          "sha256": "e33a1e959db7f84d591c7fbe933b1ee8d2212f9bdbc229658c764c08dfcdf67b",
+          "expected_git_blob": "513d06130acfc045dca0571d9a55e323e388661c",
+          "actual_git_blob": "513d06130acfc045dca0571d9a55e323e388661c"
+        },
+        "ref.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob143_fsm_onehot_ref.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob143_fsm_onehot_ref.sv",
+          "sha256": "713dafd41effad29c326f7e3592115be3394a9de809f5849cbe349add87219f1",
+          "expected_git_blob": "5de4e474293820554aa25d632327142add5e122f",
+          "actual_git_blob": "5de4e474293820554aa25d632327142add5e122f"
+        },
+        "test.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob143_fsm_onehot_test.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob143_fsm_onehot_test.sv",
+          "sha256": "b3f86936ea281b3a5e95e4fefdd2354b27fb5b3472b4207ef592555fc861cbba",
+          "expected_git_blob": "eb8120885514e5981261c8e72011d9a158375cbc",
+          "actual_git_blob": "eb8120885514e5981261c8e72011d9a158375cbc"
+        }
+      }
+    },
+    {
+      "rank": 10,
+      "id": "Prob059_wire4",
+      "meaning_zh": "三输入四输出连线",
+      "eligible": false,
+      "selected": false,
+      "status": "EXCLUDED",
+      "code": "HISTORY_SUBSTANTIVE_OVERLAP",
+      "contract_zh": "a,b,c与w,x,y,z均1位，w=a,x=b,y=b,z=c；无时钟复位，连续有效。",
+      "history_review_zh": "旧Prob032_vector0已为3位输入复制并拆到输出，本题仅改端口分组及复制次数，主要行为都是三输入无计算布线/扇出；保守近重复排除。",
+      "coverage_zh": "108个左右测试周期随机双边沿驱动，参考concat直接连线。",
+      "language": "English prompt; SystemVerilog reference/TB, fixed TopModule candidate interface",
+      "diagram_or_table": "Any required textual table/diagram reviewed above; never supplemented",
+      "signedness": "No signed arithmetic requirement; widths as original interface; four-state unspecified domains not filled",
+      "initialization_and_validity": "See per-task contract; no new initialization/reset/output masking added",
+      "sampling_zh": "原test计分always位于测试clk双边沿，helper只定义未调用；NBA驱动与active区比较，不保证统一POST/NBA后采样。组合稳定输入阶段比较不等于全时序签核。",
+      "dependencies": {
+        "modules": [
+          "RefModule",
+          "stimulus_gen",
+          "tb"
+        ],
+        "external_include": [],
+        "readmem": false,
+        "source_files": [
+          "prompt.txt",
+          "ref.sv",
+          "test.sv"
+        ],
+        "single_topmodule": "Original TB instantiates TopModule; reference header independently present; static compatible, compile NOT_RUN"
+      },
+      "authorship": {
+        "repository": "NVlabs/verilog-eval",
+        "license": "MIT (frozen LICENSE)",
+        "snapshot_commit_author": "Nathaniel Pinckney; NOT attributed as individual file author",
+        "individual_prompt_ref_test_authors": "UNKNOWN from available files; same repository lineage, no independently authored oracle established"
+      },
+      "reference_independence": "SAME_REPOSITORY_CORRELATED",
+      "independent_correctness": "NOT_ESTABLISHED",
+      "test_evidence": [
+        {
+          "line": 27,
+          "text": "\talways @(posedge clk, negedge clk)"
+        },
+        {
+          "line": 95,
+          "text": "\tRefModule good1 ("
+        },
+        {
+          "line": 104,
+          "text": "\tTopModule top_module1 ("
+        },
+        {
+          "line": 115,
+          "text": "\ttask wait_for_end_of_timestep;"
+        },
+        {
+          "line": 139,
+          "text": "\tassign tb_match = ( { w_ref, x_ref, y_ref, z_ref } === ( { w_ref, x_ref, y_ref, z_ref } ^ { w_dut, x_dut, y_dut, z_dut } ^ { w_ref, x_ref, y_ref, z_ref } ) );"
+        },
+        {
+          "line": 142,
+          "text": "\talways @(posedge clk, negedge clk) begin"
+        }
+      ],
+      "bindings": {
+        "prompt.txt": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob059_wire4_prompt.txt",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob059_wire4_prompt.txt",
+          "sha256": "f9ced086c39a835532ce255239fe04f6efa09b809245f725819af463ed42c8db",
+          "expected_git_blob": "afe890aec9163572b5b93c8cb86cdb4cc8495973",
+          "actual_git_blob": "afe890aec9163572b5b93c8cb86cdb4cc8495973"
+        },
+        "ref.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob059_wire4_ref.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob059_wire4_ref.sv",
+          "sha256": "8d0689bd426e7410c382db87eb0395146ee9cf07803e20c8d8227751827cd70e",
+          "expected_git_blob": "de8e59620c8e970c69d3dc6222bbb43adc1d01c7",
+          "actual_git_blob": "de8e59620c8e970c69d3dc6222bbb43adc1d01c7"
+        },
+        "test.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob059_wire4_test.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob059_wire4_test.sv",
+          "sha256": "66cdcbbdc855c4c7ca8964d899f1671fa9425fb3726e6b01bb4244baf4c7a82e",
+          "expected_git_blob": "0f5c5dbf47903d9d7d691bc24c4ebc9d872b967a",
+          "actual_git_blob": "0f5c5dbf47903d9d7d691bc24c4ebc9d872b967a"
+        }
+      }
+    },
+    {
+      "rank": 11,
+      "id": "Prob006_vectorr",
+      "meaning_zh": "八位反转",
+      "eligible": false,
+      "selected": false,
+      "status": "EXCLUDED",
+      "code": "HISTORY_FUNCTIONAL_NEAR_DUPLICATE",
+      "contract_zh": "in/out8位，无符号组合out[i]=in[7-i]，无时钟复位。",
+      "history_review_zh": "旧Prob023_vector100r相同位序反转，仅100改8位，排除。",
+      "coverage_zh": "定向位模式+200随机，参考显式反序拼接。",
+      "language": "English prompt; SystemVerilog reference/TB, fixed TopModule candidate interface",
+      "diagram_or_table": "Any required textual table/diagram reviewed above; never supplemented",
+      "signedness": "No signed arithmetic requirement; widths as original interface; four-state unspecified domains not filled",
+      "initialization_and_validity": "See per-task contract; no new initialization/reset/output masking added",
+      "sampling_zh": "原test计分always位于测试clk双边沿，helper只定义未调用；NBA驱动与active区比较，不保证统一POST/NBA后采样。组合稳定输入阶段比较不等于全时序签核。",
+      "dependencies": {
+        "modules": [
+          "RefModule",
+          "stimulus_gen",
+          "tb"
+        ],
+        "external_include": [],
+        "readmem": false,
+        "source_files": [
+          "prompt.txt",
+          "ref.sv",
+          "test.sv"
+        ],
+        "single_topmodule": "Original TB instantiates TopModule; reference header independently present; static compatible, compile NOT_RUN"
+      },
+      "authorship": {
+        "repository": "NVlabs/verilog-eval",
+        "license": "MIT (frozen LICENSE)",
+        "snapshot_commit_author": "Nathaniel Pinckney; NOT attributed as individual file author",
+        "individual_prompt_ref_test_authors": "UNKNOWN from available files; same repository lineage, no independently authored oracle established"
+      },
+      "reference_independence": "SAME_REPOSITORY_CORRELATED",
+      "independent_correctness": "NOT_ESTABLISHED",
+      "test_evidence": [
+        {
+          "line": 87,
+          "text": "\tRefModule good1 ("
+        },
+        {
+          "line": 91,
+          "text": "\tTopModule top_module1 ("
+        },
+        {
+          "line": 97,
+          "text": "\ttask wait_for_end_of_timestep;"
+        },
+        {
+          "line": 115,
+          "text": "\tassign tb_match = ( { out_ref } === ( { out_ref } ^ { out_dut } ^ { out_ref } ) );"
+        },
+        {
+          "line": 118,
+          "text": "\talways @(posedge clk, negedge clk) begin"
+        }
+      ],
+      "bindings": {
+        "prompt.txt": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob006_vectorr_prompt.txt",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob006_vectorr_prompt.txt",
+          "sha256": "586f1649f75aa0d7713f22b402d7aee19e45ec7fcac5761156eec32634a5b6e1",
+          "expected_git_blob": "cb3c247306c74c0a18e6c3cd25dbd1347344ddfc",
+          "actual_git_blob": "cb3c247306c74c0a18e6c3cd25dbd1347344ddfc"
+        },
+        "ref.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob006_vectorr_ref.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob006_vectorr_ref.sv",
+          "sha256": "45cdcb65da3b4a2c7bdc46f0b17cdd288350fdf724553b5eec8f34d42616c42c",
+          "expected_git_blob": "778a4e91ab63025992eb72d8cf3bf728344b6492",
+          "actual_git_blob": "778a4e91ab63025992eb72d8cf3bf728344b6492"
+        },
+        "test.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob006_vectorr_test.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob006_vectorr_test.sv",
+          "sha256": "b837b81211958f35c5a62632554f6e1806975c1487b8a9e0ba431c8bfa9b1996",
+          "expected_git_blob": "16c66c37c3d5cdaabc24e20430a64888b6aab0f1",
+          "actual_git_blob": "16c66c37c3d5cdaabc24e20430a64888b6aab0f1"
+        }
+      }
+    },
+    {
+      "rank": 12,
+      "id": "Prob052_gates100",
+      "meaning_zh": "百位AND/OR/XOR规约",
+      "eligible": false,
+      "selected": false,
+      "status": "EXCLUDED",
+      "code": "HISTORY_SUBSTANTIVE_OVERLAP",
+      "contract_zh": "in100位，三个1位输出规约AND/OR/XOR，组合无复位时钟。",
+      "history_review_zh": "XOR规约与历史parity8宽度变体，OR规约与旧向量逻辑OR重叠；多输出打包未足以消除主体功能暴露，保守排除。",
+      "coverage_zh": "定向全0/全1/单bit/反单bit及随机；随机32位扩展不等于均匀100位空间，原样保留。",
+      "language": "English prompt; SystemVerilog reference/TB, fixed TopModule candidate interface",
+      "diagram_or_table": "Any required textual table/diagram reviewed above; never supplemented",
+      "signedness": "No signed arithmetic requirement; widths as original interface; four-state unspecified domains not filled",
+      "initialization_and_validity": "See per-task contract; no new initialization/reset/output masking added",
+      "sampling_zh": "原test计分always位于测试clk双边沿，helper只定义未调用；NBA驱动与active区比较，不保证统一POST/NBA后采样。组合稳定输入阶段比较不等于全时序签核。",
+      "dependencies": {
+        "modules": [
+          "RefModule",
+          "stimulus_gen",
+          "tb"
+        ],
+        "external_include": [],
+        "readmem": false,
+        "source_files": [
+          "prompt.txt",
+          "ref.sv",
+          "test.sv"
+        ],
+        "single_topmodule": "Original TB instantiates TopModule; reference header independently present; static compatible, compile NOT_RUN"
+      },
+      "authorship": {
+        "repository": "NVlabs/verilog-eval",
+        "license": "MIT (frozen LICENSE)",
+        "snapshot_commit_author": "Nathaniel Pinckney; NOT attributed as individual file author",
+        "individual_prompt_ref_test_authors": "UNKNOWN from available files; same repository lineage, no independently authored oracle established"
+      },
+      "reference_independence": "SAME_REPOSITORY_CORRELATED",
+      "independent_correctness": "NOT_ESTABLISHED",
+      "test_evidence": [
+        {
+          "line": 115,
+          "text": "\tRefModule good1 ("
+        },
+        {
+          "line": 121,
+          "text": "\tTopModule top_module1 ("
+        },
+        {
+          "line": 129,
+          "text": "\ttask wait_for_end_of_timestep;"
+        },
+        {
+          "line": 151,
+          "text": "\tassign tb_match = ( { out_and_ref, out_or_ref, out_xor_ref } === ( { out_and_ref, out_or_ref, out_xor_ref } ^ { out_and_dut, out_or_dut, out_xor_dut } ^ { out_and_ref, out_or_ref, out_xor_ref } ) );"
+        },
+        {
+          "line": 154,
+          "text": "\talways @(posedge clk, negedge clk) begin"
+        }
+      ],
+      "bindings": {
+        "prompt.txt": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob052_gates100_prompt.txt",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob052_gates100_prompt.txt",
+          "sha256": "404059e1c630eb135328a25713f0e41f2e4273b06ff4d3a0d247d920650bceb7",
+          "expected_git_blob": "d8af71ff268052566d5782a910b1ab00dad9667e",
+          "actual_git_blob": "d8af71ff268052566d5782a910b1ab00dad9667e"
+        },
+        "ref.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob052_gates100_ref.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob052_gates100_ref.sv",
+          "sha256": "dcf314f2a0e23b9b47ec355193bf79d8b113cf0999883f712bb95a7335fd3e14",
+          "expected_git_blob": "cccda7c48ae656cf28f2ba6043c942f0a8ff01d8",
+          "actual_git_blob": "cccda7c48ae656cf28f2ba6043c942f0a8ff01d8"
+        },
+        "test.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob052_gates100_test.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob052_gates100_test.sv",
+          "sha256": "0643c8d9dc397379597e7ae07b2168c82b3457f66a198c9256491cdfda904ee4",
+          "expected_git_blob": "f126694a8602dd5f5c5509368d79109a9e17b63a",
+          "actual_git_blob": "f126694a8602dd5f5c5509368d79109a9e17b63a"
+        }
+      }
+    },
+    {
+      "rank": 13,
+      "id": "Prob111_fsm2s",
+      "meaning_zh": "两状态JK式Moore FSM",
+      "eligible": false,
+      "selected": false,
+      "status": "EXCLUDED",
+      "code": "CLOCK_EDGE_UNSPECIFIED",
+      "contract_zh": "clk/reset/j/k/out均1位；同步高复位OFF与状态图明确，但原文未指定有效时钟边沿；参考选择posedge，不能用参考补原题。",
+      "history_review_zh": "与历史两状态FSM有原语共享；排除依据是关键边沿缺失，不是预期模型难度。",
+      "coverage_zh": "reset_test及200随机双边沿；TB依赖参考posedge，未提供独立契约。",
+      "language": "English prompt; SystemVerilog reference/TB, fixed TopModule candidate interface",
+      "diagram_or_table": "Any required textual table/diagram reviewed above; never supplemented",
+      "signedness": "No signed arithmetic requirement; widths as original interface; four-state unspecified domains not filled",
+      "initialization_and_validity": "See per-task contract; no new initialization/reset/output masking added",
+      "sampling_zh": "原test计分always位于测试clk双边沿，helper只定义未调用；NBA驱动与active区比较，不保证统一POST/NBA后采样。组合稳定输入阶段比较不等于全时序签核。",
+      "dependencies": {
+        "modules": [
+          "RefModule",
+          "stimulus_gen",
+          "tb"
+        ],
+        "external_include": [],
+        "readmem": false,
+        "source_files": [
+          "prompt.txt",
+          "ref.sv",
+          "test.sv"
+        ],
+        "single_topmodule": "Original TB instantiates TopModule; reference header independently present; static compatible, compile NOT_RUN"
+      },
+      "authorship": {
+        "repository": "NVlabs/verilog-eval",
+        "license": "MIT (frozen LICENSE)",
+        "snapshot_commit_author": "Nathaniel Pinckney; NOT attributed as individual file author",
+        "individual_prompt_ref_test_authors": "UNKNOWN from available files; same repository lineage, no independently authored oracle established"
+      },
+      "reference_independence": "SAME_REPOSITORY_CORRELATED",
+      "independent_correctness": "NOT_ESTABLISHED",
+      "test_evidence": [
+        {
+          "line": 120,
+          "text": "\tRefModule good1 ("
+        },
+        {
+          "line": 127,
+          "text": "\tTopModule top_module1 ("
+        },
+        {
+          "line": 136,
+          "text": "\ttask wait_for_end_of_timestep;"
+        },
+        {
+          "line": 154,
+          "text": "\tassign tb_match = ( { out_ref } === ( { out_ref } ^ { out_dut } ^ { out_ref } ) );"
+        },
+        {
+          "line": 157,
+          "text": "\talways @(posedge clk, negedge clk) begin"
+        }
+      ],
+      "bindings": {
+        "prompt.txt": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob111_fsm2s_prompt.txt",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob111_fsm2s_prompt.txt",
+          "sha256": "50c8b7f96846c46b76dc36c0bfb4800c962982fd647806d58088a6a41e606711",
+          "expected_git_blob": "2a012c636ef57ecd37c693d7a9defeefca0b241d",
+          "actual_git_blob": "2a012c636ef57ecd37c693d7a9defeefca0b241d"
+        },
+        "ref.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob111_fsm2s_ref.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob111_fsm2s_ref.sv",
+          "sha256": "780259ce81e0cdd77a9222c7a0fd43775643e1a2d0a98b37185cadff0bf446ae",
+          "expected_git_blob": "f89ad28c03ec5fc66b34b145f18c14108fd1a5a1",
+          "actual_git_blob": "f89ad28c03ec5fc66b34b145f18c14108fd1a5a1"
+        },
+        "test.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob111_fsm2s_test.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob111_fsm2s_test.sv",
+          "sha256": "5f6f9b85818fb4d0930619b1e6cada80b3e9fe8cf8a7915e3286244dbcce3972",
+          "expected_git_blob": "63b8d05eb41d40886a276c22466a700f834ec3d3",
+          "actual_git_blob": "63b8d05eb41d40886a276c22466a700f834ec3d3"
+        }
+      }
+    },
+    {
+      "rank": 14,
+      "id": "Prob114_bugs_case",
+      "meaning_zh": "数字键扫描码映射",
+      "eligible": true,
+      "selected": true,
+      "status": "CONDITIONAL_NO_INDEPENDENT_ORACLE",
+      "code": "CONDITIONAL_STATIC_ELIGIBLE",
+      "contract_zh": "code8位,out4位,valid1位；十个明确常量映射0..9，其他out=0且valid=0；纯组合全时有效，unsigned字面值，无时钟复位。",
+      "history_review_zh": "历史decoder3为索引one-hot译码，本题为稀疏非连续scancode到数字映射，非宽度或重命名变体；与本批箭头scancode为相关表驱动题组。",
+      "coverage_zh": "列举十码及若干无效码+1000随机，非保证全256遍历；参考default valid0/out预置0，没有latch。",
+      "language": "English prompt; SystemVerilog reference/TB, fixed TopModule candidate interface",
+      "diagram_or_table": "Any required textual table/diagram reviewed above; never supplemented",
+      "signedness": "No signed arithmetic requirement; widths as original interface; four-state unspecified domains not filled",
+      "initialization_and_validity": "See per-task contract; no new initialization/reset/output masking added",
+      "sampling_zh": "原test计分always位于测试clk双边沿，helper只定义未调用；NBA驱动与active区比较，不保证统一POST/NBA后采样。组合稳定输入阶段比较不等于全时序签核。",
+      "dependencies": {
+        "modules": [
+          "RefModule",
+          "stimulus_gen",
+          "tb"
+        ],
+        "external_include": [],
+        "readmem": false,
+        "source_files": [
+          "prompt.txt",
+          "ref.sv",
+          "test.sv"
+        ],
+        "single_topmodule": "Original TB instantiates TopModule; reference header independently present; static compatible, compile NOT_RUN"
+      },
+      "authorship": {
+        "repository": "NVlabs/verilog-eval",
+        "license": "MIT (frozen LICENSE)",
+        "snapshot_commit_author": "Nathaniel Pinckney; NOT attributed as individual file author",
+        "individual_prompt_ref_test_authors": "UNKNOWN from available files; same repository lineage, no independently authored oracle established"
+      },
+      "reference_independence": "SAME_REPOSITORY_CORRELATED",
+      "independent_correctness": "NOT_ESTABLISHED",
+      "test_evidence": [
+        {
+          "line": 106,
+          "text": "\tRefModule good1 ("
+        },
+        {
+          "line": 111,
+          "text": "\tTopModule top_module1 ("
+        },
+        {
+          "line": 118,
+          "text": "\ttask wait_for_end_of_timestep;"
+        },
+        {
+          "line": 138,
+          "text": "\tassign tb_match = ( { out_ref, valid_ref } === ( { out_ref, valid_ref } ^ { out_dut, valid_dut } ^ { out_ref, valid_ref } ) );"
+        },
+        {
+          "line": 141,
+          "text": "\talways @(posedge clk, negedge clk) begin"
+        }
+      ],
+      "bindings": {
+        "prompt.txt": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob114_bugs_case_prompt.txt",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob114_bugs_case_prompt.txt",
+          "sha256": "8c995017a12715c1f9a1945e73db92bee1d893a2a74f49f10d0bffc5cfb36a0e",
+          "expected_git_blob": "ebb9a1922c721683f8635e680cd696c40787e35a",
+          "actual_git_blob": "ebb9a1922c721683f8635e680cd696c40787e35a"
+        },
+        "ref.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob114_bugs_case_ref.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob114_bugs_case_ref.sv",
+          "sha256": "97aaf43498481511ccc8ca815b33703d0e9a41a732cd36af420cd26083b4db4e",
+          "expected_git_blob": "b79e7b6e5d9f16c435eaa97b1bebf28219e938dc",
+          "actual_git_blob": "b79e7b6e5d9f16c435eaa97b1bebf28219e938dc"
+        },
+        "test.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob114_bugs_case_test.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob114_bugs_case_test.sv",
+          "sha256": "2d7330963dd2ab318d26013a3ca1b035fcdc8dd53ae687a685322183b565ffda",
+          "expected_git_blob": "bad8eddad50204eb00f787a14440f05be3d56678",
+          "actual_git_blob": "bad8eddad50204eb00f787a14440f05be3d56678"
+        }
+      }
+    },
+    {
+      "rank": 15,
+      "id": "Prob084_ece241_2013_q12",
+      "meaning_zh": "移位写入随机读LUT",
+      "eligible": false,
+      "selected": false,
+      "status": "EXCLUDED",
+      "code": "HISTORY_SUBSTANTIVE_OVERLAP",
+      "contract_zh": "posedge同步enable；8位移位S入Q0，Z=Q[ABC]，无reset、未定义初始存储；有效内容需移入。",
+      "history_review_zh": "历史shiftreg8/rt_shift与mux8已有移位及索引选择主体组合，保守排除；不因加存储名义重标独立。",
+      "coverage_zh": "先写8bit构造AND，再500随机；写满前参考X由TB掩蔽，结构ONLY移位器和mux未独立检查。",
+      "language": "English prompt; SystemVerilog reference/TB, fixed TopModule candidate interface",
+      "diagram_or_table": "Any required textual table/diagram reviewed above; never supplemented",
+      "signedness": "No signed arithmetic requirement; widths as original interface; four-state unspecified domains not filled",
+      "initialization_and_validity": "See per-task contract; no new initialization/reset/output masking added",
+      "sampling_zh": "原test计分always位于测试clk双边沿，helper只定义未调用；NBA驱动与active区比较，不保证统一POST/NBA后采样。组合稳定输入阶段比较不等于全时序签核。",
+      "dependencies": {
+        "modules": [
+          "RefModule",
+          "stimulus_gen",
+          "tb"
+        ],
+        "external_include": [],
+        "readmem": false,
+        "source_files": [
+          "prompt.txt",
+          "ref.sv",
+          "test.sv"
+        ],
+        "single_topmodule": "Original TB instantiates TopModule; reference header independently present; static compatible, compile NOT_RUN"
+      },
+      "authorship": {
+        "repository": "NVlabs/verilog-eval",
+        "license": "MIT (frozen LICENSE)",
+        "snapshot_commit_author": "Nathaniel Pinckney; NOT attributed as individual file author",
+        "individual_prompt_ref_test_authors": "UNKNOWN from available files; same repository lineage, no independently authored oracle established"
+      },
+      "reference_independence": "SAME_REPOSITORY_CORRELATED",
+      "independent_correctness": "NOT_ESTABLISHED",
+      "test_evidence": [
+        {
+          "line": 107,
+          "text": "\tRefModule good1 ("
+        },
+        {
+          "line": 116,
+          "text": "\tTopModule top_module1 ("
+        },
+        {
+          "line": 127,
+          "text": "\ttask wait_for_end_of_timestep;"
+        },
+        {
+          "line": 145,
+          "text": "\tassign tb_match = ( { Z_ref } === ( { Z_ref } ^ { Z_dut } ^ { Z_ref } ) );"
+        },
+        {
+          "line": 148,
+          "text": "\talways @(posedge clk, negedge clk) begin"
+        }
+      ],
+      "bindings": {
+        "prompt.txt": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob084_ece241_2013_q12_prompt.txt",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob084_ece241_2013_q12_prompt.txt",
+          "sha256": "fd1078991daca2074283772854e990f150646cf8abe5823645a1082b4e81ab19",
+          "expected_git_blob": "0e078e3147582252e53ad140117f344563692070",
+          "actual_git_blob": "0e078e3147582252e53ad140117f344563692070"
+        },
+        "ref.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob084_ece241_2013_q12_ref.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob084_ece241_2013_q12_ref.sv",
+          "sha256": "1ad7a305d588235457ccdff541b1892141c0eb2b9cf23f903d583328f3686d2d",
+          "expected_git_blob": "13cb69e8e5eebc06258297af265f0f212fdb2987",
+          "actual_git_blob": "13cb69e8e5eebc06258297af265f0f212fdb2987"
+        },
+        "test.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob084_ece241_2013_q12_test.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob084_ece241_2013_q12_test.sv",
+          "sha256": "f5a759073879ace65a8ba9b5dde484933164894492eeadc7ab44078598a38c45",
+          "expected_git_blob": "c44ae35a08cd13821ada999a6d910d47070766ee",
+          "actual_git_blob": "c44ae35a08cd13821ada999a6d910d47070766ee"
+        }
+      }
+    },
+    {
+      "rank": 16,
+      "id": "Prob087_gates",
+      "meaning_zh": "七种二输入逻辑门",
+      "eligible": true,
+      "selected": true,
+      "status": "CONDITIONAL_NO_INDEPENDENT_ORACLE",
+      "code": "CONDITIONAL_STATIC_ELIGIBLE",
+      "contract_zh": "a,b及七outputs1位；AND/OR/XOR/NAND/NOR/XNOR/a&~b全部指定，组合连续有效，无符号/时钟/复位。",
+      "history_review_zh": "共享旧门原语但七函数接口未发现完整历史同题；与本批Prob019共享一个输出，须报告相关性，不能当完全独立题族。",
+      "coverage_zh": "列举00/01/10/11后200随机；参考各连续assign；初始未驱动阶段可X屏蔽。",
+      "language": "English prompt; SystemVerilog reference/TB, fixed TopModule candidate interface",
+      "diagram_or_table": "Any required textual table/diagram reviewed above; never supplemented",
+      "signedness": "No signed arithmetic requirement; widths as original interface; four-state unspecified domains not filled",
+      "initialization_and_validity": "See per-task contract; no new initialization/reset/output masking added",
+      "sampling_zh": "原test计分always位于测试clk双边沿，helper只定义未调用；NBA驱动与active区比较，不保证统一POST/NBA后采样。组合稳定输入阶段比较不等于全时序签核。",
+      "dependencies": {
+        "modules": [
+          "RefModule",
+          "stimulus_gen",
+          "tb"
+        ],
+        "external_include": [],
+        "readmem": false,
+        "source_files": [
+          "prompt.txt",
+          "ref.sv",
+          "test.sv"
+        ],
+        "single_topmodule": "Original TB instantiates TopModule; reference header independently present; static compatible, compile NOT_RUN"
+      },
+      "authorship": {
+        "repository": "NVlabs/verilog-eval",
+        "license": "MIT (frozen LICENSE)",
+        "snapshot_commit_author": "Nathaniel Pinckney; NOT attributed as individual file author",
+        "individual_prompt_ref_test_authors": "UNKNOWN from available files; same repository lineage, no independently authored oracle established"
+      },
+      "reference_independence": "SAME_REPOSITORY_CORRELATED",
+      "independent_correctness": "NOT_ESTABLISHED",
+      "test_evidence": [
+        {
+          "line": 108,
+          "text": "\tRefModule good1 ("
+        },
+        {
+          "line": 119,
+          "text": "\tTopModule top_module1 ("
+        },
+        {
+          "line": 132,
+          "text": "\ttask wait_for_end_of_timestep;"
+        },
+        {
+          "line": 162,
+          "text": "\tassign tb_match = ( { out_and_ref, out_or_ref, out_xor_ref, out_nand_ref, out_nor_ref, out_xnor_ref, out_anotb_ref } === ( { out_and_ref, out_or_ref, out_xor_ref, out_nand_ref, out_nor_ref, out_xnor_ref, out_anotb_ref } ^ { out_and_dut, out_or_dut, out_xor_dut, out_nand_dut, out_nor_dut, out_xnor_dut, out_anotb_dut } ^ { out_and_ref, out_or_ref, out_xor_ref, out_nand_ref, out_nor_ref, out_xnor_ref, out_anotb_ref } ) );"
+        },
+        {
+          "line": 165,
+          "text": "\talways @(posedge clk, negedge clk) begin"
+        }
+      ],
+      "bindings": {
+        "prompt.txt": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob087_gates_prompt.txt",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob087_gates_prompt.txt",
+          "sha256": "db35b613e2e9800fd53faf14c717fc053fa723f4a97a7eecfbc459f18fa54f9d",
+          "expected_git_blob": "168281dce075a9876488ec7d870c3e3b162c74ca",
+          "actual_git_blob": "168281dce075a9876488ec7d870c3e3b162c74ca"
+        },
+        "ref.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob087_gates_ref.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob087_gates_ref.sv",
+          "sha256": "fd05947bb790cc30fbc348bd272053377e718611affdd86892a1922edec454f2",
+          "expected_git_blob": "635b2fa8f2ac4b09262a930920ad51a0b0ab5fe5",
+          "actual_git_blob": "635b2fa8f2ac4b09262a930920ad51a0b0ab5fe5"
+        },
+        "test.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob087_gates_test.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob087_gates_test.sv",
+          "sha256": "cf35d2299705395fa53f59d3f1a18f8de39bb6dadbdac6bdc55a221d7883e8a7",
+          "expected_git_blob": "0ddee2f713a7063e88b59916d535096cc6af8740",
+          "actual_git_blob": "0ddee2f713a7063e88b59916d535096cc6af8740"
+        }
+      }
+    },
+    {
+      "rank": 17,
+      "id": "Prob050_kmap1",
+      "meaning_zh": "三输入卡诺图",
+      "eligible": true,
+      "selected": true,
+      "status": "CONDITIONAL_NO_INDEPENDENT_ORACLE",
+      "code": "CONDITIONAL_STATIC_ELIGIBLE",
+      "contract_zh": "a,b,c/out均1位，完整8格图，除000外输出1；组合无时钟复位，输出连续有效，未声明4态输入真值。",
+      "history_review_zh": "与旧多输出向量门共有OR基本原语；本题完整单输出真值表不同，无同题宽度替换证据。后续Prob101属同轮OR近重复，后者排除。",
+      "coverage_zh": "10递增输入覆盖3位0..7并回绕，加200随机；参考a|b|c。",
+      "language": "English prompt; SystemVerilog reference/TB, fixed TopModule candidate interface",
+      "diagram_or_table": "Any required textual table/diagram reviewed above; never supplemented",
+      "signedness": "No signed arithmetic requirement; widths as original interface; four-state unspecified domains not filled",
+      "initialization_and_validity": "See per-task contract; no new initialization/reset/output masking added",
+      "sampling_zh": "原test计分always位于测试clk双边沿，helper只定义未调用；NBA驱动与active区比较，不保证统一POST/NBA后采样。组合稳定输入阶段比较不等于全时序签核。",
+      "dependencies": {
+        "modules": [
+          "RefModule",
+          "stimulus_gen",
+          "tb"
+        ],
+        "external_include": [],
+        "readmem": false,
+        "source_files": [
+          "prompt.txt",
+          "ref.sv",
+          "test.sv"
+        ],
+        "single_topmodule": "Original TB instantiates TopModule; reference header independently present; static compatible, compile NOT_RUN"
+      },
+      "authorship": {
+        "repository": "NVlabs/verilog-eval",
+        "license": "MIT (frozen LICENSE)",
+        "snapshot_commit_author": "Nathaniel Pinckney; NOT attributed as individual file author",
+        "individual_prompt_ref_test_authors": "UNKNOWN from available files; same repository lineage, no independently authored oracle established"
+      },
+      "reference_independence": "SAME_REPOSITORY_CORRELATED",
+      "independent_correctness": "NOT_ESTABLISHED",
+      "test_evidence": [
+        {
+          "line": 86,
+          "text": "\tRefModule good1 ("
+        },
+        {
+          "line": 92,
+          "text": "\tTopModule top_module1 ("
+        },
+        {
+          "line": 100,
+          "text": "\ttask wait_for_end_of_timestep;"
+        },
+        {
+          "line": 118,
+          "text": "\tassign tb_match = ( { out_ref } === ( { out_ref } ^ { out_dut } ^ { out_ref } ) );"
+        },
+        {
+          "line": 121,
+          "text": "\talways @(posedge clk, negedge clk) begin"
+        }
+      ],
+      "bindings": {
+        "prompt.txt": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob050_kmap1_prompt.txt",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob050_kmap1_prompt.txt",
+          "sha256": "e32c77b94e20cf4bba3c5e32d8ef2c95406b84bc3c46679f93061b1ebcdde4b6",
+          "expected_git_blob": "97c5130dbc2d4fcf846cc3c07e09f4cac76b8b39",
+          "actual_git_blob": "97c5130dbc2d4fcf846cc3c07e09f4cac76b8b39"
+        },
+        "ref.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob050_kmap1_ref.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob050_kmap1_ref.sv",
+          "sha256": "d8f2229363c7ae8748c8d9b2efb025bd5eb297f5aa9bb49a30dea271f68e8b2b",
+          "expected_git_blob": "1443de47e0579d2f09c31a5e7b2ad27fe9f845a0",
+          "actual_git_blob": "1443de47e0579d2f09c31a5e7b2ad27fe9f845a0"
+        },
+        "test.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob050_kmap1_test.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob050_kmap1_test.sv",
+          "sha256": "269dd594ea2d6c7f39136c599ea7c48637e34f0a02b19dc585b136d80b969e1f",
+          "expected_git_blob": "e903dce0435d476d1db1a2aece6309de54e93daf",
+          "actual_git_blob": "e903dce0435d476d1db1a2aece6309de54e93daf"
+        }
+      }
+    },
+    {
+      "rank": 18,
+      "id": "Prob101_circuit4",
+      "meaning_zh": "波形推断二输入OR",
+      "eligible": false,
+      "selected": false,
+      "status": "EXCLUDED",
+      "code": "WITHIN_ROUND_FUNCTIONAL_NEAR_DUPLICATE",
+      "contract_zh": "a,b,c,d/q均1位；表覆盖16个二值组合，q=b|c，a/d无关；组合无时钟复位。",
+      "history_review_zh": "与本轮更早Prob050同为OR归约真值表，仅有效输入数/表示变化，保守排除后者；没有依据RAG表现选留。",
+      "coverage_zh": "枚举18步覆盖16组合及100随机；波形本身完整，排除非缺图。",
+      "language": "English prompt; SystemVerilog reference/TB, fixed TopModule candidate interface",
+      "diagram_or_table": "Any required textual table/diagram reviewed above; never supplemented",
+      "signedness": "No signed arithmetic requirement; widths as original interface; four-state unspecified domains not filled",
+      "initialization_and_validity": "See per-task contract; no new initialization/reset/output masking added",
+      "sampling_zh": "原test计分always位于测试clk双边沿，helper只定义未调用；NBA驱动与active区比较，不保证统一POST/NBA后采样。组合稳定输入阶段比较不等于全时序签核。",
+      "dependencies": {
+        "modules": [
+          "RefModule",
+          "stimulus_gen",
+          "tb"
+        ],
+        "external_include": [],
+        "readmem": false,
+        "source_files": [
+          "prompt.txt",
+          "ref.sv",
+          "test.sv"
+        ],
+        "single_topmodule": "Original TB instantiates TopModule; reference header independently present; static compatible, compile NOT_RUN"
+      },
+      "authorship": {
+        "repository": "NVlabs/verilog-eval",
+        "license": "MIT (frozen LICENSE)",
+        "snapshot_commit_author": "Nathaniel Pinckney; NOT attributed as individual file author",
+        "individual_prompt_ref_test_authors": "UNKNOWN from available files; same repository lineage, no independently authored oracle established"
+      },
+      "reference_independence": "SAME_REPOSITORY_CORRELATED",
+      "independent_correctness": "NOT_ESTABLISHED",
+      "test_evidence": [
+        {
+          "line": 86,
+          "text": "\tRefModule good1 ("
+        },
+        {
+          "line": 93,
+          "text": "\tTopModule top_module1 ("
+        },
+        {
+          "line": 102,
+          "text": "\ttask wait_for_end_of_timestep;"
+        },
+        {
+          "line": 120,
+          "text": "\tassign tb_match = ( { q_ref } === ( { q_ref } ^ { q_dut } ^ { q_ref } ) );"
+        },
+        {
+          "line": 123,
+          "text": "\talways @(posedge clk, negedge clk) begin"
+        }
+      ],
+      "bindings": {
+        "prompt.txt": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob101_circuit4_prompt.txt",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob101_circuit4_prompt.txt",
+          "sha256": "408ee7f610fb2735ab0df8eea70ecb83de5edcff971ff3dd0038015753401ab4",
+          "expected_git_blob": "29c5cda879aff7e8690aa1685c7bd342a191373f",
+          "actual_git_blob": "29c5cda879aff7e8690aa1685c7bd342a191373f"
+        },
+        "ref.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob101_circuit4_ref.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob101_circuit4_ref.sv",
+          "sha256": "bceb52d9d227b2e42ea82749a7c732373a611021a2bd28c1996210b4ceac777c",
+          "expected_git_blob": "0ca5ee8b382f439483ba7aa03be35b0c1acd33ac",
+          "actual_git_blob": "0ca5ee8b382f439483ba7aa03be35b0c1acd33ac"
+        },
+        "test.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob101_circuit4_test.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob101_circuit4_test.sv",
+          "sha256": "f58b01f599e757556ee9882f9467121a196be69ad6b755b2016c57ab6c844524",
+          "expected_git_blob": "86baf077f9d646fb3b42c2b0dddc745a7c7be10d",
+          "actual_git_blob": "86baf077f9d646fb3b42c2b0dddc745a7c7be10d"
+        }
+      }
+    },
+    {
+      "rank": 19,
+      "id": "Prob106_always_nolatches",
+      "meaning_zh": "箭头扫描码识别",
+      "eligible": true,
+      "selected": true,
+      "status": "CONDITIONAL_NO_INDEPENDENT_ORACLE",
+      "code": "CONDITIONAL_STATIC_ELIGIBLE",
+      "contract_zh": "scancode16位，四1位方向输出；e06b/e072/e074/e075分别置对应位，其他全0；组合无时钟复位、全时有效。",
+      "history_review_zh": "与历史一般decoder只有表查找原语共享；本轮Prob114为数字输出稀疏表，本题为方向one-hot输出，保留相关表驱动题组标记，不声称完全独立族。",
+      "coverage_zh": "定向有效/相邻无效码与30000随机；不等于穷尽65536，参考每次输出全0再case。",
+      "language": "English prompt; SystemVerilog reference/TB, fixed TopModule candidate interface",
+      "diagram_or_table": "Any required textual table/diagram reviewed above; never supplemented",
+      "signedness": "No signed arithmetic requirement; widths as original interface; four-state unspecified domains not filled",
+      "initialization_and_validity": "See per-task contract; no new initialization/reset/output masking added",
+      "sampling_zh": "原test计分always位于测试clk双边沿，helper只定义未调用；NBA驱动与active区比较，不保证统一POST/NBA后采样。组合稳定输入阶段比较不等于全时序签核。",
+      "dependencies": {
+        "modules": [
+          "RefModule",
+          "stimulus_gen",
+          "tb"
+        ],
+        "external_include": [],
+        "readmem": false,
+        "source_files": [
+          "prompt.txt",
+          "ref.sv",
+          "test.sv"
+        ],
+        "single_topmodule": "Original TB instantiates TopModule; reference header independently present; static compatible, compile NOT_RUN"
+      },
+      "authorship": {
+        "repository": "NVlabs/verilog-eval",
+        "license": "MIT (frozen LICENSE)",
+        "snapshot_commit_author": "Nathaniel Pinckney; NOT attributed as individual file author",
+        "individual_prompt_ref_test_authors": "UNKNOWN from available files; same repository lineage, no independently authored oracle established"
+      },
+      "reference_independence": "SAME_REPOSITORY_CORRELATED",
+      "independent_correctness": "NOT_ESTABLISHED",
+      "test_evidence": [
+        {
+          "line": 99,
+          "text": "\tRefModule good1 ("
+        },
+        {
+          "line": 106,
+          "text": "\tTopModule top_module1 ("
+        },
+        {
+          "line": 115,
+          "text": "\ttask wait_for_end_of_timestep;"
+        },
+        {
+          "line": 139,
+          "text": "\tassign tb_match = ( { left_ref, down_ref, right_ref, up_ref } === ( { left_ref, down_ref, right_ref, up_ref } ^ { left_dut, down_dut, right_dut, up_dut } ^ { left_ref, down_ref, right_ref, up_ref } ) );"
+        },
+        {
+          "line": 142,
+          "text": "\talways @(posedge clk, negedge clk) begin"
+        }
+      ],
+      "bindings": {
+        "prompt.txt": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob106_always_nolatches_prompt.txt",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob106_always_nolatches_prompt.txt",
+          "sha256": "bca22f47f123f3faafed3372bcec4a5b76e84327375f34464b75746479ac22d6",
+          "expected_git_blob": "a96afaade60ad596b016fb17026008f07181cadb",
+          "actual_git_blob": "a96afaade60ad596b016fb17026008f07181cadb"
+        },
+        "ref.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob106_always_nolatches_ref.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob106_always_nolatches_ref.sv",
+          "sha256": "c224ca40684f97dd739096b361e1d85155a07ae5faf9548c12575d6f0f347ad6",
+          "expected_git_blob": "d6f194d7e1c3a4539713e3b44acc774f52b2f711",
+          "actual_git_blob": "d6f194d7e1c3a4539713e3b44acc774f52b2f711"
+        },
+        "test.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob106_always_nolatches_test.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob106_always_nolatches_test.sv",
+          "sha256": "fd636060098952703ed11e5d88b56f384a91c0a573d10ed98187db89cdf62136",
+          "expected_git_blob": "56bbbf28ed89e89290d5146851a937fa49dac538",
+          "actual_git_blob": "56bbbf28ed89e89290d5146851a937fa49dac538"
+        }
+      }
+    },
+    {
+      "rank": 20,
+      "id": "Prob154_fsm_ps2data",
+      "meaning_zh": "三字节包边界与输出",
+      "eligible": false,
+      "selected": false,
+      "status": "EXCLUDED",
+      "code": "KEY_TIMING_UNRESOLVED",
+      "contract_zh": "posedge同步reset；in8/out24/done1，first byte in[3]=1，done有效时三字节高到低。文字说第三字节后立即一周期，表在15/25/35边沿列2c/81/09却45才done；未定义表输入在边沿前还是后，参考按已采样输入转DONE。",
+      "history_review_zh": "与历史serial/framed任务有重叠，决定性排除为表/文字的采样约定未定，不能补题。",
+      "coverage_zh": "初200次negedge随机reset/data，随后三字节序列；不强制初始reset，ref out_bytes在done外X，TB掩蔽，不能据此证明数据窗口外定义。",
+      "language": "English prompt; SystemVerilog reference/TB, fixed TopModule candidate interface",
+      "diagram_or_table": "Any required textual table/diagram reviewed above; never supplemented",
+      "signedness": "No signed arithmetic requirement; widths as original interface; four-state unspecified domains not filled",
+      "initialization_and_validity": "See per-task contract; no new initialization/reset/output masking added",
+      "sampling_zh": "原test计分always位于测试clk双边沿，helper只定义未调用；NBA驱动与active区比较，不保证统一POST/NBA后采样。组合稳定输入阶段比较不等于全时序签核。",
+      "dependencies": {
+        "modules": [
+          "RefModule",
+          "stimulus_gen",
+          "tb"
+        ],
+        "external_include": [],
+        "readmem": false,
+        "source_files": [
+          "prompt.txt",
+          "ref.sv",
+          "test.sv"
+        ],
+        "single_topmodule": "Original TB instantiates TopModule; reference header independently present; static compatible, compile NOT_RUN"
+      },
+      "authorship": {
+        "repository": "NVlabs/verilog-eval",
+        "license": "MIT (frozen LICENSE)",
+        "snapshot_commit_author": "Nathaniel Pinckney; NOT attributed as individual file author",
+        "individual_prompt_ref_test_authors": "UNKNOWN from available files; same repository lineage, no independently authored oracle established"
+      },
+      "reference_independence": "SAME_REPOSITORY_CORRELATED",
+      "independent_correctness": "NOT_ESTABLISHED",
+      "test_evidence": [
+        {
+          "line": 81,
+          "text": "\tRefModule good1 ("
+        },
+        {
+          "line": 88,
+          "text": "\tTopModule top_module1 ("
+        },
+        {
+          "line": 97,
+          "text": "\ttask wait_for_end_of_timestep;"
+        },
+        {
+          "line": 117,
+          "text": "\tassign tb_match = ( { out_bytes_ref, done_ref } === ( { out_bytes_ref, done_ref } ^ { out_bytes_dut, done_dut } ^ { out_bytes_ref, done_ref } ) );"
+        },
+        {
+          "line": 120,
+          "text": "\talways @(posedge clk, negedge clk) begin"
+        }
+      ],
+      "bindings": {
+        "prompt.txt": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob154_fsm_ps2data_prompt.txt",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob154_fsm_ps2data_prompt.txt",
+          "sha256": "4e1014fdeac229691b0bc294092df6c773209fe9378874af8180f58dc14453d8",
+          "expected_git_blob": "18c18bbf3567c9e6ccd45b18c4b3b1811923e31b",
+          "actual_git_blob": "18c18bbf3567c9e6ccd45b18c4b3b1811923e31b"
+        },
+        "ref.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob154_fsm_ps2data_ref.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob154_fsm_ps2data_ref.sv",
+          "sha256": "366c2db7618fb43718229b1ed4d5e65a948566a7be6945f99a9160bde7a2df6a",
+          "expected_git_blob": "43a919e84dac93a33286e041fc50930abbccacf4",
+          "actual_git_blob": "43a919e84dac93a33286e041fc50930abbccacf4"
+        },
+        "test.sv": {
+          "local": "B/originals/dataset_spec-to-rtl/Prob154_fsm_ps2data_test.sv",
+          "url": "https://raw.githubusercontent.com/NVlabs/verilog-eval/c498220d0a52248f8e3fdffe279075215bde2da6/dataset_spec-to-rtl/Prob154_fsm_ps2data_test.sv",
+          "sha256": "df9bb8075240ccb7922bb2df360bbed1cf89fc8cc663ad9423fc8c0a5e8ecd17",
+          "expected_git_blob": "ae63c91dd84c7bd23ab35ed9deafee9f0c00b98a",
+          "actual_git_blob": "ae63c91dd84c7bd23ab35ed9deafee9f0c00b98a"
+        }
+      }
+    }
+  ],
+  "selection_uses_retrieval": false,
+  "new_model_or_eda_calls": 0
+}

@@ -1,0 +1,58 @@
+{
+  "frozen_utc": "2026-10-24T07:29:11.629361+00:00",
+  "scope": "OFFLINE_LEXICAL_COMPONENT_COMPARISON_NOT_FULL_RAG_REPRODUCTION",
+  "public_source": "https://github.com/dorianbrown/rank_bm25",
+  "commit": "47aa3ddf8dc1ebeb7ef4e65f2b4536af44594099",
+  "license": "Apache-2.0",
+  "methods": {
+    "TFIDF_local": {
+      "tf": "1+ln(count)",
+      "idf": "ln((1+N)/(1+df))+1",
+      "norm": "L2",
+      "implementation": "new cached adapter of existing generic formula; toy-only conformance check"
+    },
+    "BM25Okapi": {
+      "k1": 1.5,
+      "b": 0.75,
+      "epsilon": 0.25
+    },
+    "BM25L": {
+      "k1": 1.5,
+      "b": 0.75,
+      "delta": 0.5
+    },
+    "BM25Plus": {
+      "k1": 1.5,
+      "b": 0.75,
+      "delta": 1
+    }
+  },
+  "parameter_basis": "upstream default constructors, not tuned on queries; no claim these equal Elasticsearch defaults",
+  "tokenizer": "[a-z_][a-z0-9_]* lowercase, no stopwords/stemming/query expansion; query multiplicity retained",
+  "corpus": "same frozen48 complete-document lowRISC chunks; chunk text only, same for all",
+  "queries": "same20 adopted raw prompts; no ref/TB/outcome use",
+  "selection": "eligible iff shared token with query; sort full score descending then ID ascending; up to3; no numeric score threshold; empty if no lexical match",
+  "selection_reason": "uniform nonmatch exclusion because BM25L/Plus include nonzero baseline terms; not calibrated using benchmark results",
+  "context": "same frozen template and fragment format; complete chosen chunks; no adaptive token clipping",
+  "execution": "single pass20queries x4methods=80; eachmethod/query exactlyonce; no rerun/tuning; no generation/embedding/EDA/network in runner",
+  "metrics": [
+    "full rankings/rawscores retained but scores not compared across algorithms",
+    "top1 agreement",
+    "top3 ordered/set agreement",
+    "top3 intersection fraction and Jaccard",
+    "unique retrieved chunks",
+    "context UTF8bytes",
+    "index build time and single-pass warm query time separately"
+  ],
+  "not_metrics": [
+    "relevance accuracy",
+    "nDCG/recall without independent qrels",
+    "RTL correctness",
+    "RAG benefit",
+    "winner selection"
+  ],
+  "limits": "20 queries,48 docs,4 methods,top3; max process120s; local outputs only; no package installation",
+  "adoption_sha256": "73156e27426324a3cdc52e23b9c1d3c0d304cae0ca9098ffc3fb77fadbe68754",
+  "source_packet_lock_sha256": "3662b0fe3b880a64bd60cf493e1f9f82136ec92b437b7b9d2eb8b9f1eea006c5",
+  "preservation_root": "E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261024\\public-rag-independent-v1"
+}

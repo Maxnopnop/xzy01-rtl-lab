@@ -1,0 +1,42 @@
+{
+  "task": "cancel_deadline",
+  "module": "cancel_deadline",
+  "inputs": [
+    [
+      "req",
+      1
+    ],
+    [
+      "cancel",
+      1
+    ],
+    [
+      "finish",
+      1
+    ]
+  ],
+  "outputs": [
+    [
+      "busy",
+      1
+    ],
+    [
+      "accepted",
+      1
+    ],
+    [
+      "completed",
+      1
+    ],
+    [
+      "cancelled",
+      1
+    ],
+    [
+      "expired",
+      1
+    ]
+  ],
+  "seed": 31001,
+  "spec": "A single outstanding request with a three-edge completion window. Async active-low rst_n clears all state and outputs. At each rising clk edge, clear accepted/completed/cancelled/expired pulses. If idle before the edge, req=1 accepts a request, sets busy=1 and remaining=3, pulses accepted. cancel/finish have no effect while idle, even on acceptance. If busy before the edge, ignore req. Priority is cancel, then finish, then deadline. cancel terminates with cancelled=1; else finish terminates with completed=1; else remaining=1 terminates with expired=1; otherwise decrement remaining. No replacement is accepted on any terminating edge. Thus after acceptance, the next three rising edges are the response window; finish or cancel at the third edge beats expiry. busy and pulses hold between edges; async reset dominates simultaneous events."
+}

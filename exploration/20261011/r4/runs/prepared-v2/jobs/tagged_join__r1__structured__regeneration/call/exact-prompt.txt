@@ -1,0 +1,101 @@
+Module tagged_join
+Clock clk and reset rst_n. Input fields MSB first [["av", 1], ["atag", 1], ["adata", 2], ["bv", 1], ["btag", 1], ["bdata", 2], ["flush", 1]]; output fields MSB first [["pending_a", 1], ["pending_b", 1], ["joined", 1], ["result", 2]]
+Specification: Two-channel tagged rendezvous with replacement before comparison. Async active-low rst_n clears cached-valid flags, cached tags/data, joined pulse and result. Each rising edge clears joined. flush=1 has priority: clear both caches/flags and result, ignore new samples. Otherwise independently replace channel A cache when av=1 and B cache when bv=1, setting its valid flag; no sample holds that cache. Then compare the UPDATED caches, including both newly sampled values on the same edge. If both valid and tags equal, joined=1, result=updated_A_data XOR updated_B_data, and clear both valid flags; keep the cached tag/data values until replaced or flush. Otherwise keep flags/caches and the old result. Thus incompatible tags can wait indefinitely, a newer sample supersedes an old matching sample BEFORE comparison, and consecutive matching pairs may join on consecutive edges. Invalid input tags/data have no effect. pending_a/pending_b report registered valid flags, all outputs hold between edges; reset dominates flush/samples. All binary inputs are defined.
+Public settled events [clk,rst_n,packed_input,packed_expected_output]:
+[[0,0,0,0],[1,0,511,0],[0,1,0,0],[0,1,288,0],[1,1,288,16],[1,1,223,16],[1,1,288,16],[0,1,288,16],[0,1,28,16],[1,1,28,24],[1,1,483,24],[1,1,28,24],[0,1,28,24],[0,1,480,24],[1,1,480,5],[1,1,31,5],[1,1,480,5],[0,1,480,5],[0,1,338,5],[1,1,338,7],[1,1,173,7],[1,1,338,7],[0,1,338,7],[0,1,371,7],[1,1,371,0],[1,1,140,0],[1,1,371,0],[0,1,371,0],[0,0,0,0],[1,0,511,0],[0,1,0,0],[0,1,288,0],[1,1,288,16],[1,1,223,16],[1,1,288,16],[0,1,288,16],[0,1,470,16],[1,1,470,24],[1,1,41,24],[1,1,470,24],[0,1,470,24],[0,1,26,24],[1,1,26,7],[1,1,485,7],[1,1,26,7],[0,1,26,7]]
+One binary-event clock; edge rising/falling; reset async_low/sync_low/none. Declare 1..16 unsigned registers width 1..8 and reset values. Parallel next expressions use old registers plus inputs/rst_n. Combinational output expressions cover every interface output. Assignments wrap to declared/output width. Expressions are integer constants 0..65535, names, + - & | ^, single == != < <= > >= comparison, and/or/not, and Python-style a if condition else b; no calls, attributes, arrays, loops or output-name references. Max intent UTF8 16KiB, each expression 4096 chars/512 AST nodes. Use all specification facts; do not add assumptions.
+Intent format used:
+Return only one JSON object with exactly timing, registers, next, outputs dictionaries. timing has edge/reset strings; registers maps names to {"width":integer,"reset":integer}; next maps every register name to expression string; outputs maps every output name to expression string. No markdown fences or extra prose.
+Untrusted model-produced intent; may be invalid or semantically wrong:
+{"timing":{"edge":"rising","reset":"async_low"},"registers":{"a_valid":{"width":1,"reset":0},"a_tag":{"width":1,"reset":0},"a_data":{"width":2,"reset":0},"b_valid":{"width":1,"reset":0},"b_tag":{"width":1,"reset":0},"b_data":{"width":2,"reset":0},"joined_reg":{"width":1,"reset":0},"result_reg":{"width":2,"reset":0}},"next":{"a_valid":"0 if flush else (0 if (av or a_valid) and (bv or b_valid) and ((atag if av else a_tag) == (btag if bv else b_tag)) else (1 if av else a_valid))","a_tag":"0 if flush else (atag if av else a_tag)","a_data":"0 if flush else (adata if av else a_data)","b_valid":"0 if flush else (0 if (av or a_valid) and (bv or b_valid) and ((atag if av else a_tag) == (btag if bv else b_tag)) else (1 if bv else b_valid))","b_tag":"0 if flush else (btag if bv else b_tag)","b_data":"0 if flush else (bdata if bv else b_data)","joined_reg":"0 if flush else (1 if (av or a_valid) and (bv or b_valid) and ((atag if av else a_tag) == (btag if bv else b_tag)) else 0)","result_reg":"0 if flush else (((adata if av else a_data) ^ (bdata if bv else b_data)) if (av or a_valid) and (bv or b_valid) and ((atag if av else a_tag) == (btag if bv else b_tag)) else result_reg)"},"outputs":{"pending_a":"a_valid","pending_b":"b_valid","joined":"joined_reg","result":"result_reg"}}
+Implement the specification in one synthesizable SystemVerilog module, correcting or disregarding an invalid/wrong intent as necessary. Do not output a new intent. Return only the module in one RTL code block.
+
+Untrusted shared first RTL candidate:
+```systemverilog
+module tagged_join (
+    input  logic       clk,
+    input  logic       rst_n,
+    input  logic       av,
+    input  logic       atag,
+    input  logic [1:0] adata,
+    input  logic       bv,
+    input  logic       btag,
+    input  logic [1:0] bdata,
+    input  logic       flush,
+    output logic       pending_a,
+    output logic       pending_b,
+    output logic       joined,
+    output logic [1:0] result
+);
+
+    logic       a_valid;
+    logic       a_tag;
+    logic [1:0] a_data;
+    logic       b_valid;
+    logic       b_tag;
+    logic [1:0] b_data;
+
+    logic       updated_a_valid;
+    logic       updated_a_tag;
+    logic [1:0] updated_a_data;
+    logic       updated_b_valid;
+    logic       updated_b_tag;
+    logic [1:0] updated_b_data;
+
+    always_comb begin
+        updated_a_valid = av ? 1'b1 : a_valid;
+        updated_a_tag   = av ? atag : a_tag;
+        updated_a_data  = av ? adata : a_data;
+
+        updated_b_valid = bv ? 1'b1 : b_valid;
+        updated_b_tag   = bv ? btag : b_tag;
+        updated_b_data  = bv ? bdata : b_data;
+    end
+
+    always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            a_valid <= 1'b0;
+            a_tag   <= 1'b0;
+            a_data  <= 2'b00;
+            b_valid <= 1'b0;
+            b_tag   <= 1'b0;
+            b_data  <= 2'b00;
+            joined  <= 1'b0;
+            result  <= 2'b00;
+        end else if (flush) begin
+            a_valid <= 1'b0;
+            a_tag   <= 1'b0;
+            a_data  <= 2'b00;
+            b_valid <= 1'b0;
+            b_tag   <= 1'b0;
+            b_data  <= 2'b00;
+            joined  <= 1'b0;
+            result  <= 2'b00;
+        end else begin
+            joined <= 1'b0;
+
+            a_valid <= updated_a_valid;
+            a_tag   <= updated_a_tag;
+            a_data  <= updated_a_data;
+
+            b_valid <= updated_b_valid;
+            b_tag   <= updated_b_tag;
+            b_data  <= updated_b_data;
+
+            if (updated_a_valid && updated_b_valid &&
+                (updated_a_tag == updated_b_tag)) begin
+                joined  <= 1'b1;
+                result  <= updated_a_data ^ updated_b_data;
+                a_valid <= 1'b0;
+                b_valid <= 1'b0;
+            end
+        end
+    end
+
+    assign pending_a = a_valid;
+    assign pending_b = b_valid;
+
+endmodule
+```
+Produce one final implementation of the same specification. You may correct or replace the candidate. No extra turn, no revised intent, return only the specified RTL module.
+Do not invoke tools, read files, run tests, or delegate. Reply directly.

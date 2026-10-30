@@ -1,0 +1,30 @@
+module TopModule (
+  input              mode,
+  input              too_cold,
+  input              too_hot,
+  input              fan_on,
+  output logic       heater,
+  output logic       aircon,
+  output logic       fan
+);
+
+  always_comb begin
+    // Default outputs
+    heater = 1'b0;
+    aircon = 1'b0;
+    fan = fan_on; // fan can be turned on by fan_on input
+
+    if (mode) begin // Heating mode
+      if (too_cold) begin
+        heater = 1'b1; // turn on heater if too cold
+        fan = 1'b1;    // also turn on fan
+      end
+    end else begin // Cooling mode
+      if (too_hot) begin
+        aircon = 1'b1; // turn on air conditioner if too hot
+        fan = 1'b1;    // also turn on fan
+      end
+    end
+  end
+
+endmodule

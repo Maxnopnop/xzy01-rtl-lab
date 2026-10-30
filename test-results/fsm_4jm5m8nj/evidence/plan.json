@@ -1,0 +1,242 @@
+{
+  "schema": 2,
+  "study": "fsm48-v1",
+  "created_utc": "2026-10-11T00:59:12.922395+00:00",
+  "config": {
+    "schema": 1,
+    "name": "fsm-budget-localization-feasibility-v1",
+    "models": [
+      "fixture-model"
+    ],
+    "tasks": [
+      "ve_fsm",
+      "rt_sequence"
+    ],
+    "arms": [
+      "prose",
+      "table",
+      "checked_table"
+    ],
+    "repeats": 1,
+    "max_calls": 12,
+    "reasoning_effort": "low",
+    "api_timeout": 180,
+    "compile_timeout": 15,
+    "sim_timeout": 10,
+    "note": "Two calls per sample; CLI internal retries and tokens are not hard-capped. Feasibility on reused development tasks, not a final efficacy study.",
+    "mode": "offline",
+    "suite": "dev10",
+    "task_dir": "benchmarks/dev10/tasks",
+    "iverilog": null,
+    "vvp": null,
+    "synthesis": "none",
+    "codex_executable": null,
+    "codex_reasoning": "low"
+  },
+  "tasks": [
+    {
+      "id": "ve_fsm",
+      "module": "TopModule",
+      "checks": 1600,
+      "spec": "I would like you to implement a module named TopModule with the following\ninterface. All input and output ports are one bit unless otherwise\nspecified.\n\n - input  clk\n - input  areset\n - input  in\n - output out\n\nThe module should implement a Moore state machine with the following\nstate transition table with one input, one output, and four states.\nImplement this state machine. Include a positive edge triggered\nasynchronous reset that resets the FSM to state A. Assume all sequential\nlogic is triggered on the positive edge of the clock.\n\n  state | next state in=0, next state in=1 | output\n  A     | A, B                             | 0\n  B     | C, B                             | 0\n  C     | A, D                             | 0\n  D     | C, B                             | 1",
+      "category": "fsm",
+      "split": "development",
+      "family": "fsm3",
+      "benchmark": "verilog-eval",
+      "suite_version": "dev10-v1",
+      "synthesis_eligible": true,
+      "origin": {
+        "repository": "https://github.com/NVlabs/verilog-eval",
+        "commit": "c498220d0a52248f8e3fdffe279075215bde2da6",
+        "path": "dataset_spec-to-rtl/Prob119_fsm3",
+        "license": "MIT",
+        "files": {
+          "upstream/verilog-eval/Prob119_fsm3_prompt.txt": "c4bd7a8a42e599d4cb22412c5c0e1a8ed082a7cb12ac441d90de91cd577ae9a4",
+          "upstream/verilog-eval/Prob119_fsm3_ref.sv": "893c89407124afc3d51d6089262eff8a80abc0eeee15950006c6d063978f0c9b",
+          "upstream/verilog-eval/Prob119_fsm3_test.sv": "671afe85dfc599fa6f07f2052df26d03f9c7a91d1d953182948bdd21e9b3f1cc"
+        }
+      },
+      "adaptations": [
+        "Independent deterministic vector oracle replaces upstream TB; upstream TB archived.",
+        "Reference module renamed; timescale directive removed."
+      ],
+      "mutation": "Wrong Moore output state",
+      "reference_sha256": "6ff14fa807ced9355a7f0e062111d132779841b7e78cbf1d67aae4ecb88d4923",
+      "mutant_sha256": "d285ef7b16842a5644d2a37a67e574468e2f74eff49a167fd68c33b46ad81e88",
+      "tb_sha256": "73ac7f8b8c2835b3c2d303a54a06175f4b086d8e366bd40a303299646fa5f292",
+      "assets": {
+        "ve_fsm.hex": "0f6497d7fcdab38012e9c05fe485aebad980fb99e41464772027bd29b0e5aa27"
+      }
+    },
+    {
+      "id": "rt_sequence",
+      "module": "sequence_detector",
+      "checks": 1840,
+      "spec": "Please act as a professional Verilog designer.\n\nImplement a module of a sequence detector to detect a specific 4-bit binary sequence 1001.\n\nModule name:\n    sequence_detector\n\nInput ports:\n    clk: Clock signal to synchronize the detector.\n    rst_n: Active-low reset signal to initialize the state machine.\n    data_in: 1-bit binary input signal to feed the bitstream for sequence detection.\n\nOutput ports:\n    sequence_detected: 1-bit output signal that is set high when the specific sequence is detected.\n    \nInternal logic:\n    State Machine: The sequence detector uses a finite state machine (FSM) with the following states:\n    IDLE: Waiting for the start of the sequence.\n    S1: The first bit of the desired sequence is detected.\n    S2: The second bit of the desired sequence is detected.\n    S3: The third bit of the desired sequence is detected.\n    S4: The fourth and final bit of the desired sequence is detected, and the output sequence_detected is set high.\n\nImplementation:\n    -FSM Design: The FSM transitions through states based on the bitstream data_in. On each clock cycle, the detector checks for a match of the specific sequence.\n\n    -Sequence Detection: The module checks the input data_in and transitions between states. Once the complete sequence is detected, sequence_detected is asserted.\n\n    -Reset Behavior: When rst_n is low, the state machine returns to the IDLE state, resetting the detection process.\n\nDevelopment-subset clarification (part of the fixed specification): Use asynchronous active-low reset, overlapping detections, and a Moore output high after the edge consuming the final 1; matching the archived reference.",
+      "category": "fsm",
+      "split": "development",
+      "family": "sequence1001",
+      "benchmark": "RTLLM",
+      "suite_version": "dev10-v1",
+      "synthesis_eligible": true,
+      "origin": {
+        "repository": "https://github.com/hkust-zhiyao/RTLLM",
+        "commit": "51ed553d0ffd32797a1a0a13e051656bf302c81f",
+        "path": "Control/Finite State Machine/sequence_detector",
+        "license": "MIT",
+        "files": {
+          "upstream/RTLLM/sequence_detector/design_description.txt": "eaa043dd75258c345f8e2f21817c2454a38923e476e50523a5e41bff8ef93b13",
+          "upstream/RTLLM/sequence_detector/verified_sequence_detector.v": "573bbf1a2e9afb77960131b731cd6aae85b3508a09465c7589a131b517401f23",
+          "upstream/RTLLM/sequence_detector/testbench.v": "0d5e90177af40049a62b48bf63ae8ff113435115a7544d6727a272123583bcae"
+        }
+      },
+      "adaptations": [
+        "Independent deterministic vector oracle replaces upstream TB; upstream TB archived.",
+        "Reference module renamed; timescale directive removed.",
+        "Use asynchronous active-low reset, overlapping detections, and a Moore output high after the edge consuming the final 1; matching the archived reference."
+      ],
+      "mutation": "Breaks sequence prefix transition",
+      "reference_sha256": "6acb22c07d9e2bef30be3a8ed023a845da6a565b1b5f13938ea90d3bbb0ae010",
+      "mutant_sha256": "a18f13b6c6d5d4c88681df2b627226c00f7343f4a88e2d0cda5b230004ef933d",
+      "tb_sha256": "6abb900b5f8cae1ea0ab98321c1830bd58f4132c75efb676b9cc4250a5e90e4b",
+      "assets": {
+        "rt_sequence.hex": "6f656556d2940534fe990384d84ed61cb498a683531b24ee599374d98aec4c40"
+      }
+    }
+  ],
+  "jobs": [
+    {
+      "id": "m01__ve_fsm__prose__s001",
+      "task": "ve_fsm",
+      "sample": 1,
+      "arm": "prose",
+      "model": "fixture-model"
+    },
+    {
+      "id": "m01__ve_fsm__table__s001",
+      "task": "ve_fsm",
+      "sample": 1,
+      "arm": "table",
+      "model": "fixture-model"
+    },
+    {
+      "id": "m01__ve_fsm__checked_table__s001",
+      "task": "ve_fsm",
+      "sample": 1,
+      "arm": "checked_table",
+      "model": "fixture-model"
+    },
+    {
+      "id": "m01__rt_sequence__table__s001",
+      "task": "rt_sequence",
+      "sample": 1,
+      "arm": "table",
+      "model": "fixture-model"
+    },
+    {
+      "id": "m01__rt_sequence__checked_table__s001",
+      "task": "rt_sequence",
+      "sample": 1,
+      "arm": "checked_table",
+      "model": "fixture-model"
+    },
+    {
+      "id": "m01__rt_sequence__prose__s001",
+      "task": "rt_sequence",
+      "sample": 1,
+      "arm": "prose",
+      "model": "fixture-model"
+    }
+  ],
+  "source_hashes": {
+    "batch.py": "caf3dfdf2cdd753a72c574f43e17ca04bcb9bcefc21a2dd59686a7a1a0489c10",
+    "rtl_lab.py": "ab4f386a3bb5aa84bb729f18fe3b19e43399ba66dc567e297328d1c046432702",
+    "backends.py": "ff9d4e787157a57b4c6c506c52fc4c798e388a0ca1cf694df2b50d79c76de5b0",
+    "codex_adapter.py": "33a6080d45ff8f36c6441afeda8ba53d6e5204bd0bd0ad33a8d38c165d63af9d",
+    "api_worker.py": "3696301af3270a50d959773e15476700395a9703aa2a8185d0f2a669b695efc8",
+    "synthesis.py": "0bf4a414c99cc0700b3ecc25f640fe7f4f3ddc22d1ab4ab234264d402fd221c3",
+    "benchmarks/dev10/tasks/manifest.json": "194cb7fa4578e3d8986bf0077e12f004cb9c50531a8d218f6676bdf1bdb19ab1",
+    "benchmarks/dev10/source-lock.json": "42e775489f8c3a36a9d44992109b5526a691d8d7496ef3deadebcbb132303f19",
+    "benchmarks/dev10/split-lock.json": "e859533df48bc125aac0a9330b42442f5dd46c4fdb56326e0e800895a03980ae",
+    "fsm_study.py": "ba60bd48153b7297426558bbb575e61ffa5da141624b6fa329dbbe4d7a4cf801",
+    "fsm_ir.py": "ccdfb042eba75880b42fe18aacaea31641bb52d84825400f7d71c17d08420f26",
+    "fsm_checks.py": "5f8a82a5628511b685dec53adb2f5433dd0740b2456a409d7a0029af4cedda82"
+  },
+  "max_calls": 0,
+  "planned_model_calls": 0,
+  "public_contracts": {
+    "ve_fsm": {
+      "clock_edge": "posedge",
+      "output_kind": "moore",
+      "reset": {
+        "kind": "async",
+        "active": 1,
+        "output": 0
+      },
+      "trace_convention": "Each trace starts after reset. List output after each rising edge; reset is then inactive.",
+      "examples": [
+        {
+          "bits": "1101",
+          "outputs": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "bits": "10101",
+          "outputs": [
+            0,
+            0,
+            1,
+            0,
+            1
+          ]
+        }
+      ]
+    },
+    "rt_sequence": {
+      "clock_edge": "posedge",
+      "output_kind": "moore",
+      "reset": {
+        "kind": "async",
+        "active": 0,
+        "output": 0
+      },
+      "trace_convention": "Each trace starts after reset. List output after each rising edge; reset is then inactive.",
+      "examples": [
+        {
+          "bits": "1001",
+          "outputs": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "bits": "1011",
+          "outputs": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "bits": "1001001",
+          "outputs": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1
+          ]
+        }
+      ]
+    }
+  }
+}

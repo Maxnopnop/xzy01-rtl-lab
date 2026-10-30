@@ -1,0 +1,6 @@
+read_verilog -sv reference.sv dut.sv miter.sv
+hierarchy -top miter
+proc
+flatten
+opt
+sat -seq 14 -set-def-inputs -prove mismatch 0 -show-inputs -show-outputs -dump_json trace.json

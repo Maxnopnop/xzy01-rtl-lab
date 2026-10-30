@@ -1,0 +1,168 @@
+
+
+<generic_reference_context>
+These are generic style excerpts, not new task requirements or solutions. The original specification above takes precedence.
+Source: lowRISC contributors; CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/); unmodified contiguous excerpts.
+https://github.com/lowRISC/style-guides/blob/9c15ff5dce23eef969e00ab3715153967419eadd/VerilogCodingStyle.md
+[GEN043; lowRISC Verilog Coding Style Guide; lines 2841-2885]
+two process blocks: a combinational block and a clocked block.***
+
+Every state machine description has three parts:
+
+1.  An enum that declares and describes the states.
+1.  A combinational process block that decodes state to produce next state and
+    other combinational outputs.
+1.  A clocked process block that updates state from next state.
+
+*Enumerating States*
+
+The enum statement for the state machine should list each state in the state
+machine. Comments describing the states should be deferred to the case statement in
+the combinational process block, below.
+
+States should be named in `UpperCamelCase`, like other
+[enumeration constants](#enumerations).
+
+Barring special circumstances, the initial idle state of the state
+machines will be named `Idle` or `StIdle`. (Alternate names are acceptable
+if they improve clarity.)
+
+Ideally, each module should only contain one state machine. If your module needs
+more than one state machine, you will need to add a unique prefix (or suffix) to
+the states of each state machine, to distinguish which state is associated with
+which state machine. For example, a module with a "reader" machine and a
+"writer" machine might have a `StRdIdle` state and a `StWrIdle` state.
+
+*Combinational Decode of State*
+
+The combinational process block should contain:
+
+-   A case statement that decodes state to produce next state and combinational
+    outputs. For clarity, only cases where the output value deviates from the
+    default should be coded.
+-   Before the case statement should be a block of code that defines default
+    values for every combinational output, including "next state."
+-   The default value for the "next state" variable should be the current state.
+    The case statement that decodes state will then only assign to "next state"
+    when transitioning between states.
+-   Within the case statement, each state alternative should be preceded with a
+    comment that describes the function of that state within the state machine.
+
+*The State Register*
+
+
+
+[GEN047; lowRISC Verilog Coding Style Guide; lines 3116-3161]
+  variables, types
+* Use **UpperCamelCase** for tunable parameters, enumerated value names
+* Use **ALL\_CAPS** for constants and define macros
+* Main clock signal is named `clk`. All clock signals must start with `clk_`
+* Reset signals are **active-low** and **asynchronous**, default name is
+  `rst_n`
+* Signal names should be descriptive and be consistent throughout the
+  hierarchy
+
+### Suffixes for signals and types
+
+* Add `_i` to module inputs, `_o` to module outputs or `_io` for
+  bi-directional module signals
+* The input (next state) of a registered signal should have `_d` and
+  the output `_q` as suffix
+* Pipelined versions of signals should be named `_q2`, `_q3`, etc. to
+  reflect their latency
+* Active low signals should use `_n`. When using differential signals use
+  `_p` for active high
+* Enumerated types should be suffixed with `_e`
+* Multiple suffixes will not be separated with `_`. `n` should come first
+  `i`, `o`, or `io` last
+
+### Language features
+
+* Use **full port declaration style** for modules, any clock and reset
+  declared first
+* Use **named parameters** for instantiation, all declared ports must
+  be present, no `.*`
+* Top-level parameters is preferred over `` `define`` globals
+* Use **symbolically named constants** instead of raw numbers
+* Local constants should be declared `localparam`, globals in a separate
+  **.svh** file.
+* `logic` is preferred over `reg` and `wire`, declare all signals
+  explicitly
+* `always_comb`, `always_ff` and `always_latch` are preferred over `always`
+* Interfaces are discouraged
+* Sequential logic must use **non-blocking** assignments
+* Combinational blocks must use **blocking** assignments
+* Use of latches is discouraged, use flip-flops when possible
+* The use of `X` assignments in RTL is strongly discouraged, make use of SVAs
+  to check invalid behavior instead.
+* Prefer `assign` statements wherever practical.
+* Use `unique case` and always define a `default` case
+* Use available signed arithmetic constructs wherever signed arithmetic
+  is used
+
+
+[GEN021; lowRISC Verilog Coding Style Guide; lines 1295-1356]
+Use common prefixes to identify groups of signals that operate together. For
+example, all elements of an AXI-S interface would share a prefix: `foo_valid`,
+`foo_ready`, and `foo_data`.
+
+Additionally, prefixes should be used to clearly label which signal is in which
+clock group for any module with multiple clocks. See the section on [clock
+domains](#clocks) for more details.
+
+Examples:
+
+-   Signals associated with controlling a blockram might share a `bram_` prefix.
+-   Signals that are synchronous with `clk_dram` rather than `clk` should share
+    a `dram_` prefix.
+
+Code example:
+
+&#x1f44d;
+```systemverilog {.good}
+module fifo_controller (
+  input         clk_i,
+  input         rst_ni,
+
+  // writer interface
+  input [15:0]  wr_data_i,
+  input         wr_valid_i,
+  output        wr_ready_o,
+
+  // reader interface
+  output [15:0] rd_data_o,
+  output        rd_valid_o,
+  output [7:0]  rd_fullness_o,
+  input         rd_ack_i,
+
+  // memory interface:
+  output [7:0]  mem_addr_o,
+  output [15:0] mem_wdata_o,
+  output        mem_we_o,
+  input  [15:0] mem_rdata_i
+);
+```
+
+This naming convention makes it easier to map port names onto similar signal
+names using simple and consistent rules. See the section on [Hierarchical
+Consistency](#hierarchical-consistency) for more information.
+
+#### Hierarchical consistency
+
+***The same signal should have the same name at any level of the hierarchy.***
+
+A signal that connects to a port of an instance should have the same name as
+that port. By proceeding in this manner, signals that are directly connected
+should maintain the same name at any level of hierarchy.
+
+Exceptions to this convention are expected, such as:
+
+*   When connecting a port to an element of an array of signals.
+
+*   When mapping a generic port name to something more specific to the design.
+    For example, two generic blocks, one with a `host_bus` port and one with a
+    `device_bus` port might be connected by a `foo_bar_bus` signal.
+
+In each exceptional case, care should be taken to make the mapping of port names
+
+</generic_reference_context>

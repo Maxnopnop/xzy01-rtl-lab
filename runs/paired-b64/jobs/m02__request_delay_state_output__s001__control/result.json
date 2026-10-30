@@ -1,0 +1,200 @@
+{
+  "job_id": "m02__request_delay_state_output__s001__control",
+  "task": "request_delay",
+  "case": "request_delay_state_output",
+  "pair_id": "m02__request_delay_state_output__s001",
+  "arm": "control",
+  "sample": 1,
+  "requested_model": "gpt-5.6-terra",
+  "mode": "codex",
+  "case_kind": "INJECTED_FAULT",
+  "error_type": "state_output",
+  "ir_sha256": "e6b94a5db5f3b6f114cd02aa312a43a50d5c9ee83d0dffed69dc196bd5440783",
+  "directory": "jobs/m02__request_delay_state_output__s001__control",
+  "ir_diagnosis": {
+    "status": "IR_SPEC_MISMATCH",
+    "reset_contract_errors": [],
+    "shortest_counterexample": {
+      "bits": "1",
+      "expected": 0,
+      "observed": 1
+    },
+    "visited_pairs": 2,
+    "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+  },
+  "public_check": {
+    "status": "PUBLIC_CHECK_FAIL",
+    "errors": [
+      {
+        "bits": "11111001100",
+        "expected": [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "observed": [
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0
+        ]
+      },
+      {
+        "bits": "100000",
+        "expected": [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "observed": [
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "scope": "Only disclosed examples/reset/schema; private tests were not consulted."
+  },
+  "ir_rtl": {
+    "checks": 9216,
+    "stimulus_count": 4608,
+    "tb_sha256": "a4cc1b10234e3d9f87d786e5ae2a33001cba8f70761e274a3bbf269d3fc8c788",
+    "vectors_sha256": "2c87fe980c56af5199d3e5404bbeab5210488d54f727872cb394e561ea61cd42",
+    "backend": "icarus",
+    "compile_seconds": 0.094,
+    "status": "FUNCTION_FAIL",
+    "message": "Independent testbench found 1732 mismatches",
+    "stage": "simulate",
+    "receipt_nonce": "f63687755aed4a439f5b86882bcaa717",
+    "simulate_seconds": 0.047,
+    "mismatches": [
+      {
+        "cycle": 12,
+        "phase": "post",
+        "reset": 1,
+        "input": 0,
+        "expected": 1,
+        "observed": "0"
+      },
+      {
+        "cycle": 15,
+        "phase": "post",
+        "reset": 1,
+        "input": 1,
+        "expected": 1,
+        "observed": "0"
+      },
+      {
+        "cycle": 27,
+        "phase": "post",
+        "reset": 1,
+        "input": 0,
+        "expected": 1,
+        "observed": "0"
+      },
+      {
+        "cycle": 31,
+        "phase": "post",
+        "reset": 1,
+        "input": 1,
+        "expected": 1,
+        "observed": "0"
+      },
+      {
+        "cycle": 34,
+        "phase": "post",
+        "reset": 1,
+        "input": 0,
+        "expected": 1,
+        "observed": "0"
+      }
+    ]
+  },
+  "rtl_sha256": "85ca833a3265dfd49c8317fa00836256c8ef1378923a010901a9865d06b05ad3",
+  "backend": "icarus",
+  "compile_seconds": 0.094,
+  "status": "FUNCTION_FAIL",
+  "message": "Independent testbench found 3247 mismatches",
+  "stage": "simulate",
+  "receipt_nonce": "aab3a2672bca4c39b8d16654760d140a",
+  "simulate_seconds": 0.063,
+  "spec_diagnostic": {
+    "checks": 9216,
+    "stimulus_count": 4608,
+    "tb_sha256": "a4cc1b10234e3d9f87d786e5ae2a33001cba8f70761e274a3bbf269d3fc8c788",
+    "vectors_sha256": "e6b00b9db43bcbabecf07ba74c906a80dd888a638726bbac52366c5a42e98a9e",
+    "backend": "icarus",
+    "compile_seconds": 0.078,
+    "status": "FUNCTION_FAIL",
+    "message": "Independent testbench found 3247 mismatches",
+    "stage": "simulate",
+    "receipt_nonce": "fff3490353ac4db4a2f2dbaa30f03e2a",
+    "simulate_seconds": 0.046,
+    "mismatches": [
+      {
+        "cycle": 3,
+        "phase": "post",
+        "reset": 1,
+        "input": 1,
+        "expected": 0,
+        "observed": "1"
+      },
+      {
+        "cycle": 9,
+        "phase": "post",
+        "reset": 1,
+        "input": 1,
+        "expected": 0,
+        "observed": "1"
+      },
+      {
+        "cycle": 11,
+        "phase": "post",
+        "reset": 1,
+        "input": 1,
+        "expected": 0,
+        "observed": "1"
+      },
+      {
+        "cycle": 12,
+        "phase": "pre",
+        "reset": 1,
+        "input": 0,
+        "expected": 0,
+        "observed": "1"
+      },
+      {
+        "cycle": 12,
+        "phase": "post",
+        "reset": 1,
+        "input": 0,
+        "expected": 1,
+        "observed": "0"
+      }
+    ]
+  },
+  "diagnostic_consistent": true,
+  "localization": "BOTH_DIVERGE",
+  "elapsed_seconds": 13.937
+}

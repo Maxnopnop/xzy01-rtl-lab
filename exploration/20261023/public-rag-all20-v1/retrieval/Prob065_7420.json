@@ -1,0 +1,235 @@
+{
+  "query": "\nI would like you to implement a module named TopModule with the following\ninterface. All input and output ports are one bit unless otherwise\nspecified.\n\n - input  p1a\n - input  p1b\n - input  p1c\n - input  p1d\n - input  p2a\n - input  p2b\n - input  p2c\n - input  p2d\n - output p1y\n - output p2y\n\nThe 7400-series integrated circuits are a series of digital chips with a\nfew gates each. The 7420 is a chip with two 4-input NAND gates. The\nmodule should implement the same functionality as the 7420 chip.\n\n",
+  "query_sha256": "79ffe176455537fa154d36c00c56f14821825c78254e750ea81273e12ec95775",
+  "query_terms": [
+    "all",
+    "bit",
+    "chip",
+    "chips",
+    "circuits",
+    "digital",
+    "few",
+    "following",
+    "functionality",
+    "gates",
+    "i",
+    "implement",
+    "input",
+    "integrated",
+    "interface",
+    "like",
+    "module",
+    "named",
+    "nand",
+    "one",
+    "otherwise",
+    "output",
+    "p1a",
+    "p1b",
+    "p1c",
+    "p1d",
+    "p1y",
+    "p2a",
+    "p2b",
+    "p2c",
+    "p2d",
+    "p2y",
+    "ports",
+    "same",
+    "series",
+    "specified",
+    "topmodule",
+    "two",
+    "unless",
+    "would",
+    "you"
+  ],
+  "rankings": [
+    {
+      "chunk_id": "LR018",
+      "score": 3.7475288712241452,
+      "matched": [
+        {
+          "term": "input",
+          "tf": 2,
+          "df": 1,
+          "contribution": 2.2996556405251556
+        },
+        {
+          "term": "one",
+          "tf": 1,
+          "df": 1,
+          "contribution": 1.4478732306989897
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR015",
+      "score": 3.404362645465794,
+      "matched": [
+        {
+          "term": "all",
+          "tf": 1,
+          "df": 3,
+          "contribution": 1.361275165744766
+        },
+        {
+          "term": "specified",
+          "tf": 1,
+          "df": 1,
+          "contribution": 2.043087479721028
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR010",
+      "score": 3.164597955848727,
+      "matched": [
+        {
+          "term": "chip",
+          "tf": 1,
+          "df": 1,
+          "contribution": 3.164597955848727
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR003",
+      "score": 2.969023870581372,
+      "matched": [
+        {
+          "term": "you",
+          "tf": 1,
+          "df": 1,
+          "contribution": 2.969023870581372
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR002",
+      "score": 1.9382821572553182,
+      "matched": [
+        {
+          "term": "all",
+          "tf": 1,
+          "df": 3,
+          "contribution": 1.9382821572553182
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR014",
+      "score": 1.3237451152255943,
+      "matched": [
+        {
+          "term": "all",
+          "tf": 1,
+          "df": 3,
+          "contribution": 1.3237451152255943
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR001",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR004",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR005",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR006",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR007",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR008",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR009",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR011",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR012",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR013",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR016",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR017",
+      "score": 0.0,
+      "matched": []
+    }
+  ],
+  "selected_ids": [
+    "LR018",
+    "LR015",
+    "LR010"
+  ],
+  "no_hit": false,
+  "selected_chunks": [
+    {
+      "id": "LR018",
+      "section": "Case Statements",
+      "start_line": 2245,
+      "end_line": 2252,
+      "text": "`casex` should not be used. `casex` implements a symmetric wildcard operator\nsuch that an `X` in the case expression may match one or more case items.\n`casez` only treats high-impedance states (`Z` or `?`) as a wildcard, and\nperforms exact matches for undriven `X` inputs. While this does not completely\nfix the problems with symmetric wildcard matching, it is harder to accidentally\nproduce a `Z` input than an `X` input, so this form is preferred.\n`case inside` does not treat either `X` or `Z` in the case expression as a\nwildcard, so this form is preferred over `casez`.",
+      "sha256": "38b511f542f8fcb62c5ad046b40e95a8c569d5e5b69bdce9dbe2cc6e393640e9",
+      "characters": 574,
+      "use": "General synthesizable language/style guidance, not task requirements or a solution"
+    },
+    {
+      "id": "LR015",
+      "section": "Case Statements",
+      "start_line": 2189,
+      "end_line": 2192,
+      "text": "  - a `default:` statement is **always** included in order to avoid accidental\n  inference of latches, even if all cases are covered. In simulation, a case\n  expression that evaluates to `X` will not match any case and will behave as a\n  latch, leading to different behavior than synthesis if no default is specified.",
+      "sha256": "671cab8965910cd22aa4aa60fb141c20ee77102e6da34dd8c28e743cf5ec15e0",
+      "characters": 317,
+      "use": "General synthesizable language/style guidance, not task requirements or a solution"
+    },
+    {
+      "id": "LR010",
+      "section": "Combinational Logic",
+      "start_line": 2152,
+      "end_line": 2153,
+      "text": "Do not use three-state logic (`Z` state) to accomplish on-chip logic such as\nmuxing.",
+      "sha256": "f1044589bb7940ec2cb3d3cd0e6488dcce2a40da913569935f328601dce6cf4f",
+      "characters": 84,
+      "use": "General synthesizable language/style guidance, not task requirements or a solution"
+    }
+  ],
+  "elapsed_seconds": 0.0004461999997147359,
+  "a_lock_sha256": "c0609d940a0e586e2b7b5fc81ca6d58bd1eeee5e1d4cecbe40415317f341ead1",
+  "task_source_sha256": "79ffe176455537fa154d36c00c56f14821825c78254e750ea81273e12ec95775",
+  "context_sha256": "5b3de21ab92f2ce1371b069f6c6878a7e2079f97fd486649f003b63583f1b235"
+}

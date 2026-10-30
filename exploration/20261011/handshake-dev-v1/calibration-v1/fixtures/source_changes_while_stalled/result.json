@@ -1,0 +1,157 @@
+{
+  "status": "INPUT_PROTOCOL_FAIL",
+  "counts": {
+    "INPUT_PROTOCOL_FAIL": 2,
+    "DATA_OR_ORDER_FAIL": 2,
+    "UNEXPECTED_TRANSACTION": 2,
+    "LIVENESS_FAIL": 1
+  },
+  "errors": [
+    {
+      "category": "INPUT_PROTOCOL_FAIL",
+      "cycle": 1,
+      "epoch": 0,
+      "endpoint": "source",
+      "expected": [
+        18,
+        0
+      ],
+      "observed": [
+        228,
+        1
+      ],
+      "valid": 1
+    },
+    {
+      "category": "INPUT_PROTOCOL_FAIL",
+      "cycle": 1,
+      "epoch": 0,
+      "endpoint": "source_plan",
+      "position": 0,
+      "expected": [
+        18,
+        0
+      ],
+      "observed": [
+        228,
+        1
+      ]
+    },
+    {
+      "category": "DATA_OR_ORDER_FAIL",
+      "cycle": 2,
+      "epoch": 0,
+      "consumer": 0,
+      "source_cycle": 1,
+      "expected": [
+        228,
+        1
+      ],
+      "observed": [
+        18,
+        0
+      ]
+    },
+    {
+      "category": "DATA_OR_ORDER_FAIL",
+      "cycle": 3,
+      "epoch": 0,
+      "consumer": 1,
+      "source_cycle": 1,
+      "expected": [
+        228,
+        1
+      ],
+      "observed": [
+        18,
+        0
+      ]
+    },
+    {
+      "category": "UNEXPECTED_TRANSACTION",
+      "cycle": 4,
+      "epoch": 0,
+      "consumer": 0,
+      "observed": [
+        228,
+        1
+      ]
+    },
+    {
+      "category": "UNEXPECTED_TRANSACTION",
+      "cycle": 5,
+      "epoch": 0,
+      "consumer": 1,
+      "observed": [
+        228,
+        1
+      ]
+    },
+    {
+      "category": "LIVENESS_FAIL",
+      "cycle": 23,
+      "epoch": 0,
+      "reason": "source_plan_not_accepted",
+      "remaining": 1
+    }
+  ],
+  "cycles": 24,
+  "accepted": [
+    {
+      "epoch": 0,
+      "cycle": 1,
+      "beat": [
+        228,
+        1
+      ]
+    }
+  ],
+  "delivered": [
+    [
+      {
+        "epoch": 0,
+        "cycle": 2,
+        "beat": [
+          18,
+          0
+        ]
+      },
+      {
+        "epoch": 0,
+        "cycle": 4,
+        "beat": [
+          228,
+          1
+        ]
+      }
+    ],
+    [
+      {
+        "epoch": 0,
+        "cycle": 3,
+        "beat": [
+          18,
+          0
+        ]
+      },
+      {
+        "epoch": 0,
+        "cycle": 5,
+        "beat": [
+          228,
+          1
+        ]
+      }
+    ]
+  ],
+  "aborted": [],
+  "pending": [
+    0,
+    0
+  ],
+  "source_accepted_per_epoch": [
+    1
+  ],
+  "assessment": "not_scored",
+  "latency": "Variable; bounded by declared trace/drain, not exact reference cycles"
+}

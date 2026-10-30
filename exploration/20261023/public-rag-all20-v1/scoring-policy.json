@@ -1,0 +1,28 @@
+{
+  "full_denominator": 240,
+  "clear_subset_tasks": [
+    "Prob023_vector100r",
+    "Prob032_vector0"
+  ],
+  "clear_subset_denominator": 24,
+  "subset_is_part_of_240_not_extra": true,
+  "reports": [
+    "ALL20_ORIGINAL_REFERENCE_AGREEMENT with all original/updated ambiguity and history labels",
+    "CONFIRMED_CLEAR_SUBSET separate24opportunities; original reference comparison still distinct from independent proof"
+  ],
+  "states": [
+    "NOT_STARTED",
+    "RESERVED_UNKNOWN",
+    "SERVICE_ERROR",
+    "EXTRACTION_ERROR",
+    "COMPILE_ERROR",
+    "SIM_ERROR_OR_TIMEOUT",
+    "REFERENCE_PASS",
+    "REFERENCE_FAIL"
+  ],
+  "ambiguity_rule": "A mismatch for spec/reference conflict or unresolved ambiguity is REFERENCE_DISAGREEMENT, not automatically MODEL_WRONG. Agreement is not independent spec proof. Retain original labels even if all models pass.",
+  "extraction": "Use exact frozen A/history/rtl_lab.py extract_rtl policy; keep stage=extraction and EXTRACTION_ERROR rather than collapse into compile/service. No manual repair/multi-block cherry picking.",
+  "reference_judge": "Use exact original test/reference bytes; do not silently add requirements or alter tests. Parse zero-mismatch+nonzero samples+normal completion, not process exit0 alone.",
+  "unsupported_additional_checks": "Per-task SAT/event support NOT_IMPLEMENTED_PENDING_CONTRACT_REVIEW; no blanket inherited14/32step/pass claim; retain unsupported denominator entries.",
+  "history": "All20 exploratory evaluation with mixed historical exposure; do not claim all20 independent holdout."
+}

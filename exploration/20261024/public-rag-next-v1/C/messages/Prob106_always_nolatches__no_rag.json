@@ -1,0 +1,10 @@
+[
+  {
+    "role": "system",
+    "content": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs."
+  },
+  {
+    "role": "user",
+    "content": "\nI would like you to implement a module named TopModule with the following\ninterface. All input and output ports are one bit unless otherwise\nspecified.\n\n - input  scancode (16 bits)\n - output left\n - output down\n - output right\n - output up\n\nThe module should process scancodes from a PS/2 keyboard for a game.\nGiven the last two bytes of scancodes received, you need to indicate\nwhether one of the arrow keys on the keyboard have been pressed. This\ninvolves a fairly simple mapping, which can be implemented as a case\nstatement (or if-elseif) with four cases.\n\n  Scancode[15:0] | Arrow key\n  16'he06b       | left arrow\n  16'he072       | down arrow\n  16'he074       | right arrow\n  16'he075       | up arrow\n  Anything else  | none\n\nYour circuit has one 16-bit input, and four outputs. Build this circuit\nthat recognizes these four scancodes and asserts the correct output.\n\n"
+  }
+]

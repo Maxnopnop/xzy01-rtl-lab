@@ -1,0 +1,37 @@
+{
+  "status": "GENERATED",
+  "usage": {
+    "input_tokens": 11606,
+    "cached_input_tokens": 7424,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 961,
+    "reasoning_output_tokens": 150
+  },
+  "source": "READ_ONLY_SAVED_EVIDENCE",
+  "reserved_calls": 1,
+  "response": "module ordered_retire (\n    input  wire       clk,\n    input  wire       rst_n,\n    input  wire       flush,\n    input  wire       issue,\n    input  wire [1:0] issue_tag,\n    input  wire       finish,\n    input  wire [1:0] finish_tag,\n    output reg  [1:0] count,\n    output reg        retired,\n    output reg  [1:0] retired_tag\n);\n\n    reg [1:0] tag0, tag1;\n    reg       finished0, finished1;\n\n    wire retire_old;\n    wire issue_accept;\n\n    assign retire_old = (count != 2'd0) && finished0;\n\n    assign issue_accept =\n        issue &&\n        (count < 2'd2) &&\n        ((count == 2'd0) || (issue_tag != tag0)) &&\n        ((count <  2'd2) || (issue_tag != tag1));\n\n    always @(posedge clk or negedge rst_n) begin\n        if (!rst_n) begin\n            count       <= 2'd0;\n            tag0        <= 2'd0;\n            tag1        <= 2'd0;\n            finished0   <= 1'b0;\n            finished1   <= 1'b0;\n            retired     <= 1'b0;\n            retired_tag <= 2'd0;\n        end else if (flush) begin\n            count       <= 2'd0;\n            tag0        <= 2'd0;\n            tag1        <= 2'd0;\n            finished0   <= 1'b0;\n            finished1   <= 1'b0;\n            retired     <= 1'b0;\n            retired_tag <= 2'd0;\n        end else begin\n            retired <= retire_old;\n\n            if (retire_old)\n                retired_tag <= tag0;\n\n            case (count)\n                2'd0: begin\n                    if (issue_accept) begin\n                        count     <= 2'd1;\n                        tag0      <= issue_tag;\n                        finished0 <= 1'b0;\n                    end\n                end\n\n                2'd1: begin\n                    if (retire_old) begin\n                        if (issue_accept) begin\n                            count     <= 2'd1;\n                            tag0      <= issue_tag;\n                            finished0 <= 1'b0;\n                        end else begin\n                            count     <= 2'd0;\n                            tag0      <= 2'd0;\n                            finished0 <= 1'b0;\n                        end\n                        tag1      <= 2'd0;\n                        finished1 <= 1'b0;\n                    end else begin\n                        if (finish && (finish_tag == tag0))\n                            finished0 <= 1'b1;\n\n                        if (issue_accept) begin\n                            count     <= 2'd2;\n                            tag1      <= issue_tag;\n                            finished1 <= 1'b0;\n                        end\n                    end\n                end\n\n                2'd2: begin\n                    if (retire_old) begin\n                        count     <= 2'd1;\n                        tag0      <= tag1;\n                        finished0 <= finished1 ||\n                                     (finish && (finish_tag == tag1));\n                        tag1      <= 2'd0;\n                        finished1 <= 1'b0;\n                    end else begin\n                        if (finish && (finish_tag == tag0))\n                            finished0 <= 1'b1;\n                        if (finish && (finish_tag == tag1))\n                            finished1 <= 1'b1;\n                    end\n                end\n\n                default: begin\n                    count     <= 2'd0;\n                    tag0      <= 2'd0;\n                    tag1      <= 2'd0;\n                    finished0 <= 1'b0;\n                    finished1 <= 1'b0;\n                end\n            endcase\n        end\n    end\n\nendmodule",
+  "response_sha256": "a8a9bc716b455d84203401900ff43cfb36a973ab64e2a8d60b457854104a0b7d",
+  "thread_id": "01a12a09-6659-7ed1-a113-ec554296c502",
+  "exit": {
+    "utc": "2026-10-11T08:17:20.715094+00:00",
+    "pid": 33684,
+    "identity": "134361802212870976",
+    "nonce": "9a4993c059aa4bb48c29ac359ed4ccbb",
+    "request_sha256": "5d59cca2fdf101906d5d80f054d935b2f3a5d2383e65481477cb0d24f7ed920f",
+    "returncode": 0,
+    "reason": null,
+    "elapsed_seconds": 19.40599999999904,
+    "streams_closed": true,
+    "reader_errors": [],
+    "counts": {
+      "stdout": 4018,
+      "stderr": 0
+    },
+    "descendant_cleanup": "UNVERIFIED",
+    "sha256": {
+      "stdout": "a3481b8822ef55b182d3c8647f0372e7e0ec3dfd599e88910d6a4174bf4ac9a9",
+      "stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "reconstructed_without_summary": true
+}

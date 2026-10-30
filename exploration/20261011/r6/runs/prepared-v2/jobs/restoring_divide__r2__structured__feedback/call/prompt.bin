@@ -1,0 +1,100 @@
+Implement module restoring_divide with clk,rst_n and ports {"inputs": [["abort", 1], ["start", 1], ["advance", 1], ["numerator", 4], ["denominator", 4]], "outputs": [["busy", 1], ["done", 1], ["quotient", 4], ["remainder", 4]]}
+Specification:
+Unsigned 4-bit restoring divider, rising edges only, async active-low reset zeroes all state/output. abort highest priority: busy=done=quotient=remainder=0 and discard work. Otherwise done is a one-edge pulse (default 0 each rising edge). When OLD busy=0, start accepts current numerator/denominator regardless advance: for denominator=0 finish immediately with busy=0,done=1,quotient=15,remainder=numerator; otherwise busy=1, load work, four accepted advance edges required, hold previous quotient/remainder. When OLD busy=1, start and operand changes ignored. advance=0 pauses all work and holds busy/quotient/remainder, done still clears. Each advance shifts next numerator MSB into partial remainder, shifts quotient, conditionally subtracts latched denominator and sets quotient low bit iff trial>=denominator. On the fourth advance publish new quotient/remainder, busy=0,done=1. A start simultaneous with that fourth advance is ignored (OLD busy). No implicit extra advance at acceptance. Falling/stable clock changes hold all output; reset assertion clears immediately, release alone does not act.
+Public ordered binary events (clk,rst_n,packed input,packed output; ports packed in listed order; sample after #2):
+[{"clk":0,"rst_n":0,"input":0,"expected":0,"category":"reset_low"},{"clk":0,"rst_n":1,"input":0,"expected":0,"category":"release_low"},{"clk":0,"rst_n":1,"input":723,"expected":0,"category":"low_hold"},{"clk":1,"rst_n":1,"input":723,"expected":512,"category":"rising"},{"clk":1,"rst_n":1,"input":722,"expected":512,"category":"high_hold"},{"clk":0,"rst_n":1,"input":723,"expected":512,"category":"falling"},{"clk":0,"rst_n":1,"input":256,"expected":512,"category":"low_hold"},{"clk":1,"rst_n":1,"input":256,"expected":512,"category":"rising"},{"clk":1,"rst_n":1,"input":257,"expected":512,"category":"high_hold"},{"clk":0,"rst_n":1,"input":256,"expected":512,"category":"falling"},{"clk":0,"rst_n":1,"input":0,"expected":512,"category":"low_hold"},{"clk":1,"rst_n":1,"input":0,"expected":512,"category":"rising"},{"clk":1,"rst_n":1,"input":1,"expected":512,"category":"high_hold"},{"clk":0,"rst_n":1,"input":0,"expected":512,"category":"falling"},{"clk":0,"rst_n":1,"input":256,"expected":512,"category":"low_hold"},{"clk":1,"rst_n":1,"input":256,"expected":512,"category":"rising"},{"clk":1,"rst_n":1,"input":257,"expected":512,"category":"high_hold"},{"clk":0,"rst_n":1,"input":256,"expected":512,"category":"falling"},{"clk":0,"rst_n":1,"input":256,"expected":512,"category":"low_hold"},{"clk":1,"rst_n":1,"input":256,"expected":512,"category":"rising"},{"clk":1,"rst_n":1,"input":257,"expected":512,"category":"high_hold"},{"clk":0,"rst_n":1,"input":256,"expected":512,"category":"falling"},{"clk":0,"rst_n":1,"input":898,"expected":512,"category":"low_hold"},{"clk":1,"rst_n":1,"input":898,"expected":321,"category":"rising"},{"clk":1,"rst_n":1,"input":899,"expected":321,"category":"high_hold"},{"clk":0,"rst_n":1,"input":898,"expected":321,"category":"falling"},{"clk":0,"rst_n":1,"input":0,"expected":321,"category":"low_hold"},{"clk":1,"rst_n":1,"input":0,"expected":65,"category":"rising"},{"clk":1,"rst_n":1,"input":1,"expected":65,"category":"high_hold"},{"clk":0,"rst_n":1,"input":0,"expected":65,"category":"falling"},{"clk":0,"rst_n":0,"input":0,"expected":0,"category":"end_reset"}]
+Parent RTL (untrusted):
+```verilog
+module restoring_divide (
+    input  wire       clk,
+    input  wire       rst_n,
+    input  wire       abort,
+    input  wire       start,
+    input  wire       advance,
+    input  wire [3:0] numerator,
+    input  wire [3:0] denominator,
+    output reg        busy,
+    output reg        done,
+    output reg  [3:0] quotient,
+    output reg  [3:0] remainder
+);
+
+    reg [3:0] den_reg;
+    reg [3:0] num_work;
+    reg [3:0] quot_work;
+    reg [3:0] rem_work;
+    reg [2:0] count;
+
+    wire [4:0] trial;
+    wire       subtract;
+    wire [4:0] next_rem;
+    wire [3:0] next_quot;
+
+    assign trial     = {rem_work, num_work[3]};
+    assign subtract  = (trial >= {1'b0, den_reg});
+    assign next_rem  = subtract ? (trial - {1'b0, den_reg}) : trial;
+    assign next_quot = {quot_work[2:0], subtract};
+
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            busy      <= 1'b0;
+            done      <= 1'b0;
+            quotient  <= 4'b0000;
+            remainder <= 4'b0000;
+            den_reg   <= 4'b0000;
+            num_work  <= 4'b0000;
+            quot_work <= 4'b0000;
+            rem_work  <= 4'b0000;
+            count     <= 3'b000;
+        end else if (abort) begin
+            busy      <= 1'b0;
+            done      <= 1'b0;
+            quotient  <= 4'b0000;
+            remainder <= 4'b0000;
+            den_reg   <= 4'b0000;
+            num_work  <= 4'b0000;
+            quot_work <= 4'b0000;
+            rem_work  <= 4'b0000;
+            count     <= 3'b000;
+        end else begin
+            done <= 1'b0;
+
+            if (!busy) begin
+                if (start) begin
+                    if (denominator == 4'b0000) begin
+                        busy      <= 1'b0;
+                        done      <= 1'b1;
+                        quotient  <= 4'b1111;
+                        remainder <= numerator;
+                    end else begin
+                        busy      <= 1'b1;
+                        den_reg   <= denominator;
+                        num_work  <= numerator;
+                        quot_work <= 4'b0000;
+                        rem_work  <= 4'b0000;
+                        count     <= 3'b000;
+                    end
+                end
+            end else if (advance) begin
+                num_work  <= {num_work[2:0], 1'b0};
+                quot_work <= next_quot;
+                rem_work  <= next_rem[3:0];
+
+                if (count == 3) begin
+                    busy      <= 1'b0;
+                    done      <= 1'b1;
+                    quotient  <= next_quot;
+                    remainder <= next_rem[3:0];
+                    count     <= 3'b000;
+                end else begin
+                    count <= count + 1'b1;
+                end
+            end
+        end
+    end
+
+endmodule
+```
+Reconsider all timing, priority, reset and hold requirements and produce complete RTL. Return only RTL; no tools/tb/delays.
+Public RTL versus SPEC execution result:
+{"status":"PASS","mismatches":[],"scope":"Disclosed examples and event checks only; no hidden stimuli/reference RTL","message":"Independent testbench completed all 31 checks"}

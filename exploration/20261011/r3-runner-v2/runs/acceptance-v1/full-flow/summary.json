@@ -1,0 +1,229 @@
+{
+  "planned_unique_calls": 24,
+  "started": 24,
+  "generated": 24,
+  "statuses": {
+    "EXTRACTION_ERROR": 5,
+    "PASS": 17,
+    "COMPILE_FAIL": 1,
+    "FUNCTION_FAIL": 1
+  },
+  "first_candidate_statuses": {
+    "EXTRACTION_ERROR": 3,
+    "PASS": 5
+  },
+  "effects": {
+    "harm": 2,
+    "help": 2,
+    "no_change": 4
+  },
+  "comparisons": [
+    {
+      "pair": "cancel_deadline__r1",
+      "task": "cancel_deadline",
+      "regeneration": "PASS",
+      "feedback": "EXTRACTION_ERROR",
+      "effect": "harm"
+    },
+    {
+      "pair": "retrigger_window__r1",
+      "task": "retrigger_window",
+      "regeneration": "EXTRACTION_ERROR",
+      "feedback": "PASS",
+      "effect": "help"
+    },
+    {
+      "pair": "elastic_slot__r1",
+      "task": "elastic_slot",
+      "regeneration": "PASS",
+      "feedback": "PASS",
+      "effect": "no_change"
+    },
+    {
+      "pair": "rotating_owner__r1",
+      "task": "rotating_owner",
+      "regeneration": "COMPILE_FAIL",
+      "feedback": "PASS",
+      "effect": "help"
+    },
+    {
+      "pair": "cancel_deadline__r2",
+      "task": "cancel_deadline",
+      "regeneration": "PASS",
+      "feedback": "FUNCTION_FAIL",
+      "effect": "harm"
+    },
+    {
+      "pair": "retrigger_window__r2",
+      "task": "retrigger_window",
+      "regeneration": "PASS",
+      "feedback": "PASS",
+      "effect": "no_change"
+    },
+    {
+      "pair": "elastic_slot__r2",
+      "task": "elastic_slot",
+      "regeneration": "PASS",
+      "feedback": "PASS",
+      "effect": "no_change"
+    },
+    {
+      "pair": "rotating_owner__r2",
+      "task": "rotating_owner",
+      "regeneration": "PASS",
+      "feedback": "PASS",
+      "effect": "no_change"
+    }
+  ],
+  "families": {
+    "cancel_deadline": [
+      {
+        "pair": "cancel_deadline__r1",
+        "task": "cancel_deadline",
+        "regeneration": "PASS",
+        "feedback": "EXTRACTION_ERROR",
+        "effect": "harm"
+      },
+      {
+        "pair": "cancel_deadline__r2",
+        "task": "cancel_deadline",
+        "regeneration": "PASS",
+        "feedback": "FUNCTION_FAIL",
+        "effect": "harm"
+      }
+    ],
+    "retrigger_window": [
+      {
+        "pair": "retrigger_window__r1",
+        "task": "retrigger_window",
+        "regeneration": "EXTRACTION_ERROR",
+        "feedback": "PASS",
+        "effect": "help"
+      },
+      {
+        "pair": "retrigger_window__r2",
+        "task": "retrigger_window",
+        "regeneration": "PASS",
+        "feedback": "PASS",
+        "effect": "no_change"
+      }
+    ],
+    "elastic_slot": [
+      {
+        "pair": "elastic_slot__r1",
+        "task": "elastic_slot",
+        "regeneration": "PASS",
+        "feedback": "PASS",
+        "effect": "no_change"
+      },
+      {
+        "pair": "elastic_slot__r2",
+        "task": "elastic_slot",
+        "regeneration": "PASS",
+        "feedback": "PASS",
+        "effect": "no_change"
+      }
+    ],
+    "rotating_owner": [
+      {
+        "pair": "rotating_owner__r1",
+        "task": "rotating_owner",
+        "regeneration": "COMPILE_FAIL",
+        "feedback": "PASS",
+        "effect": "help"
+      },
+      {
+        "pair": "rotating_owner__r2",
+        "task": "rotating_owner",
+        "regeneration": "PASS",
+        "feedback": "PASS",
+        "effect": "no_change"
+      }
+    ]
+  },
+  "actual_unique_usage": {
+    "input_tokens": 2400,
+    "output_tokens": 480,
+    "cached_input_tokens": 0,
+    "cache_write_input_tokens": 0,
+    "reasoning_output_tokens": 0
+  },
+  "shared_first_usage": {
+    "input_tokens": 800,
+    "output_tokens": 160,
+    "cached_input_tokens": 0,
+    "cache_write_input_tokens": 0,
+    "reasoning_output_tokens": 0
+  },
+  "arms": {
+    "regeneration": {
+      "planned_branch_slots": 8,
+      "branch_generated": 8,
+      "branch_statuses": {
+        "PASS": 6,
+        "EXTRACTION_ERROR": 1,
+        "COMPILE_FAIL": 1
+      },
+      "strategy_call_opportunities": 16,
+      "shared_first_plus_branch_usage": {
+        "input_tokens": 1600,
+        "output_tokens": 320,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 0
+      },
+      "half_shared_allocated_usage": {
+        "input_tokens": 1200.0,
+        "output_tokens": 240.0,
+        "cached_input_tokens": 0.0,
+        "cache_write_input_tokens": 0.0,
+        "reasoning_output_tokens": 0.0
+      },
+      "branch_usage": {
+        "input_tokens": 800,
+        "output_tokens": 160,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 0
+      },
+      "shared_plus_branch_elapsed_seconds": 0.0,
+      "pass_per_1000_allocated_output_tokens": 25.0
+    },
+    "feedback": {
+      "planned_branch_slots": 8,
+      "branch_generated": 8,
+      "branch_statuses": {
+        "EXTRACTION_ERROR": 1,
+        "PASS": 6,
+        "FUNCTION_FAIL": 1
+      },
+      "strategy_call_opportunities": 16,
+      "shared_first_plus_branch_usage": {
+        "input_tokens": 1600,
+        "output_tokens": 320,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 0
+      },
+      "half_shared_allocated_usage": {
+        "input_tokens": 1200.0,
+        "output_tokens": 240.0,
+        "cached_input_tokens": 0.0,
+        "cache_write_input_tokens": 0.0,
+        "reasoning_output_tokens": 0.0
+      },
+      "branch_usage": {
+        "input_tokens": 800,
+        "output_tokens": 160,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "reasoning_output_tokens": 0
+      },
+      "shared_plus_branch_elapsed_seconds": 0.01599999999962165,
+      "pass_per_1000_allocated_output_tokens": 25.0
+    }
+  },
+  "cost": "UNKNOWN",
+  "yosys": "NOT_RUN",
+  "limitations": "8 pairs in 4 development families; no token-length filtering, no strict compute matching; per-strategy shared cost cannot be summed as actual calls"
+}

@@ -1,0 +1,27 @@
+module TopModule (
+    input  clk,
+    input  areset,
+    input  bump_left,
+    input  bump_right,
+    output walk_left,
+    output walk_right
+);
+
+    logic walking_left;
+
+    always_ff @(posedge clk or posedge areset) begin
+        if (areset)
+            walking_left <= 1'b1;
+        else if (walking_left) begin
+            if (bump_left)
+                walking_left <= 1'b0;
+        end else begin
+            if (bump_right)
+                walking_left <= 1'b1;
+        end
+    end
+
+    assign walk_left  = walking_left;
+    assign walk_right = ~walking_left;
+
+endmodule

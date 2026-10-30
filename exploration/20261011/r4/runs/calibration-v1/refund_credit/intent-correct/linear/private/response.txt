@@ -1,0 +1,11 @@
+Clock edge rising; reset async_low.
+Register balance has width 3 and reset 0.
+Register accept has width 1 and reset 0.
+Register reject has width 1 and reset 0.
+On the clock edge, set balance to (5 if balance + refund > 5 else balance + refund) - cost if (submit and cost != 0 and (5 if balance + refund > 5 else balance + refund) >= cost) else (5 if balance + refund > 5 else balance + refund).
+On the clock edge, set accept to 1 if (submit and cost != 0 and (5 if balance + refund > 5 else balance + refund) >= cost) else 0.
+On the clock edge, set reject to 1 if submit and not (submit and cost != 0 and (5 if balance + refund > 5 else balance + refund) >= cost) else 0.
+Continuously output credit as balance.
+Continuously output accepted as accept.
+Continuously output rejected as reject.
+Continuously output can_pay as 1 if rst_n and cost != 0 and (5 if balance + refund > 5 else balance + refund) >= cost else 0.

@@ -1,0 +1,6 @@
+# Findings
+Original selection seed is public-rag-holdout-v1/2026-10-23, SHA256(seed + newline + id) ascending. Historical A includes explicit exposure IDs and conservative family regex; both reused. A contains18 chunks, BM25 k1=1.2/b=.75, top3, exact system/context template.
+Historical budget/selection files stay as historical byte-identical A; new overlay controls12-task/144-slot preparation, no8192 cap, no execution permission.
+Same-repository ref/test are correlated sources, not independent oracle. Commit author is not asserted to be per-file author. Public benchmark training exposure UNKNOWN.
+8 conditional tasks are all combinational (including combinational FSM equations); no sequential evidence claim.143 requires multi-hot but original test onlyone-hot.094 explicitdon't-care differs from084 uninitializedX.101's complete16-entry binary waveform is excluded for within-roundOR near-duplication, not waveform incompleteness.145/154 simultaneous edge/input table conventions unresolved.
+Method unchanged after viewing retrievals. Even weak/general hits retained exactly; no replacements. Self-check compares stored ranks/assembly without re-running retrieval. No runner edited, no legacy regression or HDL tool invoked.

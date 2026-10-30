@@ -1,0 +1,1485 @@
+[
+  {
+    "task": "rt_sequence",
+    "transform": "rename",
+    "ir": {
+      "schema": 1,
+      "clock_edge": "posedge",
+      "output_kind": "moore",
+      "reset": {
+        "kind": "async",
+        "active": 0,
+        "state": "R4"
+      },
+      "states": [
+        {
+          "name": "R4",
+          "output": 0
+        },
+        {
+          "name": "R3",
+          "output": 0
+        },
+        {
+          "name": "R2",
+          "output": 0
+        },
+        {
+          "name": "R1",
+          "output": 0
+        },
+        {
+          "name": "R0",
+          "output": 1
+        }
+      ],
+      "transitions": [
+        {
+          "from": "R4",
+          "input": 0,
+          "to": "R4"
+        },
+        {
+          "from": "R4",
+          "input": 1,
+          "to": "R3"
+        },
+        {
+          "from": "R3",
+          "input": 0,
+          "to": "R2"
+        },
+        {
+          "from": "R3",
+          "input": 1,
+          "to": "R3"
+        },
+        {
+          "from": "R2",
+          "input": 0,
+          "to": "R1"
+        },
+        {
+          "from": "R2",
+          "input": 1,
+          "to": "R3"
+        },
+        {
+          "from": "R1",
+          "input": 0,
+          "to": "R4"
+        },
+        {
+          "from": "R1",
+          "input": 1,
+          "to": "R0"
+        },
+        {
+          "from": "R0",
+          "input": 0,
+          "to": "R2"
+        },
+        {
+          "from": "R0",
+          "input": 1,
+          "to": "R3"
+        }
+      ]
+    },
+    "public": {
+      "status": "PUBLIC_CHECK_PASS",
+      "errors": [],
+      "scope": "Only disclosed examples/reset/schema; private tests were not consulted."
+    },
+    "diagnosis": {
+      "status": "IR_EQUIVALENT",
+      "reset_contract_errors": [],
+      "shortest_counterexample": null,
+      "visited_pairs": 5,
+      "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+    },
+    "fixed": {
+      "backend": "icarus",
+      "compile_seconds": 0.078,
+      "status": "PASS",
+      "message": "Independent testbench completed all 1840 checks",
+      "stage": "simulate",
+      "receipt_nonce": "6af4b95fdc274f04bebc0cc3a147e74a",
+      "simulate_seconds": 0.031,
+      "rtl_sha256": "15f9a819afb946867b3b229fa74f93f5d57522b2f3de276ee486e3bab21eb5b7",
+      "tb_sha256": "6abb900b5f8cae1ea0ab98321c1830bd58f4132c75efb676b9cc4250a5e90e4b"
+    }
+  },
+  {
+    "task": "rt_sequence",
+    "transform": "reorder",
+    "ir": {
+      "schema": 1,
+      "clock_edge": "posedge",
+      "output_kind": "moore",
+      "reset": {
+        "kind": "async",
+        "active": 0,
+        "state": "S0"
+      },
+      "states": [
+        {
+          "name": "S4",
+          "output": 1
+        },
+        {
+          "name": "S3",
+          "output": 0
+        },
+        {
+          "name": "S2",
+          "output": 0
+        },
+        {
+          "name": "S1",
+          "output": 0
+        },
+        {
+          "name": "S0",
+          "output": 0
+        }
+      ],
+      "transitions": [
+        {
+          "from": "S4",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "S4",
+          "input": 0,
+          "to": "S2"
+        },
+        {
+          "from": "S3",
+          "input": 1,
+          "to": "S4"
+        },
+        {
+          "from": "S3",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "S2",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "S2",
+          "input": 0,
+          "to": "S3"
+        },
+        {
+          "from": "S1",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "S1",
+          "input": 0,
+          "to": "S2"
+        },
+        {
+          "from": "S0",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "S0",
+          "input": 0,
+          "to": "S0"
+        }
+      ]
+    },
+    "public": {
+      "status": "PUBLIC_CHECK_PASS",
+      "errors": [],
+      "scope": "Only disclosed examples/reset/schema; private tests were not consulted."
+    },
+    "diagnosis": {
+      "status": "IR_EQUIVALENT",
+      "reset_contract_errors": [],
+      "shortest_counterexample": null,
+      "visited_pairs": 5,
+      "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+    },
+    "fixed": {
+      "backend": "icarus",
+      "compile_seconds": 0.078,
+      "status": "PASS",
+      "message": "Independent testbench completed all 1840 checks",
+      "stage": "simulate",
+      "receipt_nonce": "ce9264535c29435b9bdccdd6e4b08bf3",
+      "simulate_seconds": 0.031,
+      "rtl_sha256": "e1672865d3ba4f0c22ddb19abef6dd45009260291657e4bc710b53f0fbefb6d5",
+      "tb_sha256": "6abb900b5f8cae1ea0ab98321c1830bd58f4132c75efb676b9cc4250a5e90e4b"
+    }
+  },
+  {
+    "task": "rt_sequence",
+    "transform": "unreachable",
+    "ir": {
+      "schema": 1,
+      "clock_edge": "posedge",
+      "output_kind": "moore",
+      "reset": {
+        "kind": "async",
+        "active": 0,
+        "state": "S0"
+      },
+      "states": [
+        {
+          "name": "S0",
+          "output": 0
+        },
+        {
+          "name": "S1",
+          "output": 0
+        },
+        {
+          "name": "S2",
+          "output": 0
+        },
+        {
+          "name": "S3",
+          "output": 0
+        },
+        {
+          "name": "S4",
+          "output": 1
+        },
+        {
+          "name": "UNREACHABLE",
+          "output": 1
+        }
+      ],
+      "transitions": [
+        {
+          "from": "S0",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "S0",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "S1",
+          "input": 0,
+          "to": "S2"
+        },
+        {
+          "from": "S1",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "S2",
+          "input": 0,
+          "to": "S3"
+        },
+        {
+          "from": "S2",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "S3",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "S3",
+          "input": 1,
+          "to": "S4"
+        },
+        {
+          "from": "S4",
+          "input": 0,
+          "to": "S2"
+        },
+        {
+          "from": "S4",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "UNREACHABLE",
+          "input": 0,
+          "to": "UNREACHABLE"
+        },
+        {
+          "from": "UNREACHABLE",
+          "input": 1,
+          "to": "UNREACHABLE"
+        }
+      ]
+    },
+    "public": {
+      "status": "PUBLIC_CHECK_PASS",
+      "errors": [],
+      "scope": "Only disclosed examples/reset/schema; private tests were not consulted."
+    },
+    "diagnosis": {
+      "status": "IR_EQUIVALENT",
+      "reset_contract_errors": [],
+      "shortest_counterexample": null,
+      "visited_pairs": 5,
+      "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+    },
+    "fixed": {
+      "backend": "icarus",
+      "compile_seconds": 0.094,
+      "status": "PASS",
+      "message": "Independent testbench completed all 1840 checks",
+      "stage": "simulate",
+      "receipt_nonce": "68339a89a7074aa6a59b927de0f7bade",
+      "simulate_seconds": 0.031,
+      "rtl_sha256": "3b6ad00c1897334f18667e5b307c8bb45759fe2aa8486159837127abeb5beb33",
+      "tb_sha256": "6abb900b5f8cae1ea0ab98321c1830bd58f4132c75efb676b9cc4250a5e90e4b"
+    }
+  },
+  {
+    "task": "sticky_alarm",
+    "transform": "rename",
+    "ir": {
+      "schema": 1,
+      "clock_edge": "posedge",
+      "output_kind": "moore",
+      "reset": {
+        "kind": "async",
+        "active": 0,
+        "state": "R2"
+      },
+      "states": [
+        {
+          "name": "R2",
+          "output": 0
+        },
+        {
+          "name": "R1",
+          "output": 0
+        },
+        {
+          "name": "R0",
+          "output": 1
+        }
+      ],
+      "transitions": [
+        {
+          "from": "R2",
+          "input": 0,
+          "to": "R2"
+        },
+        {
+          "from": "R2",
+          "input": 1,
+          "to": "R1"
+        },
+        {
+          "from": "R1",
+          "input": 0,
+          "to": "R2"
+        },
+        {
+          "from": "R1",
+          "input": 1,
+          "to": "R0"
+        },
+        {
+          "from": "R0",
+          "input": 0,
+          "to": "R0"
+        },
+        {
+          "from": "R0",
+          "input": 1,
+          "to": "R0"
+        }
+      ]
+    },
+    "public": {
+      "status": "PUBLIC_CHECK_PASS",
+      "errors": [],
+      "scope": "Only disclosed examples/reset/schema; private tests were not consulted."
+    },
+    "diagnosis": {
+      "status": "IR_EQUIVALENT",
+      "reset_contract_errors": [],
+      "shortest_counterexample": null,
+      "visited_pairs": 3,
+      "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+    },
+    "fixed": {
+      "backend": "icarus",
+      "compile_seconds": 0.063,
+      "status": "PASS",
+      "message": "Independent testbench completed all 9216 checks",
+      "stage": "simulate",
+      "receipt_nonce": "d9f26b309f814cfe8103e29b0e1fd700",
+      "simulate_seconds": 0.046,
+      "rtl_sha256": "134d6c6c96939cec63987c3e6720a2ed0b0e408ca44ead3b594aacc67c68648a",
+      "tb_sha256": "afd042df366768a2fad95fc4b58384b3eeebdf184e6baf3be028728dd5c0b5c6"
+    }
+  },
+  {
+    "task": "sticky_alarm",
+    "transform": "reorder",
+    "ir": {
+      "schema": 1,
+      "clock_edge": "posedge",
+      "output_kind": "moore",
+      "reset": {
+        "kind": "async",
+        "active": 0,
+        "state": "S0"
+      },
+      "states": [
+        {
+          "name": "S2",
+          "output": 1
+        },
+        {
+          "name": "S1",
+          "output": 0
+        },
+        {
+          "name": "S0",
+          "output": 0
+        }
+      ],
+      "transitions": [
+        {
+          "from": "S2",
+          "input": 1,
+          "to": "S2"
+        },
+        {
+          "from": "S2",
+          "input": 0,
+          "to": "S2"
+        },
+        {
+          "from": "S1",
+          "input": 1,
+          "to": "S2"
+        },
+        {
+          "from": "S1",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "S0",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "S0",
+          "input": 0,
+          "to": "S0"
+        }
+      ]
+    },
+    "public": {
+      "status": "PUBLIC_CHECK_PASS",
+      "errors": [],
+      "scope": "Only disclosed examples/reset/schema; private tests were not consulted."
+    },
+    "diagnosis": {
+      "status": "IR_EQUIVALENT",
+      "reset_contract_errors": [],
+      "shortest_counterexample": null,
+      "visited_pairs": 3,
+      "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+    },
+    "fixed": {
+      "backend": "icarus",
+      "compile_seconds": 0.063,
+      "status": "PASS",
+      "message": "Independent testbench completed all 9216 checks",
+      "stage": "simulate",
+      "receipt_nonce": "874fe041b7834b718271818dc55591c0",
+      "simulate_seconds": 0.031,
+      "rtl_sha256": "7e1b8423d49447aa833e55d2f57f991241852c78ee5de8a4c4870f95cd59fbfa",
+      "tb_sha256": "afd042df366768a2fad95fc4b58384b3eeebdf184e6baf3be028728dd5c0b5c6"
+    }
+  },
+  {
+    "task": "sticky_alarm",
+    "transform": "unreachable",
+    "ir": {
+      "schema": 1,
+      "clock_edge": "posedge",
+      "output_kind": "moore",
+      "reset": {
+        "kind": "async",
+        "active": 0,
+        "state": "S0"
+      },
+      "states": [
+        {
+          "name": "S0",
+          "output": 0
+        },
+        {
+          "name": "S1",
+          "output": 0
+        },
+        {
+          "name": "S2",
+          "output": 1
+        },
+        {
+          "name": "UNREACHABLE",
+          "output": 1
+        }
+      ],
+      "transitions": [
+        {
+          "from": "S0",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "S0",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "S1",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "S1",
+          "input": 1,
+          "to": "S2"
+        },
+        {
+          "from": "S2",
+          "input": 0,
+          "to": "S2"
+        },
+        {
+          "from": "S2",
+          "input": 1,
+          "to": "S2"
+        },
+        {
+          "from": "UNREACHABLE",
+          "input": 0,
+          "to": "UNREACHABLE"
+        },
+        {
+          "from": "UNREACHABLE",
+          "input": 1,
+          "to": "UNREACHABLE"
+        }
+      ]
+    },
+    "public": {
+      "status": "PUBLIC_CHECK_PASS",
+      "errors": [],
+      "scope": "Only disclosed examples/reset/schema; private tests were not consulted."
+    },
+    "diagnosis": {
+      "status": "IR_EQUIVALENT",
+      "reset_contract_errors": [],
+      "shortest_counterexample": null,
+      "visited_pairs": 3,
+      "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+    },
+    "fixed": {
+      "backend": "icarus",
+      "compile_seconds": 0.063,
+      "status": "PASS",
+      "message": "Independent testbench completed all 9216 checks",
+      "stage": "simulate",
+      "receipt_nonce": "a29ec90030024730952c093f437f8593",
+      "simulate_seconds": 0.047,
+      "rtl_sha256": "a8b19e3600759b2344c6145010f3692bb1cffed89f8148b61f73a2874a3d69da",
+      "tb_sha256": "afd042df366768a2fad95fc4b58384b3eeebdf184e6baf3be028728dd5c0b5c6"
+    }
+  },
+  {
+    "task": "event_parity",
+    "transform": "rename",
+    "ir": {
+      "schema": 1,
+      "clock_edge": "posedge",
+      "output_kind": "moore",
+      "reset": {
+        "kind": "async",
+        "active": 0,
+        "state": "R1"
+      },
+      "states": [
+        {
+          "name": "R1",
+          "output": 0
+        },
+        {
+          "name": "R0",
+          "output": 1
+        }
+      ],
+      "transitions": [
+        {
+          "from": "R1",
+          "input": 0,
+          "to": "R1"
+        },
+        {
+          "from": "R1",
+          "input": 1,
+          "to": "R0"
+        },
+        {
+          "from": "R0",
+          "input": 0,
+          "to": "R0"
+        },
+        {
+          "from": "R0",
+          "input": 1,
+          "to": "R1"
+        }
+      ]
+    },
+    "public": {
+      "status": "PUBLIC_CHECK_PASS",
+      "errors": [],
+      "scope": "Only disclosed examples/reset/schema; private tests were not consulted."
+    },
+    "diagnosis": {
+      "status": "IR_EQUIVALENT",
+      "reset_contract_errors": [],
+      "shortest_counterexample": null,
+      "visited_pairs": 2,
+      "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+    },
+    "fixed": {
+      "backend": "icarus",
+      "compile_seconds": 0.062,
+      "status": "PASS",
+      "message": "Independent testbench completed all 9216 checks",
+      "stage": "simulate",
+      "receipt_nonce": "82eca015c3b04aa5b36003cedc27307b",
+      "simulate_seconds": 0.047,
+      "rtl_sha256": "cf698cf12506b095d7c28cb9320dce6287cea18c2e372533937af26ddb457b51",
+      "tb_sha256": "ac111343afe9debbc5ed26b6e474fb73303080b082052eeacdfd90f66b27e65c"
+    }
+  },
+  {
+    "task": "event_parity",
+    "transform": "reorder",
+    "ir": {
+      "schema": 1,
+      "clock_edge": "posedge",
+      "output_kind": "moore",
+      "reset": {
+        "kind": "async",
+        "active": 0,
+        "state": "S0"
+      },
+      "states": [
+        {
+          "name": "S1",
+          "output": 1
+        },
+        {
+          "name": "S0",
+          "output": 0
+        }
+      ],
+      "transitions": [
+        {
+          "from": "S1",
+          "input": 1,
+          "to": "S0"
+        },
+        {
+          "from": "S1",
+          "input": 0,
+          "to": "S1"
+        },
+        {
+          "from": "S0",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "S0",
+          "input": 0,
+          "to": "S0"
+        }
+      ]
+    },
+    "public": {
+      "status": "PUBLIC_CHECK_PASS",
+      "errors": [],
+      "scope": "Only disclosed examples/reset/schema; private tests were not consulted."
+    },
+    "diagnosis": {
+      "status": "IR_EQUIVALENT",
+      "reset_contract_errors": [],
+      "shortest_counterexample": null,
+      "visited_pairs": 2,
+      "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+    },
+    "fixed": {
+      "backend": "icarus",
+      "compile_seconds": 0.078,
+      "status": "PASS",
+      "message": "Independent testbench completed all 9216 checks",
+      "stage": "simulate",
+      "receipt_nonce": "c2fb386a853745bf87489dd005c9e19b",
+      "simulate_seconds": 0.047,
+      "rtl_sha256": "93a8d503fd6bb3d6f0e67f1d9519b0a160f02ca0b0c26f56b77f0133465a4d9b",
+      "tb_sha256": "ac111343afe9debbc5ed26b6e474fb73303080b082052eeacdfd90f66b27e65c"
+    }
+  },
+  {
+    "task": "event_parity",
+    "transform": "unreachable",
+    "ir": {
+      "schema": 1,
+      "clock_edge": "posedge",
+      "output_kind": "moore",
+      "reset": {
+        "kind": "async",
+        "active": 0,
+        "state": "S0"
+      },
+      "states": [
+        {
+          "name": "S0",
+          "output": 0
+        },
+        {
+          "name": "S1",
+          "output": 1
+        },
+        {
+          "name": "UNREACHABLE",
+          "output": 1
+        }
+      ],
+      "transitions": [
+        {
+          "from": "S0",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "S0",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "S1",
+          "input": 0,
+          "to": "S1"
+        },
+        {
+          "from": "S1",
+          "input": 1,
+          "to": "S0"
+        },
+        {
+          "from": "UNREACHABLE",
+          "input": 0,
+          "to": "UNREACHABLE"
+        },
+        {
+          "from": "UNREACHABLE",
+          "input": 1,
+          "to": "UNREACHABLE"
+        }
+      ]
+    },
+    "public": {
+      "status": "PUBLIC_CHECK_PASS",
+      "errors": [],
+      "scope": "Only disclosed examples/reset/schema; private tests were not consulted."
+    },
+    "diagnosis": {
+      "status": "IR_EQUIVALENT",
+      "reset_contract_errors": [],
+      "shortest_counterexample": null,
+      "visited_pairs": 2,
+      "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+    },
+    "fixed": {
+      "backend": "icarus",
+      "compile_seconds": 0.062,
+      "status": "PASS",
+      "message": "Independent testbench completed all 9216 checks",
+      "stage": "simulate",
+      "receipt_nonce": "a3a0d4048d064b0bbd3e653619bbeb99",
+      "simulate_seconds": 0.047,
+      "rtl_sha256": "62178298b07a9fffc0e792036233edea67c5c99e7dce682550a67aa543792a35",
+      "tb_sha256": "ac111343afe9debbc5ed26b6e474fb73303080b082052eeacdfd90f66b27e65c"
+    }
+  },
+  {
+    "task": "request_delay",
+    "transform": "rename",
+    "ir": {
+      "schema": 1,
+      "clock_edge": "posedge",
+      "output_kind": "moore",
+      "reset": {
+        "kind": "async",
+        "active": 0,
+        "state": "R3"
+      },
+      "states": [
+        {
+          "name": "R3",
+          "output": 0
+        },
+        {
+          "name": "R2",
+          "output": 0
+        },
+        {
+          "name": "R1",
+          "output": 1
+        },
+        {
+          "name": "R0",
+          "output": 0
+        }
+      ],
+      "transitions": [
+        {
+          "from": "R3",
+          "input": 0,
+          "to": "R3"
+        },
+        {
+          "from": "R3",
+          "input": 1,
+          "to": "R2"
+        },
+        {
+          "from": "R2",
+          "input": 0,
+          "to": "R1"
+        },
+        {
+          "from": "R2",
+          "input": 1,
+          "to": "R1"
+        },
+        {
+          "from": "R1",
+          "input": 0,
+          "to": "R0"
+        },
+        {
+          "from": "R1",
+          "input": 1,
+          "to": "R0"
+        },
+        {
+          "from": "R0",
+          "input": 0,
+          "to": "R3"
+        },
+        {
+          "from": "R0",
+          "input": 1,
+          "to": "R0"
+        }
+      ]
+    },
+    "public": {
+      "status": "PUBLIC_CHECK_PASS",
+      "errors": [],
+      "scope": "Only disclosed examples/reset/schema; private tests were not consulted."
+    },
+    "diagnosis": {
+      "status": "IR_EQUIVALENT",
+      "reset_contract_errors": [],
+      "shortest_counterexample": null,
+      "visited_pairs": 4,
+      "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+    },
+    "fixed": {
+      "backend": "icarus",
+      "compile_seconds": 0.078,
+      "status": "PASS",
+      "message": "Independent testbench completed all 9216 checks",
+      "stage": "simulate",
+      "receipt_nonce": "3262ac1093184259b3726c09058df577",
+      "simulate_seconds": 0.047,
+      "rtl_sha256": "0ab3ded2b70ebdae653c1708f2201df0ba07041cf18225f3069119d24307cafe",
+      "tb_sha256": "a4cc1b10234e3d9f87d786e5ae2a33001cba8f70761e274a3bbf269d3fc8c788"
+    }
+  },
+  {
+    "task": "request_delay",
+    "transform": "reorder",
+    "ir": {
+      "schema": 1,
+      "clock_edge": "posedge",
+      "output_kind": "moore",
+      "reset": {
+        "kind": "async",
+        "active": 0,
+        "state": "S0"
+      },
+      "states": [
+        {
+          "name": "S3",
+          "output": 0
+        },
+        {
+          "name": "S2",
+          "output": 1
+        },
+        {
+          "name": "S1",
+          "output": 0
+        },
+        {
+          "name": "S0",
+          "output": 0
+        }
+      ],
+      "transitions": [
+        {
+          "from": "S3",
+          "input": 1,
+          "to": "S3"
+        },
+        {
+          "from": "S3",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "S2",
+          "input": 1,
+          "to": "S3"
+        },
+        {
+          "from": "S2",
+          "input": 0,
+          "to": "S3"
+        },
+        {
+          "from": "S1",
+          "input": 1,
+          "to": "S2"
+        },
+        {
+          "from": "S1",
+          "input": 0,
+          "to": "S2"
+        },
+        {
+          "from": "S0",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "S0",
+          "input": 0,
+          "to": "S0"
+        }
+      ]
+    },
+    "public": {
+      "status": "PUBLIC_CHECK_PASS",
+      "errors": [],
+      "scope": "Only disclosed examples/reset/schema; private tests were not consulted."
+    },
+    "diagnosis": {
+      "status": "IR_EQUIVALENT",
+      "reset_contract_errors": [],
+      "shortest_counterexample": null,
+      "visited_pairs": 4,
+      "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+    },
+    "fixed": {
+      "backend": "icarus",
+      "compile_seconds": 0.063,
+      "status": "PASS",
+      "message": "Independent testbench completed all 9216 checks",
+      "stage": "simulate",
+      "receipt_nonce": "b1aefe53771147b498910722cbb7f352",
+      "simulate_seconds": 0.047,
+      "rtl_sha256": "637785a8262584b2a4e90605329fc51a4ee32088c7c19281dda5fadabd7ae623",
+      "tb_sha256": "a4cc1b10234e3d9f87d786e5ae2a33001cba8f70761e274a3bbf269d3fc8c788"
+    }
+  },
+  {
+    "task": "request_delay",
+    "transform": "unreachable",
+    "ir": {
+      "schema": 1,
+      "clock_edge": "posedge",
+      "output_kind": "moore",
+      "reset": {
+        "kind": "async",
+        "active": 0,
+        "state": "S0"
+      },
+      "states": [
+        {
+          "name": "S0",
+          "output": 0
+        },
+        {
+          "name": "S1",
+          "output": 0
+        },
+        {
+          "name": "S2",
+          "output": 1
+        },
+        {
+          "name": "S3",
+          "output": 0
+        },
+        {
+          "name": "UNREACHABLE",
+          "output": 1
+        }
+      ],
+      "transitions": [
+        {
+          "from": "S0",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "S0",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "S1",
+          "input": 0,
+          "to": "S2"
+        },
+        {
+          "from": "S1",
+          "input": 1,
+          "to": "S2"
+        },
+        {
+          "from": "S2",
+          "input": 0,
+          "to": "S3"
+        },
+        {
+          "from": "S2",
+          "input": 1,
+          "to": "S3"
+        },
+        {
+          "from": "S3",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "S3",
+          "input": 1,
+          "to": "S3"
+        },
+        {
+          "from": "UNREACHABLE",
+          "input": 0,
+          "to": "UNREACHABLE"
+        },
+        {
+          "from": "UNREACHABLE",
+          "input": 1,
+          "to": "UNREACHABLE"
+        }
+      ]
+    },
+    "public": {
+      "status": "PUBLIC_CHECK_PASS",
+      "errors": [],
+      "scope": "Only disclosed examples/reset/schema; private tests were not consulted."
+    },
+    "diagnosis": {
+      "status": "IR_EQUIVALENT",
+      "reset_contract_errors": [],
+      "shortest_counterexample": null,
+      "visited_pairs": 4,
+      "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+    },
+    "fixed": {
+      "backend": "icarus",
+      "compile_seconds": 0.078,
+      "status": "PASS",
+      "message": "Independent testbench completed all 9216 checks",
+      "stage": "simulate",
+      "receipt_nonce": "38bfca018c6a4af9922c87090dbbcf94",
+      "simulate_seconds": 0.047,
+      "rtl_sha256": "0087cfba8f0c71950522a8dfc815e2c32b1366ac7c7ceaed13ea2935823c8587",
+      "tb_sha256": "a4cc1b10234e3d9f87d786e5ae2a33001cba8f70761e274a3bbf269d3fc8c788"
+    }
+  },
+  {
+    "task": "debounce3",
+    "transform": "rename",
+    "ir": {
+      "schema": 1,
+      "clock_edge": "posedge",
+      "output_kind": "moore",
+      "reset": {
+        "kind": "async",
+        "active": 0,
+        "state": "R4"
+      },
+      "states": [
+        {
+          "name": "R4",
+          "output": 0
+        },
+        {
+          "name": "R3",
+          "output": 0
+        },
+        {
+          "name": "R2",
+          "output": 0
+        },
+        {
+          "name": "R1",
+          "output": 1
+        },
+        {
+          "name": "R0",
+          "output": 1
+        }
+      ],
+      "transitions": [
+        {
+          "from": "R4",
+          "input": 0,
+          "to": "R4"
+        },
+        {
+          "from": "R4",
+          "input": 1,
+          "to": "R3"
+        },
+        {
+          "from": "R3",
+          "input": 0,
+          "to": "R4"
+        },
+        {
+          "from": "R3",
+          "input": 1,
+          "to": "R2"
+        },
+        {
+          "from": "R2",
+          "input": 0,
+          "to": "R4"
+        },
+        {
+          "from": "R2",
+          "input": 1,
+          "to": "R1"
+        },
+        {
+          "from": "R1",
+          "input": 0,
+          "to": "R0"
+        },
+        {
+          "from": "R1",
+          "input": 1,
+          "to": "R1"
+        },
+        {
+          "from": "R0",
+          "input": 0,
+          "to": "R4"
+        },
+        {
+          "from": "R0",
+          "input": 1,
+          "to": "R1"
+        }
+      ]
+    },
+    "public": {
+      "status": "PUBLIC_CHECK_PASS",
+      "errors": [],
+      "scope": "Only disclosed examples/reset/schema; private tests were not consulted."
+    },
+    "diagnosis": {
+      "status": "IR_EQUIVALENT",
+      "reset_contract_errors": [],
+      "shortest_counterexample": null,
+      "visited_pairs": 5,
+      "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+    },
+    "fixed": {
+      "backend": "icarus",
+      "compile_seconds": 0.093,
+      "status": "PASS",
+      "message": "Independent testbench completed all 9216 checks",
+      "stage": "simulate",
+      "receipt_nonce": "0d0c2b904b4849a4adcf41a1040f62e7",
+      "simulate_seconds": 0.047,
+      "rtl_sha256": "66495e6654c39d82cd62481fa55041dee70a0b3007aa106b367f0e330791af38",
+      "tb_sha256": "cff80605ce4e08a7469025e72d6ace782184cdf9b6d9b18a9a58fefff42eae0e"
+    }
+  },
+  {
+    "task": "debounce3",
+    "transform": "reorder",
+    "ir": {
+      "schema": 1,
+      "clock_edge": "posedge",
+      "output_kind": "moore",
+      "reset": {
+        "kind": "async",
+        "active": 0,
+        "state": "S0"
+      },
+      "states": [
+        {
+          "name": "S4",
+          "output": 1
+        },
+        {
+          "name": "S3",
+          "output": 1
+        },
+        {
+          "name": "S2",
+          "output": 0
+        },
+        {
+          "name": "S1",
+          "output": 0
+        },
+        {
+          "name": "S0",
+          "output": 0
+        }
+      ],
+      "transitions": [
+        {
+          "from": "S4",
+          "input": 1,
+          "to": "S3"
+        },
+        {
+          "from": "S4",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "S3",
+          "input": 1,
+          "to": "S3"
+        },
+        {
+          "from": "S3",
+          "input": 0,
+          "to": "S4"
+        },
+        {
+          "from": "S2",
+          "input": 1,
+          "to": "S3"
+        },
+        {
+          "from": "S2",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "S1",
+          "input": 1,
+          "to": "S2"
+        },
+        {
+          "from": "S1",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "S0",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "S0",
+          "input": 0,
+          "to": "S0"
+        }
+      ]
+    },
+    "public": {
+      "status": "PUBLIC_CHECK_PASS",
+      "errors": [],
+      "scope": "Only disclosed examples/reset/schema; private tests were not consulted."
+    },
+    "diagnosis": {
+      "status": "IR_EQUIVALENT",
+      "reset_contract_errors": [],
+      "shortest_counterexample": null,
+      "visited_pairs": 5,
+      "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+    },
+    "fixed": {
+      "backend": "icarus",
+      "compile_seconds": 0.078,
+      "status": "PASS",
+      "message": "Independent testbench completed all 9216 checks",
+      "stage": "simulate",
+      "receipt_nonce": "bd3dd2852bb84c74bfd4973f275ecce2",
+      "simulate_seconds": 0.063,
+      "rtl_sha256": "b3a66f493a44acdac42934f8449e90873958bd5721aa6ff8d674a15760ffa69d",
+      "tb_sha256": "cff80605ce4e08a7469025e72d6ace782184cdf9b6d9b18a9a58fefff42eae0e"
+    }
+  },
+  {
+    "task": "debounce3",
+    "transform": "unreachable",
+    "ir": {
+      "schema": 1,
+      "clock_edge": "posedge",
+      "output_kind": "moore",
+      "reset": {
+        "kind": "async",
+        "active": 0,
+        "state": "S0"
+      },
+      "states": [
+        {
+          "name": "S0",
+          "output": 0
+        },
+        {
+          "name": "S1",
+          "output": 0
+        },
+        {
+          "name": "S2",
+          "output": 0
+        },
+        {
+          "name": "S3",
+          "output": 1
+        },
+        {
+          "name": "S4",
+          "output": 1
+        },
+        {
+          "name": "UNREACHABLE",
+          "output": 1
+        }
+      ],
+      "transitions": [
+        {
+          "from": "S0",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "S0",
+          "input": 1,
+          "to": "S1"
+        },
+        {
+          "from": "S1",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "S1",
+          "input": 1,
+          "to": "S2"
+        },
+        {
+          "from": "S2",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "S2",
+          "input": 1,
+          "to": "S3"
+        },
+        {
+          "from": "S3",
+          "input": 0,
+          "to": "S4"
+        },
+        {
+          "from": "S3",
+          "input": 1,
+          "to": "S3"
+        },
+        {
+          "from": "S4",
+          "input": 0,
+          "to": "S0"
+        },
+        {
+          "from": "S4",
+          "input": 1,
+          "to": "S3"
+        },
+        {
+          "from": "UNREACHABLE",
+          "input": 0,
+          "to": "UNREACHABLE"
+        },
+        {
+          "from": "UNREACHABLE",
+          "input": 1,
+          "to": "UNREACHABLE"
+        }
+      ]
+    },
+    "public": {
+      "status": "PUBLIC_CHECK_PASS",
+      "errors": [],
+      "scope": "Only disclosed examples/reset/schema; private tests were not consulted."
+    },
+    "diagnosis": {
+      "status": "IR_EQUIVALENT",
+      "reset_contract_errors": [],
+      "shortest_counterexample": null,
+      "visited_pairs": 5,
+      "scope": "Complete finite abstract Moore graph from reset; not an RTL proof"
+    },
+    "fixed": {
+      "backend": "icarus",
+      "compile_seconds": 0.093,
+      "status": "PASS",
+      "message": "Independent testbench completed all 9216 checks",
+      "stage": "simulate",
+      "receipt_nonce": "fb88dbe6af934ebda5a5262e4265c25c",
+      "simulate_seconds": 0.047,
+      "rtl_sha256": "834db999c1123097860eb73a13be94495fa3c60c4952137bd5f232288db1f109",
+      "tb_sha256": "cff80605ce4e08a7469025e72d6ace782184cdf9b6d9b18a9a58fefff42eae0e"
+    }
+  }
+]

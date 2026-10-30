@@ -1,0 +1,34 @@
+{
+  "id": "ve_popcount",
+  "module": "TopModule",
+  "checks": 1112,
+  "spec": "I would like you to implement a module named TopModule with the following\ninterface. All input and output ports are one bit unless otherwise\nspecified.\n\n - input  in  (255 bits)\n - output out (  8 bits)\n\nA \"population count\" circuit counts the number of '1's in an input\nvector. The module should implement a population count circuit for a\n255-bit input vector.",
+  "category": "arithmetic",
+  "split": "development",
+  "family": "popcount",
+  "benchmark": "verilog-eval",
+  "suite_version": "dev10-v1",
+  "synthesis_eligible": true,
+  "origin": {
+    "repository": "https://github.com/NVlabs/verilog-eval",
+    "commit": "c498220d0a52248f8e3fdffe279075215bde2da6",
+    "path": "dataset_spec-to-rtl/Prob030_popcount255",
+    "license": "MIT",
+    "files": {
+      "upstream/verilog-eval/Prob030_popcount255_prompt.txt": "5e741f3f7e69e3d850d6aad2a705f9896e3b5b19bf75e7386fa435b0f4ebbb39",
+      "upstream/verilog-eval/Prob030_popcount255_ref.sv": "22b15d60c088cb92db08008302f287e4ba9ec76a6cd50f9ed91f16dcf9bf1eac",
+      "upstream/verilog-eval/Prob030_popcount255_test.sv": "ddcbf4f9702214d74f9157eb20b7f511c4a9b278f273fbf43dc2c78e09e28dda"
+    }
+  },
+  "adaptations": [
+    "Independent deterministic vector oracle replaces upstream TB; upstream TB archived.",
+    "Reference module renamed; timescale directive removed."
+  ],
+  "mutation": "Drops most significant input bit",
+  "reference_sha256": "9cc75018964d53c983b6bf72e4b34b51119f54e540105a4fbd5618f88c16a4db",
+  "mutant_sha256": "031c2553053080c008af7bb7246799a462362554ad5fca7c5112d7f9548baccc",
+  "tb_sha256": "180ab80c4cf9d575067886cf64899f9c76531b5412e7e05a157d9564d1559935",
+  "assets": {
+    "ve_popcount.hex": "094a321c1fb9a1882eedba65cbda764359031ab6bc55fd6613c2700ae2892ff7"
+  }
+}

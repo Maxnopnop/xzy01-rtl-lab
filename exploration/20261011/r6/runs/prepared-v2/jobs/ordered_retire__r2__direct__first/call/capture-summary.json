@@ -1,0 +1,37 @@
+{
+  "status": "GENERATED",
+  "usage": {
+    "input_tokens": 10739,
+    "cached_input_tokens": 7424,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 1117,
+    "reasoning_output_tokens": 375
+  },
+  "source": "READ_ONLY_SAVED_EVIDENCE",
+  "reserved_calls": 1,
+  "response": "```verilog\nmodule ordered_retire (\n    input  wire       clk,\n    input  wire       rst_n,\n    input  wire       flush,\n    input  wire       issue,\n    input  wire [1:0] issue_tag,\n    input  wire       finish,\n    input  wire [1:0] finish_tag,\n    output reg  [1:0] count,\n    output reg        retired,\n    output reg  [1:0] retired_tag\n);\n\n    reg [1:0] head_tag;\n    reg [1:0] tail_tag;\n    reg       head_finished;\n    reg       tail_finished;\n\n    always @(posedge clk or negedge rst_n) begin\n        if (!rst_n) begin\n            count         <= 2'd0;\n            retired       <= 1'b0;\n            retired_tag   <= 2'd0;\n            head_tag      <= 2'd0;\n            tail_tag      <= 2'd0;\n            head_finished <= 1'b0;\n            tail_finished <= 1'b0;\n        end else if (flush) begin\n            count         <= 2'd0;\n            retired       <= 1'b0;\n            retired_tag   <= 2'd0;\n            head_tag      <= 2'd0;\n            tail_tag      <= 2'd0;\n            head_finished <= 1'b0;\n            tail_finished <= 1'b0;\n        end else begin\n            retired <= 1'b0;\n\n            case (count)\n                2'd0: begin\n                    head_finished <= 1'b0;\n                    tail_finished <= 1'b0;\n\n                    if (issue) begin\n                        head_tag      <= issue_tag;\n                        head_finished <= 1'b0;\n                        count         <= 2'd1;\n                    end\n                end\n\n                2'd1: begin\n                    tail_finished <= 1'b0;\n\n                    if (head_finished) begin\n                        retired     <= 1'b1;\n                        retired_tag <= head_tag;\n\n                        if (issue && (issue_tag != head_tag)) begin\n                            head_tag      <= issue_tag;\n                            head_finished <= 1'b0;\n                            count         <= 2'd1;\n                        end else begin\n                            head_finished <= 1'b0;\n                            count         <= 2'd0;\n                        end\n                    end else begin\n                        if (finish && (finish_tag == head_tag))\n                            head_finished <= 1'b1;\n\n                        if (issue && (issue_tag != head_tag)) begin\n                            tail_tag      <= issue_tag;\n                            tail_finished <= 1'b0;\n                            count         <= 2'd2;\n                        end\n                    end\n                end\n\n                2'd2: begin\n                    if (head_finished) begin\n                        retired       <= 1'b1;\n                        retired_tag   <= head_tag;\n                        head_tag      <= tail_tag;\n                        head_finished <= tail_finished |\n                                         (finish && (finish_tag == tail_tag));\n                        tail_finished <= 1'b0;\n                        count         <= 2'd1;\n                    end else begin\n                        if (finish && (finish_tag == head_tag))\n                            head_finished <= 1'b1;\n                        if (finish && (finish_tag == tail_tag))\n                            tail_finished <= 1'b1;\n                    end\n                end\n\n                default: begin\n                    count         <= 2'd0;\n                    head_finished <= 1'b0;\n                    tail_finished <= 1'b0;\n                end\n            endcase\n        end\n    end\n\nendmodule\n```",
+  "response_sha256": "7de4fd2ffc6e6574a8206b01277ace1101f025fc870e4a4c7bb82bbddc3bb13d",
+  "thread_id": "01a12a08-2fd1-7b53-a169-7745820297f8",
+  "exit": {
+    "utc": "2026-10-11T08:16:02.695892+00:00",
+    "pid": 50436,
+    "identity": "134361801417708148",
+    "nonce": "0e0119899d9549e2a4ce9607092ae5c6",
+    "request_sha256": "e5e163639720793a1d9a4b4fab2e8245b6acdae2ba4a70b65f6332ed10970d75",
+    "returncode": 0,
+    "reason": null,
+    "elapsed_seconds": 20.90599999999904,
+    "streams_closed": true,
+    "reader_errors": [],
+    "counts": {
+      "stdout": 3976,
+      "stderr": 0
+    },
+    "descendant_cleanup": "UNVERIFIED",
+    "sha256": {
+      "stdout": "79e41ada646e0df6f08d382c577835e0f390d70ce5e71a39c3589dfa4b689f31",
+      "stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "reconstructed_without_summary": true
+}

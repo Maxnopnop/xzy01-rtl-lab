@@ -1,0 +1,15 @@
+module rotating_owner(input clk,rst_n,req0,req1,retire,output grant0,grant1);
+reg [1:0] owner;reg preference;
+wire new_pref=(owner==1)?1'b1:((owner==2)?1'b0:preference);
+assign grant0=(owner==1);assign grant1=(owner==2);
+always @(posedge clk or negedge rst_n) begin
+ if(!rst_n) begin owner<=0;preference<=0;end
+ else if(owner==0 || retire) begin
+  if(owner!=0) preference<=new_pref;
+  if(req0 && req1) owner<=(owner!=0?new_pref:preference)?2'd2:2'd1;
+  else if(req0) owner<=1;
+  else if(req1) owner<=2;
+  else owner<=0;
+ end
+end
+endmodule

@@ -1,0 +1,46 @@
+
+I would like you to implement a module named TopModule with the following
+interface. All input and output ports are one bit unless otherwise
+specified.
+
+ - input  clk
+ - input  areset
+ - input  x
+ - output z
+
+The module should implement a one-input one-output serial 2's
+complementer Moore state machine. The input (x) is a series of bits (one
+per clock cycle) beginning with the least-significant bit of the number,
+and the output (Z) is the 2's complement of the input. The machine will
+accept input numbers of arbitrary length. The circuit requires a positive
+edge triggered asynchronous reset. The conversion begins when Reset is
+released and stops when Reset is asserted. Assume all sequential logic is
+triggered on the positive edge of the clock.
+
+
+
+<generic_reference_context>
+These are generic style excerpts, not new task requirements or solutions. The original specification above takes precedence.
+Source: lowRISC contributors; CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/); unmodified selected prose.
+https://github.com/lowRISC/style-guides/blob/9c15ff5dce23eef969e00ab3715153967419eadd/VerilogCodingStyle.md
+[LR018; Case Statements; lines 2245-2252]
+`casex` should not be used. `casex` implements a symmetric wildcard operator
+such that an `X` in the case expression may match one or more case items.
+`casez` only treats high-impedance states (`Z` or `?`) as a wildcard, and
+performs exact matches for undriven `X` inputs. While this does not completely
+fix the problems with symmetric wildcard matching, it is harder to accidentally
+produce a `Z` input than an `X` input, so this form is preferred.
+`case inside` does not treat either `X` or `Z` in the case expression as a
+wildcard, so this form is preferred over `casez`.
+
+[LR006; Sequential Logic (Registers); lines 1818-1820]
+Sequential statements for state assignments should only contain reset values and
+a next-state to state assignment, use a separate combinational-only block to
+generate that next-state value.
+
+[LR015; Case Statements; lines 2189-2192]
+  - a `default:` statement is **always** included in order to avoid accidental
+  inference of latches, even if all cases are covered. In simulation, a case
+  expression that evaluates to `X` will not match any case and will behave as a
+  latch, leading to different behavior than synthesis if no default is specified.
+</generic_reference_context>

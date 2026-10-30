@@ -1,0 +1,17 @@
+{
+  "status": "DESIGN_ONLY_NOT_COMPILED_OR_CALIBRATED",
+  "tasks": {
+    "Prob018_mux256to1": {
+      "sat14_32": "PLANNED_UNVALIDATED; combinational selection, no init/reset/clock constraints, repeated steps not temporal proof",
+      "reset_events": "NOT_APPLICABLE_COMBINATIONAL",
+      "reference": "Original upstream RefModule, correlated; no independent author claim"
+    },
+    "Prob095_review2015_fsmshift": {
+      "sat14_32": "PLANNED_UNVALIDATED; synchronous active-high reset at abstract step1, skip first observation; subsequent reset unconstrained. No zero-init or async2sync.",
+      "events": "31 separately authored diagnostic events, 29 scored after first reset, sampling drive+1; no original TB/vector changed",
+      "temporal_interpretation": "reset edge starts first of four enabled intervals; held reset restarts; terminal output0 until sampled reset",
+      "reference": "SAT same upstream RefModule; event expected values from independently written countdown rule by same project author, not external independent validation"
+    }
+  },
+  "limits": "Cannot claim added findings, suitability of SAT flags, original-input equivalence or runtime correctness until separately reviewed offline validation. No old90972 events or old low-active/zero-init assumptions reused."
+}

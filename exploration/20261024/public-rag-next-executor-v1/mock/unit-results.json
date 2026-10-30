@@ -1,0 +1,56 @@
+[
+  {
+    "case": "exact128",
+    "status": "MOCK_ONLY_NOT_EDA",
+    "stop": false
+  },
+  {
+    "case": "over128",
+    "status": "RESOURCE_LIMIT",
+    "stop": true
+  },
+  {
+    "case": "multiblock",
+    "status": "EXTRACTION_ERROR",
+    "stop": false
+  },
+  {
+    "case": "unsafe",
+    "status": "RTL_REJECTED",
+    "stop": false
+  },
+  {
+    "case": "compile_timeout",
+    "status": "INFRASTRUCTURE_ERROR",
+    "stop": true,
+    "fake_phases": [
+      "compile"
+    ]
+  },
+  {
+    "case": "simulate_timeout",
+    "status": "INFRASTRUCTURE_ERROR",
+    "stop": true,
+    "fake_phases": [
+      "compile",
+      "simulate"
+    ]
+  },
+  {
+    "case": "tb_timeout",
+    "status": "RESOURCE_LIMIT",
+    "stop": true,
+    "fake_phases": [
+      "compile",
+      "simulate"
+    ]
+  },
+  {
+    "case": "compile_error",
+    "status": "COMPILE_ERROR",
+    "stop": false,
+    "fake_phases": [
+      "compile"
+    ]
+  }
+]

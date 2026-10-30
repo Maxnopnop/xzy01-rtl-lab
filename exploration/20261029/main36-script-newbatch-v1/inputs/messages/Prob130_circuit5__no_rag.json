@@ -1,0 +1,10 @@
+[
+  {
+    "role": "system",
+    "content": "Implement the given digital circuit in synthesizable SystemVerilog.\nReturn only one complete module in a single ```systemverilog code block.\nUse exactly the specified module name and ports. Do not provide a testbench.\nNo includes, preprocessor directives, strings, hierarchical references, extra\nmodules, simulation system tasks, file IO, or attributes. Only $signed,\n$unsigned and $clog2 system functions are permitted. Do not use delays.\nThe independent evaluator will supply all input stimuli and check outputs."
+  },
+  {
+    "role": "user",
+    "content": "\nI would like you to implement a module named TopModule with the following\ninterface. All input and output ports are one bit unless otherwise\nspecified.\n\n - input  a (4 bits)\n - input  b (4 bits)\n - input  c (4 bits)\n - input  d (4 bits)\n - input  e (4 bits)\n - output q (4 bits)\n\nThe module should implement a combinational circuit. Read the simulation\nwaveforms to determine what the circuit does, then implement it.\n\n  time  a  b  c  d  e  q\n  0ns   x  x  x  x  x  x\n  5ns   x  x  x  x  x  x\n  10ns  x  x  x  x  x  x\n  15ns  a  b  0  d  e  b\n  20ns  a  b  1  d  e  e\n  25ns  a  b  2  d  e  a\n  30ns  a  b  3  d  e  d\n  35ns  a  b  4  d  e  f\n  40ns  a  b  5  d  e  f\n  45ns  a  b  6  d  e  f\n  50ns  a  b  7  d  e  f\n  55ns  a  b  8  d  e  f\n  60ns  a  b  9  d  e  f\n  65ns  a  b  a  d  e  f\n  70ns  a  b  b  d  e  f\n  75ns  a  b  c  d  e  f\n  80ns  a  b  d  d  e  f\n  85ns  a  b  e  d  e  f\n  90ns  a  b  f  d  e  f\n\n"
+  }
+]

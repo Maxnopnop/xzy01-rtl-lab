@@ -1,0 +1,135 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "http": 200,
+      "outcome": "HTTP_OK",
+      "events": [
+        [
+          "connect",
+          "127.0.0.1",
+          3213
+        ],
+        [
+          "tunnel",
+          "openrouter.ai",
+          443
+        ],
+        [
+          "request",
+          "POST",
+          "/api/v1/chat/completions"
+        ]
+      ]
+    },
+    {
+      "http": 302,
+      "outcome": "REDIRECT_REJECTED",
+      "events": [
+        [
+          "connect",
+          "127.0.0.1",
+          3213
+        ],
+        [
+          "tunnel",
+          "openrouter.ai",
+          443
+        ],
+        [
+          "request",
+          "POST",
+          "/api/v1/chat/completions"
+        ]
+      ]
+    },
+    {
+      "http": 403,
+      "outcome": "HTTP_ERROR",
+      "events": [
+        [
+          "connect",
+          "127.0.0.1",
+          3213
+        ],
+        [
+          "tunnel",
+          "openrouter.ai",
+          443
+        ],
+        [
+          "request",
+          "POST",
+          "/api/v1/chat/completions"
+        ]
+      ]
+    },
+    {
+      "http": 429,
+      "outcome": "HTTP_ERROR",
+      "events": [
+        [
+          "connect",
+          "127.0.0.1",
+          3213
+        ],
+        [
+          "tunnel",
+          "openrouter.ai",
+          443
+        ],
+        [
+          "request",
+          "POST",
+          "/api/v1/chat/completions"
+        ]
+      ]
+    },
+    {
+      "http": 500,
+      "outcome": "HTTP_ERROR",
+      "events": [
+        [
+          "connect",
+          "127.0.0.1",
+          3213
+        ],
+        [
+          "tunnel",
+          "openrouter.ai",
+          443
+        ],
+        [
+          "request",
+          "POST",
+          "/api/v1/chat/completions"
+        ]
+      ]
+    },
+    {
+      "case": "proxy_connection_failure",
+      "outcome": "UNKNOWN",
+      "events": [
+        [
+          "connect",
+          "127.0.0.1",
+          3213
+        ],
+        [
+          "tunnel",
+          "openrouter.ai",
+          443
+        ],
+        [
+          "request",
+          "POST",
+          "/api/v1/chat/completions"
+        ]
+      ]
+    }
+  ],
+  "transport_sha256": "7ba1d3b47e2e471a9f11d226c65700d3cd70535b581fe7863a4fa4ed27c98524",
+  "network_calls": 0,
+  "model_calls": 0,
+  "claim": "Explicit proxy target and CONNECT target; one POST attempt; no direct fallback or retry."
+}

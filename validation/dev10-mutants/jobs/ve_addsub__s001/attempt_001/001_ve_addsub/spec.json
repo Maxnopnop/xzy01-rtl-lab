@@ -1,0 +1,34 @@
+{
+  "id": "ve_addsub",
+  "module": "TopModule",
+  "checks": 131072,
+  "spec": "Consider the following adder-subtractor with a zero flag:\n\n  synthesis verilog_input_version verilog_2001\n  module TopModule (\n      input do_sub,\n      input [7:0] a,\n      input [7:0] b,\n      output reg [7:0] out,\n      output reg result_is_zero\n  );\n\n      always @(*) begin\n          case (do_sub)\n            0: out = a+b;\n            1: out = a-b;\n          endcase\n\n          if (~out)\n              result_is_zero = 1;\n      end\n\n  endmodule\n\nUnfortunately, this module has a bug. Implement a new version of this\nmodule that fixes the bug.",
+  "category": "arithmetic",
+  "split": "development",
+  "family": "addsub",
+  "benchmark": "verilog-eval",
+  "suite_version": "dev10-v1",
+  "synthesis_eligible": true,
+  "origin": {
+    "repository": "https://github.com/NVlabs/verilog-eval",
+    "commit": "c498220d0a52248f8e3fdffe279075215bde2da6",
+    "path": "dataset_spec-to-rtl/Prob123_bugs_addsubz",
+    "license": "MIT",
+    "files": {
+      "upstream/verilog-eval/Prob123_bugs_addsubz_prompt.txt": "3a8f9a585971b0860d638de476315cb5e4b328db6ba03e45408cd0181a25fcd4",
+      "upstream/verilog-eval/Prob123_bugs_addsubz_ref.sv": "8790d9ac5eddb0a9f59275aaee7b67911fb595fd9b519f8ef07de116b0875a20",
+      "upstream/verilog-eval/Prob123_bugs_addsubz_test.sv": "f3eaacb4d5bcf7eecea48772ca9c917e5e51e4adbc374a8039cb5754c832276f"
+    }
+  },
+  "adaptations": [
+    "Independent deterministic vector oracle replaces upstream TB; upstream TB archived.",
+    "Reference module renamed; timescale directive removed."
+  ],
+  "mutation": "Incorrect zero flag",
+  "reference_sha256": "63e1905a9d24ee4c310dd63b872d159bd171187aee7c9267a50f22555f80c8d3",
+  "mutant_sha256": "7cd5ea829e09bf760426659dc1d87d4543009c73daf81ebb1defe2c820258c7d",
+  "tb_sha256": "5e0e9b37dad3ebc91fc40742d7315ce2cb9ba8bd5ec2c364a39eff9256538aeb",
+  "assets": {
+    "ve_addsub.hex": "88e8b8c58b07ed14a0982d9bd1e8ba423123577094a517d1242c83bca8f8484d"
+  }
+}

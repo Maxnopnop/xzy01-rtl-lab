@@ -1,0 +1,11 @@
+# 预声明开发契约：8bit带last广播到2消费者
+
+测试域仅single-clock、binary握手、一个producer/两个consumer、有序broadcast。每个输入valid&&ready的beat=data8,last1必须被每个consumer各接收恰一次、同顺序、字段不变；各consumer可不同周期消费。接收只发生于pre-rising-edge采样的valid&&ready；同拍输入→输出允许（先登记source握手再消费output），不规定固定latency/输入ready波形/吞吐。valid=0时data/last无约束，可有X/Z；valid/ready/reset及有效payload必须可确定，否则TRACE_INVALID非功能分数。
+
+valid&&ready=0的发送者，下一非reset采样必须保持valid=1且data,last相同，包括下一拍ready变1。分别检查source环境与各consumer DUT。source违约标INPUT_PROTOCOL_FAIL，输出违约BACKPRESSURE_FAIL。不能只mask valid=0而放过stall时payload变化/valid撤销。
+
+source计划由独立fixture/TB常量给出，不从DUT输出/ready推导。实际接受输入必须匹配计划；消费者expected由已经接受的输入FIFO形成。防止DUT永远ready=0且零输出被空账误判PASS：每个drain episode结束时必须接受全部计划且各consumer队列为空。终止是预先声明有限窗口末尾；最后阶段source无新计划（已计划但未接受者必须继续保持valid），消费者ready=1连续至少8个采样；80周期窗口/8拍drain不是无界活性或任意合法延迟保证。输入计划未接收标LIVENESS_FAIL；输入已接收但未交付标MISSING_TRANSACTION，不能仅凭有限缺失区分永久丢失与超窗口延迟。声明done后停记录不能掩盖重复，因此整段尾部仍检查unexpected输出。
+
+reset为采样周期的高有效同步flush抽象：reset行不计握手，不要求pre-edge旧valid已清零或payload已知，reset行不解释endpoint值；取消已在途事务及未完成source计划只能在预声明reset episode边界，记录aborted而非missing。下一active episode有独立source计划，stall guard清空；旧数据不能再消费为新epoch事务。初始reset不产生空episode。终局不能以reset/截断替代drain。没有clock稳定期/异步reset/CDC模拟，未解决R7其他任务契约或IR适配。
+
+预声明验收：合法0拍组合传播、1/3拍可变延迟、各消费者独立消费、valid0改变data/last/X、同拍替换、reset明确取消通过；final loss、extra duplicate、reorder、payload/last损坏、stall下data/last变化或valid撤销、永远source-not-ready、晚到超窗口失败；source环境违规、unknown valid控制及无足够公平drain不可评估，不混功能分数。测试只人工开发trace和手写RTL，不能声称模型改进。

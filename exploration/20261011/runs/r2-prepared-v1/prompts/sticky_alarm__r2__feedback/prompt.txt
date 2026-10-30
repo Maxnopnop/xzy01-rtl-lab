@@ -1,0 +1,160 @@
+Implement the given digital circuit in synthesizable SystemVerilog.
+Return only one complete module in a single ```systemverilog code block.
+Use exactly the specified module name and ports. Do not provide a testbench.
+No includes, preprocessor directives, strings, hierarchical references, extra
+modules, simulation system tasks, file IO, or attributes. Only $signed,
+$unsigned and $clog2 system functions are permitted. Do not use delays.
+The independent evaluator will supply all input stimuli and check outputs.
+
+Implement module sticky_alarm(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. q starts at 0. Two consecutive sampled ones set q to 1. Once set, q remains 1 until reset, regardless of later input. A zero before activation breaks the consecutive-one count.
+
+Use reg/localparam state encodings and case/if assignments for Icarus compatibility. Avoid enum-valued ternary assignments. Preserve the specified reset, overlap and cycle timing.
+
+Public specification examples shared across conditions:
+{
+  "clock_edge": "posedge",
+  "output_kind": "moore",
+  "reset": {
+    "kind": "async",
+    "active": 0,
+    "output": 0
+  },
+  "trace_convention": "Each trace starts after reset; output is sampled after every rising edge.",
+  "examples": [
+    {
+      "bits": "1011000",
+      "outputs": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "bits": "01010",
+      "outputs": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "bits": "111",
+      "outputs": [
+        0,
+        1,
+        1
+      ]
+    }
+  ]
+}
+
+Candidate intermediate state table (may contain mistakes):
+{
+  "schema": 1,
+  "clock_edge": "posedge",
+  "output_kind": "moore",
+  "reset": {
+    "kind": "async",
+    "active": 0,
+    "state": "S0"
+  },
+  "states": [
+    {
+      "name": "S0",
+      "output": 0
+    },
+    {
+      "name": "S1",
+      "output": 0
+    },
+    {
+      "name": "S2",
+      "output": 1
+    }
+  ],
+  "transitions": [
+    {
+      "from": "S0",
+      "input": 0,
+      "to": "S0"
+    },
+    {
+      "from": "S0",
+      "input": 1,
+      "to": "S0"
+    },
+    {
+      "from": "S1",
+      "input": 0,
+      "to": "S0"
+    },
+    {
+      "from": "S1",
+      "input": 1,
+      "to": "S2"
+    },
+    {
+      "from": "S2",
+      "input": 0,
+      "to": "S2"
+    },
+    {
+      "from": "S2",
+      "input": 1,
+      "to": "S2"
+    }
+  ]
+}
+
+
+Implement the specification. You may correct the candidate table while producing RTL. There is no extra repair turn. Return only the specified RTL module.
+
+Executable results on the already-public contract:
+{
+  "status": "PUBLIC_CHECK_FAIL",
+  "errors": [
+    {
+      "bits": "1011000",
+      "expected": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ],
+      "observed": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "bits": "111",
+      "expected": [
+        0,
+        1,
+        1
+      ],
+      "observed": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "scope": "Only disclosed examples/reset/schema; private tests were not consulted."
+}
+
+Do not invoke tools, read files, run tests, or delegate. Reply directly.

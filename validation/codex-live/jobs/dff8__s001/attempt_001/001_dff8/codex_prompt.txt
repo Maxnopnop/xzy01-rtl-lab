@@ -1,0 +1,11 @@
+Implement the given digital circuit in synthesizable SystemVerilog.
+Return only one complete module in a single ```systemverilog code block.
+Use exactly the specified module name and ports. Do not provide a testbench.
+No includes, preprocessor directives, strings, hierarchical references, extra
+modules, simulation system tasks, file IO, or attributes. Only $signed,
+$unsigned and $clog2 system functions are permitted. Do not use delays.
+The independent evaluator will supply all input stimuli and check outputs.
+
+Implement module dff8(input wire clk, rst, en, input wire [7:0] d, output reg [7:0] q). All state changes only on rising clk. rst is active-high synchronous and has priority. State before the first reset edge is unspecified. On rst set q=0; else if en set q=d; else hold.
+
+Reply directly with the RTL. Do not invoke tools, read files, run tests, or delegate.

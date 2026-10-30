@@ -1,0 +1,27 @@
+
+
+<generic_reference_context>
+These are generic style excerpts, not new task requirements. The original specification above takes precedence.
+Source: lowRISC contributors; CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/); unmodified selected prose.
+https://github.com/lowRISC/style-guides/blob/9c15ff5dce23eef969e00ab3715153967419eadd/VerilogCodingStyle.md
+[LR008; Sequential Logic (Registers); lines 1897-1901]
+Keep work in sequential blocks simple. If a sequential block becomes
+sufficiently complicated, consider splitting the combinational logic into a
+separate combinational (`always_comb`) block. Ideally, sequential blocks should
+contain only a register instantiation, with perhaps a load enable or an
+increment.
+
+[LR018; Case Statements; lines 2245-2252]
+`casex` should not be used. `casex` implements a symmetric wildcard operator
+such that an `X` in the case expression may match one or more case items.
+`casez` only treats high-impedance states (`Z` or `?`) as a wildcard, and
+performs exact matches for undriven `X` inputs. While this does not completely
+fix the problems with symmetric wildcard matching, it is harder to accidentally
+produce a `Z` input than an `X` input, so this form is preferred.
+`case inside` does not treat either `X` or `Z` in the case expression as a
+wildcard, so this form is preferred over `casez`.
+
+[LR003; Sequential Logic (Latches); lines 1802-1803]
+If you must use a latch, use `always_latch` over `always`, and use non-blocking
+assignments (`<=`). Never use blocking assignments (`=`).
+</generic_reference_context>

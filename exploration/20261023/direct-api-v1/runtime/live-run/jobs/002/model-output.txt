@@ -1,0 +1,65 @@
+```systemverilog
+module TopModule (
+    input  logic       clk,
+    input  logic       reset,
+    input  logic [2:0] s,
+    output logic       fr2,
+    output logic       fr1,
+    output logic       fr0,
+    output logic       dfr
+);
+
+    logic [2:0] level_q;
+    logic       rising_q;
+
+    always_ff @(posedge clk) begin
+        if (reset) begin
+            level_q <= 3'b000;
+            rising_q <= 1'b1;
+        end else begin
+            if (s > level_q)
+                rising_q <= 1'b1;
+            else if (s < level_q)
+                rising_q <= 1'b0;
+
+            level_q <= s;
+        end
+    end
+
+    always_comb begin
+        case (level_q)
+            3'b000: begin
+                fr2 = 1'b1;
+                fr1 = 1'b1;
+                fr0 = 1'b1;
+                dfr = 1'b1;
+            end
+            3'b001: begin
+                fr2 = 1'b0;
+                fr1 = 1'b1;
+                fr0 = 1'b1;
+                dfr = rising_q;
+            end
+            3'b011: begin
+                fr2 = 1'b0;
+                fr1 = 1'b0;
+                fr0 = 1'b1;
+                dfr = rising_q;
+            end
+            3'b111: begin
+                fr2 = 1'b0;
+                fr1 = 1'b0;
+                fr0 = 1'b0;
+                dfr = 1'b0;
+            end
+            default: begin
+                fr2 = 1'b0;
+                fr1 = 1'b0;
+                fr0 = 1'b0;
+                dfr = 1'b0;
+            end
+        endcase
+    end
+
+endmodule
+```

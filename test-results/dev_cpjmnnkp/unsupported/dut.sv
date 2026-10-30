@@ -1,0 +1,1 @@
+module bad(input clk,a,d,output reg q); always @(posedge clk or posedge a) q<=d; endmodule

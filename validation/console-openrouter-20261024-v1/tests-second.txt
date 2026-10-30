@@ -1,0 +1,48 @@
+test_budget_release_mismatch_and_exclusive_lock (test_console_bridge.BridgeTests.test_budget_release_mismatch_and_exclusive_lock) ... ok
+test_exact_bytes_secret_hidden_single_post_no_repeat (test_console_bridge.BridgeTests.test_exact_bytes_secret_hidden_single_post_no_repeat) ... ok
+test_historical_slot_refused (test_console_bridge.BridgeTests.test_historical_slot_refused) ... ok
+test_import_preview_no_auth_and_missing_budget_preserved (test_console_bridge.BridgeTests.test_import_preview_no_auth_and_missing_budget_preserved) ... ok
+test_model_identity_failure_retains_usage (test_console_bridge.BridgeTests.test_model_identity_failure_retains_usage) ... ok
+test_no_release_blocks_before_reservation (test_console_bridge.BridgeTests.test_no_release_blocks_before_reservation) ... ok
+test_real_loopback_transport_auth_redirect_and_no_retry (test_console_bridge.BridgeTests.test_real_loopback_transport_auth_redirect_and_no_retry) ... ok
+test_request_drift_and_cross_model_difference (test_console_bridge.BridgeTests.test_request_drift_and_cross_model_difference) ... ok
+test_secret_echo_never_persisted (test_console_bridge.BridgeTests.test_secret_echo_never_persisted) ... ok
+test_unknown_and_failure_stop_no_retries (test_console_bridge.BridgeTests.test_unknown_and_failure_stop_no_retries) ... ok
+test_hidden_native_window_reads_336_and_no_network (test_console_bridge.GuiTests.test_hidden_native_window_reads_336_and_no_network) ... ERROR
+test_history_counts_never_upgraded (test_console_bridge.SchoolTests.test_history_counts_never_upgraded) ... ok
+test_package_missing_share_tamper_return_and_count (test_console_bridge.SchoolTests.test_package_missing_share_tamper_return_and_count) ... ok
+test_synthesis_pack_contains_no_library (test_console_bridge.SchoolTests.test_synthesis_pack_contains_no_library) ... ok
+
+======================================================================
+ERROR: test_hidden_native_window_reads_336_and_no_network (test_console_bridge.GuiTests.test_hidden_native_window_reads_336_and_no_network)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Codex\2026-09-25\xzy01-using-llm-for-digital-chip-2\outputs\rtl-batch\test_console_bridge.py", line 157, in test_hidden_native_window_reads_336_and_no_network
+    app=Console(root);root.update();self.assertEqual(len(app.rows),336)
+        ^^^^^^^^^^^^^
+  File "E:\Codex\2026-09-25\xzy01-using-llm-for-digital-chip-2\outputs\rtl-batch\console_gui_v2.py", line 51, in __init__
+    self.load_history(None)
+  File "E:\Codex\2026-09-25\xzy01-using-llm-for-digital-chip-2\outputs\rtl-batch\console_gui_v2.py", line 87, in load_history
+    self.display(b.historical_rows(name) if name else b.history())
+                                                      ^^^^^^^^^^^
+  File "E:\Codex\2026-09-25\xzy01-using-llm-for-digital-chip-2\outputs\rtl-batch\console_bridge.py", line 90, in history
+    return [r for name in HISTORY for r in historical_rows(name)]
+                                           ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Codex\2026-09-25\xzy01-using-llm-for-digital-chip-2\outputs\rtl-batch\console_bridge.py", line 70, in historical_rows
+    slots = read(batch / 'C/slots.json')
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Codex\2026-09-25\xzy01-using-llm-for-digital-chip-2\outputs\rtl-batch\console_bridge.py", line 27, in read
+    return json.loads(Path(path).read_bytes().decode('utf-8-sig'))
+                      ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1019, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'E:\\Codex\\2026-09-25\\xzy01-using-llm-for-digital-chip-2\\outputs\\rtl-batch\\exploration\\20261023\\public-rag-all20-v1\\C\\slots.json'
+
+----------------------------------------------------------------------
+Ran 14 tests in 3.619s
+
+FAILED (errors=1)

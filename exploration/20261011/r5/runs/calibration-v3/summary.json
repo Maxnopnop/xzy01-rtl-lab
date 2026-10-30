@@ -1,0 +1,651 @@
+{
+  "status": "PASS",
+  "label": "ARTIFICIAL CALIBRATION ONLY",
+  "real_model_calls": 0,
+  "anchors": 18,
+  "reference_methods": "Incremental Python, hand SV, payload/set derivation; all same author",
+  "checks": [
+    {
+      "task": "phase_snapshot",
+      "split": "public",
+      "kind": "reference",
+      "expected": "PASS",
+      "result": {
+        "backend": "icarus",
+        "compile_seconds": 0.094,
+        "status": "PASS",
+        "message": "Independent testbench completed all 30 checks",
+        "stage": "simulate",
+        "receipt_nonce": "43c97636ee304db59c88eacdb0eb6ef7",
+        "simulate_seconds": 0.046,
+        "mismatches": [],
+        "checks": 30,
+        "rtl_sha256": "308c2df1a7b9f7444da9e17a585513f4596ed4949aea266ad922557e3c94c4fa",
+        "tb_sha256": "0ff380a288bfd6b1c0e3dac2307c17648b27d378e7b022270b376775ba43cac3",
+        "vectors_sha256": "8fe49ac8c281197763c6441b1ab65e8eaf11bc05e769aecd3bf0f4d2308218ac"
+      }
+    },
+    {
+      "task": "phase_snapshot",
+      "split": "public",
+      "kind": "priority-mutant",
+      "expected": "FUNCTION_FAIL",
+      "result": {
+        "backend": "icarus",
+        "compile_seconds": 0.125,
+        "status": "FUNCTION_FAIL",
+        "message": "Independent testbench found 17 mismatches",
+        "stage": "simulate",
+        "receipt_nonce": "3575b8edfbe042ba8806ebec17434417",
+        "simulate_seconds": 0.031,
+        "mismatches": [
+          {
+            "event": 13,
+            "expected": 7,
+            "observed": "10111",
+            "category": "falling"
+          },
+          {
+            "event": 14,
+            "expected": 7,
+            "observed": "10111",
+            "category": "low_hold"
+          },
+          {
+            "event": 15,
+            "expected": 7,
+            "observed": "10111",
+            "category": "low_restore"
+          },
+          {
+            "event": 16,
+            "expected": 7,
+            "observed": "10111",
+            "category": "low_pre"
+          },
+          {
+            "event": 17,
+            "expected": 1,
+            "observed": "10101",
+            "category": "rising"
+          },
+          {
+            "event": 18,
+            "expected": 1,
+            "observed": "10101",
+            "category": "high_hold"
+          },
+          {
+            "event": 19,
+            "expected": 1,
+            "observed": "10101",
+            "category": "high_restore"
+          },
+          {
+            "event": 20,
+            "expected": 17,
+            "observed": "10101",
+            "category": "falling"
+          }
+        ],
+        "checks": 30,
+        "rtl_sha256": "5e80d9b667a8a3d756e36fe42eabca41ec6752bd1186d74eb0a372b107d9c177",
+        "tb_sha256": "0ff380a288bfd6b1c0e3dac2307c17648b27d378e7b022270b376775ba43cac3",
+        "vectors_sha256": "8fe49ac8c281197763c6441b1ab65e8eaf11bc05e769aecd3bf0f4d2308218ac"
+      }
+    },
+    {
+      "task": "phase_snapshot",
+      "split": "private",
+      "kind": "reference",
+      "expected": "PASS",
+      "result": {
+        "backend": "icarus",
+        "compile_seconds": 0.078,
+        "status": "PASS",
+        "message": "Independent testbench completed all 9128 checks",
+        "stage": "simulate",
+        "receipt_nonce": "23f9ebb6501a46028cb703f6b73c8ba7",
+        "simulate_seconds": 0.078,
+        "mismatches": [],
+        "checks": 9128,
+        "rtl_sha256": "308c2df1a7b9f7444da9e17a585513f4596ed4949aea266ad922557e3c94c4fa",
+        "tb_sha256": "2cb946d7aeb7a053ad0b1594d7b7b9aaa719dc15dbbd1671f31eae6c959e3356",
+        "vectors_sha256": "4f7ad1d5d1e21860198c4edf7de34478a3c1c4a85d5735f9402ec1042e924f84"
+      }
+    },
+    {
+      "task": "phase_snapshot",
+      "split": "private",
+      "kind": "priority-mutant",
+      "expected": "FUNCTION_FAIL",
+      "result": {
+        "backend": "icarus",
+        "compile_seconds": 0.094,
+        "status": "FUNCTION_FAIL",
+        "message": "Independent testbench found 1900 mismatches",
+        "stage": "simulate",
+        "receipt_nonce": "a882b0ae2a0d45619eb2bed9e4d0f1fc",
+        "simulate_seconds": 0.078,
+        "mismatches": [
+          {
+            "event": 37,
+            "expected": 7,
+            "observed": "10111",
+            "category": "falling"
+          },
+          {
+            "event": 38,
+            "expected": 7,
+            "observed": "10111",
+            "category": "low_hold_bit"
+          },
+          {
+            "event": 39,
+            "expected": 7,
+            "observed": "10111",
+            "category": "low_restore"
+          },
+          {
+            "event": 40,
+            "expected": 7,
+            "observed": "10111",
+            "category": "low_hold_bit"
+          },
+          {
+            "event": 41,
+            "expected": 7,
+            "observed": "10111",
+            "category": "low_restore"
+          },
+          {
+            "event": 42,
+            "expected": 7,
+            "observed": "10111",
+            "category": "low_hold_bit"
+          },
+          {
+            "event": 43,
+            "expected": 7,
+            "observed": "10111",
+            "category": "low_restore"
+          },
+          {
+            "event": 44,
+            "expected": 7,
+            "observed": "10111",
+            "category": "low_hold_bit"
+          }
+        ],
+        "checks": 9128,
+        "rtl_sha256": "5e80d9b667a8a3d756e36fe42eabca41ec6752bd1186d74eb0a372b107d9c177",
+        "tb_sha256": "2cb946d7aeb7a053ad0b1594d7b7b9aaa719dc15dbbd1671f31eae6c959e3356",
+        "vectors_sha256": "4f7ad1d5d1e21860198c4edf7de34478a3c1c4a85d5735f9402ec1042e924f84"
+      }
+    },
+    {
+      "task": "phase_snapshot",
+      "split": "private",
+      "kind": "artificial-deterministic-converter",
+      "expected": "PASS",
+      "result": {
+        "backend": "icarus",
+        "compile_seconds": 0.11,
+        "status": "PASS",
+        "message": "Independent testbench completed all 9128 checks",
+        "stage": "simulate",
+        "receipt_nonce": "02652f34184d4b118d5970043cce09dc",
+        "simulate_seconds": 0.078,
+        "mismatches": [],
+        "checks": 9128,
+        "rtl_sha256": "f0eace1a7a90e89c17436b232ed57e0c4a19b05f79bdc1a069eff28c56cd5b1c",
+        "tb_sha256": "2cb946d7aeb7a053ad0b1594d7b7b9aaa719dc15dbbd1671f31eae6c959e3356",
+        "vectors_sha256": "4f7ad1d5d1e21860198c4edf7de34478a3c1c4a85d5735f9402ec1042e924f84"
+      }
+    },
+    {
+      "task": "escape_frame",
+      "split": "public",
+      "kind": "reference",
+      "expected": "PASS",
+      "result": {
+        "backend": "icarus",
+        "compile_seconds": 0.109,
+        "status": "PASS",
+        "message": "Independent testbench completed all 123 checks",
+        "stage": "simulate",
+        "receipt_nonce": "b7293df866994cb7839f59ceb38e6bc6",
+        "simulate_seconds": 0.062,
+        "mismatches": [],
+        "checks": 123,
+        "rtl_sha256": "224bd3f8da59711784038be416eaffc2b7cbd11fd315dbc08d8916998d3a1e3c",
+        "tb_sha256": "9bec731b88a338729ee3f48bba8aafd2c8e54292e555226cd2ad115b81e42418",
+        "vectors_sha256": "61836ee1a3eb2033166fde0a80ab1e3ffc2732464cdadcb1eab2dcd62645d4a0"
+      }
+    },
+    {
+      "task": "escape_frame",
+      "split": "public",
+      "kind": "priority-mutant",
+      "expected": "FUNCTION_FAIL",
+      "result": {
+        "backend": "icarus",
+        "compile_seconds": 0.094,
+        "status": "FUNCTION_FAIL",
+        "message": "Independent testbench found 49 mismatches",
+        "stage": "simulate",
+        "receipt_nonce": "41cd45e96b4e477f91df186c776dc697",
+        "simulate_seconds": 0.062,
+        "mismatches": [
+          {
+            "event": 17,
+            "expected": 1184,
+            "observed": "1",
+            "category": "rising"
+          },
+          {
+            "event": 18,
+            "expected": 1184,
+            "observed": "1",
+            "category": "high_hold"
+          },
+          {
+            "event": 19,
+            "expected": 1184,
+            "observed": "1",
+            "category": "high_restore"
+          },
+          {
+            "event": 20,
+            "expected": 1184,
+            "observed": "1",
+            "category": "falling"
+          },
+          {
+            "event": 21,
+            "expected": 1184,
+            "observed": "1",
+            "category": "low_hold"
+          },
+          {
+            "event": 22,
+            "expected": 1184,
+            "observed": "1",
+            "category": "low_restore"
+          },
+          {
+            "event": 23,
+            "expected": 1184,
+            "observed": "1",
+            "category": "low_pre"
+          },
+          {
+            "event": 24,
+            "expected": 1344,
+            "observed": "0",
+            "category": "rising"
+          }
+        ],
+        "checks": 123,
+        "rtl_sha256": "8e4865fc084cf724cbf67c089bac7b1c388b9e6ef0c7e723a2ea36d07ea9dad3",
+        "tb_sha256": "9bec731b88a338729ee3f48bba8aafd2c8e54292e555226cd2ad115b81e42418",
+        "vectors_sha256": "61836ee1a3eb2033166fde0a80ab1e3ffc2732464cdadcb1eab2dcd62645d4a0"
+      }
+    },
+    {
+      "task": "escape_frame",
+      "split": "private",
+      "kind": "reference",
+      "expected": "PASS",
+      "result": {
+        "backend": "icarus",
+        "compile_seconds": 0.078,
+        "status": "PASS",
+        "message": "Independent testbench completed all 6855 checks",
+        "stage": "simulate",
+        "receipt_nonce": "9b7f6245de4e45788d74c09750d34522",
+        "simulate_seconds": 0.078,
+        "mismatches": [],
+        "checks": 6855,
+        "rtl_sha256": "224bd3f8da59711784038be416eaffc2b7cbd11fd315dbc08d8916998d3a1e3c",
+        "tb_sha256": "24e7aa4f2a9c8e5b61a3b315abeda23b5b7da9694345de9f597c373b0379a94d",
+        "vectors_sha256": "d3ffb7d867e2621f2debaa4b5f700b0279f7d86f3b715a6acda8c6b549a30069"
+      }
+    },
+    {
+      "task": "escape_frame",
+      "split": "private",
+      "kind": "priority-mutant",
+      "expected": "FUNCTION_FAIL",
+      "result": {
+        "backend": "icarus",
+        "compile_seconds": 0.094,
+        "status": "FUNCTION_FAIL",
+        "message": "Independent testbench found 9 mismatches",
+        "stage": "simulate",
+        "receipt_nonce": "a4fb67665fd64fbc903c3321e3bc4931",
+        "simulate_seconds": 0.078,
+        "mismatches": [
+          {
+            "event": 41,
+            "expected": 1184,
+            "observed": "1",
+            "category": "rising"
+          },
+          {
+            "event": 42,
+            "expected": 1184,
+            "observed": "1",
+            "category": "high_hold_bit"
+          },
+          {
+            "event": 43,
+            "expected": 1184,
+            "observed": "1",
+            "category": "high_restore"
+          },
+          {
+            "event": 44,
+            "expected": 1184,
+            "observed": "1",
+            "category": "high_hold_bit"
+          },
+          {
+            "event": 45,
+            "expected": 1184,
+            "observed": "1",
+            "category": "high_restore"
+          },
+          {
+            "event": 46,
+            "expected": 1184,
+            "observed": "1",
+            "category": "high_hold_bit"
+          },
+          {
+            "event": 47,
+            "expected": 1184,
+            "observed": "1",
+            "category": "high_restore"
+          },
+          {
+            "event": 48,
+            "expected": 1184,
+            "observed": "1",
+            "category": "high_hold_bit"
+          }
+        ],
+        "checks": 6855,
+        "rtl_sha256": "8e4865fc084cf724cbf67c089bac7b1c388b9e6ef0c7e723a2ea36d07ea9dad3",
+        "tb_sha256": "24e7aa4f2a9c8e5b61a3b315abeda23b5b7da9694345de9f597c373b0379a94d",
+        "vectors_sha256": "d3ffb7d867e2621f2debaa4b5f700b0279f7d86f3b715a6acda8c6b549a30069"
+      }
+    },
+    {
+      "task": "escape_frame",
+      "split": "private",
+      "kind": "artificial-deterministic-converter",
+      "expected": "PASS",
+      "result": {
+        "backend": "icarus",
+        "compile_seconds": 0.094,
+        "status": "PASS",
+        "message": "Independent testbench completed all 6855 checks",
+        "stage": "simulate",
+        "receipt_nonce": "0ce0c0029e44430b9abaa6e8e73247e4",
+        "simulate_seconds": 0.078,
+        "mismatches": [],
+        "checks": 6855,
+        "rtl_sha256": "d9ecd707ab37bc94696ce5e57303202d899493d09d52b2a6f7c7814e8db0aa2b",
+        "tb_sha256": "24e7aa4f2a9c8e5b61a3b315abeda23b5b7da9694345de9f597c373b0379a94d",
+        "vectors_sha256": "d3ffb7d867e2621f2debaa4b5f700b0279f7d86f3b715a6acda8c6b549a30069"
+      }
+    },
+    {
+      "task": "masked_ring_alloc",
+      "split": "public",
+      "kind": "reference",
+      "expected": "PASS",
+      "result": {
+        "backend": "icarus",
+        "compile_seconds": 0.094,
+        "status": "PASS",
+        "message": "Independent testbench completed all 58 checks",
+        "stage": "simulate",
+        "receipt_nonce": "721785279d7e49a8872c4ddad313ff03",
+        "simulate_seconds": 0.063,
+        "mismatches": [],
+        "checks": 58,
+        "rtl_sha256": "dcf29031d0ea8cd5208ee709fa9260bfbe091020f6b6563c56fbd7d9f36059f3",
+        "tb_sha256": "5cf2eddfd258d93c6ed3b2f6f5e78474db7cfd328aa8c76b922971b3768ad1d8",
+        "vectors_sha256": "7b94636a246fa324ba398e54b2f0e4ee106f31798e5c5ae28fa4bad64e6bd248"
+      }
+    },
+    {
+      "task": "masked_ring_alloc",
+      "split": "public",
+      "kind": "priority-mutant",
+      "expected": "FUNCTION_FAIL",
+      "result": {
+        "backend": "icarus",
+        "compile_seconds": 0.093,
+        "status": "FUNCTION_FAIL",
+        "message": "Independent testbench found 20 mismatches",
+        "stage": "simulate",
+        "receipt_nonce": "7d3914a146a44b5790ee4005954daad2",
+        "simulate_seconds": 0.032,
+        "mismatches": [
+          {
+            "event": 38,
+            "expected": 1018,
+            "observed": "1111011010",
+            "category": "rising"
+          },
+          {
+            "event": 39,
+            "expected": 1018,
+            "observed": "1111011010",
+            "category": "high_hold"
+          },
+          {
+            "event": 40,
+            "expected": 1018,
+            "observed": "1111011010",
+            "category": "high_restore"
+          },
+          {
+            "event": 41,
+            "expected": 1018,
+            "observed": "1111011010",
+            "category": "falling"
+          },
+          {
+            "event": 42,
+            "expected": 1018,
+            "observed": "1111011010",
+            "category": "low_hold"
+          },
+          {
+            "event": 43,
+            "expected": 1018,
+            "observed": "1111011010",
+            "category": "low_restore"
+          },
+          {
+            "event": 44,
+            "expected": 1018,
+            "observed": "1111011010",
+            "category": "low_pre"
+          },
+          {
+            "event": 45,
+            "expected": 952,
+            "observed": "1110011000",
+            "category": "rising"
+          }
+        ],
+        "checks": 58,
+        "rtl_sha256": "f98e78149cf1c07fdb679c208b7110e55e2f36fb377dfaf9aa7bd073d0313661",
+        "tb_sha256": "5cf2eddfd258d93c6ed3b2f6f5e78474db7cfd328aa8c76b922971b3768ad1d8",
+        "vectors_sha256": "7b94636a246fa324ba398e54b2f0e4ee106f31798e5c5ae28fa4bad64e6bd248"
+      }
+    },
+    {
+      "task": "masked_ring_alloc",
+      "split": "private",
+      "kind": "reference",
+      "expected": "PASS",
+      "result": {
+        "backend": "icarus",
+        "compile_seconds": 0.094,
+        "status": "PASS",
+        "message": "Independent testbench completed all 6678 checks",
+        "stage": "simulate",
+        "receipt_nonce": "aed0c97e7eed4449bcc4926ba0f38f31",
+        "simulate_seconds": 0.062,
+        "mismatches": [],
+        "checks": 6678,
+        "rtl_sha256": "dcf29031d0ea8cd5208ee709fa9260bfbe091020f6b6563c56fbd7d9f36059f3",
+        "tb_sha256": "1feb00777b094641da61365ca8deed5b1ae89672bfabff2a576b866e8e8e5b5d",
+        "vectors_sha256": "ee7a23c17ab8a0f84b9c7564ea8234d9e07bff0134f8a4fef24ff6ee1a4cc7a5"
+      }
+    },
+    {
+      "task": "masked_ring_alloc",
+      "split": "private",
+      "kind": "priority-mutant",
+      "expected": "FUNCTION_FAIL",
+      "result": {
+        "backend": "icarus",
+        "compile_seconds": 0.094,
+        "status": "FUNCTION_FAIL",
+        "message": "Independent testbench found 697 mismatches",
+        "stage": "simulate",
+        "receipt_nonce": "c704e9f18e784518afaf7f31efe826fb",
+        "simulate_seconds": 0.078,
+        "mismatches": [
+          {
+            "event": 431,
+            "expected": 978,
+            "observed": "1111100010",
+            "category": "rising"
+          },
+          {
+            "event": 432,
+            "expected": 978,
+            "observed": "1111100010",
+            "category": "high_hold_bit"
+          },
+          {
+            "event": 433,
+            "expected": 978,
+            "observed": "1111100010",
+            "category": "high_restore"
+          },
+          {
+            "event": 434,
+            "expected": 978,
+            "observed": "1111100010",
+            "category": "high_hold_bit"
+          },
+          {
+            "event": 435,
+            "expected": 978,
+            "observed": "1111100010",
+            "category": "high_restore"
+          },
+          {
+            "event": 436,
+            "expected": 978,
+            "observed": "1111100010",
+            "category": "high_hold_bit"
+          },
+          {
+            "event": 437,
+            "expected": 978,
+            "observed": "1111100010",
+            "category": "high_restore"
+          },
+          {
+            "event": 438,
+            "expected": 978,
+            "observed": "1111100010",
+            "category": "high_hold_bit"
+          }
+        ],
+        "checks": 6678,
+        "rtl_sha256": "f98e78149cf1c07fdb679c208b7110e55e2f36fb377dfaf9aa7bd073d0313661",
+        "tb_sha256": "1feb00777b094641da61365ca8deed5b1ae89672bfabff2a576b866e8e8e5b5d",
+        "vectors_sha256": "ee7a23c17ab8a0f84b9c7564ea8234d9e07bff0134f8a4fef24ff6ee1a4cc7a5"
+      }
+    },
+    {
+      "task": "masked_ring_alloc",
+      "split": "private",
+      "kind": "artificial-deterministic-converter",
+      "expected": "PASS",
+      "result": {
+        "backend": "icarus",
+        "compile_seconds": 0.093,
+        "status": "PASS",
+        "message": "Independent testbench completed all 6678 checks",
+        "stage": "simulate",
+        "receipt_nonce": "d86ea4b7284641aab94cce9b0fd7a8dd",
+        "simulate_seconds": 0.078,
+        "mismatches": [],
+        "checks": 6678,
+        "rtl_sha256": "32973457b04b7810ff279b00ef31971608ed282ca53bd3d91cde629b1e2948df",
+        "tb_sha256": "1feb00777b094641da61365ca8deed5b1ae89672bfabff2a576b866e8e8e5b5d",
+        "vectors_sha256": "ee7a23c17ab8a0f84b9c7564ea8234d9e07bff0134f8a4fef24ff6ee1a4cc7a5"
+      }
+    },
+    {
+      "kind": "syntax",
+      "expected": "COMPILE_FAIL",
+      "result": {
+        "backend": "icarus",
+        "compile_seconds": 0.093,
+        "status": "COMPILE_FAIL",
+        "stage": "compile",
+        "message": "See compile.stderr.log",
+        "mismatches": [],
+        "checks": 58,
+        "rtl_sha256": "ea33a0de939bafea75be36a23db1caf1b4326252b8ce3a2482e6149420bff1ca",
+        "tb_sha256": "0a7e2232005fda3a74f102c2298036f0ca4fd83dd28479590010119e4b94b6ba",
+        "vectors_sha256": "e0a7080cccb679e178be0ac62e3bc96df3ce0d19880ad072a7833d5243463bf8"
+      }
+    }
+  ],
+  "invalid": [
+    {
+      "status": "EXTRACTION_ERROR",
+      "stage": "intent",
+      "message": "Invalid JSON",
+      "mismatches": []
+    },
+    {
+      "status": "EXTRACTION_ERROR",
+      "stage": "intent",
+      "message": "Intent bytes/fences",
+      "mismatches": []
+    },
+    {
+      "status": "EXTRACTION_ERROR",
+      "stage": "intent",
+      "message": "Intent bytes/fences",
+      "mismatches": []
+    },
+    {
+      "status": "IR_INVALID",
+      "stage": "intent",
+      "message": "Disjoint complete edge banks",
+      "mismatches": []
+    },
+    {
+      "status": "UNSUPPORTED",
+      "stage": "intent",
+      "message": "Shift must be constant0..7",
+      "mismatches": []
+    }
+  ]
+}

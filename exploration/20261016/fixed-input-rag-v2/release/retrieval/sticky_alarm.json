@@ -1,0 +1,204 @@
+{
+  "query": "Implement module sticky_alarm(input clk, input rst_n, input din, output q). Use rising clock edges, asynchronous active-low reset, and Moore outputs. q starts at 0. Two consecutive sampled ones set q to 1. Once set, q remains 1 until reset, regardless of later input. A zero before activation breaks the consecutive-one count.",
+  "query_sha256": "347b22a5a3508b3784de0373766a4d040535136ac96e300ea92afff70737b5a1",
+  "query_terms": [
+    "activation",
+    "active",
+    "asynchronous",
+    "breaks",
+    "clk",
+    "clock",
+    "consecutive",
+    "count",
+    "din",
+    "edges",
+    "implement",
+    "input",
+    "later",
+    "low",
+    "module",
+    "moore",
+    "once",
+    "one",
+    "ones",
+    "output",
+    "outputs",
+    "q",
+    "regardless",
+    "remains",
+    "reset",
+    "rising",
+    "rst_n",
+    "sampled",
+    "set",
+    "starts",
+    "sticky_alarm",
+    "two",
+    "until",
+    "zero"
+  ],
+  "rankings": [
+    {
+      "chunk_id": "LR018",
+      "score": 3.7475288712241452,
+      "matched": [
+        {
+          "term": "input",
+          "tf": 2,
+          "df": 1,
+          "contribution": 2.2996556405251556
+        },
+        {
+          "term": "one",
+          "tf": 1,
+          "df": 1,
+          "contribution": 1.4478732306989897
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR002",
+      "score": 2.909095903096425,
+      "matched": [
+        {
+          "term": "zero",
+          "tf": 1,
+          "df": 1,
+          "contribution": 2.909095903096425
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR007",
+      "score": 2.6917689322402474,
+      "matched": [
+        {
+          "term": "set",
+          "tf": 1,
+          "df": 1,
+          "contribution": 2.6917689322402474
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR006",
+      "score": 2.642417804238559,
+      "matched": [
+        {
+          "term": "reset",
+          "tf": 1,
+          "df": 1,
+          "contribution": 2.642417804238559
+        }
+      ]
+    },
+    {
+      "chunk_id": "LR001",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR003",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR004",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR005",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR008",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR009",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR010",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR011",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR012",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR013",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR014",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR015",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR016",
+      "score": 0.0,
+      "matched": []
+    },
+    {
+      "chunk_id": "LR017",
+      "score": 0.0,
+      "matched": []
+    }
+  ],
+  "selected_ids": [
+    "LR018",
+    "LR002",
+    "LR007"
+  ],
+  "no_hit": false,
+  "selected_chunks": [
+    {
+      "id": "LR018",
+      "section": "Case Statements",
+      "start_line": 2245,
+      "end_line": 2252,
+      "text": "`casex` should not be used. `casex` implements a symmetric wildcard operator\nsuch that an `X` in the case expression may match one or more case items.\n`casez` only treats high-impedance states (`Z` or `?`) as a wildcard, and\nperforms exact matches for undriven `X` inputs. While this does not completely\nfix the problems with symmetric wildcard matching, it is harder to accidentally\nproduce a `Z` input than an `X` input, so this form is preferred.\n`case inside` does not treat either `X` or `Z` in the case expression as a\nwildcard, so this form is preferred over `casez`.",
+      "sha256": "38b511f542f8fcb62c5ad046b40e95a8c569d5e5b69bdce9dbe2cc6e393640e9",
+      "characters": 574,
+      "use": "General synthesizable language/style guidance, not task requirements or a solution"
+    },
+    {
+      "id": "LR002",
+      "section": "Delay Modeling",
+      "start_line": 1789,
+      "end_line": 1790,
+      "text": "Synthesizable design modules must be designed around a zero-delay simulation\nmethodology. All forms of `#delay`, including `#0`, are not permitted.",
+      "sha256": "f08d2bb9835cd2c97e28e5887e08b5b4a8a22fbf1363bff522ea521583dc5538",
+      "characters": 147,
+      "use": "General synthesizable language/style guidance, not task requirements or a solution"
+    },
+    {
+      "id": "LR007",
+      "section": "Sequential Logic (Registers)",
+      "start_line": 1860,
+      "end_line": 1862,
+      "text": "Exception: It is fine to set default values first, then specific values.\nHowever, it is preferred to do this work in a separate combinational block with\nexplicit blocking assignments.",
+      "sha256": "95cb4e3e557c9542e94391c30886dee9c2e07f8caa40eafb0993a9810c70456d",
+      "characters": 183,
+      "use": "General synthesizable language/style guidance, not task requirements or a solution"
+    }
+  ]
+}

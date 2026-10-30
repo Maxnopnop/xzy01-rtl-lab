@@ -1,0 +1,234 @@
+{
+  "status": "PASS",
+  "runs": [
+    {
+      "run": "compound-v1",
+      "verified_files": 1333,
+      "source_files": 11,
+      "plan_sha256": "262724d22a690c4d6ae34e6849eb73ca7effb6a290e9c6c564eaa09b773b9d6b"
+    },
+    {
+      "run": "delayed-v1",
+      "verified_files": 175,
+      "source_files": 10,
+      "plan_sha256": "77c0abf126ff0855819f6146ad04d392b8769f0e201656653c26f69d165cb2c5"
+    },
+    {
+      "run": "factorial20-v1",
+      "verified_files": 67,
+      "source_files": 12,
+      "plan_sha256": "ed08f03783ae9b78c8eff75500d3f8b67d776ce91887730c231a9101a976d483"
+    },
+    {
+      "run": "formal-v1",
+      "verified_files": 37,
+      "source_files": 6,
+      "plan_sha256": "47703a249053dafb23677cd64dac7fe356d5f5ce565094bc209970b28f551254"
+    }
+  ],
+  "independent_shortest_witness_checks": [
+    {
+      "task": "rt_sequence",
+      "shorter_sequences_checked": 4095,
+      "witness": "111110011001",
+      "observed": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "expected": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1
+      ],
+      "shortest_length": 12
+    },
+    {
+      "task": "sticky_alarm",
+      "shorter_sequences_checked": 4095,
+      "witness": "001000000111",
+      "observed": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "expected": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "shortest_length": 12
+    },
+    {
+      "task": "event_parity",
+      "shorter_sequences_checked": 4095,
+      "witness": "001110101001",
+      "observed": [
+        0,
+        0,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ],
+      "expected": [
+        0,
+        0,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0
+      ],
+      "shortest_length": 12
+    },
+    {
+      "task": "request_delay",
+      "shorter_sequences_checked": 4095,
+      "witness": "011111110000",
+      "observed": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "expected": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "shortest_length": 12
+    },
+    {
+      "task": "debounce3",
+      "shorter_sequences_checked": 4095,
+      "witness": "000101111101",
+      "observed": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0
+      ],
+      "expected": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "shortest_length": 12
+    }
+  ],
+  "formal_trace_checks": [
+    {
+      "task": "rt_sequence",
+      "solver_prefix": "111110011001",
+      "mismatch_step": 14,
+      "note": "Yosys state/output at timestep reflects prior timestep transition; prefix inputs step2..13, mismatch step14."
+    },
+    {
+      "task": "sticky_alarm",
+      "solver_prefix": "001000000111",
+      "mismatch_step": 14,
+      "note": "Yosys state/output at timestep reflects prior timestep transition; prefix inputs step2..13, mismatch step14."
+    },
+    {
+      "task": "event_parity",
+      "solver_prefix": "001110101001",
+      "mismatch_step": 14,
+      "note": "Yosys state/output at timestep reflects prior timestep transition; prefix inputs step2..13, mismatch step14."
+    },
+    {
+      "task": "request_delay",
+      "solver_prefix": "011111110000",
+      "mismatch_step": 14,
+      "note": "Yosys state/output at timestep reflects prior timestep transition; prefix inputs step2..13, mismatch step14."
+    },
+    {
+      "task": "debounce3",
+      "solver_prefix": "000101111101",
+      "mismatch_step": 14,
+      "note": "Yosys state/output at timestep reflects prior timestep transition; prefix inputs step2..13, mismatch step14."
+    }
+  ],
+  "notes": "No runner changes; no broad core regression needed. Existing paired_audit and mutation verify independently passed."
+}
